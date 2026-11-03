@@ -2,7 +2,6 @@ package core
 
 import (
 	"math"
-	"strings"
 	"testing"
 	"time"
 
@@ -45,8 +44,7 @@ func TestPlayableRacesAreTheTen(t *testing.T) {
 }
 
 // Forever: two active and two passive racials per race. The shape is
-// confirmed by the Deep Dive panel; the numbers on three of the forty
-// entries are not, and UnconfirmedRacials names exactly those.
+// confirmed by the Deep Dive panel and every entry by the client rows.
 func TestEveryRaceHasTwoActivesAndTwoPassives(t *testing.T) {
 	for _, race := range PlayableRaces() {
 		t.Run(race.String(), func(t *testing.T) {
@@ -112,7 +110,7 @@ func TestSkyborneRowsDifferOnlyInTheirSecondActive(t *testing.T) {
 		}
 	}
 	if differ != 1 {
-		t.Errorf("the two Skyborne rows differ in %d racials, want exactly 1 (Read Ley Line vs Skysight): %v vs %v", differ, alNames, hoNames)
+		t.Errorf("the two Skyborne rows differ in %d racials, want exactly 1 (Read Leyline vs Skysight): %v vs %v", differ, alNames, hoNames)
 	}
 }
 
@@ -124,11 +122,11 @@ func TestTheNamedRacialsAreAllPresent(t *testing.T) {
 		proto.Race_RaceOrc:                {"Blood Fury", "Shatter Curse", "Command", "Hardiness"},
 		proto.Race_RaceDwarf:              {"Stoneform", "Find Treasure", "Artisan's Precision", "Big Game Hunter"},
 		proto.Race_RaceNightElf:           {"Elune's Light", "Shadowmeld", "Quickness", "Wisp Spirit"},
-		proto.Race_RaceUndead:             {"Will of the Forsaken", "Cannibalize", "Touch of the Grave"},
-		proto.Race_RaceTauren:             {"War Stomp", "Endurance"},
+		proto.Race_RaceUndead:             {"Will of the Forsaken", "Cannibalize", "Touch of the Grave", "Underwater Breathing"},
+		proto.Race_RaceTauren:             {"War Stomp", "Cultivation", "Endurance", "Plainsrunning"},
 		proto.Race_RaceGnome:              {"Escape Artist", "Eureka!", "Expansive Mind", "Engineering Specialization"},
 		proto.Race_RaceTroll:              {"Berserking", "Rapid Regeneration", "Beast Slaying", "Regeneration"},
-		proto.Race_RaceHighOrderSkyborne:  {"Walk on Air", "Read Ley Line", "Wind Blessed", "Elemental Insight"},
+		proto.Race_RaceHighOrderSkyborne:  {"Walk on Air", "Read Leyline", "Wind Blessed", "Elemental Insight"},
 		proto.Race_RaceWindshaperSkyborne: {"Walk on Air", "Skysight", "Wind Blessed", "Elemental Insight"},
 	}
 	for race, names := range want {
@@ -140,51 +138,6 @@ func TestTheNamedRacialsAreAllPresent(t *testing.T) {
 			if !have[n] {
 				t.Errorf("%v is missing the racial %q", race, n)
 			}
-		}
-	}
-}
-
-// The three entries the client tables do not settle - Undead's fourth
-// racial, which no source names, and Tauren's two candidate second
-// actives, of which neither is known to be the one - are named out loud,
-// so the spec
-// support page can say what the sim is guessing at. An unnamed or
-// unpublished racial is Confirmed: false exactly like an unpublished
-// percentage; a name is exactly as unconfirmed as a number.
-func TestUnconfirmedRacialsNamesTheThree(t *testing.T) {
-	got := UnconfirmedRacials()
-	if len(got) == 0 {
-		t.Skip("nothing is unconfirmed: the beta settled the numbers and this test has done its job")
-	}
-	// Print them: this list is what the spec support page shows, and it
-	// is worth reading on every run rather than only when it breaks.
-	for _, line := range got {
-		t.Log(line)
-	}
-	joined := strings.Join(got, "\n")
-	// All three by name, and exactly three (Mace Specialization left the
-	// list when the client stated its 1%; Big Game Hunter, Quickness,
-	// Berserking and Touch of the Grave left it on 2026-10-07 when the
-	// client rows for build 1.60.1.70009 settled them). The count is
-	// asserted because a fourth means a number was marked unconfirmed
-	// without anyone deciding it was, and a second means one was quietly
-	// promoted to confirmed.
-	want := []string{
-		"Unannounced Fourth Racial", // Undead: no source names this racial at all
-		"Cultivation",               // Tauren: which of these two is the second
-		"Plainsrunning",             //   active is unread; both are listed
-	}
-	for _, w := range want {
-		if !strings.Contains(joined, w) {
-			t.Errorf("UnconfirmedRacials() does not mention %q:\n%s", w, joined)
-		}
-	}
-	if len(got) != len(want) {
-		t.Errorf("UnconfirmedRacials() has %d entries, want %d:\n%s", len(got), len(want), joined)
-	}
-	for _, line := range got {
-		if !strings.Contains(line, ": ") || !strings.Contains(line, "(") {
-			t.Errorf("%q is not in the form \"<race>: <name> (<note>)\"", line)
 		}
 	}
 }

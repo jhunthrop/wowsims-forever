@@ -14,26 +14,19 @@ import (
 // similar offensive power" (Blizzard, Deep Dive panel recap). This file is
 // that table.
 //
-// SOURCING. The shape is confirmed by Blizzard. The names and numbers are
-// transcribed from the BlizzCon demo by Icy Veins and by Talents Forever,
-// and are recorded with their citations in data/curated/races.json in the
-// site repository. Most numbers are corroborated by both transcriptions
-// (and several by the Deep Dive panel directly) and ship as Confirmed.
-// Eight entries, across the whole table, are not: either the two
-// transcriptions disagree, neither gives a number at all, or (Undead's
-// fourth racial) no source names the racial itself. Those eight carry
-// `Confirmed: false` and a Note explaining what is unread, and
-// UnconfirmedRacials() reports exactly those eight for the spec support
-// page. Where the two transcriptions disagree on a number, the lower
-// reading ships and the disagreement is in the entry's Note. An unnamed
-// or unpublished racial is always Confirmed: false, regardless of whether
-// it happens to have a number attached - a name is exactly as unconfirmed
-// as a percentage.
+// SOURCING. The shape is confirmed by Blizzard. Every name and number is
+// read from the 1.60.1.70753 client tables (SkillLineAbility on each race's
+// racial skill line, then SpellEffect, SpellMisc, SpellAuraOptions and
+// SpellCooldowns); data/curated/races.json in the site repository keeps the
+// citations. An entry stays Confirmed: false, with a Note saying what is
+// unread, only while the client leaves a name or a number open, and
+// UnconfirmedRacials() reports exactly those for the spec support page. As
+// of 1.60.1.70753 there are none.
 //
 // TEN RACES. Skyborne is one neutral race whose faction is chosen at
 // character creation and whose second active differs by faction, so the
 // client's race table carries it as two rows and so does this file:
-// RaceHighOrderSkyborne (Alliance, Read Ley Line) and
+// RaceHighOrderSkyborne (Alliance, Read Leyline) and
 // RaceWindshaperSkyborne (Horde, Skysight). Their other three racials are
 // identical and are written once, by skyborneShared().
 //
@@ -67,8 +60,7 @@ type Racial struct {
 	SpellID int32
 	// Confirmed is true when the entry's numbers (if it has any) are
 	// corroborated rather than contested or simply missing, and when the
-	// racial itself is named by a source. See the SOURCING note above
-	// the eight that are false.
+	// racial itself is named by a source. See the SOURCING note above.
 	Confirmed bool
 	// Note says what is unread. Required when Confirmed is false.
 	Note  string
@@ -135,7 +127,7 @@ func skyborneShared() []Racial {
 		},
 		{
 			Name: "Wind Blessed", Kind: RacialPassive, Confirmed: true,
-			Note: "client 1259710: 2% spellcasting, melee and ranged haste (26 October notes; the shipped rows read 3)",
+			Note: "client 1259710: 2% spellcasting, melee and ranged haste (aura 342 and aura 65 at 2 in 1.60.1.70753)",
 			Apply: func(character *Character) {
 				// Haste is NOT merged (research/08-stats.md 12.1 item 5),
 				// so this sets all three, as a racial that just says
@@ -220,7 +212,7 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "The Human Spirit", Kind: RacialPassive, Confirmed: true,
-			Note:  "client 20598: 10% Spirit (26 October notes; the shipped row reads 5)",
+			Note:  "client 20598: 10% Spirit (aura 137 at 10 in 1.60.1.70753)",
 			Apply: func(character *Character) { character.MultiplyStat(stats.Spirit, humanSpiritMultiplier) },
 		},
 	},
@@ -366,12 +358,9 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 	},
 
-	// Undead: Will of the Forsaken, Cannibalize, Touch of the Grave, and
-	// one genuinely unread fourth passive - the only slot in the whole
-	// table with nothing named at all. It still gets an entry, per this
-	// file's header, and Confirmed stays true because there is no number
-	// here to be unconfirmed about; UnconfirmedRacials has nothing to
-	// print until the racial itself is named.
+	// Undead: Will of the Forsaken, Cannibalize, Touch of the Grave and
+	// Underwater Breathing, the four SkillLineAbility rows of Racial -
+	// Undead (220) in 1.60.1.70753.
 	proto.Race_RaceUndead: {
 		{
 			Name: "Will of the Forsaken", Kind: RacialActive, Confirmed: true,
@@ -385,24 +374,20 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 		{
 			Name: "Touch of the Grave", Kind: RacialPassive, Confirmed: true,
-			Note:  "client 1260189 (warrior, paladin, rogue: 20%) or 1260201 (priest, mage, warlock: 30%), 15 s internal cooldown (27 October notes; the shipped rows read 25 s); drain 1260198 takes 5% of maximum Health as flat Shadow damage; see racial_touch_of_the_grave.go",
+			Note:  "client 1260189 (warrior, paladin, rogue: 20%) or 1260201 (priest, mage, warlock: 30%), 15 s internal cooldown (SpellAuraOptions 15000 ms in 1.60.1.70753); drain 1260198 takes 5% of maximum Health as flat Shadow damage; see racial_touch_of_the_grave.go",
 			Apply: applyTouchOfTheGrave,
 		},
 		{
-			Name: "Unannounced Fourth Racial", Kind: RacialPassive, Confirmed: false,
-			Note: "no source names a fourth Undead racial or its effect; data/builds/1.60.1.69893/races.json's Undead row (id 5) names only Will of the Forsaken, Cannibalize and Touch of the Grave",
-			Apply: func(*Character) {
-				// unconfirmed: neither a name nor an effect is published
-				// for this slot, so it is declared - not omitted - with
-				// no effect until one is.
-			},
+			Name: "Underwater Breathing", Kind: RacialPassive, SpellID: 5227, Confirmed: true,
+			Note:  "client 5227 (SkillLineAbility, Racial - Undead): aura 155, breath lasts 300% longer",
+			Apply: func(*Character) {}, // underwater breath: no combat effect
 		},
 	},
 
-	// Tauren: War Stomp, Endurance, and a second active that is one of
-	// Plainsrunning or Cultivation - which one is unread, so both are
-	// listed rather than guessing, and both are Confirmed: false. Neither
-	// has a combat effect, so the sim is unaffected either way.
+	// Tauren: War Stomp, Cultivation, Endurance, Plainsrunning. The
+	// 1.60.1.70753 SkillLineAbility rows of Tauren Racial (124) carry all
+	// four; Spell's subtext marks Cultivation the active and Plainsrunning
+	// the passive.
 	proto.Race_RaceTauren: {
 		{
 			Name: "War Stomp", Kind: RacialActive, Confirmed: true,
@@ -410,9 +395,9 @@ var racialsByRace = map[proto.Race][]Racial{
 			Apply: func(*Character) {}, // stuns up to 5 enemies within 8 yd for 2 s, 2 min cooldown: crowd control, not modeled
 		},
 		{
-			Name: "Cultivation", Kind: RacialActive, Confirmed: false,
-			Note:  "grows bonus herbs; whether this or Plainsrunning is Tauren's second active is unread, so both are listed",
-			Apply: func(*Character) {}, // unconfirmed slot, and no combat effect either way
+			Name: "Cultivation", Kind: RacialActive, SpellID: 20552, Confirmed: true,
+			Note:  "client 20552 (subtext Racial): grows a duplicate herb",
+			Apply: func(*Character) {}, // herb duplication: no combat effect
 		},
 		{
 			Name: "Endurance", Kind: RacialPassive, Confirmed: true,
@@ -429,9 +414,9 @@ var racialsByRace = map[proto.Race][]Racial{
 			},
 		},
 		{
-			Name: "Plainsrunning", Kind: RacialPassive, Confirmed: false,
-			Note:  "raises movement speed the longer you move; whether this or Cultivation is Tauren's second active is unread, so both are listed",
-			Apply: func(*Character) {}, // unconfirmed slot, and no combat effect either way
+			Name: "Plainsrunning", Kind: RacialPassive, SpellID: 1259918, Confirmed: true,
+			Note:  "client 1259918 (subtext Racial Passive): movement speed that grows while moving",
+			Apply: func(*Character) {}, // movement speed: no combat effect
 		},
 	},
 
@@ -506,21 +491,12 @@ var racialsByRace = map[proto.Race][]Racial{
 		},
 	},
 
-	// Skyborne (Alliance): Walk on Air, Read Ley Line, Wind Blessed,
+	// Skyborne (Alliance): Walk on Air, Read Leyline, Wind Blessed,
 	// Elemental Insight.
 	proto.Race_RaceHighOrderSkyborne: append([]Racial{{
-		Name: "Read Ley Line", Kind: RacialActive, Confirmed: true,
-		Note: "",
-		Apply: func(character *Character) {
-			// 100% health and mana regeneration for 15 s. No cooldown is
-			// published, so no major cooldown is registered here and the
-			// sim never uses this racial - a missing cooldown, unlike a
-			// missing percentage, isn't something a number could be
-			// invented for, and this racial has no combat effect either
-			// way once the demo's other regen-focused racials (Rapid
-			// Regeneration, Cannibalize) are compared: they are all left
-			// unmodeled the same way.
-		},
+		Name: "Read Leyline", Kind: RacialActive, SpellID: readLeylineSpellID, Confirmed: true,
+		Note:  "client 1259705: Energized 1270842, 50% mana and health regeneration for 15 s, 2 min cooldown, on the global cooldown; APL-cast only, see racial_read_leyline.go",
+		Apply: applyReadLeyline,
 	}}, skyborneShared()...),
 
 	// Skyborne (Horde): Walk on Air, Skysight, Wind Blessed, Elemental
