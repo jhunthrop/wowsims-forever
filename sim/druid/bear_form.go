@@ -41,22 +41,27 @@ type bearFormTier struct {
 	// ArmorFromItemsPercent is auras 142 and 466: +N% of the armor items
 	// carry.
 	ArmorFromItemsPercent float64
-	Health                clientdamage.Effect
-	AttackPower           clientdamage.Effect
+	// EnrageArmorReductionPercent is Enrage's (5229) "reduces base armor
+	// by 27% in Bear Form and 16% in Dire Bear Form".
+	EnrageArmorReductionPercent float64
+	Health                      clientdamage.Effect
+	AttackPower                 clientdamage.Effect
 }
 
 var bearFormTiers = [...]bearFormTier{
 	{
 		FormSpellID: 5487, PassiveSpellID: 1178, LearnLevel: bearFormAnnouncedMinLevel,
-		ArmorFromItemsPercent: 180,
-		Health:                clientdamage.Effect{Amount: 20, PerLevel: 18, SpellLevel: 10, MaxLevel: 40},
-		AttackPower:           clientdamage.Effect{Amount: 30, PerLevel: 3, SpellLevel: 10, MaxLevel: 40},
+		ArmorFromItemsPercent:       180,
+		EnrageArmorReductionPercent: 27,
+		Health:                      clientdamage.Effect{Amount: 20, PerLevel: 18, SpellLevel: 10, MaxLevel: 40},
+		AttackPower:                 clientdamage.Effect{Amount: 30, PerLevel: 3, SpellLevel: 10, MaxLevel: 40},
 	},
 	{
 		FormSpellID: 9634, PassiveSpellID: 9635, LearnLevel: 40,
-		ArmorFromItemsPercent: 360,
-		Health:                clientdamage.Effect{Amount: 600, PerLevel: 32, SpellLevel: 40, MaxLevel: 70},
-		AttackPower:           clientdamage.Effect{Amount: 120, PerLevel: 3, SpellLevel: 40, MaxLevel: 70},
+		ArmorFromItemsPercent:       360,
+		EnrageArmorReductionPercent: 16,
+		Health:                      clientdamage.Effect{Amount: 600, PerLevel: 32, SpellLevel: 40, MaxLevel: 70},
+		AttackPower:                 clientdamage.Effect{Amount: 120, PerLevel: 3, SpellLevel: 40, MaxLevel: 70},
 	},
 }
 
@@ -74,6 +79,11 @@ func bearFormTierAt(level int32) (bearFormTier, bool) {
 // ArmorMultiplier is the factor the form puts on the armor items carry.
 func (tier bearFormTier) ArmorMultiplier() float64 {
 	return 1 + tier.ArmorFromItemsPercent/100
+}
+
+// EnrageArmorMultiplier is the factor Enrage leaves on the form's base armor.
+func (tier bearFormTier) EnrageArmorMultiplier() float64 {
+	return 1 - tier.EnrageArmorReductionPercent/100
 }
 
 // GetBearWeapon is both bear forms' paw at the equipped weapon's DPS
