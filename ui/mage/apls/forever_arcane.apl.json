@@ -72,10 +72,23 @@
       "notes": "Frostbolt the moment Presence of Mind is up, so the 2.5 second cast goes out instant. Presence of Mind on a 1.5 second Arcane Blast saves nothing, since the global cooldown already holds you that long.",
       "action": {
         "condition": {
-          "auraIsActive": {
-            "auraId": {
-              "spellId": 12043
-            }
+          "and": {
+            "vals": [
+              {
+                "spellIsKnown": {
+                  "spellId": {
+                    "spellId": 12043
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 12043
+                  }
+                }
+              }
+            ]
           }
         },
         "castSpell": {
