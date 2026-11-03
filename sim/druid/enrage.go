@@ -13,19 +13,19 @@ import (
 // 2 rage) for 10 seconds, so a cast pays 30 rage; the bear also "loses" base
 // armor for the duration, in a dummy effect with no amount.
 //
-// unconfirmed: the armor penalty. Era's 27% of base armor is used, since the
-// client's dummy effect states none. The instant 10 rage and the 2 a second
-// are the client's amounts read as tenths of a point, the unit rage costs
-// use.
+// The armor penalty is a dummy effect with no amount; the spell's text
+// states it by form: 27% of base armor in Bear Form, 16% in Dire Bear Form
+// (bearFormTier.EnrageArmorReductionPercent). The instant 10 rage and the 2
+// a second are the client's amounts read as tenths of a point, the unit
+// rage costs use.
 const (
-	enrageSpellID            = 5229
-	enrageDuration           = 10 * time.Second
-	enrageCooldown           = time.Minute
-	enrageLearnLevel         = 12
-	enrageInstantRage        = 10.0
-	enrageRagePerTick        = 2.0
-	enrageTickPeriod         = time.Second
-	enrageBaseArmorReduction = 0.27
+	enrageSpellID     = 5229
+	enrageDuration    = 10 * time.Second
+	enrageCooldown    = time.Minute
+	enrageLearnLevel  = 12
+	enrageInstantRage = 10.0
+	enrageRagePerTick = 2.0
+	enrageTickPeriod  = time.Second
 )
 
 func (druid *Druid) registerEnrageSpell() {
@@ -34,7 +34,11 @@ func (druid *Druid) registerEnrageSpell() {
 	}
 	actionID := core.ActionID{SpellID: enrageSpellID}
 	rageMetrics := druid.NewRageMetrics(actionID)
-	armorMultiplier := 1 - enrageBaseArmorReduction
+	tier, ok := bearFormTierAt(druid.Level)
+	if !ok {
+		return
+	}
+	armorMultiplier := tier.EnrageArmorMultiplier()
 
 	druid.EnrageAura = druid.RegisterAura(core.Aura{
 		Label:    "Enrage Aura",
