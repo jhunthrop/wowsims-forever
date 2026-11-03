@@ -117,6 +117,11 @@ func (unit *Unit) pushBackChannel(sim *Simulation, dot *Dot) {
 	unit.channelPushback -= 0.2
 
 	newExpires := max(sim.CurrentTime, dot.ExpiresAt()-pushback)
+	// A tick due inside this server batch lands before the hit does.
+	if nextTick := dot.lastTickTime + dot.tickPeriod; dot.tickPeriod > 0 && nextTick > newExpires &&
+		dot.MaxTicksRemaining() > 0 && sim.sameServerBatch(nextTick-sim.CurrentTime) {
+		newExpires = nextTick
+	}
 	ticksLeft := int32(0)
 	if dot.tickPeriod > 0 {
 		ticksLeft = int32((newExpires - dot.lastTickTime) / dot.tickPeriod)
@@ -168,7 +173,14 @@ func (unit *Unit) PushBackCast(sim *Simulation) {
 	}
 	hc := &unit.Hardcast
 	hcSpell := unit.GetSpell(hc.ActionID)
-	if hcSpell == nil || sim.Roll(0, 1.0) <= hcSpell.PushbackReduction {
+	if hcSpell == nil {
+		return
+	}
+	// A cast that ends inside this server batch completes before the hit.
+	if !hcSpell.Flags.Matches(SpellFlagChanneled) && sim.sameServerBatch(hc.Expires-sim.CurrentTime) {
+		return
+	}
+	if sim.Roll(0, 1.0) <= hcSpell.PushbackReduction {
 		return
 	}
 	pushback := DurationFromSeconds(max(0.2, hc.Pushback))
