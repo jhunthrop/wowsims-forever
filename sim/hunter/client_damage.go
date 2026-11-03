@@ -31,32 +31,35 @@ func generatedDamage(rolls [][]float64, perLevel []float64, spellLevels, maxLeve
 // 13549-13555 and 25295. The generated SerpentStingBaseDamage reads the
 // reissued family (425728-425737), whose ranks 1-8 carry a different
 // amount; the spellbook (spellranks.json) lists the legacy ids, which
-// the engine registers, so their own amounts are stated here.
+// the engine registers, so their own amounts are stated here (the
+// server's 70753 hotfix push, 2026-11-03, raised every rank: 111 -> 135
+// per tick at rank 9).
 var SerpentStingDamage = [SerpentStingRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 2, SpellLevel: 4},
-	{Amount: 6, SpellLevel: 10},
-	{Amount: 12, SpellLevel: 18},
-	{Amount: 22, SpellLevel: 26},
-	{Amount: 34, SpellLevel: 34},
-	{Amount: 48, SpellLevel: 42},
-	{Amount: 64, SpellLevel: 50},
-	{Amount: 83, SpellLevel: 58},
-	{Amount: 111, SpellLevel: 60},
+	{Amount: 3, SpellLevel: 4},
+	{Amount: 7, SpellLevel: 10},
+	{Amount: 14, SpellLevel: 18},
+	{Amount: 26, SpellLevel: 26},
+	{Amount: 40, SpellLevel: 34},
+	{Amount: 58, SpellLevel: 42},
+	{Amount: 75, SpellLevel: 50},
+	{Amount: 100, SpellLevel: 58},
+	{Amount: 135, SpellLevel: 60},
 }
 
 // AimedShotDamage is effect 121's flat bonus of ids 19434 and 20900
 // through 20904. The generated AimedShotBaseDamage[6] reads 27632, the
 // level-60 duplicate that states 600, which no rank of the spellbook
-// uses.
+// uses. The server's 70753 hotfix push (2026-11-03) about doubled every
+// rank (166 -> 350 at rank 6).
 var AimedShotDamage = [AimedShotRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 20, SpellLevel: 20},
-	{Amount: 34, SpellLevel: 28},
-	{Amount: 55, SpellLevel: 36},
-	{Amount: 89, SpellLevel: 44},
-	{Amount: 125, SpellLevel: 52},
-	{Amount: 166, SpellLevel: 60},
+	{Amount: 40, SpellLevel: 20},
+	{Amount: 70, SpellLevel: 28},
+	{Amount: 115, SpellLevel: 36},
+	{Amount: 185, SpellLevel: 44},
+	{Amount: 260, SpellLevel: 52},
+	{Amount: 350, SpellLevel: 60},
 }
 
 // RaptorStrikeDamage is effect 58's flat bonus of the spellbook ids 2973

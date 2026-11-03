@@ -116,14 +116,14 @@ func TestAhnQirajBookRanksFollowIncludeAQ(t *testing.T) {
 	}
 }
 
-// Trueshot Aura since client 1.60.1.70707: 15/22/30/40/50 ranged attack
-// power (rank 4 was 75, above rank 5's 50, through 70685), so level 60
-// takes rank 5; before level 25 there is no rank at all.
-func TestTrueshotAuraFollowsThe70707Ranks(t *testing.T) {
+// Trueshot Aura since the server's 70753 hotfix push (2026-11-03):
+// 20/35/50/75/100 ranged attack power (70707 had cut it to 15/22/30/40/50),
+// so level 60 takes rank 5; before level 25 there is no rank at all.
+func TestTrueshotAuraFollowsThe70753Push(t *testing.T) {
 	cases := []struct {
 		level int
 		want  float64
-	}{{24, 0}, {25, 15}, {32, 22}, {40, 30}, {50, 40}, {59, 40}, {60, 50}}
+	}{{24, 0}, {25, 20}, {32, 35}, {40, 50}, {50, 75}, {59, 75}, {60, 100}}
 	for _, c := range cases {
 		if got := TrueshotAuraRanks.At(c.level); got != c.want {
 			t.Errorf("Trueshot Aura at level %d = %v, want %v", c.level, got, c.want)
