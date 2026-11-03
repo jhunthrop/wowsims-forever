@@ -146,6 +146,9 @@ func TestHeatingUpIsSpentByTheNextPyroblast(t *testing.T) {
 	castAndLand(sim, target, fireball)
 
 	pyroblast := mage.Pyroblast[PyroblastRanks]
+	// The idle rotation polls every 50 ms from the pull, and the steps above
+	// can stop on a regen tick between polls; the test owns this moment.
+	mage.GCD.Reset()
 	if !pyroblast.Cast(sim, target) {
 		t.Fatal("Pyroblast would not cast")
 	}

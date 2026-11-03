@@ -2,7 +2,6 @@ package mage
 
 import (
 	"testing"
-	"time"
 
 	"github.com/wowsims/classic/sim/core"
 )
@@ -46,7 +45,10 @@ func TestIceBarrierRaisesFrostDamageForAMinute(t *testing.T) {
 		t.Errorf("a second Ice Barrier left Frostbolt's additive damage %.4f up, want %.4f", got, want)
 	}
 
-	advanceBy(sim, iceBarrierDuration+time.Second)
+	// The fight is a minute long, and a step toward a moment past its end
+	// stops without advancing the clock to it (before the regen phase was
+	// drawn, a tick at exactly 60 s did that), so step exactly to the expiry.
+	advanceBy(sim, iceBarrierDuration)
 	if got := frostbolt.DamageMultiplierAdditive; got != frostBefore {
 		t.Errorf("Frostbolt's additive damage is %.4f a minute after Ice Barrier, want %.4f: both halves lapse", got, frostBefore)
 	}

@@ -263,9 +263,15 @@ func (sim *Simulation) initManaTickAction() {
 		return
 	}
 
-	interval := time.Second * 2
+	// The server's regen tick runs on its own clock, so its phase against the
+	// pull is arbitrary: each iteration draws it from [0, 2 s). A fixed grid
+	// put ticks on the same instants as the global's 0.5 s steps, and those
+	// ties came out one way at exactly 0% haste. The draw is from the
+	// iteration's seeded RNG, so a seed still reproduces.
+	interval := DurationFromSeconds(manaTickInterval)
+	phase := DurationFromSeconds(sim.RandomFloat("Mana Tick Phase") * manaTickInterval)
 	pa := &PendingAction{
-		NextActionAt: sim.Environment.PrepullStartTime() + interval,
+		NextActionAt: sim.Environment.PrepullStartTime() + min(phase, interval-1),
 		Priority:     ActionPriorityRegen,
 	}
 	pa.OnAction = func(sim *Simulation) {
