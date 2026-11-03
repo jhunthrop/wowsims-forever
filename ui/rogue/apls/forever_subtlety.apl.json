@@ -34,7 +34,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 11269,
+            "spellId": 11290,
             "rank": 6
           }
         }
@@ -60,7 +60,7 @@
           }
         }
       },
-      "notes": "Ghostly Strike on cooldown: cheaper than Backstab, hits for 180% weapon damage with a dagger, and builds a combo point."
+      "notes": "Ghostly Strike on cooldown: it hits harder than Hemorrhage for 5 more energy and gives a combo point."
     },
     {
       "action": {
@@ -102,7 +102,7 @@
           }
         }
       },
-      "notes": "Rupture at four or more combo points whenever it is not running. Hemorrhage makes the target take 15% more Rupture damage, so Rupture is this tree's main finisher."
+      "notes": "Rupture at four or more combo points whenever it is not ticking. Hemorrhage and Serrated Blades both feed it, so it is the main finisher."
     },
     {
       "action": {
@@ -140,7 +140,7 @@
           }
         }
       },
-      "notes": "Eviscerate at three or more combo points while Rupture is running, so combo points built during a Rupture are spent instead of idling."
+      "notes": "Eviscerate at three or more combo points while Rupture is ticking, so points never sit idle."
     },
     {
       "action": {
@@ -220,7 +220,7 @@
           }
         }
       },
-      "notes": "Slice and Dice while Rupture is running: opened when it is down, refreshed under 3 seconds remaining, at three or more combo points."
+      "notes": "Slice and Dice at three or more combo points while Rupture is ticking, when it is down or has under 3 seconds left."
     },
     {
       "action": {
@@ -290,7 +290,7 @@
           }
         }
       },
-      "notes": "Hemorrhage as the builder: 145% weapon damage with a dagger, one combo point, and the debuff that lifts Rupture damage by 15% for 15 seconds. Gated on spellIsKnown so a build without the talent falls through to Sinister Strike. It holds back while Ghostly Strike is less than a second from ready (unless energy is at 75 or more), so energy pools to Ghostly Strike's 40 and it goes on cooldown."
+      "notes": "Hemorrhage is the builder: one combo point, and its debuff makes your Rupture hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more."
     },
     {
       "action": {
@@ -312,7 +312,7 @@
           }
         }
       },
-      "notes": "Sinister Strike is the fallback builder whenever you have not talented into Hemorrhage."
+      "notes": "Sinister Strike only before you have Hemorrhage."
     }
   ]
 }
