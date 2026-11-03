@@ -78,6 +78,7 @@ const (
 	PriestSpellMaskDivineGrace
 	PriestSpellMaskContingencyPlanHeal
 	PriestSpellMaskInnerFire
+	PriestSpellMaskPowerInfusion
 )
 
 // PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
@@ -116,7 +117,7 @@ const PriestSpellMaskTwinDisciplines = PriestSpellMaskInstantShadowDamage | Prie
 const PriestSpellMaskMentalAgility = PriestSpellMaskSmite | PriestSpellMaskHolyFire |
 	PriestSpellMaskShadowWordPain | PriestSpellMaskDevouringPlague | PriestSpellMaskRenew |
 	PriestSpellMaskPowerWordShield | PriestSpellMaskHolyNova | PriestSpellMaskPrayerOfMending |
-	PriestSpellMaskVampiricEmbrace | PriestSpellMaskInnerFire
+	PriestSpellMaskVampiricEmbrace | PriestSpellMaskInnerFire | PriestSpellMaskPowerInfusion
 
 // PriestSpellMaskSpiritualHealing is what Spiritual Healing (14898) names:
 // the direct heals of SpellEffect 692104 (Lesser Heal, Heal, Greater Heal,

@@ -107,13 +107,15 @@ func (druid *Druid) applyImprovedRegrowth() {
 	})
 }
 
-// reflectionRanks is Reflection's three ranks (node 104920), each 1/6 of the
-// mana regeneration that continues while casting: the client's 17/33/50%.
-const reflectionRanks = 3
+// reflectionRegenWhileCasting is Reflection's three ranks (node 104920): the
+// share of mana regeneration that continues while casting, the client's
+// 17/33/50% (TraitDefinitionEffectPoints 134381, curve 85365), as the
+// shaman's Mindfulness reads the same curve shape.
+var reflectionRegenWhileCasting = [4]float64{0, 0.17, 0.33, 0.50}
 
 // applyReflection implements Reflection: "Allows 17/33/50% of your Mana
 // regeneration to continue while casting."
 func (druid *Druid) applyReflection() {
-	rank := clampRank(druid.Talents.Reflection, reflectionRanks)
-	druid.PseudoStats.SpiritRegenRateCasting += float64(rank) / reflectionRanks * 0.5
+	rank := clampRank(druid.Talents.Reflection, int32(len(reflectionRegenWhileCasting)-1))
+	druid.PseudoStats.SpiritRegenRateCasting += reflectionRegenWhileCasting[rank]
 }

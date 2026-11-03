@@ -198,8 +198,10 @@ func TestNaturesSplendorLengthensRejuvenationAndRegrowth(t *testing.T) {
 	}
 }
 
+// Reflection's trait curve (TraitDefinitionEffectPoints 134381, curve
+// 85365) states 17, 33 and 50 percent, not thirds of 50.
 func TestReflectionKeepsAShareOfRegenerationWhileCasting(t *testing.T) {
-	for rank, want := range map[int]float64{0: 0, 1: 1.0 / 6, 2: 1.0 / 3, 3: 0.5} {
+	for rank, want := range map[int]float64{0: 0, 1: 0.17, 2: 0.33, 3: 0.5} {
 		resto, _ := healer(t, map[string]int{"reflection": rank})
 		if got := resto.PseudoStats.SpiritRegenRateCasting; !near(got, want) {
 			t.Errorf("casting regeneration with %d/3 Reflection = %v, want %v", rank, got, want)
