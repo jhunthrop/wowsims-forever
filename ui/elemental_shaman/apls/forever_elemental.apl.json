@@ -240,6 +240,53 @@
       }
     },
     {
+      "notes": "Wait for Lava Burst when it comes off cooldown within a tenth of a second and your Flame Shock is up. Five 2.0 second Lightning Bolts end exactly as its 10 second cooldown returns, so any haste ends the fifth a hair early; a sixth bolt then would push Lava Burst back 2 seconds.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "dotIsActive": {
+                  "spellId": {
+                    "spellId": 29228,
+                    "rank": 6
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "spellTimeToReady": {
+                      "spellId": {
+                        "spellId": 1326047,
+                        "rank": 4
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.1s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "wait": {
+          "duration": {
+            "spellTimeToReady": {
+              "spellId": {
+                "spellId": 1326047,
+                "rank": 4
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "notes": "Lightning Bolt at the top rank while your mana is ahead of the fight: more than the share of the fight left. Rank 10 costs 220 mana to rank 9's 190 for about 9% more base damage, so you spend the spare mana on it and drop to rank 9 as soon as you fall behind.",
       "action": {
         "condition": {
