@@ -116,53 +116,24 @@ func (warrior *Warrior) ApplyTalents() {
 	warrior.applyEnrage()
 	warrior.applyFlurry()
 	warrior.applyProtectionTalents()
-	warrior.applyImprovedCharge()
 	warrior.applyBloodthrill()
 	warrior.applyBloodCraze()
 	warrior.registerDeathWishCD()
 	warrior.registerSweepingStrikesCD()
 }
 
-// applyImprovedCharge is Improved Charge: "Increases the Rage generated
-// by your Charge ability by 3/6" at ranks 1-2 (Arms node 105955).
-//
-// This package registers no Charge spell at all - neither this fork nor
-// upstream models the gap-closer, which would need a movement primitive
-// core does not have (PORTING.md's Encounter.movement is the target
-// moving, not the player) - so the rage is granted once per sim, at
-// Reset, standing in for the opening Charge every melee profile uses to
-// start the pull. It is granted unconditionally rather than gated on the
-// fight's starting stance: the charge-in happens before combat and
-// before Reset's stance switch runs, so by the time a stance check could
-// read Vanguard or the input stance, the rage would already be in the
-// bar. Improved Intercept, the Fury-side sibling, grants no rage at all
-// (just a cooldown reduction) and is in the not-modelled list below.
+// improvedChargeRage is Improved Charge: "Increases the Rage generated
+// by your Charge ability by 3/6" at ranks 1-2 (Arms node 105955). The
+// rage comes with the pre-pull Charge (charge.go), so a rotation that
+// never Charges gets none. Until round 12 it was paid once at Reset, a
+// stand-in from before Charge was a spell, so Fury and Protection searches
+// read free rage into the talent. Improved Intercept, the Fury-side
+// sibling, grants no rage at all (just a cooldown reduction) and is in the
+// not-modelled list below.
 var improvedChargeRagePerRank = [3]float64{0, 3, 6}
 
-func (warrior *Warrior) applyImprovedCharge() {
-	if warrior.Talents.ImprovedCharge == 0 {
-		return
-	}
-
-	rage := improvedChargeRagePerRank[rankIndex(warrior.Talents.ImprovedCharge, improvedChargeRagePerRank[:])]
-	rageMetrics := warrior.NewRageMetrics(core.ActionID{SpellID: TalentSpellIDs["improved_charge"][0]})
-
-	warrior.RegisterResetEffect(func(sim *core.Simulation) {
-		// Deferred one event past Reset itself: Unit.reset runs the
-		// registered reset effects before unit.rageBar.reset (sim/core/
-		// unit.go), so an AddRage called directly here would be
-		// overwritten the moment the rage bar resets to its own
-		// starting value a few lines later in the same Reset pass.
-		// DoAt at the current (reset) time queues this for the start of
-		// the event loop instead, strictly after every Reset call has
-		// run.
-		core.StartDelayedAction(sim, core.DelayedActionOptions{
-			DoAt: sim.CurrentTime,
-			OnAction: func(sim *core.Simulation) {
-				warrior.AddRage(sim, rage, rageMetrics)
-			},
-		})
-	})
+func (warrior *Warrior) improvedChargeRage() float64 {
+	return improvedChargeRagePerRank[rankIndex(warrior.Talents.ImprovedCharge, improvedChargeRagePerRank[:])]
 }
 
 // Talents whose ranks do not scale linearly, or whose values are the
