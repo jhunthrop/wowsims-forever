@@ -27,3 +27,23 @@ func TestSearingTotemAttacksAtTheLoggedCadence(t *testing.T) {
 		t.Errorf("Searing Totem rank 6 makes %d attacks, want %d", got, want)
 	}
 }
+
+// The totem stands for the client's whole duration (SpellMisc
+// DurationIndex of 10438: 55,000 ms), not for its last attack: 22 attacks
+// at 2.437 s end at 53.614 s, and a rotation that redrops the totem when
+// it is down must not see it down 1.386 s early. It still lands 22
+// attacks, the last at 53.614 s.
+func TestSearingTotemStandsForTheClientDuration(t *testing.T) {
+	sim, s := newFireNovaShaman(t, 60, "")
+	dropSearingTotem(sim, s)
+	totem := s.SearingTotem[len(s.SearingTotem)-1]
+	dot := totem.Dot(sim.GetTargetUnit(0))
+	if got, want := dot.ExpiresAt(), sim.CurrentTime+55*time.Second; got != want {
+		t.Errorf("the totem's attacks run out at %v, want the client's 55 s (%v)", got, want)
+	}
+	for sim.CurrentTime < 60*time.Second && !sim.Step() {
+	}
+	if got, want := dot.TickCount, int32(22); got != want {
+		t.Errorf("a full rank 6 totem attacked %d times, want %d", got, want)
+	}
+}
