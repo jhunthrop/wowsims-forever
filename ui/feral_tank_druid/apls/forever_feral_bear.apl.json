@@ -182,7 +182,7 @@
       }
     },
     {
-      "notes": "Queued on your next swing whenever you have 15 rage, which leaves the rest for Primal Bite and Lacerate.",
+      "notes": "Queued on your next swing whenever you have 15 rage. It costs 10 with Ferocity, so this keeps rage back for Primal Bite and Lacerate.",
       "action": {
         "castSpell": {
           "spellId": {
