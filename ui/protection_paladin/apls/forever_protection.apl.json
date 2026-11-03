@@ -20,8 +20,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 20928,
-            "rank": 3
+            "spellId": 1239570,
+            "rank": 4
           }
         }
       },
@@ -37,7 +37,7 @@
       "action": {
         "autocastOtherCooldowns": {}
       },
-      "notes": "Lay on Hands, the last-resort cooldown, fires itself below 10 percent health."
+      "notes": "Lay on Hands fires itself below 10% health: it is the last thing between you and a wipe."
     },
     {
       "action": {
@@ -60,7 +60,7 @@
           }
         }
       },
-      "notes": "Templar's Bulwark, an absorb of the paladin's whole health bar for 8 seconds, as the first panic button: low health is when a late shield buys the most, and it puts Forbearance on the next two defensives for a minute."
+      "notes": "Below 35% health, as the first panic button. A shield worth your whole health bar for 8 seconds; it puts Forbearance on you, which locks out the other two for a while."
     },
     {
       "action": {
@@ -84,7 +84,7 @@
           }
         }
       },
-      "notes": "Divine Shield: 12 seconds of immunity at half damage dealt, the second panic button once Forbearance from the first has gone."
+      "notes": "Below 25% health, once Forbearance from Templar's Bulwark has gone. Twelve seconds immune, at half damage dealt."
     },
     {
       "action": {
@@ -108,7 +108,7 @@
           }
         }
       },
-      "notes": "Divine Protection: 8 seconds of immunity with no attacks, the last resort."
+      "notes": "Below 20% health, the last resort once Forbearance allows it."
     },
     {
       "action": {
@@ -156,8 +156,8 @@
                   "rhs": {
                     "spellCurrentCost": {
                       "spellId": {
-                        "spellId": 20928,
-                        "rank": 3
+                        "spellId": 1239570,
+                        "rank": 4
                       }
                     }
                   }
@@ -167,18 +167,18 @@
           }
         }
       },
-      "notes": "Seal of Fury kept up. Judgement no longer consumes the seal in Forever, so this recasts every 30 seconds, and only with Holy Shield's mana left over."
+      "notes": "Keep it up, and recast it in its last 2 seconds only with Holy Shield's mana left over. Judgement does not consume it, so this is one cast every 30 seconds."
     },
     {
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 20928,
-            "rank": 3
+            "spellId": 1239570,
+            "rank": 4
           }
         }
       },
-      "notes": "Holy Shield on cooldown: its 10 second cooldown equals its duration, so it is up whenever its four charges last, and it is the first claim on mana."
+      "notes": "On cooldown. Its 10 second cooldown matches its duration, so it is up whenever its four charges last, and it is the first claim on your mana."
     },
     {
       "action": {
@@ -189,7 +189,7 @@
           }
         }
       },
-      "notes": "Holy Strike on cooldown: the cheapest threat per mana the paladin has (20 mana)."
+      "notes": "On cooldown. Your cheapest threat at 20 mana; with Iron Creed it also cuts your damage taken for 6 seconds, and Shieldsworn brings it back every 6 seconds."
     },
     {
       "action": {
@@ -219,15 +219,15 @@
             "rhs": {
               "spellCurrentCost": {
                 "spellId": {
-                  "spellId": 20928,
-                  "rank": 3
+                  "spellId": 1239570,
+                  "rank": 4
                 }
               }
             }
           }
         }
       },
-      "notes": "Hammer of the Righteous on cooldown, once the Holy Shield mana is safe."
+      "notes": "On cooldown, once Holy Shield's mana is safe. It hits your target and the enemies next to it, and it is your biggest single threat button."
     },
     {
       "action": {
@@ -237,7 +237,7 @@
           }
         }
       },
-      "notes": "Swift Judgement whenever it is ready: since client 1.60.1.70707 it judges the active Seal on its own one minute cooldown, free and off the global cooldown, without touching Judgement's."
+      "notes": "Whenever it is ready. A second Judgement of your Seal on its own one minute cooldown, free and off the global cooldown; under Seal of Fury it taunts too, so hold it when a tank swap is coming."
     },
     {
       "action": {
@@ -267,15 +267,15 @@
             "rhs": {
               "spellCurrentCost": {
                 "spellId": {
-                  "spellId": 20928,
-                  "rank": 3
+                  "spellId": 1239570,
+                  "rank": 4
                 }
               }
             }
           }
         }
       },
-      "notes": "Judgement on cooldown (an off-the-global cast of 6 percent of base mana)."
+      "notes": "On cooldown, once Holy Shield's mana is safe. Off the global cooldown for 6% of base mana, and under Seal of Fury it is your taunt."
     },
     {
       "action": {
@@ -318,8 +318,8 @@
                   "rhs": {
                     "spellCurrentCost": {
                       "spellId": {
-                        "spellId": 20928,
-                        "rank": 3
+                        "spellId": 1239570,
+                        "rank": 4
                       }
                     }
                   }
@@ -329,7 +329,7 @@
           }
         }
       },
-      "notes": "Exorcism on Undead and Demons only; the engine refuses it on any other target."
+      "notes": "On Undead and Demons only, once Holy Shield's mana is safe. It cannot be cast on anything else."
     },
     {
       "action": {
@@ -377,8 +377,8 @@
                   "rhs": {
                     "spellCurrentCost": {
                       "spellId": {
-                        "spellId": 20928,
-                        "rank": 3
+                        "spellId": 1239570,
+                        "rank": 4
                       }
                     }
                   }
@@ -388,7 +388,7 @@
           }
         }
       },
-      "notes": "Consecration last and only above half mana: about one threat per mana against ten for Hammer of the Righteous, so it is the use of mana the tank has to spare."
+      "notes": "Last, and only above half mana. It makes far less threat per mana than Hammer of the Righteous, so it spends the mana you will not need."
     }
   ]
 }
