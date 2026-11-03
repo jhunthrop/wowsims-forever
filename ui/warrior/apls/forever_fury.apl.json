@@ -5,6 +5,20 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 2687
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-2.5s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 11551,
             "rank": 6
           }
@@ -12,7 +26,7 @@
       },
       "doAtValue": {
         "const": {
-          "val": "-1s"
+          "val": "-1.5s"
         }
       }
     }
@@ -24,7 +38,7 @@
       }
     },
     {
-      "notes": "Bloodrage on cooldown: rage is the limiting resource for Fury.",
+      "notes": "Whenever rage is under 80: 10 rage at once and 10 more over 10 seconds, back every minute.",
       "action": {
         "condition": {
           "cmp": {
@@ -47,14 +61,42 @@
       }
     },
     {
-      "notes": "Death Wish (30 s, 3 min cooldown) now if a second use still fits after it, otherwise held for the execute phase, or for the last 30 s when the execute phase is shorter than the buff. Holding for execute alone lost 5-23% in fights under 90 s and at 300 s, where it gave up a whole use.",
+      "notes": "At the pull only if a second one fits before the boss dies. Otherwise hold it for the execute phase, or for the last 30 seconds when that phase is short.",
       "action": {
         "condition": {
           "or": {
             "vals": [
-              {"cmp": {"op": "OpGe", "lhs": {"remainingTime": {}}, "rhs": {"const": {"val": "210s"}}}},
-              {"isExecutePhase": {"threshold": "E20"}},
-              {"cmp": {"op": "OpLe", "lhs": {"remainingTime": {}}, "rhs": {"const": {"val": "30s"}}}}
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "210s"
+                    }
+                  }
+                }
+              },
+              {
+                "isExecutePhase": {
+                  "threshold": "E20"
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "30s"
+                    }
+                  }
+                }
+              }
             ]
           }
         },
@@ -66,13 +108,29 @@
       }
     },
     {
-      "notes": "Recklessness (15 s, 30 min cooldown: one use a fight) in the execute phase, or in the last 15 s when the execute phase is shorter than the buff.",
+      "notes": "In the execute phase, or in the last 15 seconds when that phase is short. It is a once-a-fight button.",
       "action": {
         "condition": {
           "or": {
             "vals": [
-              {"isExecutePhase": {"threshold": "E20"}},
-              {"cmp": {"op": "OpLe", "lhs": {"remainingTime": {}}, "rhs": {"const": {"val": "15s"}}}}
+              {
+                "isExecutePhase": {
+                  "threshold": "E20"
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15s"
+                    }
+                  }
+                }
+              }
             ]
           }
         },
@@ -84,7 +142,7 @@
       }
     },
     {
-      "notes": "Keep Battle Shout up.",
+      "notes": "Whenever it drops. It is 10 rage for the whole group's attack power.",
       "action": {
         "condition": {
           "not": {
@@ -107,7 +165,7 @@
       }
     },
     {
-      "notes": "Execute below 20 percent.",
+      "notes": "First, below 20%: it beats Bloodthirst there and takes every point of rage you hold.",
       "action": {
         "condition": {
           "isExecutePhase": {
@@ -123,7 +181,7 @@
       }
     },
     {
-      "notes": "Bloodthirst is the highest damage per rage button and comes off a six second cooldown.",
+      "notes": "On cooldown: your best hit per rage.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -134,26 +192,8 @@
       }
     },
     {
-      "notes": "Whirlwind while Bloodthirst is down.",
+      "notes": "On cooldown, right behind Bloodthirst: it hits up to four targets with both weapons.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "spellTimeToReady": {
-                "spellId": {
-                  "spellId": 23894,
-                  "rank": 4
-                }
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "1.5s"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 1680
@@ -162,7 +202,7 @@
       }
     },
     {
-      "notes": "Overpower whenever its dodge window is open. It is a Battle Stance spell: Fury stays in Battle Stance until Whirlwind is learned at 36, then opens in Berserker Stance and the line falls through.",
+      "notes": "Only before level 36, while you still fight in Battle Stance. Once Whirlwind is trained you live in Berserker Stance and it never comes up.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -173,19 +213,52 @@
       }
     },
     {
-      "notes": "Heroic Strike as the rage dump, never below 40 rage.",
+      "notes": "Only above 60 rage, and never from 25% down: hold that rage for Execute. It is queued on your next swing and costs no global cooldown.",
       "action": {
         "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentRage": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "40"
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentRage": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "60"
+                    }
+                  }
+                }
+              },
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "isExecutePhase": {
+                            "threshold": "E25"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "not": {
+                        "val": {
+                          "spellIsKnown": {
+                            "spellId": {
+                              "spellId": 20662,
+                              "rank": 5
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
               }
-            }
+            ]
           }
         },
         "castSpell": {
