@@ -64,6 +64,18 @@ var unsimulatedDurations = map[string]string{
 	"warrior/Pummel":        "the school lockout after an interrupt has no reader: the sim's targets never cast",
 }
 
+// attackCadenceDurations names, per class and spell, a periodic the engine
+// models as whole attacks at a logged cadence inside the client's lifetime:
+// its Dot spans NumberOfTicks x the cadence, so it ends less than one attack
+// before the client's duration. The value is the cadence in milliseconds.
+var attackCadenceDurations = map[string]int32{
+	// sim/shaman/fire_totems.go: foreverlogs.gg beta timelines put a
+	// totem's landed Attacks a median 2.437 s apart (round 13 casters).
+	"shaman/Searing Totem": 2437,
+}
+
+const reasonAttackCadence = "the engine's Dot spans the totem's whole attacks at the logged cadence (attackCadenceDurations), so it ends less than one attack before the client's duration"
+
 // durationSpellFor returns the client spell whose duration_ms the engine is
 // compared against: the cast spell itself, or its payload spell of the same
 // rank when durationPayloadSpells names one.
@@ -111,6 +123,10 @@ func durationReading(row Row, client spellconst.Spell, spell *core.Spell, siblin
 	// the numbers are only compared when they happen to agree.
 	if onlyUnmodeledControlEffects(client) && row.EngineDurationMS != client.DurationMS {
 		return reasonUnmodeledEffect
+	}
+	if cadence := attackCadenceDurations[row.ClassSlug+"/"+client.Name]; cadence > 0 && row.EngineDurationFound &&
+		row.EngineDurationMS < client.DurationMS && client.DurationMS-row.EngineDurationMS < cadence {
+		return reasonAttackCadence
 	}
 	if row.EngineDurationMS == -1 && permanentOnTarget(spell, siblingIDs) {
 		return reasonFullBuffsAura

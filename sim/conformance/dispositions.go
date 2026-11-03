@@ -89,5 +89,7 @@ var trainableDispositions = map[string]map[string]string{
 		"Haunt":               dispDefer + ": the client lists it on no learn row (no Forever trainer teaches it); not a spell a player learns",
 		"Unstable Affliction": dispDefer + ": the client lists it on no learn row (no Forever trainer teaches it); not a spell a player learns",
 		"Dispel Magic":        dispUtility + ": dispel (the Felhunter pet's ability), no learn row",
+		"Soul Link":           dispAura + ": sim/warlock/talents.go applySoulLink, the talent's 30% damage-taken share on the warlock and the pet; no rotation casts it",
+		"Curse of Exhaustion": dispUtility + ": movement slow on the target; no sim number reads it",
 	},
 }

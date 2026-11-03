@@ -95,6 +95,27 @@ func TestDurationReadingKeepsRealDurations(t *testing.T) {
 	}
 }
 
+// Searing Totem's engine Dot spans 12 attacks at 2.437 s (29.244 s) inside
+// the client's 30 s totem: that reads as the cadence, but an engine number a
+// whole attack short, or longer than the client's, is still compared.
+func TestDurationReadingAcceptsAnAttackCadenceWithinOneAttack(t *testing.T) {
+	client := spellconst.Spell{Name: "Searing Totem", DurationMS: 30000}
+	cases := []struct {
+		engineMS int32
+		want     string
+	}{
+		{29244, reasonAttackCadence},
+		{30000 - 2437, ""},
+		{30500, ""},
+	}
+	for _, c := range cases {
+		row := Row{ClassSlug: "shaman", EngineDurationMS: c.engineMS, EngineDurationFound: true}
+		if got := durationReading(row, client, nil, nil); got != c.want {
+			t.Errorf("engine %d ms reads %q, want %q", c.engineMS, got, c.want)
+		}
+	}
+}
+
 func TestClassifiedTrainablesAreAllDispositioned(t *testing.T) {
 	for slug := range trainableDispositions {
 		golden, err := os.ReadFile(goldenPath(slug))
