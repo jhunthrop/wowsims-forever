@@ -53,7 +53,10 @@ func (mage *Mage) newArcaneExplosionSpellConfig(rank int) core.SpellConfig {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			for _, aoeTarget := range sim.Encounter.TargetUnits {
 				damage := sim.Roll(baseDamageLow, baseDamageHigh)
-				spell.CalcAndDealDamage(sim, aoeTarget, damage, spell.OutcomeMagicCrit)
+				// A direct damage spell: it rolls the spell hit table on
+				// every target like Cone of Cold and Frost Nova do, where
+				// OutcomeMagicCrit (hit-only) never missed.
+				spell.CalcAndDealDamage(sim, aoeTarget, damage, spell.OutcomeMagicHitAndCrit)
 			}
 		},
 	}
