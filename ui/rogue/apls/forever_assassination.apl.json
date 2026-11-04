@@ -52,29 +52,6 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 14177
-          }
-        },
-        "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentComboPoints": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "4"
-              }
-            }
-          }
-        }
-      },
-      "notes": "Cold Blood at four or more combo points, right before the Eviscerate. It is off the global cooldown and costs nothing, so it waits for the finisher."
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
             "spellId": 6774,
             "rank": 2
           }
@@ -193,6 +170,29 @@
         }
       },
       "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking, once Blood Splatter makes it last 6 seconds longer: bleeds always crit in Forever."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14177
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "4"
+              }
+            }
+          }
+        }
+      },
+      "notes": "Cold Blood at four or more combo points, right before the Eviscerate. It is off the global cooldown and costs nothing, so it waits for the finisher."
     },
     {
       "action": {
