@@ -32,6 +32,11 @@ type SpellConfig struct {
 	MetricSplits   int
 	Rank           int
 	RequiredLevel  int
+	// ScalesToCasterLevel marks a single-rank spell whose client amount grows
+	// every level up to a MaxLevel at or above the caster's (Wrack: level 40,
+	// MaxLevel 60): it is not a rank below the caster, so the level-gap
+	// penalty (levelPenalty) leaves its coefficient whole.
+	ScalesToCasterLevel bool
 
 	ManaCost   ManaCostOptions
 	EnergyCost EnergyCostOptions
@@ -126,6 +131,8 @@ type Spell struct {
 
 	Rank          int
 	RequiredLevel int
+	// ScalesToCasterLevel is the config's: the level-gap penalty left it whole.
+	ScalesToCasterLevel bool
 
 	ResourceMetrics *ResourceMetrics
 	healthMetrics   []*ResourceMetrics
@@ -320,6 +327,7 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 
 	spell.Rank = config.Rank
 	spell.RequiredLevel = config.RequiredLevel
+	spell.ScalesToCasterLevel = config.ScalesToCasterLevel
 
 	spell.CdSpell = spell
 
@@ -337,8 +345,8 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 		spell.DefaultCast.Cost = spell.Cost.BaseCost
 	}
 
-	// A rank learned below level 20 gains less from spell power.
-	if penalty := levelPenalty(config); penalty != 1 {
+	// A rank far below the caster's level gains less from spell power.
+	if penalty := levelPenalty(config, unit); penalty != 1 {
 		spell.BonusCoefficient *= penalty
 		config.Dot.BonusCoefficient *= penalty
 		config.Hot.BonusCoefficient *= penalty
@@ -774,49 +782,52 @@ func (spell *Spell) ApplyAdditivePeriodicDamageBonus(percent int64) {
 	spell.PeriodicDamageMultiplierAdditive += float64(percent) / 100
 }
 
-// levelPenaltyLevel is the spell level from which a spell keeps its whole
-// spell power coefficient, and levelPenaltyPerLevel what it loses for each
-// level below it.
+// levelPenaltyGrace is how many levels past a rank's learn level the caster
+// may be before the rank loses spell power, and levelPenaltyPerLevel what it
+// loses for each level beyond that.
 const (
-	levelPenaltyLevel    = 20
-	levelPenaltyPerLevel = 0.0375
+	levelPenaltyGrace    = 17
+	levelPenaltyPerLevel = 0.05
 )
 
 // levelPenalty is the share of its spell power coefficient a rank the
-// player casts keeps: 1 - (20 - level) * 0.0375 when it is learned below
-// level 20, else all of it (cmangos-classic Unit::CalculateLevelPenalty and
-// vmangos SpellCaster::CalculateLevelPenalty). The client's coefficients
-// carry no penalty of their own. Only a spell the player casts (it has a
-// cost or a cast) is a learned rank: a proc's RequiredLevel is its client
-// spell level (every Seal of Righteousness and Seal of Fury proc is level
-// 1), and how the penalty treats a triggered spell is unsettled, so procs
-// keep their coefficient. Physical abilities take no spell power.
+// player (or a pet) casts keeps at the caster's level (LevelPenalty). The
+// client's coefficients carry no penalty of their own and its tables carry
+// no curve (SpellLevels' MaxLevel is learn level + 5 on every heal rank and
+// is not what the measurement follows). Only a spell the caster casts (it
+// has a cost or a cast) is a learned rank: a proc's RequiredLevel is its
+// client spell level (every Seal of Righteousness and Seal of Fury proc is
+// level 1), so procs keep their coefficient. Physical abilities take no
+// spell power, and an enemy's spells are not ranks it learned.
 //
-// Heals take no penalty in Forever. The beta logs' low ranks fit only the
-// whole coefficient: two druids' Rejuvenation ranks 3 (level 16) and 5
-// (28) give one healing power under a 1.16 and a 1.20 multiplier with it,
-// and 0.77 and 0.81, below any talent's, with the penalty; a druid's
-// Healing Touch ranks 2 and 5, a shaman's Healing Wave ranks 1 and 4 and
-// two paladins' Holy Light ranks 3 to 5 fit the same way (sim-accuracy
-// round 11, healers). Damage spells keep the cores' rule: one mage's
-// Arcane Explosion ranks lean the same way, too little to move them.
-func levelPenalty(config SpellConfig) float64 {
-	if config.SpellSchool == SpellSchoolPhysical || !isCastRank(config) {
+// Round 11's beta logs (levels 27 to 35) fit the whole coefficient on every
+// low rank they caught, Rejuvenation ranks 3 (16) and 5 (28) among them; each
+// is within 17 levels of its caster, so they agree with this rule too.
+func levelPenalty(config SpellConfig, caster *Unit) float64 {
+	if config.SpellSchool == SpellSchoolPhysical || !isCastRank(config) || caster.Type == EnemyUnit || config.ScalesToCasterLevel {
 		return 1
 	}
-	if config.ProcMask.Matches(ProcMaskSpellHealing) {
-		return 1
-	}
-	return LevelPenalty(config.RequiredLevel)
+	return LevelPenalty(config.RequiredLevel, int(caster.Level))
 }
 
-// LevelPenalty is the share of its coefficient a rank learned at level
-// keeps; level 0 is a spell with no learn level and keeps it all.
-func LevelPenalty(level int) float64 {
-	if level <= 0 || level >= levelPenaltyLevel {
+// LevelPenalty is Forever's level-gap rule, which replaced Era's sub-20 cut:
+// a rank learned at rankLevel keeps its whole coefficient until casterLevel
+// is 17 levels past it, then 5% less a level, none from 37 levels past
+// (share = clamp(1 - (L - T - 17) * 0.05, 0, 1)). Blizzard's 1 October 2026
+// beta note and the character sheet say ranks "vastly below your current
+// level receive less benefit from your Spell Damage and Spell Healing"; the
+// numbers are ForeverChanges' beta measurement on heals, levels 18 to 30
+// (foreverchanges.pro/downranking, 2026-10-16), assumed above 30 and for
+// damage spells. A rank or a caster with no level keeps it all.
+func LevelPenalty(rankLevel, casterLevel int) float64 {
+	if rankLevel <= 0 || casterLevel <= 0 {
 		return 1
 	}
-	return 1 - float64(levelPenaltyLevel-level)*levelPenaltyPerLevel
+	gap := casterLevel - rankLevel - levelPenaltyGrace
+	if gap <= 0 {
+		return 1
+	}
+	return max(0, 1-float64(gap)*levelPenaltyPerLevel)
 }
 
 // isCastRank is whether config is a spell the player casts: it costs a

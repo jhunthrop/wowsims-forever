@@ -67,8 +67,8 @@ type DamageComparison struct {
 	// vanilla convention, which is not compared.
 	ClientCoefficient          float64
 	ClientCoefficientFromTable bool
-	// LevelPenalty is the share of the client's coefficient a rank learned
-	// below level 20 keeps (core.LevelPenalty); 1 for every other spell.
+	// LevelPenalty is the share of the client's coefficient a rank keeps at
+	// the caster's level (core.LevelPenalty); 1 for every other spell.
 	LevelPenalty float64
 
 	EngineMin, EngineMax float64
@@ -275,11 +275,11 @@ func (c DamageComparison) expectedCoefficient() float64 {
 
 // levelPenaltyOf is the level penalty the engine applies to a rank the
 // player casts (core.RegisterSpell): a spell with a cost or a cast, not
-// physical and not a heal, learned below level 20.
+// physical, at the caster's level (core.LevelPenalty, Forever's level gap).
 func levelPenaltyOf(clientSpell spellconst.Spell, engine *core.Spell) float64 {
 	cast := engine.DefaultCast.GCD != 0 || engine.DefaultCast.CastTime != 0 || engine.Cost != nil
-	if !cast || engine.SpellSchool == core.SpellSchoolPhysical || engine.ProcMask.Matches(core.ProcMaskSpellHealing) {
+	if !cast || engine.SpellSchool == core.SpellSchoolPhysical || engine.Unit.Type == core.EnemyUnit || engine.ScalesToCasterLevel {
 		return 1
 	}
-	return core.LevelPenalty(clientSpell.SpellLevel)
+	return core.LevelPenalty(clientSpell.SpellLevel, int(engine.Unit.Level))
 }
