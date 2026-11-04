@@ -59,9 +59,18 @@ func (mage *Mage) applyHeatingUp() {
 			}
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			if spell.ClassSpellMask == MageSpellMaskPyroblast {
-				aura.Deactivate(sim)
+			if spell.ClassSpellMask != MageSpellMaskPyroblast {
+				return
 			}
+			// Blizzard's 16 October 2026 beta notes: "Heating Up is no
+			// longer consumed if the Mage also had Presence of Mind active
+			// for the Pyroblast cast." An instant Pyroblast is one of
+			// those (three stacks of Heating Up still leave a quarter of
+			// the cast), so it leaves the stacks for the next hard cast.
+			if spell.CurCast.CastTime == 0 {
+				return
+			}
+			aura.Deactivate(sim)
 		},
 	})
 

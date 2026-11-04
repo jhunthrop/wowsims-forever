@@ -46,6 +46,49 @@ func TestClearcastingIsSpentByTheNextDamageSpell(t *testing.T) {
 	}
 }
 
+// Blizzard's 2 November 2026 beta notes: "Clearcasting is no longer
+// consumed on Arcane Missiles if Missile Barrage is active at the same
+// time." The engine read the cast's cost instead, which is 0 without
+// Arcane Power but 30% under it (the client adds percentage cost mods), so
+// an Arcane Power Barrage Missiles spent the charge.
+func TestClearcastingSurvivesABarrageMissilesUnderArcanePower(t *testing.T) {
+	built, sim, target := newFrostMageSimWithTalents(t, core.DefaultTargetProtoLvl60, arcanePowerCostTestTalents)
+	if built.ClearcastingAura == nil || built.MissileBarrageAura == nil || built.ArcanePowerAura == nil {
+		t.Fatal("the Arcane build did not register Clearcasting, Missile Barrage and Arcane Power")
+	}
+	built.ArcanePowerAura.Activate(sim)
+	built.MissileBarrageAura.Activate(sim)
+	built.ClearcastingAura.Activate(sim)
+	sim.CurrentTime += time.Second
+
+	missiles := topRank(t, built.ArcaneMissiles)
+	before := built.CurrentMana()
+	if !missiles.Cast(sim, target) {
+		t.Fatal("Arcane Missiles did not cast")
+	}
+	if spent := before - built.CurrentMana(); spent != 0 {
+		t.Errorf("a Barrage Missiles under Arcane Power and Clearcasting cost %.1f mana, want 0", spent)
+	}
+	if built.MissileBarrageAura.IsActive() {
+		t.Error("Missile Barrage was not spent by the Arcane Missiles it made free")
+	}
+	if !built.ClearcastingAura.IsActive() {
+		t.Error("Clearcasting was spent on a Missile Barrage Arcane Missiles; Blizzard keeps it")
+	}
+
+	// Without Missile Barrage the same channel spends the charge.
+	built, sim, target = newFrostMageSimWithTalents(t, core.DefaultTargetProtoLvl60, arcanePowerCostTestTalents)
+	built.ArcanePowerAura.Activate(sim)
+	built.ClearcastingAura.Activate(sim)
+	sim.CurrentTime += time.Second
+	if !topRank(t, built.ArcaneMissiles).Cast(sim, target) {
+		t.Fatal("the plain Arcane Missiles did not cast")
+	}
+	if built.ClearcastingAura.IsActive() {
+		t.Error("Clearcasting survived a plain Arcane Missiles")
+	}
+}
+
 // Ice Barrier is not in Clearcasting's class mask: it is not a damage
 // spell, so it pays its cost and leaves the charge for the next nuke.
 func TestClearcastingDoesNotPayForIceBarrier(t *testing.T) {
