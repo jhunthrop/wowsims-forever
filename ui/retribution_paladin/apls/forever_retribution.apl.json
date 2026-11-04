@@ -138,13 +138,63 @@
       }
     },
     {
+      "notes": "With Unsealed Wrath, straight after the opening Crusader Judgement. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then go straight to Seal of Command: three swings store three Commands and the twist is under way. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight.",
       "action": {
         "condition": {
-          "auraIsActive": {
-            "auraId": {
-              "spellId": 20308,
-              "rank": 6
-            }
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 1310735
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 20308,
+                    "rank": 6
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20920,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Without Unsealed Wrath, at the top rank you have trained, straight after the opening Crusader Judgement. Same opener: Seal of the Crusader before the pull, Judge it on your first swing, then your damage Seal.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "auraIsKnown": {
+                      "auraId": {
+                        "spellId": 1310735
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 20308,
+                    "rank": 6
+                  }
+                }
+              }
+            ]
           }
         },
         "castSpell": {
@@ -153,8 +203,7 @@
             "rank": 8
           }
         }
-      },
-      "notes": "At the top rank you have trained, straight after the opening Crusader Judgement. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then swap straight to your damage Seal. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight."
+      }
     },
     {
       "notes": "On cooldown against Undead and Demons. It cannot be cast on anything else, so it is a dungeon button more than a raid one.",
