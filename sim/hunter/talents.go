@@ -28,9 +28,10 @@ const (
 
 // Forever's rates for three more talents (1.60.1.70291 talent text):
 // Efficiency "Reduces the Mana cost of your Shots, Stings, and melee
-// abilities by 15%" at 5/5 (3% a rank), Barrage "Increases the damage done
-// by your Multi-Shot, Aimed Shot, and Volley abilities by 10%" at 3/3 (3, 7,
-// 10%: not a clean multiple) and Savage Strikes "Increases the critical
+// abilities by 15%" at 5/5 (3% a rank), Barrage (19461) 5/10/15% Multi-Shot,
+// Aimed Shot and Volley damage by effect 0's TraitDefinitionEffectPoints
+// curve (the 70753 hotfix push; Wowhead's text read 3/7/10% until 70755)
+// and Savage Strikes "Increases the critical
 // strike chance of all your melee abilities by 4%" at 2/2 (2% a rank).
 // Vanilla's 2%, 5% a rank and 10% a rank are not Forever's.
 const (
@@ -38,7 +39,13 @@ const (
 	savageStrikesCritPerRank       float64 = 2.0
 )
 
-var barrageDamageByRank = [4]float64{0, 0.03, 0.07, 0.10}
+// lightningReflexesAgilityPerRank is Lightning Reflexes (19168) effect 0,
+// aura 137 (total stat percent): 3/6/9/12/15% Agility by its
+// TraitDefinitionEffectPoints curve since the 70753 hotfix push (2% a rank
+// before; Wowhead's text caught up in 70755).
+const lightningReflexesAgilityPerRank = 0.03
+
+var barrageDamageByRank = [4]float64{0, 0.05, 0.10, 0.15}
 
 // barrageDamage is Barrage's damage bonus at a rank.
 func barrageDamage(rank int32) float64 {
@@ -155,10 +162,7 @@ func (hunter *Hunter) ApplyTalents() {
 	}
 
 	if hunter.Talents.LightningReflexes > 0 {
-		// Client text: "Increases your Agility by 2%" per rank (was 3%
-		// here, from before the Survival tree was rewritten to Forever's
-		// trait tree -- source: 1.60.1.70009 talents/hunter.json).
-		agiBonus := 0.02 * float64(hunter.Talents.LightningReflexes)
+		agiBonus := lightningReflexesAgilityPerRank * float64(hunter.Talents.LightningReflexes)
 		hunter.MultiplyStat(stats.Agility, 1.0+agiBonus)
 	}
 

@@ -33,3 +33,18 @@ func TestWarlockTalentRatesAreForevers(t *testing.T) {
 		t.Errorf("Demonic Sacrifice period = %v, want 4s", demonicSacrificeRegenPeriod)
 	}
 }
+
+// TestShadowAndFlameReadsThe70755Curve pins 426316's effects 2 and 3
+// (Shadow and Fire damage) at 4% a rank, 20% at 5/5, raised from 2% a rank
+// by the 70755 hotfix push, and effect 1's 20% a rank Immolate chance.
+func TestShadowAndFlameReadsThe70755Curve(t *testing.T) {
+	if got := shadowAndFlameDamagePerRank * 5; math.Abs(got-0.20) > 1e-9 {
+		t.Errorf("Shadow and Flame 5/5 damage = %v, want 0.20", got)
+	}
+	if got := shadowAndFlameImmolatePreserveChance * 5; math.Abs(got-1.0) > 1e-9 {
+		t.Errorf("Shadow and Flame 5/5 Immolate chance = %v, want 1.0", got)
+	}
+	if shadowAndFlameBuffDuration != 20*time.Second {
+		t.Errorf("Shadow and Flame buff lasts %v, want 20s", shadowAndFlameBuffDuration)
+	}
+}

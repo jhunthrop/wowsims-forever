@@ -952,10 +952,11 @@ const (
 	// Fire and Brimstone: "Increases the critical strike chance of
 	// your Conflagrate spell by 8/17/25%."
 
-	// Shadow and Flame: "...increases all Shadow/Fire damage you deal
-	// by 2/4/6/8/10% for 20 sec... Conflagrate has a 20/40/60/80/100%
-	// chance not to consume Immolate..."
-	shadowAndFlameDamagePerRank          = 0.02
+	// Shadow and Flame (426316): effects 2 and 3 are the Shadow and Fire
+	// damage, 4/8/12/16/20% for 20 sec by their TraitDefinitionEffectPoints
+	// curves (2/4/6/8/10% before the 70755 hotfix push); effect 1 is the
+	// 20/40/60/80/100% chance that Conflagrate does not consume Immolate.
+	shadowAndFlameDamagePerRank          = 0.04
 	shadowAndFlameImmolatePreserveChance = 0.20
 	shadowAndFlameBuffDuration           = 20 * time.Second
 

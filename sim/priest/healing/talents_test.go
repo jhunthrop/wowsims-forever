@@ -409,15 +409,6 @@ func TestTwilightFocusKeepsCastTimeUnderDamage(t *testing.T) {
 	}
 }
 
-// Binding Heal (1240774) is in Spiritual Healing's direct-heal mask
-// (14898 effect 0, class mask word 1 bit 4, the bit Binding Heal's own
-// class options carry), so 3/3 raises it by 10% like Flash Heal.
-func TestSpiritualHealingRaisesBindingHeal(t *testing.T) {
-	talents := onePoint(holyTree, spiritualHealing, 3)
-	binding := func(a *HealingPriest) *core.Spell { return a.BindingHeal[len(a.BindingHeal)-1] }
-	assertRatio(t, "Binding Heal", tankHealed(t, talents, binding), tankHealed(t, "", binding), 1.10)
-}
-
 // Inner Focus's crit is "if it is a non-periodic spell": its crit modifier
 // (14751 effect 1, SpellEffect 692357) names no Renew rank, so a Renew
 // ticking while Inner Focus is up crits no more often.

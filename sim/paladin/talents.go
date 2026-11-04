@@ -82,39 +82,44 @@ func (paladin *Paladin) applyConviction() {
 	paladin.AddStat(stats.Crit, convictionCritPctPerRank*float64(paladin.Talents.Conviction)*core.CritRatingPerCritChance)
 }
 
-// Two-Handed Weapon Specialization (node 105697, 3 ranks): "Increases the
-// physical damage you deal by 2%, and reduces all threat you generate by
-// 7% while a two-handed melee weapon is equipped", 4%/14% and 6%/20% at
-// ranks 2 and 3 (client 1.60.1.70707). The text names physical damage, so
-// it no longer reaches the Holy weapon attacks (seal procs, Judgement of
-// Command, Holy Strike, Hammer of the Righteous) that "damage you deal with
-// two-handed melee weapons" did before 70707. The two-hander condition is
-// read as covering both halves, as the talent's name and its 70658 text
-// say (unconfirmed for the damage half).
+// Two-Handed Weapon Specialization (node 105697, 3 ranks, spell 20111):
+// effect 0 is aura 79 (MOD_DAMAGE_PERCENT_DONE) at 2/4/6% (its
+// TraitDefinitionEffectPoints curve), effect 1 is threat -7/-14/-20%,
+// while a two-handed melee weapon is equipped. The 70755 hotfix push moved
+// effect 0's EffectMiscValue school mask from 1 (Physical) to 3 (Physical
+// and Holy), so the bonus reaches Holy damage again: seal procs, Judgement
+// of Command, Holy Strike, Hammer of the Righteous, Exorcism and the rest.
+// The two-hander condition covers both halves, as the talent's text says.
 const twoHandedWeaponSpecializationDamagePerRank = 0.02
 
 var twoHandedWeaponSpecializationThreatReduction = [4]float64{0, 0.07, 0.14, 0.20}
 
-// applyWeaponSpecialization scales physical damage and threat while a
-// two-hander is in the main hand.
+// twoHandedWeaponSpecializationSchools is effect 0's school mask (misc 3).
+var twoHandedWeaponSpecializationSchools = []stats.SchoolIndex{stats.SchoolIndexPhysical, stats.SchoolIndexHoly}
+
+// applyWeaponSpecialization scales Physical and Holy damage and threat
+// while a two-hander is in the main hand.
 func (paladin *Paladin) applyWeaponSpecialization() {
 	rank := paladin.Talents.TwoHandedWeaponSpecialization
 	if rank == 0 || !paladin.has2hEquipped() {
 		return
 	}
-	paladin.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + twoHandedWeaponSpecializationDamagePerRank*float64(rank)
+	for _, school := range twoHandedWeaponSpecializationSchools {
+		paladin.PseudoStats.SchoolDamageDealtMultiplier[school] *= 1 + twoHandedWeaponSpecializationDamagePerRank*float64(rank)
+	}
 	paladin.PseudoStats.ThreatMultiplier *= 1 - twoHandedWeaponSpecializationThreatReduction[rank]
 }
 
 // Forever's Vengeance (1.60.1.70291 talents/paladin.json): "Increases your
 // Physical and Holy damage dealt by 1/2/3% for 30 sec after landing a
-// non-periodic critical strike. Stacks up to 3 times"; an aura's amount
-// applies once a stack, so 3/3 with three stacks is +9%. Vanilla's 3% a
-// rank for 8 sec with no stacks is not Forever's.
+// non-periodic critical strike"; an aura's amount applies once a stack.
+// The buff 20050 stacks to SpellAuraOptions.CumulativeAura 5 since the
+// 70755 hotfix push (3 before), so 3/3 at five stacks is +15%. Vanilla's 3%
+// a rank for 8 sec with no stacks is not Forever's.
 const (
 	vengeanceDamagePerRank = 0.01
 	vengeanceDuration      = 30 * time.Second
-	vengeanceMaxStacks     = 3
+	vengeanceMaxStacks     = 5
 )
 
 // vengeanceMultiplier is the Physical and Holy damage multiplier Vengeance

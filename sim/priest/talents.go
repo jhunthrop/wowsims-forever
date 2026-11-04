@@ -616,12 +616,11 @@ var twilightFocusPushbackReduction = [4]float64{0, 0.23, 0.47, 0.70}
 
 // PriestSpellMaskTwilightFocus is what Twilight Focus's pushback modifier
 // names (14913 effect 0, aura 108 misc 9): the cast and channelled spells
-// Lesser Heal, Heal, Flash Heal, Greater Heal, Prayer of Healing, Binding
-// Heal, Penance, Smite, Holy Fire, Mind Blast and Mind Flay. Lightwell and
+// Lesser Heal, Heal, Flash Heal, Greater Heal, Prayer of Healing, Penance, Smite, Holy Fire, Mind Blast and Mind Flay. Lightwell and
 // the instants are not in it.
 const PriestSpellMaskTwilightFocus = PriestSpellMaskLesserHeal | PriestSpellMaskHeal |
 	PriestSpellMaskFlashHeal | PriestSpellMaskGreaterHeal | PriestSpellMaskPrayerOfHealing |
-	PriestSpellMaskBindingHeal | PriestSpellMaskPenance | PriestSpellMaskSmite |
+	PriestSpellMaskPenance | PriestSpellMaskSmite |
 	PriestSpellMaskHolyFire | PriestSpellMaskMindBlast | PriestSpellMaskMindFlay
 
 func (priest *Priest) applyTwilightFocus() {

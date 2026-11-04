@@ -41,7 +41,6 @@ const (
 	SpellCode_PriestStarshards
 	SpellCode_PriestVampiricTouch
 	SpellCode_PriestLightwell
-	SpellCode_PriestBindingHeal
 )
 
 // Spell masks for the declarative talent mods below. One bit per
@@ -74,7 +73,7 @@ const (
 	PriestSpellMaskLightwell
 	PriestSpellMaskMindBlast
 	PriestSpellMaskVampiricEmbrace
-	PriestSpellMaskBindingHeal
+	_ // Binding Heal's bit until client 1.60.1.70755 dropped its trainer rows; never reused
 	PriestSpellMaskDivineGrace
 	PriestSpellMaskContingencyPlanHeal
 	PriestSpellMaskInnerFire
@@ -122,7 +121,7 @@ const PriestSpellMaskMentalAgility = PriestSpellMaskSmite | PriestSpellMaskHolyF
 // PriestSpellMaskSpiritualHealing is what Spiritual Healing (14898) names:
 // the direct heals of SpellEffect 692104 (Lesser Heal, Heal, Greater Heal,
 // Flash Heal, Prayer of Healing, Holy Nova, Desperate Prayer, Penance,
-// Prayer of Mending and Binding Heal) and Renew, the one heal over time of
+// and Prayer of Mending) and Renew, the one heal over time of
 // 1239404. Lightwell's renew and Holy Binding carry no class options, and
 // a shield absorbs rather than heals. Its eff0 also names the racial
 // heals: Divine Grace (mask 0x1000000) and Contingency Plan's heal over
@@ -130,7 +129,7 @@ const PriestSpellMaskMentalAgility = PriestSpellMaskSmite | PriestSpellMaskHolyF
 const PriestSpellMaskSpiritualHealing = PriestSpellMaskLesserHeal | PriestSpellMaskHeal |
 	PriestSpellMaskGreaterHeal | PriestSpellMaskFlashHeal | PriestSpellMaskPrayerOfHealing |
 	PriestSpellMaskHolyNova | PriestSpellMaskDesperatePrayer | PriestSpellMaskPenance |
-	PriestSpellMaskPrayerOfMending | PriestSpellMaskBindingHeal | PriestSpellMaskRenew |
+	PriestSpellMaskPrayerOfMending | PriestSpellMaskRenew |
 	PriestSpellMaskDivineGrace | PriestSpellMaskContingencyPlanHeal
 
 type Priest struct {
@@ -139,7 +138,6 @@ type Priest struct {
 
 	Latency float64
 
-	BindingHeal       []*core.Spell
 	DarkSacrifice     []*core.Spell
 	DesperatePrayer   []*core.Spell
 	DevouringPlague   []*core.Spell
