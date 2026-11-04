@@ -84,9 +84,8 @@ func (mage *Mage) applyArcaneTalents() {
 		mage.MultiplyStat(stats.Intellect, 1.0+arcaneMindIntellectPerRank*float64(mage.Talents.ArcaneMind))
 	}
 
-	// Wand Specialization increases wand damage; this sim does not
-	// model wand casts.
-	_ = mage.Talents.WandSpecialization
+	// Wand Specialization's 13/25% wand damage is applied where Shoot is
+	// registered (shoot.go, wandSpecializationMultiplier).
 
 	// Arcane Blast is a bool talent that grants a new cast of Arcane
 	// Blast; registerArcaneBlastSpell (arcane_blast.go) is what
