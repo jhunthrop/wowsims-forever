@@ -64,7 +64,7 @@ func (warrior *Warrior) registerRecklessSwingsSpell() {
 		Duration:  recklessSwingsDuration,
 		MaxStacks: recklessSwingsCharges,
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.Landed() || !spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) {
+			if !result.Landed() || !countsAsWhiteSwing(spell.ProcMask) {
 				return
 			}
 			warrior.AddRage(sim, recklessSwingsRage, rageMetrics)
