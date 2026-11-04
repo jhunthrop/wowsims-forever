@@ -64,6 +64,20 @@ func heroicStrikeRankSpellID(rank int) int32 {
 	return HeroicStrikeSpellId[rank]
 }
 
+// heroicStrikeThreatByRank is each rank's bonus threat. The client's
+// table has no threat effect for Heroic Strike, so these are the Classic
+// server's spell_threat rows (mangoszero/database
+// World/Setup/FullDB/spell_threat.sql; the same rows in mangosArchives
+// databaseZero_Rel19 and tortoise-wow), the source of the level-60 145 the
+// engine always used. Before, every rank got 145, so a levelling warrior's
+// rank 3 Heroic Strike carried rank 8's threat. Rank 0 is the stub.
+var heroicStrikeThreatByRank = [HeroicStrikeRanks + 1]float64{0, 20, 39, 59, 78, 98, 118, 137, 145, 175}
+
+// heroicStrikeThreat is a Heroic Strike rank's bonus threat.
+func heroicStrikeThreat(rank int) float64 {
+	return heroicStrikeThreatByRank[rank]
+}
+
 // heroicStrikeRankManaCost mirrors heroicStrikeRankSpellID for cost:
 // the generated HeroicStrikeManaCost[3] is 0, read off the same free
 // duplicate (25712) rather than 285's real 150.
@@ -79,8 +93,7 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 	flatDamageBonus := HeroicStrikeDamage[rank]
 	casterLevel := int(warrior.Level)
 	spellID := heroicStrikeRankSpellID(rank)
-	// No known equation, and the client's table has no threat column.
-	threat := core.TernaryFloat64(core.IncludeAQ, 173, 145)
+	threat := heroicStrikeThreat(rank)
 
 	warrior.HeroicStrike = warrior.RegisterSpell(AnyStance, core.SpellConfig{
 		ClassSpellMask: WarriorSpellMaskHeroicStrike,
