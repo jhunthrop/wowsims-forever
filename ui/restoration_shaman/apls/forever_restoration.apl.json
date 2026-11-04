@@ -187,6 +187,61 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 1239243,
+            "rank": 3
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 1239243,
+                        "rank": 3
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.9"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Riptide on the tank first: it is the most mana-efficient heal and lifts the Chain Heal below."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 10468,
             "rank": 6
           },
@@ -419,61 +474,6 @@
           }
         }
       }
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 1239243,
-            "rank": 3
-          },
-          "target": {
-            "type": "Player",
-            "index": 5
-          }
-        },
-        "condition": {
-          "and": {
-            "vals": [
-              {
-                "not": {
-                  "val": {
-                    "dotIsActive": {
-                      "spellId": {
-                        "spellId": 1239243,
-                        "rank": 3
-                      },
-                      "targetUnit": {
-                        "type": "Player",
-                        "index": 5
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "currentHealthPercent": {
-                      "sourceUnit": {
-                        "type": "Player",
-                        "index": 5
-                      }
-                    }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "0.9"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        }
-      },
-      "notes": "Riptide on the tank first: it is the most mana-efficient heal and lifts the Chain Heal below."
     },
     {
       "action": {
