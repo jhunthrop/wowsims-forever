@@ -141,6 +141,56 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 11275,
+            "rank": 6
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "4"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 11275,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 6774,
+                    "rank": 2
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking: bleeds always crit in Forever, and Blood Splatter makes it last 6 seconds longer."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 11300,
             "rank": 8
           }
