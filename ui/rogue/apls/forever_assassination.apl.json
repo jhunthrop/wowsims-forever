@@ -180,12 +180,19 @@
                     "rank": 2
                   }
                 }
+              },
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 1329256
+                  }
+                }
               }
             ]
           }
         }
       },
-      "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking: bleeds always crit in Forever, and Blood Splatter makes it last 6 seconds longer."
+      "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking, once Blood Splatter makes it last 6 seconds longer: bleeds always crit in Forever."
     },
     {
       "action": {
