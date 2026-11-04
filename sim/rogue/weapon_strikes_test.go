@@ -71,3 +71,21 @@ func TestMutilateOffHandTakesDualWieldSpecialization(t *testing.T) {
 		t.Errorf("Mutilate off-hand weapon damage with DWS 2/2 = %.3f x untalented, want 1.50", with/without)
 	}
 }
+
+// Mutilate's off-hand strike 1241590 carries Attributes_3 16777728, which
+// holds REQUIRES_OFF_HAND_WEAPON (0x1000000); the main-hand 1241586 carries
+// 1536 without it. That flag makes the strike an off-hand attack, so its
+// weapon damage is the off-hand weapon's, halved like every off-hand swing
+// (the same flag Shank carries). The engine read the off-hand weapon at full
+// weight. The flat per-hand bonus is not weapon damage and stays whole.
+func TestMutilateOffHandTakesTheOffHandPenalty(t *testing.T) {
+	const ap = 1000.0
+	talents := talentStringWithRank(t, zeroRogueTalents, "mutilate", 1)
+	sim, built := rogueSim(t, talents, "combat_backstab_prebis")
+	got := built.GetRogue().MutilateOHWeaponDamageForTest(sim, ap)
+	refSim, ref := rogueSim(t, talents, "combat_backstab_prebis")
+	want := 0.5 * ref.GetRogue().AutoAttacks.OH().CalculateNormalizedWeaponDamage(refSim, ap)
+	if math.Abs(got-want) > 1e-9 {
+		t.Errorf("Mutilate off-hand weapon damage = %.3f, want half the off-hand roll %.3f", got, want)
+	}
+}

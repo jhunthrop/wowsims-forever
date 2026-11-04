@@ -133,12 +133,8 @@ func (rogue *Rogue) registerMutilateSpell() {
 				poisonedMultiplier = mutilatePoisonedTargetMultiplier
 			}
 
-			// Both hands read their own weapon's normalized damage
-			// directly off AutoAttacks.MH()/OH(), not the unit-level
-			// MHNormalizedWeaponDamage/OHNormalizedWeaponDamage helpers:
-			// the latter bakes in the auto-attack-only 50% off-hand
-			// penalty (core/attack.go), which does not apply to a
-			// special ability that explicitly swings the off-hand.
+			// Each hand reads its own weapon's normalized damage; the
+			// off hand's is halved (mutilateOHWeaponDamage).
 			ap := spell.MeleeAttackPower(target)
 			mhDamage := poisonedMultiplier * mutilateHandDamage(flatDamage.Roll(sim, casterLevel), rogue.AutoAttacks.MH().CalculateNormalizedWeaponDamage(sim, ap))
 			ohDamage := poisonedMultiplier * mutilateHandDamage(flatDamage.Roll(sim, casterLevel), rogue.mutilateOHWeaponDamage(sim, ap))
@@ -177,10 +173,14 @@ func (rogue *Rogue) TargetHasRoguePoison(target *core.Unit) bool {
 	return rogue.woundPoisonDebuffAuras.Get(target).IsActive()
 }
 
-// mutilateOHWeaponDamage is the off-hand strike's normalized weapon damage,
-// raised by Dual Wield Specialization: 13715 is aura 122, the off-hand damage
-// percent, which scales the off-hand weapon's damage for every off-hand
-// strike, not only the white swing.
+// mutilateOHWeaponDamage is the off-hand strike's normalized weapon damage.
+// The off-hand hand spell (1241590, 1241588, 399961) carries Attributes_3
+// REQUIRES_OFF_HAND_WEAPON (0x1000000), which the main-hand one lacks: it is
+// an off-hand attack, so it reads the off-hand weapon's damage with the 50%
+// off-hand penalty, as Shank does (OHNormalizedWeaponDamage). Dual Wield
+// Specialization (13715, aura 122, the off-hand damage percent) raises that
+// off-hand weapon damage. The flat per-hand bonus is not weapon damage and
+// is not halved (mutilateHandDamage).
 func (rogue *Rogue) mutilateOHWeaponDamage(sim *core.Simulation, attackPower float64) float64 {
-	return rogue.AutoAttacks.OH().CalculateNormalizedWeaponDamage(sim, attackPower) * rogue.dwsMultiplier()
+	return rogue.OHNormalizedWeaponDamage(sim, attackPower) * rogue.dwsMultiplier()
 }
