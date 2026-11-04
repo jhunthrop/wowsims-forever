@@ -7,6 +7,7 @@
       }
     },
     {
+      "notes": "On yourself below 30% mana. It multiplies your Spirit regeneration, and a Restoration druid carries a lot of Spirit.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -26,10 +27,20 @@
             }
           }
         }
-      },
-      "notes": "Innervate on self when the bar runs low; the major-cooldown pass above only catches it below 500 mana."
+      }
     },
     {
+      "notes": "Alliance Skyborne only: Read Leyline every time it is ready. Half again your Spirit regeneration for 15 seconds is worth a global cooldown on a fight that drains your mana bar.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1259705
+          }
+        }
+      }
+    },
+    {
+      "notes": "When the tank drops under 35%: Nature's Swiftness, then an instant Healing Touch on him.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -71,10 +82,10 @@
             ]
           }
         }
-      },
-      "notes": "Emergency: the tank under 35% gets Nature's Swiftness and, in the same instant, an instant Healing Touch."
+      }
     },
     {
+      "notes": "Right after Nature's Swiftness, as the instant save on the tank.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -106,10 +117,10 @@
             ]
           }
         }
-      },
-      "notes": "Gated on knowing the spell as well: a druid without the talent has no Nature's Swiftness aura, and an unresolved condition would let this cast run unconditionally."
+      }
     },
     {
+      "notes": "When the tank is under 75% and your mana is keeping pace with the fight. In Forever it does not use up the HoT, so it is a heal of its own on a 15 second cooldown, for 20% of your base mana.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -165,10 +176,10 @@
             ]
           }
         }
-      },
-      "notes": "Swiftmend whenever the tank is under 75%, paced like Healing Touch. It heals for the whole of the tank's Regrowth (or his Rejuvenation when no Regrowth is up) and leaves the effect ticking: Forever's Swiftmend does not use the heal over time up, so it is a heal of its own on a 15 second cooldown, not a last-ditch trade."
+      }
     },
     {
+      "notes": "When two of your party, you included, are under 70% at once. It heals the whole party every 2 seconds.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -621,10 +632,10 @@
             ]
           }
         }
-      },
-      "notes": "Tranquility once two of the five party members (you among them) are hurt; it heals the party every 2 seconds for 10 and sits on a 5 minute cooldown."
+      }
     },
     {
+      "notes": "On the tank whenever it is not ticking. Let it run out before you recast it, so Bloom heals him when it does.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -671,10 +682,10 @@
             ]
           }
         }
-      },
-      "notes": "The tank's two heals over time stay up for the whole fight: Regrowth is the most healing per mana in the kit and Rejuvenation stacks with it."
+      }
     },
     {
+      "notes": "On the tank whenever it is not ticking, at rank 10 in a raid. Let it run out before you recast it, so Bloom heals him when it does. A raid fight's mana pays for the rank that heals the tank most; below 60 and without raid buffs, rank 4 keeps your mana going.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -724,6 +735,7 @@
       }
     },
     {
+      "notes": "On the tank under 55%, only while your mana is ahead of the fight.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -780,10 +792,10 @@
             ]
           }
         }
-      },
-      "notes": "Healing Touch is the big direct heal; it is paced so the mana lasts: only while the mana bar is above the share of the fight still to come."
+      }
     },
     {
+      "notes": "On a hurt party member under 70%, you included. It does not wait on the mana pace the costly heals follow.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -835,8 +847,7 @@
             ]
           }
         }
-      },
-      "notes": "You are one of the five: a hurt healer gets Rejuvenation at the party pace. Rejuvenation is cast at rank 4 (2090) on every target: over the raid fight it returns more effective healing for its mana than the top rank. Below 60, the rank each band casts is chosen on that band's own fight, sized to the dungeons a group of its level runs."
+      }
     },
     {
       "action": {
@@ -890,8 +901,7 @@
             ]
           }
         }
-      },
-      "notes": "A hurt party member gets Rejuvenation, at the same pace."
+      }
     },
     {
       "action": {
