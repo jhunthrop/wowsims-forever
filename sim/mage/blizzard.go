@@ -48,6 +48,11 @@ func (mage *Mage) newBlizzardSpellConfig(rank int) core.SpellConfig {
 
 	spellCoeff := BlizzardTickSpellCoeff[rank]
 
+	// Blizzard is the one spell whose low rank still cuts a talent's trigger
+	// chance (Blizzard's 2 November 2026 note): its chill rolls Frostbite at
+	// the rank's level-gap share.
+	frostbiteShare := core.SpellLevelPenalty(spellId, level, int(mage.Level))
+
 	var improvedBlizzardProcApplication *core.Spell
 	if mage.Talents.ImprovedBlizzard > 0 {
 		impId := []int32{0, 11185, 12487, 12488}[mage.Talents.ImprovedBlizzard]
@@ -64,7 +69,7 @@ func (mage *Mage) newBlizzardSpellConfig(rank int) core.SpellConfig {
 			Flags:    SpellFlagMage | core.SpellFlagNoLogs | SpellFlagChillSpell,
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				auras.Get(target).Activate(sim)
-				mage.chillApplied(sim, spell, target)
+				mage.chillAppliedAt(sim, spell, target, frostbiteShare)
 			},
 		})
 	}

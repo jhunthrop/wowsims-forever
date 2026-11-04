@@ -66,18 +66,29 @@ func (mage *Mage) applyChillTriggers() {
 	})
 }
 
-// chillApplied is one Chill application on target by spell.
+// chillApplied is one Chill application on target by spell. A talent's
+// trigger chance takes no low-rank penalty (Blizzard's 2 November 2026 note),
+// except from the spell Blizzard, whose chill passes its rank's share
+// (chillAppliedAt).
 func (mage *Mage) chillApplied(sim *core.Simulation, spell *core.Spell, target *core.Unit) {
-	mage.rollFingersOfFrost(sim, mage.fingersOfFrostChance(spell))
-	mage.rollFrostbite(sim, target)
+	mage.chillAppliedAt(sim, spell, target, 1)
 }
 
-// rollFrostbite is one Chill application's chance to freeze target.
-func (mage *Mage) rollFrostbite(sim *core.Simulation, target *core.Unit) {
+// chillAppliedAt is chillApplied with the Frostbite roll at frostbiteShare of
+// its chance: the Blizzard rank's level-gap share (core.SpellLevelPenalty),
+// 1 for every other Chill spell.
+func (mage *Mage) chillAppliedAt(sim *core.Simulation, spell *core.Spell, target *core.Unit, frostbiteShare float64) {
+	mage.rollFingersOfFrost(sim, mage.fingersOfFrostChance(spell))
+	mage.rollFrostbite(sim, target, frostbiteShare)
+}
+
+// rollFrostbite is one Chill application's chance to freeze target, at share
+// of the talent's chance.
+func (mage *Mage) rollFrostbite(sim *core.Simulation, target *core.Unit, share float64) {
 	if mage.FrostbiteFrozenAuras == nil || !mage.canFreeze(target) {
 		return
 	}
-	chance := frostbiteChancePerRank * float64(mage.Talents.Frostbite)
+	chance := frostbiteChancePerRank * float64(mage.Talents.Frostbite) * share
 	if sim.Proc(chance, "Frostbite") {
 		mage.FrostbiteFrozenAuras.Get(target).Activate(sim)
 	}

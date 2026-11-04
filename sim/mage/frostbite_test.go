@@ -22,7 +22,7 @@ func TestFrostbiteChanceFollowsTheTalentRank(t *testing.T) {
 		frozen := 0
 		for i := 0; i < rolls; i++ {
 			built.FrostbiteFrozenAuras.Get(target).Deactivate(sim)
-			built.rollFrostbite(sim, target)
+			built.rollFrostbite(sim, target, 1)
 			if built.FrostbiteFrozenAuras.Get(target).IsActive() {
 				frozen++
 			}
@@ -45,7 +45,7 @@ func TestFrostbiteIsAbsentWithoutTheTalent(t *testing.T) {
 func TestFrostbiteCannotFreezeARaidBoss(t *testing.T) {
 	built, sim, boss := newFrostMageSimWithTalents(t, bossTarget(), frostbiteTalents(t, 3))
 	for i := 0; i < 500; i++ {
-		built.rollFrostbite(sim, boss)
+		built.rollFrostbite(sim, boss, 1)
 	}
 	if built.FrostbiteFrozenAuras.Get(boss).IsActive() || built.isTargetFrozen(boss) {
 		t.Error("a raid boss was frozen by Frostbite")
@@ -97,5 +97,46 @@ func TestFrostNovaDoesNotRollFrostbite(t *testing.T) {
 		if built.FrostbiteFrozenAuras.Get(target).IsActive() {
 			t.Fatal("Frost Nova is not a Chill effect, so it must not roll Frostbite")
 		}
+	}
+}
+
+// Blizzard's 2 November 2026 note: "Various talents no longer have a penalty
+// to their chance to trigger when casting spells of a low rank. This penalty
+// does still apply to Blizzard." So a rank 1 Frostbolt at 60 still rolls
+// Frostbite at full chance, while a rank 1 Blizzard's chill (Improved
+// Blizzard) rolls it at the Blizzard rank's level-gap share, which is none at
+// 60 (core.SpellLevelPenalty); the top rank keeps the full chance.
+func TestFrostbiteFromBlizzardRollsAtTheBlizzardRanksLevelGapShare(t *testing.T) {
+	talents := talentStringWithRank(t, frostbiteTalents(t, 3), "improved_blizzard", 3)
+	built, sim, target := newFrostMageSimWithTalents(t, freezableTarget(), talents)
+	rankOne := built.Frostbolt[1]
+	frozen := false
+	for i := 0; i < 200 && !frozen; i++ {
+		rankOne.ApplyEffects(sim, target, rankOne)
+		waitForOutcomes(sim)
+		frozen = built.FrostbiteFrozenAuras.Get(target).IsActive()
+	}
+	if !frozen {
+		t.Error("200 rank 1 Frostbolts never froze a target: talents have no low-rank penalty")
+	}
+	tick := func(blizzard *core.Spell, ticks int) bool {
+		built.FrostbiteFrozenAuras.Get(target).Deactivate(sim)
+		// The tick itself, on an unapplied dot: an applied channel's ticks ask
+		// the rotation whether to stop, and this fixture has none.
+		dot := blizzard.AOEDot()
+		for i := 0; i < ticks; i++ {
+			dot.OnTick(sim, dot.Unit, dot)
+			waitForOutcomes(sim)
+			if built.FrostbiteFrozenAuras.Get(target).IsActive() {
+				return true
+			}
+		}
+		return false
+	}
+	if tick(built.Blizzard[1], 300) {
+		t.Error("a rank 1 Blizzard's chill froze a target at level 60: the Blizzard penalty is missing")
+	}
+	if !tick(built.Blizzard[BlizzardRanks], 300) {
+		t.Error("300 top-rank Blizzard ticks never froze a target")
 	}
 }

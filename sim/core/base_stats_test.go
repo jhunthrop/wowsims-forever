@@ -285,24 +285,45 @@ func TestProvisionalConstantsAreDeclared(t *testing.T) {
 	}
 }
 
-// Skyborne base stats are not in any mined table. They ship as clones of
-// a vanilla row, marked, and named by ProvisionalConstants, so nobody
-// mistakes a Skyborne sim's numbers for measured ones. When the real
-// table lands this test fails, which is the point.
+// Skyborne base stats are in no client table: ChrRaces 1.60.1.70755 has
+// no stat columns, RaceStat carries one zero column for every race, and
+// no ChrClassRaceSex table ships. The only measured Forever value is the
+// beta character sheet (forever-bugs #414, 2026-10-20: a naked level-1
+// Skyborne reads Human -1 Strength, +1 Agility, -1 Stamina, +1 Intellect,
+// +0 Spirit; Warcraft Tavern's Skyborne guide prints the same sheet for
+// all six classes). Both variants read the same in beta. Blizzard's reply
+// on #414 says the launch build gives each variant its own, larger
+// offsets, so the row stays provisional until a launch sheet is read; but
+// it must never again be a clone of Human or of Orc, which no source ever
+// supported.
 //
 // Asserted against RaceOffsets and getBaseStatsCombo - what
 // character.go:153 actually reads to compute a character's base stats -
-// rather than the BaseStatsKey-keyed BaseStats map: that map is
-// unpopulated and unread by any runtime path in this fork, so comparing
-// through it would pass vacuously (two absent entries are both the zero
-// value). Standing ruling (Task 9): no production behaviour, including a
-// package init(), exists purely to give a test something to compare.
-func TestSkyborneBaseStatsAreDeclaredClones(t *testing.T) {
-	al := getBaseStatsCombo(proto.Race_RaceHighOrderSkyborne, proto.Class_ClassWarrior, CharacterMaxLevel)
-	human := getBaseStatsCombo(proto.Race_RaceHuman, proto.Class_ClassWarrior, CharacterMaxLevel)
-	if al != human {
-		t.Log("Skyborne base stats are no longer a clone of Human: a real table has landed. Remove the clone, remove this test, and drop the two entries from ProvisionalConstants.")
-		t.Fail()
+// rather than the BaseStatsKey-keyed BaseStats map, which no runtime path
+// reads.
+func TestSkyborneBaseStatsFollowTheBetaCharacterSheet(t *testing.T) {
+	want := stats.Stats{
+		stats.Strength:  -1,
+		stats.Agility:   1,
+		stats.Stamina:   -1,
+		stats.Intellect: 1,
+		stats.Spirit:    0,
+	}
+	for _, race := range []proto.Race{proto.Race_RaceHighOrderSkyborne, proto.Race_RaceWindshaperSkyborne} {
+		if got := RaceOffsets[race]; got != want {
+			t.Errorf("RaceOffsets[%v] = %v, want the beta sheet %v", race, got, want)
+		}
+		got := getBaseStatsCombo(race, proto.Class_ClassWarrior, CharacterMaxLevel)
+		human := getBaseStatsCombo(proto.Race_RaceHuman, proto.Class_ClassWarrior, CharacterMaxLevel)
+		if got[stats.Strength] != human[stats.Strength]-1 || got[stats.Agility] != human[stats.Agility]+1 {
+			t.Errorf("%v level 60 warrior Str/Agi = %v/%v, want Human %v/%v -1/+1", race, got[stats.Strength], got[stats.Agility], human[stats.Strength], human[stats.Agility])
+		}
+		if got == human {
+			t.Errorf("%v is still a clone of Human", race)
+		}
+		if orc := getBaseStatsCombo(proto.Race_RaceOrc, proto.Class_ClassWarrior, CharacterMaxLevel); got == orc {
+			t.Errorf("%v is still a clone of Orc", race)
+		}
 	}
 	var named int
 	for _, n := range ProvisionalConstants() {
@@ -311,7 +332,7 @@ func TestSkyborneBaseStatsAreDeclaredClones(t *testing.T) {
 		}
 	}
 	if named != 2 {
-		t.Errorf("ProvisionalConstants names %d Skyborne entries, want 2", named)
+		t.Errorf("ProvisionalConstants names %d Skyborne entries, want 2 (the launch sheet is still unread)", named)
 	}
 }
 
