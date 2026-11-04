@@ -4,6 +4,7 @@ import (
 	"slices"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
@@ -19,8 +20,12 @@ import (
 // by wowhead's Forever page):
 //   - cast_time_ms 0, gcd_ms 1500, cooldown_ms 0, cost 200 (mana),
 //     spell_level 40, duration_ms 6000.
-//   - effect 0: aura 3 (PERIODIC_DAMAGE), amount 36, sp_coefficient
-//     0.143, period_ms 1000 -- "36 Shadow damage every 1 sec" exactly.
+//   - effect 0: aura 3 (PERIODIC_DAMAGE), amount 36 at the spell's level
+//     40 plus EffectRealPointsPerLevel 2.5 a caster level up to
+//     SpellLevels.MaxLevel 60 (86 a tick at 60), EffectBonusCoefficient
+//     0.286, period_ms 1000. The 70755 hotfix push doubled the
+//     coefficient (0.143 -> 0.286) and added the per-level growth (0 ->
+//     2.5); the tick is read from the generated Wrack* tables.
 //   - effect 1: aura 271, amount 10, period_ms 0 -- a flat, non-periodic
 //     10, matching the "+10%" in the talent text.
 //
@@ -33,8 +38,12 @@ import (
 // 0x402: Corruption (0x2) and Bane of Agony (0x400). The text's "your other
 // Shadow damage over time effects" resolves to those two; Siphon Life, Bane
 // of Doom, Shadow Bolt and other casters' Shadow damage take nothing from it.
-const WrackTickBaseDamage = 36.0
-const WrackTickCoefficient = 0.14300000668
+// WrackTickDamage is effect 0's per-tick amount at the caster's level.
+var WrackTickDamage = clientdamage.FromTable(WrackBaseDamage[:], WrackPointsPerLevel[:], WrackLevel[:], WrackMaxLevel[:])[1]
+
+// WrackTickCoefficient is effect 0's EffectBonusCoefficient.
+var WrackTickCoefficient = WrackSpellCoeff[1]
+
 const WrackNumTicks = 6
 const WrackTickLength = time.Second * 1
 const WrackDuration = WrackTickLength * WrackNumTicks
@@ -82,6 +91,9 @@ func (warlock *Warlock) registerWrackSpell() {
 	warlock.WrackVulnerabilityAuras = warlock.NewEnemyAuraArray(warlock.newWrackVulnerabilityAura)
 	warlock.applyWrackVulnerability()
 
+	casterLevel := int(warlock.Level)
+	tickDamage := WrackTickDamage.Center(casterLevel)
+
 	config := core.SpellConfig{
 		ActionID:      core.ActionID{SpellID: WrackSpellID},
 		SpellSchool:   core.SpellSchoolShadow,
@@ -104,7 +116,7 @@ func (warlock *Warlock) registerWrackSpell() {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
-		ClientBaseDamage: [2]float64{WrackTickBaseDamage, WrackTickBaseDamage},
+		ClientBaseDamage: WrackTickDamage.Range(casterLevel),
 		BonusCoefficient: WrackTickCoefficient, // the report compares the spell's, which a pure DoT never reads
 
 		Dot: core.DotConfig{
@@ -122,7 +134,7 @@ func (warlock *Warlock) registerWrackSpell() {
 			Dynamic: true,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				dot.Snapshot(target, WrackTickBaseDamage, isRollover)
+				dot.Snapshot(target, tickDamage, isRollover)
 				if !isRollover {
 					// Soul Siphon (talents.go): see drain_life.go's
 					// identical hook for the talent's wording. Wrack is
@@ -153,7 +165,7 @@ func (warlock *Warlock) registerWrackSpell() {
 				dot := spell.Dot(target)
 				return dot.CalcSnapshotDamage(sim, target, dot.Spell.OutcomeExpectedMagicAlwaysHit)
 			} else {
-				return spell.CalcPeriodicDamage(sim, target, WrackTickBaseDamage, spell.OutcomeExpectedMagicAlwaysHit)
+				return spell.CalcPeriodicDamage(sim, target, tickDamage, spell.OutcomeExpectedMagicAlwaysHit)
 			}
 		},
 	}

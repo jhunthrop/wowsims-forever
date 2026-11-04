@@ -372,7 +372,7 @@ func TestFireAndBrimstoneIncreasesConflagrateCrit(t *testing.T) {
 
 // TestShadowAndFlameBuffsAndPreservesImmolate checks both of Shadow
 // and Flame's implemented halves at rank 5 (max): the 20 s school
-// damage buff (triggered the same way conflagrate.go/shadowburn.go
+// damage buff (+20%, 70755; triggered the same way conflagrate.go/shadowburn.go
 // call it on a landed hit) and the 100% chance to preserve Immolate.
 func TestShadowAndFlameBuffsAndPreservesImmolate(t *testing.T) {
 	sim, built, _ := newWarlockForDamageTest(t, "--000000000000005") // Destruction field 15, rank 5.
@@ -380,14 +380,14 @@ func TestShadowAndFlameBuffsAndPreservesImmolate(t *testing.T) {
 	before := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow]
 	built.triggerShadowAndFlame(sim, SpellCode_WarlockConflagrate)
 	after := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexShadow]
-	if got, want := after/before, 1.10; got < want-0.0001 || got > want+0.0001 {
+	if got, want := after/before, 1.20; got < want-0.0001 || got > want+0.0001 {
 		t.Errorf("Shadow damage multiplier ratio after Conflagrate = %v, want %v (Shadow and Flame rank 5)", got, want)
 	}
 
 	beforeFire := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire]
 	built.triggerShadowAndFlame(sim, SpellCode_WarlockShadowburn)
 	afterFire := built.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire]
-	if got, want := afterFire/beforeFire, 1.10; got < want-0.0001 || got > want+0.0001 {
+	if got, want := afterFire/beforeFire, 1.20; got < want-0.0001 || got > want+0.0001 {
 		t.Errorf("Fire damage multiplier ratio after Shadowburn = %v, want %v (Shadow and Flame rank 5)", got, want)
 	}
 
