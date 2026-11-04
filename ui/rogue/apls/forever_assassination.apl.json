@@ -304,7 +304,7 @@
           }
         }
       },
-      "notes": "Sinister Strike before Mutilate only when Backstab cannot be cast: no dagger in the main hand, or the target is facing you. With a dagger it waits for 60 energy or more, so it never takes the energy Backstab needs."
+      "notes": "Sinister Strike before Mutilate only when Backstab cannot be cast, because your main hand is not a dagger or the target is facing you. With a dagger it waits for 60 energy or more, so it never takes the energy Backstab needs."
     }
   ]
 }

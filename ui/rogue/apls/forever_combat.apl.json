@@ -188,7 +188,7 @@
           }
         }
       },
-      "notes": "Sinister Strike only when Backstab cannot be cast: no dagger in the main hand, or the target is facing you."
+      "notes": "Sinister Strike only when Backstab cannot be cast, because your main hand is not a dagger or the target is facing you."
     }
   ]
 }
