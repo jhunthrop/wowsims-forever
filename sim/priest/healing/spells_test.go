@@ -439,3 +439,23 @@ func TestPrayerOfMendingSpendsAChargeWhenTheHolderTakesDamage(t *testing.T) {
 		t.Error("three seconds of tank hits spent no Prayer of Mending charge")
 	}
 }
+
+// TestADownrankedShieldAbsorbsWithTheLevelGapShare: Power Word: Shield adds
+// its healing-power share by hand, so it must take Forever's level-gap rule
+// (core.LevelPenalty) as every other cast rank does. Discipline's rank 4
+// (learned at 24) at 60 keeps 5% of its 0.1 coefficient; rank 10 keeps all.
+func TestADownrankedShieldAbsorbsWithTheLevelGapShare(t *testing.T) {
+	sim, agent := healerSim(t, 60, "")
+	client := loadClient(t)
+	for i, rank := range []int{4, 10} {
+		target := &sim.Raid.Parties[0].Players[1+i].GetCharacter().Unit
+		shield := agent.PowerWordShield[rank]
+		row, _ := client.ByID(shield.SpellID)
+		low, high, _ := row.DamageRange(0, 60)
+		want := (low+high)/2 + row.Effects[0].ResolvedSPCoefficient*core.LevelPenalty(row.SpellLevel, 60)*shield.HealingPower(target)
+		shield.ApplyEffects(sim, target, shield)
+		if got := shield.Shield(target).Remaining(); math.Abs(got-want) > 0.01 {
+			t.Errorf("rank %d shield absorbs %.2f, want %.2f", rank, got, want)
+		}
+	}
+}
