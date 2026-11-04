@@ -42,15 +42,25 @@ func (paladin *Paladin) registerSealOfTheCrusader() {
 		libramAp, libramBonus = libramOfFervorBonuses()
 	}
 
+	// The debuff is one aura on the target ("Judgement of the Crusader",
+	// shared with the raid preset's), so it is registered once, with the
+	// bonus of the top rank this paladin knows: registering it rank by rank
+	// left every rank on the first one's 23.
+	topJudgeBonus := 0.0
+	for _, rank := range ranks {
+		if paladin.Level >= rank.level {
+			topJudgeBonus = rank.judge.bonus
+		}
+	}
+	debuffs := paladin.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
+		return core.JudgementOfTheCrusaderAura(&paladin.Unit, target, topJudgeBonus, improvedSotC, libramBonus)
+	})
+
 	for i, rank := range ranks {
 		rank := rank
 		if paladin.Level < rank.level {
 			break
 		}
-
-		debuffs := paladin.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-			return core.JudgementOfTheCrusaderAura(&paladin.Unit, target, rank.judge.bonus, improvedSotC, libramBonus)
-		})
 
 		judgeSpell := paladin.RegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: rank.judge.spellID},
