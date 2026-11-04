@@ -58,7 +58,9 @@ func (priest *Priest) registerPowerWordShield() {
 			return weakened != nil && !weakened.IsActive()
 		}
 		config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			absorb := entry.effect.Center(int(priest.Level)) + entry.coefficient*spell.HealingPower(target)
+			// spell.BonusCoefficient is the rank's coefficient after Forever's
+			// level-gap rule (core.RegisterSpell); entry.coefficient is the raw one.
+			absorb := entry.effect.Center(int(priest.Level)) + spell.BonusCoefficient*spell.HealingPower(target)
 			spell.Shield(target).Apply(sim, absorb)
 			priest.weakenedSoul(target).Activate(sim)
 		}

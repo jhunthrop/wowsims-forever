@@ -647,10 +647,12 @@ var lightningOverloadChance = [4]float64{0, 0.10, 0.20, 0.30}
 // coefficient swapped for the overload row's own (LightningBoltOverload*
 // and ChainLightningOverload*: 0.357 and 0.2855 at the top ranks), then
 // restores it. Exported so the elemental package's tests can check the
-// swap without forcing the proc.
+// swap without forcing the proc. The overload is the cast rank's own spell,
+// so the swapped coefficient takes Forever's level-gap rule
+// (core.LevelPenalty) at the cast rank's learn level, as the bolt's does.
 func (shaman *Shaman) AtLightningOverloadCoefficient(spell *core.Spell, coefficient float64, hit func()) {
 	enteringCoefficient := spell.BonusCoefficient
-	spell.BonusCoefficient = coefficient
+	spell.BonusCoefficient = coefficient * core.LevelPenalty(spell.RequiredLevel, int(shaman.Level))
 	hit()
 	spell.BonusCoefficient = enteringCoefficient
 }
