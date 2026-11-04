@@ -136,6 +136,9 @@ func (paladin *Paladin) registerHolyShockHeal(rank holyShockRank) *core.Spell {
 		return nil
 	}
 	casterLevel := int(paladin.Level)
+	// The Oath of Light amount this rank keeps: the heal's own level rule,
+	// as its healing power (oath_of_light.go).
+	oathShare := core.SpellLevelPenalty(rank.healID, rank.level, casterLevel)
 	spell := paladin.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: rank.healID},
 		SpellSchool: core.SpellSchoolHoly,
@@ -155,7 +158,7 @@ func (paladin *Paladin) registerHolyShockHeal(rank holyShockRank) *core.Spell {
 		BonusCoefficient: holyShockHealCoefficient,
 		ClientBaseDamage: rank.heal.Range(casterLevel),
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseHealing := rank.heal.Roll(sim, casterLevel) + holyShockHealCoefficient*paladin.oathOfLightBonus(target, PaladinSpellMaskHolyShockHeal)
+			baseHealing := rank.heal.Roll(sim, casterLevel) + oathShare*paladin.oathOfLightBonus(target, PaladinSpellMaskHolyShockHeal)
 			// Boundless Light reaches only allies without the Oath.
 			lostCrit := paladin.boundlessLightCritOn(target)
 			spell.BonusCritRating -= lostCrit

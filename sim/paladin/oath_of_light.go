@@ -16,10 +16,19 @@ import (
 // 400, 115 and 230 at 60: Blessing of Light's two amounts on one ally, with
 // Holy Shock added. It costs 8% of base mana.
 //
-// Assumption, as Blessing of Light's was: the client states the bonus as a
-// bare amount, so it counts as bonus healing for that one spell and is
-// scaled by the spell's coefficient like healing power. Effect 0's 1.5 s
-// periodic dummy has no stated job and is not modelled.
+// The amount lands whole on a rank near the caster's level, with no
+// cast-time coefficient, and a rank learned far below the caster keeps
+// only the share its healing power keeps (core.SpellLevelPenalty, applied
+// by the heal that adds the bonus). That is how Blizzard's server treated
+// Blessing of Light, the Oath's model (dummy auras by script, the same
+// "by up to" text): in Classic Era Flash of Light rank 1 took the whole
+// +60 and Holy Light rank 1 took 60 of its 210, the level-1 rank's sub-20
+// share (us.forums.blizzard.com/en/wow/t/blessing-of-light-bug/297989,
+// September 2019); warcraft.wiki.gg/wiki/Blessing_of_Light has the whole
+// amount and patch 2.3.0's "lower ranks ... are now properly penalized".
+// Decided in sim-accuracy round 20 (design/reviews/2026-11-04-sim-audit-
+// round20/paladin.md); no Forever log at 25+ with the Oath exists yet.
+// Effect 0's 1.5 s periodic dummy has no stated job and is not modelled.
 const (
 	oathOfLightSpellID        = 1328548
 	oathOfLightDuration       = 5 * time.Minute

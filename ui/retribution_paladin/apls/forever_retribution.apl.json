@@ -102,8 +102,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20292,
-            "rank": 7
+            "spellId": 20293,
+            "rank": 8
           }
         }
       },
@@ -138,23 +138,72 @@
       }
     },
     {
+      "notes": "With Unsealed Wrath, straight after the opening Crusader Judgement. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then go straight to Seal of Command: three swings store three Commands and the twist is under way. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight.",
       "action": {
         "condition": {
-          "auraIsActive": {
-            "auraId": {
-              "spellId": 20308,
-              "rank": 6
-            }
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 1310735
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 20308,
+                    "rank": 6
+                  }
+                }
+              }
+            ]
           }
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20292,
-            "rank": 7
+            "spellId": 20920,
+            "rank": 5
           }
         }
-      },
-      "notes": "Rank 7 from 58, straight after the opening Crusader Judgement: rank 8 gets nothing from your spell damage. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then swap straight to your damage Seal. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight."
+      }
+    },
+    {
+      "notes": "Without Unsealed Wrath, at the top rank you have trained, straight after the opening Crusader Judgement. Same opener: Seal of the Crusader before the pull, Judge it on your first swing, then your damage Seal.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "auraIsKnown": {
+                      "auraId": {
+                        "spellId": 1310735
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 20308,
+                    "rank": 6
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20293,
+            "rank": 8
+          }
+        }
+      }
     },
     {
       "notes": "On cooldown against Undead and Demons. It cannot be cast on anything else, so it is a dungeon button more than a raid one.",
@@ -192,7 +241,7 @@
       }
     },
     {
-      "notes": "With Unsealed Wrath, once three swings have stored Seal of Command. Switch to Seal of Righteousness for one swing, and that swing releases all three stored Commands. Only above 30% mana and with raid buffs on you (1200 attack power or more): every Seal costs a global and 150 to 190 mana, and with less attack power Seal of Command does less than Seal of Righteousness.",
+      "notes": "With Unsealed Wrath, once three swings have stored Seal of Command. Switch to Seal of Righteousness for one swing, and that swing releases all three stored Commands. Only above 30% mana and with raid buffs on you (1200 attack power or more): every Seal costs a global and 180 to 190 mana, and with less attack power Seal of Command does less than Seal of Righteousness.",
       "action": {
         "condition": {
           "and": {
@@ -260,8 +309,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20292,
-            "rank": 7
+            "spellId": 20293,
+            "rank": 8
           }
         }
       }
@@ -307,8 +356,8 @@
               {
                 "auraIsActive": {
                   "auraId": {
-                    "spellId": 20292,
-                    "rank": 7
+                    "spellId": 20293,
+                    "rank": 8
                   }
                 }
               },
@@ -421,7 +470,7 @@
       }
     },
     {
-      "notes": "Otherwise keep Seal of Righteousness up, and recast it in its last second. From 58 use rank 7: rank 8 gets nothing from your spell damage. That is every fight without Unsealed Wrath or raid buffs, and any time you drop under 30% mana.",
+      "notes": "Otherwise keep Seal of Righteousness up at the top rank you have trained, and recast it in its last second. That is every fight without Unsealed Wrath or raid buffs, and any time you drop under 30% mana.",
       "action": {
         "condition": {
           "cmp": {
@@ -438,8 +487,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 20292,
-            "rank": 7
+            "spellId": 20293,
+            "rank": 8
           }
         }
       }
@@ -503,8 +552,8 @@
                           "lhs": {
                             "spellCurrentCost": {
                               "spellId": {
-                                "spellId": 20292,
-                                "rank": 7
+                                "spellId": 20293,
+                                "rank": 8
                               }
                             }
                           },

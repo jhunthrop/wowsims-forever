@@ -60,6 +60,9 @@ func (paladin *Paladin) registerDirectHeal(heal directHeal) {
 
 func (paladin *Paladin) registerDirectHealRank(heal directHeal, rankNumber int, rank healRank) {
 	casterLevel := int(paladin.Level)
+	// The Oath of Light amount this rank keeps: the rank's own level rule,
+	// as its healing power (oath_of_light.go).
+	oathShare := core.SpellLevelPenalty(rank.spellID, rank.level, casterLevel)
 
 	spell := paladin.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: rank.spellID},
@@ -89,7 +92,7 @@ func (paladin *Paladin) registerDirectHealRank(heal directHeal, rankNumber int, 
 		PushbackReduction: paladin.spiritualFocusPushbackReduction(heal.classMask),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseHealing := rank.heal.Roll(sim, casterLevel) + heal.coefficient*paladin.oathOfLightBonus(target, heal.classMask)
+			baseHealing := rank.heal.Roll(sim, casterLevel) + oathShare*paladin.oathOfLightBonus(target, heal.classMask)
 			spell.CalcAndDealHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
 		},
 	})
