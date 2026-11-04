@@ -39,7 +39,7 @@
       }
     },
     {
-      "notes": "Shank on cooldown: it cannot miss, pays back more energy than it costs and, with Venom, makes your poisons hit 30% harder and land more often for 6 seconds.",
+      "notes": "Shank on cooldown: it cannot miss, pays back more energy than it costs and, with Venom, adds 30% to your poison damage on top of Vile Poisons and makes them land more often for 6 seconds.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -169,7 +169,7 @@
           }
         }
       },
-      "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking, once Blood Splatter makes it last 6 seconds longer: bleeds can crit in Forever."
+      "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking, only with Blood Splatter (the raid build): it lasts 6 seconds longer, and bleeds always crit in Forever."
     },
     {
       "action": {
@@ -233,7 +233,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 11294,
+            "spellId": 11281,
             "rank": 8
           }
         },
@@ -250,7 +250,61 @@
           }
         }
       },
-      "notes": "Sinister Strike only before you have Mutilate."
+      "notes": "Backstab is the builder until Mutilate whenever a dagger is in your main hand: from behind it hits far harder than Sinister Strike."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11294,
+            "rank": 8
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "spellIsKnown": {
+                      "spellId": {
+                        "spellId": 1241584,
+                        "rank": 3
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "spellCanCast": {
+                      "spellId": {
+                        "spellId": 11281,
+                        "rank": 8
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentEnergy": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "60"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Sinister Strike before Mutilate only when Backstab cannot be cast (no dagger in the main hand), held to 60 energy so a dagger rogue never spends Backstab's energy here."
     }
   ]
 }
