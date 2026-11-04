@@ -39,3 +39,15 @@ func (rogue *Rogue) DeadlyPoisonSnapshotMultiplierForTest(target *core.Unit) flo
 func (rogue *Rogue) DeadlyPoisonStacksForTest(target *core.Unit) int32 {
 	return rogue.deadlyPoisonTick.Dot(target).GetStacks()
 }
+
+// BleedTickDamageForTest deals one tick of a running Rupture or Garrote
+// through the rogue's bleed path with a plain hit, and returns its damage.
+func (rogue *Rogue) BleedTickDamageForTest(sim *core.Simulation, target *core.Unit, bleed *core.Spell) float64 {
+	dot := bleed.Dot(target)
+	return rogue.dealBleedTickWith(sim, target, dot, dot.Spell.OutcomeAlwaysHit).Damage
+}
+
+// HemorrhageDebuffForTest is the Hemorrhage debuff on target.
+func (rogue *Rogue) HemorrhageDebuffForTest(target *core.Unit) *core.Aura {
+	return rogue.hemorrhageAuras.Get(target)
+}

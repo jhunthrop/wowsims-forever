@@ -91,12 +91,21 @@ func (rogue *Rogue) BleedDamageTakenMultiplier(target *core.Unit) float64 {
 }
 
 // dealBleedTick deals one Rupture or Garrote tick with the target's
-// Hemorrhage debuff read at the tick, not snapshotted.
+// Hemorrhage debuff read at the tick, not snapshotted. A snapshot tick
+// reads the multiplier the cast took (SnapshotAttackerMultiplier), never
+// the spell's live one, so the debuff scales that for the tick.
 func (rogue *Rogue) dealBleedTick(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+	rogue.dealBleedTickWith(sim, target, dot, dot.OutcomeTick)
+}
+
+// dealBleedTickWith is dealBleedTick with the tick's outcome roll given.
+func (rogue *Rogue) dealBleedTickWith(sim *core.Simulation, target *core.Unit, dot *core.Dot, outcome core.OutcomeApplier) *core.SpellResult {
 	bonus := rogue.BleedDamageTakenMultiplier(target)
-	dot.Spell.DamageMultiplier *= bonus
-	dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
-	dot.Spell.DamageMultiplier /= bonus
+	snapshot := dot.SnapshotAttackerMultiplier
+	dot.SnapshotAttackerMultiplier = snapshot * bonus
+	result := dot.CalcAndDealPeriodicSnapshotDamage(sim, target, outcome)
+	dot.SnapshotAttackerMultiplier = snapshot
+	return result
 }
 
 // hemorrhageWeaponDamage is Hemorrhage's weapon damage before its 100% (145%
