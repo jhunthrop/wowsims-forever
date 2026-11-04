@@ -51,6 +51,19 @@
     {
       "notes": "Arcane Power on cooldown, together with Presence of Mind, your on-use trinkets and your racial. It is 30% more damage for 15 seconds at 30% more mana a cast, off the global cooldown, so press it between casts. On a fresh pull, give the tank a Sunder or two first.",
       "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentTime": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "3s"
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 12042
@@ -61,6 +74,19 @@
     {
       "notes": "Presence of Mind on cooldown, with Arcane Power. Your next spell is instant, so spend it on a 2.5 second Frostbolt, never on an Arcane Blast that the global cooldown already caps at 1.5 seconds.",
       "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentTime": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "3s"
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 12043
