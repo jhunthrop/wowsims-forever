@@ -15,6 +15,25 @@
           "val": "-2.5s"
         }
       }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10927,
+            "rank": 7
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1s"
+        }
+      }
     }
   ],
   "priorityList": [
