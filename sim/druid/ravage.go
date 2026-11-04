@@ -52,12 +52,12 @@ func (druid *Druid) registerRavageSpell() {
 			},
 			IgnoreHaste: true,
 		},
-		// Ravage requires Prowl: the client data carries no such flag (it's
-		// a scripted requirement, the same way Ambush's stealth requirement
-		// in sim/rogue/ambush.go isn't in its own spellconst either), so
-		// this mirrors the rogue precedent directly.
+		// Ravage requires Prowl and a position behind the target: every
+		// rank's text is "Must be prowling and behind the target". Neither is
+		// a client flag (scripted, like Ambush's stealth in sim/rogue/ambush.go),
+		// so this mirrors Pounce and Shred.
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return druid.IsProwling()
+			return druid.IsProwling() && !druid.PseudoStats.InFrontOfTarget
 		},
 
 		DamageMultiplier: ravageDamageMultiplier,

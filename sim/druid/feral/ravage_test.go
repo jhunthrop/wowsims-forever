@@ -86,6 +86,22 @@ func TestRavageOnlyCastableWhileProwling(t *testing.T) {
 	}
 }
 
+// TestRavageNeedsToBeBehindTheTarget: every Ravage rank's 70755 text is "Must be prowling and
+// behind the target" (Spell 6785 ... 9867), the same rule Shred ("Must be behind the target")
+// and Pounce already enforce through InFrontOfTarget. Ravage checked Prowl only.
+func TestRavageNeedsToBeBehindTheTarget(t *testing.T) {
+	built, sim, target := newFeralDruidSimAtLevel(t, 60)
+	built.ProwlAura.Activate(sim)
+	built.PseudoStats.InFrontOfTarget = true
+	if built.Ravage.CanCast(sim, target) {
+		t.Error("Ravage is castable from in front of the target")
+	}
+	built.PseudoStats.InFrontOfTarget = false
+	if !built.Ravage.CanCast(sim, target) {
+		t.Error("Ravage is not castable from behind while Prowling")
+	}
+}
+
 // TestRavageDealsDamageGrantsComboPointAndBreaksProwl covers the other
 // three parts of this lane's brief: a landed Ravage deals damage in the
 // rank's band, grants a combo point (client data: spellconst effect
