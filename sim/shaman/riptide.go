@@ -8,15 +8,20 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// Riptide (talent 104724, learned from the trainer in three ranks) heals
-// its target and leaves a heal over time that makes the shaman's Chain Heal
-// cast directly on that target heal more.
+// Riptide (talent 104724, learned from the trainer in three ranks) leaves a
+// heal over time on its target that makes the shaman's Chain Heal cast
+// directly on that target heal more. Client 1.60.1.70755's push took the
+// direct heal away: effect 0 of every rank (408521, 1239242, 1239243) went
+// from Effect 10 (heal) to Effect 3 (dummy) with 0 base points, the
+// category cooldown went from 6000 to 12000 ms (the generated
+// RiptideCooldownMS) and the cost fell to 150/180/230 (RiptideManaCost).
+// The dummy keeps a points-per-level and a 0.214 coefficient column, which
+// heal nothing.
 const (
-	riptideCooldown = 6 * time.Second
-	riptideTicks    = 5
-	riptideTickGap  = 3 * time.Second
+	riptideTicks   = 5
+	riptideTickGap = 3 * time.Second
 	// riptideTickCoefficient is the client's per-tick spell-power share
-	// (effect 1); the direct heal's 0.214 is the generated column.
+	// (effect 1).
 	riptideTickCoefficient = 0.1
 	// riptideChainHealBonusPercent is effect 2 of every rank, the "25%"
 	// of "increases the effectiveness of your Chain Heal casts directly
@@ -35,22 +40,25 @@ var riptideTickHealing = [RiptideRanks + 1]clientdamage.Effect{
 }
 
 // riptideRanks skips the generated table's index 0 (409954, a talent
-// passive that shares the name).
+// passive that shares the name). A rank has no direct heal, so it carries
+// no roll and no coefficient.
 func riptideRanks() []healingRank {
-	healing := clientdamage.FromTable(RiptideBaseDamage[:], RiptidePointsPerLevel[:], RiptideLevel[:], RiptideMaxLevel[:])
 	ranks := make([]healingRank, 0, RiptideRanks)
 	for rank := 1; rank <= RiptideRanks; rank++ {
 		ranks = append(ranks, healingRank{
-			rank:        rank,
-			spellID:     RiptideSpellId[rank],
-			level:       RiptideLevel[rank],
-			manaCost:    RiptideManaCost[rank],
-			castTime:    castTimeFromMS(RiptideCastTime[rank]),
-			coefficient: RiptideSpellCoeff[rank],
-			healing:     healing[rank],
+			rank:     rank,
+			spellID:  RiptideSpellId[rank],
+			level:    RiptideLevel[rank],
+			manaCost: RiptideManaCost[rank],
+			castTime: castTimeFromMS(RiptideCastTime[rank]),
 		})
 	}
 	return ranks
+}
+
+// riptideCooldown is the ranks' shared category cooldown.
+func riptideCooldown() time.Duration {
+	return time.Duration(RiptideCooldownMS[1]) * time.Millisecond
 }
 
 func (shaman *Shaman) registerRiptideSpell() {
@@ -58,7 +66,7 @@ func (shaman *Shaman) registerRiptideSpell() {
 		return
 	}
 	// The ranks are one spell to the client, so they share the cooldown.
-	cooldown := core.Cooldown{Timer: shaman.NewTimer(), Duration: riptideCooldown}
+	cooldown := core.Cooldown{Timer: shaman.NewTimer(), Duration: riptideCooldown()}
 	shaman.Riptide = shaman.registerHealingRanks(riptideRanks(), func(rank healingRank) core.SpellConfig {
 		return shaman.newRiptideConfig(rank, cooldown)
 	})
@@ -70,7 +78,6 @@ func (shaman *Shaman) newRiptideConfig(rank healingRank, cooldown core.Cooldown)
 
 	casterLevel := int(shaman.Level)
 	tick := riptideTickHealing[rank.rank]
-	directHeal := config.ApplyEffects
 
 	config.Hot = core.DotConfig{
 		Aura:             core.Aura{Label: fmt.Sprintf("Riptide (Rank %d)", rank.rank)},
@@ -92,7 +99,6 @@ func (shaman *Shaman) newRiptideConfig(rank healingRank, cooldown core.Cooldown)
 	}
 
 	config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-		directHeal(sim, target, spell)
 		shaman.cancelRiptide(sim, target)
 		spell.Hot(target).Apply(sim)
 	}

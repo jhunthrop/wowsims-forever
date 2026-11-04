@@ -21,6 +21,15 @@ func TestChainLightningDamageMatchesClient(t *testing.T) {
 		ChainLightningSpellId[:], ChainLightningDamage[:], ChainLightningSpellCoef[:])
 }
 
+// The overload rows are Lightning Overload's own spells, one per rank.
+func TestLightningOverloadDamageMatchesClient(t *testing.T) {
+	class := clientdamagetest.Load(t, clientShamanSpellconst)
+	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Lightning Bolt overload",
+		LightningBoltOverloadSpellId[:], LightningBoltOverloadDamage[:], LightningBoltOverloadSpellCoef[:])
+	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Chain Lightning overload",
+		ChainLightningOverloadSpellId[:], ChainLightningOverloadDamage[:], ChainLightningOverloadSpellCoef[:])
+}
+
 func TestEarthShockDamageMatchesClient(t *testing.T) {
 	class := clientdamagetest.Load(t, clientShamanSpellconst)
 	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Earth Shock",
@@ -39,16 +48,6 @@ func TestFlameShockDamageMatchesClient(t *testing.T) {
 		FlameShockSpellId[:], FlameShockDamage[:], FlameShockBaseSpellCoef[:])
 	clientdamagetest.AssertTable(t, class, clientdamagetest.Periodic, "Flame Shock tick",
 		FlameShockSpellId[:], FlameShockTickDamage[:], FlameShockDotSpellCoef[:])
-}
-
-func TestLavaBurstDamageMatchesClient(t *testing.T) {
-	class := clientdamagetest.Load(t, clientShamanSpellconst)
-	coefficients := make([]float64, LavaBurstRanks+1)
-	for rank := 1; rank <= LavaBurstRanks; rank++ {
-		coefficients[rank] = LavaBurstSpellCoefficient
-	}
-	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Lava Burst",
-		LavaBurstSpellId[:], LavaBurstDamage[:], coefficients)
 }
 
 func TestFireTotemDamageMatchesClient(t *testing.T) {
@@ -77,6 +76,43 @@ func TestFireNovaCastMatchesClient(t *testing.T) {
 		}
 		if got := time.Duration(spell.EffectiveCooldownMS()) * time.Millisecond; got != FireNovaCooldown {
 			t.Errorf("rank %d cooldown = %v, client %v", rank, FireNovaCooldown, got)
+		}
+	}
+}
+
+// TestNukeCastsMatchClient pins Lightning Bolt's and Chain Lightning's
+// mana cost, cast time and level against the vendored client table, so a
+// push that reprices or re-times a rank (1.60.1.70755 moved every Chain
+// Lightning rank to CastingTimeIndex 19, 2500 ms, and raised its cost)
+// fails here instead of drifting.
+func TestNukeCastsMatchClient(t *testing.T) {
+	class := clientdamagetest.Load(t, clientShamanSpellconst)
+	check := func(name string, rank int, id int32, cost float64, castTime time.Duration, level int) {
+		t.Helper()
+		spell, ok := class.ByID(id)
+		if !ok {
+			t.Fatalf("%s rank %d (%d) is not in the client table", name, rank, id)
+		}
+		if spell.Cost != cost {
+			t.Errorf("%s rank %d cost = %v, client %v", name, rank, cost, spell.Cost)
+		}
+		if got := time.Duration(spell.CastTimeMS) * time.Millisecond; got != castTime {
+			t.Errorf("%s rank %d cast time = %v, client %v", name, rank, castTime, got)
+		}
+		if spell.SpellLevel != level {
+			t.Errorf("%s rank %d level = %d, client %d", name, rank, level, spell.SpellLevel)
+		}
+	}
+	for rank := 1; rank <= LightningBoltRanks; rank++ {
+		check("Lightning Bolt", rank, LightningBoltSpellId[rank], LightningBoltManaCost[rank],
+			time.Duration(LightningBoltCastTime[rank])*time.Millisecond, LightningBoltLevel[rank])
+	}
+	for rank := 1; rank <= ChainLightningRanks; rank++ {
+		check("Chain Lightning", rank, ChainLightningSpellId[rank], ChainLightningManaCost[rank],
+			ChainLightningCastTime, ChainLightningLevel[rank])
+		spell, _ := class.ByID(ChainLightningSpellId[rank])
+		if got := time.Duration(spell.EffectiveCooldownMS()) * time.Millisecond; got != ChainLightningCooldown {
+			t.Errorf("Chain Lightning rank %d cooldown = %v, client %v", rank, ChainLightningCooldown, got)
 		}
 	}
 }

@@ -111,7 +111,7 @@ func TestEnhancement(t *testing.T) {
 // Stormstrike, Spirit Weapons, Mental Quickness 2/2 (Rage of the
 // Farseer's prereq), Improved Stormstrike, Maelstrom Weapon and Rage of
 // the Farseer itself (31 points) - 51 total, none in Restoration.
-var DefaultTalents = "552422-054010011304112251-"
+var DefaultTalents = "552422-054010113041012251-"
 
 var PlayerOptionsSyncDelayOH = &proto.Player_EnhancementShaman{
 	EnhancementShaman: &proto.EnhancementShaman{

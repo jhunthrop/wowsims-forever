@@ -12,7 +12,7 @@ import (
 // callOfFlameTalentsString sets only Call of Flame (the Elemental tree's
 // 5th tracked node - tier 1, column 2, in talents/shaman.json - to the
 // given rank), the same "isolate the one talent this lane added"
-// convention as LavaBurstOnlyTalentsString above.
+// convention as talents_rewrite_test.go's elementalTalentString.
 func callOfFlameTalentsString(rank int) string {
 	nodes := [16]byte{}
 	for i := range nodes {
@@ -22,9 +22,9 @@ func callOfFlameTalentsString(rank int) string {
 	return string(nodes[:]) + "--"
 }
 
-// newCallOfFlameShaman is newLavaBurstShaman's shape, with an arbitrary
-// talents string instead of the Lava Burst-only one, so this file can
-// vary Call of Flame's rank independently.
+// newCallOfFlameShaman builds a level-60 Elemental shaman with an
+// arbitrary talents string, so this file can vary Call of Flame's rank
+// independently.
 func newCallOfFlameShaman(t *testing.T, talentsString string) (*core.Simulation, *shaman.Shaman) {
 	t.Helper()
 
@@ -67,10 +67,9 @@ func newCallOfFlameShaman(t *testing.T, talentsString string) (*core.Simulation,
 // sim/shaman/flame_shock.go against regressing to
 // newShockSpellConfig's own flat DamageMultiplier: 1: Call of Flame's
 // tooltip (talents/shaman.json node 104770) names "Fire Totems and ...
-// Flame Shock, Fire Nova, and Lava Burst" explicitly, and Lava Burst
-// and the Fire Totems already apply this 5%-per-rank multiplier via
-// shaman.callOfFlameMultiplier() (lava_burst.go, fire_totems.go) -
-// Flame Shock was the one left out.
+// Flame Shock and Fire Nova" explicitly, and the Fire Totems already
+// apply this 5%-per-rank multiplier via shaman.callOfFlameMultiplier()
+// (fire_totems.go) - Flame Shock was the one left out.
 func TestFlameShockAppliesCallOfFlameMultiplier(t *testing.T) {
 	cases := []struct {
 		ranks int
@@ -97,8 +96,7 @@ func TestFlameShockAppliesCallOfFlameMultiplier(t *testing.T) {
 // reaches actual dealt damage for both the direct hit and the DoT tick,
 // not just the registered SpellConfig field: two sims share the same
 // RandomSeed, so the only difference in outcome is Call of Flame's own
-// multiplier (the same isolation TestLavaBurstFlameShockInteraction
-// uses above).
+// multiplier.
 func TestFlameShockDealsCallOfFlameBonusDamage(t *testing.T) {
 	simWithout, withoutShaman := newCallOfFlameShaman(t, callOfFlameTalentsString(0))
 	targetWithout := simWithout.Encounter.TargetUnits[0]

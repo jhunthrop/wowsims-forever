@@ -21,14 +21,15 @@ import (
 // Forever's per-rank rates (1.60.1.70291 talents/shaman.json): Ancestral
 // Knowledge "Increases your Intellect by 2%" (vanilla: +1% maximum Mana),
 // Anticipation "Increases your chance to dodge by an additional 2%"
-// (vanilla 1%), Toughness "Increases your Stamina by 2%" (vanilla: armor
-// from items) and Flurry "Increases your attack speed by 5%" (vanilla
-// 10 + 5 a rank).
+// (vanilla 1%) and Toughness "Increases your Stamina by 2%" (vanilla:
+// armor from items). Flurry's is its trait curve 85300 (TraitDefinition
+// 134208, spell 16256 effect 0), 6/12/18/24/30 since client 1.60.1.70755
+// (5/10/15/20/25 before; vanilla 10 + 5 a rank).
 const (
 	ancestralKnowledgeIntellectPerRank = 0.02
 	anticipationDodgePerRank           = 2.0
 	toughnessStaminaPerRank            = 0.02
-	flurryAttackSpeedPerRank           = 0.05
+	flurryAttackSpeedPerRank           = 0.06
 )
 
 func (shaman *Shaman) ApplyTalents() {
@@ -38,7 +39,8 @@ func (shaman *Shaman) ApplyTalents() {
 	shaman.applyElementalDevastation()
 	shaman.applyImprovedFireTotems()
 	shaman.applyElementalFury()
-	shaman.registerElementalMasteryCD()
+	shaman.applyCallOfThunder()
+	shaman.registerLightningMasteryCD()
 	shaman.applyElementalAlacrity()
 	shaman.applyEyeOfTheStorm()
 	shaman.applyHealingFocus()
@@ -286,52 +288,69 @@ func elementalFuryApplies(spell *core.Spell) bool {
 	return spell.Flags.Matches(SpellFlagShaman)
 }
 
-// ElementalMasteryCastTimeReduction is Elemental Mastery's flat cut to
-// Lightning Bolt's and Lava Burst's cast time (spell 16166, effect 0:
-// aura 107 on misc value 10, the cast time modifier, -500 ms).
-const ElementalMasteryCastTimeReduction = 500 * time.Millisecond
+// callOfThunderCritPercent is Call of Thunder's one rank (node 104760,
+// spell 16120 effect 0: aura 107, misc 7 the crit chance modifier, 5
+// points, class mask word 0 = 3, Lightning Bolt and Chain Lightning) in
+// client 1.60.1.70755, where it took Lava Burst's place in the tree.
+const callOfThunderCritPercent = 5.0
 
-// elementalMasteryDuration and elementalMasteryCooldown are the client's
-// duration_ms 15000 and cooldown_ms 180000.
-const (
-	elementalMasteryDuration = 15 * time.Second
-	elementalMasteryCooldown = 3 * time.Minute
-)
+func (shaman *Shaman) applyCallOfThunder() {
+	if !shaman.Talents.CallOfThunder {
+		return
+	}
+	shaman.AddStaticMod(core.SpellModConfig{
+		Kind:       core.SpellMod_BonusCrit_Flat,
+		ClassMask:  ShamanSpellMaskLightningBolt | ShamanSpellMaskChainLightning,
+		FloatValue: callOfThunderCritPercent * core.CritRatingPerCritChance,
+	})
+}
 
-// registerElementalMasteryCD is Forever's Elemental Mastery (1.60.1.70658,
-// spell 16166): "Gain mastery over Fire and Lightning, reducing the cast
-// time of Lightning Bolt and Lava Burst by 0.5 sec, and removing the
-// cooldown from Chain Lightning. Lasts 15 sec." Vanilla's next-spell 100%
-// crit is gone from the client. The cut is flat, on the pre-haste base
-// cast time like Elemental Alacrity's, so it is applied to DefaultCast and
-// handed back exactly when the aura fades; Chain Lightning's cooldown is
-// zeroed (and any running one finished) for the same window.
-func (shaman *Shaman) registerElementalMasteryCD() {
-	if !shaman.Talents.ElementalMastery {
+// lightningMasteryCastTimeReduction is Lightning Mastery's flat cut to
+// Lightning Bolt's cast time (spell 16166, effect 0: aura 107 on misc
+// value 10, the cast time modifier, -500 ms, class mask {1, 4096}: word 0
+// bit 0 is Lightning Bolt, word 1 bit 12 the removed Lava Burst).
+const lightningMasteryCastTimeReduction = 500 * time.Millisecond
+
+// lightningMasteryDuration is SpellMisc DurationIndex 8 (15000 ms); the
+// cooldown is the generated 180000 ms.
+const lightningMasteryDuration = 15 * time.Second
+
+// registerLightningMasteryCD is Forever's Lightning Mastery (node 104758,
+// spell 16166, prereq Call of Thunder since 1.60.1.70755, which renamed
+// Elemental Mastery and took Lava Burst out of it): "Gain mastery over
+// Lightning, reducing the cast time of your Lightning Bolt spell by 0.5
+// sec, and removing the cooldown from your Chain Lightning spell. Lasts 15
+// sec." Effect 1 is aura 108 misc 11 (cooldown) -100% on class mask word
+// 0 = 2, Chain Lightning. The cut is flat, on the pre-haste base cast time
+// like Elemental Alacrity's, so it is applied to DefaultCast and handed
+// back exactly when the aura fades; Chain Lightning's cooldown is zeroed
+// (and any running one finished) for the same window.
+func (shaman *Shaman) registerLightningMasteryCD() {
+	if !shaman.Talents.LightningMastery {
 		return
 	}
 
-	actionID := core.ActionID{SpellID: ElementalMasterySpellId[0]}
-	var shortened []*core.Spell
+	actionID := core.ActionID{SpellID: LightningMasterySpellId[0]}
+	var lightningBolts []*core.Spell
 	var chainLightning []*core.Spell
 	var cutBy = map[*core.Spell]time.Duration{}
 	var chainCD time.Duration
 
-	emAura := shaman.RegisterAura(core.Aura{
-		Label:    "Elemental Mastery",
+	lmAura := shaman.RegisterAura(core.Aura{
+		Label:    "Lightning Mastery",
 		ActionID: actionID,
-		Duration: elementalMasteryDuration,
+		Duration: lightningMasteryDuration,
 		OnInit: func(aura *core.Aura, sim *core.Simulation) {
-			shortened = core.FilterSlice(shaman.Spellbook, func(spell *core.Spell) bool {
-				return spell.SpellCode == SpellCode_ShamanLightningBolt || spell.SpellCode == SpellCode_ShamanLavaBurst
+			lightningBolts = core.FilterSlice(shaman.Spellbook, func(spell *core.Spell) bool {
+				return spell.SpellCode == SpellCode_ShamanLightningBolt
 			})
 			chainLightning = core.FilterSlice(shaman.Spellbook, func(spell *core.Spell) bool {
 				return spell.SpellCode == SpellCode_ShamanChainLightning
 			})
 		},
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range shortened {
-				cut := min(ElementalMasteryCastTimeReduction, spell.DefaultCast.CastTime)
+			for _, spell := range lightningBolts {
+				cut := min(lightningMasteryCastTimeReduction, spell.DefaultCast.CastTime)
 				cutBy[spell] = cut
 				spell.DefaultCast.CastTime -= cut
 			}
@@ -342,7 +361,7 @@ func (shaman *Shaman) registerElementalMasteryCD() {
 			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			for _, spell := range shortened {
+			for _, spell := range lightningBolts {
 				spell.DefaultCast.CastTime += cutBy[spell]
 			}
 			for _, spell := range chainLightning {
@@ -351,22 +370,22 @@ func (shaman *Shaman) registerElementalMasteryCD() {
 		},
 	})
 
-	shaman.ElementalMastery = shaman.RegisterSpell(core.SpellConfig{
+	shaman.LightningMastery = shaman.RegisterSpell(core.SpellConfig{
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    shaman.NewTimer(),
-				Duration: elementalMasteryCooldown,
+				Duration: time.Duration(LightningMasteryCooldownMS[0]) * time.Millisecond,
 			},
 		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-			emAura.Activate(sim)
+			lmAura.Activate(sim)
 		},
 	})
 
 	shaman.AddMajorCooldown(core.MajorCooldown{
-		Spell: shaman.ElementalMastery,
+		Spell: shaman.LightningMastery,
 		Type:  core.CooldownTypeDPS,
 	})
 }
@@ -537,15 +556,13 @@ func (shaman *Shaman) totemManaMultiplier() int32 {
 	return 100 - 5*shaman.Talents.TotemicFocus
 }
 
-// callOfThunderCritBonus is Call of Thunder's one rank (talents/shaman.json
-
 // elementalAlacrityCastTimeReduction is Elemental Alacrity's three
 // ranks (talents/shaman.json node 104765): "Reduces the cast time of
-// your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.17/
-// 0.33/0.5 sec." A flat reduction to the pre-haste base cast time,
-// applied once at registration - not a percentage, so it cannot reuse
-// CastTimeMultiplier the way Elemental Mastery and Nature's Swiftness
-// do above.
+// your Lightning Bolt and Chain Lightning spells by 0.17/0.33/0.50 sec."
+// (trait curve 85216; 1.60.1.70755 took Lava Burst out of the text with
+// the spell). A flat reduction to the pre-haste base cast time, applied
+// once at registration - not a percentage, so it cannot reuse
+// CastTimeMultiplier the way Nature's Swiftness does above.
 var elementalAlacrityCastTimeReduction = [4]time.Duration{0, 170 * time.Millisecond, 330 * time.Millisecond, 500 * time.Millisecond}
 
 func (shaman *Shaman) applyElementalAlacrity() {
@@ -554,7 +571,7 @@ func (shaman *Shaman) applyElementalAlacrity() {
 	}
 
 	reduction := elementalAlacrityCastTimeReduction[rankIndex(shaman.Talents.ElementalAlacrity, len(elementalAlacrityCastTimeReduction))]
-	affectedSpellCodes := []int32{SpellCode_ShamanLightningBolt, SpellCode_ShamanChainLightning, SpellCode_ShamanLavaBurst}
+	affectedSpellCodes := []int32{SpellCode_ShamanLightningBolt, SpellCode_ShamanChainLightning}
 	shaman.OnSpellRegistered(func(spell *core.Spell) {
 		if slices.Contains(affectedSpellCodes, spell.SpellCode) && spell.DefaultCast.CastTime > 0 {
 			spell.DefaultCast.CastTime = max(0, spell.DefaultCast.CastTime-reduction)
@@ -563,9 +580,10 @@ func (shaman *Shaman) applyElementalAlacrity() {
 }
 
 // eyeOfTheStormPushbackReduction is Eye of the Storm's three ranks
-// (talents/shaman.json node 104763): "Reduces the pushback suffered
-// from damaging attacks while casting Lightning Bolt, Chain Lightning,
-// and Lava Burst by 23/47/70%." sim/core/cast.go's applySpellPushback
+// (talents/shaman.json node 104763): "Gives your Lightning Bolt and Chain
+// Lightning spells a 23/47/70% chance to not lose casting time when you
+// take damage." (trait curve 85224; Lava Burst left the text in
+// 1.60.1.70755). sim/core/cast.go's applySpellPushback
 // already reads Spell.PushbackReduction as exactly this chance to
 // avoid a pushback entirely; this talent is the first to ever set it.
 var eyeOfTheStormPushbackReduction = [4]float64{0, 0.23, 0.47, 0.70}
@@ -576,7 +594,7 @@ func (shaman *Shaman) applyEyeOfTheStorm() {
 	}
 
 	reduction := eyeOfTheStormPushbackReduction[rankIndex(shaman.Talents.EyeOfTheStorm, len(eyeOfTheStormPushbackReduction))]
-	affectedSpellCodes := []int32{SpellCode_ShamanLightningBolt, SpellCode_ShamanChainLightning, SpellCode_ShamanLavaBurst}
+	affectedSpellCodes := []int32{SpellCode_ShamanLightningBolt, SpellCode_ShamanChainLightning}
 	shaman.OnSpellRegistered(func(spell *core.Spell) {
 		if slices.Contains(affectedSpellCodes, spell.SpellCode) {
 			spell.PushbackReduction += reduction
@@ -606,37 +624,35 @@ func (shaman *Shaman) applyHealingFocus() {
 
 // lightningOverloadChance is Lightning Overload's three ranks
 // (talents/shaman.json node 104759): "Gives your Lightning Bolt and
-// Chain Lightning spells a 3/7/10% chance to cast a second, similar
+// Chain Lightning spells a 10/20/30% chance to cast a second, similar
 // spell on the same target at no additional cost that causes half
 // damage and no threat." lightning_bolt.go and chain_lightning.go call
 // rollLightningOverload from inside their own ApplyEffects and, on a
-// proc, deal a second hit through the SAME spell object at half the
-// rolled base damage, rather than this file registering a cloned
+// proc, deal a second hit through the SAME spell object with the rank's
+// own overload roll and coefficient (the client's 4084xx rows, which the
+// 1.60.1.70755 push left at half the old bolt's numbers, so "half damage"
+// is now well under half), rather than this file registering a cloned
 // spell: a second call through the original spell automatically
 // carries every multiplier ("a second, similar spell") the primary
 // hit already has - Concussion, Call of Thunder, Elemental Fury, gear,
 // buffs - instead of a clone that has to be kept in sync by hand. The
 // tooltip's "no threat" has no DPS effect in this engine (threat is
 // tracked separately from the damage the sim reports) and is not
-// modeled.
-var lightningOverloadChance = [4]float64{0, 0.03, 0.07, 0.10}
+// modeled. The chances are trait curve 85227 (TraitDefinition 134220,
+// spell 408438 effect 0), 10/20/30 since client 1.60.1.70755 (3/7/10
+// before).
+var lightningOverloadChance = [4]float64{0, 0.10, 0.20, 0.30}
 
-// lightningOverloadDamageScale is the whole second hit's share of the
-// first: the client's overload spells (408477 for Lightning Bolt rank 10,
-// 408484 for Chain Lightning rank 4) carry half the primary's amount AND
-// half its spell-power coefficient (98 at 0.357 against 196 at 0.714), so
-// halving only the base damage, as the first version did, let the
-// overload keep the full spell-power share.
-const lightningOverloadDamageScale = 0.5
-
-// AtLightningOverloadScale runs hit with spell's damage multiplier cut to
-// the overload's share, then restores it. Exported so the elemental
-// package's tests can check the scale without forcing the proc.
-func (shaman *Shaman) AtLightningOverloadScale(spell *core.Spell, hit func()) {
-	enteringMultiplier := spell.DamageMultiplier
-	spell.DamageMultiplier *= lightningOverloadDamageScale
+// AtLightningOverloadCoefficient runs hit with spell's spell-power
+// coefficient swapped for the overload row's own (LightningBoltOverload*
+// and ChainLightningOverload*: 0.357 and 0.2855 at the top ranks), then
+// restores it. Exported so the elemental package's tests can check the
+// swap without forcing the proc.
+func (shaman *Shaman) AtLightningOverloadCoefficient(spell *core.Spell, coefficient float64, hit func()) {
+	enteringCoefficient := spell.BonusCoefficient
+	spell.BonusCoefficient = coefficient
 	hit()
-	spell.DamageMultiplier = enteringMultiplier
+	spell.BonusCoefficient = enteringCoefficient
 }
 
 func (shaman *Shaman) rollLightningOverload(sim *core.Simulation) bool {
@@ -648,8 +664,10 @@ func (shaman *Shaman) rollLightningOverload(sim *core.Simulation) bool {
 
 // mentalDexterityAttackPowerPercent is Mental Dexterity's three ranks
 // (talents/shaman.json node 104755): "Increases your Attack Power by
-// an amount equal to 33/67/100% of your Intellect."
-var mentalDexterityAttackPowerPercent = [4]float64{0, 0.33, 0.67, 1.0}
+// an amount equal to 50/100/150% of your Intellect." - trait curve 85272
+// (TraitDefinition 134216, spell 415140 effect 0), 50/100/150 since
+// client 1.60.1.70755 (33/67/100 before).
+var mentalDexterityAttackPowerPercent = [4]float64{0, 0.50, 1.0, 1.5}
 
 func (shaman *Shaman) applyMentalDexterity() {
 	if shaman.Talents.MentalDexterity == 0 {

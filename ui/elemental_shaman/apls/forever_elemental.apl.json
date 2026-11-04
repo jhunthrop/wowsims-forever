@@ -34,25 +34,6 @@
   ],
   "priorityList": [
     {
-      "notes": "Lava Burst whenever your Flame Shock is on the target: the 20% bonus only counts then, and it is your hardest hit. 10 second cooldown, a 2.0 second cast with Elemental Alacrity.",
-      "action": {
-        "condition": {
-          "dotIsActive": {
-            "spellId": {
-              "spellId": 29228,
-              "rank": 6
-            }
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 1326047,
-            "rank": 4
-          }
-        }
-      }
-    },
-    {
       "notes": "Mana Spring Totem when your Water slot is empty: drop it before the pull, and again if it dies. 10 mana every 2 seconds to your party for 5 minutes pays back its 100 mana many times over. Two Mana Springs do not stack, so skip yours if a Restoration shaman already has one down for your group.",
       "action": {
         "castSpell": {
@@ -82,10 +63,10 @@
       "action": {
         "autocastOtherCooldowns": {}
       },
-      "notes": "Elemental Mastery, trinkets, racials and potions on cooldown: for Mastery's 15 seconds Lightning Bolt is a 1.5 second cast, so stack everything inside it."
+      "notes": "Lightning Mastery, trinkets, racials and potions on cooldown: for Mastery's 15 seconds Lightning Bolt is a 1.5 second cast, so stack everything inside it."
     },
     {
-      "notes": "Flame Shock whenever it is not on the target: Lava Burst needs it, and with Call of Flame it lasts 21 seconds.",
+      "notes": "Flame Shock whenever it is not on the target: with Call of Flame it lasts 21 seconds and ticks for the whole of it.",
       "action": {
         "condition": {
           "not": {
@@ -192,7 +173,7 @@
       }
     },
     {
-      "notes": "Chain Lightning on two or more targets: it hits each of them for close to a Lightning Bolt.",
+      "notes": "Chain Lightning on two or more targets: it hits each of them for more than a Lightning Bolt does.",
       "action": {
         "condition": {
           "cmp": {
@@ -240,54 +221,7 @@
       }
     },
     {
-      "notes": "Wait for Lava Burst when it comes off cooldown within a tenth of a second and your Flame Shock is up. Five 2.0 second Lightning Bolts end exactly as its 10 second cooldown returns, so any haste ends the fifth a hair early; a sixth bolt then would push Lava Burst back 2 seconds.",
-      "action": {
-        "condition": {
-          "and": {
-            "vals": [
-              {
-                "dotIsActive": {
-                  "spellId": {
-                    "spellId": 29228,
-                    "rank": 6
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "spellTimeToReady": {
-                      "spellId": {
-                        "spellId": 1326047,
-                        "rank": 4
-                      }
-                    }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "0.1s"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        },
-        "wait": {
-          "duration": {
-            "spellTimeToReady": {
-              "spellId": {
-                "spellId": 1326047,
-                "rank": 4
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "notes": "Lightning Bolt at the top rank while your mana is ahead of the fight: more than the share of the fight left. Rank 10 costs 220 mana to rank 9's 190 for about 9% more base damage, so you spend the spare mana on it and drop to rank 9 as soon as you fall behind.",
+      "notes": "Lightning Bolt at the top rank while your mana is ahead of the fight: more than the share of the fight left. Rank 10 costs 220 mana to rank 9's 190 for about 20% more base damage, so you spend the spare mana on it and drop to rank 9 as soon as you fall behind.",
       "action": {
         "condition": {
           "cmp": {

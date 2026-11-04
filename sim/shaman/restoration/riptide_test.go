@@ -28,13 +28,17 @@ func TestRiptideRanksOnlyExistWithTheTalent(t *testing.T) {
 	}
 }
 
-func TestRiptideHealsWithinTheClientRollAndStartsItsHeal(t *testing.T) {
+// TestRiptideOnlyStartsItsHealOverTime: since client 1.60.1.70755 every
+// rank's effect 0 is a dummy (Effect 3, 0 base points), so the cast heals
+// nothing at once and only leaves its heal over time.
+func TestRiptideOnlyStartsItsHealOverTime(t *testing.T) {
 	sim, healer := newHealer(t, 60, riptideOnly)
 	tank := raidMember(sim, healsim.TankIndex)
 	spell := healer.Riptide[3]
 
-	healing, crit := healOf(sim, spell, tank)
-	assertRoll(t, "Riptide direct heal", spell, healing, crit, 1)
+	if healing, _ := healOf(sim, spell, tank); healing != 0 {
+		t.Errorf("Riptide healed %.2f on the cast, want 0 (no direct heal since 1.60.1.70755)", healing)
+	}
 
 	hot := spell.Hot(tank)
 	if !hot.IsActive() {
@@ -73,8 +77,9 @@ func TestRiptideRanksShareOneCooldown(t *testing.T) {
 	if healer.Riptide[1].CD.IsReady(sim) {
 		t.Error("casting rank 3 should put rank 1 on cooldown too")
 	}
-	if got := healer.Riptide[3].CD.Duration; got != 6*time.Second {
-		t.Errorf("Riptide cooldown = %v, want 6s", got)
+	// Client 1.60.1.70755: CategoryRecoveryTime 12000 (6000 before).
+	if got := healer.Riptide[3].CD.Duration; got != 12*time.Second {
+		t.Errorf("Riptide cooldown = %v, want 12s", got)
 	}
 }
 
@@ -136,11 +141,12 @@ func TestRiptideTicksFiveTimesOverFifteenSeconds(t *testing.T) {
 			if target.Casts == 0 {
 				continue
 			}
-			// One direct heal (a hit or a crit) and five ticks (plain or
-			// critical: the heal over time crits since 1.60.1.70707).
+			// No direct heal (gone since 1.60.1.70755) and five ticks
+			// (plain or critical: the heal over time crits since
+			// 1.60.1.70707).
 			direct, ticks := target.Hits+target.Crits, target.Ticks+target.CritTicks
-			if target.Casts != 1 || direct != 1 || ticks != riptideTicks {
-				t.Errorf("Riptide cast %d time(s), landed %d direct heals and %d ticks, want 1, 1 and %d", target.Casts, direct, ticks, riptideTicks)
+			if target.Casts != 1 || direct != 0 || ticks != riptideTicks {
+				t.Errorf("Riptide cast %d time(s), landed %d direct heals and %d ticks, want 1, 0 and %d", target.Casts, direct, ticks, riptideTicks)
 			}
 			return
 		}

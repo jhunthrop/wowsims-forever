@@ -3,6 +3,7 @@ package shaman_test
 import (
 	"math"
 	"testing"
+	"time"
 
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
@@ -17,7 +18,7 @@ func init() {
 	enhancement.RegisterEnhancementShaman()
 }
 
-const enhancementRaidTalents = "0533001000000000-253030031005102051-0530000000000000"
+const enhancementRaidTalents = "0533001000000000-253030310051002051-0530000000000000"
 
 func enhancementSim(t *testing.T) (*core.Simulation, *shaman.Shaman) {
 	t.Helper()
@@ -48,10 +49,12 @@ func enhancementSim(t *testing.T) (*core.Simulation, *shaman.Shaman) {
 	return sim, agent.GetShaman()
 }
 
-// Stormstrike 17364 is client effect 121 alone (normalized weapon damage,
-// 1.60.1.70707 SpellEffect): its attack power counts at the weapon type's
-// normalized speed (3.3 s for a two-hander, 2.4 s for a one-hander), not the
-// weapon's own swing speed, as Hemorrhage, Backstab and Sinister Strike do.
+// Stormstrike 17364's effect 0 is client effect 121 (normalized weapon
+// damage, 1.60.1.70707 SpellEffect): its attack power counts at the weapon
+// type's normalized speed (3.3 s for a two-hander, 2.4 s for a one-hander),
+// not the weapon's own swing speed, as Hemorrhage, Backstab and Sinister
+// Strike do. Effect 2, added in 1.60.1.70755, is Effect 31 (weapon percent
+// damage) at 150: the strike is 150% of that normalized weapon damage.
 func TestStormstrikeUsesNormalizedWeaponDamage(t *testing.T) {
 	const ap = 1500.0
 	sim, built := enhancementSim(t)
@@ -64,8 +67,11 @@ func TestStormstrikeUsesNormalizedWeaponDamage(t *testing.T) {
 	if mh.SwingSpeed == mh.NormalizedSwingSpeed {
 		t.Fatalf("the test weapon swings at its normalized %.1f s, so it cannot tell the two apart", mh.SwingSpeed)
 	}
-	want := mh.CalculateNormalizedWeaponDamage(refSim, ap)
+	want := 1.5 * mh.CalculateNormalizedWeaponDamage(refSim, ap)
 	if math.Abs(got-want) > 1e-9 {
-		t.Errorf("Stormstrike weapon damage = %.3f, want the normalized %.3f (weapon %.2f s)", got, want, mh.SwingSpeed)
+		t.Errorf("Stormstrike weapon damage = %.3f, want 150%% of the normalized, %.3f (weapon %.2f s)", got, want, mh.SwingSpeed)
+	}
+	if got, want := built.Stormstrike.CD.Duration, 6*time.Second; got != want {
+		t.Errorf("Stormstrike cooldown = %v, want %v (client RecoveryTime 6000)", got, want)
 	}
 }

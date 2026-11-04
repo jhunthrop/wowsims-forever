@@ -125,27 +125,30 @@ func TestElementalDevastationIsMeleeOnly(t *testing.T) {
 	}
 }
 
-// TestLightningOverloadHalvesTheWholeHit: the client's overload spells
-// carry half the amount AND half the spell-power coefficient (408477:
-// 98 at 0.357 against 196 at 0.714), so the second hit is the whole
-// primary at half the damage multiplier, not half of its base damage
-// alone. The scale helper must halve the multiplier for the hit it wraps
-// and restore it after.
-func TestLightningOverloadHalvesTheWholeHit(t *testing.T) {
+// TestLightningOverloadUsesItsOwnCoefficient: the overload is the client's
+// own per-rank spell (408477 for Lightning Bolt rank 10: 98 + 0.6 a level
+// at 0.357), which client 1.60.1.70755 left alone while it raised the bolt
+// to 353 + 2.1 at 0.714. The helper must swap in the overload's
+// coefficient for the hit it wraps, leave the damage multiplier alone, and
+// restore the bolt's coefficient after.
+func TestLightningOverloadUsesItsOwnCoefficient(t *testing.T) {
 	_, built := newCallOfFlameShaman(t, elementalTalentsWith(map[int]int{lightningOverloadNode: 3}))
 	lightningBolt := built.LightningBolt[10]
 
-	full := lightningBolt.DamageMultiplier
-	var scaled float64
-	built.AtLightningOverloadScale(lightningBolt, func() {
-		scaled = lightningBolt.DamageMultiplier
+	coefficient, multiplier := lightningBolt.BonusCoefficient, lightningBolt.DamageMultiplier
+	var during, multiplierDuring float64
+	built.AtLightningOverloadCoefficient(lightningBolt, shaman.LightningBoltOverloadSpellCoef[10], func() {
+		during, multiplierDuring = lightningBolt.BonusCoefficient, lightningBolt.DamageMultiplier
 	})
 
-	if !near(scaled, full/2) {
-		t.Errorf("overload hit damage multiplier %v, want half of %v", scaled, full)
+	if !near(during, 0.357) {
+		t.Errorf("overload hit coefficient %v, want the client's 0.357", during)
 	}
-	if !near(lightningBolt.DamageMultiplier, full) {
-		t.Errorf("damage multiplier %v after the overload, want the restored %v", lightningBolt.DamageMultiplier, full)
+	if !near(multiplierDuring, multiplier) {
+		t.Errorf("overload hit damage multiplier %v, want the primary's %v", multiplierDuring, multiplier)
+	}
+	if !near(lightningBolt.BonusCoefficient, coefficient) {
+		t.Errorf("coefficient %v after the overload, want the restored %v", lightningBolt.BonusCoefficient, coefficient)
 	}
 }
 

@@ -100,7 +100,6 @@ const (
 	ShamanSpellMaskEarthShock
 	ShamanSpellMaskFrostShock
 	ShamanSpellMaskStormstrike
-	ShamanSpellMaskLavaBurst
 )
 
 // ShamanSpellMaskHealing is every direct heal a healing talent reaches
@@ -118,7 +117,6 @@ const (
 	SpellCode_ShamanFlameShock
 	SpellCode_ShamanFrostShock
 	SpellCode_ShamanHealingWave
-	SpellCode_ShamanLavaBurst
 	SpellCode_ShamanLesserHealingWave
 	SpellCode_ShamanLightningBolt
 	SpellCode_ShamanLightningShield
@@ -143,7 +141,6 @@ type Shaman struct {
 	ChainHeal            []*core.Spell
 	ChainLightning       []*core.Spell
 	EarthShock           []*core.Spell
-	ElementalMastery     *core.Spell
 	FireNova             []*core.Spell
 	FireNovaBlast        []*core.Spell
 	FlameShock           []*core.Spell
@@ -151,9 +148,9 @@ type Shaman struct {
 	GraceOfAirTotem      []*core.Spell
 	HealingStreamTotem   []*core.Spell
 	HealingWave          []*core.Spell
-	LavaBurst            []*core.Spell
 	LesserHealingWave    []*core.Spell
 	LightningBolt        []*core.Spell
+	LightningMastery     *core.Spell
 	LightningShield      []*core.Spell
 	LightningShieldProcs []*core.Spell // The damage component of lightning shield is a separate spell
 	MagmaTotem           []*core.Spell
@@ -235,7 +232,6 @@ func (shaman *Shaman) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 func (shaman *Shaman) Initialize() {
 	// Core abilities
 	shaman.registerChainLightningSpell()
-	shaman.registerLavaBurstSpell()
 	shaman.registerLightningBoltSpell()
 	shaman.registerLightningShieldSpell()
 	shaman.registerShocks()

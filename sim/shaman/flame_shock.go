@@ -21,21 +21,21 @@ var FlameShockSpellId = [FlameShockRanks + 1]int32{0, 8050, 8052, 8053, 10447, 1
 // above the rank's own; the ticks do not grow.
 var FlameShockDamage = [FlameShockRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 20, PerLevel: 0.8, SpellLevel: 10, MaxLevel: 15},
-	{Amount: 33, PerLevel: 1, SpellLevel: 18, MaxLevel: 23},
-	{Amount: 43, PerLevel: 1.2, SpellLevel: 28, MaxLevel: 33},
-	{Amount: 82, PerLevel: 1.4, SpellLevel: 40, MaxLevel: 45},
-	{Amount: 128, PerLevel: 1.7, SpellLevel: 52, MaxLevel: 57},
-	{Amount: 166, PerLevel: 2.1, SpellLevel: 60, MaxLevel: 67},
+	{Amount: 25, PerLevel: 0.8, SpellLevel: 10, MaxLevel: 15},
+	{Amount: 51, PerLevel: 1, SpellLevel: 18, MaxLevel: 23},
+	{Amount: 95, PerLevel: 1.2, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 164, PerLevel: 1.4, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 245, PerLevel: 1.7, SpellLevel: 52, MaxLevel: 57},
+	{Amount: 292, PerLevel: 3.8, SpellLevel: 60, MaxLevel: 67},
 }
 var FlameShockTickDamage = [FlameShockRanks + 1]clientdamage.Effect{
 	{},
 	{Amount: 7, SpellLevel: 10, MaxLevel: 15},
-	{Amount: 8, SpellLevel: 18, MaxLevel: 23},
-	{Amount: 14, SpellLevel: 28, MaxLevel: 33},
-	{Amount: 21, SpellLevel: 40, MaxLevel: 45},
-	{Amount: 34, SpellLevel: 52, MaxLevel: 57},
-	{Amount: 44, SpellLevel: 60, MaxLevel: 67},
+	{Amount: 12, SpellLevel: 18, MaxLevel: 23},
+	{Amount: 24, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 42, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 64, SpellLevel: 52, MaxLevel: 57},
+	{Amount: 80, SpellLevel: 60, MaxLevel: 67},
 }
 var FlameShockBaseSpellCoef = [FlameShockRanks + 1]float64{0, .214, .214, .214, .214, .214, .214}
 var FlameShockDotSpellCoef = [FlameShockRanks + 1]float64{0, .1, .1, .1, .1, .1, .1}
@@ -85,10 +85,10 @@ func (shaman *Shaman) newFlameShockSpell(rank int, shockTimer *core.Timer) core.
 	spell.ClientBaseDamage = damage.Range(casterLevel)
 
 	// Call of Flame's tooltip (talents/shaman.json node 104770) names
-	// "Fire Totems and ... Flame Shock, Fire Nova, and Lava Burst"
-	// explicitly; Lava Burst and the fire totems already apply this
-	// multiplicatively via shaman.callOfFlameMultiplier() (lava_burst.go,
-	// fire_totems.go), but Flame Shock was left on newShockSpellConfig's
+	// "Fire Totems and ... Flame Shock and Fire Nova" explicitly (Lava
+	// Burst left it in 1.60.1.70755); the fire totems already apply this
+	// multiplicatively via shaman.callOfFlameMultiplier()
+	// (fire_totems.go), but Flame Shock was left on newShockSpellConfig's
 	// flat DamageMultiplier: 1. AttackerDamageMultiplier multiplies
 	// spell.DamageMultiplier into both the initial hit
 	// (calcDamageInternal) and the DoT's own snapshot

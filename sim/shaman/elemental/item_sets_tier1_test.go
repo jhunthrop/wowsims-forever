@@ -41,10 +41,18 @@ func TestSpiritcallersStormFlatBonusesMatchTheRows(t *testing.T) {
 	})
 }
 
-// 5P: "Reduces the cooldown on your Lava Burst spell by 1 sec".
-func TestSpiritcallersStormFivePieceShortensLavaBurst(t *testing.T) {
-	clientsetbonustest.AssertCooldownBonus(t, spiritcallersStormSetID, clientsetbonus.FivePieces, func(pieces int) *core.Spell {
-		burst := spiritcallersStormShaman(t, proto.Race_RaceOrc, LavaBurstOnlyTalentsString, pieces).LavaBurst
-		return burst[len(burst)-1]
-	})
+// 5P: "Reduces the cooldown on your Lava Burst spell by 1 sec". No shaman
+// can learn Lava Burst since client 1.60.1.70755, so the bonus is declared
+// NoSim rather than modelled.
+func TestSpiritcallersStormFivePieceIsNoSim(t *testing.T) {
+	fivePiece := clientsetbonus.SpellAt(spiritcallersStormSetID, clientsetbonus.FivePieces)
+	for _, model := range core.ClientSetModels()[spiritcallersStormSetID] {
+		if model.SpellID == fivePiece {
+			if model.Kind != core.ClientBonusNoSim {
+				t.Errorf("5-piece %d is %v, want NoSim", fivePiece, model.Kind)
+			}
+			return
+		}
+	}
+	t.Fatalf("5-piece %d is not among the set's models", fivePiece)
 }

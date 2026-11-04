@@ -150,8 +150,7 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "priest", Label: "Shadowform", Tree: 2, Pos: 17},
 
 	// Shaman (Elemental 16, Enhancement 18, Restoration 16).
-	{ClassSlug: "shaman", Label: "Lava Burst", Tree: 0, Pos: 13},
-	{ClassSlug: "shaman", Label: "Stormstrike", Tree: 1, Pos: 13},
+	{ClassSlug: "shaman", Label: "Stormstrike", Tree: 1, Pos: 12},
 	{ClassSlug: "shaman", Label: "Rage of the Farseer", Tree: 1, Pos: 18},
 	{ClassSlug: "shaman", Label: "Water Shield", Tree: 2, Pos: 9},
 	{ClassSlug: "shaman", Label: "Mana Tide Totem", Tree: 2, Pos: 12, Preset: "RestorationShaman"},
