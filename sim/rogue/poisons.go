@@ -175,18 +175,18 @@ func (rogue *Rogue) registerDeadlyPoisonSpell() {
 			NumberOfTicks: 4,
 			TickLength:    time.Second * 3,
 
+			// Every application, a refresh at five stacks included, takes the
+			// caster's modifiers of that moment (Venom's 6-second 30% above
+			// all); only a new stack adds base damage.
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, applyStack bool) {
+				attackTable := dot.Spell.Unit.AttackTables[target.UnitIndex][dot.Spell.CastType]
+				dot.SnapshotAttackerMultiplier = dot.Spell.AttackerDamageMultiplier(attackTable, true)
 				if !applyStack {
 					return
 				}
-
-				// only the first stack snapshots the multiplier
 				if dot.GetStacks() == 1 {
-					attackTable := dot.Spell.Unit.AttackTables[target.UnitIndex][dot.Spell.CastType]
-					dot.SnapshotAttackerMultiplier = dot.Spell.AttackerDamageMultiplier(attackTable, true)
 					dot.SnapshotBaseDamage = 0
 				}
-
 				dot.SnapshotBaseDamage += tickDamage.Roll(sim, casterLevel)
 			},
 

@@ -28,3 +28,14 @@ func (rogue *Rogue) MutilateOHWeaponDamageForTest(sim *core.Simulation, attackPo
 func PoisedEngineMaskForTest() uint64 {
 	return rogueClassMasks.Resolve(poisedFamilies)
 }
+
+// DeadlyPoisonSnapshotMultiplierForTest exposes the caster multiplier the
+// Deadly Poison on target last took.
+func (rogue *Rogue) DeadlyPoisonSnapshotMultiplierForTest(target *core.Unit) float64 {
+	return rogue.deadlyPoisonTick.Dot(target).SnapshotAttackerMultiplier
+}
+
+// DeadlyPoisonStacksForTest exposes the Deadly Poison stacks on target.
+func (rogue *Rogue) DeadlyPoisonStacksForTest(target *core.Unit) int32 {
+	return rogue.deadlyPoisonTick.Dot(target).GetStacks()
+}
