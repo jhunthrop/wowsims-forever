@@ -30,33 +30,31 @@ import (
 // advice; it is a fixed input, so a DPS change is attributable to the
 // engine rather than to a build edit.
 //
-// It is written against the live tree (the client's trait tables with
-// Wowhead's hotfix overlay, build 1.60.1.70009), so its three segments
-// are 17, 17 and 18 characters (TalentTreeSizes). Spend:
+// It is written against the client's trees at build 1.60.1.70755, so its
+// three segments are 17, 18 and 18 characters (TalentTreeSizes). Spend:
 //
-//	Arms 20: Improved Heroic Strike 3, Deflection 3, Improved Rend 3,
-//	         Improved Tactical Mastery 5, Anger Management 1,
+//	Arms 20: Improved Heroic Strike 3, Deflection 5, Improved Rend 3,
+//	         Improved Tactical Mastery 3, Anger Management 1,
 //	         Deep Wounds 3, Impale 2
 //	Fury 31: Booming Voice 1, Cruelty 5, Lingering Rage 3,
 //	         Unbridled Wrath 5, Furious Precision 3, Piercing Howl 1,
-//	         Enrage 5, Improved Execute 1, Death Wish 1, Flurry 5,
-//	         Bloodthirst 1
+//	         Enrage 5, Improved Execute 1, Death Wish 1,
+//	         Improved Whirlwind 2, Flurry 3, Bloodthirst 1
 //	Protection 0
 //
-// The live-tree rebuild removed Improved Cleave 3 and Precision 3 from
-// the earlier reference build; their six points went to Furious
-// Precision 3 (the replacement hit talent) and Lingering Rage 3, which
-// has no effect on a simmed number, so the reference build's DPS moves
-// only by what the removed and added talents themselves are worth.
+// The 70755 push cut Improved Tactical Mastery and Flurry from five ranks
+// to three. The two Arms points went to Deflection (no effect on a DPS
+// number) and the two Fury points to Improved Whirlwind, the node that
+// replaced Raging Blows, so the build still reaches Bloodthirst with the
+// 30 points tier 6 needs above it. Reckless Swings is not taken: no
+// pinned rotation casts it yet.
 //
-// Improved Rend is 3, not the 2 an earlier draft spent, because the
-// client makes Deep Wounds require Improved Rend at rank 3; and the Fury
-// half is shaped by the tier gates rather than by taste, because
-// reaching Bloodthirst with exactly 31 points forces 25 of them into
-// tiers 0-4. TestForeverFuryTalentsAreAValidBuild checks the widths and
-// the spend, so a segment one character short fails rather than
-// silently reading the neighbouring talent.
-const ForeverFuryTalents = "33305013002000000-15353100051010501-000000000000000000"
+// Improved Rend is 3 because the client makes Deep Wounds require
+// Improved Rend at rank 3, and Anger Management requires Improved
+// Tactical Mastery at its new max of 3. TestForeverFuryTalentsAreAValidBuild
+// and TestTheReferenceBuildsRespectTheTiersAndPrerequisites check the
+// widths, the spend and the gates.
+const ForeverFuryTalents = "35303013002000000-153531050010100231-000000000000000000"
 
 // ForeverProtectionTalents is the same fixed input for the tank spec: a
 // 20-point Arms spend that a tank wants (the parry and the cheaper Heroic
@@ -65,14 +63,17 @@ const ForeverFuryTalents = "33305013002000000-15353100051010501-0000000000000000
 // that moves is attributable to the engine and not to a build edit.
 //
 //	Arms 20:       Improved Heroic Strike 3, Deflection 5,
-//	               Improved Rend 3, Improved Tactical Mastery 5,
-//	               Anger Management 1, Deep Wounds 3
+//	               Improved Rend 3, Improved Tactical Mastery 3,
+//	               Improved Overpower 2, Anger Management 1, Deep Wounds 3
 //	Protection 31: Shield Specialization 5, Anticipation 5,
 //	               Improved Revenge 3, Improved Thunder Clap 3,
 //	               Last Stand 1, Master of Defense 2, Defiance 3,
 //	               Improved Sunder Armor 3, Concussion Blow 1,
 //	               Focused Rage 3, Bastion 1, Shield Slam 1
 //
+// Improved Tactical Mastery's max fell from 5 to 3 in the 70755 push; the
+// two points went to Improved Overpower, which a Defensive Stance tank
+// never casts, so the tank numbers move only by what the push changed.
 // The Protection spend is shaped by the tier gates: Shield Slam (tier 6)
 // needs 30 points above it, Concussion Blow (tier 4) is its prerequisite,
 // and Master of Defense needs Shield Specialization at 5. Iron Will,
@@ -80,7 +81,7 @@ const ForeverFuryTalents = "33305013002000000-15353100051010501-0000000000000000
 // stationary one-boss tank sim stuns, silences and disarms nothing.
 // TestTheReferenceBuildsRespectTheTiersAndPrerequisites checks the widths
 // and the gates.
-const ForeverProtectionTalents = "35305013000000000-00000000000000000-050533120330001311"
+const ForeverProtectionTalents = "35303213000000000-000000000000000000-050533120330001311"
 
 // fillWarriorTalents parses a talent string into the proto, positionally
 // against TalentTreeSizes. It is the one place that pairing happens, so
@@ -148,13 +149,32 @@ var (
 	// Improved Rend: "Increases the damage of your Rend ability by
 	// 35%" at rank 3.
 	improvedRendDamageMultiplier = [4]float64{1, 1.12, 1.23, 1.35}
-	// Flurry: "+25% melee attack speed for your next swings" at rank 5,
-	// so 5% a point. See makeFlurryAura.
-	flurryAttackSpeed = [6]float64{1, 1.05, 1.10, 1.15, 1.20, 1.25}
+	// Flurry (Fury node 105928, 3 ranks since 1.60.1.70755): "Increases
+	// your melee attack speed by 10%/20%/30% for your next 3 swings",
+	// trait curve 83289 on 12319 e0 (1: 10, 2: 20, 3: 30); the proc aura
+	// 12966 carries the max rank's 30 (aura 319). See makeFlurryAura.
+	flurryAttackSpeed = [4]float64{1, 1.10, 1.20, 1.30}
+	// Two-Handed Weapon Specialization (Arms node 105948): "by 2%/4%/6%",
+	// trait curve 83308 on 12163 e0 (the spell row's own base points, 1,
+	// is the untraited default the curve replaces).
+	twoHandedWeaponSpecializationPct = [4]float64{0, 2, 4, 6}
 	// Deep Wounds has a distinct rank spell per rank, unlike the ranks
 	// in TalentSpellIDs, which the client reissued as one id.
 	deepWoundsSpellIDs = [4]int32{0, 12834, 12849, 12867}
 )
+
+// flurryMaxPoints is Flurry's client max rank (the length of its
+// TalentSpellIDs entry): what a set bonus that grants "Flurry" at full
+// strength (the Protection T2 4pc, item_sets_pve.go) builds its aura at.
+func flurryMaxPoints() int32 {
+	return int32(len(TalentSpellIDs["flurry"]))
+}
+
+// twoHandedWeaponSpecializationMultiplier is the physical damage
+// multiplier Two-Handed Weapon Specialization gives at a point count.
+func twoHandedWeaponSpecializationMultiplier(points int32) float64 {
+	return 1 + twoHandedWeaponSpecializationPct[rankIndex(points, twoHandedWeaponSpecializationPct[:])]/100
+}
 
 // rankIndex clamps a talent rank to a lookup table's highest index.
 // core.FillTalentsProto does not validate a talent string against the
@@ -222,12 +242,15 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 		})
 	}
 
-	// Booming Voice: "reduces their Rage cost by 5%" a point (the live
-	// tree's text; the area of effect has no meaning in a raid sim).
+	// Booming Voice: "reduces the Rage cost of your Shouts and Howls by
+	// 5%" a point (12321 e1, aura 108 misc 14, trait curve 125261:
+	// -5/-10/-15/-20/-25; the area of effect has no meaning in a raid
+	// sim). Since 1.60.1.70755 the e1 class mask adds mask_1 0x20, which
+	// is Piercing Howl's family bit (12323), to the shouts' 0xF0000.
 	if t.BoomingVoice > 0 {
 		warrior.AddStaticMod(core.SpellModConfig{
 			Kind:      core.SpellMod_PowerCost_Pct,
-			ClassMask: WarriorSpellMaskBattleShout | WarriorSpellMaskDemoralizingShout,
+			ClassMask: boomingVoiceClassMask,
 			IntValue:  -boomingVoiceCostReductionPct * int64(t.BoomingVoice),
 		})
 	}
@@ -257,19 +280,7 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 	// SchoolDamageDealtMultiplier[Physical] is the pattern Death Wish
 	// (applyDeathWish) and Enrage (applyEnrage) already use.
 	if t.TwoHandedWeaponSpecialization > 0 && warrior.MainHand().HandType == proto.HandType_HandTypeTwoHand {
-		warrior.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1 + 0.01*float64(t.TwoHandedWeaponSpecialization)
-	}
-
-	// Raging Blows: since build 1.60.1.70291 the client text and row
-	// (spell 1310315, aura 107 of -30 tenths of rage) read "Reduces the Rage
-	// cost of your Cleave and Whirlwind abilities by 3". The off-hand
-	// Whirlwind strike the earlier text also named is baseline (whirlwind.go).
-	if t.RagingBlows {
-		warrior.AddStaticMod(core.SpellModConfig{
-			Kind:      core.SpellMod_PowerCost_Flat,
-			ClassMask: WarriorSpellMaskCleave | WarriorSpellMaskWhirlwind,
-			IntValue:  -ragingBlowsRageDiscount,
-		})
+		warrior.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= twoHandedWeaponSpecializationMultiplier(t.TwoHandedWeaponSpecialization)
 	}
 
 	// Improved Revenge: "Increases damage dealt by your Revenge ability
@@ -478,6 +489,11 @@ func (warrior *Warrior) registerWeaponmasterExtraAttack(procMask core.ProcMask, 
 // off the rage cost of Battle Shout and Demoralizing Shout.
 const boomingVoiceCostReductionPct = 5
 
+// boomingVoiceClassMask is what Booming Voice's cost clause reaches among
+// the spells this package registers: the shouts (Battle Shout and
+// Demoralizing Shout) and, since 1.60.1.70755, the Howls (Piercing Howl).
+const boomingVoiceClassMask = WarriorSpellMaskBattleShout | WarriorSpellMaskDemoralizingShout | WarriorSpellMaskPiercingHowl
+
 const unbridledWrathRage = 1.0
 
 // applyUnbridledWrath is Unbridled Wrath: "a 60% chance to generate 1
@@ -522,11 +538,6 @@ func dualWieldSpecializationOffHandRageMultiplier(points int32) float64 {
 func furiousPrecisionOffHandHitPercent(points int32) float64 {
 	return [4]float64{0, 4, 7, 10}[max(0, min(points, 3))]
 }
-
-// ragingBlowsRageDiscount is the rage Raging Blows takes off Cleave and
-// Whirlwind: 3 per Blizzard's 1 October 2026 notes (client text: 2, Cleave
-// only).
-const ragingBlowsRageDiscount = 3
 
 // applyFuriousPrecision is Furious Precision (Fury node 105953,
 // hotfix_only): "Increases your chance to hit with off-hand attacks by
@@ -650,14 +661,13 @@ func (warrior *Warrior) applyFlurry() {
 	}))
 }
 
-// makeFlurryAura is separated out because of the T1 Shaman Tank 2P that
+// makeFlurryAura is separated out because of the Protection T2 4pc that
 // can proc Flurry separately from the talent. It triggers the max-rank
-// Flurry aura but with dodge, parry, or block.
+// Flurry aura (flurryMaxPoints) but with dodge, parry, or block.
 //
-// The client's Flurry is "+25% melee attack speed for your next swings"
-// at rank 5, so 5% a point. Vanilla's was 10% at rank 1 rising to 30%;
-// this is the single largest number change in the Fury tree and the
-// reason the spec's goldens move.
+// The client's Flurry is 10%/20%/30% melee attack speed at ranks 1-3
+// (flurryAttackSpeed, since 1.60.1.70755; it was 5% a point over five
+// ranks before).
 func (warrior *Warrior) makeFlurryAura(points int32) *core.Aura {
 	if points == 0 {
 		return nil
@@ -666,7 +676,7 @@ func (warrior *Warrior) makeFlurryAura(points int32) *core.Aura {
 	// The client gives every rank of Flurry the same rank spell, 12319,
 	// so the id no longer distinguishes one rank's aura from another's
 	// and the label carries the rank instead. It has to: the
-	// Protection T2 4pc registers its own five-point Flurry through
+	// Protection T2 4pc registers its own max-rank Flurry through
 	// this same function, and GetOrRegisterAura keys on the label, so
 	// two ranks sharing a label would silently become one aura at
 	// whichever attack speed registered first.
@@ -693,7 +703,7 @@ func (warrior *Warrior) makeFlurryAura(points int32) *core.Aura {
 	return aura
 }
 
-// With the Protection T2 4pc it's possible to have 2 different Flurry auras if using less than 5/5 points in Flurry.
+// With the Protection T2 4pc it's possible to have 2 different Flurry auras if using less than max points in Flurry.
 // The two different buffs don't stack whatsoever. Instead the stronger aura takes precedence and each one is only refreshed by the corresponding triggers.
 func (warrior *Warrior) makeFlurryConsumptionTrigger(flurryAura *core.Aura) *core.Aura {
 	icd := core.Cooldown{

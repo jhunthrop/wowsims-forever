@@ -100,6 +100,9 @@ type Warrior struct {
 	// Aura cannot carry two durations, so Overpower's cast condition and
 	// ApplyEffects check both. Nil when Bloodthrill is not talented.
 	BloodthrillAura *core.Aura
+	// RecklessSwingsAura is Reckless Swings' four-charge rage buff; nil
+	// when Reckless Swings is not talented.
+	RecklessSwingsAura *core.Aura
 
 	// Enrage Auras
 	BerserkerRageAura *core.Aura
@@ -143,6 +146,7 @@ type Warrior struct {
 	Hamstring         *WarriorSpell
 	PiercingHowl      *WarriorSpell
 	SpearingStrike    *WarriorSpell
+	RecklessSwings    *WarriorSpell
 	Charge            *WarriorSpell
 	Retaliation       *WarriorSpell
 
@@ -233,6 +237,7 @@ func (warrior *Warrior) Initialize() {
 	warrior.registerPummelSpell()
 	warrior.registerPiercingHowlSpell()
 	warrior.registerSpearingStrikeSpell()
+	warrior.registerRecklessSwingsSpell()
 	warrior.registerChargeSpell()
 	warrior.registerRetaliationSpell()
 

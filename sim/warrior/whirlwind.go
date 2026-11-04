@@ -27,6 +27,32 @@ const (
 	whirlwindCooldown = time.Second * 10
 )
 
+// Improved Whirlwind (Fury node 105977, 2 ranks, spell 1310315; the node
+// held Raging Blows until 1.60.1.70755): "Reduces the cooldown of your
+// Whirlwind ability by 1/2 sec and increases the damage it deals to the
+// closest enemy by 15%/30%." The rows: e0 aura 107 (add flat modifier)
+// misc 11 (cooldown) on Whirlwind's family bit (mask_1 0x4), trait
+// curve 128139 (1: -1000, 2: -2000 ms); e1 aura 4 (dummy, a server
+// script) with trait curve 128138 (1: 15, 2: 30). The engine's first
+// target is the closest one: the +% lands on the main- and off-hand
+// strikes Whirlwind deals to Whirlwind's primary target and to no other.
+var (
+	improvedWhirlwindCooldownCutMS         = [3]int32{0, 1000, 2000}
+	improvedWhirlwindPrimaryTargetBonusPct = [3]float64{0, 15, 30}
+)
+
+// improvedWhirlwindCooldownCut is what Improved Whirlwind takes off
+// Whirlwind's cooldown at a point count.
+func improvedWhirlwindCooldownCut(points int32) time.Duration {
+	return time.Duration(improvedWhirlwindCooldownCutMS[rankIndex(points, improvedWhirlwindCooldownCutMS[:])]) * time.Millisecond
+}
+
+// improvedWhirlwindPrimaryTargetMultiplier is the damage multiplier
+// Improved Whirlwind gives Whirlwind's strikes on its closest target.
+func improvedWhirlwindPrimaryTargetMultiplier(points int32) float64 {
+	return 1 + improvedWhirlwindPrimaryTargetBonusPct[rankIndex(points, improvedWhirlwindPrimaryTargetBonusPct[:])]/100
+}
+
 // WhirlwindOffHandSpellID is Whirlwind's off-hand strike, the client's
 // spell 462891: SpellMisc Attributes_3 0x01000000 (the off-hand attack
 // flag), effect 121 normalized weapon damage on one target, no cost and no
@@ -51,6 +77,7 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 	// results so the two loops share one numHits bound.
 	ohResults := make([]*core.SpellResult, len(results))
 	offHandStrike := warrior.registerWhirlwindOffHandStrike()
+	primaryTargetMultiplier := improvedWhirlwindPrimaryTargetMultiplier(warrior.Talents.ImprovedWhirlwind)
 
 	warrior.Whirlwind = warrior.RegisterSpell(BerserkerStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorWhirlwind,
@@ -76,7 +103,7 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    warrior.NewTimer(),
-				Duration: whirlwindCooldown,
+				Duration: whirlwindCooldown - improvedWhirlwindCooldownCut(warrior.Talents.ImprovedWhirlwind),
 			},
 		},
 		CritDamageBonus: warrior.impale(),
@@ -87,7 +114,7 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			// Whirlwind strikes with both weapons baseline (Blizzard's
-			// 1 October 2026 notes; it was Raging Blows' clause before).
+			// 1 October 2026 notes).
 			// A dual-wielding check because the clause presumes a weapon
 			// is there to strike with; a 2H Whirlwind swings with the
 			// main hand only, same as always.
@@ -95,10 +122,16 @@ func (warrior *Warrior) registerWhirlwindSpell() {
 
 			numHits := min(len(results), len(sim.Encounter.TargetUnits))
 			for idx := 0; idx < numHits; idx++ {
-				baseDamage := spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+				// Improved Whirlwind's bonus is the closest enemy's
+				// alone: the cast's own target, the first one struck.
+				targetMultiplier := 1.0
+				if idx == 0 {
+					targetMultiplier = primaryTargetMultiplier
+				}
+				baseDamage := targetMultiplier * spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				if offHand {
-					ohDamage := offHandStrike.Unit.OHNormalizedWeaponDamage(sim, offHandStrike.MeleeAttackPower(target))
+					ohDamage := targetMultiplier * offHandStrike.Unit.OHNormalizedWeaponDamage(sim, offHandStrike.MeleeAttackPower(target))
 					ohResults[idx] = offHandStrike.CalcDamage(sim, target, ohDamage, offHandStrike.OutcomeMeleeWeaponSpecialHitAndCrit)
 				}
 				target = sim.Environment.NextTargetUnit(target)

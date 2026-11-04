@@ -13,11 +13,11 @@ import "testing"
 // a landed ProcMaskMeleeMHSpecial hit against a target its own Dot is
 // now ticking on.
 //
-// Rank 5 is 20% a landed hit (bloodthrillProcChance), so 300 trials
+// Rank 2 is 20% a landed hit (bloodthrillProcChance), so 300 trials
 // without a single proc has probability 0.8^300, far below any flake
 // budget.
 func TestBloodthrillOpensItsOwnOverpowerWindow(t *testing.T) {
-	talents := talentStringWithRank(t, emptyWarriorTalents, "bloodthrill", 5)
+	talents := talentStringWithRank(t, emptyWarriorTalents, "bloodthrill", 2)
 	war, sim := buildWarriorAndSimForCostTest(t, talents)
 	target := sim.Encounter.TargetUnits[0]
 
@@ -33,7 +33,7 @@ func TestBloodthrillOpensItsOwnOverpowerWindow(t *testing.T) {
 	}
 
 	if !war.BloodthrillAura.IsActive() {
-		t.Fatal("BloodthrillAura never activated across 300 Main Hand hits on a Rend-afflicted target at rank 5 (20%)")
+		t.Fatal("BloodthrillAura never activated across 300 Main Hand hits on a Rend-afflicted target at rank 2 (20%)")
 	}
 	if !war.Overpower.CanCast(sim, target) {
 		t.Error("Overpower is not castable while BloodthrillAura is active")

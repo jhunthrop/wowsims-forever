@@ -12,13 +12,13 @@ import (
 )
 
 // The generated tree must be the client's: Arms 17, Fury 18,
-// Protection 18 on the live tree (client trait tables plus Wowhead's
-// hotfix overlay, build 1.60.1.70009; Fury lost Improved Cleave and
-// Precision and gained Gore Drinker). If Task 17 has not run, or
-// ran against Era, this fails first and everything below it is noise.
+// Protection 18 at build 1.60.1.70755 (the push replaced Raging Blows
+// with Improved Whirlwind and added Reckless Swings). If Task 17 has not
+// run, or ran against Era, this fails first and everything below it is
+// noise.
 func TestTheGeneratedTreeIsTheClients(t *testing.T) {
-	if got, want := TalentTreeSizes, [3]int{17, 17, 18}; got != want {
-		t.Fatalf("TalentTreeSizes = %v, want %v (Arms 17, Fury 17, Protection 18)", got, want)
+	if got, want := TalentTreeSizes, [3]int{17, 18, 18}; got != want {
+		t.Fatalf("TalentTreeSizes = %v, want %v (Arms 17, Fury 18, Protection 18)", got, want)
 	}
 	if TalentsBuild == "" {
 		t.Error("TalentsBuild is empty; the generated file must record the client build")
@@ -38,8 +38,8 @@ func TestTalentTreeSizesMatchTheProto(t *testing.T) {
 	if fields.Len() != total {
 		t.Errorf("WarriorTalents has %d fields, TalentTreeSizes sums to %d", fields.Len(), total)
 	}
-	if total != 52 {
-		t.Errorf("the warrior has %d talents, want 52 from build %s", total, TalentsBuild)
+	if total != 53 {
+		t.Errorf("the warrior has %d talents, want 53 from build %s", total, TalentsBuild)
 	}
 }
 
@@ -59,9 +59,6 @@ var foreverFuryTalentsApplied = []string{
 	"improved_thunder_clap",
 	"improved_sunder_armor",
 	"two_handed_weapon_specialization",
-	// raging_blows is also read directly by whirlwind.go, for the
-	// off-hand strike half of the talent.
-	"raging_blows",
 	"improved_revenge",
 	"bastion",
 	"focused_rage",
@@ -81,6 +78,8 @@ var foreverFuryTalentsApplied = []string{
 	"shield_slam",
 	"bloodthirst",
 	"piercing_howl",
+	// Read by whirlwind.go: the cooldown cut and the closest-enemy bonus.
+	"improved_whirlwind",
 	// Talents with their own function.
 	"anger_management",
 	"deep_wounds",
@@ -100,6 +99,8 @@ var foreverFuryTalentsApplied = []string{
 	"blood_craze",
 	// A new attack, registered by spearing_strike.go.
 	"spearing_strike",
+	// A new learned ability, registered by reckless_swings.go.
+	"reckless_swings",
 }
 
 // Every talent this spec's behaviour reads must exist in the generated

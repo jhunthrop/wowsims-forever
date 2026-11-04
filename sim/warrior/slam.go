@@ -14,19 +14,22 @@ import (
 // castable ability - that out-ranked the real id on the generator's
 // spell_level tiebreak (the stub's spell_level reads one tier high).
 // Rank 5 needs no correction: its own duplicate pair (11605/1310200)
-// both carry the real numbers. The real per-rank ids and their shared
-// 1500ms cast time / 18000ms cooldown / 150-tenths cost are confirmed
-// against both data/builds/1.60.1.70009/spellconst/warrior.json (ids
-// 1240193, 1464, 8820, 11604, 11605) and spellranks.json, which never
-// lists 462893-462897 at all. 11605 is also the id the UI and the
-// preset rotations name for rank 5.
-// Improved Slam's numbers: the cast time and GCD each lose 0.25 s a point
-// (the talent's own rank text, see registerSlamSpell), and the cooldown
-// loses a flat 3 s with any point spent: both rank texts read "Slam's
-// cooldown is reduced by 3.0 sec" and client 12862 carries -3000 ms.
-const (
-	improvedSlamCastReductionPerPoint = 250 * time.Millisecond
-	improvedSlamCooldownReduction     = 3 * time.Second
+// both carry the real numbers, so the cooldown every rank shares is read
+// from it (SlamCooldownMS[SlamRanks]: CategoryRecoveryTime 15000 since
+// 1.60.1.70755, 18000 before). The real per-rank ids and their shared
+// 1500ms cast time and 150-tenths cost are confirmed against the client
+// table (TestSlamRanksMatchTheClient), which never lists 462893-462897
+// with a cost at all. 11605 is also the id the UI and the preset
+// rotations name for rank 5.
+//
+// Improved Slam's numbers (Arms node 110858, spell 12862) are its trait
+// curves, per point: e0 (misc 10, cast time) and e1 (misc 21, global
+// cooldown) -250/-500 ms (curves 109365, 109364), and e2 (misc 11,
+// cooldown) -2500/-5000 ms (curve 128144; the row's own -5000 is the max
+// rank's, -3000 before 1.60.1.70755).
+var (
+	improvedSlamCastReductionMS     = [3]int32{0, 250, 500}
+	improvedSlamCooldownReductionMS = [3]int32{0, 2500, 5000}
 )
 
 // improvedSlamReductions is the talent's effect at a given point count,
@@ -34,11 +37,9 @@ const (
 // and cooldown; kept as a pure function so the per-rank numbers are
 // checkable without building a warrior.
 func improvedSlamReductions(points int32) (cast, gcd, cooldown time.Duration) {
-	p := time.Duration(points)
-	if points > 0 {
-		cooldown = improvedSlamCooldownReduction
-	}
-	return improvedSlamCastReductionPerPoint * p, improvedSlamCastReductionPerPoint * p, cooldown
+	cast = time.Duration(improvedSlamCastReductionMS[rankIndex(points, improvedSlamCastReductionMS[:])]) * time.Millisecond
+	cooldown = time.Duration(improvedSlamCooldownReductionMS[rankIndex(points, improvedSlamCooldownReductionMS[:])]) * time.Millisecond
+	return cast, cast, cooldown
 }
 
 // improvedSlamKeepsTheSwing is the talent's third clause: with any point
@@ -47,11 +48,14 @@ func improvedSlamKeepsTheSwing(points int32) bool {
 	return points > 0
 }
 
+// slamCooldownMS is the category cooldown every learned Slam rank shares.
+var slamCooldownMS = SlamCooldownMS[SlamRanks]
+
 var (
 	slamRankLevel      = [SlamRanks + 1]int{0, 20, 30, 38, 46, 54}
 	slamRankSpellID    = [SlamRanks + 1]int32{0, 1240193, 1464, 8820, 11604, 11605}
 	slamRankCastTimeMS = [SlamRanks + 1]int32{0, 1500, 1500, 1500, 1500, 1500}
-	slamRankCooldownMS = [SlamRanks + 1]int32{0, 18000, 18000, 18000, 18000, 18000}
+	slamRankCooldownMS = [SlamRanks + 1]int32{0, slamCooldownMS, slamCooldownMS, slamCooldownMS, slamCooldownMS, slamCooldownMS}
 	slamRankManaCost   = [SlamRanks + 1]float64{0, 150, 150, 150, 150, 150}
 )
 
@@ -62,11 +66,10 @@ func (warrior *Warrior) registerSlamSpell() {
 	flatDamageBonus := SlamDamage[rank]
 	casterLevel := int(warrior.Level)
 
-	// Improved Slam, per the client's own rank text (Arms tree, spell
-	// 12862): "Reduces the global cooldown and cast time of your Slam
-	// ability by 0.25/0.5 sec. In addition, Slam no longer interrupts or
-	// delays your melee swing and Slam's cooldown is
-	// reduced by 3.0 sec" at either rank (see improvedSlamReductions).
+	// Improved Slam (Arms node 110858, spell 12862): "Reduces the
+	// cooldown of your Slam ability by 2.5/5.0 sec, the cast time and
+	// global cooldown by 0.25/0.50 sec, and Slam no longer interrupts or
+	// delays your melee swing" (see improvedSlamReductions).
 	castReduction, gcdReduction, cooldownReduction := improvedSlamReductions(warrior.Talents.ImprovedSlam)
 	keepsTheSwing := improvedSlamKeepsTheSwing(warrior.Talents.ImprovedSlam)
 	castConfig := core.CastConfig{
@@ -83,7 +86,7 @@ func (warrior *Warrior) registerSlamSpell() {
 			}
 		},
 	}
-	// The client gives Slam an 18 s category cooldown at every learned
+	// The client gives Slam a 15 s category cooldown at every learned
 	// rank (slamRankCooldownMS); rank 0 (unlearned) genuinely has none: a
 	// Cooldown with a Timer and a zero Duration panics in RegisterSpell
 	// ("Cast.CD w/o Duration"), so the CD is only attached when the

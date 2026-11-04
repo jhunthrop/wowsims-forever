@@ -10,21 +10,28 @@ import (
 // spearingStrikeRageCost is Spearing Strike's own cost, read from the
 // client's SpellPower row for spell 1310222 (150 tenths, data lane's
 // raw/SpellPower.csv), not from a rank description: "A brutal attack
-// that deals 40% weapon damage" names no cost of its own.
+// that deals 75% weapon damage" names no cost of its own.
 const spearingStrikeRageCost = 15.0
 
-// spearingStrikeWeaponDamagePercent is Spearing Strike's base 40%
-// weapon damage, and spearingStrikeBonusWeaponDamagePercent is "an
-// additional 80% weapon damage against Giants, Dragonkin, and mounted
-// targets" - so 120% total against one of those.
+// spearingStrikeWeaponDamagePercent is Spearing Strike's base weapon
+// damage, 1310222 e1 (effect 31, weapon percent damage) base points 75
+// since 1.60.1.70755 (40 before). spearingStrikeBonusMultiplier is e2's
+// base points (1 since 70755, 2 before): the tooltip's "additional
+// ${$s2*$s3}% weapon damage against Giants, Dragonkin, and mounted
+// targets", so 75% more, 150% in all, against one of those.
+// TestSpearingStrikeMatchesTheClient pins both to the client row.
 const (
-	spearingStrikeWeaponDamagePercent      = 0.4
-	spearingStrikeBonusWeaponDamagePercent = 0.8
+	spearingStrikeWeaponDamagePercent = 0.75
+	spearingStrikeBonusMultiplier     = 1.0
 )
+
+// spearingStrikeBonusWeaponDamagePercent is the additional weapon damage
+// against a Giant, Dragonkin or mounted target.
+const spearingStrikeBonusWeaponDamagePercent = spearingStrikeWeaponDamagePercent * spearingStrikeBonusMultiplier
 
 // spearingStrikeDamagePercent is the pure selection Spearing Strike's
 // ApplyEffects reads: no RNG, no sim state, just the target's MobType.
-// Kept separate from ApplyEffects so the 40%/120% split is checkable
+// Kept separate from ApplyEffects so the 75%/150% split is checkable
 // without rolling weapon damage.
 //
 // "Mounted" is not modelled: nothing in this engine's target.MobType or

@@ -497,7 +497,7 @@ var ItemSetImmoveableWrath = core.NewItemSet(core.ItemSet{
 		4: func(agent core.Agent) {
 			warrior := agent.(WarriorAgent).GetWarrior()
 
-			flurryAura := warrior.makeFlurryAura(5)
+			flurryAura := warrior.makeFlurryAura(flurryMaxPoints())
 			// The consumption trigger may not exist if the Warrior doesn't talent into Flurry
 			warrior.makeFlurryConsumptionTrigger(flurryAura)
 

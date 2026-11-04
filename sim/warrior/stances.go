@@ -25,11 +25,13 @@ var StanceCodes = []int32{SpellCode_WarriorStanceBattle, SpellCode_WarriorStance
 
 const stanceEffectCategory = "Stance"
 
-// improvedTacticalMasteryRagePerPoint is the "additional 3 Rage" of
-// Improved Tactical Mastery's rank-1 description. The talent's rank
-// spell (12295) carries the figure only in its text, not in a
-// spellconst effect amount, so it is typed here with the quote above.
-const improvedTacticalMasteryRagePerPoint = 3.0
+// improvedTacticalMasteryRagePerPoint is Improved Tactical Mastery's
+// "additional 5/10/15 Rage" (Arms node 105954, 3 ranks since
+// 1.60.1.70755): the max-rank amount the client's rank spell 12295 e0
+// carries (15, the generated ImprovedTacticalMasteryBaseDamage) spread
+// over the talent's ranks, which is exactly its trait curve 83313
+// (1: 5, 2: 10, 3: 15).
+var improvedTacticalMasteryRagePerPoint = ImprovedTacticalMasteryBaseDamage[0][0] / float64(len(TalentSpellIDs["improved_tactical_mastery"]))
 
 // Tactical Mastery (1310185) is baseline in Forever: trained at 14, it
 // keeps 10 rage through a stance change before Improved Tactical Mastery.
@@ -92,7 +94,7 @@ func (warrior *Warrior) makeStanceSpell(stance Stance, aura *core.Aura, stanceCD
 	}[stance]
 	actionID := aura.ActionID
 	// Baseline Tactical Mastery's 10 rage plus Improved Tactical
-	// Mastery's "additional 3 Rage" a rank (Arms node 105954).
+	// Mastery's "additional 5 Rage" a rank (Arms node 105954).
 	maxRetainedRage := retainedStanceRage(warrior.Level, warrior.Talents.ImprovedTacticalMastery)
 	rageMetrics := warrior.NewRageMetrics(actionID)
 

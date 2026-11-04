@@ -35,10 +35,11 @@ import (
 func TestTwoHandedWeaponSpecializationCoversWhiteSwings(t *testing.T) {
 	twoHander := weaponWithHandType(t, proto.HandType_HandTypeTwoHand)
 
-	// Three points is the talent's max rank: "+3% damage with
-	// two-handed melee weapons".
+	// Three points is the talent's max rank: "+6% damage with
+	// two-handed melee weapons" (trait curve 83308, 2% a point since
+	// 1.60.1.70755).
 	const points = 3
-	const want = 1.03
+	const want = 1.06
 
 	with := buildWarriorWithWeapons(t, talentStringWithRank(t, emptyWarriorTalents, "two_handed_weapon_specialization", points), twoHander, 0)
 	without := buildWarriorWithWeapons(t, emptyWarriorTalents, twoHander, 0)

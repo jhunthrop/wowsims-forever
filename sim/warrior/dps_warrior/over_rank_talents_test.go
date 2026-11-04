@@ -27,15 +27,19 @@ import (
 // talent is added to the list below.
 func TestWarriorWithOverRankTalentsConstructsWithoutPanicking(t *testing.T) {
 	overRanked := []string{
-		"improved_bloodrage",    // improvedBloodrageInstantRage
-		"improved_execute",      // improvedExecuteRageReduction
-		"improved_rend",         // improvedRendDamageMultiplier
-		"improved_shield_wall",  // improvedShieldWallDuration
-		"defiance",              // defianceThreatMultiplier
-		"flurry",                // flurryAttackSpeed, TalentSpellIDs["flurry"]
-		"deep_wounds",           // deepWoundsSpellIDs
-		"enrage",                // TalentSpellIDs["enrage"]
-		"shield_specialization", // TalentSpellIDs["shield_specialization"]
+		"improved_bloodrage",               // improvedBloodrageInstantRage
+		"improved_execute",                 // improvedExecuteRageReduction
+		"improved_rend",                    // improvedRendDamageMultiplier
+		"improved_shield_wall",             // improvedShieldWallDuration
+		"defiance",                         // defianceThreatMultiplier
+		"flurry",                           // flurryAttackSpeed, TalentSpellIDs["flurry"]
+		"deep_wounds",                      // deepWoundsSpellIDs
+		"enrage",                           // TalentSpellIDs["enrage"]
+		"shield_specialization",            // TalentSpellIDs["shield_specialization"]
+		"two_handed_weapon_specialization", // twoHandedWeaponSpecializationPct
+		"bloodthrill",                      // bloodthrillProcChancePct
+		"improved_slam",                    // improvedSlamCastReductionMS, improvedSlamCooldownReductionMS
+		"improved_whirlwind",               // improvedWhirlwindCooldownCutMS, improvedWhirlwindPrimaryTargetBonusPct
 	}
 
 	talentsStr := warrior.ForeverFuryTalents

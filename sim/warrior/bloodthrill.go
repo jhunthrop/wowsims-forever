@@ -6,13 +6,17 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// bloodthrillProcChance is Bloodthrill's own per-rank chance: "a
-// 4%/8%/12%/16%/20% chance to allow the use of your Overpower ability"
-// at ranks 1-5 (Arms node 110524), so a flat 4% a point. Kept separate
-// from the trigger below so the per-rank number is checkable without
-// rolling RNG.
+// bloodthrillProcChancePct is Bloodthrill's per-rank chance (Arms node
+// 110524, 2 ranks since 1.60.1.70755): "a 10%/20% chance to allow an
+// activation of Overpower". The client's trait curve 109366 on 1289682
+// e0 gives 1: 10, 2: 20; the spell row's own base points (15) is the
+// untraited default the curve replaces, not a rank's value.
+var bloodthrillProcChancePct = [3]float64{0, 10, 20}
+
+// bloodthrillProcChance is the chance at a rank. Kept separate from the
+// trigger below so the per-rank number is checkable without rolling RNG.
 func bloodthrillProcChance(rank int32) float64 {
-	return 0.04 * float64(rank)
+	return bloodthrillProcChancePct[rankIndex(rank, bloodthrillProcChancePct[:])] / 100
 }
 
 // bloodthrillWindow is the Overpower window 1282733 opens: DurationIndex 28,
@@ -21,9 +25,9 @@ func bloodthrillProcChance(rank int32) float64 {
 // (OverpowerAura in overpower.go) with a mutated Duration.
 const bloodthrillWindow = time.Second * 5
 
-// applyBloodthrill is Bloodthrill: "Your Main Hand melee attacks
-// against enemies afflicted by your Rend have a 4%/8%/12%/16%/20%
-// chance to allow the use of your Overpower ability on the target."
+// applyBloodthrill is Bloodthrill: "Grants your Main Hand melee attacks
+// against enemies afflicted by your Rend a 10%/20% chance to allow an
+// activation of Overpower."
 //
 // warrior.Rend.Dot(target).IsActive() is the "afflicted by your Rend"
 // check: Rend is a snapshot Dot (rend.go), and Dot embeds *Aura, so
