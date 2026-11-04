@@ -60,8 +60,11 @@ func (hunter *Hunter) getArcaneShotConfig(rank int, timer *core.Timer) core.Spel
 		BonusCoefficient: 0,
 		ClientBaseDamage: damage.Range(casterLevel),
 
+		// The server adds 15% of the hunter's ranged attack power to the
+		// flat amount (attack_power_scaling.go).
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeRangedHitAndCrit)
+			baseDamage := damage.Roll(sim, casterLevel) + arcaneShotAPCoeff*spell.RangedAttackPower(target, true)
+			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeRangedHitAndCrit)
 
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 				spell.DealDamage(sim, result)

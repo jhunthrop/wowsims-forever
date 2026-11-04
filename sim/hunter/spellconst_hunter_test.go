@@ -1,6 +1,7 @@
 package hunter
 
 import (
+	"math"
 	"testing"
 	"time"
 
@@ -8,6 +9,7 @@ import (
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 // newBareHunterAtLevel builds a zero-talent, zero-gear, zero-buff hunter
@@ -130,7 +132,11 @@ func averageArcaneShotRank8Damage(t *testing.T, n int) float64 {
 // 70753 hotfix push, 217 before; at zero spell power so BonusCoefficient
 // contributes nothing here).
 func TestArcaneShotRank8DamageMatchesSpellconst(t *testing.T) {
-	const wantBase = 280.0
+	// The client's flat 280 plus the server's 15% of ranged attack power
+	// (attack_power_scaling.go); a bare level-60 hunter's is the same on
+	// every build below.
+	_, bare, _ := newBareHunterAtLevel(t, 60)
+	wantBase := 280.0 + arcaneShotAPCoeff*bare.GetStat(stats.RangedAttackPower)
 	const oldEngineValue = 183.0
 
 	got := averageArcaneShotRank8Damage(t, 30)
@@ -329,8 +335,10 @@ func TestSerpentStingPerTickDamageMatchesSpellconst(t *testing.T) {
 				continue
 			}
 			found = true
-			if got := dot.SnapshotBaseDamage; got != c.want {
-				t.Errorf("Serpent Sting (spell %d) per-tick snapshot damage = %.2f, want %.2f (spellconst amount)", c.spellID, got, c.want)
+			// The client's flat plus the server's 5% of ranged attack power a tick.
+			want := c.want + serpentStingTickAPCoeff*built.GetStat(stats.RangedAttackPower)
+			if got := dot.SnapshotBaseDamage; math.Abs(got-want) > 0.01 {
+				t.Errorf("Serpent Sting (spell %d) per-tick snapshot damage = %.2f, want %.2f (spellconst amount plus 5%% of ranged attack power)", c.spellID, got, want)
 			}
 		}
 		if !found {
@@ -395,8 +403,10 @@ func TestImmolationTrapActionIDsMatchSpellconst(t *testing.T) {
 		}
 		dot := spell.Dot(target)
 		dot.Apply(sim)
-		if got := dot.SnapshotBaseDamage; got != c.perTickDamage {
-			t.Errorf("Immolation Trap rank %d per-tick snapshot damage = %.2f, want %.2f (spellconst per-tick amount)", c.rank, got, c.perTickDamage)
+		// The client's flat plus the server's 2% of ranged attack power a tick.
+		want := c.perTickDamage + immolationTrapTickAPCoeff*sameHunter.GetStat(stats.RangedAttackPower)
+		if got := dot.SnapshotBaseDamage; math.Abs(got-want) > 0.01 {
+			t.Errorf("Immolation Trap rank %d per-tick snapshot damage = %.2f, want %.2f (spellconst per-tick amount plus 2%% of ranged attack power)", c.rank, got, want)
 		}
 	}
 }

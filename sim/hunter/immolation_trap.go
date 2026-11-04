@@ -82,8 +82,11 @@ func (hunter *Hunter) getImmolationTrapConfig(rank int, timer *core.Timer) core.
 			NumberOfTicks: 5,
 			TickLength:    time.Second * 3,
 
+			// Each tick adds 2% of the hunter's ranged attack power on the
+			// server since the 16 October 2026 fix (attack_power_scaling.go).
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				dot.Snapshot(target, tickDamage.Roll(sim, casterLevel), isRollover)
+				tick := tickDamage.Roll(sim, casterLevel) + immolationTrapTickAPCoeff*dot.Spell.RangedAttackPower(target, true)
+				dot.Snapshot(target, tick, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
