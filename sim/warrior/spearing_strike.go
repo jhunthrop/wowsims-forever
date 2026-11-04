@@ -57,7 +57,8 @@ func (warrior *Warrior) registerSpearingStrikeSpell() {
 
 	actionID := core.ActionID{SpellID: TalentSpellIDs["spearing_strike"][0]}
 
-	warrior.SpearingStrike = warrior.RegisterSpell(AnyStance, core.SpellConfig{
+	// SpellShapeshift 58595: ShapeshiftMask 65536, Battle Stance only.
+	warrior.SpearingStrike = warrior.RegisterSpell(BattleStance, core.SpellConfig{
 		SpellCode:      SpellCode_WarriorSpearingStrike,
 		ClassSpellMask: WarriorSpellMaskSpearingStrike,
 		ActionID:       actionID,
