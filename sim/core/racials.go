@@ -264,6 +264,9 @@ var racialsByRace = map[proto.Race][]Racial{
 					ActionID: actionID,
 					Flags:    SpellFlagNoOnCastComplete,
 					Cast: CastConfig{
+						// The client's global cooldown (SpellCooldowns
+						// StartRecoveryTime 1500, category 133).
+						DefaultCast: Cast{GCD: GCDDefault},
 						CD: Cooldown{
 							Timer:    character.NewTimer(),
 							Duration: time.Minute * 3,

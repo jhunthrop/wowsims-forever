@@ -58,21 +58,18 @@ const (
 	consecrationFirstTargetsCoefficient = 0.042 // client 1.60.1.70425 (0.095 before)
 )
 
-// consecrationCoefficient is the first targets' spell-power coefficient for
-// a rank learned at rankLevel cast at casterLevel. The share is added by
-// hand below, so it takes Forever's level-gap rule (core.LevelPenalty)
-// itself rather than through the spell's BonusCoefficient.
-func consecrationCoefficient(rankLevel, casterLevel int32) float64 {
-	return consecrationFirstTargetsCoefficient * core.LevelPenalty(int(rankLevel), int(casterLevel))
-}
-
-// consecrationTickDamage is what the nth enemy (from 0, in the order the
-// encounter lists them) in the area takes each second.
-func consecrationTickDamage(tickDamage, firstTargetsTickDamage, coefficient, spellPower float64, nth int) float64 {
+// consecrationTickDamage is the base damage the nth enemy (from 0, in the
+// order the encounter lists them) in the area takes each second. The first
+// targets' spell-power share is the ground effect's BonusCoefficient
+// (consecrationFirstTargetsCoefficient), so the engine adds it with the
+// level-gap rule and with Judgement of the Crusader's bonus Holy damage
+// taken. That share reaches every target; every encounter here has at most
+// consecrationFirstTargets enemies.
+func consecrationTickDamage(tickDamage, firstTargetsTickDamage float64, nth int) float64 {
 	if nth >= consecrationFirstTargets {
 		return tickDamage
 	}
-	return tickDamage + firstTargetsTickDamage + coefficient*spellPower
+	return tickDamage + firstTargetsTickDamage
 }
 
 func (paladin *Paladin) registerConsecration() {
@@ -89,7 +86,6 @@ func (paladin *Paladin) registerConsecration() {
 		if paladin.Level < rank.level {
 			break
 		}
-		coefficient := consecrationCoefficient(rank.level, paladin.Level)
 
 		consecration := paladin.RegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: rank.spellID},
@@ -122,8 +118,9 @@ func (paladin *Paladin) registerConsecration() {
 				Aura: core.Aura{
 					Label: "Consecration" + paladin.Label + strconv.Itoa(i+1),
 				},
-				NumberOfTicks: ConsecrationNumberOfTicks,
-				TickLength:    ConsecrationTickLength,
+				NumberOfTicks:    ConsecrationNumberOfTicks,
+				TickLength:       ConsecrationTickLength,
+				BonusCoefficient: consecrationFirstTargetsCoefficient,
 
 				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 					// dot.OutcomeTick, not spell.OutcomeMagicHit: the
@@ -133,7 +130,7 @@ func (paladin *Paladin) registerConsecration() {
 					// Blizzard) ticks through dot.OutcomeTick so its
 					// casts show up as ticks in the metrics.
 					for nth, aoeTarget := range sim.Encounter.TargetUnits {
-						damage := consecrationTickDamage(rank.tickDamage, rank.firstTargetsTickDamage, coefficient, dot.Spell.GetBonusDamage(aoeTarget), nth)
+						damage := consecrationTickDamage(rank.tickDamage, rank.firstTargetsTickDamage, nth)
 						dot.Spell.CalcAndDealPeriodicDamage(sim, aoeTarget, damage, dot.OutcomeTick)
 					}
 				},

@@ -114,6 +114,28 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 20594
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentHealthPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "0.7"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 20423,
             "rank": 7
           }
