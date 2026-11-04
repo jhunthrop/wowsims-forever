@@ -76,6 +76,13 @@ func hitStepWindow(p HitProfile) (low, high float64, ok bool) {
 	if !p.Physical {
 		return -hitStepPoints, hitStepPoints, true
 	}
+	if spellsStillMiss := p.Spell && p.SpellProfile.ToSpellCap() > 0; spellsStillMiss && p.Hit >= p.WhiteCap {
+		// Past the weapon cap the one Hit stat still lands more of the
+		// player's damage spells (an Enhancement shaman's shocks and
+		// bolts), up to the spell cap.
+		highEdge := math.Min(p.Hit+hitStepPoints, p.Hit+p.SpellProfile.ToSpellCap())
+		return -hitStepPoints, highEdge - p.Hit, true
+	}
 	if p.Hit > p.WhiteCap {
 		return 0, 0, false
 	}
