@@ -89,13 +89,25 @@ func (priest *Priest) roll(sim *core.Simulation, entry healRank) float64 {
 
 // healTarget lands one heal of baseHealing on target. Every direct heal
 // goes through here so Renewed Hope, which rides on the cast and not on
-// the spell, reaches all the heals it names the same way.
+// the spell, reaches all the heals it names the same way: the crit bonus
+// on the heal, then the cut to the target's Weakened Soul.
 func (priest *Priest) healTarget(sim *core.Simulation, spell *core.Spell, target *core.Unit, baseHealing float64) *core.SpellResult {
+	result := priest.healPulse(sim, spell, target, baseHealing)
+	priest.shortenWeakenedSoul(sim, spell, target)
+	return result
+}
+
+// healPulse is healTarget without the Weakened Soul cut: Penance's second
+// and third pulses. Blizzard counts a Penance as one heal for that cut,
+// whatever the talent text reads ("Not A Bug. This is a typo in the deep
+// dive.", community bug tracker issue #288, 10 October 2026), so only the
+// cast's first pulse takes time off Weakened Soul. The crit bonus is per
+// heal and stays on every pulse.
+func (priest *Priest) healPulse(sim *core.Simulation, spell *core.Spell, target *core.Unit, baseHealing float64) *core.SpellResult {
 	hope := priest.renewedHopeCrit(spell, target)
 	spell.BonusCritRating += hope
 	result := spell.CalcAndDealHealing(sim, target, baseHealing, spell.OutcomeHealingCrit)
 	spell.BonusCritRating -= hope
-	priest.shortenWeakenedSoul(sim, spell, target)
 	return result
 }
 

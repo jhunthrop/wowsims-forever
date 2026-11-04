@@ -20,7 +20,8 @@ const (
 // the heal helper (healRank.effectSpellID) the amount, so one channel
 // here lands the instant pulse and two more on the second boundaries. Its
 // damage half, thrown at an enemy, is not modelled: no healing rotation
-// casts it.
+// casts it. Renewed Hope's Weakened Soul cut lands once, with the first
+// pulse (heals.go healPulse says why); the channel pulses keep its crit.
 func (priest *Priest) registerPenance() {
 	if !priest.Talents.Penance {
 		return
@@ -37,7 +38,7 @@ func (priest *Priest) registerPenance() {
 			NumberOfTicks: penanceChannelTicks,
 			TickLength:    penanceTickLength,
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				priest.healTarget(sim, dot.Spell, target, priest.roll(sim, entry))
+				priest.healPulse(sim, dot.Spell, target, priest.roll(sim, entry))
 			},
 		}
 		config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
