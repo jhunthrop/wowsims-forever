@@ -71,9 +71,14 @@ func succubusSheet(level int32) (cfg PetConfig) {
 		}
 		cfg.AutoAttacks = core.AutoAttackOptions{
 			MainHand: core.Weapon{
-				// Not updated
-				BaseDamageMin: 41,
-				BaseDamageMax: 61,
+				// Upstream carried the level-40 weapon here ("Not updated"),
+				// so a level-50 Succubus hit no harder than a level-40 one.
+				// Until a level-50 Forever Succubus log gives the real roll,
+				// the weapon lies halfway between the carried 40 (41-61) and
+				// 60 (95-131) sheets, the same linear rule petSheetAtLevel
+				// applies to every level without a sheet (unconfirmed).
+				BaseDamageMin: 68,
+				BaseDamageMax: 96,
 				SwingSpeed:    2,
 			},
 			AutoSwingMelee: true,
