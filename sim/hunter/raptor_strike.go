@@ -1,6 +1,7 @@
 package hunter
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
@@ -28,12 +29,15 @@ func (hunter *Hunter) TryRaptorStrike(sim *core.Simulation, mhSwingSpell *core.S
 	return mhSwingSpell
 }
 
-func (hunter *Hunter) getRaptorStrikeConfig(rank int) core.SpellConfig {
+// getRaptorStrikeConfig is rank's on-next-swing cast. cdTimer is the one
+// cooldown every rank shares.
+func (hunter *Hunter) getRaptorStrikeConfig(rank int, cdTimer *core.Timer) core.SpellConfig {
 	spellID := RaptorStrikeSpellId[rank]
 	manaCost := RaptorStrikeManaCost[rank]
 	level := RaptorStrikeLevel[rank]
 
-	hunter.RaptorStrikeHit = hunter.newRaptorStrikeHitSpell(rank)
+	hit := hunter.newRaptorStrikeHitSpell(rank)
+	hunter.RaptorStrikeHit = hit
 
 	spellConfig := core.SpellConfig{
 		SpellCode:     SpellCode_HunterRaptorStrike,
@@ -51,7 +55,7 @@ func (hunter *Hunter) getRaptorStrikeConfig(rank int) core.SpellConfig {
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
-				Timer:    hunter.NewTimer(),
+				Timer:    cdTimer,
 				Duration: time.Second * 6,
 			},
 		},
@@ -61,7 +65,7 @@ func (hunter *Hunter) getRaptorStrikeConfig(rank int) core.SpellConfig {
 		ClientBaseDamage: RaptorStrikeDamage[rank].Range(int(hunter.Level)),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			hunter.RaptorStrikeHit.Cast(sim, target)
+			hit.Cast(sim, target)
 
 			if hunter.curQueueAura != nil {
 				hunter.curQueueAura.Deactivate(sim)
@@ -105,10 +109,12 @@ func (hunter *Hunter) newRaptorStrikeHitSpell(rank int) *core.Spell {
 	})
 }
 
-func (hunter *Hunter) makeQueueSpellsAndAura() *core.Spell {
+// makeQueueSpellsAndAura is raptorStrike's queue: the APL cast (tag 3)
+// that arms it on the next main-hand swing.
+func (hunter *Hunter) makeQueueSpellsAndAura(raptorStrike *core.Spell) *core.Spell {
 	queueAura := hunter.RegisterAura(core.Aura{
-		Label:    "Raptor Strike Queued",
-		ActionID: hunter.RaptorStrike.ActionID,
+		Label:    "Raptor Strike Queued " + strconv.Itoa(raptorStrike.Rank),
+		ActionID: raptorStrike.ActionID,
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			if hunter.curQueueAura != nil {
@@ -116,7 +122,7 @@ func (hunter *Hunter) makeQueueSpellsAndAura() *core.Spell {
 			}
 			hunter.PseudoStats.DisableDWMissPenalty = true
 			hunter.curQueueAura = aura
-			hunter.curQueuedAutoSpell = hunter.RaptorStrike
+			hunter.curQueuedAutoSpell = raptorStrike
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			hunter.PseudoStats.DisableDWMissPenalty = false
@@ -127,7 +133,7 @@ func (hunter *Hunter) makeQueueSpellsAndAura() *core.Spell {
 
 	queueSpell := hunter.RegisterSpell(core.SpellConfig{
 		SpellCode: SpellCode_HunterRaptorStrike,
-		ActionID:  hunter.RaptorStrike.WithTag(3),
+		ActionID:  raptorStrike.WithTag(3),
 		// SpellFlagPassiveSpell: like RaptorStrikeHit above, this
 		// queue-trigger shares RaptorStrike's SpellID (WithTag only
 		// changes the Tag), the same shape compare.go's rowFor doc
@@ -140,17 +146,17 @@ func (hunter *Hunter) makeQueueSpellsAndAura() *core.Spell {
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return hunter.curQueueAura != queueAura &&
-				hunter.CurrentMana() >= hunter.RaptorStrike.Cost.GetCurrentCost() &&
+				hunter.CurrentMana() >= raptorStrike.Cost.GetCurrentCost() &&
 				!hunter.IsCasting(sim) &&
 				hunter.DistanceFromTarget <= core.MaxMeleeAttackDistance &&
-				hunter.RaptorStrike.IsReady(sim)
+				raptorStrike.IsReady(sim)
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			queueAura.Activate(sim)
 		},
 	})
-	queueSpell.CdSpell = hunter.RaptorStrike
+	queueSpell.CdSpell = raptorStrike
 
 	return queueSpell
 }
@@ -159,12 +165,19 @@ func (hunter *Hunter) registerRaptorStrikeSpell() {
 	// RaptorStrikeLevel[1:] is already the rank -> learn-level table (source:
 	// 1.60.1.70009 client spell data, "Raptor Strike", ranks 1-8); reuse it
 	// instead of a second copy.
-	rank := core.HighestRankAtLevel(RaptorStrikeLevel[1:], hunter.Level)
-	if rank == 0 {
+	//
+	// Every learned rank is registered, as the spellbook keeps them, so a
+	// rotation can queue a lower one; all share one cooldown, and
+	// hunter.RaptorStrike (and RaptorStrikeHit) is the highest.
+	top := core.HighestRankAtLevel(RaptorStrikeLevel[1:], hunter.Level)
+	if top == 0 {
 		return
 	}
 
-	config := hunter.getRaptorStrikeConfig(rank)
-	hunter.RaptorStrike = hunter.GetOrRegisterSpell(config)
-	hunter.makeQueueSpellsAndAura()
+	cdTimer := hunter.NewTimer()
+	for rank := 1; rank <= top; rank++ {
+		spell := hunter.GetOrRegisterSpell(hunter.getRaptorStrikeConfig(rank, cdTimer))
+		hunter.makeQueueSpellsAndAura(spell)
+		hunter.RaptorStrike = spell
+	}
 }
