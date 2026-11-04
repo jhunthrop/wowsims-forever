@@ -72,7 +72,7 @@
       }
     },
     {
-      "notes": "Presence of Mind on cooldown, with Arcane Power. Your next spell is instant, so spend it on a 2.5 second Frostbolt, never on an Arcane Blast that the global cooldown already caps at 1.5 seconds.",
+      "notes": "Presence of Mind on cooldown, with Arcane Power. Your next spell is instant: spend it on Pyroblast, your longest cast, or on Frostbolt with the leveling build. Never spend it on an Arcane Blast that the global cooldown already caps at 1.5 seconds.",
       "action": {
         "condition": {
           "cmp": {
@@ -95,6 +95,7 @@
       }
     },
     {
+      "notes": "Pyroblast the moment Presence of Mind is up, once you have Heating Up: the 6 second cast goes out instant, the most cast time Presence of Mind can save you.",
       "action": {
         "condition": {
           "and": {
@@ -132,7 +133,7 @@
       }
     },
     {
-      "notes": "Frostbolt the moment Presence of Mind is up, so the 2.5 second cast goes out instant. Presence of Mind on a 1.5 second Arcane Blast saves nothing, since the global cooldown already holds you that long.",
+      "notes": "Frostbolt the moment Presence of Mind is up with the leveling build, so the cast goes out instant. Presence of Mind on a 1.5 second Arcane Blast saves nothing, since the global cooldown already holds you that long.",
       "action": {
         "condition": {
           "and": {
@@ -163,12 +164,47 @@
       }
     },
     {
-      "notes": "Arcane Missiles the moment Missile Barrage lights up. The proc makes it free, halves the channel and fires a missile every half second. Arcane Blast procs it 40% of the time and Frostbolt 20%, so this is a big share of your damage. Rank 7 is the top trainer rank; rank 8 is a book from Ahn'Qiraj.",
+      "notes": "Arcane Missiles the moment Missile Barrage lights up. The proc makes it free, halves the channel and fires a missile every half second. Arcane Blast procs it 40% of the time, and Arcane Wrath, Fireball and Frostbolt 20%, so this is a big share of your damage. Rank 7 is the top trainer rank; rank 8 is a book from Ahn'Qiraj.",
       "action": {
         "condition": {
-          "auraIsActive": {
-            "auraId": {
-              "spellId": 400589
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 400589
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 400589
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10212,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Arcane Missiles before you have Missile Barrage, at 20 and 21: on a long fight it does more damage for its mana than Arcane Blast or Frostbolt. From 22 Missiles waits for the free proc and Blast takes over.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsKnown": {
+                "auraId": {
+                  "spellId": 400589
+                }
+              }
             }
           }
         },
@@ -181,6 +217,7 @@
       }
     },
     {
+      "notes": "Pyroblast on 3 Heating Up stacks, when it is a 1.5 second cast. On 1 or 2 stacks it is still too slow, so keep casting.",
       "action": {
         "condition": {
           "and": {
@@ -221,6 +258,7 @@
       }
     },
     {
+      "notes": "Fire Blast every time it is ready: every hit is a Heating Up stack, a crit adds another, and Improved Fire Blast makes it a 6 second cooldown.",
       "action": {
         "condition": {
           "auraIsKnown": {
@@ -238,6 +276,7 @@
       }
     },
     {
+      "notes": "Arcane Wrath every time it is ready while you hold 3 Blast stacks: the stacks' spell damage and 5% of your maximum mana both go into it.",
       "action": {
         "condition": {
           "cmp": {
@@ -329,6 +368,7 @@
       }
     },
     {
+      "notes": "Fireball fills in a raid once you stop blasting. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and its crits feed Heating Up and Ignite.",
       "action": {
         "condition": {
           "auraIsKnown": {
@@ -346,7 +386,7 @@
       }
     },
     {
-      "notes": "Frostbolt fills the rest of the 18 seconds once you stop blasting. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and it costs a fraction of a stacked Blast. When the stacks fall off, the next Blast starts a cheap new set.",
+      "notes": "Frostbolt fills the rest of the 18 seconds once you stop blasting on the way to 60; in a raid Fireball takes its place. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and it costs a fraction of a stacked Blast. When the stacks fall off, the next Blast starts a cheap new set.",
       "action": {
         "castSpell": {
           "spellId": {
