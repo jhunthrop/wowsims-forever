@@ -145,7 +145,7 @@
       }
     },
     {
-      "notes": "Aimed Shot when the shared cooldown comes up and your next auto shot is more than 1.2 seconds away, so the cast starts right after a shot leaves. Since the 3 November hotfix it hits about twice as hard as before and beats Multi-Shot on that cooldown whenever the cast fits; with an auto shot about to fire, take Multi-Shot instead and keep the auto rolling.",
+      "notes": "Aimed Shot when the shared cooldown comes up right after an auto shot fires. It outhits Multi-Shot whenever the cast fits. If you are partway to your next auto shot, take Multi-Shot instead and keep the auto rolling.",
       "action": {
         "condition": {
           "cmp": {
@@ -171,8 +171,21 @@
       }
     },
     {
-      "notes": "Multi-Shot on the shared cooldown when Aimed Shot's cast would hold an auto shot. It is instant, so it never delays your next shot.",
+      "notes": "Multi-Shot on the shared cooldown when Aimed Shot's cast would hold an auto shot, while you are above a quarter of your mana. It is instant, so it never delays your next shot, but it is the worst damage for its mana you fire, so it is the first shot to go when the mana runs low.",
       "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "25%"
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 2643,
@@ -182,7 +195,7 @@
       }
     },
     {
-      "notes": "",
+      "notes": "Sniper Shot when the shared cooldown is down and an auto shot has just left. Its 4 second cast holds your next auto, so start it right after one fires, never partway to the next. It is your hardest hit, on its own 15 second cooldown.",
       "action": {
         "condition": {
           "cmp": {
@@ -208,7 +221,7 @@
       }
     },
     {
-      "notes": "Serpent Sting when it has under 1.5 seconds left and the shared cooldown is not about to come back. Refreshing any earlier throws away a tick. It is the best damage for its mana you have between the big shots, so keep it rolling for the whole fight.",
+      "notes": "Serpent Sting when it has under 1.5 seconds left and the shared cooldown is not about to come back. Refreshing any earlier throws away a tick. Every tick carries 5% of your ranged attack power on top of its own damage, so it is the best damage for its mana you fire: keep it rolling for the whole fight.",
       "action": {
         "condition": {
           "and": {
@@ -261,43 +274,24 @@
       }
     },
     {
-      "notes": "Arcane Shot to fill a gap when the shared cooldown is more than a global away and you are above 25% mana. It is instant and never holds an auto shot, but it costs the most mana for its damage, so it is the shot you drop first when the mana runs low.",
+      "notes": "Arcane Shot to fill a gap when the shared cooldown is more than a global away. It is instant and never holds an auto shot, and every hit carries 15% of your ranged attack power, so it is second only to Serpent Sting for damage per mana: keep it going even when the mana runs low.",
       "action": {
         "condition": {
-          "and": {
-            "vals": [
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "25%"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "spellTimeToReady": {
-                      "spellId": {
-                        "spellId": 2643,
-                        "rank": 0
-                      }
-                    }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "1.5s"
-                    }
-                  }
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "spellTimeToReady": {
+                "spellId": {
+                  "spellId": 2643,
+                  "rank": 0
                 }
               }
-            ]
+            },
+            "rhs": {
+              "const": {
+                "val": "1.5s"
+              }
+            }
           }
         },
         "castSpell": {
