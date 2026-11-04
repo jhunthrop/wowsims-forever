@@ -139,6 +139,17 @@
           "and": {
             "vals": [
               {
+                "not": {
+                  "val": {
+                    "auraIsKnown": {
+                      "auraId": {
+                        "spellId": 400625
+                      }
+                    }
+                  }
+                }
+              },
+              {
                 "spellIsKnown": {
                   "spellId": {
                     "spellId": 12043
