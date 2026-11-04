@@ -215,7 +215,7 @@
       }
     },
     {
-      "notes": "Earth Shock on cooldown while you have more than a quarter of your mana: it takes Stormstrike's 20% when no bolt is ready. Keep that last quarter for Stormstrike and your totems.",
+      "notes": "Earth Shock on cooldown while you have more than a quarter of your mana: it takes Stormstrike's 20% when no bolt is ready. Keep that last quarter for Stormstrike and your totems. Until Maelstrom Weapon has all five points your five-stack bolts still cost mana, so keep half your mana instead.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -224,16 +224,60 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "currentManaPercent": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "25%"
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "25%"
+                    }
+                  }
+                }
+              },
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGt",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "50%"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "not": {
+                        "val": {
+                          "auraIsKnown": {
+                            "auraId": {
+                              "spellId": 408498
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "auraIsKnown": {
+                        "auraId": {
+                          "spellId": 408498,
+                          "tag": 5
+                        }
+                      }
+                    }
+                  ]
+                }
               }
-            }
+            ]
           }
         }
       }
