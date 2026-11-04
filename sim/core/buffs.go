@@ -1179,6 +1179,10 @@ func InnervateAura(character *Character, actionTag int32) *Aura {
 		ActionID: actionID,
 		Duration: InnervateDuration,
 		OnGain: func(aura *Aura, sim *Simulation) {
+			// Innervate replaces a Skyborne's Read Leyline (Energized).
+			if energized := character.GetAuraByID(ActionID{SpellID: readLeylineBuffSpellID}); energized != nil {
+				energized.Deactivate(sim)
+			}
 			character.PseudoStats.SpiritRegenMultiplier += 4
 			character.PseudoStats.ForceFullSpiritRegen = true
 		},
