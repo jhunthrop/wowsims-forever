@@ -550,8 +550,8 @@
         },
         "castSpell": {
           "spellId": {
-            "spellId": 19750,
-            "rank": 1
+            "spellId": 19942,
+            "rank": 5
           },
           "target": {
             "type": "Player",

@@ -885,8 +885,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 332,
-            "rank": 2
+            "spellId": 10396,
+            "rank": 9
           },
           "target": {
             "type": "Player",
