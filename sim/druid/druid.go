@@ -103,8 +103,11 @@ const (
 		DruidSpellMaskTranquility | DruidSpellMaskWildGrowth
 
 	// Every damage-over-time effect this package registers, for
-	// Genesis's "periodic damage".
-	DruidSpellMaskPeriodicDamage = DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRake | DruidSpellMaskRip | DruidSpellMaskPounce
+	// Genesis's "periodic damage". Lacerate's bleed is in the client's
+	// Genesis mask (1223081 effect 0 mask_1 0x4000100 holds Lacerate's
+	// 0x100 on every rank, 1.60.1.70755).
+	DruidSpellMaskPeriodicDamage = DruidSpellMaskMoonfire | DruidSpellMaskInsectSwarm | DruidSpellMaskRake | DruidSpellMaskRip | DruidSpellMaskPounce |
+		DruidSpellMaskLacerate
 
 	// Every spell this package registers that Nature's Swiftness can make
 	// instant: the client's mask (17116, SpellEffect 695239) names Wrath,
