@@ -58,8 +58,11 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 			// 25295); only the Season of Discovery reissues 425728-425737 scale.
 			BonusCoefficient: 0,
 
+			// Each tick adds 5% of the hunter's ranged attack power on the
+			// server (attack_power_scaling.go).
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				dot.Snapshot(target, damage.Roll(sim, casterLevel), isRollover)
+				tick := damage.Roll(sim, casterLevel) + serpentStingTickAPCoeff*dot.Spell.RangedAttackPower(target, true)
+				dot.Snapshot(target, tick, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
