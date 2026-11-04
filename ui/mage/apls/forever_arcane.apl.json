@@ -398,8 +398,37 @@
       }
     },
     {
-      "notes": "Frostbolt in a raid when you are too low on mana for a Fireball, and as the filler once you stop blasting on the way to 60. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and it costs a fraction of a stacked Blast. When the stacks fall off, the next Blast starts a cheap new set.",
+      "notes": "Frostbolt in a raid only when you are too low on mana for a Fireball. It costs a third less and still procs Missile Barrage 20% of the time, but it feeds no Ignite or Heating Up, so it only stretches the last of your mana.",
       "action": {
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 400625
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10181,
+            "rank": 10
+          }
+        }
+      }
+    },
+    {
+      "notes": "Frostbolt as the filler once you stop blasting on the way to 60. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and it costs a fraction of a stacked Blast. When the stacks fall off, the next Blast starts a cheap new set.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsKnown": {
+                "auraId": {
+                  "spellId": 400625
+                }
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 10181,
