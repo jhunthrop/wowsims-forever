@@ -13,6 +13,11 @@ import "time"
 // the caster Attuned (1259691) for more; a raid boss room has none, so the
 // base 50% is the one modelled.
 //
+// Blizzard's Forever notes (26 October and 3 November 2026): it "cannot be
+// used while Innervate is active, and will be replaced by Innervate as a more
+// powerful effect." So it is not castable under any Innervate, and an
+// Innervate landing on the caster ends Energized (InnervateAura).
+//
 // It is registered for an APL to cast and never fired automatically: it
 // costs a global cooldown, and inside the five-second rule spirit regen is
 // mostly off, so firing it on cooldown would cost a damage dealer a cast for
@@ -47,6 +52,9 @@ func applyReadLeyline(character *Character) {
 				Timer:    character.NewTimer(),
 				Duration: readLeylineCooldown,
 			},
+		},
+		ExtraCastCondition: func(_ *Simulation, _ *Unit) bool {
+			return !character.HasActiveAuraWithTag(InnervateAuraTag)
 		},
 		ApplyEffects: func(sim *Simulation, _ *Unit, _ *Spell) {
 			aura.Activate(sim)

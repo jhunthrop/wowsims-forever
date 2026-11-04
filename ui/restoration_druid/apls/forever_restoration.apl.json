@@ -735,7 +735,7 @@
       }
     },
     {
-      "notes": "On the tank under 55%, only while your mana is ahead of the fight.",
+      "notes": "On the tank under 55%, only while your mana is ahead of the fight. While leveling, rank 3 from 30 to 33 and rank 5 from 40 to 44 heal more for the mana than the top rank.",
       "action": {
         "castSpell": {
           "spellId": {
