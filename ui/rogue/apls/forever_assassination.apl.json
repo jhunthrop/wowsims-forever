@@ -43,8 +43,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1329549,
-            "rank": 2
+            "spellId": 1329549
           }
         }
       }
@@ -142,6 +141,63 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 11275,
+            "rank": 6
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "4"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 11275,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 6774,
+                    "rank": 2
+                  }
+                }
+              },
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 1329256
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking, once Blood Splatter makes it last 6 seconds longer: bleeds always crit in Forever."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 11300,
             "rank": 8
           }
@@ -167,7 +223,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 1241584,
-            "rank": 4
+            "rank": 3
           }
         }
       },
@@ -187,7 +243,7 @@
               "spellIsKnown": {
                 "spellId": {
                   "spellId": 1241584,
-                  "rank": 4
+                  "rank": 3
                 }
               }
             }

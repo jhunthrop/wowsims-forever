@@ -43,8 +43,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1329549,
-            "rank": 2
+            "spellId": 1329549
           }
         }
       }
@@ -137,7 +136,7 @@
           }
         }
       },
-      "notes": "Backstab with a dagger in the main hand: Puncturing Wounds, Aggression and Lethality all land on it, and Puncturing Wounds can give it a second combo point."
+      "notes": "Backstab with a dagger in the main hand: Puncturing Wounds raises its crit chance and can give it a second combo point, and in the raid build Opportunity and Lethality land on it too."
     },
     {
       "action": {

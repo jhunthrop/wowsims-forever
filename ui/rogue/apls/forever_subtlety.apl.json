@@ -57,8 +57,20 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1329549,
-            "rank": 2
+            "spellId": 1329549
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "3"
+              }
+            }
           }
         }
       }
@@ -69,9 +81,64 @@
           "spellId": {
             "spellId": 14278
           }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "4"
+              }
+            }
+          }
         }
       },
       "notes": "Ghostly Strike on cooldown: it hits harder than Hemorrhage for 5 more energy and gives a combo point."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 11290,
+            "rank": 6
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 11290,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "4"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Garrote right after Ghostly Strike whenever it has dropped off: Ghostly Strike lets the next Garrote go in without Stealth, and it is a bleed that Hemorrhage, Opportunity and Death Mark all feed."
     },
     {
       "action": {
@@ -165,23 +232,41 @@
           "and": {
             "vals": [
               {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentComboPoints": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "3"
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentComboPoints": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "dotIsActive": {
+                        "spellId": {
+                          "spellId": 11275,
+                          "rank": 6
+                        }
+                      }
                     }
-                  }
+                  ]
                 }
               },
               {
-                "dotIsActive": {
-                  "spellId": {
-                    "spellId": 11275,
-                    "rank": 6
+                "not": {
+                  "val": {
+                    "spellIsKnown": {
+                      "spellId": {
+                        "spellId": 1325758,
+                        "rank": 4
+                      }
+                    }
                   }
                 }
               }
@@ -339,7 +424,7 @@
           }
         }
       },
-      "notes": "Hemorrhage is the builder: one combo point, and its debuff makes your Rupture hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more."
+      "notes": "Hemorrhage is the builder: one combo point, and its debuff makes your Rupture and Garrote hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more."
     },
     {
       "action": {

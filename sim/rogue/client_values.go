@@ -111,6 +111,19 @@ const (
 	bloodSplatterGarroteExtra = 9 * time.Second
 )
 
+// registerBloodSplatterAura gives the talent a passive aura, so a rotation
+// can ask auraIsKnown(1329256) whether Rupture runs 6 s longer.
+func (rogue *Rogue) registerBloodSplatterAura() {
+	if !rogue.Talents.BloodSplatter {
+		return
+	}
+	core.MakePermanent(rogue.RegisterAura(core.Aura{
+		Label:    "Blood Splatter",
+		ActionID: core.ActionID{SpellID: 1329256},
+		Duration: core.NeverExpires,
+	}))
+}
+
 // bloodSplatterTicks is Blood Splatter's extra duration on a bleed, in that
 // bleed's ticks: a duration modifier on a periodic aura adds whole ticks.
 func (rogue *Rogue) bloodSplatterTicks(extra, tickLength time.Duration) int32 {
