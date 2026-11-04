@@ -29,6 +29,7 @@ func (rogue *Rogue) ApplyTalents() {
 	rogue.applyFlawlessExecution()
 	rogue.applyEfficientStrikes()
 	rogue.applySetup()
+	rogue.registerBloodSplatterAura()
 
 	// FOREVER: talents with no DPS lever on a Patchwerk fight. Each is
 	// commented with why, so the reader can tell "not implemented" from
