@@ -80,15 +80,16 @@ func (hunter *Hunter) getSerpentStingConfig(rank int) core.SpellConfig {
 	}
 }
 
+// registerSerpentStingSpell registers every learned rank, as the spellbook
+// keeps them, so a rotation can cast a lower one; hunter.SerpentSting is the
+// highest.
 func (hunter *Hunter) registerSerpentStingSpell() {
-
 	maxRank := core.TernaryInt(core.IncludeAQ, 9, 8)
-	for rank := maxRank; rank >= 0; rank-- {
+	for rank := 1; rank <= maxRank; rank++ {
 		config := hunter.getSerpentStingConfig(rank)
 
 		if config.RequiredLevel <= int(hunter.Level) {
 			hunter.SerpentSting = hunter.GetOrRegisterSpell(config)
-			break
 		}
 	}
 }
