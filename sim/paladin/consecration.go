@@ -58,13 +58,21 @@ const (
 	consecrationFirstTargetsCoefficient = 0.042 // client 1.60.1.70425 (0.095 before)
 )
 
+// consecrationCoefficient is the first targets' spell-power coefficient for
+// a rank learned at rankLevel cast at casterLevel. The share is added by
+// hand below, so it takes Forever's level-gap rule (core.LevelPenalty)
+// itself rather than through the spell's BonusCoefficient.
+func consecrationCoefficient(rankLevel, casterLevel int32) float64 {
+	return consecrationFirstTargetsCoefficient * core.LevelPenalty(int(rankLevel), int(casterLevel))
+}
+
 // consecrationTickDamage is what the nth enemy (from 0, in the order the
 // encounter lists them) in the area takes each second.
-func consecrationTickDamage(tickDamage, firstTargetsTickDamage, spellPower float64, nth int) float64 {
+func consecrationTickDamage(tickDamage, firstTargetsTickDamage, coefficient, spellPower float64, nth int) float64 {
 	if nth >= consecrationFirstTargets {
 		return tickDamage
 	}
-	return tickDamage + firstTargetsTickDamage + consecrationFirstTargetsCoefficient*spellPower
+	return tickDamage + firstTargetsTickDamage + coefficient*spellPower
 }
 
 func (paladin *Paladin) registerConsecration() {
@@ -81,6 +89,7 @@ func (paladin *Paladin) registerConsecration() {
 		if paladin.Level < rank.level {
 			break
 		}
+		coefficient := consecrationCoefficient(rank.level, paladin.Level)
 
 		consecration := paladin.RegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: rank.spellID},
@@ -124,7 +133,7 @@ func (paladin *Paladin) registerConsecration() {
 					// Blizzard) ticks through dot.OutcomeTick so its
 					// casts show up as ticks in the metrics.
 					for nth, aoeTarget := range sim.Encounter.TargetUnits {
-						damage := consecrationTickDamage(rank.tickDamage, rank.firstTargetsTickDamage, dot.Spell.GetBonusDamage(aoeTarget), nth)
+						damage := consecrationTickDamage(rank.tickDamage, rank.firstTargetsTickDamage, coefficient, dot.Spell.GetBonusDamage(aoeTarget), nth)
 						dot.Spell.CalcAndDealPeriodicDamage(sim, aoeTarget, damage, dot.OutcomeTick)
 					}
 				},
