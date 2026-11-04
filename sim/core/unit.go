@@ -370,10 +370,6 @@ func (unit *Unit) InitialCastSpeed() float64 {
 	return unit.initialCastSpeed
 }
 
-func (unit *Unit) SpellGCD() time.Duration {
-	return max(GCDMin, unit.ApplyCastSpeed(GCDDefault))
-}
-
 func (unit *Unit) updateCastSpeed() {
 	unit.CastSpeed = (1 / (unit.PseudoStats.CastSpeedMultiplier * (1 + (unit.stats[stats.SpellHaste] / (HasteRatingPerHastePercent * 100)))))
 }

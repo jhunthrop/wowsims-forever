@@ -671,13 +671,6 @@ func (spell *Spell) ExpectedTickDamageFromCurrentSnapshot(sim *Simulation, targe
 	return result.Damage
 }
 
-// Time until either the cast is finished or GCD is ready again, whichever is longer
-func (spell *Spell) EffectiveCastTime() time.Duration {
-	// TODO: this is wrong for spells like shadowfury, that have a GCD of less than 1s
-	return max(spell.Unit.SpellGCD(),
-		spell.Unit.ApplyCastSpeedForSpell(spell.DefaultCast.EffectiveTime(), spell))
-}
-
 // Time until the cast is finished (ignoring GCD)
 func (spell *Spell) CastTime() time.Duration {
 	return spell.castTimeFn(spell)

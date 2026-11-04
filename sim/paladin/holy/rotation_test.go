@@ -27,9 +27,9 @@ const (
 	greaterBlessingOfLight int32 = 25890
 
 	// The ranks the written rotation downranks to (data/curated/apl/
-	// paladin-holy.json): Holy Shock rank 1, and Flash of Light rank 4 on
+	// paladin-holy.json): Holy Shock rank 4, and Flash of Light rank 4 on
 	// the party members.
-	holyShockRotationCast int32 = 1311606
+	holyShockRotationCast int32 = 20930
 	flashOfLightPartyRank int32 = 19941
 	// flashOfLightTankRank is the rotation's Flash of Light on the tank:
 	// rank 5 (115 mana) since site round 15 wave 2 (Forever's level-gap rule:
@@ -159,9 +159,9 @@ func TestDefaultRotationSpendsSpareManaOnHolyShockAndHolyLight(t *testing.T) {
 	short := rotationFight(t, 0).run(t, rotationIterations)
 	spare := rotationFight(t, manaToSpare).run(t, rotationIterations)
 
-	// Holy Shock is paced, and at rank 1 it costs about what Flash of Light
-	// does, so a healer short of mana still reaches it now and then; a
-	// healer with spare mana reaches it far more often.
+	// Holy Shock is paced (rank 4 since round 15, which the level-gap rule
+	// made the better rank at 60), so a healer short of mana reaches it now
+	// and then; a healer with spare mana reaches it far more often.
 	shortCasts, spareCasts := totalsOf(short, holyShockRotationCast).casts, totalsOf(spare, holyShockRotationCast).casts
 	if spareCasts == 0 {
 		t.Errorf("a healer with spare mana never cast Holy Shock")

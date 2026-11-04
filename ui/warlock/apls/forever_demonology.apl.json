@@ -81,10 +81,27 @@
     {
       "action": {
         "condition": {
-          "auraIsActive": {
-            "auraId": {
-              "spellId": 440873
-            }
+          "and": {
+            "vals": [
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 440873
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "auraIsKnown": {
+                      "auraId": {
+                        "spellId": 425464
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         },
         "castSpell": {

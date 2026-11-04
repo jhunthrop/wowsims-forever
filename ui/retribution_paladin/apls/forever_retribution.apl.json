@@ -4,10 +4,57 @@
     {
       "action": {
         "condition": {
-          "auraIsKnown": {
-            "auraId": {
-              "spellId": 1310735
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 20303,
+                  "rank": 6
+                },
+                "sourceUnit": {
+                  "type": "CurrentTarget"
+                }
+              }
             }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 20308,
+            "rank": 6
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1.5s"
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 1310735
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 20303,
+                    "rank": 6
+                  },
+                  "sourceUnit": {
+                    "type": "CurrentTarget"
+                  }
+                }
+              }
+            ]
           }
         },
         "castSpell": {
@@ -26,14 +73,31 @@
     {
       "action": {
         "condition": {
-          "not": {
-            "val": {
-              "auraIsKnown": {
-                "auraId": {
-                  "spellId": 1310735
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "auraIsKnown": {
+                      "auraId": {
+                        "spellId": 1310735
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 20303,
+                    "rank": 6
+                  },
+                  "sourceUnit": {
+                    "type": "CurrentTarget"
+                  }
                 }
               }
-            }
+            ]
           }
         },
         "castSpell": {
@@ -71,6 +135,19 @@
             "spellId": 20271
           }
         }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "auraIsActive": {
+            "auraId": {
+              "spellId": 20308,
+              "rank": 6
+            }
+          }
+        },
+        "castPaladinPrimarySeal": {}
       }
     },
     {

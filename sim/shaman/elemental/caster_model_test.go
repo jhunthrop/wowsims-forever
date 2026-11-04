@@ -185,3 +185,24 @@ func TestElementalFuryReachesTheTotemsDamage(t *testing.T) {
 		}
 	}
 }
+
+// TestADownrankedBoltsOverloadTakesTheLevelGapShare: the overload is the
+// cast rank's own spell, so the swapped-in coefficient takes Forever's
+// level-gap rule (core.LevelPenalty) at the cast rank's learn level, as the
+// bolt's own coefficient does. Lightning Bolt rank 4 (learned at 20) cast at
+// 60 is 40 levels behind and keeps none of it; rank 10 keeps all.
+func TestADownrankedBoltsOverloadTakesTheLevelGapShare(t *testing.T) {
+	_, built := newCallOfFlameShaman(t, elementalTalentsWith(map[int]int{lightningOverloadNode: 3}))
+	for _, c := range []struct {
+		rank int
+		want float64
+	}{{4, 0}, {10, 0.357}} {
+		bolt := built.LightningBolt[c.rank]
+		var during float64
+		built.AtLightningOverloadCoefficient(bolt, shaman.LightningBoltOverloadSpellCoef[c.rank], func() { during = bolt.BonusCoefficient })
+		want := shaman.LightningBoltOverloadSpellCoef[c.rank] * core.LevelPenalty(bolt.RequiredLevel, int(built.Level))
+		if !near(during, want) || (c.want == 0 && during != 0) || (c.want > 0 && !near(during, c.want)) {
+			t.Errorf("rank %d overload coefficient %v, want %v", c.rank, during, want)
+		}
+	}
+}

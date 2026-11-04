@@ -16,6 +16,9 @@ func (priest *Priest) registerStarshardsSpell() {
 	}
 
 	priest.Starshards = make([][]*core.Spell, StarshardsRanks+1)
+	// Every rank shares one 30 s category cooldown (SpellCooldowns
+	// CategoryRecoveryTime, category 2522; StarshardsCooldownMS).
+	cooldown := core.Cooldown{Timer: priest.NewTimer(), Duration: time.Duration(StarshardsCooldownMS[StarshardsRanks]) * time.Millisecond}
 
 	for rank := 1; rank <= StarshardsRanks; rank++ {
 		priest.Starshards[rank] = make([]*core.Spell, StarshardsTicks+1)
@@ -23,6 +26,7 @@ func (priest *Priest) registerStarshardsSpell() {
 		var tick int32
 		for tick = 0; tick < StarshardsTicks; tick++ {
 			config := priest.newStarshardsSpellConfig(rank, tick)
+			config.Cast.CD = cooldown
 
 			if config.RequiredLevel <= int(priest.Level) {
 				priest.Starshards[rank][tick] = priest.RegisterSpell(config)
