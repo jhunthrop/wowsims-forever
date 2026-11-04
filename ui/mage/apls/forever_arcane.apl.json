@@ -397,7 +397,7 @@
       }
     },
     {
-      "notes": "Frostbolt fills the rest of the 18 seconds once you stop blasting on the way to 60; in a raid Fireball takes its place. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and it costs a fraction of a stacked Blast. When the stacks fall off, the next Blast starts a cheap new set.",
+      "notes": "Frostbolt fills the rest of the 18 seconds once you stop blasting on the way to 60, and in a raid it is the cheaper cast when you are too low on mana for a Fireball. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and it costs a fraction of a stacked Blast. When the stacks fall off, the next Blast starts a cheap new set.",
       "action": {
         "castSpell": {
           "spellId": {
