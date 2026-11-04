@@ -102,8 +102,8 @@ func (warlock *Warlock) registerWrackSpell() {
 		DefenseType:   core.DefenseTypeMagic,
 		Flags:         core.SpellFlagAPL | core.SpellFlagResetAttackSwing | core.SpellFlagChanneled | core.SpellFlagPureDot | WarlockFlagAffliction,
 		RequiredLevel: 40,
-		// One rank, growing 2.5 a tick each level to MaxLevel 60: never below the caster.
-		ScalesToCasterLevel: true,
+		// One rank, growing 2.5 a tick each level to MaxLevel 60: never below
+		// the caster, so the low-rank penalty (core.SpellLevelPenalty) leaves it whole.
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: WrackManaCost[1],

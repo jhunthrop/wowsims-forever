@@ -314,6 +314,13 @@ relicmods:
 periodiccrit:
 	cd /tmp && python3 -I "$(CURDIR)/tools/periodiccrit/gen.py" "$(SITE_DIR)/data/builds/$(BUILD)"
 
+.PHONY: spellmaxlevel
+# spellmaxlevel regenerates sim/core/spell_max_level_auto_gen.go, the
+# SpellLevels.MaxLevel the low-rank penalty keys on wherever it is not the
+# spell level + 5, from the raw tables in the site's build directory.
+spellmaxlevel:
+	cd /tmp && python3 -I "$(CURDIR)/tools/spellmaxlevel/gen.py" "$(SITE_DIR)/data/builds/$(BUILD)"
+
 .PHONY: eureka
 # eureka regenerates sim/core/eureka_auto_gen.go, each class's Eureka! row
 # and the spells its class masks reach, from the raw tables in the site's

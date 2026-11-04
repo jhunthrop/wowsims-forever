@@ -92,8 +92,8 @@ func TestEveryRankHealsTheClientRollPlusCoefficientTimesHealingPower(t *testing.
 				t.Fatalf("%s rank %d: spell %d is not in the client table", name, rank, spell.SpellID)
 			}
 			low, high, _ := row.DamageRange(0, 60)
-			// A rank far below the caster keeps only part of it (core.LevelPenalty).
-			bonus := row.Effects[0].ResolvedSPCoefficient * core.LevelPenalty(row.SpellLevel, 60) * spell.HealingPower(target)
+			// A rank far below the caster keeps only part of it (core.SpellLevelPenalty).
+			bonus := row.Effects[0].ResolvedSPCoefficient * core.SpellLevelPenalty(row.ID, row.SpellLevel, 60) * spell.HealingPower(target)
 			for draw := 0; draw < 5; draw++ {
 				assertWithin(t, name, healedBy(sim, spell, target), low+bonus, high+bonus)
 			}
@@ -442,7 +442,7 @@ func TestPrayerOfMendingSpendsAChargeWhenTheHolderTakesDamage(t *testing.T) {
 
 // TestADownrankedShieldAbsorbsWithTheLevelGapShare: Power Word: Shield adds
 // its healing-power share by hand, so it must take Forever's level-gap rule
-// (core.LevelPenalty) as every other cast rank does. Discipline's rank 4
+// (core.SpellLevelPenalty) as every other cast rank does. Discipline's rank 4
 // (learned at 24) at 60 keeps 5% of its 0.1 coefficient; rank 10 keeps all.
 func TestADownrankedShieldAbsorbsWithTheLevelGapShare(t *testing.T) {
 	sim, agent := healerSim(t, 60, "")
@@ -452,7 +452,7 @@ func TestADownrankedShieldAbsorbsWithTheLevelGapShare(t *testing.T) {
 		shield := agent.PowerWordShield[rank]
 		row, _ := client.ByID(shield.SpellID)
 		low, high, _ := row.DamageRange(0, 60)
-		want := (low+high)/2 + row.Effects[0].ResolvedSPCoefficient*core.LevelPenalty(row.SpellLevel, 60)*shield.HealingPower(target)
+		want := (low+high)/2 + row.Effects[0].ResolvedSPCoefficient*core.SpellLevelPenalty(row.ID, row.SpellLevel, 60)*shield.HealingPower(target)
 		shield.ApplyEffects(sim, target, shield)
 		if got := shield.Shield(target).Remaining(); math.Abs(got-want) > 0.01 {
 			t.Errorf("rank %d shield absorbs %.2f, want %.2f", rank, got, want)

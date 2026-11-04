@@ -5,6 +5,7 @@ import (
 	"os"
 	"regexp"
 	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/wowsims/classic/sim/core"
@@ -246,17 +247,30 @@ func TestDefaultRotationWithoutTheTalentsOpensWithTheTanksHeals(t *testing.T) {
 	}
 }
 
+// readLeylineWarning is the one warning a druid who is not an Alliance
+// Skyborne gets: the rotation's Read Leyline line names a racial only that
+// race registers (sim/core/racial_read_leyline.go), so the line is skipped.
+const readLeylineWarning = "does not know spell {SpellID: 1259705}"
+
 func TestDefaultRotationRunsWithoutWarnings(t *testing.T) {
-	player := newPlayer(60, StandardTalents, healerBonusStats, loadDefaultRotation(t))
-	sim := healsim.Request(player, healsim.TestProfile(), 60, 1)
-	result := core.ComputeStats(&proto.ComputeStatsRequest{Raid: sim.Raid, Encounter: sim.Encounter})
-	if result.ErrorResult != "" {
-		t.Fatal(result.ErrorResult)
-	}
-	for i, action := range result.RaidStats.Parties[0].Players[healsim.HealerIndex].RotationStats.PriorityList {
-		for _, warning := range action.Warnings {
-			t.Errorf("rotation action %d: %s", i, warning)
-		}
+	for _, race := range []proto.Race{proto.Race_RaceHighOrderSkyborne, proto.Race_RaceTauren, proto.Race_RaceNightElf} {
+		t.Run(race.String(), func(t *testing.T) {
+			player := newPlayer(60, StandardTalents, healerBonusStats, loadDefaultRotation(t))
+			player.Race = race
+			sim := healsim.Request(player, healsim.TestProfile(), 60, 1)
+			result := core.ComputeStats(&proto.ComputeStatsRequest{Raid: sim.Raid, Encounter: sim.Encounter})
+			if result.ErrorResult != "" {
+				t.Fatal(result.ErrorResult)
+			}
+			for i, action := range result.RaidStats.Parties[0].Players[healsim.HealerIndex].RotationStats.PriorityList {
+				for _, warning := range action.Warnings {
+					if race != proto.Race_RaceHighOrderSkyborne && strings.Contains(warning, readLeylineWarning) {
+						continue
+					}
+					t.Errorf("rotation action %d: %s", i, warning)
+				}
+			}
+		})
 	}
 }
 

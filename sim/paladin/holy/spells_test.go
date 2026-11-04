@@ -58,12 +58,12 @@ func assertHealNumbers(t *testing.T, f fight, castID, healID int32) spellTotals 
 	if !ok {
 		t.Fatalf("spell %d has no effect 0", healID)
 	}
-	// A cast rank far below the caster keeps only part of it (core.LevelPenalty),
-	// and so does Holy Shock's heal half, at its cast rank's level; any other
+	// A cast rank far below the caster keeps only part of it (core.SpellLevelPenalty),
+	// and so does Holy Shock's heal half, on its own client row; any other
 	// heal another cast triggers keeps all of it.
 	coefficient := heal.Effects[0].ResolvedSPCoefficient
 	if castID == healID || slices.Contains(holyShockHealIDs, healID) {
-		coefficient *= core.LevelPenalty(clientSpell(t, castID).SpellLevel, int(level))
+		coefficient *= core.SpellLevelPenalty(healID, clientSpell(t, castID).SpellLevel, int(level))
 	}
 	want := (low+high)/2 + coefficient*healingPower
 

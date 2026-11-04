@@ -171,6 +171,13 @@
                 }
               },
               {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 16188
+                  }
+                }
+              },
+              {
                 "auraIsActive": {
                   "auraId": {
                     "spellId": 16188

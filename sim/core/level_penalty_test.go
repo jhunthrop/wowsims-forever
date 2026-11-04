@@ -121,21 +121,20 @@ func TestAProcKeepsItsCoefficientAtAnyLevel(t *testing.T) {
 
 // A single-rank spell whose client amount grows every level up to the
 // caster's level (SpellLevels MaxLevel at or above it, as Wrack's 40 to 60)
-// is not a rank below the caster: it keeps its whole coefficient.
+// is not a rank below the caster: its MaxLevel keeps its whole coefficient.
 func TestASpellThatScalesToTheCasterKeepsItsCoefficient(t *testing.T) {
 	_, caster, _ := newPeriodicCritFixture(t, 0)
 	spell := caster.RegisterSpell(SpellConfig{
-		ActionID:            ActionID{SpellID: 1316697},
-		SpellSchool:         SpellSchoolShadow,
-		DefenseType:         DefenseTypeMagic,
-		ProcMask:            ProcMaskSpellDamage,
-		RequiredLevel:       40,
-		ScalesToCasterLevel: true,
-		ManaCost:            ManaCostOptions{FlatCost: 50},
-		Cast:                CastConfig{DefaultCast: Cast{GCD: GCDDefault}},
-		DamageMultiplier:    1,
-		ThreatMultiplier:    1,
-		BonusCoefficient:    0.286,
+		ActionID:         ActionID{SpellID: 1316697},
+		SpellSchool:      SpellSchoolShadow,
+		DefenseType:      DefenseTypeMagic,
+		ProcMask:         ProcMaskSpellDamage,
+		RequiredLevel:    40,
+		ManaCost:         ManaCostOptions{FlatCost: 50},
+		Cast:             CastConfig{DefaultCast: Cast{GCD: GCDDefault}},
+		DamageMultiplier: 1,
+		ThreatMultiplier: 1,
+		BonusCoefficient: 0.286,
 	})
 	if spell.BonusCoefficient != 0.286 {
 		t.Errorf("a spell that scales to the caster's level: coefficient %v, want 0.286", spell.BonusCoefficient)
@@ -143,8 +142,9 @@ func TestASpellThatScalesToTheCasterKeepsItsCoefficient(t *testing.T) {
 }
 
 // A heal another cast triggers (Holy Shock's heal half) carries that cast
-// rank's learn level and is that rank, so it takes the cast rank's share
-// though it has no cost or cast of its own.
+// rank's learn level and is that rank, so it takes a rank's share though it
+// has no cost or cast of its own. Its own client row (1311605: SpellLevel
+// 30, MaxLevel 37) keys it: 45% at 60.
 func TestATriggeredRankTakesItsCastRanksShare(t *testing.T) {
 	_, caster, _ := newPeriodicCritFixture(t, 0)
 	heal := caster.RegisterSpell(SpellConfig{
@@ -159,7 +159,70 @@ func TestATriggeredRankTakesItsCastRanksShare(t *testing.T) {
 		ThreatMultiplier: 1,
 		BonusCoefficient: 0.429,
 	})
-	if got, want := heal.BonusCoefficient, 0.429*0.35; math.Abs(got-want) > 1e-9 {
+	if got, want := heal.BonusCoefficient, 0.429*0.45; math.Abs(got-want) > 1e-9 {
 		t.Errorf("a triggered rank learned at 30, caster 60: coefficient %v, want %v", got, want)
+	}
+}
+
+// The penalty runs from a rank's client SpellLevels.MaxLevel: whole until the
+// caster is 12 levels past it, then 5% less a level. Nearly every heal rank's
+// MaxLevel is its learn level + 5 (the "17 levels" rule); the ones that are
+// not are what the beta measurements caught off that rule:
+//   - Lesser Heal rank 1 (MaxLevel 3) kept about 24% on a level-30 priest's
+//     tooltip, against 40% on the learn level (HealRankAdvisor, verified at
+//     16 and 151 spell healing, github.com/mendeleevforever/HealRankAdvisor,
+//     2026-10-24); MaxLevel gives 25%.
+//   - Healing Touch and Holy Light rank 1 (MaxLevel 5) "run one level ahead,
+//     as if learned at level 0" (ForeverChanges, foreverchanges.pro/downranking,
+//     2026-10-16): 85% at 20, 34% at 30, Holy Light 94% at 18.
+//   - Rejuvenation 1 and 2, Healing Touch 2 and Regrowth 1 (MaxLevel = learn
+//     level + 5) fit both keys.
+//
+// A spell that grows to MaxLevel 60 (Wrack) is never below the caster.
+func TestSpellLevelPenaltyKeysOnTheRanksMaxLevel(t *testing.T) {
+	for _, c := range []struct {
+		name         string
+		id           int32
+		rank, caster int
+		want         float64
+	}{
+		{"Lesser Heal 1 at 30", 2050, 1, 30, 0.25},
+		{"Healing Touch 1 at 20", 5185, 1, 20, 0.85},
+		{"Healing Touch 1 at 30", 5185, 1, 30, 0.35},
+		{"Holy Light 1 at 18", 635, 1, 18, 0.95},
+		{"Holy Light 1 at 20", 635, 1, 20, 0.85},
+		{"Rejuvenation 1 at 22", 774, 4, 22, 0.95},
+		{"Rejuvenation 1 at 30", 774, 4, 30, 0.55},
+		{"Regrowth 1 at 30", 8936, 12, 30, 0.95},
+		{"Prayer of Healing 1 at 60", 596, 30, 60, 0.55},
+		{"Wrack at 60", 1316697, 40, 60, 1},
+		{"no client row: learn level", 0, 30, 60, 0.35},
+	} {
+		if got := SpellLevelPenalty(c.id, c.rank, c.caster); math.Abs(got-c.want) > 1e-9 {
+			t.Errorf("%s: share %.4f, want %.4f", c.name, got, c.want)
+		}
+	}
+}
+
+// RegisterSpell takes the MaxLevel key: Lesser Heal rank 1 on a level-30
+// caster keeps a quarter of its coefficient.
+func TestACastRankTakesItsMaxLevelShare(t *testing.T) {
+	_, caster, _ := newPeriodicCritFixture(t, 0)
+	caster.Level = 30
+	heal := caster.RegisterSpell(SpellConfig{
+		ActionID:         ActionID{SpellID: 2050},
+		SpellSchool:      SpellSchoolHoly,
+		DefenseType:      DefenseTypeMagic,
+		Flags:            SpellFlagHelpful,
+		ProcMask:         ProcMaskSpellHealing,
+		RequiredLevel:    1,
+		ManaCost:         ManaCostOptions{FlatCost: 30},
+		Cast:             CastConfig{DefaultCast: Cast{GCD: GCDDefault}},
+		DamageMultiplier: 1,
+		ThreatMultiplier: 1,
+		BonusCoefficient: 0.429,
+	})
+	if got, want := heal.BonusCoefficient, 0.429*0.25; math.Abs(got-want) > 1e-9 {
+		t.Errorf("Lesser Heal rank 1 at 30: coefficient %v, want %v", got, want)
 	}
 }

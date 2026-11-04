@@ -53,7 +53,7 @@
       }
     },
     {
-      "notes": "Shank on cooldown: an off-hand stab that cannot miss, pays back more energy than it costs and, with Boot Knife, adds two combo points.",
+      "notes": "Shank on cooldown at three combo points or fewer: an off-hand stab that cannot miss, pays back more energy than it costs and, with Boot Knife, adds two combo points.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -96,7 +96,7 @@
           }
         }
       },
-      "notes": "Ghostly Strike on cooldown: it hits harder than Hemorrhage for 5 more energy and gives a combo point."
+      "notes": "Ghostly Strike on cooldown at four combo points or fewer: it hits harder than Hemorrhage for 10 more energy (Hemorrhage costs 30 with Efficient Strikes), gives a combo point and lets your next Garrote in without Stealth."
     },
     {
       "action": {
@@ -107,38 +107,20 @@
           }
         },
         "condition": {
-          "and": {
-            "vals": [
-              {
-                "not": {
-                  "val": {
-                    "dotIsActive": {
-                      "spellId": {
-                        "spellId": 11290,
-                        "rank": 6
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpLe",
-                  "lhs": {
-                    "currentComboPoints": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "4"
-                    }
-                  }
-                }
+          "cmp": {
+            "op": "OpLe",
+            "lhs": {
+              "currentComboPoints": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "4"
               }
-            ]
+            }
           }
         }
       },
-      "notes": "Garrote right after Ghostly Strike whenever it has dropped off: Ghostly Strike lets the next Garrote go in without Stealth, and it is a bleed that Hemorrhage, Opportunity and Death Mark all feed."
+      "notes": "Garrote after every Ghostly Strike, at four combo points or fewer, even when the old one is still ticking: Ghostly Strike lets it in without Stealth, and a fresh Garrote is a bleed that Hemorrhage, Opportunity and Death Mark all feed."
     },
     {
       "action": {
@@ -183,7 +165,7 @@
       "notes": "Rupture at four or more combo points whenever it is not ticking. Hemorrhage and Serrated Blades both feed it, so it is the main finisher."
     },
     {
-      "notes": "Death Mark at five combo points while Rupture is ticking: for 6 seconds it stores a share of everything you hit the target for, Rupture and Garrote at twice the rate, then deals it back at once.",
+      "notes": "Death Mark at four or more combo points while Rupture is ticking: for 6 seconds it stores a share of everything you hit the target for, Rupture and Garrote at twice the rate, then deals it back at once. It comes back every 10 seconds, so a mark now beats a bigger one a few seconds later.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -202,7 +184,7 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "5"
+                      "val": "4"
                     }
                   }
                 }
@@ -274,7 +256,7 @@
           }
         }
       },
-      "notes": "Eviscerate at three or more combo points while Rupture is ticking, so points never sit idle."
+      "notes": "Eviscerate at three or more combo points while Rupture is ticking, only before you have Death Mark."
     },
     {
       "action": {
@@ -367,64 +349,81 @@
           "and": {
             "vals": [
               {
-                "spellIsKnown": {
-                  "spellId": {
-                    "spellId": 16511
-                  }
-                }
-              },
-              {
-                "or": {
+                "and": {
                   "vals": [
                     {
-                      "not": {
-                        "val": {
-                          "spellIsKnown": {
-                            "spellId": {
-                              "spellId": 14278
-                            }
-                          }
+                      "spellIsKnown": {
+                        "spellId": {
+                          "spellId": 16511
                         }
                       }
                     },
                     {
-                      "cmp": {
-                        "op": "OpGt",
-                        "lhs": {
-                          "spellTimeToReady": {
-                            "spellId": {
-                              "spellId": 14278
+                      "or": {
+                        "vals": [
+                          {
+                            "not": {
+                              "val": {
+                                "spellIsKnown": {
+                                  "spellId": {
+                                    "spellId": 14278
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpGt",
+                              "lhs": {
+                                "spellTimeToReady": {
+                                  "spellId": {
+                                    "spellId": 14278
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "1s"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpGe",
+                              "lhs": {
+                                "currentEnergy": {}
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "75"
+                                }
+                              }
                             }
                           }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "1s"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpGe",
-                        "lhs": {
-                          "currentEnergy": {}
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "75"
-                          }
-                        }
+                        ]
                       }
                     }
                   ]
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 1329326
+                      }
+                    }
+                  }
                 }
               }
             ]
           }
         }
       },
-      "notes": "Hemorrhage is the builder: one combo point, and its debuff makes your Rupture and Garrote hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more."
+      "notes": "Hemorrhage is the builder: one combo point, and its debuff makes your Rupture and Garrote hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more, and hold it after a Ghostly Strike until the Garrote is in."
     },
     {
       "action": {
