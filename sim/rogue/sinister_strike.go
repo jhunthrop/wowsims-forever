@@ -36,7 +36,8 @@ func (rogue *Rogue) registerSinisterStrikeSpell() {
 		RequiredLevel:  sinisterStrikeLearnLevels[rank-1],
 
 		EnergyCost: core.EnergyCostOptions{
-			Cost:   []float64{45, 42, 40}[rogue.Talents.ImprovedSinisterStrike],
+			// Efficient Strikes' discount is applied in talents.go.
+			Cost:   45,
 			Refund: 0.8,
 		},
 		Cast: core.CastConfig{

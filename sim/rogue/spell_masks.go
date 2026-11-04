@@ -23,13 +23,15 @@ const (
 	RogueSpellMaskRiposte
 	RogueSpellMaskBladeFlurry
 	RogueSpellMaskMutilate
-	RogueSpellMaskVenom
+	RogueSpellMaskShank
+	RogueSpellMaskDeathMark
 )
 
 // rogueClassMasks names the client spell family (SpellClassOptions,
-// SpellClassSet 8, build 1.60.1.70753) of each engine rogue ability. Sap,
+// SpellClassSet 8, build 1.60.1.70755) of each engine rogue ability. Sap,
 // Distract, Blind, Kidney Shot and Envenom have families too but no engine
-// spell.
+// spell, and so does Venom's buff (1310703, mask_2 67108864), which the
+// engine models as an aura Shank applies, not a cast.
 var rogueClassMasks = core.ClassMaskTable{
 	{Client: core.ClientClassMask{2}, Engine: RogueSpellMaskSinisterStrike},
 	{Client: core.ClientClassMask{4}, Engine: RogueSpellMaskBackstab},
@@ -48,5 +50,6 @@ var rogueClassMasks = core.ClassMaskTable{
 	{Client: core.ClientClassMask{0, 256}, Engine: RogueSpellMaskRiposte},
 	{Client: core.ClientClassMask{0, 2048}, Engine: RogueSpellMaskBladeFlurry},
 	{Client: core.ClientClassMask{0, 2097152}, Engine: RogueSpellMaskMutilate},
-	{Client: core.ClientClassMask{0, 0, 67108864}, Engine: RogueSpellMaskVenom},
+	{Client: core.ClientClassMask{536870912}, Engine: RogueSpellMaskShank},
+	{Client: core.ClientClassMask{0, 0, 4}, Engine: RogueSpellMaskDeathMark},
 }

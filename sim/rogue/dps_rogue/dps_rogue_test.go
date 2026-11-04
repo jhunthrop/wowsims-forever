@@ -57,8 +57,15 @@ func TestCombatDaggers(t *testing.T) {
 	}))
 }
 
-var CombatSwordsTalents = "005323105-0240052020050150231"
-var CombatDaggersTalents = "005023104-0233050020550100221-05"
+// The Combat builds in the 70755 trees (talents_auto_gen.go's field order):
+// Malice 5, Ruthlessness 3, Improved Slice and Dice 3, Lethality 2,
+// Relentless Strikes 5; Coup de Grace 3, Efficient Strikes 2, Precision 3,
+// Flawless Execution, Weapon Expertise 2, Aggression 3, Dual Wield
+// Specialization 2, Blade Flurry, Hack and Slash 5, Flash of Steel 5,
+// Adrenaline Rush, with Lightning Reflexes 5 (swords) or Puncturing Wounds
+// 3 and Lightning Reflexes 2 (daggers).
+var CombatSwordsTalents = "0053030020005-3250030000012321551"
+var CombatDaggersTalents = "0053030020005-3223030000012321551"
 
 var DefaultRogue = &proto.Player_Rogue{
 	Rogue: &proto.Rogue{

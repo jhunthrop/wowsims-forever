@@ -57,8 +57,9 @@ func TestHemorrhageUsesNormalizedWeaponDamage(t *testing.T) {
 }
 
 // Dual Wield Specialization 13715 is aura 122, the off-hand damage percent
-// (+5% a rank): it raises the off-hand weapon's damage, so Mutilate's
-// off-hand strike (1241590) takes it as the white off-hand swing does.
+// (+25% a rank in 70755): it raises the off-hand weapon's damage, so
+// Mutilate's off-hand strike (1241590) takes it as the white off-hand
+// swing does.
 func TestMutilateOffHandTakesDualWieldSpecialization(t *testing.T) {
 	const ap = 1000.0
 	base := talentStringWithRank(t, zeroRogueTalents, "mutilate", 1)
@@ -66,7 +67,7 @@ func TestMutilateOffHandTakesDualWieldSpecialization(t *testing.T) {
 	sim2, r2 := rogueSim(t, talentStringWithRank(t, base, "dual_wield_specialization", 2), "combat_backstab_prebis")
 	without := r0.GetRogue().MutilateOHWeaponDamageForTest(sim0, ap)
 	with := r2.GetRogue().MutilateOHWeaponDamageForTest(sim2, ap)
-	if math.Abs(with/without-1.10) > 1e-9 {
-		t.Errorf("Mutilate off-hand weapon damage with DWS 2/5 = %.3f x untalented, want 1.10", with/without)
+	if math.Abs(with/without-1.50) > 1e-9 {
+		t.Errorf("Mutilate off-hand weapon damage with DWS 2/2 = %.3f x untalented, want 1.50", with/without)
 	}
 }

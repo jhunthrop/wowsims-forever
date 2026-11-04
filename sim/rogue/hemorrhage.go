@@ -23,10 +23,10 @@ func (rogue *Rogue) registerHemorrhageSpell() {
 
 	// The client's Hemorrhage is a Rupture amplifier, not the vanilla
 	// "+7 physical damage on the next 30 hits" (core.HemorrhageAura), so
-	// the rogue keeps its own debuff; see RuptureDamageTakenMultiplier.
+	// the rogue keeps its own debuff; see BleedDamageTakenMultiplier.
 	hemoAuras := rogue.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
 		return target.GetOrRegisterAura(core.Aura{
-			Label:    "Hemorrhage (Rupture)",
+			Label:    "Hemorrhage (Rupture and Garrote)",
 			ActionID: actionID,
 			Duration: hemorrhageDebuffDuration,
 		})
@@ -81,13 +81,22 @@ func (rogue *Rogue) registerHemorrhageSpell() {
 	})
 }
 
-// RuptureDamageTakenMultiplier is the factor the target's Hemorrhage debuff
-// puts on this rogue's Rupture damage (1 when it is not up).
-func (rogue *Rogue) RuptureDamageTakenMultiplier(target *core.Unit) float64 {
+// BleedDamageTakenMultiplier is the factor the target's Hemorrhage debuff
+// puts on this rogue's Rupture and Garrote damage (1 when it is not up).
+func (rogue *Rogue) BleedDamageTakenMultiplier(target *core.Unit) float64 {
 	if rogue.hemorrhageAuras != nil && rogue.hemorrhageAuras.Get(target).IsActive() {
-		return 1 + hemorrhageRuptureDamageBonus
+		return 1 + hemorrhageBleedDamageBonus
 	}
 	return 1
+}
+
+// dealBleedTick deals one Rupture or Garrote tick with the target's
+// Hemorrhage debuff read at the tick, not snapshotted.
+func (rogue *Rogue) dealBleedTick(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
+	bonus := rogue.BleedDamageTakenMultiplier(target)
+	dot.Spell.DamageMultiplier *= bonus
+	dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+	dot.Spell.DamageMultiplier /= bonus
 }
 
 // hemorrhageWeaponDamage is Hemorrhage's weapon damage before its 100% (145%

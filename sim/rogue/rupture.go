@@ -21,6 +21,8 @@ var ruptureSpellID = [7]int32{0, 1943, 8639, 8640, 11273, 11274, 11275}
 // spellconst does not carry.
 var ruptureComboTickDamage = [7]float64{0, 1.18, 1.78, 2.37, 2.96, 4.14, 4.73}
 
+const ruptureTickLength = 2 * time.Second
+
 func (rogue *Rogue) registerRupture() {
 	rank := core.HighestRankAtLevel(ruptureLearnLevels, rogue.Level)
 	if rank == 0 {
@@ -72,17 +74,13 @@ func (rogue *Rogue) registerRupture() {
 			// every Rupture rank; ApplyEffects below always overwrites
 			// this with the real per-cast combo-point value before Apply.
 			NumberOfTicks: 3,
-			TickLength:    time.Second * 2,
+			TickLength:    ruptureTickLength,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, rogue.RuptureDamage(target, rogue.ComboPoints()), isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				// Hemorrhage's debuff is read at each tick, not snapshotted.
-				bonus := rogue.RuptureDamageTakenMultiplier(target)
-				dot.Spell.DamageMultiplier *= bonus
-				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
-				dot.Spell.DamageMultiplier /= bonus
+				rogue.dealBleedTick(sim, target, dot)
 			},
 		},
 
@@ -113,10 +111,13 @@ func (rogue *Rogue) RuptureDamage(target *core.Unit, comboPoints int32) float64 
 		[]float64{0, 0.04 / 4, 0.10 / 5, 0.18 / 6, 0.21 / 7, 0.24 / 8}[comboPoints]*rogue.Rupture.MeleeAttackPower(target)
 }
 
+// RuptureTicks is a Rupture's tick count: 3 plus one per combo point, plus
+// Blood Splatter's extra duration in 2-second ticks (the 70755 rank text is
+// "$m1+$b1)*(4+$<bloodS>/2) damage over (8+$<bloodS>) secs").
 func (rogue *Rogue) RuptureTicks(comboPoints int32) int32 {
-	return 3 + comboPoints
+	return 3 + comboPoints + rogue.bloodSplatterTicks(bloodSplatterRuptureExtra, ruptureTickLength)
 }
 
 func (rogue *Rogue) RuptureDuration(comboPoints int32) time.Duration {
-	return time.Duration(rogue.RuptureTicks(comboPoints)) * time.Second * 2
+	return time.Duration(rogue.RuptureTicks(comboPoints)) * ruptureTickLength
 }

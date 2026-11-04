@@ -21,6 +21,12 @@ type finisherRunResult struct {
 // fight length and iteration count.
 func runRotation(t *testing.T, aplJSON string, durationSeconds float64, iterations int32) finisherRunResult {
 	t.Helper()
+	return runRotationWithTalents(t, CombatSwordsTalents, aplJSON, durationSeconds, iterations)
+}
+
+// runRotationWithTalents is runRotation with the given talent string.
+func runRotationWithTalents(t *testing.T, talents string, aplJSON string, durationSeconds float64, iterations int32) finisherRunResult {
+	t.Helper()
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -31,7 +37,7 @@ func runRotation(t *testing.T, aplJSON string, durationSeconds float64, iteratio
 			Database:      testWeaponDatabase,
 			Buffs:         core.FullBuffs.Player,
 			Consumes:      Phase1Consumes.Consumes,
-			TalentsString: CombatSwordsTalents,
+			TalentsString: talents,
 			Rotation:      core.APLRotationFromJsonString(aplJSON),
 		},
 		DefaultRogue,

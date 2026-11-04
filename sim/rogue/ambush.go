@@ -25,7 +25,7 @@ func (rogue *Rogue) registerAmbushSpell() {
 	casterLevel := int(rogue.Level)
 	spellID := ambushSpellID[rank]
 
-	damageMultiplier := 2.5 * opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])]
+	damageMultiplier := 2.5 * rogue.opportunity()
 
 	rogue.Ambush = rogue.RegisterSpell(core.SpellConfig{
 		SpellCode:      SpellCode_RogueAmbush,
@@ -51,14 +51,7 @@ func (rogue *Rogue) registerAmbushSpell() {
 			if !rogue.HasDagger(core.MainHand) {
 				return false
 			}
-			if rogue.IsStealthed() {
-				return true
-			}
-			// Cutthroat (talents.go's applyCutthroat): a landed Backstab
-			// has a chance to let the next Ambush within 10 sec skip the
-			// stealth requirement. CutthroatAura is nil for a build with
-			// no points in the talent, so this is a no-op there.
-			return rogue.CutthroatAura != nil && rogue.CutthroatAura.IsActive()
+			return rogue.canOpen()
 		},
 
 		BonusCritRating:  15 * core.CritRatingPerCritChance * float64(rogue.Talents.ImprovedAmbush),
@@ -68,13 +61,7 @@ func (rogue *Rogue) registerAmbushSpell() {
 		ClientBaseDamage: flatDamage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			// Consume the Cutthroat bypass before BreakStealth, which
-			// would otherwise make "not stealthed" ambiguous between
-			// "never stealthed" and "was stealthed, now broken".
-			if !rogue.IsStealthed() && rogue.CutthroatAura != nil && rogue.CutthroatAura.IsActive() {
-				rogue.CutthroatAura.Deactivate(sim)
-			}
-			rogue.BreakStealth(sim)
+			rogue.spendOpener(sim)
 			baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)

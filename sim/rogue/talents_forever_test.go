@@ -1,10 +1,8 @@
 package rogue_test
 
-// Tests for the eighteen RogueTalents proto fields talents.go did not
-// read before this change (PORTING.md has no entry for this lane; see
-// the task that added applyPuncturingWounds, applyHackAndSlash,
-// applyCutthroat, applyThousandCuts, applyQuietus,
-// applyFlawlessExecution and applySetup in sim/rogue/talents.go).
+// Tests for the Forever rogue talents in sim/rogue/talents.go
+// (applyPuncturingWounds, applyHackAndSlash, applyFlawlessExecution,
+// applyEfficientStrikes, applySetup and friends).
 //
 // This file is package rogue_test (external), not rogue, because it
 // needs dps_rogue's RegisterDpsRogue to build a full character through
@@ -15,6 +13,7 @@ import (
 	"math"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
@@ -29,13 +28,12 @@ func init() {
 	dpsrogue.RegisterDpsRogue()
 }
 
-// zeroRogueTalents is a valid-length, all-zero talent string: 17-17-19,
-// the client's Assassination/Combat/Subtlety tree sizes
-// (rogue.TalentTreeSizes).
+// zeroRogueTalents is a valid-length, all-zero talent string in the
+// client's Assassination/Combat/Subtlety tree sizes (rogue.TalentTreeSizes).
 var zeroRogueTalents = strings.Join([]string{
-	strings.Repeat("0", 17),
-	strings.Repeat("0", 17),
-	strings.Repeat("0", 19),
+	strings.Repeat("0", rogue.TalentTreeSizes[0]),
+	strings.Repeat("0", rogue.TalentTreeSizes[1]),
+	strings.Repeat("0", rogue.TalentTreeSizes[2]),
 }, "-")
 
 // talentStringWithRank returns a copy of talentsStr with the named
@@ -52,7 +50,7 @@ func talentStringWithRank(t *testing.T, talentsStr string, fieldName string, ran
 		t.Fatalf("RogueTalents has no field named %q", fieldName)
 	}
 
-	treeSizes := [3]int{17, 17, 19}
+	treeSizes := rogue.TalentTreeSizes
 	pos := int(fd.Number()) - 1
 	treeIdx := 0
 	for treeIdx < len(treeSizes) && pos >= treeSizes[treeIdx] {
@@ -153,35 +151,30 @@ func TestFlawlessExecutionDiscountsEviscerate(t *testing.T) {
 	if rogue.Eviscerate == nil {
 		t.Fatal("Eviscerate did not register")
 	}
-	if got, want := rogue.Eviscerate.Cost.FlatModifier, int32(-10); got != want {
-		t.Errorf("Eviscerate.Cost.FlatModifier = %d, want %d", got, want)
+	if got, want := rogue.Eviscerate.Cost.FlatModifier, int32(-15); got != want {
+		t.Errorf("Eviscerate.Cost.FlatModifier = %d, want %d (1310711's 70755 curve)", got, want)
 	}
 }
 
-// TestCutthroatLetsAmbushBypassStealth checks that a rogue with
-// Cutthroat spent gets a non-nil CutthroatAura (ambush.go's
-// ExtraCastCondition reads this field directly) and that a rogue with no
-// points in it does not, so the bypass check in ambush.go is provably a
-// no-op for every build without the talent.
-func TestCutthroatLetsAmbushBypassStealth(t *testing.T) {
-	withTalent := talentStringWithRank(t, zeroRogueTalents, "cutthroat", 5)
-	built := buildRogueForTalentTest(t, withTalent, "combat_backstab_prebis")
-	rogue := built.GetRogue()
-	if rogue.CutthroatAura == nil {
-		t.Fatal("CutthroatAura is nil with Cutthroat rank 5 spent")
-	}
-	if rogue.Ambush == nil {
-		t.Fatal("Ambush did not register")
-	}
-
-	withoutTalent := buildRogueForTalentTest(t, zeroRogueTalents, "combat_backstab_prebis")
-	if withoutTalent.GetRogue().CutthroatAura != nil {
-		t.Error("CutthroatAura is non-nil with no points in Cutthroat")
+// TestEfficientStrikesDiscountsSinisterStrikeAndHemorrhage pins 13732's
+// curve (-3/-5) on its mask: Sinister Strike and Hemorrhage, nothing else.
+func TestEfficientStrikesDiscountsSinisterStrikeAndHemorrhage(t *testing.T) {
+	for rank, want := range map[int]int32{1: -3, 2: -5} {
+		talentsStr := talentStringWithRank(t, talentStringWithRank(t, zeroRogueTalents, "hemorrhage", 1), "efficient_strikes", rank)
+		rogue := buildRogueForTalentTest(t, talentsStr, "combat_backstab_prebis").GetRogue()
+		if got := rogue.SinisterStrike.Cost.FlatModifier; got != want {
+			t.Errorf("rank %d: SinisterStrike.Cost.FlatModifier = %d, want %d", rank, got, want)
+		}
+		if got := rogue.Hemorrhage.Cost.FlatModifier; got != want {
+			t.Errorf("rank %d: Hemorrhage.Cost.FlatModifier = %d, want %d", rank, got, want)
+		}
+		if got := rogue.Backstab.Cost.FlatModifier; got != 0 {
+			t.Errorf("rank %d: Backstab.Cost.FlatModifier = %d, want 0 (outside the mask)", rank, got)
+		}
 	}
 }
 
-// TestSetupComboPointChanceTable pins Setup's 33%/67%/100% per-rank
-// table (not an exact 33.33%/rank multiply) and that an over-ranked
+// TestSetupComboPointChanceTable pins that an over-ranked
 // talent string (core.FillTalentsProto does no max-rank validation)
 // clamps to rank 3's value instead of panicking on an out-of-range
 // index - the same hazard mage/talents.go's rankIndex guards against.
@@ -256,10 +249,8 @@ var hackAndSlashActionID = core.ActionID{SpellID: 13960}
 
 // buildRogueSimForTalentTest is buildRogueForTalentTest's sibling for
 // tests that need a live *core.Simulation (not just a built character):
-// sim.Reset() is what fires every registered aura's OnReset, including
-// applyThousandCuts' and applyQuietus' - core.NewEnvironment alone (used
-// above) never calls it, since those tests only inspected static,
-// already-applied field values.
+// sim.Reset() is what fires every registered aura's OnReset -
+// core.NewEnvironment alone (used above) never calls it.
 func buildRogueSimForTalentTest(t *testing.T, talentsStr string, gearSet string) (*core.Simulation, *dpsrogue.DpsRogue) {
 	t.Helper()
 	return buildRogueSimAtLevel(t, talentsStr, gearSet, 0)
@@ -298,95 +289,6 @@ func buildRogueSimAtLevel(t *testing.T, talentsStr string, gearSet string, level
 	return sim, built
 }
 
-// TestThousandCutsStacksDiscountEnergyCost drives the stacking aura
-// directly (Activate/AddStack/SetStacks are what applyThousandCuts'
-// Rupture-tick and Hemorrhage/Backstab-cast listeners call) rather than
-// through an actual Rupture tick or Backstab cast, since fabricating a
-// landed core.SpellResult from outside sim/core is not worth the
-// coupling. It still exercises the part most likely to regress: the
-// per-stack delta in OnStacksChange, the cap at 5 stacks, and that
-// SetStacks(0) - not Deactivate - is what the consuming cast and the
-// natural 10-sec expiry both need to undo the discount (see the aura's
-// own OnExpire comment in talents.go).
-func TestThousandCutsStacksDiscountEnergyCost(t *testing.T) {
-	talentsStr := talentStringWithRank(t, zeroRogueTalents, "thousand_cuts", 1)
-	sim, built := buildRogueSimForTalentTest(t, talentsStr, "combat_backstab_prebis")
-	rogue := built.GetRogue()
-
-	if rogue.Backstab == nil {
-		t.Fatal("Backstab did not register")
-	}
-	// The fight opens with Poised's -10 on the first ability; this test
-	// is about Thousand Cuts' own discount.
-	rogue.PoisedAura.Deactivate(sim)
-	if got := rogue.Backstab.Cost.FlatModifier; got != 0 {
-		t.Fatalf("Backstab.Cost.FlatModifier = %d before any Rupture tick, want 0", got)
-	}
-
-	aura := rogue.GetAuraByID(core.ActionID{SpellID: 1310721})
-	if aura == nil {
-		t.Fatal("no Thousand Cuts aura registered")
-	}
-
-	aura.Activate(sim)
-	aura.AddStack(sim)
-	if got, want := rogue.Backstab.Cost.FlatModifier, int32(-3); got != want {
-		t.Errorf("Backstab.Cost.FlatModifier after 1 stack = %d, want %d", got, want)
-	}
-
-	for i := 0; i < 4; i++ {
-		aura.AddStack(sim)
-	}
-	if got, want := rogue.Backstab.Cost.FlatModifier, int32(-15); got != want {
-		t.Errorf("Backstab.Cost.FlatModifier after 5 stacks (the cap) = %d, want %d", got, want)
-	}
-	// A 6th tick must not push past the 5-stack cap.
-	aura.AddStack(sim)
-	if got, want := rogue.Backstab.Cost.FlatModifier, int32(-15); got != want {
-		t.Errorf("Backstab.Cost.FlatModifier after a 6th stack = %d, want %d (still capped at 5)", got, want)
-	}
-
-	// SetStacks(0) is the consume/expire path; it must fully undo the
-	// discount, not just the last stack.
-	aura.SetStacks(sim, 0)
-	if got, want := rogue.Backstab.Cost.FlatModifier, int32(0); got != want {
-		t.Errorf("Backstab.Cost.FlatModifier after SetStacks(0) = %d, want %d", got, want)
-	}
-	if aura.IsActive() {
-		t.Error("Thousand Cuts aura is still active after SetStacks(0)")
-	}
-}
-
-// TestQuietusAppliesNothingBeforeAnyExecutePhaseTransition is the
-// eager-mutation safety check applyPuncturingWounds' tests above don't
-// need: Quietus's damage bonus must stay at zero until sim time actually
-// crosses the 35%-health execute-phase boundary
-// (sim.RegisterExecutePhaseCallback, re-armed every sim.Reset - see
-// talents.go's applyQuietus comment), not at construction or at Reset
-// itself. Driving a real phase transition needs sim/core's private
-// advance()/nextExecutePhase(), which this external test package cannot
-// reach, so this pins the one invariant it can observe from outside:
-// Reset alone must not have moved the number.
-func TestQuietusAppliesNothingBeforeAnyExecutePhaseTransition(t *testing.T) {
-	talentsStr := talentStringWithRank(t, zeroRogueTalents, "quietus", 5)
-	_, withTalent := buildRogueSimForTalentTest(t, talentsStr, "combat_backstab_prebis")
-	_, withoutTalent := buildRogueSimForTalentTest(t, zeroRogueTalents, "combat_backstab_prebis")
-
-	withRogue, baseRogue := withTalent.GetRogue(), withoutTalent.GetRogue()
-	if withRogue.SinisterStrike == nil || baseRogue.SinisterStrike == nil {
-		t.Fatal("SinisterStrike did not register")
-	}
-
-	// core.RegisterSpell defaults DamageMultiplierAdditive to 1 (not 0)
-	// when only DamageMultiplier is set (sim/core/spell.go), so the
-	// no-op baseline to compare against is the untalented rogue's value,
-	// not zero.
-	got := withRogue.SinisterStrike.DamageMultiplierAdditive - baseRogue.SinisterStrike.DamageMultiplierAdditive
-	if got != 0 {
-		t.Errorf("Quietus rank 5's SinisterStrike.DamageMultiplierAdditive delta right after Reset = %v, want 0 (nothing is below 35%% health yet)", got)
-	}
-}
-
 // TestHackAndSlashMaceIgnoresArmorPercent checks the mace branch: "Mace:
 // Your attacks ignore 15% of your target's armor" at rank 5 (13960 effect
 // 1309137, 15). Like Serrated Blades it is a share of the target's armor
@@ -417,5 +319,38 @@ func TestHackAndSlashMaceIgnoresArmorPercent(t *testing.T) {
 	}
 	if got := mace.GetStat(stats.ArmorPenetration) - plain.GetStat(stats.ArmorPenetration); got != 0 {
 		t.Errorf("Hack and Slash added %v flat armor penetration, want 0", got)
+	}
+}
+
+// TestGhostlyStrikeLetsTheNextOpenerSkipStealth pins 14278 e5's trigger
+// 1329326 (aura 275 on Garrote 256 + Ambush 512, 7 sec): with it up, Ambush
+// and Garrote cast outside Stealth, and one of them spends it.
+func TestGhostlyStrikeLetsTheNextOpenerSkipStealth(t *testing.T) {
+	talentsStr := talentStringWithRank(t, zeroRogueTalents, "ghostly_strike", 1)
+	sim, built := buildRogueSimForTalentTest(t, talentsStr, "combat_backstab_prebis")
+	r := built.GetRogue()
+	target := sim.Encounter.TargetUnits[0]
+	aura := r.GhostlyStrikeOpenerAura
+	if aura == nil || aura.ActionID.SpellID != 1329326 || aura.Duration != 7*time.Second {
+		t.Fatalf("Ghostly Strike opener aura = %+v, want 1329326 for 7s", aura)
+	}
+	r.StealthAura.Deactivate(sim)
+	if r.Ambush.ExtraCastCondition(sim, target) || r.Garrote.ExtraCastCondition(sim, target) {
+		t.Fatal("Ambush or Garrote castable outside Stealth without Ghostly Strike's buff")
+	}
+	aura.Activate(sim)
+	if !r.Ambush.ExtraCastCondition(sim, target) || !r.Garrote.ExtraCastCondition(sim, target) {
+		t.Error("Ambush and Garrote must be castable outside Stealth with Ghostly Strike's buff")
+	}
+	r.Garrote.ApplyEffects(sim, target, r.Garrote)
+	if aura.IsActive() {
+		t.Error("Garrote outside Stealth did not spend Ghostly Strike's buff")
+	}
+}
+
+// TestNoOpenerBuffWithoutGhostlyStrike: the aura exists only with the talent.
+func TestNoOpenerBuffWithoutGhostlyStrike(t *testing.T) {
+	if r := buildRogueForTalentTest(t, zeroRogueTalents, "combat_backstab_prebis").GetRogue(); r.GhostlyStrikeOpenerAura != nil {
+		t.Error("untalented rogue has Ghostly Strike's opener buff")
 	}
 }

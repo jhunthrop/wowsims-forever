@@ -35,7 +35,8 @@ const (
 	SpellCode_RogueSliceandDice
 	SpellCode_RogueStealth
 	SpellCode_RogueVanish
-	SpellCode_RogueVenom
+	SpellCode_RogueShank
+	SpellCode_RogueDeathMark
 	SpellCode_RogueCheapShot
 	SpellCode_RogueGouge
 	SpellCode_RogueKick
@@ -53,7 +54,6 @@ type Rogue struct {
 	Options *proto.RogueOptions
 
 	sliceAndDiceDurations [6]time.Duration
-	venomDurations        [6]time.Duration
 
 	AdrenalineRush *core.Spell
 	Backstab       *core.Spell
@@ -81,8 +81,10 @@ type Rogue struct {
 	ExposeArmor  *core.Spell
 	Rupture      *core.Spell
 	SliceAndDice *core.Spell
-	Venom        *core.Spell
+	DeathMark    *core.Spell
 	Finishers    []*core.Spell
+
+	Shank *core.Spell
 
 	Evasion *core.Spell
 
@@ -102,10 +104,9 @@ type Rogue struct {
 	PoisedAura         *core.Aura
 	VanishAura         *core.Aura
 	VenomAura          *core.Aura
-	// CutthroatAura is nil unless the Cutthroat talent is spent; set in
-	// talents.go's applyCutthroat, read by ambush.go to let Ambush bypass
-	// its stealth requirement.
-	CutthroatAura *core.Aura
+	// GhostlyStrikeOpenerAura is Ghostly Strike's 1329326 buff ("Next
+	// Ambush or Garrote does not require Stealth"); nil without the talent.
+	GhostlyStrikeOpenerAura *core.Aura
 
 	woundPoisonDebuffAuras core.AuraArray
 	// hemorrhageAuras holds the Hemorrhage debuff per target (nil without the talent).
@@ -151,10 +152,11 @@ func (rogue *Rogue) Initialize() {
 	rogue.registerDeadlyPoisonSpell()
 	rogue.registerWoundPoisonSpell()
 
-	// Forever-only talent-granted abilities (registered after poisons:
-	// Venom's aura toggles the poison spells' DamageMultiplier).
+	// Forever-only abilities (registered after poisons: Shank's Venom
+	// aura toggles the poison spells' DamageMultiplier).
 	rogue.registerMutilateSpell()
-	rogue.registerVenomSpell()
+	rogue.registerShankSpell()
+	rogue.registerDeathMarkSpell()
 
 	// Stealth
 	rogue.registerStealthAura()

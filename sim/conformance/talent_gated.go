@@ -158,17 +158,18 @@ var TalentGatedSpells = []TalentGatedSpell{
 	{ClassSlug: "shaman", Label: "Nature's Swiftness", Tree: 2, Pos: 14},
 	{ClassSlug: "shaman", Label: "Riptide", Tree: 2, Pos: 16, Preset: "RestorationShaman"},
 
-	// Rogue (Assassination 17, Combat 17, Subtlety 19).
+	// Rogue (Assassination 17, Combat 19, Subtlety 18; 70755). Venom is a
+	// passive on Shank in 70755, not a spell of its own.
 	{ClassSlug: "rogue", Label: "Cold Blood", Tree: 0, Pos: 11},
-	{ClassSlug: "rogue", Label: "Mutilate", Tree: 0, Pos: 14},
-	{ClassSlug: "rogue", Label: "Venom", Tree: 0, Pos: 17},
-	{ClassSlug: "rogue", Label: "Riposte", Tree: 1, Pos: 8},
-	{ClassSlug: "rogue", Label: "Blade Flurry", Tree: 1, Pos: 13},
-	{ClassSlug: "rogue", Label: "Adrenaline Rush", Tree: 1, Pos: 17},
-	{ClassSlug: "rogue", Label: "Ghostly Strike", Tree: 2, Pos: 9},
-	{ClassSlug: "rogue", Label: "Premeditation", Tree: 2, Pos: 12},
+	{ClassSlug: "rogue", Label: "Mutilate", Tree: 0, Pos: 17},
+	{ClassSlug: "rogue", Label: "Riposte", Tree: 1, Pos: 9},
+	{ClassSlug: "rogue", Label: "Blade Flurry", Tree: 1, Pos: 16},
+	{ClassSlug: "rogue", Label: "Adrenaline Rush", Tree: 1, Pos: 19},
+	{ClassSlug: "rogue", Label: "Premeditation", Tree: 2, Pos: 9},
+	{ClassSlug: "rogue", Label: "Ghostly Strike", Tree: 2, Pos: 12},
 	{ClassSlug: "rogue", Label: "Preparation", Tree: 2, Pos: 15},
 	{ClassSlug: "rogue", Label: "Hemorrhage", Tree: 2, Pos: 16},
+	{ClassSlug: "rogue", Label: "Death Mark", Tree: 2, Pos: 18},
 }
 
 // talentTreeSizesBySlug is used only to bounds-check each
