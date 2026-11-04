@@ -24,7 +24,7 @@
       }
     },
     {
-      "notes": "Open with Ravage from Prowl at the pull. It only works while prowling, so it fires once.",
+      "notes": "Your opener, from Prowl and from behind the target. It only works while you prowl, so it fires once; open at full energy so Poised makes it cheaper.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -35,7 +35,7 @@
       }
     },
     {
-      "notes": "Faerie Fire in Cat Form whenever the target lacks it: Forever's Cat Form (Passive) makes it free with a 6 second cooldown and a 1 second global cooldown, so a cat keeps its own armor reduction up when no raid Faerie Fire is on the target (tag 1 is the in-form cast).",
+      "notes": "When the target has no Faerie Fire on it. In Cat Form it is free on a 6 second cooldown, so keep your own up when no one else does.",
       "action": {
         "condition": {
           "not": {
@@ -62,7 +62,7 @@
       }
     },
     {
-      "notes": "Below level 20, before Cat Form is learned, keep Moonfire ticking -- the same upkeep line Balance uses.",
+      "notes": "Below level 20, before Cat Form, when Moonfire is not ticking on the target.",
       "action": {
         "condition": {
           "and": {
@@ -103,7 +103,7 @@
       }
     },
     {
-      "notes": "Wrath as the pre-Cat-Form filler once Moonfire is already ticking; see the Moonfire line above for the full diagnosis. Gated the same way, `not spellIsKnown(Claw)`.",
+      "notes": "Below level 20, before Cat Form, once Moonfire is ticking.",
       "action": {
         "condition": {
           "not": {
@@ -126,7 +126,7 @@
       }
     },
     {
-      "notes": "Shifting Power (Feral capstone talent since client 1.60.1.70707, instant, converts 55% of base mana into 40 energy, 8 s cooldown on the live tooltip) on cooldown whenever the energy bar has room for all 40, which is 60 or less. Inert for a build that has not taken the talent; no client spell row states its global cooldown, so the engine treats it as on the GCD.",
+      "notes": "At 60 energy or less, so all 40 energy fits under the cap. It costs mana, not energy, and comes back every 8 seconds.",
       "action": {
         "condition": {
           "cmp": {
@@ -149,7 +149,7 @@
       }
     },
     {
-      "notes": "At 5 combo points, Rip once it has under 6 seconds left -- this refreshes a little before the DoT actually falls off, so Ferocious Bite stays reachable whenever Rip still has real time on it.",
+      "notes": "At 5 combo points when Rip is off the boss or has under 2 seconds left. A new Rip throws away the ticks the old one had left, so let it run almost to the end. Rip comes first because it is the bleed that keeps Rend and Tear on.",
       "action": {
         "condition": {
           "and": {
@@ -180,7 +180,7 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "6s"
+                      "val": "2s"
                     }
                   }
                 }
@@ -197,7 +197,7 @@
       }
     },
     {
-      "notes": "At 5 combo points with Rip having more than 6 seconds left, Ferocious Bite dumps them instead of capping out.",
+      "notes": "At 5 combo points while Rip still has 5 seconds or more. Between 2 and 5 seconds, keep Shredding and hold the points for the Rip. With Predatory Discipline the Bite keeps the damage from your spare energy without spending it.",
       "action": {
         "condition": {
           "and": {
@@ -228,7 +228,7 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "6s"
+                      "val": "5s"
                     }
                   }
                 }
@@ -245,7 +245,7 @@
       }
     },
     {
-      "notes": "Shred builds combo points the rest of the time, from level 24 (Ferocious Bite's first rank is the level marker). Below that, rank 1 Shred (155% weapon damage plus 22 for 60 energy) does less than rank 1 Claw on a level-20 weapon: Claw first measured about 4.6% ahead at band 20, Shred about 5% ahead at band 30.",
+      "notes": "Your builder from level 20, always from behind the target. Shred hits harder than Claw at every rank, but until Shredding Attacks is full at 22 it costs 8 to 14 more energy, and Claw does more for the energy.",
       "action": {
         "condition": {
           "spellIsKnown": {
@@ -264,7 +264,7 @@
       }
     },
     {
-      "notes": "Claw builds combo points below level 24, before Ferocious Bite: rank 1 Shred, learned at 20 since client 1.60.1.70707, does less there (see the Shred line).",
+      "notes": "Your builder at 20 and 21, before Shredding Attacks is full: Claw costs 40 to Shred's 54 at 20 and 48 at 21, and does more for its energy. Later, it is the button for a target you cannot get behind.",
       "action": {
         "condition": {
           "not": {
