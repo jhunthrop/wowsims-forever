@@ -139,6 +139,17 @@
           "and": {
             "vals": [
               {
+                "not": {
+                  "val": {
+                    "auraIsKnown": {
+                      "auraId": {
+                        "spellId": 400625
+                      }
+                    }
+                  }
+                }
+              },
+              {
                 "spellIsKnown": {
                   "spellId": {
                     "spellId": 12043
@@ -195,14 +206,15 @@
       }
     },
     {
-      "notes": "Arcane Missiles before you have Missile Barrage, at 20 and 21: on a long fight it does more damage for its mana than Arcane Blast or Frostbolt. From 22 Missiles waits for the free proc and Blast takes over.",
+      "notes": "Arcane Missiles until you have both ranks of Missile Barrage, at 20 to 22: on a long fight it does more damage for its mana than Arcane Blast or Frostbolt. From 23 Missiles waits for the free proc and Blast takes over.",
       "action": {
         "condition": {
           "not": {
             "val": {
               "auraIsKnown": {
                 "auraId": {
-                  "spellId": 400589
+                  "spellId": 400588,
+                  "tag": 2
                 }
               }
             }
@@ -386,7 +398,7 @@
       }
     },
     {
-      "notes": "Frostbolt fills the rest of the 18 seconds once you stop blasting on the way to 60; in a raid Fireball takes its place. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and it costs a fraction of a stacked Blast. When the stacks fall off, the next Blast starts a cheap new set.",
+      "notes": "Frostbolt in a raid when you are too low on mana for a Fireball, and as the filler once you stop blasting on the way to 60. The stacks' spell damage still applies to it, it procs Missile Barrage 20% of the time, and it costs a fraction of a stacked Blast. When the stacks fall off, the next Blast starts a cheap new set.",
       "action": {
         "castSpell": {
           "spellId": {

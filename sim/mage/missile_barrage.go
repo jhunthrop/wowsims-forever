@@ -22,7 +22,11 @@ import (
 // cast, per the tooltip's "your next Arcane Missiles".
 const (
 	missileBarrageBuffSpellId int32 = 400589
-	missileBarrageDuration          = time.Second * 15
+	// missileBarrageTalentSpellId is the talent's own spell (400588, the
+	// same id at both ranks). Its trigger aura carries the rank as the
+	// ActionID tag, so a rotation can tell 1/2 from 2/2 with auraIsKnown.
+	missileBarrageTalentSpellId int32 = 400588
+	missileBarrageDuration            = time.Second * 15
 
 	missileBarrageArcaneBlastChancePerRank = 0.20
 	missileBarrageOtherChancePerRank       = 0.10
@@ -85,6 +89,7 @@ func (mage *Mage) registerMissileBarrage() {
 
 	mage.RegisterAura(core.Aura{
 		Label:    "Missile Barrage Trigger",
+		ActionID: core.ActionID{SpellID: missileBarrageTalentSpellId}.WithTag(mage.Talents.MissileBarrage),
 		Duration: core.NeverExpires,
 		OnReset: func(aura *core.Aura, sim *core.Simulation) {
 			aura.Activate(sim)
