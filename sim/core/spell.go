@@ -107,6 +107,11 @@ type Spell struct {
 	// scalar identity; the two do not overlap in purpose.
 	ClassSpellMask uint64
 
+	// levelPenaltyShare is the share of its spell power coefficient this
+	// rank kept at registration (levelPenalty): 1 for every spell that is
+	// not a rank below the caster. Read through LevelPenaltyShare.
+	levelPenaltyShare float64
+
 	// The unit who will perform this spell.
 	Unit *Unit
 
@@ -344,8 +349,10 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 		spell.DefaultCast.Cost = spell.Cost.BaseCost
 	}
 
-	// A rank far below the caster's level gains less from spell power.
-	if penalty := levelPenalty(config, unit); penalty != 1 {
+	// A rank far below the caster's level gains less from spell power, and
+	// its procs roll at the same share (LevelPenaltyShare).
+	spell.levelPenaltyShare = levelPenalty(config, unit)
+	if penalty := spell.levelPenaltyShare; penalty != 1 {
 		spell.BonusCoefficient *= penalty
 		config.Dot.BonusCoefficient *= penalty
 		config.Hot.BonusCoefficient *= penalty
@@ -772,6 +779,23 @@ func (spell *Spell) ApplyAdditiveImpactDamageBonus(percent int64) {
 // ApplyAdditivePeriodicDamageBonus applies to periodic damage only.
 func (spell *Spell) ApplyAdditivePeriodicDamageBonus(percent int64) {
 	spell.PeriodicDamageMultiplierAdditive += float64(percent) / 100
+}
+
+// LevelPenaltyShare is the share of its spell power coefficient this rank
+// kept at the caster's level (SpellLevelPenalty), which is also the share of
+// its chance to activate a class ability or talent. Blizzard's 1 October
+// 2026 beta note: ranks "vastly below your current level receive less
+// benefit from your Spell Damage and Spell Healing and have a reduced chance
+// to activate your Class abilities and Talents (examples: Frostbite and Omen
+// of Clarity)", with "a Rank 1 Frostbolt at level 60 ... a 0% chance to get
+// a Frostbite activation", which is the share's own zero. A proc site
+// multiplies its chance by the triggering spell's share. A spell built
+// outside RegisterSpell keeps a whole share.
+func (spell *Spell) LevelPenaltyShare() float64 {
+	if spell.levelPenaltyShare == 0 && spell.Unit == nil {
+		return 1
+	}
+	return spell.levelPenaltyShare
 }
 
 // levelPenaltyGrace is how many levels past a rank's client MaxLevel the

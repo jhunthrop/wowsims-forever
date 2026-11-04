@@ -411,7 +411,9 @@ func (druid *Druid) applyOmenOfClarity() {
 		if spell.ProcMask.Matches(core.ProcMaskMelee) {
 			procced = ppmm.ProcWithWeaponSpecials(sim, spell.ProcMask, "Omen of Clarity")
 		} else if spell.ProcMask.Matches(core.ProcMaskSpellDamage | core.ProcMaskSpellHealing) {
-			procced = sim.Proc(omenSpellProcChance(inMoonkin), "Omen of Clarity")
+			// A rank far below the druid's level rolls at its level-gap share
+			// (Blizzard's beta note names Omen of Clarity; core.Spell.LevelPenaltyShare).
+			procced = sim.Proc(omenSpellProcChance(inMoonkin)*spell.LevelPenaltyShare(), "Omen of Clarity")
 		}
 		if procced {
 			readyAt = sim.CurrentTime + omenProcCooldown(inMoonkin)
