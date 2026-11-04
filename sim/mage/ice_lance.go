@@ -13,10 +13,9 @@ import (
 //
 // Every number is the client's own, from sim/mage/constants_auto_gen.go
 // (build 1.60.1.69893) rather than a Go literal, so a patch that
-// renumbers a rank is a regeneration. Only the coefficient carries an
-// unconfirmed marker, and the generated file carries it: the client's
-// coefficient column was zero and the generator derived the value from
-// the vanilla convention.
+// renumbers a rank is a regeneration. The coefficient is the exception:
+// the client's column is zero, the generated file's value is only the
+// vanilla convention, and iceLanceSpellCoeff takes it from Forever logs.
 const (
 	// "Deals 300% increased damage to Frozen targets." (1.60.1.70707
 	// talent text; 70425 through 70685 said 200%, 70374 said 300%). The
@@ -28,6 +27,16 @@ const (
 	iceLanceFrozenMultiplier = 1 + iceLanceFrozenBonusPct/100
 	// iceLanceFrozenBonusPct is the talent text's "300% increased damage".
 	iceLanceFrozenBonusPct = 300.0
+
+	// iceLanceSpellCoeff is every rank's spell power coefficient. The
+	// client column is 0 and the generator's 0.4286 is only the
+	// instant-spell convention. Forever beta logs (foreverlogs reports
+	// 2762, 2763 and 2786, four Frost mages at 33-35) put it at 0.10 to
+	// 0.12: each mage's spell power, read off their own Frostbolt (0.814),
+	// Cone of Cold (0.129) and Frost Nova (0.029) hits, agrees within about
+	// 10% across the three, and their unfrozen and frozen (/4) Ice Lance
+	// hits sit 0.107 a point above the rank's base on average.
+	iceLanceSpellCoeff = 0.107
 )
 
 func (mage *Mage) registerIceLanceSpell() {
@@ -92,7 +101,7 @@ func (mage *Mage) getIceLanceConfig(rank int, cdTimer *core.Timer) core.SpellCon
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
-		BonusCoefficient: IceLanceSpellCoeff[rank],
+		BonusCoefficient: iceLanceSpellCoeff,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := sim.Roll(baseDamageLow, baseDamageHigh)
