@@ -253,12 +253,11 @@ func mainHandOnly(t *testing.T, handType proto.HandType) *proto.EquipmentSpec {
 	return &proto.EquipmentSpec{Items: items}
 }
 
-// Two-Handed Weapon Specialization (client 1.60.1.70707): "Increases the
-// physical damage you deal by 6%, and reduces all threat you generate by
-// 20% while a two-handed melee weapon is equipped" at 3/3. It reaches
-// physical damage only, so Holy Strike (a Holy weapon attack) no longer
-// gains it, and a one-hander gets neither half.
-func TestTwoHandedWeaponSpecializationIsPhysicalDamageAndLessThreat(t *testing.T) {
+// Two-Handed Weapon Specialization 3/3 (spell 20111): effect 0 is +6%
+// damage on school mask EffectMiscValue 3, Physical and Holy since the
+// 70755 hotfix push (1, Physical only, before), effect 1 is -20% threat,
+// while a two-handed melee weapon is equipped. A one-hander gets neither.
+func TestTwoHandedWeaponSpecializationIsPhysicalAndHolyDamageAndLessThreat(t *testing.T) {
 	talents := talentString(t, map[string]int{"two_handed_weapon_specialization": 3})
 	for _, tc := range []struct {
 		hand           proto.HandType
@@ -269,18 +268,19 @@ func TestTwoHandedWeaponSpecializationIsPhysicalDamageAndLessThreat(t *testing.T
 	} {
 		_, base := newTalentTestUnitWith(t, "", mainHandOnly(t, tc.hand))
 		_, talented := newTalentTestUnitWith(t, talents, mainHandOnly(t, tc.hand))
-		physical := talented.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] / base.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical]
-		if math.Abs(physical-tc.damage) > 1e-9 {
-			t.Errorf("%v: physical damage x%v, want x%v", tc.hand, physical, tc.damage)
+		for _, school := range []stats.SchoolIndex{stats.SchoolIndexPhysical, stats.SchoolIndexHoly} {
+			got := talented.PseudoStats.SchoolDamageDealtMultiplier[school] / base.PseudoStats.SchoolDamageDealtMultiplier[school]
+			if math.Abs(got-tc.damage) > 1e-9 {
+				t.Errorf("%v: school %v damage x%v, want x%v", tc.hand, school, got, tc.damage)
+			}
+		}
+		for _, school := range []stats.SchoolIndex{stats.SchoolIndexFire, stats.SchoolIndexShadow} {
+			if got := talented.PseudoStats.SchoolDamageDealtMultiplier[school] / base.PseudoStats.SchoolDamageDealtMultiplier[school]; math.Abs(got-1) > 1e-9 {
+				t.Errorf("%v: school %v damage x%v, want x1", tc.hand, school, got)
+			}
 		}
 		if threat := talented.PseudoStats.ThreatMultiplier / base.PseudoStats.ThreatMultiplier; math.Abs(threat-tc.threat) > 1e-9 {
 			t.Errorf("%v: threat x%v, want x%v", tc.hand, threat, tc.threat)
-		}
-		holyStrike := func(unit *core.Unit) float64 {
-			return unit.GetSpell(core.ActionID{SpellID: 10333}).DamageMultiplier
-		}
-		if got, want := holyStrike(talented), holyStrike(base); math.Abs(got-want) > 1e-9 {
-			t.Errorf("%v: Holy Strike's multiplier is %v with the talent, %v without", tc.hand, got, want)
 		}
 	}
 }
