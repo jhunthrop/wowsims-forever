@@ -14,8 +14,18 @@ import (
 // Up taken, prepulled so spells can be driven through ApplyEffects.
 func newHeatingUpTestMage(t *testing.T) (*core.Simulation, *Mage) {
 	t.Helper()
+	return newHeatingUpTestMageWithTalents(t)
+}
+
+// newHeatingUpTestMageWithTalents is newHeatingUpTestMage with one more
+// rank of each named bool talent on top (proto field names).
+func newHeatingUpTestMageWithTalents(t *testing.T, extraTalents ...string) (*core.Simulation, *Mage) {
+	t.Helper()
 	talentsStr := talentStringWithRank(t, ForeverFrostTalents, "pyroblast", 1)
 	talentsStr = talentStringWithRank(t, talentsStr, "heating_up", 1)
+	for _, talent := range extraTalents {
+		talentsStr = talentStringWithRank(t, talentsStr, talent, 1)
+	}
 
 	player := core.WithSpec(
 		&proto.Player{
@@ -158,6 +168,56 @@ func TestHeatingUpIsSpentByTheNextPyroblast(t *testing.T) {
 	}
 	if got, want := pyroblast.CastTime(), time.Duration(PyroblastCastTime[PyroblastRanks])*time.Millisecond; got != want {
 		t.Errorf("Pyroblast cast time after the buff was spent = %v, want %v", got, want)
+	}
+}
+
+// Blizzard's 16 October 2026 beta notes: "Heating Up is no longer consumed
+// if the Mage also had Presence of Mind active for the Pyroblast cast."
+// The engine spent the stacks on every Pyroblast that completed, the
+// instant one included.
+func TestHeatingUpSurvivesAPresenceOfMindPyroblast(t *testing.T) {
+	sim, mage := newHeatingUpTestMageWithTalents(t, "presence_of_mind")
+	target := sim.Encounter.TargetUnits[0]
+	if mage.PresenceOfMind == nil {
+		t.Fatal("Presence of Mind is not registered with the talent taken")
+	}
+	fireball := mage.Fireball[core.MaxTrainerRank(FireballRanks)]
+	forceOutcome(fireball, true)
+	castAndLand(sim, target, fireball)
+	castAndLand(sim, target, fireball)
+	if got := heatingUpStacks(mage); got != 2 {
+		t.Fatalf("stacks before the instant Pyroblast = %d, want 2", got)
+	}
+
+	pyroblast := mage.Pyroblast[PyroblastRanks]
+	mage.GCD.Reset()
+	if !mage.PresenceOfMind.Cast(sim, target) {
+		t.Fatal("Presence of Mind would not cast")
+	}
+	if got := pyroblast.CastTime(); got != 0 {
+		t.Fatalf("Pyroblast under Presence of Mind casts in %v, want instant", got)
+	}
+	if !pyroblast.Cast(sim, target) {
+		t.Fatal("the instant Pyroblast would not cast")
+	}
+	advanceBy(sim, time.Second)
+	if got := heatingUpStacks(mage); got != 2 {
+		t.Errorf("stacks after a Presence of Mind Pyroblast = %d, want 2 (the instant cast does not spend them)", got)
+	}
+
+	// Presence of Mind is spent, so the next Pyroblast is a hard cast at
+	// two stacks, and that one spends them.
+	base := time.Duration(PyroblastCastTime[PyroblastRanks]) * time.Millisecond
+	if got, want := pyroblast.CastTime(), base*50/100; got != want {
+		t.Fatalf("Pyroblast cast time after Presence of Mind = %v, want %v", got, want)
+	}
+	mage.GCD.Reset()
+	if !pyroblast.Cast(sim, target) {
+		t.Fatal("the hard-cast Pyroblast would not cast")
+	}
+	advanceBy(sim, 4*time.Second)
+	if got := heatingUpStacks(mage); got != 0 {
+		t.Errorf("stacks after the hard-cast Pyroblast = %d, want 0", got)
 	}
 }
 
