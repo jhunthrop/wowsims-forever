@@ -156,6 +156,15 @@
       }
     },
     {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1316697
+          }
+        }
+      }
+    },
+    {
       "notes": "Shadow Bolt fills every remaining global while the DoTs run their course.",
       "action": {
         "castSpell": {
