@@ -496,6 +496,19 @@ const boomingVoiceClassMask = WarriorSpellMaskBattleShout | WarriorSpellMaskDemo
 
 const unbridledWrathRage = 1.0
 
+// countsAsWhiteSwing reports whether a hit is a "done melee auto attack"
+// for the client's ProcTypeMask 4, which Unbridled Wrath (12322), the
+// Flurry charge aura (12966) and Reckless Swings (1329555) all carry. Only
+// a pure white swing is one: Forever beta logs (ppach/marrow.github.io
+// eternal/data/logs, 2026-09-23; forever-bugs #105) hold 228 landed Heroic
+// Strikes and Cleaves and not one Unbridled Wrath proc after them, against
+// a 36% rate on white swings. So the next-swing abilities, whose mask
+// carries an auto bit (onNextSwingProcMask), neither proc these auras nor
+// spend their charges.
+func countsAsWhiteSwing(procMask core.ProcMask) bool {
+	return procMask.Matches(core.ProcMaskMeleeWhiteHit) && !procMask.Matches(core.ProcMaskMeleeSpecial)
+}
+
 // applyUnbridledWrath is Unbridled Wrath: "a 60% chance to generate 1
 // additional Rage when you deal melee damage with a weapon" at rank 5,
 // 12% a point, regardless of weapon (see unbridledWrathRage).
@@ -518,7 +531,7 @@ func (warrior *Warrior) applyUnbridledWrath() {
 				return
 			}
 
-			if spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) && sim.RandomFloat("Unbridled Wrath") < procChance {
+			if countsAsWhiteSwing(spell.ProcMask) && sim.RandomFloat("Unbridled Wrath") < procChance {
 				warrior.AddRage(sim, unbridledWrathRage, rageMetrics)
 			}
 		},
@@ -714,7 +727,7 @@ func (warrior *Warrior) makeFlurryConsumptionTrigger(flurryAura *core.Aura) *cor
 		Label: "Flurry Consume Trigger - " + flurryAura.Label,
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			// Remove a stack.
-			if flurryAura.IsActive() && spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) && icd.IsReady(sim) {
+			if flurryAura.IsActive() && countsAsWhiteSwing(spell.ProcMask) && icd.IsReady(sim) {
 				icd.Use(sim)
 				flurryAura.RemoveStack(sim)
 			}

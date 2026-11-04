@@ -4,6 +4,12 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// onNextSwingProcMask is the proc mask of the two on-next-swing
+// abilities: main-hand special plus main-hand auto, since they replace a
+// white swing (upstream wowsims 543752637). countsAsWhiteSwing keeps them
+// off the client's "done melee auto attack" auras.
+const onNextSwingProcMask = core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto
+
 // heroicStrikeRank and cleaveRank are the TOP ranks of the two
 // on-next-swing abilities a level-60 warrior casts, as labels into the
 // generated rank arrays in constants_auto_gen.go. Heroic Strike's rank
@@ -81,7 +87,7 @@ func (warrior *Warrior) registerHeroicStrikeSpell(realismICD *core.Cooldown) {
 		ActionID:       core.ActionID{SpellID: spellID},
 		SpellSchool:    core.SpellSchoolPhysical,
 		DefenseType:    core.DefenseTypeMelee,
-		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
+		ProcMask:       onNextSwingProcMask,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | SpellFlagOffensive,
 
 		RequiredLevel: HeroicStrikeLevel[rank],
@@ -140,7 +146,7 @@ func (warrior *Warrior) registerCleaveSpell(realismICD *core.Cooldown) {
 		ActionID:       core.ActionID{SpellID: spellID},
 		SpellSchool:    core.SpellSchoolPhysical,
 		DefenseType:    core.DefenseTypeMelee,
-		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeMHAuto,
+		ProcMask:       onNextSwingProcMask,
 		Flags:          core.SpellFlagMeleeMetrics | SpellFlagOffensive,
 
 		RequiredLevel: CleaveLevel[rank],
