@@ -120,7 +120,7 @@
           }
         }
       },
-      "notes": "Garrote after every Ghostly Strike, at four combo points or fewer, even when the old one is still ticking: Ghostly Strike lets it in without Stealth, and a fresh Garrote is a bleed that Hemorrhage, Opportunity and Death Mark all feed."
+      "notes": "Garrote after every Ghostly Strike, at four combo points or fewer and ahead of Rupture at exactly four, even when the old one is still ticking: Ghostly Strike lets it in without Stealth, and a fresh Garrote is a bleed that Hemorrhage, Opportunity and Death Mark all feed."
     },
     {
       "action": {
@@ -162,10 +162,10 @@
           }
         }
       },
-      "notes": "Rupture at four or more combo points whenever it is not ticking. Hemorrhage and Serrated Blades both feed it, so it is the main finisher."
+      "notes": "Rupture at four or more combo points whenever it is not ticking, so it goes up right after the opener: Hemorrhage and Serrated Blades both feed it, which makes it the main finisher."
     },
     {
-      "notes": "Death Mark at four or more combo points while Rupture is ticking: for 6 seconds it stores a share of everything you hit the target for, Rupture and Garrote at twice the rate, then deals it back at once. It comes back every 10 seconds, so a mark now beats a bigger one a few seconds later.",
+      "notes": "Death Mark at four or more combo points while Rupture is ticking, and between marks the points Rupture and Slice and Dice do not need wait for the next one: for 6 seconds it stores a share of everything you hit the target for, Rupture and Garrote at twice the rate, then deals it back at once. It comes back every 10 seconds, so a mark now beats a bigger one a few seconds later, and an Eviscerate in between costs more than it deals.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -423,7 +423,7 @@
           }
         }
       },
-      "notes": "Hemorrhage is the builder: one combo point, and its debuff makes your Rupture and Garrote hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more, and hold it after a Ghostly Strike until the Garrote is in."
+      "notes": "Hemorrhage, your builder for every global nothing above takes, and it keeps Hemorrhage's debuff up: one combo point a cast, and the debuff makes your Rupture and Garrote hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more, and hold it after a Ghostly Strike until the Garrote is in."
     },
     {
       "action": {
