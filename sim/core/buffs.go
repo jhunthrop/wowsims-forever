@@ -122,7 +122,23 @@ type StatConfig struct {
 // Create an exclusive effect that tries to determine within-category priority based on the value of stats provided.
 func makeExclusiveBuff(aura *Aura, config BuffConfig) {
 	aura.BuildPhase = CharacterBuildPhaseBuffs
+	newExclusiveStatsEffect(aura, config)
+}
 
+// KingsStatsEffect gives a cast-applied Blessing of Kings aura (a paladin's
+// own cast, which lasts minutes rather than the whole fight) its +10% to
+// every stat through the category the raid Kings and Heart of the Lion's
+// area buff share, so it never stacks with either.
+func KingsStatsEffect(aura *Aura) {
+	newExclusiveStatsEffect(aura, BuffConfig{
+		Category: kingsAndLionStatsCategory,
+		Stats:    HeartOfTheLionStatConfigs(),
+	})
+}
+
+// newExclusiveStatsEffect is makeExclusiveBuff without the build phase, for
+// an aura that is cast during the fight.
+func newExclusiveStatsEffect(aura *Aura, config BuffConfig) {
 	startingStats := aura.Unit.GetStats()
 	bonusStats := stats.Stats{}
 	statDeps := []*stats.StatDependency{}

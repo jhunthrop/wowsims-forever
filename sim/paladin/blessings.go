@@ -29,6 +29,9 @@ type blessingKind struct {
 	// newEffect builds the effect on a unit; deps and multipliers are made
 	// once per unit here.
 	newEffect func(target *core.Unit) blessingEffect
+	// exclusive, when set, gives the blessing's aura on each unit an
+	// exclusive effect beside newEffect.
+	exclusive func(aura *core.Aura)
 }
 
 var blessingKinds = []blessingKind{
@@ -45,7 +48,7 @@ var blessingKinds = []blessingKind{
 	{
 		label: "Blessing of Kings", raidAuraLabel: "Blessing of Kings",
 		spells: blessingOfKingsSpells, greater: greaterBlessingOfKingsSpells,
-		newEffect: kingsEffect,
+		newEffect: noBlessingEffect, exclusive: core.KingsStatsEffect,
 	},
 }
 
@@ -62,29 +65,13 @@ func statsEffect(stat stats.Stat) func(*core.Unit) blessingEffect {
 	}
 }
 
-// kingsEffect raises Stamina, Agility, Strength, Intellect and Spirit by the
-// amount percent, the stats the raid-buff Blessing of Kings raises.
-func kingsEffect(target *core.Unit) blessingEffect {
-	multiplier := 1 + blessingOfKingsStatBonus/100.0
-	deps := []*stats.StatDependency{
-		target.NewDynamicMultiplyStat(stats.Stamina, multiplier),
-		target.NewDynamicMultiplyStat(stats.Agility, multiplier),
-		target.NewDynamicMultiplyStat(stats.Strength, multiplier),
-		target.NewDynamicMultiplyStat(stats.Intellect, multiplier),
-		target.NewDynamicMultiplyStat(stats.Spirit, multiplier),
-	}
-	return blessingEffect{
-		gain: func(sim *core.Simulation, _ float64) {
-			for _, dep := range deps {
-				target.EnableBuildPhaseStatDep(sim, dep)
-			}
-		},
-		lose: func(sim *core.Simulation, _ float64) {
-			for _, dep := range deps {
-				target.DisableBuildPhaseStatDep(sim, dep)
-			}
-		},
-	}
+// noBlessingEffect is for a blessing whose whole effect is its exclusive
+// effect. Kings' +10% to every stat (blessingOfKingsStatBonus) goes through
+// core.KingsStatsEffect, the category the raid Kings and Heart of the Lion's
+// area buff share, so a cast Kings never stacks with either.
+func noBlessingEffect(*core.Unit) blessingEffect {
+	none := func(*core.Simulation, float64) {}
+	return blessingEffect{gain: none, lose: none}
 }
 
 // registeredBlessing is one paladin's cast-applied blessing: an aura per
@@ -126,7 +113,7 @@ func blessingLearned(kind blessingKind, level int32) bool {
 func (blessing *registeredBlessing) newAura(paladin *Paladin, target *core.Unit) *core.Aura {
 	effect := blessing.kind.newEffect(target)
 	applied := 0.0
-	return target.RegisterAura(core.Aura{
+	aura := target.RegisterAura(core.Aura{
 		Label:    fmt.Sprintf("%s (paladin %d)", blessing.kind.label, paladin.UnitIndex),
 		ActionID: core.ActionID{SpellID: blessing.kind.spells[0].spellID},
 		Duration: blessingDuration,
@@ -138,6 +125,10 @@ func (blessing *registeredBlessing) newAura(paladin *Paladin, target *core.Unit)
 			effect.lose(sim, applied)
 		},
 	})
+	if blessing.kind.exclusive != nil {
+		blessing.kind.exclusive(aura)
+	}
+	return aura
 }
 
 func (paladin *Paladin) registerBlessingCasts(blessing *registeredBlessing, spells []blessingSpell, raidWide bool) {
