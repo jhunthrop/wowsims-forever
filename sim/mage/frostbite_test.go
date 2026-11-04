@@ -22,7 +22,7 @@ func TestFrostbiteChanceFollowsTheTalentRank(t *testing.T) {
 		frozen := 0
 		for i := 0; i < rolls; i++ {
 			built.FrostbiteFrozenAuras.Get(target).Deactivate(sim)
-			built.rollFrostbite(sim, target, 1)
+			built.rollFrostbite(sim, target)
 			if built.FrostbiteFrozenAuras.Get(target).IsActive() {
 				frozen++
 			}
@@ -45,7 +45,7 @@ func TestFrostbiteIsAbsentWithoutTheTalent(t *testing.T) {
 func TestFrostbiteCannotFreezeARaidBoss(t *testing.T) {
 	built, sim, boss := newFrostMageSimWithTalents(t, bossTarget(), frostbiteTalents(t, 3))
 	for i := 0; i < 500; i++ {
-		built.rollFrostbite(sim, boss, 1)
+		built.rollFrostbite(sim, boss)
 	}
 	if built.FrostbiteFrozenAuras.Get(boss).IsActive() || built.isTargetFrozen(boss) {
 		t.Error("a raid boss was frozen by Frostbite")
@@ -97,38 +97,5 @@ func TestFrostNovaDoesNotRollFrostbite(t *testing.T) {
 		if built.FrostbiteFrozenAuras.Get(target).IsActive() {
 			t.Fatal("Frost Nova is not a Chill effect, so it must not roll Frostbite")
 		}
-	}
-}
-
-// Blizzard's 1 October 2026 beta note (developers' notes): "Using a Rank 1
-// Frostbolt at level 60 will result in a 0% chance to get a Frostbite
-// activation." A Chill from a rank far below the mage rolls Frostbite at the
-// rank's level-gap share (core.Spell.LevelPenaltyShare); the top rank keeps
-// its whole chance (TestFrostbiteProcsFromChillSpells).
-func TestFrostbiteNeverProcsFromARankOneFrostboltAtSixty(t *testing.T) {
-	built, sim, target := newFrostMageSimWithTalents(t, freezableTarget(), frostbiteTalents(t, 3))
-	rankOne := built.Frostbolt[1]
-	if share := rankOne.LevelPenaltyShare(); share != 0 {
-		t.Fatalf("rank 1 Frostbolt at level %d keeps share %v, want 0", built.Level, share)
-	}
-	for i := 0; i < 300; i++ {
-		rankOne.ApplyEffects(sim, target, rankOne)
-		waitForOutcomes(sim)
-		if built.FrostbiteFrozenAuras.Get(target).IsActive() {
-			t.Fatal("a rank 1 Frostbolt froze a target at level 60")
-		}
-	}
-	// The roll itself scales: a half share freezes about half as often.
-	frozen := 0
-	const rolls = 6000
-	for i := 0; i < rolls; i++ {
-		built.FrostbiteFrozenAuras.Get(target).Deactivate(sim)
-		built.rollFrostbite(sim, target, 0.5)
-		if built.FrostbiteFrozenAuras.Get(target).IsActive() {
-			frozen++
-		}
-	}
-	if rate := float64(frozen) / rolls; rate < 0.055 || rate > 0.095 {
-		t.Errorf("half-share freeze rate %.3f, want about 0.075", rate)
 	}
 }

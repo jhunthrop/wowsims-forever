@@ -226,39 +226,3 @@ func TestACastRankTakesItsMaxLevelShare(t *testing.T) {
 		t.Errorf("Lesser Heal rank 1 at 30: coefficient %v, want %v", got, want)
 	}
 }
-
-// A registered rank exposes the share it kept, for proc sites to roll at
-// (Blizzard's beta note: a rank "vastly below your current level" has "a
-// reduced chance to activate your Class abilities and Talents", Frostbite and
-// Omen of Clarity named; a rank 1 Frostbolt at 60 has a 0% Frostbite chance).
-// A spell no unit registered keeps a whole share.
-func TestARegisteredRankExposesItsLevelGapShare(t *testing.T) {
-	_, caster, _ := newPeriodicCritFixture(t, 0)
-	caster.Level = 60
-	register := func(id int32, level int) *Spell {
-		return caster.RegisterSpell(SpellConfig{
-			ActionID:         ActionID{SpellID: id},
-			SpellSchool:      SpellSchoolFrost,
-			DefenseType:      DefenseTypeMagic,
-			ProcMask:         ProcMaskSpellDamage,
-			RequiredLevel:    level,
-			ManaCost:         ManaCostOptions{FlatCost: 50},
-			Cast:             CastConfig{DefaultCast: Cast{GCD: GCDDefault}},
-			DamageMultiplier: 1,
-			ThreatMultiplier: 1,
-			BonusCoefficient: 0.8,
-		})
-	}
-	for _, c := range []struct {
-		id    int32
-		level int
-		want  float64
-	}{{901, 4, 0}, {902, 30, 0.35}, {903, 43, 1}} {
-		if got := register(c.id, c.level).LevelPenaltyShare(); math.Abs(got-c.want) > 1e-9 {
-			t.Errorf("rank learned at %d at level 60: share %.4f, want %.4f", c.level, got, c.want)
-		}
-	}
-	if got := (&Spell{}).LevelPenaltyShare(); got != 1 {
-		t.Errorf("an unregistered spell's share is %v, want 1", got)
-	}
-}

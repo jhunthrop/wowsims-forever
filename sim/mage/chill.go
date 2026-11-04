@@ -69,17 +69,15 @@ func (mage *Mage) applyChillTriggers() {
 // chillApplied is one Chill application on target by spell.
 func (mage *Mage) chillApplied(sim *core.Simulation, spell *core.Spell, target *core.Unit) {
 	mage.rollFingersOfFrost(sim, mage.fingersOfFrostChance(spell))
-	mage.rollFrostbite(sim, target, spell.LevelPenaltyShare())
+	mage.rollFrostbite(sim, target)
 }
 
-// rollFrostbite is one Chill application's chance to freeze target. A rank
-// far below the mage's level rolls at its level-gap share (Blizzard's beta
-// note names Frostbite: a rank 1 Frostbolt at 60 never freezes).
-func (mage *Mage) rollFrostbite(sim *core.Simulation, target *core.Unit, rankShare float64) {
+// rollFrostbite is one Chill application's chance to freeze target.
+func (mage *Mage) rollFrostbite(sim *core.Simulation, target *core.Unit) {
 	if mage.FrostbiteFrozenAuras == nil || !mage.canFreeze(target) {
 		return
 	}
-	chance := frostbiteChancePerRank * float64(mage.Talents.Frostbite) * rankShare
+	chance := frostbiteChancePerRank * float64(mage.Talents.Frostbite)
 	if sim.Proc(chance, "Frostbite") {
 		mage.FrostbiteFrozenAuras.Get(target).Activate(sim)
 	}

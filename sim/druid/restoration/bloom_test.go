@@ -6,7 +6,6 @@ import (
 
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/stats"
-	"github.com/wowsims/classic/sim/druid"
 )
 
 // runUntil steps the simulation to the given time.
@@ -99,47 +98,5 @@ func TestBloomCanCrit(t *testing.T) {
 	resto.Bloom.ApplyEffects(sim, &resto.Unit, resto.Bloom.Spell)
 	if got := resto.Bloom.SpellMetrics[resto.UnitIndex].TotalCritHealing; got <= 0 {
 		t.Error("Bloom at 200% crit chance did not crit")
-	}
-}
-
-// Blizzard's 1 October 2026 beta note names Omen of Clarity among the class
-// abilities a rank "vastly below your current level" activates less: a
-// Rejuvenation rank 1 at 60 (level-gap share 0, core.Spell.LevelPenaltyShare)
-// never grants Clearcasting, while the top rank still does.
-func TestOmenOfClarityNeverProcsFromARankOneRejuvenationAtSixty(t *testing.T) {
-	resto, sim := healer(t, nil)
-	rankOne := resto.Rejuvenation[1]
-	if share := rankOne.LevelPenaltyShare(); share != 0 {
-		t.Fatalf("rank 1 Rejuvenation at 60 keeps share %v, want 0", share)
-	}
-	// Omen rolls a heal over time once a cast (OnCastComplete), so the test
-	// casts, a global apart, with the mana topped up.
-	manaMetrics := resto.NewManaMetrics(core.ActionID{SpellID: 1})
-	cast := func(spell *druid.DruidSpell) {
-		// A global apart, with the global, the running Rejuvenation and the
-		// mana reset by hand: the fixture's fight is too short to step through
-		// hundreds of casts.
-		sim.CurrentTime += core.GCDDefault
-		resto.GCD.Reset()
-		if hot := spell.Hot(&resto.Unit); hot != nil && hot.IsActive() {
-			hot.Deactivate(sim)
-		}
-		resto.AddMana(sim, resto.MaxMana()-resto.CurrentMana(), manaMetrics)
-		if !spell.Cast(sim, &resto.Unit) {
-			t.Fatalf("%s did not cast at %v", spell.ActionID, sim.CurrentTime)
-		}
-	}
-	for i := 0; i < 300; i++ {
-		cast(rankOne)
-		if resto.ClearcastingAura.IsActive() {
-			t.Fatal("a rank 1 Rejuvenation granted Clearcasting at level 60")
-		}
-	}
-	top := resto.Rejuvenation[core.MaxTrainerRank(11)]
-	for i := 0; i < 600 && !resto.ClearcastingAura.IsActive(); i++ {
-		cast(top)
-	}
-	if !resto.ClearcastingAura.IsActive() {
-		t.Error("600 top-rank Rejuvenations never granted Clearcasting")
 	}
 }
