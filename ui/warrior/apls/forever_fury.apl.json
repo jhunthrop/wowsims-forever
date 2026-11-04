@@ -224,6 +224,28 @@
       }
     },
     {
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentRage": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "80"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18499
+          }
+        }
+      }
+    },
+    {
       "notes": "Only before level 36, while you still fight in Battle Stance. Once Whirlwind is trained you live in Berserker Stance and it never comes up.",
       "action": {
         "castSpell": {

@@ -201,6 +201,15 @@
       }
     },
     {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1329555
+          }
+        }
+      }
+    },
+    {
       "notes": "Below 20%. Every point of rage you hold goes into the hit, so walk into the phase with a full bar.",
       "action": {
         "condition": {
@@ -241,6 +250,15 @@
           "spellId": {
             "spellId": 11605,
             "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1310222
           }
         }
       }
