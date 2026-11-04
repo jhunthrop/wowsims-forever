@@ -423,7 +423,7 @@ func TestWindBlessedHastesCastingMeleeAndRanged(t *testing.T) {
 // Elune's Light 1259799: crit +10% for 15 s, 3 min cooldown. Berserking
 // 20554: 15 s, 3 min, no cost (Blizzard's 27 October notes, "Berserking
 // duration increased to 15 seconds (was 10 seconds)", and the 30 October
-// hotfix cache; the shipped row's SpellDuration still gives 10 s). Both read back from the registered spell and
+// hotfix cache; the 70755 SpellMisc row is DurationIndex 8, 15000 ms). Both read back from the registered spell and
 // aura, which is where the engine holds the numbers.
 func TestElunesLightAndBerserkingMatchTheClientRows(t *testing.T) {
 	night, _ := racialPlayer(t, proto.Race_RaceNightElf, proto.MobType_MobTypeUnknown)
@@ -439,9 +439,12 @@ func TestElunesLightAndBerserkingMatchTheClientRows(t *testing.T) {
 	}
 
 	troll, _ := racialPlayer(t, proto.Race_RaceTroll, proto.MobType_MobTypeUnknown)
-	berserking := troll.GetSpell(ActionID{SpellID: 26297})
+	berserking := troll.GetSpell(ActionID{SpellID: 20554})
 	if berserking == nil {
-		t.Fatal("Berserking is not registered")
+		t.Fatal("Berserking is not registered under the client id 20554")
+	}
+	if troll.GetSpell(ActionID{SpellID: 26297}) != nil {
+		t.Error("Berserking is still registered under 26297, the Classic energy variant the 70755 client does not ship")
 	}
 	if berserking.CD.Duration != 3*time.Minute {
 		t.Errorf("Berserking cooldown is %v, want 3m", berserking.CD.Duration)

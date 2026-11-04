@@ -11,7 +11,7 @@ import (
 // The cooldowns the major-cooldown pass is held to for a healer whose
 // current target is a friend.
 const (
-	berserkingSpellID           int32 = 26297
+	berserkingSpellID           int32 = 20554
 	talismanOfEphemeralPowerID  int32 = 18820 // use: spell power
 	earthstrikeID               int32 = 21180 // use: attack power only
 	cooldownRunIterationsPerRun       = 10
