@@ -437,15 +437,20 @@ var racialsByRace = map[proto.Race][]Racial{
 			Name: "Expansive Mind", Kind: RacialPassive, Confirmed: true,
 			Note: "client 20591 (Mana), 1259802 (Rage), 1259803 (Energy): +5% maximum of each",
 			Apply: func(character *Character) {
-				// 5% Mana, Rage and Energy. Mana takes the multiplicative
-				// stat dependency every other "+X%" racial in this file
-				// uses; Rage and Energy are fixed 100-point pools outside
-				// the stat-dependency system (see stats/deps.go's
-				// safeDepsOrder), so their 5% is written as the flat
-				// point value of 5% of Classic's 100-point cap.
-				character.MultiplyStat(stats.Mana, 1.05)
-				character.AddStat(stats.Rage, 0.05*MaxRage)
-				character.AddStat(stats.Energy, 0.05*expansiveMindEnergyCap)
+				// Aura 178 at 5 on each resource. Mana takes the
+				// multiplicative stat dependency every other "+X%" racial
+				// in this file uses. Rage and Energy are bar caps outside
+				// the stat system, so the racial raises the cap of the bar
+				// the class has already enabled (the class constructor runs
+				// before the race effects): 105 rage, or 105 energy (more
+				// with Vigor, which the percent multiplies).
+				character.MultiplyStat(stats.Mana, expansiveMindMultiplier)
+				if character.HasRageBar() {
+					character.MultiplyMaxRage(expansiveMindMultiplier)
+				}
+				if character.HasEnergyBar() {
+					character.EnableEnergyBar(character.MaxEnergy() * expansiveMindMultiplier)
+				}
 			},
 		},
 		{
@@ -508,13 +513,9 @@ var racialsByRace = map[proto.Race][]Racial{
 	}}, skyborneShared()...),
 }
 
-// expansiveMindEnergyCap is Classic's fixed Energy pool size, used to
-// convert Expansive Mind's "+5% Energy" into a flat point value the same
-// way MaxRage is used for Rage. Unexported and file-local rather than a
-// new shared constant: sim/core/energy.go and sim/rogue/rogue.go already
-// hardcode this same 100-point baseline inline, and unifying all three
-// into one shared constant is a cleanup outside this file's scope.
-const expansiveMindEnergyCap = 100
+// expansiveMindMultiplier is Expansive Mind's 5% (aura 178, base points 5)
+// on maximum mana, rage or energy.
+const expansiveMindMultiplier = 1.05
 
 // Berserking (client 20554): effects aura 319, 140 and 65 at 10 each and a
 // 3 min cooldown, with no resource cost. The duration is 15 s: Blizzard's

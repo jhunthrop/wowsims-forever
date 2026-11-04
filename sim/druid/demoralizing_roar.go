@@ -14,9 +14,9 @@ import (
 // 5 (9898, learned at 52) is -193 and -1.4 a level up to level 62, so a
 // level 60 druid takes 204.2 from the target's attack power.
 //
-// unconfirmed: the threat. The client's table has no threat column; the
-// flat bonus is twice the spell's level, the convention the rest of the
-// fork's threat-bearing utilities use, with no multiplier.
+// The threat is the client's effect 63 on each rank: 8, 16, 26, 34 and 42
+// at the rank's level, plus 0.8 a level to the rank's max level, on every
+// target the roar lands on (demoralizingRoarThreat).
 const (
 	DemoralizingRoarRageCost = 10.0
 	demoralizingRoarDuration = 30 * time.Second
@@ -39,6 +39,17 @@ func demoralizingRoarEffects() [DemoralizingRoarRanks + 1]clientdamage.Effect {
 		}
 	}
 	return effects
+}
+
+// demoralizingRoarBaseThreat and demoralizingRoarThreatPerLevel are each
+// rank's effect 63 (spellconst/druid.json 99, 1735, 9490, 9747, 9898).
+var demoralizingRoarBaseThreat = [DemoralizingRoarRanks + 1]float64{0, 8, 16, 26, 34, 42}
+
+const demoralizingRoarThreatPerLevel = 0.8
+
+func demoralizingRoarThreat(rank int, level int32) float64 {
+	levelsAbove := max(0, min(int(level), DemoralizingRoarMaxLevel[rank])-DemoralizingRoarLevel[rank])
+	return demoralizingRoarBaseThreat[rank] + demoralizingRoarThreatPerLevel*float64(levelsAbove)
 }
 
 func (druid *Druid) registerDemoralizingRoarSpell() {
@@ -73,7 +84,7 @@ func (druid *Druid) registerDemoralizingRoarSpell() {
 		},
 
 		ThreatMultiplier: 1,
-		FlatThreatBonus:  2 * float64(DemoralizingRoarLevel[rank]),
+		FlatThreatBonus:  demoralizingRoarThreat(rank, druid.Level),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			for _, aoeTarget := range sim.Encounter.TargetUnits {

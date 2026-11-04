@@ -424,6 +424,10 @@ func (mage *Mage) applyMasterOfElements() {
 // ("Combustion 3 charges"), where the earlier client tables said 4.
 const combustionCriticalStrikes = 3
 
+// combustionMaxStacks is the buff's stack cap (28682, SpellAuraOptions
+// 135400 CumulativeAura 10): +10% Fire crit a stack, +100% at most.
+const combustionMaxStacks = 10
+
 // addManaflareFrostfireCrit shifts Frostfire Bolt's crit rating by delta
 // when the Manaflare Regalia 5-piece is worn: its bonus lasts as long as
 // Combustion does.
@@ -466,7 +470,7 @@ func (mage *Mage) registerCombustionCD() {
 		Label:     "Combustion",
 		ActionID:  actionID,
 		Duration:  core.NeverExpires,
-		MaxStacks: 20,
+		MaxStacks: combustionMaxStacks,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			numCrits = 0
 			mage.addManaflareFrostfireCrit(frostfireBolts, manaflareFrostfireCombustionCritPoints*core.CritRatingPerCritChance)

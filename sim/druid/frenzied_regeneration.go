@@ -8,19 +8,19 @@ import (
 
 // Frenzied Regeneration (spell 22842, learned at 36; build 1.60.1.70009): a
 // Bear Form ability on the global cooldown with a 3 minute cooldown that
-// lasts 10 seconds. The client row holds only the periodic aura (aura 23,
-// amount 1, every second); the conversion is the Era spell's: each second it
-// spends up to 10 rage and heals 0.3% of maximum health for every point of
-// rage spent.
+// lasts 10 seconds. Each second it spends up to 10 rage and heals 1% of
+// maximum health for every point spent: the client's description is "Each
+// point of Rage is converted into $s1% health" and effect 0 (aura 23, every
+// second) is amount 1 (1.60.1.70753; Wowhead Forever's tooltip reads 1%).
 //
-// unconfirmed: the whole conversion, because the client states none of it.
+// unconfirmed: the 10 rage a second, which is the description's text only.
 const (
 	frenziedRegenerationSpellID       = 22842
 	frenziedRegenerationDuration      = 10 * time.Second
 	frenziedRegenerationCooldown      = 3 * time.Minute
 	frenziedRegenerationLearnLevel    = 36
 	frenziedRegenerationRagePerSecond = 10.0
-	frenziedRegenerationHealthPerRage = 0.003
+	frenziedRegenerationHealthPerRage = 0.01
 	frenziedRegenerationTickPeriod    = time.Second
 )
 

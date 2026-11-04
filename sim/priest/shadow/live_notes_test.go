@@ -130,3 +130,24 @@ func TestInnerFocusCritBonusSkipsPeriodicSpells(t *testing.T) {
 		t.Errorf("Inner Focus raised Devouring Plague's crit rating by %v, want 0 (periodic)", got)
 	}
 }
+
+// Inner Focus's crit modifier (14751 effect 1, SpellEffect 692357,
+// class mask 0xD9F43E90/0x00098434/0/0x10200000) does not name Shadow
+// Word: Death (1309636, class mask word 1 bit 0x2); only its cost
+// modifier (692356, word 1 0x10940436) does. A Death cast under Inner
+// Focus is free and crits no more often.
+func TestInnerFocusCritBonusSkipsShadowWordDeath(t *testing.T) {
+	sim, built, _ := newShadowPriestSimWithTalents(t, map[string]int{"inner_focus": 1})
+
+	death := built.ShadowWordDeath[len(built.ShadowWordDeath)-1]
+	if death == nil {
+		t.Fatal("Shadow Word: Death is not registered")
+	}
+	before := death.BonusCritRating
+
+	built.InnerFocusAura.Activate(sim)
+
+	if got := death.BonusCritRating - before; got != 0 {
+		t.Errorf("Inner Focus raised Shadow Word: Death's crit rating by %v, want 0 (not in the client crit mask)", got)
+	}
+}

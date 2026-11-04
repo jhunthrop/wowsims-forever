@@ -43,11 +43,13 @@ func MakeHarmfulSpellProcAura(unit *Unit, config HarmfulSpellProc) *Aura {
 	return MakePermanent(unit.RegisterAura(Aura{
 		Label:    config.Name,
 		ActionID: config.ActionID,
+		// Each iteration starts with no recovery running, so a run's mean
+		// does not depend on how its iterations are split between sims.
+		OnReset: func(*Aura, *Simulation) { clear(lastProc) },
 		OnSpellHitDealt: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
 			if !spell.ProcMask.Matches(ProcMaskSpellDamage) || result.Target == nil || result.Target.Type != EnemyUnit {
 				return
 			}
-			// A new iteration restarts the clock below the last proc.
 			if last, ok := lastProc[spell]; ok && sim.CurrentTime >= last && sim.CurrentTime < last+config.ICD {
 				return
 			}

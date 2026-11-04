@@ -50,9 +50,9 @@ func (hunter *Hunter) createQuickStrikesAura() *core.Aura {
 
 // getMaxAspectOfTheHawkAttackPower is the rank's ranged attack power: the
 // client's aura-124 base points on spells 13165/14318/14319/14320/14321/
-// 14322/25296, read from the generated AspectOfTheHawkBaseDamage. Client
-// 1.60.1.70707 cut ranks 1-5 to 15/22/30/38/47 (from 20/35/50/70/90);
-// rank 6 (14322, level 58) stays 55 and rank 7 (25296, AQ) 120.
+// 14322/25296, read from the generated AspectOfTheHawkBaseDamage. The
+// 1.60.1.70753 hotfix push (2026-11-03) set ranks 1-6 to 20/35/50/70/90/110
+// (from 70707's 15/22/30/38/47/55); rank 7 (25296, AQ) stays 120.
 func (hunter *Hunter) getMaxAspectOfTheHawkAttackPower(rank int) float64 {
 	if rank < 1 || rank > AspectOfTheHawkRanks {
 		return 0.0

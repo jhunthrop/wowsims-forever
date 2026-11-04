@@ -72,13 +72,10 @@ func (warlock *Warlock) getImmolateConfig(rank int) core.SpellConfig {
 				GCD:      core.GCDDefault,
 				CastTime: ImmolateCastTime,
 			},
-			ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
-				cast.CastTime = spell.CastTime()
-			},
-			CastTime: func(spell *core.Spell) time.Duration {
-				durationDecrease := time.Duration(0)
-				return spell.DefaultCast.CastTime - durationDecrease
-			},
+			// No CastTime hook: the core's default applies cast speed, as
+			// for every other cast-time spell. The upstream hook returned
+			// the unhasted DefaultCast.CastTime, so haste never reached
+			// Immolate.
 		},
 
 		DamageMultiplier: 1,

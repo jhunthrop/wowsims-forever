@@ -118,7 +118,11 @@ func (shaman *Shaman) newSearingTotemSpellConfig(rank int) core.SpellConfig {
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 			shaman.endStandingFireTotem(sim)
-			spell.Dot(sim.GetTargetUnit(0)).Apply(sim)
+			dot := spell.Dot(sim.GetTargetUnit(0))
+			dot.Apply(sim)
+			// The totem stands for the client's whole duration; its
+			// attacks (22 at rank 6) end before it does.
+			dot.UpdateExpires(sim, sim.CurrentTime+duration)
 			// +1 needed because of rounding issues with totem tick time.
 			shaman.TotemExpirations[FireTotem] = sim.CurrentTime + duration + 1
 			shaman.ActiveTotems[FireTotem] = spell
