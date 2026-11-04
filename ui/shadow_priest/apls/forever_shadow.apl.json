@@ -14,6 +14,21 @@
           "val": "-20s"
         }
       }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 10947,
+            "rank": 9
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-1.5s"
+        }
+      }
     }
   ],
   "priorityList": [
