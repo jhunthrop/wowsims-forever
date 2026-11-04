@@ -1,21 +1,6 @@
 {
   "type": "TypeAPL",
-  "prepullActions": [
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 18288
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-5s"
-        }
-      }
-    }
-  ],
+  "prepullActions": [],
   "priorityList": [
     {
       "action": {
@@ -81,18 +66,125 @@
       }
     },
     {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 603
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "60s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 603
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 603
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 11713,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "remainingTime": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "60s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18288
+          }
+        }
+      }
+    },
+    {
       "notes": "Bane of Agony is the curse kept up: it ticks, so it gains from Wrack's +10% to the warlock's other Shadow damage over time and from periodic crits, and it is an Affliction effect for Soul Siphon. With Siphon Life up and periodic crits in the engine it measured above Bane of Doom.",
       "action": {
         "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
-                "spellId": {
-                  "spellId": 11713,
-                  "rank": 6
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 603
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 11713,
+                        "rank": 6
+                      }
+                    }
+                  }
                 }
               }
-            }
+            ]
           }
         },
         "castSpell": {
