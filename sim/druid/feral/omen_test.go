@@ -51,18 +51,19 @@ func TestTigersFuryIsNotLearnable(t *testing.T) {
 }
 
 // Rend and Tear: "Increases damage done by your melee abilities on Bleeding
-// targets by 2%" a rank. The cat's own Rip makes the target bleed, so at 5/5
-// every Shred while Rip is up deals 10% more and the few before the first
-// Rip deal the same. Damage multipliers draw no random numbers, so the same
-// seed runs the same fight: the ratio sits just under 1.10, never above it.
+// targets by 3%" a rank on 70755 (the server's talent text; the client curve
+// still reads 2%). The cat's own Rip makes the target bleed, so at 5/5 every
+// Shred while Rip is up deals 15% more and the few before the first Rip deal
+// the same. Damage multipliers draw no random numbers, so the same seed runs
+// the same fight: the ratio sits just under 1.15, never above it.
 func TestRendAndTearRaisesShredOnABleedingTarget(t *testing.T) {
 	without := shredDamage(t, nil)
 	with := shredDamage(t, map[string]int{"rend_and_tear": 5})
 	if without == 0 {
 		t.Fatal("no Shred damage in the reference run")
 	}
-	if got := with / without; got < 1.07 || got > 1.1001 {
-		t.Errorf("Shred damage with Rend and Tear 5/5 over without = %.4f, want 1.07-1.10", got)
+	if got := with / without; got < 1.11 || got > 1.1501 {
+		t.Errorf("Shred damage with Rend and Tear 5/5 over without = %.4f, want 1.11-1.15", got)
 	}
 }
 
@@ -73,8 +74,8 @@ func TestRendAndTearCountsTheCatsOwnBleeds(t *testing.T) {
 		t.Fatalf("multiplier with no bleed = %v, want 1", got)
 	}
 	cat.Rip.Dot(target).Apply(sim)
-	if got := cat.RendAndTearMultiplier(target); got < 1.099 || got > 1.101 {
-		t.Errorf("multiplier with Rip up = %v, want 1.10", got)
+	if got := cat.RendAndTearMultiplier(target); got < 1.149 || got > 1.151 {
+		t.Errorf("multiplier with Rip up = %v, want 1.15", got)
 	}
 }
 

@@ -77,7 +77,9 @@ func (druid *Druid) applyNaturalReaction() {
 }
 
 // Rend and Tear (node 104953, five ranks): "Increases damage done by your
-// melee abilities on Bleeding targets by 2%" a rank.
+// melee abilities on Bleeding targets by 3%" a rank, 15% at 5/5. That is the
+// server's value on 1.60.1.70755 (Wowhead's live Forever talent payload and
+// talents/druid.json); the client's curve 85357 still reads 2/4/6/8/10.
 //
 // The client row (spell 1223246) is a dummy aura, so the server decides what
 // it touches; the text names every melee ability. It is applied to the direct
@@ -89,7 +91,7 @@ func (druid *Druid) applyNaturalReaction() {
 // multiplier.
 const (
 	rendAndTearMaxRank       = 5
-	rendAndTearDamagePerRank = 0.02
+	rendAndTearDamagePerRank = 0.03
 )
 
 // RendAndTearMultiplier is Rend and Tear's multiplier on a melee
