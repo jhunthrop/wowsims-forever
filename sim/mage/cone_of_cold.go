@@ -95,7 +95,7 @@ func (mage *Mage) getConeOfColdConfig(rank int, cdTimer *core.Timer) core.SpellC
 				// Cold is taken to spend the stacks too.
 				stacks := float64(mage.wintersChillStacks(aoeTarget))
 				multiplier := 1 + wintersChillConeOfColdDamagePerStack*stacks
-				coefficient := wintersChillConeOfColdCoefficientPerStack * stacks
+				coefficient := mage.wintersChillConeOfColdCoefficient(spell, stacks)
 				spell.DamageMultiplier *= multiplier
 				spell.BonusCoefficient += coefficient
 				spell.CalcAndDealDamage(sim, aoeTarget, baseDamage, spell.OutcomeMagicHitAndCrit)
@@ -130,6 +130,14 @@ const (
 	wintersChillConeOfColdDamagePerStack      = 0.20
 	wintersChillConeOfColdCoefficientPerStack = 0.07
 )
+
+// wintersChillConeOfColdCoefficient is the spell power coefficient stacks
+// Winter's Chill stacks add to cone. It is the cast rank's spell power, so a
+// rank far below the caster's level keeps only its level-gap share of it
+// (core.LevelPenalty), as the rank's own coefficient does.
+func (mage *Mage) wintersChillConeOfColdCoefficient(cone *core.Spell, stacks float64) float64 {
+	return wintersChillConeOfColdCoefficientPerStack * stacks * core.LevelPenalty(cone.RequiredLevel, int(mage.Level))
+}
 
 // wintersChillStacks is the Winter's Chill stacks this mage holds on
 // target.
