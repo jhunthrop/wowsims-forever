@@ -152,7 +152,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Flash Heal | 3 | 9473 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 32→32 | n/a | match |  | 294.75-354.25→294.75-354.25 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Flash Heal | 4 | 9474 | 215.00→215.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 38→38 | n/a | match |  | 354.08-423.12→354.08-423.12 | 0.429→0.429 | declared, matches |
 | HealingPriest | 40 | Greater Heal | 1 | 2060 | 370.00→370.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | n/a | match |  | 793.68-894.32→793.68-894.32 | 0.857→0.857 | declared, matches |
-| HealingPriest | 40 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857 x0.6500→0.5571 | declared, matches |
+| HealingPriest | 40 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857 x0.6500→0.5570 | declared, matches |
 | HealingPriest | 40 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857 x0.9500→0.8141 | declared, matches |
 | HealingPriest | 40 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857→0.857 | declared, matches |
 | HealingPriest | 40 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 632.63-714.37→632.63-714.37 | 0.857→0.857 | declared, matches |
@@ -301,7 +301,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857 x0.2500→0.2142 | declared, matches |
-| HealingPriest | 60 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 632.63-714.37→632.63-714.37 | 0.857 x0.5500→0.4713 | declared, matches |
+| HealingPriest | 60 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 632.63-714.37→632.63-714.37 | 0.857 x0.5500→0.4714 | declared, matches |
 | HealingPriest | 60 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750 x0.1000→0.0750 | declared, matches |
 | HealingPriest | 60 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750 x0.4000→0.3000 | declared, matches |
@@ -326,7 +326,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 4 | 8104 | 150.00→150.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 153.41-162.59→153.41-162.59 | 0.429 x0.2500→0.1072 | declared, matches |
-| HealingPriest | 60 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 197.63-210.38→197.62-210.38 | 0.429 x0.5500→0.2359 | declared, matches |
+| HealingPriest | 60 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 197.63-210.38→197.62-210.38 | 0.429 x0.5500→0.2360 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 6 | 8106 | 225.00→225.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 40→40 | n/a | match |  | 259.14-275.86→259.14-275.86 | 0.429 x0.8500→0.3646 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 7 | 10945 | 265.00→265.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 46→46 | n/a | match |  | 325.10-343.90→325.10-343.90 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 8 | 10946 | 310.00→310.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 52→52 | n/a | match |  | 405.55-428.45→405.55-428.45 | 0.429→0.429 | declared, matches |
@@ -535,7 +535,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 60 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 60 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 60 | Mind Blast | 4 | 8104 | 150.00→150.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 153.41-162.59→153.41-162.59 | 0.429 x0.2500→0.1072 | declared, matches |
-| ShadowPriest | 60 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 197.63-210.38→197.62-210.38 | 0.429 x0.5500→0.2359 | declared, matches |
+| ShadowPriest | 60 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 197.63-210.38→197.62-210.38 | 0.429 x0.5500→0.2360 | declared, matches |
 | ShadowPriest | 60 | Mind Blast | 6 | 8106 | 225.00→225.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 40→40 | n/a | match |  | 259.14-275.86→259.14-275.86 | 0.429 x0.8500→0.3646 | declared, matches |
 | ShadowPriest | 60 | Mind Blast | 7 | 10945 | 265.00→265.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 46→46 | n/a | match |  | 325.10-343.90→325.10-343.90 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 60 | Mind Blast | 8 | 10946 | 310.00→310.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 52→52 | n/a | match |  | 405.55-428.45→405.55-428.45 | 0.429→0.429 | declared, matches |

@@ -1104,7 +1104,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RestorationShaman | 50 | Healing Wave | 2 | 332 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 68.51-83.49→68.51-83.49 | 0.571 x0.0000→0.0000 | declared, matches |
 | RestorationShaman | 50 | Healing Wave | 3 | 547 | 80.00→80.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 12→12 | n/a | match |  | 125.82-151.18→125.82-151.18 | 0.714 x0.0000→0.0000 | declared, matches |
 | RestorationShaman | 50 | Healing Wave | 4 | 913 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 18→18 | n/a | match |  | 245.51-289.49→245.51-289.49 | 0.857 x0.2500→0.2142 | declared, matches |
-| RestorationShaman | 50 | Healing Wave | 5 | 939 | 200.00→200.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | n/a | match |  | 327.62-383.38→327.62-383.38 | 0.857 x0.5500→0.4713 | declared, matches |
+| RestorationShaman | 50 | Healing Wave | 5 | 939 | 200.00→200.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 24→24 | n/a | match |  | 327.62-383.38→327.62-383.38 | 0.857 x0.5500→0.4714 | declared, matches |
 | RestorationShaman | 50 | Healing Wave | 6 | 959 | 265.00→265.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 32→32 | n/a | match |  | 463.33-537.67→463.33-537.67 | 0.857 x0.9500→0.8141 | declared, matches |
 | RestorationShaman | 50 | Healing Wave | 7 | 8005 | 340.00→340.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | n/a | match |  | 654.12-754.88→654.12-754.88 | 0.857→0.857 | declared, matches |
 | RestorationShaman | 50 | Healing Wave | 8 | 10395 | 440.00→440.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 48→48 | n/a | match |  | 914.00-1048.80→914.00-1048.80 | 0.857→0.857 | declared, matches |

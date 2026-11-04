@@ -406,7 +406,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 60 | Exorcism | 6 | 10314 | 345.00→345.00 | mana→mana | 15000→15000 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | 474.74-529.26→474.74-529.26 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 60 | Flash of Light | 1 | 19750 | 35.00→35.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 47.19-54.81→47.19-54.81 | 0.429 x0.0000→0.0000 | declared, matches |
 | HolyPaladin | 60 | Flash of Light | 2 | 19939 | 50.00→50.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 67.57-77.43→67.57-77.43 | 0.429 x0.1500→0.0643 | declared, matches |
-| HolyPaladin | 60 | Flash of Light | 3 | 19940 | 70.00→70.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 102.63-115.37→102.63-115.37 | 0.429 x0.5500→0.2359 | declared, matches |
+| HolyPaladin | 60 | Flash of Light | 3 | 19940 | 70.00→70.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 102.63-115.37→102.63-115.37 | 0.429 x0.5500→0.2360 | declared, matches |
 | HolyPaladin | 60 | Flash of Light | 4 | 19941 | 90.00→90.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 42→42 | n/a | match |  | 151.28-169.72→151.28-169.72 | 0.429 x0.9500→0.4075 | declared, matches |
 | HolyPaladin | 60 | Flash of Light | 5 | 19942 | 115.00→115.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 50→50 | n/a | match |  | 220.77-247.23→220.77-247.23 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 60 | Flash of Light | 6 | 19943 | 140.00→140.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 58→58 | n/a | match |  | 291.22-325.18→291.22-325.18 | 0.429→0.429 | declared, matches |
