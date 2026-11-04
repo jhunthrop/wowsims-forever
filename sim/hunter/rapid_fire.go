@@ -6,6 +6,9 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// rapidFireHaste is Rapid Fire's 40% ranged and melee attack speed.
+const rapidFireHaste = 1.4
+
 func (hunter *Hunter) registerRapidFire() {
 	if hunter.Level < int32(RapidFireLevel[0]) {
 		return
@@ -20,11 +23,15 @@ func (hunter *Hunter) registerRapidFire() {
 
 		// Client 3045: aura 140 (ranged haste 40) and aura 319 (melee
 		// haste 40), "ranged and melee attack speed by 40%".
+		// The beta logs show it on Summon Hawk's hawks too (2.26 s swings,
+		// 1.62 s inside Rapid Fire).
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.MultiplyAttackSpeed(sim, 1.4)
+			aura.Unit.MultiplyAttackSpeed(sim, rapidFireHaste)
+			hunter.hasteHawks(sim, true)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Unit.MultiplyAttackSpeed(sim, 1/1.4)
+			aura.Unit.MultiplyAttackSpeed(sim, 1/rapidFireHaste)
+			hunter.hasteHawks(sim, false)
 		},
 	})
 

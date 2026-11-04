@@ -127,6 +127,13 @@ func buildHunterWithTalents(t *testing.T, level int32, talents string, petType p
 // Aura.Activate against.
 func newRunningHunterForTalentTest(t *testing.T, level int32, field string, rank int32, petType proto.Hunter_Options_PetType, distanceFromTarget float64, debuffs *proto.Debuffs) (*core.Simulation, *Hunter, *core.Unit) {
 	t.Helper()
+	return newRunningHunterWithTalents(t, level, buildTalentsString(t, field, rank), petType, distanceFromTarget, debuffs)
+}
+
+// newRunningHunterWithTalents is newRunningHunterForTalentTest for a whole
+// talent string.
+func newRunningHunterWithTalents(t *testing.T, level int32, talents string, petType proto.Hunter_Options_PetType, distanceFromTarget float64, debuffs *proto.Debuffs) (*core.Simulation, *Hunter, *core.Unit) {
+	t.Helper()
 
 	if debuffs == nil {
 		debuffs = &proto.Debuffs{}
@@ -139,7 +146,7 @@ func newRunningHunterForTalentTest(t *testing.T, level int32, field string, rank
 			Level:              level,
 			Equipment:          &proto.EquipmentSpec{},
 			Buffs:              &proto.IndividualBuffs{},
-			TalentsString:      buildTalentsString(t, field, rank),
+			TalentsString:      talents,
 			DistanceFromTarget: distanceFromTarget,
 		},
 		&proto.Player_Hunter{
