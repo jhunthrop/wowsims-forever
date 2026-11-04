@@ -363,6 +363,39 @@
   "prepullActions": [
     {
       "action": {
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 400625
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18809,
+            "rank": 8
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-6s"
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsKnown": {
+                "auraId": {
+                  "spellId": 400625
+                }
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 10181,
