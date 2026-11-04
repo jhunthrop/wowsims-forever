@@ -16,13 +16,13 @@ var EarthShockSpellId = [EarthShockRanks + 1]int32{0, 8042, 8044, 8045, 8046, 10
 // replaced sat close to.
 var EarthShockDamage = [EarthShockRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 18, Variance: 0.111111, PerLevel: 0.5, SpellLevel: 4, MaxLevel: 9},
-	{Amount: 33, Variance: 0.060606, PerLevel: 0.7, SpellLevel: 8, MaxLevel: 13},
-	{Amount: 49, Variance: 0.064516, PerLevel: 0.9, SpellLevel: 14, MaxLevel: 19},
-	{Amount: 81, Variance: 0.065041, PerLevel: 1.1, SpellLevel: 24, MaxLevel: 29},
-	{Amount: 132, Variance: 0.060345, PerLevel: 1.3, SpellLevel: 36, MaxLevel: 41},
-	{Amount: 205, Variance: 0.059459, PerLevel: 1.6, SpellLevel: 48, MaxLevel: 53},
-	{Amount: 301, Variance: 0.052731, PerLevel: 1.9, SpellLevel: 60, MaxLevel: 65},
+	{Amount: 20, Variance: 0.111111, PerLevel: 0.5, SpellLevel: 4, MaxLevel: 9},
+	{Amount: 36, Variance: 0.060606, PerLevel: 0.7, SpellLevel: 8, MaxLevel: 13},
+	{Amount: 67, Variance: 0.064516, PerLevel: 0.9, SpellLevel: 14, MaxLevel: 19},
+	{Amount: 130, Variance: 0.065041, PerLevel: 1.1, SpellLevel: 24, MaxLevel: 29},
+	{Amount: 242, Variance: 0.060345, PerLevel: 1.3, SpellLevel: 36, MaxLevel: 41},
+	{Amount: 383, Variance: 0.059459, PerLevel: 1.6, SpellLevel: 48, MaxLevel: 53},
+	{Amount: 531, Variance: 0.052731, PerLevel: 3.4, SpellLevel: 60, MaxLevel: 65},
 }
 var EarthShockSpellCoef = [EarthShockRanks + 1]float64{0, .386, .386, .386, .386, .386, .386, .386}
 var EarthShockManaCost = [EarthShockRanks + 1]float64{0, 30, 50, 85, 145, 240, 345, 450}

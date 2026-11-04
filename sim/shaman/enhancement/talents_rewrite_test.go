@@ -9,34 +9,48 @@ import (
 	"github.com/wowsims/classic/sim/core/simsignals"
 	"github.com/wowsims/classic/sim/core/stats"
 	"github.com/wowsims/classic/sim/shaman"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-// Node indices into the Enhancement tree's own 18-character segment
-// and the Restoration tree's 16-character segment, from a direct
-// protoreflect dump of proto.ShamanTalents's field order - the same
-// ground truth sim/shaman/elemental/talents_rewrite_test.go's own node
-// constants use, and for the same reason: talents/shaman.json's build
-// 1.60.1.70009 tier/column layout does not always match
-// talents_auto_gen.go's source build 1.60.1.69893 field order.
-const (
-	enhNodeMentalDexterity     = 4
-	enhNodeShamanisticFocus    = 8
-	enhNodeStormstrike         = 12
-	enhNodeSpiritWeapons       = 13
-	enhNodeMentalQuickness     = 14
-	enhNodeImprovedStormstrike = 15
-	enhNodeMaelstromWeapon     = 16
-	enhNodeRageOfTheFarseer    = 17
+// treeNode is a talent's position inside its own tree's segment of the
+// talent string: the generated proto field's number less the fields of
+// the trees before it (shaman.TalentTreeSizes), looked up by name so a
+// tree layout change (1.60.1.70755 moved Improved Ghost Wolf from tier 1
+// to tier 3, shifting Shamanistic Focus and Stormstrike one place left)
+// cannot leave a typed index pointing at another talent.
+func treeNode(tree int, field string) int {
+	fd := (&proto.ShamanTalents{}).ProtoReflect().Descriptor().Fields().ByName(protoreflect.Name(field))
+	if fd == nil {
+		panic("ShamanTalents has no field " + field)
+	}
+	index := int(fd.Number()) - 1
+	for _, size := range shaman.TalentTreeSizes[:tree] {
+		index -= size
+	}
+	if index < 0 || index >= shaman.TalentTreeSizes[tree] {
+		panic("ShamanTalents field " + field + " is not in tree " + string(rune('0'+tree)))
+	}
+	return index
+}
 
-	restoNodeWaterShield = 8
+var (
+	enhNodeMentalDexterity     = treeNode(1, "mental_dexterity")
+	enhNodeShamanisticFocus    = treeNode(1, "shamanistic_focus")
+	enhNodeStormstrike         = treeNode(1, "stormstrike")
+	enhNodeSpiritWeapons       = treeNode(1, "spirit_weapons")
+	enhNodeMentalQuickness     = treeNode(1, "mental_quickness")
+	enhNodeImprovedStormstrike = treeNode(1, "improved_stormstrike")
+	enhNodeMaelstromWeapon     = treeNode(1, "maelstrom_weapon")
+	enhNodeRageOfTheFarseer    = treeNode(1, "rage_of_the_farseer")
+
+	restoNodeWaterShield = treeNode(2, "water_shield")
 )
 
 // shamanTalentString builds a full three-tree talents string from one
 // rank map per tree, so a test can isolate the Enhancement or
 // Restoration talent it is guarding while still turning on whatever
 // else that talent needs to do anything at all (Improved Stormstrike
-// needs Stormstrike itself talented, the same way
-// elemental_test.go's own talents need Lava Burst).
+// needs Stormstrike itself talented).
 func shamanTalentString(elemental, enhancement, restoration map[int]int) string {
 	build := func(size int, ranks map[int]int) string {
 		nodes := make([]byte, size)
@@ -90,7 +104,9 @@ func newIsolatedTalentShaman(t *testing.T, talentsString string) (*core.Simulati
 }
 
 // TestMentalDexterityAttackPower guards shaman.applyMentalDexterity:
-// node 104755, three ranks, Attack Power += 33/67/100% of Intellect.
+// node 104755, three ranks, Attack Power += 50/100/150% of Intellect
+// (trait curve 85272 for spell 415140 effect 0 in client 1.60.1.70755;
+// 33/67/100 before).
 func TestMentalDexterityAttackPower(t *testing.T) {
 	_, baseline := newIsolatedTalentShaman(t, shamanTalentString(nil, nil, nil))
 	baseAP := baseline.GetStat(stats.AttackPower)
@@ -102,7 +118,7 @@ func TestMentalDexterityAttackPower(t *testing.T) {
 	cases := []struct {
 		rank int
 		pct  float64
-	}{{1, 0.33}, {2, 0.67}, {3, 1.0}}
+	}{{1, 0.50}, {2, 1.0}, {3, 1.5}}
 	for _, c := range cases {
 		_, built := newIsolatedTalentShaman(t, shamanTalentString(nil, map[int]int{enhNodeMentalDexterity: c.rank}, nil))
 		if got, want := built.Talents.MentalDexterity, int32(c.rank); got != want {

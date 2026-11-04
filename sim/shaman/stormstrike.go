@@ -10,6 +10,18 @@ import (
 // in client 1.60.1.70425, as the fraction ManaCostOptions.BaseCost takes.
 const stormstrikeBaseManaCostPercent = 0.08
 
+// stormstrikeWeaponDamagePercent is 17364 effect 2, Effect 31 (weapon
+// percent damage) with 150 points, the row client 1.60.1.70755's push
+// added: "Instantly strike for 150% weapon damage" (normal weapon damage
+// before). It scales effect 0's normalized weapon damage.
+const stormstrikeWeaponDamagePercent = 1.50
+
+// stormstrikeCooldown is 17364's RecoveryTime, 6000 ms since client
+// 1.60.1.70755 (8000 before), the generated StormstrikeCooldownMS.
+func stormstrikeCooldown() time.Duration {
+	return time.Duration(StormstrikeCooldownMS[0]) * time.Millisecond
+}
+
 func (shaman *Shaman) registerStormstrikeSpell() {
 	if !shaman.Talents.Stormstrike {
 		return
@@ -40,7 +52,7 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 			},
 			CD: core.Cooldown{
 				Timer:    shaman.NewTimer(),
-				Duration: time.Second * 8,
+				Duration: stormstrikeCooldown(),
 			},
 		},
 
@@ -69,9 +81,10 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 // damage taken for two charges).
 // stormstrikeWeaponDamage is Stormstrike's strike: client 17364 effect 0 is
 // effect 121, normalized weapon damage (1.60.1.70707 SpellEffect), so attack
-// power counts at the weapon type's normalized speed, not its swing speed.
+// power counts at the weapon type's normalized speed, not its swing speed,
+// and effect 2 (1.60.1.70755) makes it 150% of that.
 func (shaman *Shaman) stormstrikeWeaponDamage(sim *core.Simulation, attackPower float64) float64 {
-	return shaman.MHNormalizedWeaponDamage(sim, attackPower)
+	return stormstrikeWeaponDamagePercent * shaman.MHNormalizedWeaponDamage(sim, attackPower)
 }
 
 const (

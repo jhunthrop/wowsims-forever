@@ -10,10 +10,10 @@ const FrostShockRanks = 4
 var FrostShockSpellId = [FrostShockRanks + 1]int32{0, 8056, 8058, 10472, 10473}
 var FrostShockDamage = [FrostShockRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 66, Variance: 0.065217, PerLevel: 0.9, SpellLevel: 20, MaxLevel: 25},
-	{Amount: 124, Variance: 0.065728, PerLevel: 1.3, SpellLevel: 34, MaxLevel: 39},
-	{Amount: 188, Variance: 0.058309, PerLevel: 1.5, SpellLevel: 46, MaxLevel: 51},
-	{Amount: 283, Variance: 0.056, PerLevel: 1.8, SpellLevel: 58, MaxLevel: 63},
+	{Amount: 98, Variance: 0.065217, PerLevel: 0.9, SpellLevel: 20, MaxLevel: 25},
+	{Amount: 222, Variance: 0.065728, PerLevel: 1.3, SpellLevel: 34, MaxLevel: 39},
+	{Amount: 355, Variance: 0.058309, PerLevel: 1.5, SpellLevel: 46, MaxLevel: 51},
+	{Amount: 506, Variance: 0.056, PerLevel: 1.8, SpellLevel: 58, MaxLevel: 63},
 }
 var FrostShockSpellCoef = [FrostShockRanks + 1]float64{0, .386, .386, .386, .386}
 var FrostShockManaCost = [FrostShockRanks + 1]float64{0, 115, 225, 325, 430}

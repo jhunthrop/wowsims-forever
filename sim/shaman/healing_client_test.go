@@ -53,7 +53,33 @@ func TestDirectHealTablesMatchTheClient(t *testing.T) {
 	assertRanksMatchClient(t, class, "Healing Wave", healingWaveRanks())
 	assertRanksMatchClient(t, class, "Lesser Healing Wave", lesserHealingWaveRanks())
 	assertRanksMatchClient(t, class, "Chain Heal", chainHealRanks())
-	assertRanksMatchClient(t, class, "Riptide", riptideRanks())
+}
+
+// TestRiptideHasNoDirectHealInTheClient: client 1.60.1.70755 turned
+// effect 0 of every Riptide rank into a dummy (Effect 3, 0 base points),
+// so riptideRanks carries no roll or coefficient; its cost and cooldown
+// are the generated 150/180/230 mana and 12000 ms.
+func TestRiptideHasNoDirectHealInTheClient(t *testing.T) {
+	const effectDummy = 3
+	class := clientdamagetest.Load(t, clientShamanSpellconst)
+	for _, rank := range riptideRanks() {
+		client, ok := class.ByID(rank.spellID)
+		if !ok {
+			t.Fatalf("Riptide rank %d (%d) is not in the client table", rank.rank, rank.spellID)
+		}
+		if effect := client.Effects[directHealEffect]; effect.Effect != effectDummy || effect.Amount != 0 {
+			t.Errorf("Riptide rank %d effect 0 is effect %d amount %v, want the dummy %d with 0", rank.rank, effect.Effect, effect.Amount, effectDummy)
+		}
+		if rank.coefficient != 0 || rank.healing.Amount != 0 || rank.healing.PerLevel != 0 {
+			t.Errorf("Riptide rank %d carries a direct heal (coefficient %v, roll %+v)", rank.rank, rank.coefficient, rank.healing)
+		}
+		if client.Cost != rank.manaCost || client.SpellLevel != rank.level {
+			t.Errorf("Riptide rank %d: cost %v level %d, client %v %d", rank.rank, rank.manaCost, rank.level, client.Cost, client.SpellLevel)
+		}
+		if got := time.Duration(client.EffectiveCooldownMS()) * time.Millisecond; got != riptideCooldown() {
+			t.Errorf("Riptide rank %d cooldown %v, client %v", rank.rank, riptideCooldown(), got)
+		}
+	}
 }
 
 func TestRiptideTickTableMatchesTheClient(t *testing.T) {

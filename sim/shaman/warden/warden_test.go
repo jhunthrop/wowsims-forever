@@ -48,7 +48,7 @@ var PlayerOptionsBasic = &proto.Player_WardenShaman{
 // warden_test.go's SkipAwaitingForeverTalentRewrite below). Changed
 // to 0, the only value that keeps this fixture's intent (this spec
 // never meant to invest in whichever talent used to live there).
-var DefaultTalents = "5203015-0505000145503101"
+var DefaultTalents = "5203015-0505001455030101"
 
 var Phase1Consumes = core.ConsumesCombo{
 	Label: "P1-Consumes",

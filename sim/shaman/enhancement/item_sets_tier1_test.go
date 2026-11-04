@@ -12,9 +12,6 @@ import (
 
 var spiritcallersRageSetID = shaman.ItemSetTheSpiritcallersRage.ID
 
-// stormstrikeNode is Stormstrike's position in the Enhancement tree.
-const stormstrikeNode = 12
-
 // spiritcallersRageShaman is an enhancement shaman wearing pieces of The
 // Spiritcaller's Rage.
 func spiritcallersRageShaman(t *testing.T, race proto.Race, talents string, pieces int) *shaman.Shaman {
@@ -48,7 +45,7 @@ func TestSpiritcallersRageFlatBonusesMatchTheRows(t *testing.T) {
 
 // 5P: "Reduces the cooldown on your Stormstrike ability by 0.5 sec".
 func TestSpiritcallersRageFivePieceShortensStormstrike(t *testing.T) {
-	talents := shamanTalentString(nil, map[int]int{stormstrikeNode: 1}, nil)
+	talents := shamanTalentString(nil, map[int]int{enhNodeStormstrike: 1}, nil)
 	clientsetbonustest.AssertCooldownBonus(t, spiritcallersRageSetID, clientsetbonus.FivePieces, func(pieces int) *core.Spell {
 		return spiritcallersRageShaman(t, proto.Race_RaceOrc, talents, pieces).Stormstrike
 	})
