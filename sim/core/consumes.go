@@ -1398,6 +1398,17 @@ func addMeleeWeaponCrit(unit *Unit, rating float64) {
 // energize of 100 at every level).
 const thistleTeaEnergy = 100.0
 
+// thistleTeaMaxWaste is the most of the tea's energy the bar may cap away.
+const thistleTeaMaxWaste = 10.0
+
+// thistleTeaFits reports whether the tea's 100 energy fits under the bar's
+// cap with at most thistleTeaMaxWaste lost. The cap is not always 100:
+// Vigor and the gnome's Expansive Mind raise it, and a fixed "10 energy or
+// less" left a 110-energy rogue that seldom bottoms out never drinking.
+func thistleTeaFits(current, maxEnergy float64) bool {
+	return current+thistleTeaEnergy-maxEnergy <= thistleTeaMaxWaste
+}
+
 // makeThistleTeaMCD is Thistle Tea for any character with an energy bar: a
 // rogue, and a druid since Forever ("Rage potions and Thistletea are also
 // now usable by Druids", the druid deep dive, news.blizzard.com article
@@ -1414,7 +1425,7 @@ func makeThistleTeaMCD(character *Character, conjuredTimer *Timer) MajorCooldown
 	return MajorCooldown{
 		Type: CooldownTypeDPS,
 		ShouldActivate: func(sim *Simulation, character *Character) bool {
-			return character.CurrentEnergy() <= 10
+			return thistleTeaFits(character.CurrentEnergy(), character.MaxEnergy())
 		},
 		Spell: character.RegisterSpell(SpellConfig{
 			ActionID: actionID,
