@@ -128,8 +128,14 @@ type Hunter struct {
 	SilencingShot     *core.Spell
 	SniperShot        *core.Spell
 	SummonHawk        *core.Spell
-	Volley            *core.Spell
-	WingClip          *core.Spell
+
+	// hawks are Summon Hawk's 18 s hawks; HawkAssaultAura's stacks count
+	// those out (summon_hawk_assault.go).
+	hawks           []*Hawk
+	HawkAssaultAura *core.Aura
+
+	Volley   *core.Spell
+	WingClip *core.Spell
 
 	Shots       []*core.Spell
 	Strikes     []*core.Spell
@@ -219,6 +225,7 @@ func (hunter *Hunter) Initialize() {
 
 	// Summon Hawk (talent) shares Arcane Shot's category cooldown per the
 	// client's tooltip ("Summon Hawk shares its cooldown with Arcane Shot").
+	hunter.registerHawkAssaultAura()
 	hunter.registerSummonHawkSpell(arcaneShotTimer)
 	hunter.registerSniperShotSpell()
 
@@ -317,6 +324,7 @@ func NewHunter(character *core.Character, options *proto.Player) *Hunter {
 	}
 
 	hunter.pet = hunter.NewHunterPet()
+	hunter.registerHawks()
 
 	hunter.AddStatDependency(stats.Strength, stats.AttackPower, core.APPerStrength[character.Class])
 	hunter.AddStatDependency(stats.Agility, stats.AttackPower, 1)

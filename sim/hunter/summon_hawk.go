@@ -92,6 +92,7 @@ func (hunter *Hunter) getSummonHawkConfig(rank int, timer *core.Timer) core.Spel
 			spell.WaitTravelTime(sim, func(s *core.Simulation) {
 				spell.DealDamage(sim, result)
 			})
+			hunter.sendHawk(sim)
 		},
 	}
 }
