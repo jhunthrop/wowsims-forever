@@ -188,7 +188,7 @@
           }
         }
       },
-      "notes": "Sinister Strike only when Backstab cannot be cast (no dagger in the main hand), held to 60 energy so a dagger rogue never spends Backstab's energy here."
+      "notes": "Sinister Strike only when Backstab cannot be cast: no dagger in the main hand, or the target is facing you."
     }
   ]
 }
