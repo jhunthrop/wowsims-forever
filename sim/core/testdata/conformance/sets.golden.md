@@ -618,7 +618,7 @@ Every Phase 1 client set (sim/core/client_sets_gen.go: any piece with a loot sou
 | The Spiritcaller's Storm | 2111 | 2 | 1300959 | 1.60.0 - Item - Tier 1 - Shaman - Elemental 2P Bonus - Hit | stats | declared, matches |  |
 | The Spiritcaller's Storm | 2111 | 3 | 1301053 | 1.60.0 - Item - Tier 1 - Shaman - Elemental 3P Bonus - Earthbind Totem | none | no sim effect | reduces the cooldown of Earthbind Totem, a utility totem the sim never drops |
 | The Spiritcaller's Storm | 2111 | 4 | 1301092 | 1.60.0 - Item - Tier 1 - Shaman - Elemental 4P Bonus - SP vs. Elementals | stats | declared, matches |  |
-| The Spiritcaller's Storm | 2111 | 5 | 1301711 | 1.60.0 - Item - Tier 1 - Shaman - Elemental 5P Bonus - Lava Burst | hand-written | modelled |  |
+| The Spiritcaller's Storm | 2111 | 5 | 1301711 | 1.60.0 - Item - Tier 1 - Shaman - Elemental 5P Bonus - Lava Burst | none | no sim effect | reduces the cooldown of Lava Burst, which no shaman can learn since client 1.60.1.70755 |
 | Grovekeeper Raiment | 2112 | 2 | 1300943 | 1.60.0 - Item - Tier 1 - Druid - Restoration 2P Bonus - Spirit | stats | declared, matches |  |
 | Grovekeeper Raiment | 2112 | 3 | 1301006 | 1.60.0 - Item - Tier 1 - Druid - Restoration 3P Bonus - Barkskin | none | no sim effect | reduces the cooldown of Barkskin, which only the bear kit registers; the restoration druid never casts it |
 | Grovekeeper Raiment | 2112 | 4 | 1301077 | 1.60.0 - Item - Tier 1 - Druid - Restoration 4P Bonus - Healing/Damage | stats | declared, matches |  |

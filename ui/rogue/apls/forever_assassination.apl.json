@@ -39,6 +39,17 @@
       }
     },
     {
+      "notes": "Shank on cooldown: it cannot miss, pays back more energy than it costs and, with Venom, makes your poisons hit 30% harder and land more often for 6 seconds.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1329549,
+            "rank": 2
+          }
+        }
+      }
+    },
+    {
       "action": {
         "castSpell": {
           "spellId": {

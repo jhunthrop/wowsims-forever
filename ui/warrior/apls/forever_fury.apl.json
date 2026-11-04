@@ -214,6 +214,16 @@
       }
     },
     {
+      "notes": "On cooldown, right behind Whirlwind: your next four white swings each bring 5 more rage, and it costs a quarter of your base health, which the healers cover.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1329555
+          }
+        }
+      }
+    },
+    {
       "notes": "Only before level 36, while you still fight in Battle Stance. Once Whirlwind is trained you live in Berserker Stance and it never comes up.",
       "action": {
         "castSpell": {

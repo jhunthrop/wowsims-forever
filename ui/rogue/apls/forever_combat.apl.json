@@ -39,6 +39,17 @@
       }
     },
     {
+      "notes": "Shank on cooldown: an off-hand stab that cannot miss and pays back more energy than it costs, every 10 seconds.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1329549,
+            "rank": 2
+          }
+        }
+      }
+    },
+    {
       "action": {
         "castSpell": {
           "spellId": {

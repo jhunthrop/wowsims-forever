@@ -53,6 +53,17 @@
       }
     },
     {
+      "notes": "Shank on cooldown: an off-hand stab that cannot miss, pays back more energy than it costs and, with Boot Knife, adds two combo points.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1329549,
+            "rank": 2
+          }
+        }
+      }
+    },
+    {
       "action": {
         "castSpell": {
           "spellId": {
@@ -103,6 +114,44 @@
         }
       },
       "notes": "Rupture at four or more combo points whenever it is not ticking. Hemorrhage and Serrated Blades both feed it, so it is the main finisher."
+    },
+    {
+      "notes": "Death Mark at five combo points while Rupture is ticking: for 6 seconds it stores a share of everything you hit the target for, Rupture and Garrote at twice the rate, then deals it back at once.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1325758,
+            "rank": 4
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5"
+                    }
+                  }
+                }
+              },
+              {
+                "dotIsActive": {
+                  "spellId": {
+                    "spellId": 11275,
+                    "rank": 6
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
     },
     {
       "action": {
