@@ -12,17 +12,18 @@ const StarfireRanks = 7
 var StarfireSpellId = [StarfireRanks + 1]int32{0, 2912, 8949, 8950, 8951, 9875, 9876, 25298}
 
 // StarfireBaseDamage is spellconst/druid.json's flat per-rank "amount"
-// (rank 7 is 381 at coefficient 1.0, against the Classic roll of 496-584
-// it replaced); the coefficient was already the client's.
+// (rank 7 is 533 plus 3.4 a level at coefficient 1.0 after the 1.60.1.70755
+// server push 113403; 381 plus 2.4 before it); the coefficient was already the
+// client's.
 var StarfireDamage = [StarfireRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 81, Variance: 0.20202, PerLevel: 1.3, SpellLevel: 20, MaxLevel: 25},
-	{Amount: 110, Variance: 0.197368, PerLevel: 1.5, SpellLevel: 26, MaxLevel: 32},
-	{Amount: 144, Variance: 0.180995, PerLevel: 1.6, SpellLevel: 34, MaxLevel: 40},
-	{Amount: 198, Variance: 0.175896, PerLevel: 1.8, SpellLevel: 42, MaxLevel: 48},
-	{Amount: 266, Variance: 0.167089, PerLevel: 2.2, SpellLevel: 50, MaxLevel: 56},
-	{Amount: 337, Variance: 0.164948, PerLevel: 2.3, SpellLevel: 58, MaxLevel: 64},
-	{Amount: 381, Variance: 0.162963, PerLevel: 2.4, SpellLevel: 60, MaxLevel: 66},
+	{Amount: 113, Variance: 0.20202, PerLevel: 1.8, SpellLevel: 20, MaxLevel: 25},
+	{Amount: 154, Variance: 0.197368, PerLevel: 2.1, SpellLevel: 26, MaxLevel: 32},
+	{Amount: 201, Variance: 0.180995, PerLevel: 2.2, SpellLevel: 34, MaxLevel: 40},
+	{Amount: 277, Variance: 0.175896, PerLevel: 2.5, SpellLevel: 42, MaxLevel: 48},
+	{Amount: 372, Variance: 0.167089, PerLevel: 3.0, SpellLevel: 50, MaxLevel: 56},
+	{Amount: 471, Variance: 0.164948, PerLevel: 3.2, SpellLevel: 58, MaxLevel: 64},
+	{Amount: 533, Variance: 0.162963, PerLevel: 3.4, SpellLevel: 60, MaxLevel: 66},
 }
 var StarfireSpellCoeff = [StarfireRanks + 1]float64{0, 1, 1, 1, 1, 1, 1, 1}
 var StarfireManaCost = [StarfireRanks + 1]float64{0, 95, 135, 180, 230, 275, 315, 340}

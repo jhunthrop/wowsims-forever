@@ -18,8 +18,9 @@ var ravageSpellID = [5]int32{0, 6785, 6787, 9866, 9867}
 var ravageFlatDamageBonus = [5]float64{0, 42, 62, 78, 98}
 
 // ravageDamageMultiplier is Ravage's weapon-damage multiplier on every
-// rank (effect 1, amount 350 -> 3.5x); source: 1.60.1.70009 spellconst.
-const ravageDamageMultiplier = 3.5
+// rank (effect 1, amount 435 -> 4.35x since the 1.60.1.70755 server push
+// 113403; 350 before it).
+const ravageDamageMultiplier = 4.35
 
 func (druid *Druid) registerRavageSpell() {
 	rank := core.HighestRankAtLevel(ravageLearnLevels, druid.Level)
@@ -52,12 +53,12 @@ func (druid *Druid) registerRavageSpell() {
 			},
 			IgnoreHaste: true,
 		},
-		// Ravage requires Prowl: the client data carries no such flag (it's
-		// a scripted requirement, the same way Ambush's stealth requirement
-		// in sim/rogue/ambush.go isn't in its own spellconst either), so
-		// this mirrors the rogue precedent directly.
+		// Ravage requires Prowl and a position behind the target: every
+		// rank's text is "Must be prowling and behind the target". Neither is
+		// a client flag (scripted, like Ambush's stealth in sim/rogue/ambush.go),
+		// so this mirrors Pounce and Shred.
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return druid.IsProwling()
+			return druid.IsProwling() && !druid.PseudoStats.InFrontOfTarget
 		},
 
 		DamageMultiplier: ravageDamageMultiplier,

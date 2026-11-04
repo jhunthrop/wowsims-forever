@@ -21,10 +21,10 @@ var shredSpellID = [6]int32{0, 5221, 6800, 8992, 9829, 9830}
 var shredFlatDamageBonus = [6]float64{0, 22, 32, 44, 64, 80}
 
 // shredWeaponDamageMultiplier is Shred's weapon damage percentage on every
-// rank: client effect 1 is 155 in Forever (Era's 225; Wowhead Forever 9830
-// "causing 155% damage plus 80"). Beta logs agree: a rank 1 Shred over a
-// 31-damage paw hit averaged 82, which is 1.55 x (31 + 22).
-const shredWeaponDamageMultiplier = 1.55
+// rank: client effect 1 is 200 since the 1.60.1.70755 server push 113403
+// (155 before it, which beta logs matched: a rank 1 Shred over a 31-damage
+// paw hit averaged 82 = 1.55 x (31 + 22); Era's was 225).
+const shredWeaponDamageMultiplier = 2.00
 
 func (druid *Druid) registerShredSpell() {
 	rank := core.HighestRankAtLevel(shredLearnLevels, druid.Level)

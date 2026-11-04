@@ -18,8 +18,9 @@ var clawSpellID = [6]int32{0, 1082, 3029, 5201, 9849, 9850}
 var clawFlatDamageBonus = [6]float64{0, 27, 39, 57, 88, 115}
 
 // clawWeaponDamageMultiplier is Claw's weapon damage percentage on every
-// rank: client effect 1 is 110 ("110% normal damage").
-const clawWeaponDamageMultiplier = 1.10
+// rank: client effect 1 is 140 since the 1.60.1.70755 server push 113403
+// (110 before it).
+const clawWeaponDamageMultiplier = 1.40
 
 func (druid *Druid) registerClawSpell() {
 	rank := core.HighestRankAtLevel(clawLearnLevels, druid.Level)
