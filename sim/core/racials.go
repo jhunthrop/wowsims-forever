@@ -227,7 +227,7 @@ var racialsByRace = map[proto.Race][]Racial{
 		{
 			Name: "Shatter Curse", Kind: RacialActive, Confirmed: true,
 			Note:  "",
-			Apply: func(*Character) {}, // removes/immunes Curses and Banes, -15% magic damage taken 8 s: utility, no offensive effect
+			Apply: func(*Character) {}, // client 1299026: removes all Curses and Banes and -5% magic damage taken for 8 s (aura 87, -5), 3 min cooldown: utility, no offensive effect
 		},
 		{
 			Name: "Command", Kind: RacialPassive, Confirmed: true,
@@ -395,7 +395,7 @@ var racialsByRace = map[proto.Race][]Racial{
 		{
 			Name: "War Stomp", Kind: RacialActive, Confirmed: true,
 			Note:  "",
-			Apply: func(*Character) {}, // stuns up to 5 enemies within 8 yd for 2 s, 2 min cooldown: crowd control, not modeled
+			Apply: func(*Character) {}, // client 20549: 0.5 s cast, stuns up to 5 enemies within 8 yd for 2 s, 90 s cooldown: crowd control, not modeled
 		},
 		{
 			Name: "Cultivation", Kind: RacialActive, SpellID: 20552, Confirmed: true,
@@ -495,7 +495,7 @@ var racialsByRace = map[proto.Race][]Racial{
 		{
 			Name: "Regeneration", Kind: RacialPassive, Confirmed: true,
 			Note:  "",
-			Apply: func(*Character) {}, // keeps 10% of Health regeneration running in combat: no combat effect
+			Apply: func(*Character) {}, // client 20555: +20% Health regeneration and 20% of it continues in combat (aura 88 and 116, 20 each): no combat effect
 		},
 	},
 
@@ -523,18 +523,22 @@ const expansiveMindMultiplier = 1.05
 // Berserking (client 20554): effects aura 319, 140 and 65 at 10 each and a
 // 3 min cooldown, with no resource cost. The duration is 15 s: Blizzard's
 // 27 October notes ("increased to 15 seconds (was 10 seconds)"), and the
-// 1.60.1.70753 client ships it (SpellMisc DurationIndex 15000 ms).
+// 1.60.1.70755 client ships it (SpellMisc DurationIndex 8, 15000 ms).
 // A customPercentage of 0 is the client row; any other value makes a
 // cooldown hard-coded to that percentage, which existing APLs address by
 // tag.
 const (
+	// berserkingSpellID is the client's Berserking, the one id 70755 ships
+	// (SkillLineAbility, Racial - Troll). Classic's per-power variants
+	// (20554 mana, 26296 rage, 26297 energy) collapsed into it.
+	berserkingSpellID     = 20554
 	berserkingBasePercent = 0.10
 	berserkingDuration    = 15 * time.Second
 	berserkingCooldown    = 3 * time.Minute
 )
 
 func makeBerserkingCooldown(character *Character, customPercentage float64, timer *Timer) {
-	actionID := ActionID{SpellID: 26297, Tag: int32(customPercentage * 20)}
+	actionID := ActionID{SpellID: berserkingSpellID, Tag: int32(customPercentage * 20)}
 
 	label := "Berserking"
 	percent := berserkingBasePercent
