@@ -422,15 +422,10 @@ func rankIndex[T any](rank int32, table []T) int {
 // melee auto attacks have a [same]% chance of increasing melee attack
 // speed by 30% for 12 sec."
 //
-// Its melee half keys off Aspect of the Beast (aspect_of_the_beast.go).
-// Aspect of the Falcon (469145) also gives it melee: its
-// client text says "While Aspect of the Falcon is active, the Improved
-// Aspect of the Hawk talent can now proc from and benefit melee attacks"
-// (Deadly Aspects is that talent, spell 19552), and its own proc trigger
-// is Quick Strikes (469144, aura 319, +30% melee attack speed for 12 sec),
-// as wowsims/sod models the same spell. So a melee auto under Falcon rolls
-// the same chance for Quick Strikes, and a ranged Auto Shot under Hawk for
-// the ranged haste.
+// Its two chance mods (aura 107 misc 18) reach Aspect of the Hawk (effect 0,
+// mask word0 1048576) and Aspect of the Beast (effect 1, mask word2 16)
+// only. Aspect of the Falcon's mask is 0: its Quick Strikes proc is its own
+// flat 5% (aspect_of_the_falcon.go), which the talent does not raise.
 func (hunter *Hunter) applyDeadlyAspects() {
 	if hunter.Talents.DeadlyAspects == 0 {
 		return
@@ -439,13 +434,12 @@ func (hunter *Hunter) applyDeadlyAspects() {
 	procChance := 0.02 * float64(hunter.Talents.DeadlyAspects)
 	speedAura := hunter.createImprovedHawkAura("Deadly Aspects Haste", core.ActionID{SpellID: 19552})
 	quickStrikes := hunter.createQuickStrikesAura()
-	var falcon, beast *core.Aura
+	var beast *core.Aura
 
 	hunter.RegisterAura(core.Aura{
 		Label:    "Deadly Aspects",
 		Duration: core.NeverExpires,
 		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			falcon = hunter.GetAura(aspectOfTheFalconAuraLabel)
 			beast = hunter.GetAura(aspectOfTheBeastAuraLabel)
 			aura.Activate(sim)
 		},
@@ -457,10 +451,6 @@ func (hunter *Hunter) applyDeadlyAspects() {
 			case spell.ProcMask.Matches(core.ProcMaskRangedAuto) && hunter.HasActiveAuraWithTag(AspectOfTheHawkAuraTag):
 				if sim.Proc(procChance, "Deadly Aspects") {
 					speedAura.Activate(sim)
-				}
-			case spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) && falcon != nil && falcon.IsActive():
-				if sim.Proc(procChance, "Deadly Aspects (Falcon)") {
-					quickStrikes.Activate(sim)
 				}
 			case spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit) && beast != nil && beast.IsActive():
 				// Beast's own Quick Strikes (1299448) is Falcon's 469144 again:
