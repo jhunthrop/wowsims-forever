@@ -133,6 +133,12 @@ type Mage struct {
 	// Frost charge resolves; isTargetFrozen reads it.
 	fingersFreezeCast bool
 
+	// missileBarrageChannel is true when the Arcane Missiles channel that
+	// just started was a Missile Barrage one (arcane_missiles.go sets it as
+	// the channel applies, before any OnCastComplete runs); Clearcasting
+	// reads it to leave its charge on such a cast (talents.go).
+	missileBarrageChannel bool
+
 	// fireBlastCategoryTimer is the client's cooldown category 19, which
 	// Fire Blast and Ice Lance share (fireBlastCategory).
 	fireBlastCategoryTimer *core.Timer

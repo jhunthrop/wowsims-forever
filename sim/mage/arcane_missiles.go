@@ -101,7 +101,8 @@ func (mage *Mage) getArcaneMissilesSpellConfig(rank int) core.SpellConfig {
 			// swap is what makes this particular cast free; checked here
 			// too because OnCastComplete (which consumes the buff) does
 			// not run until after this function returns.
-			if mage.MissileBarrageAura != nil && mage.MissileBarrageAura.IsActive() {
+			mage.missileBarrageChannel = mage.MissileBarrageAura != nil && mage.MissileBarrageAura.IsActive()
+			if mage.missileBarrageChannel {
 				dot.TickLength = missileBarrageTickLength
 			} else {
 				dot.TickLength = tickLength

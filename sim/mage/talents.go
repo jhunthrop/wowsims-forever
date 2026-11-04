@@ -215,11 +215,15 @@ func (mage *Mage) applyArcaneConcentration() {
 			if !spell.Matches(clearcastingMask) || spell.Cost == nil {
 				return
 			}
-			// A cast that was free without Clearcasting (Missile
-			// Barrage's Arcane Missiles) leaves the charge. The cost is
-			// read without Clearcasting's own mod, which is what made
-			// every cast look free and kept the charge for 15 s.
-			if spell.Cost.Multiplier-clearcastingCostPct <= 0 {
+			// Blizzard's 2 November 2026 beta notes: "Clearcasting is no
+			// longer consumed on Arcane Missiles if Missile Barrage is
+			// active at the same time." The channel records that as it
+			// starts (missileBarrageChannel), because the rule holds under
+			// Arcane Power too, where a Barrage Missiles is not free by
+			// itself: the client adds percentage cost mods, so -100 and +30
+			// leave 30%. Reading the cost here, as the engine once did,
+			// spent the charge on exactly those casts.
+			if spell.SpellCode == SpellCode_MageArcaneMissiles && mage.missileBarrageChannel {
 				return
 			}
 			aura.Deactivate(sim)
