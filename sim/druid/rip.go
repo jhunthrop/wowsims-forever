@@ -11,13 +11,13 @@ import (
 var RipTickDamage = clientdamage.FromTable(RipBaseDamage[:], RipPointsPerLevel[:], RipLevel[:], RipMaxLevel[:])
 
 // The Rip ladder is constants_auto_gen.go's: RipBaseDamage is the client's
-// per-tick base (rank 6: 15, where the Era ladder this replaced had 17).
+// per-tick base (rank 6: 19 after the 70755 push 113403, 15 before it).
 // ripTickPerComboPoint is the client's EffectPointsPerResource for effect 0
-// of each rank (1.60.1.70009 SpellEffect.csv, ids 1079-9896), which the
+// of each rank (ids 1079-9896; 1.60.1.70755 server push 113403), which the
 // vendored spellconst does not carry: the tooltip reads "${6*($m1+N*$b1)}
 // damage over $d" for N combo points, so each combo point adds its step to
 // every one of the six ticks.
-var ripTickPerComboPoint = [RipRanks + 1]float64{0, 4.4, 7.2, 8.5, 12.7, 18.2, 25.5}
+var ripTickPerComboPoint = [RipRanks + 1]float64{0, 5.5, 9, 10.5, 15.8, 22.5, 31.9}
 
 // RipNumberOfTicks is Rip's tick count at every combo point count: the
 // client's duration_ms is 12000 on all six ranks with 2 s periods, and its

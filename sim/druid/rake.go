@@ -11,17 +11,17 @@ import (
 var RakeInitialDamage = clientdamage.FromTable(RakeBaseDamage[:], RakePointsPerLevel[:], RakeLevel[:], RakeMaxLevel[:])
 
 // The Rake ladder is constants_auto_gen.go's (RakeSpellId, RakeLevel and
-// RakeBaseDamage hold the client's amounts: rank 4 is 61 up front, where the
-// Era ladder this replaced had 58). The client states no width and no
+// RakeBaseDamage hold the client's amounts: rank 4 is 76 up front after the 70755
+// push 113403, 61 before it). The client states no width and no
 // per-level growth, and its tick is not a generated column, so
 // RakeTickDamage is spellconst/druid.json's periodic effect for the same
-// ids (34 a tick at rank 4, where the Era ladder had 32).
+// ids (42 a tick at rank 4 after push 113403, 34 before it).
 var RakeTickDamage = [RakeRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 16, SpellLevel: 24},
-	{Amount: 21, SpellLevel: 34},
-	{Amount: 26, SpellLevel: 44},
-	{Amount: 34, SpellLevel: 54},
+	{Amount: 20, SpellLevel: 24},
+	{Amount: 26, SpellLevel: 34},
+	{Amount: 32, SpellLevel: 44},
+	{Amount: 42, SpellLevel: 54},
 }
 
 func (druid *Druid) registerRakeSpell() {

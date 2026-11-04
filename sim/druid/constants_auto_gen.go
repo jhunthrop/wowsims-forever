@@ -2,7 +2,7 @@
 //
 // Class: druid
 // Client build: 1.60.1.70755
-// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/c755/site/data/builds/1.60.1.70755/spellconst/druid.json
+// Source: /Users/jh/code/forever/.claude/worktrees/r15-druid/data/builds/1.60.1.70755/spellconst/druid.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -1453,7 +1453,7 @@ var FerociousBiteCooldownMS = [FerociousBiteRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var FerociousBiteManaCost = [FerociousBiteRanks + 1]float64{0, 35, 35, 35, 35, 35, 35}
 var FerociousBiteManaCostPct = [FerociousBiteRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var FerociousBiteSpellCoeff = [FerociousBiteRanks + 1]float64{1, 1, 1, 1, 1, 1, 1}
-var FerociousBiteBaseDamage = [FerociousBiteRanks + 1][]float64{{1750, 2250}, {9, 19}, {14, 30}, {20, 44}, {30, 70}, {45, 95}, {52, 112}}
+var FerociousBiteBaseDamage = [FerociousBiteRanks + 1][]float64{{1750, 2250}, {10.9286, 23.0714}, {17.1818, 36.8182}, {25, 55}, {37.2, 86.8}, {55.9286, 118.0714}, {64.6829, 139.3171}}
 var FerociousBitePointsPerLevel = [FerociousBiteRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var FerociousBiteMaxLevel = [FerociousBiteRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 
@@ -3238,7 +3238,7 @@ var RakeCooldownMS = [RakeRanks + 1]int32{0, 0, 0, 0, 0}
 var RakeManaCost = [RakeRanks + 1]float64{0, 40, 40, 40, 40}
 var RakeManaCostPct = [RakeRanks + 1]float64{0, 0, 0, 0, 0}
 var RakeSpellCoeff = [RakeRanks + 1]float64{0.5, 0.3, 0.3, 0.3, 0.3}
-var RakeBaseDamage = [RakeRanks + 1][]float64{{200, 300}, {23, 23}, {31, 31}, {45, 45}, {61, 61}}
+var RakeBaseDamage = [RakeRanks + 1][]float64{{200, 300}, {27, 27}, {39, 39}, {56, 56}, {76, 76}}
 var RakePointsPerLevel = [RakeRanks + 1]float64{0, 0, 0, 0, 0}
 var RakeMaxLevel = [RakeRanks + 1]int{0, 0, 0, 0, 0}
 
@@ -3487,7 +3487,7 @@ var RipCooldownMS = [RipRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var RipManaCost = [RipRanks + 1]float64{0, 30, 30, 30, 30, 30, 30}
 var RipManaCostPct = [RipRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var RipSpellCoeff = [RipRanks + 1]float64{0, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4}
-var RipBaseDamage = [RipRanks + 1][]float64{{0, 0}, {3, 3}, {4, 4}, {6, 6}, {8, 8}, {11, 11}, {15, 15}}
+var RipBaseDamage = [RipRanks + 1][]float64{{0, 0}, {4, 4}, {5, 5}, {8, 8}, {10, 10}, {14, 14}, {19, 19}}
 var RipPointsPerLevel = [RipRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var RipMaxLevel = [RipRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 

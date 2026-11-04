@@ -11,10 +11,11 @@ import (
 var FerociousBiteDamage = clientdamage.FromTable(FerociousBiteBaseDamage[:], FerociousBitePointsPerLevel[:], FerociousBiteLevel[:], FerociousBiteMaxLevel[:])
 
 // The bite's ladder and its non-combo-point roll are constants_auto_gen.go's
-// (FerociousBiteBaseDamage rank 6 is the client's 52-112). The per-energy step
-// is the client's dummy effect 1 (amount 60/100/150/200/250/270 hundredths per
-// energy, pinned by spellconst_damage_test.go); the per-combo-point step is
-// stated nowhere in the client's rows and stays the Era figure. Rank 1
+// (FerociousBiteBaseDamage rank 6 is the client's 102 +/- 35.7%). The per-energy
+// step is the client's dummy effect 1 (amount 70/120/180/250/310/330 hundredths
+// per energy, pinned by spellconst_damage_test.go); the per-combo-point step is
+// effect 0's EffectPointsPerResource, which spellconst does not carry
+// (30/45/74/115/160/181; all three from the 1.60.1.70755 server push 113403). Rank 1
 // (1328618, level 24) is the server's hotfix push, which the client tables
 // carry since the site's pipeline layers the push (round 6); its 24 a combo
 // point is Wowhead's live tooltip (33-43 at 1 point over the client's 9-19,
@@ -25,8 +26,8 @@ var FerociousBiteDamage = clientdamage.FromTable(FerociousBiteBaseDamage[:], Fer
 // damage, but still deals extra damage based on your excess Energy." The
 // bite keeps the per-energy damage on the energy left after its cost but no
 // longer spends that energy.
-var ferociousBiteDamagePerComboPoint = [FerociousBiteRanks + 1]float64{0, 24, 36, 59, 92, 128, 147}
-var ferociousBiteDamagePerEnergy = [FerociousBiteRanks + 1]float64{0, 0.6, 1.0, 1.5, 2.0, 2.5, 2.7}
+var ferociousBiteDamagePerComboPoint = [FerociousBiteRanks + 1]float64{0, 30, 45, 74, 115, 160, 181}
+var ferociousBiteDamagePerEnergy = [FerociousBiteRanks + 1]float64{0, 0.7, 1.2, 1.8, 2.5, 3.1, 3.3}
 
 // ferociousBiteLearnLevels is core.HighestRankAtLevel's input shape
 // (rank r, 1-based, learned at ferociousBiteLearnLevels[r-1]), read off
