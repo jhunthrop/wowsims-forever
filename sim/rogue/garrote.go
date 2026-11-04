@@ -15,6 +15,11 @@ var garroteLearnLevels = []int{14, 22, 30, 38, 46, 54}
 // garroteSpellID is Garrote's rank -> spell id, index 0 unused.
 var garroteSpellID = [7]int32{0, 703, 8631, 8632, 8633, 11289, 11290}
 
+const (
+	garroteBaseTicks  = 6
+	garroteTickLength = 3 * time.Second
+)
+
 func (rogue *Rogue) registerGarrote() {
 	rank := core.HighestRankAtLevel(garroteLearnLevels, rogue.Level)
 	if rank == 0 {
@@ -46,13 +51,10 @@ func (rogue *Rogue) registerGarrote() {
 			IgnoreHaste: true,
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			if !rogue.IsStealthed() {
-				return false
-			}
-			return !rogue.PseudoStats.InFrontOfTarget
+			return rogue.canOpen() && !rogue.PseudoStats.InFrontOfTarget
 		},
 
-		DamageMultiplier: opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])],
+		DamageMultiplier: rogue.opportunity(),
 		ThreatMultiplier: 1,
 		ClientBaseDamage: tickDamage.Range(casterLevel),
 
@@ -60,19 +62,19 @@ func (rogue *Rogue) registerGarrote() {
 			Aura: core.Aura{
 				Label: "Garrote",
 			},
-			NumberOfTicks: 6,
-			TickLength:    time.Second * 3,
+			NumberOfTicks: garroteBaseTicks + rogue.bloodSplatterTicks(bloodSplatterGarroteExtra, garroteTickLength),
+			TickLength:    garroteTickLength,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				damage := tickDamage.Roll(sim, casterLevel) + dot.Spell.MeleeAttackPower(target)*0.03
 				dot.Snapshot(target, damage, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
+				rogue.dealBleedTick(sim, target, dot)
 			},
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			rogue.BreakStealth(sim)
+			rogue.spendOpener(sim)
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMeleeSpecialNoBlockDodgeParryNoCritNoHitCounter)
 			if result.Landed() {
 				rogue.AddComboPoints(sim, 1, target, spell.ComboPointMetrics())

@@ -19,7 +19,6 @@ import (
 
 func (rogue *Rogue) ApplyTalents() {
 	rogue.applyRuthlessness()
-	rogue.applyMurder()
 	rogue.applyRelentlessStrikes()
 	rogue.applySealFate()
 	rogue.applyWeaponSpecializations()
@@ -27,10 +26,8 @@ func (rogue *Rogue) ApplyTalents() {
 	rogue.applyInitiative()
 	rogue.applyPuncturingWounds()
 	rogue.applyHackAndSlash()
-	rogue.applyCutthroat()
-	rogue.applyThousandCuts()
-	rogue.applyQuietus()
 	rogue.applyFlawlessExecution()
+	rogue.applyEfficientStrikes()
 	rogue.applySetup()
 
 	// FOREVER: talents with no DPS lever on a Patchwerk fight. Each is
@@ -82,11 +79,16 @@ func (rogue *Rogue) ApplyTalents() {
 	// rank to shorten.
 	_ = rogue.Talents.Camouflage
 
-	// Master of Deception, Improved Distract and Heightened Senses are
-	// all Stealth-detection or being-hit-by-ranged/spells mitigation:
-	// nothing in this sim models an enemy detecting a stealthed rogue
-	// or casting at one, so none of the three has a number to change.
-	_, _, _ = rogue.Talents.MasterOfDeception, rogue.Talents.ImprovedDistract, rogue.Talents.HeightenedSenses
+	// Master of Deception and Heightened Senses are Stealth-detection or
+	// being-hit-by-ranged/spells mitigation: nothing in this sim models an
+	// enemy detecting a stealthed rogue or casting at one, so neither has
+	// a number to change.
+	_, _ = rogue.Talents.MasterOfDeception, rogue.Talents.HeightenedSenses
+
+	// Quick Getaway (1310728) raises the Sap target cap and triggers a
+	// 1329282 run-speed buff after a Sap. Sap has no spell file in this
+	// package and a Patchwerk fight saps nothing.
+	_ = rogue.Talents.QuickGetaway
 
 	// Dirty Tricks discounts Sap and Blind. Neither has a spell file in
 	// this package: both are pre-pull/CC utility, not a Patchwerk
@@ -136,39 +138,28 @@ func (rogue *Rogue) applyRuthlessness() {
 	})
 }
 
-// Murder talent. Client text: "Increases all damage dealt by 2%/4% against
-// Humanoid and Giant targets." (talents/rogue.json), one multiplier on the
-// damage dealt and nothing on the crit multiplier.
-func (rogue *Rogue) applyMurder() {
-	if rogue.Talents.Murder == 0 {
+// applyRelentlessStrikes: 14179 e0 triggers 14181 (25 Energy); the chance
+// per combo point is the trait curve (TraitDefinitionEffectPoints 25222,
+// curve 128113: 4/8/12/16/20%).
+func (rogue *Rogue) applyRelentlessStrikes() {
+	rank := rogue.Talents.RelentlessStrikes
+	if rank == 0 {
 		return
 	}
 
-	// post finalize, since attack tables need to be setup
-	rogue.Env.RegisterPostFinalizeEffect(func() {
-		for _, t := range rogue.Env.Encounter.Targets {
-			switch t.MobType {
-			case proto.MobType_MobTypeHumanoid, proto.MobType_MobTypeGiant:
-				multiplier := 1 + murderDamagePerRank*float64(rogue.Talents.Murder)
-				for _, at := range rogue.AttackTables[t.UnitIndex] {
-					at.DamageDealtMultiplier *= multiplier
-				}
-			}
+	chancePerComboPoint := relentlessStrikesChancePerComboPoint(rank)
+	cpMetrics := rogue.NewEnergyMetrics(core.ActionID{SpellID: 14179})
+	rogue.OnComboPointsSpent(func(sim *core.Simulation, spell *core.Spell, comboPoints int32) {
+		if sim.Proc(chancePerComboPoint*float64(comboPoints), "RelentlessStrikes") {
+			rogue.AddEnergy(sim, relentlessStrikesEnergy, cpMetrics)
 		}
 	})
 }
 
-func (rogue *Rogue) applyRelentlessStrikes() {
-	if !rogue.Talents.RelentlessStrikes {
-		return
-	}
-
-	cpMetrics := rogue.NewEnergyMetrics(core.ActionID{SpellID: 14179})
-	rogue.OnComboPointsSpent(func(sim *core.Simulation, spell *core.Spell, comboPoints int32) {
-		if sim.Proc(0.2*float64(comboPoints), "RelentlessStrikes") {
-			rogue.AddEnergy(sim, 25, cpMetrics)
-		}
-	})
+// relentlessStrikesChancePerComboPoint is the restore chance per combo
+// point at a Relentless Strikes rank.
+func relentlessStrikesChancePerComboPoint(rank int32) float64 {
+	return relentlessStrikesChancePerRank * float64(max(0, min(rank, relentlessStrikesMaxRank)))
 }
 
 // Cold Blood talent
@@ -227,13 +218,17 @@ func (rogue *Rogue) registerColdBloodCD() {
 	})
 }
 
+// sealFateChance is Seal Fate's rank -> proc chance, index 0 unused: the
+// trait curve (TraitDefinitionEffectPoints 23365, curve 83040: 33/66/100).
+var sealFateChance = [4]float64{0, 0.33, 0.66, 1.0}
+
 // Seal Fate talent
 func (rogue *Rogue) applySealFate() {
 	if rogue.Talents.SealFate == 0 {
 		return
 	}
 
-	procChance := 0.2 * float64(rogue.Talents.SealFate)
+	procChance := sealFateChance[rankIndex(rogue.Talents.SealFate, sealFateChance[:])]
 	cpMetrics := rogue.NewComboPointMetrics(core.ActionID{SpellID: 14195})
 
 	icd := core.Cooldown{
@@ -550,42 +545,34 @@ const (
 	hackAndSlashExtraAttackChancePerRank = 0.01
 	hackAndSlashCritPerRank              = 1.0
 	hackAndSlashArmorPenPctPerRank       = 3.0
-	// Cutthroat: "Your Backstab has a 3%/6%/9%/12%/15% chance to cause
-	// your next Ambush within 10 sec to not require Stealth."
-	cutthroatProcChancePerRank = 0.03
-	cutthroatDuration          = 10 * time.Second
-	// Thousand Cuts (1 rank only): "When your Rupture ability deals
-	// periodic damage, the Energy cost of your next Hemorrhage or
-	// Backstab ability within 10 sec is reduced by 3, stacking up to 5
-	// times."
-	thousandCutsCostReductionPerStack = 3
-	thousandCutsMaxStacks             = 5
-	thousandCutsDuration              = 10 * time.Second
-	// Quietus: "Your Sinister Strike, Ghostly Strike, and Hemorrhage
-	// abilities cause 2%/4%/6%/8%/10% more damage against targets below
-	// 35% health." sim.IsExecutePhase35 is the same "target below 35%
-	// health" the warrior Execute/priest Shadow Word: Death talents key
-	// off, since this engine has no real target HP pool to read.
-	quietusDamagePerRank = 0.02
-	// Flawless Execution (1 rank only): "Reduces the Energy cost of your
-	// Eviscerate ability by 10."
-	flawlessExecutionEnergyCostReduction = 10
-	// Setup: "Gives you a 33%/67%/100% chance to add a Combo Point to
-	// your target after Dodging an attack or fully resisting a spell."
-	// Not an exact 33.33%/rank, so a table rather than a multiply.
+	// Flawless Execution (1 rank): 1310711 e0 aura 107 (cost) on
+	// Eviscerate, the trait curve's -15 (TraitDefinitionEffectPoints 25225,
+	// curve 128126).
+	flawlessExecutionEnergyCostReduction = 15
+	// Relentless Strikes: 25 Energy (14181) at 4% per combo point per rank.
+	relentlessStrikesChancePerRank = 0.04
+	relentlessStrikesMaxRank       = 5
+	relentlessStrikesEnergy        = 25
 )
 
-// setupComboPointChance is Setup's rank -> proc chance, index 0 unused.
-var setupComboPointChance = [4]float64{0, 0.33, 0.67, 1.0}
+// setupComboPointChance is Setup's rank -> proc chance, index 0 unused:
+// the trait curve (TraitDefinitionEffectPoints 23403, curve 83009:
+// 15/30/45%).
+var setupComboPointChance = [4]float64{0, 0.15, 0.30, 0.45}
+
+// isOffHandStrike reports whether spell swings the off-hand weapon: every
+// off-hand proc-mask spell, and Shank, which strikes with the off hand but
+// carries an empty proc mask because the client suppresses its procs.
+func isOffHandStrike(spell *core.Spell) bool {
+	return spell.ProcMask.Matches(core.ProcMaskMeleeOH) || spell.Matches(RogueSpellMaskShank)
+}
 
 // applyPuncturingWounds gives Backstab and Mutilate's crit bonus and
 // Backstab's extra-combo-point chance. The crit bonus is applied once,
 // deferred to Env.RegisterPreFinalizeEffect: ApplyTalents runs before
 // Initialize (core/character.go's applyAllEffects calls agent.ApplyTalents
 // first), so rogue.Backstab/MutilateMH/MutilateOH are all still nil here;
-// by the pre-finalize phase every player has finished Initialize (same
-// reasoning as applyMurder's RegisterPostFinalizeEffect below, which needs
-// AttackTables instead of spells).
+// by the pre-finalize phase every player has finished Initialize.
 func (rogue *Rogue) applyPuncturingWounds() {
 	rank := rogue.Talents.PuncturingWounds
 	if rank == 0 {
@@ -677,14 +664,14 @@ func (rogue *Rogue) applyHackAndSlash() {
 			// correction applyWeaponSpecializations' commented Dagger/
 			// Fist Specialization already made.
 			rogue.OnSpellRegistered(func(spell *core.Spell) {
-				if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
+				if isOffHandStrike(spell) {
 					spell.BonusCritRating -= critBonus
 				}
 			})
 		}
 	} else if isDaggerOrFist(oh) {
 		rogue.OnSpellRegistered(func(spell *core.Spell) {
-			if spell.ProcMask.Matches(core.ProcMaskMeleeOH) {
+			if isOffHandStrike(spell) {
 				spell.BonusCritRating += critBonus
 			}
 		})
@@ -722,159 +709,6 @@ func (rogue *Rogue) applyHackAndSlash() {
 	}
 }
 
-// applyCutthroat registers the Ambush-stealth-bypass buff; ambush.go
-// reads rogue.CutthroatAura.
-func (rogue *Rogue) applyCutthroat() {
-	rank := rogue.Talents.Cutthroat
-	if rank == 0 {
-		return
-	}
-
-	procChance := cutthroatProcChancePerRank * float64(rank)
-
-	rogue.CutthroatAura = rogue.RegisterAura(core.Aura{
-		Label:    "Cutthroat",
-		ActionID: core.ActionID{SpellID: 462708},
-		Duration: cutthroatDuration,
-	})
-
-	rogue.RegisterAura(core.Aura{
-		Label:    "Cutthroat Trigger",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell != rogue.Backstab || !result.Landed() {
-				return
-			}
-			if sim.Proc(procChance, "Cutthroat") {
-				rogue.CutthroatAura.Activate(sim)
-			}
-		},
-	})
-}
-
-// applyThousandCuts stacks an Energy-cost discount on Hemorrhage/Backstab
-// off Rupture ticks. The discount aura's own stack count is the only
-// state; see its OnReset for why the aura unwinds its own cost delta
-// before re-registering each iteration, rather than relying on Deactivate
-// (which does not reset stacks - see aura.go's SetStacks/Deactivate).
-func (rogue *Rogue) applyThousandCuts() {
-	if !rogue.Talents.ThousandCuts {
-		return
-	}
-
-	affectedSpells := func() []*core.Spell {
-		spells := make([]*core.Spell, 0, 2)
-		if rogue.Hemorrhage != nil {
-			spells = append(spells, rogue.Hemorrhage)
-		}
-		if rogue.Backstab != nil {
-			spells = append(spells, rogue.Backstab)
-		}
-		return spells
-	}
-
-	var discountAura *core.Aura
-	discountAura = rogue.RegisterAura(core.Aura{
-		Label:     "Thousand Cuts",
-		ActionID:  core.ActionID{SpellID: 1310721},
-		Duration:  thousandCutsDuration,
-		MaxStacks: thousandCutsMaxStacks,
-		OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks int32, newStacks int32) {
-			delta := int32(thousandCutsCostReductionPerStack) * (newStacks - oldStacks)
-			for _, spell := range affectedSpells() {
-				spell.Cost.FlatModifier -= delta
-			}
-		},
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			// Natural 10-sec expiry without a consuming cast: unwind via
-			// SetStacks(0), not Deactivate, so OnStacksChange fires and
-			// reverses the FlatModifier. Deactivate is already mid-call
-			// on this aura (that is how OnExpire was reached), and it
-			// guards re-entry with its own aura.active check, so the
-			// reentrant Deactivate inside SetStacks(0) is a safe no-op.
-			aura.SetStacks(sim, 0)
-		},
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell != rogue.Hemorrhage && spell != rogue.Backstab {
-				return
-			}
-			aura.SetStacks(sim, 0)
-		},
-	})
-
-	rogue.RegisterAura(core.Aura{
-		Label:    "Thousand Cuts Trigger",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-		},
-		OnPeriodicDamageDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell != rogue.Rupture {
-				return
-			}
-			discountAura.Activate(sim)
-			discountAura.AddStack(sim)
-		},
-	})
-}
-
-// applyQuietus toggles Sinister Strike/Ghostly Strike/Hemorrhage's
-// damage bonus on sim.IsExecutePhase35, the same "target below 35%
-// health" proxy warrior/execute.go and priest/shadow_word_death.go read
-// (this engine has no real target HP pool). RegisterExecutePhaseCallback
-// is re-registered from OnReset because sim.reset (core/sim.go) clears
-// the whole callback list at the start of every iteration; the `applied`
-// flag undoes a previous iteration's still-active bonus before that
-// iteration's fresh registration, since nothing else reverses it when a
-// fight simply ends while still under 35%.
-func (rogue *Rogue) applyQuietus() {
-	rank := rogue.Talents.Quietus
-	if rank == 0 {
-		return
-	}
-
-	damageBonus := quietusDamagePerRank * float64(rank)
-	applied := false
-
-	affectedSpells := func() []*core.Spell {
-		spells := make([]*core.Spell, 0, 3)
-		for _, spell := range []*core.Spell{rogue.SinisterStrike, rogue.GhostlyStrike, rogue.Hemorrhage} {
-			if spell != nil {
-				spells = append(spells, spell)
-			}
-		}
-		return spells
-	}
-
-	rogue.RegisterAura(core.Aura{
-		Label:    "Quietus",
-		Duration: core.NeverExpires,
-		OnReset: func(aura *core.Aura, sim *core.Simulation) {
-			aura.Activate(sim)
-
-			if applied {
-				for _, spell := range affectedSpells() {
-					spell.DamageMultiplierAdditive -= damageBonus
-				}
-				applied = false
-			}
-
-			sim.RegisterExecutePhaseCallback(func(sim *core.Simulation, isExecute int32) {
-				if isExecute > 35 || applied {
-					return
-				}
-				applied = true
-				for _, spell := range affectedSpells() {
-					spell.DamageMultiplierAdditive += damageBonus
-				}
-			})
-		},
-	})
-}
-
 // applyFlawlessExecution discounts Eviscerate's Energy cost. Deferred to
 // Env.RegisterPreFinalizeEffect for the same reason applyPuncturingWounds
 // is: rogue.Eviscerate is nil until Initialize runs, which is after
@@ -887,6 +721,29 @@ func (rogue *Rogue) applyFlawlessExecution() {
 	rogue.Env.RegisterPreFinalizeEffect(func() {
 		if rogue.Eviscerate != nil {
 			rogue.Eviscerate.Cost.FlatModifier -= flawlessExecutionEnergyCostReduction
+		}
+	})
+}
+
+// efficientStrikesCostReduction is Efficient Strikes' rank -> Energy off
+// Sinister Strike and Hemorrhage, index 0 unused: 13732 e0 aura 107 (cost,
+// misc 14) on mask 33554434 (Sinister Strike 2 + Hemorrhage 33554432), the
+// trait curve's -3/-5 (TraitDefinitionEffectPoints 23394, curve 83038).
+var efficientStrikesCostReduction = [3]int32{0, 3, 5}
+
+// applyEfficientStrikes discounts Sinister Strike and Hemorrhage, deferred
+// for the same reason applyFlawlessExecution is.
+func (rogue *Rogue) applyEfficientStrikes() {
+	if rogue.Talents.EfficientStrikes == 0 {
+		return
+	}
+
+	reduction := efficientStrikesCostReduction[rankIndex(rogue.Talents.EfficientStrikes, efficientStrikesCostReduction[:])]
+	rogue.Env.RegisterPreFinalizeEffect(func() {
+		for _, spell := range []*core.Spell{rogue.SinisterStrike, rogue.Hemorrhage} {
+			if spell != nil {
+				spell.Cost.FlatModifier -= reduction
+			}
 		}
 	})
 }

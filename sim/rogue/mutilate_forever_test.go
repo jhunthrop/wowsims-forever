@@ -2,12 +2,15 @@ package rogue
 
 import "testing"
 
-// Mutilate's flat bonus sits inside its 75% weapon damage, as Backstab's
-// sits inside its 150%: client 1241586/1241590 carry effect 121 (weapon
-// damage plus 67) with effect 31 (75%), and the tooltip's "plus an
-// additional 50 with each weapon" is 67 x 0.75.
+// Mutilate's flat bonus sits inside its 90% weapon damage, as Backstab's
+// sits inside its 150%: client 399960/399961 carry effect 121 (weapon
+// damage plus 44) with effect 31 (90% in 70755), and the tooltip's "plus
+// an additional 40 with each weapon" is 44 x 0.90.
 func TestMutilateFlatBonusScalesWithItsWeaponPercent(t *testing.T) {
-	if got := mutilateHandDamage(67, 100); got != (67+100)*0.75 {
-		t.Errorf("Mutilate hand damage with 67 flat on 100 weapon = %v, want (67+100) x 0.75 = %v", got, (67+100)*0.75)
+	if got, want := mutilateHandDamage(44, 100), (44+100)*0.90; got != want {
+		t.Errorf("Mutilate hand damage with 44 flat on 100 weapon = %v, want (44+100) x 0.90 = %v", got, want)
+	}
+	if got, want := MutilateDamage[1].Amount, 44.0; got != want {
+		t.Errorf("Mutilate rank 1 flat = %v, want %v", got, want)
 	}
 }

@@ -56,7 +56,7 @@ func TestPoisedIsNotKnownBelowEighteen(t *testing.T) {
 // (poisons, Mutilate's hand strikes, Blade Flurry's copy) may spend it.
 func TestPoisedReachesEveryEnergyAbility(t *testing.T) {
 	talents := talentsWithRanks(t, map[string]int{
-		"mutilate": 1, "hemorrhage": 1, "ghostly_strike": 1, "blade_flurry": 1, "riposte": 1, "venom": 1,
+		"mutilate": 1, "hemorrhage": 1, "ghostly_strike": 1, "blade_flurry": 1, "riposte": 1, "death_mark": 1,
 	})
 	_, built := buildRogueSimForTalentTest(t, talents, "combat_backstab_prebis")
 	r := built.GetRogue()
@@ -65,6 +65,14 @@ func TestPoisedReachesEveryEnergyAbility(t *testing.T) {
 	reached := 0
 	for _, spell := range r.Spellbook {
 		costsEnergy := spell.Cost != nil && spell.Cost.CostType() == core.CostTypeEnergy && spell.Cost.BaseCost > 0
+		// Shank (mask_0 536870912) and Death Mark (mask_2 4) are new in
+		// 70755 and outside the buff's mask: Poised does not reach them.
+		if spell.Matches(rogue.RogueSpellMaskShank | rogue.RogueSpellMaskDeathMark) {
+			if spell.Matches(mask) {
+				t.Errorf("%v is in Poised's mask; the client leaves it out", spell.ActionID)
+			}
+			continue
+		}
 		switch {
 		case costsEnergy && !spell.Matches(mask):
 			t.Errorf("%v costs Energy but Poised does not reach it", spell.ActionID)

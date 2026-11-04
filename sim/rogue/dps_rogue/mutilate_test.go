@@ -188,17 +188,14 @@ func TestMutilateNotRegisteredWithoutTheTalent(t *testing.T) {
 	}
 }
 
-// TestMutilateLevel60DealsDamageAndAwardsComboPoints is the case the
-// curated APL's "inert" entry for spell 1310707 is waiting on: a
-// talented level-60 rogue must have Mutilate registered, and casting it
-// must land on both weapons, deal damage, and award the 2 combo points
-// the talent's tooltip states.
+// TestMutilateLevel60DealsDamageAndAwardsComboPoints: a talented level-60
+// rogue must have Mutilate registered, and casting it must land on both
+// weapons, deal damage, and award the 2 combo points the talent's tooltip
+// states.
 //
-// The registered id is rank 4's (1241584), not rank 1's (1310707):
-// Mutilate is a four-rank ability learned by level
-// (spellranks.json's chain, 1310707@30/399956@40/1241582@50/1241584@60),
-// not the single always-known ability this test used to assume, and a
-// level-60 rogue has learned every rank.
+// The registered id is rank 3's (1241584): in 70755 Mutilate is a
+// three-rank ability learned by level (399956@40/1241582@50/1241584@60),
+// and a level-60 rogue has learned every rank.
 func TestMutilateLevel60DealsDamageAndAwardsComboPoints(t *testing.T) {
 	sim, built := buildRogueForTest(t, rogueTalentStringWith(t, "mutilate"))
 

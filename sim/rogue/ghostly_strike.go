@@ -8,6 +8,16 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// Ghostly Strike (14278, 70755): e0 125% weapon damage (e3 180% with a
+// main-hand dagger), e1 +15% dodge for 7 sec, e2 one combo point, and e5
+// (effect 64) triggers 1329326, "Next Ambush or Garrote does not require
+// Stealth": aura 275 on mask 768 (Garrote 256 + Ambush 512), DurationIndex
+// 165 (7 sec).
+const (
+	ghostlyStrikeOpenerSpellID  = 1329326
+	ghostlyStrikeOpenerDuration = 7 * time.Second
+)
+
 func (rogue *Rogue) registerGhostlyStrikeSpell() {
 	if !rogue.Talents.GhostlyStrike {
 		return
@@ -23,6 +33,12 @@ func (rogue *Rogue) registerGhostlyStrikeSpell() {
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			rogue.AddStatDynamic(sim, stats.Dodge, -15*core.DodgeRatingPerDodgeChance)
 		},
+	})
+
+	rogue.GhostlyStrikeOpenerAura = rogue.RegisterAura(core.Aura{
+		Label:    "Ghostly Strike (Opener)",
+		ActionID: core.ActionID{SpellID: ghostlyStrikeOpenerSpellID},
+		Duration: ghostlyStrikeOpenerDuration,
 	})
 
 	rogue.GhostlyStrike = rogue.RegisterSpell(core.SpellConfig{
@@ -69,9 +85,31 @@ func (rogue *Rogue) registerGhostlyStrikeSpell() {
 
 			if result.Landed() {
 				rogue.AddComboPoints(sim, 1, target, spell.ComboPointMetrics())
+				rogue.GhostlyStrikeOpenerAura.Activate(sim)
 			} else {
 				spell.IssueRefund(sim)
 			}
 		},
 	})
+}
+
+// canOpen reports whether Ambush or Garrote may be cast now: in Stealth,
+// or with Ghostly Strike's opener buff up.
+func (rogue *Rogue) canOpen() bool {
+	return rogue.IsStealthed() || rogue.hasGhostlyStrikeOpener()
+}
+
+func (rogue *Rogue) hasGhostlyStrikeOpener() bool {
+	return rogue.GhostlyStrikeOpenerAura != nil && rogue.GhostlyStrikeOpenerAura.IsActive()
+}
+
+// spendOpener breaks Stealth for an Ambush or Garrote; one cast outside
+// Stealth spends Ghostly Strike's buff. It is checked before BreakStealth,
+// which would otherwise make "not stealthed" ambiguous between "never
+// stealthed" and "was stealthed, now broken".
+func (rogue *Rogue) spendOpener(sim *core.Simulation) {
+	if !rogue.IsStealthed() && rogue.hasGhostlyStrikeOpener() {
+		rogue.GhostlyStrikeOpenerAura.Deactivate(sim)
+	}
+	rogue.BreakStealth(sim)
 }

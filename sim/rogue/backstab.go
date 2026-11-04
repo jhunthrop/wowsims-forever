@@ -26,8 +26,9 @@ func (rogue *Rogue) registerBackstabSpell() {
 	casterLevel := int(rogue.Level)
 	spellID := backstabSpellID[rank]
 
-	// 150% weapon damage, with Opportunity and Aggression added together.
-	damageMultiplier := 1.5 * (opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])] + rogue.aggressionBonus())
+	// 150% weapon damage with Opportunity. Aggression's mask (18427)
+	// dropped Backstab in 70755.
+	damageMultiplier := 1.5 * rogue.opportunity()
 
 	rogue.Backstab = rogue.RegisterSpell(core.SpellConfig{
 		SpellCode:      SpellCode_RogueBackstab,

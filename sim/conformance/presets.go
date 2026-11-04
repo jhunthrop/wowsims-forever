@@ -366,7 +366,7 @@ var Presets = []Preset{
 		ClientClassSlug: "rogue",
 		Class:           proto.Class_ClassRogue,
 		Race:            proto.Race_RaceHuman,
-		Talents:         "005323105-0240052020050150231",
+		Talents:         "0053030020005-3250030000012321551",
 		SpecOptions:     defaultRogueOptions,
 	},
 	{
@@ -374,7 +374,7 @@ var Presets = []Preset{
 		ClientClassSlug: "rogue",
 		Class:           proto.Class_ClassRogue,
 		Race:            proto.Race_RaceHuman,
-		Talents:         "005023104-0233050020550100221-05",
+		Talents:         "0053030020005-3223030000012321551",
 		SpecOptions:     defaultRogueOptions,
 	},
 }

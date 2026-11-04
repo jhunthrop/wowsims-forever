@@ -7,19 +7,13 @@ import (
 )
 
 // Mutilate is granted by a single Assassination talent point (node
-// 105709) but is NOT a single, unranked ability once learned: the
-// client carries four player ranks, learned by character level the
-// same way Sinister Strike or Ambush are (spellranks.json's "Mutilate"
-// chain: 1310707@30, 399956@40, 1241582@50, 1241584@60). A duplicate
-// rank-1 row, 1329@40, shares rank 1 with 1310707 and triggers a
-// different, older sub-spell pair (5374) the rest of this chain does
-// not use, the same kind of dedup artifact heroic_strike_cleave.go's
-// rank 3 has, so it is skipped. Before this, the whole chain outside
-// rank 1 was missing: the rotation's castSpell (rewritten to the rank
-// the character has actually learned, same as every other ranked
-// ability) could never find a level-40+ Mutilate, so the button never
-// fired past level 30 and, since it is Assassination's combo-point
-// generator, Eviscerate and Slice and Dice starved with it.
+// 105709, tier 6 in 70755) but is NOT a single, unranked ability once
+// learned: the client carries three player ranks, learned by character
+// level the same way Sinister Strike or Ambush are (SkillLineAbility
+// 49379/54140/54141: 399956@40, 1241582@50, 1241584@60). 70755 deleted the
+// old level-30 rank 1310707 and its hand spells 1310705/1310706 (its
+// SkillLineAbility row is AcquireMethod 3, not learnable), so the chain
+// starts at 40.
 //
 // The client's own data models each rank's strike as the outer spell
 // (a "Trigger Spell" dummy effect pointing at two identical sub-spells,
@@ -32,33 +26,27 @@ import (
 // own), and the talented button only spends the energy and awards the
 // combo points.
 //
-// mutilateFlatDamageBonus is each rank's per-hand effect (effect 121,
-// amount 23/33/48/67 at ranks 1-4) - a real tuned number, not a
-// dummy/server-side-script placeholder, so per this lane's
-// source-of-truth rule it wins over the talent tooltip's own stated
-// "17.25" for rank 1 - kept here only as a comment for a future reader
-// who diffs against Wowhead. mutilateWeaponDamagePct (75%) matches both
-// the tooltip and every rank's sub-spells' effect index 1 (effect 31,
-// amount 75) and does not vary by rank.
-const mutilateRanks = 4
+// Each hand spell is e0 effect 121 (normalized weapon damage plus a flat
+// 44/63/88 at ranks 1-3, MutilateDamage) under e1 effect 31 at 90%: the
+// talent text's "plus an additional 40" is rank 1's 44 x 0.90.
+const mutilateRanks = 3
 
-var mutilateSpellID = [mutilateRanks + 1]int32{0, 1310707, 399956, 1241582, 1241584}
-var mutilateMHSpellID = [mutilateRanks + 1]int32{0, 1310705, 399960, 1241585, 1241586}
-var mutilateOHSpellID = [mutilateRanks + 1]int32{0, 1310706, 399961, 1241588, 1241590}
+var mutilateSpellID = [mutilateRanks + 1]int32{0, 399956, 1241582, 1241584}
+var mutilateMHSpellID = [mutilateRanks + 1]int32{0, 399960, 1241585, 1241586}
+var mutilateOHSpellID = [mutilateRanks + 1]int32{0, 399961, 1241588, 1241590}
 
 // mutilateLearnLevels is core.HighestRankAtLevel's input shape: rank r
 // (1-based) is learned at mutilateLearnLevels[r-1], no rank-0 placeholder
 // (unlike the by-rank arrays above), the same convention
 // eviscerate.go's eviscerateLearnLevels and ambush.go's
 // ambushLearnLevels already use.
-var mutilateLearnLevels = []int{30, 40, 50, 60}
+var mutilateLearnLevels = []int{40, 50, 60}
 
 const (
 	mutilateEnergyCost      = 60.0
-	mutilateWeaponDamagePct = 0.75
+	mutilateWeaponDamagePct = 0.90
 	// mutilatePoisonedTargetMultiplier: "Damage increased by 20% against
-	// Poisoned targets" (talent tooltip, spell 1310707). No client effect
-	// carries this as a number, so the tooltip is the only source.
+	// Poisoned targets" (399956 e3, effect 3 bp 20, a server script).
 	mutilatePoisonedTargetMultiplier = 1.20
 	mutilateComboPointsAwarded       = 2
 )
@@ -75,11 +63,9 @@ func (rogue *Rogue) registerMutilateSpell() {
 	flatDamage := MutilateDamage[rank]
 	casterLevel := int(rogue.Level)
 
-	// Opportunity (talent node 105760): "Increases the damage dealt by
-	// your Backstab, Garrote, Ambush, and Mutilate abilities by 5%/10%."
-	// Two ranks per the client's tree; the same table (client_values.go)
+	// Opportunity (talent node 105760): the same table (client_values.go)
 	// serves Backstab, Garrote and Ambush.
-	opportunityDamage := opportunityMultiplier[rankIndex(rogue.Talents.Opportunity, opportunityMultiplier[:])]
+	opportunityDamage := rogue.opportunity()
 
 	rogue.MutilateMH = rogue.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: mutilateMHSpellID[rank]},
@@ -171,8 +157,8 @@ func (rogue *Rogue) registerMutilateSpell() {
 }
 
 // mutilateHandDamage is one hand's Mutilate damage before multipliers: the
-// flat bonus sits inside the 75% weapon damage (client effect 121, weapon
-// plus 67, under effect 31 at 75%; the tooltip's "plus 50" is 67 x 0.75),
+// flat bonus sits inside the 90% weapon damage (client effect 121, weapon
+// plus 44, under effect 31 at 90%; the tooltip's "plus 40" is 44 x 0.90),
 // the way Backstab's flat sits inside its 150%.
 func mutilateHandDamage(flat, normalizedWeaponDamage float64) float64 {
 	return mutilateWeaponDamagePct * (flat + normalizedWeaponDamage)

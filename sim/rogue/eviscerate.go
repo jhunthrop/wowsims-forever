@@ -65,9 +65,9 @@ func (rogue *Rogue) registerEviscerate() {
 			return rogue.ComboPoints() > 0
 		},
 
-		DamageMultiplier: 1 +
-			(improvedEviscerateMultiplier[rankIndex(rogue.Talents.ImprovedEviscerate, improvedEviscerateMultiplier[:])] - 1) +
-			rogue.aggressionBonus(),
+		// Coup de Grace and Aggression are both aura 108 on Eviscerate's
+		// mask, so they add.
+		DamageMultiplier: 1 + rogue.coupDeGrace() + rogue.aggressionBonus(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
 		ClientBaseDamage: damage.Range(casterLevel),

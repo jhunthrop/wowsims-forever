@@ -2,90 +2,139 @@ package dpsrogue
 
 import (
 	"math"
+	"strings"
 	"testing"
 	"time"
+
+	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/rogue"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-// TestVenomNotRegisteredWithoutTheTalent rebuilds the state
-// data/curated/apl/rogue-assassination.json's "inert" entry describes: a
-// rogue who hasn't spent the point must not have Venom at all.
-func TestVenomNotRegisteredWithoutTheTalent(t *testing.T) {
-	_, built := buildRogueForTest(t, rogueTalentStringWith(t))
+// rogueTalentStringWithRanks is rogueTalentStringWith with a rank per field.
+func rogueTalentStringWithRanks(t *testing.T, ranks map[string]int) string {
+	t.Helper()
+	segments := strings.Split(rogueTalentStringWith(t), "-")
+	for name, rank := range ranks {
+		fd := (&proto.RogueTalents{}).ProtoReflect().Descriptor().Fields().ByName(protoreflect.Name(name))
+		if fd == nil {
+			t.Fatalf("RogueTalents has no field named %q", name)
+		}
+		pos := int(fd.Number()) - 1
+		treeIdx := 0
+		for treeIdx < len(rogue.TalentTreeSizes) && pos >= rogue.TalentTreeSizes[treeIdx] {
+			pos -= rogue.TalentTreeSizes[treeIdx]
+			treeIdx++
+		}
+		chars := []rune(segments[treeIdx])
+		chars[pos] = rune('0' + rank)
+		segments[treeIdx] = string(chars)
+	}
+	return strings.Join(segments, "-")
+}
 
-	if built.Venom != nil {
-		t.Fatal("rogue without the Venom talent has Venom registered")
+// TestShankIsBaselineAtItsClientValues pins Shank rank 2 (1329549, level
+// 44): 5 Energy, a 10 sec cooldown, and +25 Energy (e1) on every cast.
+func TestShankIsBaselineAtItsClientValues(t *testing.T) {
+	sim, built := buildRogueForTest(t, rogueTalentStringWith(t))
+	if built.Shank == nil {
+		t.Fatal("level-60 rogue has no Shank")
+	}
+	if got := built.Shank.ActionID.SpellID; got != 1329549 {
+		t.Errorf("Shank id = %d, want rank 2's 1329549", got)
+	}
+	if got := built.Shank.DefaultCast.Cost; got != 5 {
+		t.Errorf("Shank cost = %v, want 5 Energy", got)
+	}
+	if got := built.Shank.CD.Duration; got != 10*time.Second {
+		t.Errorf("Shank cooldown = %v, want 10s", got)
+	}
+	target := sim.Encounter.TargetUnits[0]
+	built.SpendEnergy(sim, built.CurrentEnergy(), built.Shank.EnergyMetrics())
+	built.Shank.ApplyEffects(sim, target, built.Shank)
+	if got := built.CurrentEnergy(); math.Abs(got-25) > 1e-9 {
+		t.Errorf("Energy after one Shank from empty = %v, want 25", got)
+	}
+	if got := built.ComboPoints(); got != 0 {
+		t.Errorf("untalented Shank awarded %d combo points, want 0", got)
 	}
 }
 
-// TestVenomDurationScalesWithComboPoints pins the talent tooltip's five
-// stated durations (9/12/15/18/21 s for 1-5 combo points) and, per this
-// lane's brief, that a 5-point Venom outlasts a 1-point Venom.
-func TestVenomDurationScalesWithComboPoints(t *testing.T) {
-	sim, built := buildRogueForTest(t, rogueTalentStringWith(t, "venom"))
-	if built.Venom == nil {
-		t.Fatal("talented level-60 rogue has no Venom registered")
+// TestFlashOfSteelAddsEnergyAndCutsCooldown pins 1329284's curves at rank
+// 5: +15 Energy and -2.0 sec.
+func TestFlashOfSteelAddsEnergyAndCutsCooldown(t *testing.T) {
+	sim, built := buildRogueForTest(t, rogueTalentStringWithRanks(t, map[string]int{"flash_of_steel": 5}))
+	if got := built.Shank.CD.Duration; got != 8*time.Second {
+		t.Errorf("Shank cooldown with Flash of Steel 5 = %v, want 8s", got)
 	}
-	target := sim.Encounter.TargetUnits[0]
-
-	built.AddComboPoints(sim, 1, target, built.Venom.ComboPointMetrics())
-	built.Venom.ApplyEffects(sim, target, built.Venom)
-	oneComboPointDuration := built.VenomAura.Duration
-	built.VenomAura.Deactivate(sim)
-
-	if got, want := oneComboPointDuration, 9*time.Second; got != want {
-		t.Errorf("Venom duration at 1 combo point = %v, want %v", got, want)
-	}
-
-	built.AddComboPoints(sim, 5, target, built.Venom.ComboPointMetrics())
-	built.Venom.ApplyEffects(sim, target, built.Venom)
-	fiveComboPointDuration := built.VenomAura.Duration
-
-	if got, want := fiveComboPointDuration, 21*time.Second; got != want {
-		t.Errorf("Venom duration at 5 combo points = %v, want %v", got, want)
-	}
-
-	if fiveComboPointDuration <= oneComboPointDuration {
-		t.Errorf("a 5-point Venom (%v) must outlast a 1-point Venom (%v)", fiveComboPointDuration, oneComboPointDuration)
+	built.SpendEnergy(sim, built.CurrentEnergy(), built.Shank.EnergyMetrics())
+	built.Shank.ApplyEffects(sim, sim.Encounter.TargetUnits[0], built.Shank)
+	if got := built.CurrentEnergy(); math.Abs(got-40) > 1e-9 {
+		t.Errorf("Energy after one Shank with Flash of Steel 5 = %v, want 25+15", got)
 	}
 }
 
-// TestVenomIncreasesPoisonDamageAndProcChanceWhileActive pins the talent
-// tooltip's "increases the damage of your Poisons by 30% and your
-// chance to apply Poisons by 10%" against Instant Poison, and that both
-// bonuses revert exactly when the aura expires (VenomousTotem's item
-// effect toggles additivePoisonBonusChance the same way, in
-// sim/rogue/items.go, for the same reason: this must net to zero, not
-// leave a residual bonus behind after the buff ends).
-func TestVenomIncreasesPoisonDamageAndProcChanceWhileActive(t *testing.T) {
+// TestBootKnifeAwardsTwoComboPoints pins 1329286 rank 5 (100%) and its
+// trigger 1329285 (2 combo points).
+func TestBootKnifeAwardsTwoComboPoints(t *testing.T) {
+	sim, built := buildRogueForTest(t, rogueTalentStringWithRanks(t, map[string]int{"boot_knife": 5}))
+	built.Shank.ApplyEffects(sim, sim.Encounter.TargetUnits[0], built.Shank)
+	if got := built.ComboPoints(); got != 2 {
+		t.Errorf("combo points after a Boot Knife 5 Shank = %d, want 2", got)
+	}
+}
+
+// TestShankProcsNoPoison: Shank's Attributes_3 suppress caster and target
+// procs, so a hundred Shanks never apply Instant Poison.
+func TestShankProcsNoPoison(t *testing.T) {
+	sim, built := buildRogueForTest(t, rogueTalentStringWith(t))
+	target := sim.Encounter.TargetUnits[0]
+	for i := 0; i < 100; i++ {
+		built.Shank.ApplyEffects(sim, target, built.Shank)
+	}
+	if built.InstantPoison != nil && built.InstantPoison.SpellMetrics[target.UnitIndex].Casts != 0 {
+		t.Errorf("Shank applied Instant Poison %d times, want 0", built.InstantPoison.SpellMetrics[target.UnitIndex].Casts)
+	}
+}
+
+// TestVenomIsAShankPassive: 70755's Venom (1329328) is no finisher; Shank
+// applies 1310703 for 6 sec, +30% poison damage and +20 points of poison
+// chance, and both revert when it ends.
+func TestVenomIsAShankPassive(t *testing.T) {
 	sim, built := buildRogueForTest(t, rogueTalentStringWith(t, "venom"))
 	target := sim.Encounter.TargetUnits[0]
-
-	if built.InstantPoison == nil {
-		t.Fatal("level-60 rogue has no Instant Poison registered")
-	}
 
 	baseMultiplier := built.InstantPoison.DamageMultiplier
 	baseProcChance := built.GetInstantPoisonProcChance()
 
-	built.AddComboPoints(sim, 5, target, built.Venom.ComboPointMetrics())
-	built.Venom.ApplyEffects(sim, target, built.Venom)
-
+	built.Shank.ApplyEffects(sim, target, built.Shank)
 	if !built.VenomAura.IsActive() {
-		t.Fatal("Venom's aura is not active after casting Venom")
+		t.Fatal("Venom's aura is not active after Shank")
+	}
+	if got := built.VenomAura.Duration; got != 6*time.Second {
+		t.Errorf("Venom duration = %v, want 6s", got)
 	}
 	if got, want := built.InstantPoison.DamageMultiplier, baseMultiplier*1.30; math.Abs(got-want) > 1e-9 {
-		t.Errorf("Instant Poison DamageMultiplier while Venom is up = %v, want %v (30%% bonus)", got, want)
+		t.Errorf("Instant Poison DamageMultiplier while Venom is up = %v, want %v", got, want)
 	}
-	if got, want := built.GetInstantPoisonProcChance(), baseProcChance+0.10; math.Abs(got-want) > 1e-9 {
-		t.Errorf("Instant Poison proc chance while Venom is up = %v, want %v (+10 points)", got, want)
+	if got, want := built.GetInstantPoisonProcChance(), baseProcChance+0.20; math.Abs(got-want) > 1e-9 {
+		t.Errorf("Instant Poison proc chance while Venom is up = %v, want %v", got, want)
 	}
 
 	built.VenomAura.Deactivate(sim)
-
 	if got := built.InstantPoison.DamageMultiplier; got != baseMultiplier {
-		t.Errorf("Instant Poison DamageMultiplier after Venom expires = %v, want the pre-Venom %v", got, baseMultiplier)
+		t.Errorf("Instant Poison DamageMultiplier after Venom = %v, want %v", got, baseMultiplier)
 	}
 	if got := built.GetInstantPoisonProcChance(); got != baseProcChance {
-		t.Errorf("Instant Poison proc chance after Venom expires = %v, want the pre-Venom %v", got, baseProcChance)
+		t.Errorf("Instant Poison proc chance after Venom = %v, want %v", got, baseProcChance)
+	}
+}
+
+// TestNoVenomWithoutTheTalent: Shank without the point leaves no Venom.
+func TestNoVenomWithoutTheTalent(t *testing.T) {
+	sim, built := buildRogueForTest(t, rogueTalentStringWith(t))
+	built.Shank.ApplyEffects(sim, sim.Encounter.TargetUnits[0], built.Shank)
+	if built.VenomAura != nil {
+		t.Error("untalented rogue has a Venom aura")
 	}
 }

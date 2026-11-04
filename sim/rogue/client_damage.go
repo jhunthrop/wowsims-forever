@@ -51,15 +51,14 @@ func engineRanks(effects []clientdamage.Effect, topRank, clientTopRank int) []cl
 	return append(ranks, effects[clientTopRank])
 }
 
-// MutilateDamage is effect 121's flat bonus of the main-hand strikes
-// (1310705, 399960, 1241585, 1241586): the generated MutilateBaseDamage
-// reads the talent spell's first effect, so rank 1 is a dummy.
+// MutilateDamage is effect 121's flat bonus of the hand strikes (399960,
+// 1241585, 1241586 and their off-hand twins): the generated
+// MutilateBaseDamage reads a mix of the talent spell and its sub-spells.
 var MutilateDamage = [mutilateRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 23, SpellLevel: 30},
-	{Amount: 33, SpellLevel: 40},
-	{Amount: 48, SpellLevel: 50},
-	{Amount: 67, SpellLevel: 60},
+	{Amount: 44, SpellLevel: 40},
+	{Amount: 63, SpellLevel: 50},
+	{Amount: 88, SpellLevel: 60},
 }
 
 // InstantPoisonDamage is the roll of the "Instant Poison" damage spells
