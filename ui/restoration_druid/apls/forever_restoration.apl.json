@@ -30,7 +30,7 @@
       }
     },
     {
-      "notes": "Alliance Skyborne only: Read Leyline every time it is ready. Half again your Spirit regeneration for 15 seconds is worth a global cooldown on a fight that drains your mana bar.",
+      "notes": "Alliance Skyborne only: Read Leyline every time it is ready. 50% more mana regeneration for 15 seconds is worth a global cooldown on a fight that drains your mana bar. It will not cast under Innervate, and an Innervate replaces it.",
       "action": {
         "castSpell": {
           "spellId": {
