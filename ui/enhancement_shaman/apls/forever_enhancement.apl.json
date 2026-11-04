@@ -215,7 +215,7 @@
       }
     },
     {
-      "notes": "Earth Shock on cooldown while you are above half mana: it takes Stormstrike's 20% when no bolt is ready. Below half mana, stop shocking so you do not run dry without raid buffs.",
+      "notes": "Earth Shock on cooldown while you have more than a quarter of your mana: it takes Stormstrike's 20% when no bolt is ready. Keep that last quarter for Stormstrike and your totems.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -231,7 +231,7 @@
             },
             "rhs": {
               "const": {
-                "val": "50%"
+                "val": "25%"
               }
             }
           }
