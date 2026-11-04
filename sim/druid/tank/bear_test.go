@@ -306,7 +306,7 @@ func TestSwipeAddsSavageFuryAndFeralInstinct(t *testing.T) {
 	}
 }
 
-// Rend and Tear 5/5: +10% melee ability damage on a bleeding target, which
+// Rend and Tear 5/5: +15% melee ability damage (3% a rank on 70755) on a bleeding target, which
 // a Lacerate on it makes.
 func TestRendAndTearNeedsABleed(t *testing.T) {
 	bear, sim, target := newBearSim(t, 60, map[string]int{"rend_and_tear": 5, "lacerate": 1})
@@ -318,8 +318,8 @@ func TestRendAndTearNeedsABleed(t *testing.T) {
 	if !bear.Lacerate.Dot(target).IsActive() {
 		t.Skip("the Lacerate cast missed on this seed")
 	}
-	if got := bear.RendAndTearMultiplier(target); !near(got, 1.10) {
-		t.Errorf("multiplier with Lacerate up = %v, want 1.10", got)
+	if got := bear.RendAndTearMultiplier(target); !near(got, 1.15) {
+		t.Errorf("multiplier with Lacerate up = %v, want 1.15", got)
 	}
 }
 
