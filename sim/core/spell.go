@@ -32,11 +32,6 @@ type SpellConfig struct {
 	MetricSplits   int
 	Rank           int
 	RequiredLevel  int
-	// ScalesToCasterLevel marks a single-rank spell whose client amount grows
-	// every level up to a MaxLevel at or above the caster's (Wrack: level 40,
-	// MaxLevel 60): it is not a rank below the caster, so the level-gap
-	// penalty (levelPenalty) leaves its coefficient whole.
-	ScalesToCasterLevel bool
 	// TriggeredRank marks a spell another cast triggers that is that cast's
 	// rank (Holy Shock's heal half carries the cast rank's RequiredLevel): the
 	// level-gap penalty applies to it though it has no cost or cast.
@@ -135,8 +130,6 @@ type Spell struct {
 
 	Rank          int
 	RequiredLevel int
-	// ScalesToCasterLevel is the config's: the level-gap penalty left it whole.
-	ScalesToCasterLevel bool
 	// TriggeredRank is the config's: the level-gap penalty applied to it.
 	TriggeredRank bool
 
@@ -333,7 +326,6 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 
 	spell.Rank = config.Rank
 	spell.RequiredLevel = config.RequiredLevel
-	spell.ScalesToCasterLevel = config.ScalesToCasterLevel
 	spell.TriggeredRank = config.TriggeredRank
 
 	spell.CdSpell = spell
@@ -782,48 +774,77 @@ func (spell *Spell) ApplyAdditivePeriodicDamageBonus(percent int64) {
 	spell.PeriodicDamageMultiplierAdditive += float64(percent) / 100
 }
 
-// levelPenaltyGrace is how many levels past a rank's learn level the caster
-// may be before the rank loses spell power, and levelPenaltyPerLevel what it
-// loses for each level beyond that.
+// levelPenaltyGrace is how many levels past a rank's client MaxLevel the
+// caster may be before the rank loses spell power, levelPenaltyPerLevel what
+// it loses for each level beyond that, and rankMaxLevelAfterLearn the MaxLevel
+// a rank with no client exception has (its learn level + 5).
 const (
-	levelPenaltyGrace    = 17
-	levelPenaltyPerLevel = 0.05
+	levelPenaltyGrace      = 12
+	levelPenaltyPerLevel   = 0.05
+	rankMaxLevelAfterLearn = 5
 )
 
 // levelPenalty is the share of its spell power coefficient a rank the
-// player (or a pet) casts keeps at the caster's level (LevelPenalty). The
-// client's coefficients carry no penalty of their own and its tables carry
-// no curve (SpellLevels' MaxLevel is learn level + 5 on every heal rank and
-// is not what the measurement follows). Only a spell the caster casts (it
-// has a cost or a cast) is a learned rank: a proc's RequiredLevel is its
-// client spell level (every Seal of Righteousness and Seal of Fury proc is
-// level 1), so procs keep their coefficient. Physical abilities take no
-// spell power, and an enemy's spells are not ranks it learned.
-//
-// Round 11's beta logs (levels 27 to 35) fit the whole coefficient on every
-// low rank they caught, Rejuvenation ranks 3 (16) and 5 (28) among them; each
-// is within 17 levels of its caster, so they agree with this rule too.
+// player (or a pet) casts keeps at the caster's level (SpellLevelPenalty).
+// The client's coefficients carry no penalty of their own. Only a spell the
+// caster casts (it has a cost or a cast) is a learned rank: a proc's
+// RequiredLevel is its client spell level (every Seal of Righteousness and
+// Seal of Fury proc is level 1), so procs keep their coefficient. Physical
+// abilities take no spell power, and an enemy's spells are not ranks it
+// learned.
 func levelPenalty(config SpellConfig, caster *Unit) float64 {
-	if config.SpellSchool == SpellSchoolPhysical || !(isCastRank(config) || config.TriggeredRank) || caster.Type == EnemyUnit || config.ScalesToCasterLevel {
+	if config.SpellSchool == SpellSchoolPhysical || !(isCastRank(config) || config.TriggeredRank) || caster.Type == EnemyUnit {
 		return 1
 	}
-	return LevelPenalty(config.RequiredLevel, int(caster.Level))
+	return SpellLevelPenalty(config.ActionID.SpellID, config.RequiredLevel, int(caster.Level))
 }
 
-// LevelPenalty is Forever's level-gap rule, which replaced Era's sub-20 cut:
-// a rank learned at rankLevel keeps its whole coefficient until casterLevel
-// is 17 levels past it, then 5% less a level, none from 37 levels past
-// (share = clamp(1 - (L - T - 17) * 0.05, 0, 1)). Blizzard's 1 October 2026
-// beta note and the character sheet say ranks "vastly below your current
-// level receive less benefit from your Spell Damage and Spell Healing"; the
-// numbers are ForeverChanges' beta measurement on heals, levels 18 to 30
-// (foreverchanges.pro/downranking, 2026-10-16), assumed above 30 and for
-// damage spells. A rank or a caster with no level keeps it all.
+// SpellLevelPenalty is Forever's low-rank rule, which replaced Era's sub-20
+// cut: a rank keeps its whole coefficient until the caster is 12 levels past
+// its client SpellLevels.MaxLevel, then 5% less a level, none from 32 levels
+// past it (share = clamp(1 - (L - MaxLevel - 12) * 0.05, 0, 1)). Blizzard's
+// 1 October 2026 beta note and the character sheet say ranks "vastly below
+// your current level receive less benefit from your Spell Damage and Spell
+// Healing". The numbers are two beta measurements on heals:
+//   - ForeverChanges, levels 18 to 30 (foreverchanges.pro/downranking,
+//     2026-10-16): 17 levels past the learn level, 5% a level, with Healing
+//     Touch and Holy Light rank 1 running one level early;
+//   - HealRankAdvisor's tooltip reads on a level-30 priest
+//     (github.com/mendeleevforever/HealRankAdvisor): nine ranks on the learn
+//     level + 17, Lesser Heal rank 1 at 24% against its 40%.
+//
+// Nearly every heal rank's MaxLevel is its learn level + 5, which is the
+// learn level + 17 rule; the three that ran early are the ranks whose
+// MaxLevel is lower (Lesser Heal 1: 3; Healing Touch 1, Holy Light 1: 5), and
+// MaxLevel + 12 fits each of them. A spell that grows to the caster's level
+// (Wrack, MaxLevel 60) is never below it. clientSpellMaxLevel holds every
+// MaxLevel that is not the spell level + 5; any other rank keys on
+// rankLevel + 5. Assumed above level 30 and for damage spells. A rank or a
+// caster with no level keeps it all.
+func SpellLevelPenalty(spellID int32, rankLevel, casterLevel int) float64 {
+	if maxLevel, ok := clientSpellMaxLevel[spellID]; ok && rankLevel > 0 {
+		return LevelPenaltyFromMaxLevel(maxLevel, casterLevel)
+	}
+	return LevelPenalty(rankLevel, casterLevel)
+}
+
+// LevelPenalty is SpellLevelPenalty for a rank learned at rankLevel whose
+// MaxLevel is rankLevel + 5 (every rank with no client exception): whole
+// until the caster is 17 levels past rankLevel.
 func LevelPenalty(rankLevel, casterLevel int) float64 {
-	if rankLevel <= 0 || casterLevel <= 0 {
+	if rankLevel <= 0 {
 		return 1
 	}
-	gap := casterLevel - rankLevel - levelPenaltyGrace
+	return LevelPenaltyFromMaxLevel(rankLevel+rankMaxLevelAfterLearn, casterLevel)
+}
+
+// LevelPenaltyFromMaxLevel is the share a rank whose client MaxLevel is
+// maxLevel keeps at casterLevel.
+func LevelPenaltyFromMaxLevel(maxLevel, casterLevel int) float64 {
+	if casterLevel <= 0 {
+		return 1
+	}
+	gap := casterLevel - maxLevel - levelPenaltyGrace
 	if gap <= 0 {
 		return 1
 	}

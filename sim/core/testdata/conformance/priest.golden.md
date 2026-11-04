@@ -31,7 +31,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 20 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 47.86-60.14→47.86-60.14 | 0.750→0.750 | declared, matches |
 | HealingPriest | 20 | Inner Fire | 1 | 588 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 20 | Inner Fire | 2 | 7128 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 20 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429 x0.9000→0.3861 | declared, matches |
+| HealingPriest | 20 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429 x0.7500→0.3217 | declared, matches |
 | HealingPriest | 20 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.571 | declared, matches |
 | HealingPriest | 20 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714→0.714 | declared, matches |
 | HealingPriest | 20 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.429 | declared, matches |
@@ -63,7 +63,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 30 | Inner Fire | 1 | 588 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 30 | Inner Fire | 2 | 7128 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 30 | Inner Fire | 3 | 602 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 30 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429 x0.4000→0.1716 | declared, matches |
+| HealingPriest | 30 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429 x0.2500→0.1072 | declared, matches |
 | HealingPriest | 30 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571 x0.5500→0.3140 | declared, matches |
 | HealingPriest | 30 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714 x0.8500→0.6069 | declared, matches |
 | HealingPriest | 30 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429 x0.8500→0.3646 | declared, matches |
@@ -102,14 +102,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 38 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857→0.857 | declared, matches |
 | HealingPriest | 38 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857→0.857 | declared, matches |
 | HealingPriest | 38 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 628.40-709.60→628.40-709.60 | 0.857→0.857 | declared, matches |
-| HealingPriest | 38 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.9500→0.7125 | declared, matches |
+| HealingPriest | 38 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.9000→0.6750 | declared, matches |
 | HealingPriest | 38 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750→0.750 | declared, matches |
 | HealingPriest | 38 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750→0.750 | declared, matches |
 | HealingPriest | 38 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 83.82-106.18→83.82-106.18 | 0.750→0.750 | declared, matches |
 | HealingPriest | 38 | Inner Fire | 1 | 588 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 12→12 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 38 | Inner Fire | 2 | 7128 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 38 | Inner Fire | 3 | 602 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 38 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| HealingPriest | 38 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 38 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571 x0.1500→0.0856 | declared, matches |
 | HealingPriest | 38 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714 x0.4500→0.3213 | declared, matches |
 | HealingPriest | 38 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429 x0.4500→0.1930 | declared, matches |
@@ -137,7 +137,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 38 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 38 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 38 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 38 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| HealingPriest | 38 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 38 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571 x0.2500→0.1427 | declared, matches |
 | HealingPriest | 38 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714 x0.6500→0.4641 | declared, matches |
 | HealingPriest | 38 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714→0.714 | declared, matches |
@@ -156,7 +156,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857 x0.9500→0.8141 | declared, matches |
 | HealingPriest | 40 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857→0.857 | declared, matches |
 | HealingPriest | 40 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 632.63-714.37→632.63-714.37 | 0.857→0.857 | declared, matches |
-| HealingPriest | 40 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.8500→0.6375 | declared, matches |
+| HealingPriest | 40 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.8000→0.6000 | declared, matches |
 | HealingPriest | 40 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750→0.750 | declared, matches |
 | HealingPriest | 40 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750→0.750 | declared, matches |
 | HealingPriest | 40 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 86.47-109.53→86.47-109.53 | 0.750→0.750 | declared, matches |
@@ -164,7 +164,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Inner Fire | 2 | 7128 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Inner Fire | 3 | 602 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 40 | Inner Fire | 4 | 1006 | 165.00→165.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 40 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| HealingPriest | 40 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 40 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571 x0.0500→0.0285 | declared, matches |
 | HealingPriest | 40 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714 x0.3500→0.2499 | declared, matches |
 | HealingPriest | 40 | Lightwell | 1 | 724 | 225.00→225.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 40→40 | 180000→180000 | match |  | n/a | n/a | n/a |
@@ -196,7 +196,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 40 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 40 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 40 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 40 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| HealingPriest | 40 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 40 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571 x0.1500→0.0856 | declared, matches |
 | HealingPriest | 40 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714 x0.5500→0.3927 | declared, matches |
 | HealingPriest | 40 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714 x0.9500→0.6783 | declared, matches |
@@ -219,9 +219,9 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857 x0.4500→0.3856 | declared, matches |
 | HealingPriest | 50 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857 x0.7500→0.6427 | declared, matches |
 | HealingPriest | 50 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 632.63-714.37→632.63-714.37 | 0.857→0.857 | declared, matches |
-| HealingPriest | 50 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.3500→0.2625 | declared, matches |
-| HealingPriest | 50 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750 x0.5500→0.4125 | declared, matches |
-| HealingPriest | 50 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750 x0.8500→0.6375 | declared, matches |
+| HealingPriest | 50 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.3000→0.2250 | declared, matches |
+| HealingPriest | 50 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750 x0.6000→0.4500 | declared, matches |
+| HealingPriest | 50 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750 x0.9000→0.6750 | declared, matches |
 | HealingPriest | 50 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 89.12-112.88→89.12-112.88 | 0.750→0.750 | declared, matches |
 | HealingPriest | 50 | Holy Fire | 5 | 15265 | 170.00→170.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | 10000→10000 | match |  | 101.56-128.44→101.56-128.44 | 0.750→0.750 | declared, matches |
 | HealingPriest | 50 | Holy Fire | 6 | 15266 | 200.00→200.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 48→48 | 10000→10000 | match |  | 125.59-159.21→125.59-159.21 | 0.750→0.750 | declared, matches |
@@ -230,30 +230,30 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Inner Fire | 3 | 602 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 30→30 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Inner Fire | 4 | 1006 | 165.00→165.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Inner Fire | 5 | 10951 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 50 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| HealingPriest | 50 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.000 | declared, differs: coefficient 0.571->0.000 |
-| HealingPriest | 50 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714→0.000 | declared, differs: coefficient 0.714->0.000 |
+| HealingPriest | 50 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 50 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 50 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 50 | Lightwell | 1 | 724 | 225.00→225.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 40→40 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 50 | Lightwell | 2 | 27870 | 295.00→295.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 50→50 | 180000→180000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 50 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| HealingPriest | 50 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 50 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429 x0.1500→0.0643 | declared, matches |
 | HealingPriest | 50 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429 x0.4500→0.1930 | declared, matches |
 | HealingPriest | 50 | Mind Blast | 4 | 8104 | 150.00→150.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 153.41-162.59→153.41-162.59 | 0.429 x0.7500→0.3217 | declared, matches |
 | HealingPriest | 50 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 197.63-210.38→197.62-210.38 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Mind Blast | 6 | 8106 | 225.00→225.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 40→40 | n/a | match |  | 259.14-275.86→259.14-275.86 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Mind Blast | 7 | 10945 | 265.00→265.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 46→46 | n/a | match |  | 323.06-341.74→323.06-341.74 | 0.429→0.429 | declared, matches |
-| HealingPriest | 50 | Power Word: Shield | 1 | 17 | 45.00→45.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | 48.00-48.00→48.00-48.00 | 0.100→0.000 | declared, differs: coefficient 0.100->0.000 |
-| HealingPriest | 50 | Power Word: Shield | 2 | 592 | 80.00→80.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | 92.00-92.00→92.00-92.00 | 0.100→0.000 | declared, differs: coefficient 0.100->0.000 |
+| HealingPriest | 50 | Power Word: Shield | 1 | 17 | 45.00→45.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | 48.00-48.00→48.00-48.00 | 0.100 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 50 | Power Word: Shield | 2 | 592 | 80.00→80.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | 92.00-92.00→92.00-92.00 | 0.100 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 50 | Power Word: Shield | 3 | 600 | 130.00→130.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | 162.00-162.00→162.00-162.00 | 0.100 x0.2500→0.0250 | declared, matches |
 | HealingPriest | 50 | Power Word: Shield | 4 | 3747 | 175.00→175.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 24→24 | 30000→30000 | match |  | 236.00-236.00→236.00-236.00 | 0.100 x0.5500→0.0550 | declared, matches |
 | HealingPriest | 50 | Power Word: Shield | 5 | 6065 | 210.00→210.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | 302.50-302.50→302.50-302.50 | 0.100 x0.8500→0.0850 | declared, matches |
 | HealingPriest | 50 | Power Word: Shield | 6 | 6066 | 250.00→250.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 36→36 | 30000→30000 | match |  | 381.00-381.00→381.00-381.00 | 0.100→0.100 | declared, matches |
 | HealingPriest | 50 | Power Word: Shield | 7 | 10898 | 300.00→300.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 42→42 | 30000→30000 | match |  | 485.00-485.00→485.00-485.00 | 0.100→0.100 | declared, matches |
 | HealingPriest | 50 | Power Word: Shield | 8 | 10899 | 355.00→355.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 48→48 | 30000→30000 | match |  | 597.80-597.80→597.80-597.80 | 0.100→0.100 | declared, matches |
-| HealingPriest | 50 | Prayer of Healing | 1 | 596 | 410.00→410.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 30→30 | n/a | match |  | 179.25-191.15→179.24-191.16 | 0.286 x0.8500→0.2431 | declared, matches |
+| HealingPriest | 50 | Prayer of Healing | 1 | 596 | 410.00→410.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 30→30 | n/a | match |  | 179.25-191.15→179.24-191.16 | 0.286→0.286 | declared, matches |
 | HealingPriest | 50 | Prayer of Healing | 2 | 996 | 560.00→560.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | n/a | match |  | 265.62-282.38→265.62-282.38 | 0.286→0.286 | declared, matches |
 | HealingPriest | 50 | Prayer of Healing | 3 | 10960 | 770.00→770.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | n/a | match |  | 389.73-412.27→389.73-412.27 | 0.286→0.286 | declared, matches |
-| HealingPriest | 50 | Renew | 1 | 139 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 15000→15000 | match |  | 9.00-9.00→9.00-9.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
+| HealingPriest | 50 | Renew | 1 | 139 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 15000→15000 | match |  | 9.00-9.00→9.00-9.00 | 0.200 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 50 | Renew | 2 | 6074 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 15000→15000 | match |  | 15.00-15.00→15.00-15.00 | 0.200 x0.0500→0.0100 | declared, matches |
 | HealingPriest | 50 | Renew | 3 | 6075 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | 25.00-25.00→25.00-25.00 | 0.200 x0.3500→0.0700 | declared, matches |
 | HealingPriest | 50 | Renew | 4 | 6076 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | 32.00-32.00→32.00-32.00 | 0.200 x0.6500→0.1300 | declared, matches |
@@ -264,16 +264,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 50 | Shadow Word: Death | 1 | 1309595 | 175.00→175.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | 293.35-311.65→293.35-311.65 | 0.429 x0.9500→0.4075 | declared, matches |
 | HealingPriest | 50 | Shadow Word: Death | 2 | 1309633 | 205.00→205.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | 368.02-390.98→368.02-390.98 | 0.429→0.429 | declared, matches |
 | HealingPriest | 50 | Shadow Word: Death | 3 | 1309635 | 250.00→250.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | 395.08-419.72→395.08-419.72 | 0.429→0.429 | declared, matches |
-| HealingPriest | 50 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
-| HealingPriest | 50 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
+| HealingPriest | 50 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 50 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 50 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200 x0.2500→0.0500 | declared, matches |
 | HealingPriest | 50 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200 x0.6500→0.1300 | declared, matches |
 | HealingPriest | 50 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 50 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→18000 | match |  | 71.00-71.00→71.00-71.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 50 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→18000 | match |  | 97.00-97.00→97.00-97.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 50 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 50 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| HealingPriest | 50 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571→0.000 | declared, differs: coefficient 0.571->0.000 |
+| HealingPriest | 50 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 50 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 50 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714 x0.0500→0.0357 | declared, matches |
 | HealingPriest | 50 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714 x0.4500→0.3213 | declared, matches |
 | HealingPriest | 50 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714 x0.8500→0.6069 | declared, matches |
@@ -286,7 +286,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Devouring Plague | 5 | 19279 | 810.00→810.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 52→52 | 24000→24000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Devouring Plague | 6 | 19280 | 985.00→985.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 60→60 | 24000→24000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Divine Grace | 0 | 1277378 | 0.00→0.00 | mana→none | 600000→600000 | 0→0 | 1500→1500 | 58→58 | n/a | match |  | 1284.00-1514.80→1284.00-1514.80 | 0.429→0.429 | declared, matches |
-| HealingPriest | 60 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 182.68-224.32→182.68-224.32 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| HealingPriest | 60 | Flash Heal | 1 | 2061 | 125.00→125.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 20→20 | n/a | match |  | 182.68-224.32→182.68-224.32 | 0.429 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Flash Heal | 2 | 9472 | 155.00→155.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 26→26 | n/a | match |  | 234.55-285.45→234.55-285.45 | 0.429 x0.1500→0.0643 | declared, matches |
 | HealingPriest | 60 | Flash Heal | 3 | 9473 | 185.00→185.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 32→32 | n/a | match |  | 294.75-354.25→294.75-354.25 | 0.429 x0.4500→0.1930 | declared, matches |
 | HealingPriest | 60 | Flash Heal | 4 | 9474 | 215.00→215.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 38→38 | n/a | match |  | 361.73-432.27→361.73-432.27 | 0.429 x0.7500→0.3217 | declared, matches |
@@ -298,15 +298,15 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Greater Heal | 3 | 10964 | 545.00→545.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 52→52 | n/a | match |  | 1354.91-1517.09→1354.91-1517.09 | 0.857→0.857 | declared, matches |
 | HealingPriest | 60 | Greater Heal | 4 | 10965 | 655.00→655.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 58→58 | n/a | match |  | 1698.74-1895.26→1698.74-1895.26 | 0.857→0.857 | declared, matches |
 | HealingPriest | 60 | Greater Heal | 5 | 25314 | 710.00→710.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | n/a | match |  | 1852.58-2067.42→1852.58-2067.42 | 0.857→0.857 | declared, matches |
-| HealingPriest | 60 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857→0.000 | declared, differs: coefficient 0.857->0.000 |
-| HealingPriest | 60 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857→0.000 | declared, differs: coefficient 0.857->0.000 |
+| HealingPriest | 60 | Heal | 1 | 2054 | 155.00→155.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 16→16 | n/a | match |  | 259.75-300.25→259.75-300.25 | 0.857 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Heal | 2 | 2055 | 205.00→205.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 22→22 | n/a | match |  | 363.25-415.75→363.25-415.75 | 0.857 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Heal | 3 | 6063 | 255.00→255.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 28→28 | n/a | match |  | 508.84-577.16→508.84-577.16 | 0.857 x0.2500→0.2142 | declared, matches |
 | HealingPriest | 60 | Heal | 4 | 6064 | 305.00→305.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 34→34 | n/a | match |  | 632.63-714.37→632.63-714.37 | 0.857 x0.5500→0.4713 | declared, matches |
-| HealingPriest | 60 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750→0.000 | declared, differs: coefficient 0.750->0.000 |
-| HealingPriest | 60 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750 x0.0500→0.0375 | declared, matches |
-| HealingPriest | 60 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750 x0.3500→0.2625 | declared, matches |
-| HealingPriest | 60 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 89.12-112.88→89.12-112.88 | 0.750 x0.6500→0.4875 | declared, matches |
-| HealingPriest | 60 | Holy Fire | 5 | 15265 | 170.00→170.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | 10000→10000 | match |  | 101.56-128.44→101.56-128.44 | 0.750 x0.9500→0.7125 | declared, matches |
+| HealingPriest | 60 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750 x0.1000→0.0750 | declared, matches |
+| HealingPriest | 60 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750 x0.4000→0.3000 | declared, matches |
+| HealingPriest | 60 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 89.12-112.88→89.12-112.88 | 0.750 x0.7000→0.5250 | declared, matches |
+| HealingPriest | 60 | Holy Fire | 5 | 15265 | 170.00→170.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | 10000→10000 | match |  | 101.56-128.44→101.56-128.44 | 0.750→0.750 | declared, matches |
 | HealingPriest | 60 | Holy Fire | 6 | 15266 | 200.00→200.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 48→48 | 10000→10000 | match |  | 131.59-166.81→131.59-166.81 | 0.750→0.750 | declared, matches |
 | HealingPriest | 60 | Holy Fire | 7 | 15267 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 54→54 | 10000→10000 | match |  | 162.49-206.31→162.49-206.31 | 0.750→0.750 | declared, matches |
 | HealingPriest | 60 | Holy Fire | 8 | 15261 | 255.00→255.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 60→60 | 10000→10000 | match |  | 183.68-232.32→183.68-232.32 | 0.750→0.750 | declared, matches |
@@ -316,24 +316,24 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Inner Fire | 4 | 1006 | 165.00→165.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 40→40 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Inner Fire | 5 | 10951 | 235.00→235.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 600000→600000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Inner Fire | 6 | 10952 | 315.00→315.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 600000→600000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 60 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| HealingPriest | 60 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571→0.000 | declared, differs: coefficient 0.571->0.000 |
-| HealingPriest | 60 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714→0.000 | declared, differs: coefficient 0.714->0.000 |
+| HealingPriest | 60 | Lesser Heal | 1 | 2050 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 46.54-56.66→46.54-56.66 | 0.429 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Lesser Heal | 2 | 2052 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 4→4 | n/a | match |  | 88.75-106.25→88.75-106.25 | 0.571 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Lesser Heal | 3 | 2053 | 75.00→75.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 10→10 | n/a | match |  | 156.27-181.73→156.27-181.73 | 0.714 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Lightwell | 1 | 724 | 225.00→225.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 40→40 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Lightwell | 2 | 27870 | 295.00→295.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 50→50 | 180000→180000 | match |  | n/a | n/a | n/a |
 | HealingPriest | 60 | Lightwell | 3 | 27871 | 365.00→365.00 | mana→mana | 600000→600000 | 1500→1500 | 1500→1500 | 60→60 | 180000→180000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 60 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| HealingPriest | 60 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| HealingPriest | 60 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| HealingPriest | 60 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 4 | 8104 | 150.00→150.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 153.41-162.59→153.41-162.59 | 0.429 x0.2500→0.1072 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 197.63-210.38→197.62-210.38 | 0.429 x0.5500→0.2359 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 6 | 8106 | 225.00→225.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 40→40 | n/a | match |  | 259.14-275.86→259.14-275.86 | 0.429 x0.8500→0.3646 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 7 | 10945 | 265.00→265.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 46→46 | n/a | match |  | 325.10-343.90→325.10-343.90 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 8 | 10946 | 310.00→310.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 52→52 | n/a | match |  | 405.55-428.45→405.55-428.45 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Mind Blast | 9 | 10947 | 350.00→350.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 58→58 | n/a | match |  | 476.93-503.47→476.93-503.47 | 0.429→0.429 | declared, matches |
-| HealingPriest | 60 | Power Word: Shield | 1 | 17 | 45.00→45.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | 48.00-48.00→48.00-48.00 | 0.100→0.000 | declared, differs: coefficient 0.100->0.000 |
-| HealingPriest | 60 | Power Word: Shield | 2 | 592 | 80.00→80.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | 92.00-92.00→92.00-92.00 | 0.100→0.000 | declared, differs: coefficient 0.100->0.000 |
-| HealingPriest | 60 | Power Word: Shield | 3 | 600 | 130.00→130.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | 162.00-162.00→162.00-162.00 | 0.100→0.000 | declared, differs: coefficient 0.100->0.000 |
+| HealingPriest | 60 | Power Word: Shield | 1 | 17 | 45.00→45.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 6→6 | 30000→30000 | match |  | 48.00-48.00→48.00-48.00 | 0.100 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Power Word: Shield | 2 | 592 | 80.00→80.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 12→12 | 30000→30000 | match |  | 92.00-92.00→92.00-92.00 | 0.100 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Power Word: Shield | 3 | 600 | 130.00→130.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 18→18 | 30000→30000 | match |  | 162.00-162.00→162.00-162.00 | 0.100 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Power Word: Shield | 4 | 3747 | 175.00→175.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 24→24 | 30000→30000 | match |  | 236.00-236.00→236.00-236.00 | 0.100 x0.0500→0.0050 | declared, matches |
 | HealingPriest | 60 | Power Word: Shield | 5 | 6065 | 210.00→210.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 30→30 | 30000→30000 | match |  | 302.50-302.50→302.50-302.50 | 0.100 x0.3500→0.0350 | declared, matches |
 | HealingPriest | 60 | Power Word: Shield | 6 | 6066 | 250.00→250.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 36→36 | 30000→30000 | match |  | 381.00-381.00→381.00-381.00 | 0.100 x0.6500→0.0650 | declared, matches |
@@ -341,14 +341,14 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Power Word: Shield | 8 | 10899 | 355.00→355.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 48→48 | 30000→30000 | match |  | 608.00-608.00→608.00-608.00 | 0.100→0.100 | declared, matches |
 | HealingPriest | 60 | Power Word: Shield | 9 | 10900 | 425.00→425.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 54→54 | 30000→30000 | match |  | 768.50-768.50→768.50-768.50 | 0.100→0.100 | declared, matches |
 | HealingPriest | 60 | Power Word: Shield | 10 | 10901 | 500.00→500.00 | mana→mana | 4000→4000 | 0→0 | 1500→1500 | 60→60 | 30000→30000 | match |  | 928.00-928.00→928.00-928.00 | 0.100→0.100 | declared, matches |
-| HealingPriest | 60 | Prayer of Healing | 1 | 596 | 410.00→410.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 30→30 | n/a | match |  | 179.25-191.15→179.24-191.16 | 0.286 x0.3500→0.1001 | declared, matches |
-| HealingPriest | 60 | Prayer of Healing | 2 | 996 | 560.00→560.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | n/a | match |  | 265.62-282.38→265.62-282.38 | 0.286 x0.8500→0.2431 | declared, matches |
+| HealingPriest | 60 | Prayer of Healing | 1 | 596 | 410.00→410.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 30→30 | n/a | match |  | 179.25-191.15→179.24-191.16 | 0.286 x0.5500→0.1573 | declared, matches |
+| HealingPriest | 60 | Prayer of Healing | 2 | 996 | 560.00→560.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 40→40 | n/a | match |  | 265.62-282.38→265.62-282.38 | 0.286→0.286 | declared, matches |
 | HealingPriest | 60 | Prayer of Healing | 3 | 10960 | 770.00→770.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 50→50 | n/a | match |  | 401.10-424.30→401.10-424.30 | 0.286→0.286 | declared, matches |
 | HealingPriest | 60 | Prayer of Healing | 4 | 10961 | 1030.00→1030.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | n/a | match |  | 567.29-598.71→567.29-598.71 | 0.286→0.286 | declared, matches |
 | HealingPriest | 60 | Prayer of Healing | 5 | 25316 | 1070.00→1070.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 60→60 | n/a | match |  | 631.41-666.59→631.41-666.59 | 0.286→0.286 | declared, matches |
-| HealingPriest | 60 | Renew | 1 | 139 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 15000→15000 | match |  | 9.00-9.00→9.00-9.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
-| HealingPriest | 60 | Renew | 2 | 6074 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 15000→15000 | match |  | 15.00-15.00→15.00-15.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
-| HealingPriest | 60 | Renew | 3 | 6075 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | 25.00-25.00→25.00-25.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
+| HealingPriest | 60 | Renew | 1 | 139 | 30.00→30.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 15000→15000 | match |  | 9.00-9.00→9.00-9.00 | 0.200 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Renew | 2 | 6074 | 65.00→65.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 14→14 | 15000→15000 | match |  | 15.00-15.00→15.00-15.00 | 0.200 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Renew | 3 | 6075 | 105.00→105.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 15000→15000 | match |  | 25.00-25.00→25.00-25.00 | 0.200 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Renew | 4 | 6076 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 15000→15000 | match |  | 32.00-32.00→32.00-32.00 | 0.200 x0.1500→0.0300 | declared, matches |
 | HealingPriest | 60 | Renew | 5 | 6077 | 170.00→170.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 32→32 | 15000→15000 | match |  | 41.00-41.00→41.00-41.00 | 0.200 x0.4500→0.0900 | declared, matches |
 | HealingPriest | 60 | Renew | 6 | 6078 | 205.00→205.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 38→38 | 15000→15000 | match |  | 54.00-54.00→54.00-54.00 | 0.200 x0.7500→0.1500 | declared, matches |
@@ -360,19 +360,19 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HealingPriest | 60 | Shadow Word: Death | 2 | 1309633 | 205.00→205.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | 368.02-390.98→368.02-390.98 | 0.429 x0.8500→0.3646 | declared, matches |
 | HealingPriest | 60 | Shadow Word: Death | 3 | 1309635 | 250.00→250.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | 401.48-426.52→401.48-426.52 | 0.429→0.429 | declared, matches |
 | HealingPriest | 60 | Shadow Word: Death | 4 | 1309636 | 340.00→340.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 56→56 | n/a | match |  | 444.15-471.85→444.15-471.85 | 0.429→0.429 | declared, matches |
-| HealingPriest | 60 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
-| HealingPriest | 60 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
-| HealingPriest | 60 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
+| HealingPriest | 60 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200 x0.1500→0.0300 | declared, matches |
 | HealingPriest | 60 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200 x0.5500→0.1100 | declared, matches |
 | HealingPriest | 60 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→18000 | match |  | 71.00-71.00→71.00-71.00 | 0.200 x0.9500→0.1900 | declared, matches |
 | HealingPriest | 60 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→18000 | match |  | 97.00-97.00→97.00-97.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 60 | Shadow Word: Pain | 8 | 10894 | 470.00→470.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 18000→18000 | match |  | 127.00-127.00→127.00-127.00 | 0.200→0.200 | declared, matches |
 | HealingPriest | 60 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| HealingPriest | 60 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| HealingPriest | 60 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571→0.000 | declared, differs: coefficient 0.571->0.000 |
-| HealingPriest | 60 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714→0.000 | declared, differs: coefficient 0.714->0.000 |
-| HealingPriest | 60 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714→0.000 | declared, differs: coefficient 0.714->0.000 |
+| HealingPriest | 60 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714 x0.0000→0.0000 | declared, matches |
+| HealingPriest | 60 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714 x0.0000→0.0000 | declared, matches |
 | HealingPriest | 60 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714 x0.3500→0.2499 | declared, matches |
 | HealingPriest | 60 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 93.34-105.66→93.34-105.66 | 0.714 x0.7500→0.5355 | declared, matches |
 | HealingPriest | 60 | Smite | 7 | 10933 | 230.00→230.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 46→46 | n/a | match |  | 123.74-139.26→123.74-139.26 | 0.714→0.714 | declared, matches |
@@ -421,7 +421,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 38 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 38 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 38 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
-| ShadowPriest | 38 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.9500→0.7125 | declared, matches |
+| ShadowPriest | 38 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.9000→0.6750 | declared, matches |
 | ShadowPriest | 38 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 38 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 38 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 83.82-106.18→83.82-106.18 | 0.750→0.750 | declared, matches |
@@ -437,7 +437,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 38 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 38 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 38 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| ShadowPriest | 38 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| ShadowPriest | 38 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 38 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571 x0.2500→0.1427 | declared, matches |
 | ShadowPriest | 38 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714 x0.6500→0.4641 | declared, matches |
 | ShadowPriest | 38 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714→0.714 | declared, matches |
@@ -449,7 +449,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 40 | Devouring Plague | 1 | 2944 | 215.00→215.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 20→20 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 40 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 40 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
-| ShadowPriest | 40 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.8500→0.6375 | declared, matches |
+| ShadowPriest | 40 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.8000→0.6000 | declared, matches |
 | ShadowPriest | 40 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 40 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 40 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 86.47-109.53→86.47-109.53 | 0.750→0.750 | declared, matches |
@@ -467,7 +467,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 40 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 40 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 40 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| ShadowPriest | 40 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| ShadowPriest | 40 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 40 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571 x0.1500→0.0856 | declared, matches |
 | ShadowPriest | 40 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714 x0.5500→0.3927 | declared, matches |
 | ShadowPriest | 40 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714 x0.9500→0.6783 | declared, matches |
@@ -481,13 +481,13 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 50 | Devouring Plague | 2 | 19276 | 350.00→350.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 28→28 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 50 | Devouring Plague | 3 | 19277 | 495.00→495.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 36→36 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 50 | Devouring Plague | 4 | 19278 | 645.00→645.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 44→44 | 24000→24000 | match |  | n/a | n/a | n/a |
-| ShadowPriest | 50 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.3500→0.2625 | declared, matches |
-| ShadowPriest | 50 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750 x0.5500→0.4125 | declared, matches |
-| ShadowPriest | 50 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750 x0.8500→0.6375 | declared, matches |
+| ShadowPriest | 50 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.3000→0.2250 | declared, matches |
+| ShadowPriest | 50 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750 x0.6000→0.4500 | declared, matches |
+| ShadowPriest | 50 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750 x0.9000→0.6750 | declared, matches |
 | ShadowPriest | 50 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 89.12-112.88→89.12-112.88 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 50 | Holy Fire | 5 | 15265 | 170.00→170.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | 10000→10000 | match |  | 101.56-128.44→101.56-128.44 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 50 | Holy Fire | 6 | 15266 | 200.00→200.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 48→48 | 10000→10000 | match |  | 125.59-159.21→125.59-159.21 | 0.750→0.750 | declared, matches |
-| ShadowPriest | 50 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| ShadowPriest | 50 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 50 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429 x0.1500→0.0643 | declared, matches |
 | ShadowPriest | 50 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429 x0.4500→0.1930 | declared, matches |
 | ShadowPriest | 50 | Mind Blast | 4 | 8104 | 150.00→150.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 153.41-162.59→153.41-162.59 | 0.429 x0.7500→0.3217 | declared, matches |
@@ -497,16 +497,16 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 50 | Shadow Word: Death | 1 | 1309595 | 175.00→175.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 32→32 | n/a | match |  | 293.35-311.65→293.35-311.65 | 0.429 x0.9500→0.4075 | declared, matches |
 | ShadowPriest | 50 | Shadow Word: Death | 2 | 1309633 | 205.00→205.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | 368.02-390.98→368.02-390.98 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 50 | Shadow Word: Death | 3 | 1309635 | 250.00→250.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | 395.08-419.72→395.08-419.72 | 0.429→0.429 | declared, matches |
-| ShadowPriest | 50 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
-| ShadowPriest | 50 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
+| ShadowPriest | 50 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 50 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 50 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200 x0.2500→0.0500 | declared, matches |
 | ShadowPriest | 50 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200 x0.6500→0.1300 | declared, matches |
 | ShadowPriest | 50 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 50 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→18000 | match |  | 71.00-71.00→71.00-71.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 50 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→18000 | match |  | 97.00-97.00→97.00-97.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 50 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| ShadowPriest | 50 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| ShadowPriest | 50 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571→0.000 | declared, differs: coefficient 0.571->0.000 |
+| ShadowPriest | 50 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 50 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 50 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714 x0.0500→0.0357 | declared, matches |
 | ShadowPriest | 50 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714 x0.4500→0.3213 | declared, matches |
 | ShadowPriest | 50 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714 x0.8500→0.6069 | declared, matches |
@@ -523,17 +523,17 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 60 | Devouring Plague | 4 | 19278 | 645.00→645.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 44→44 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 60 | Devouring Plague | 5 | 19279 | 810.00→810.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 52→52 | 24000→24000 | match |  | n/a | n/a | n/a |
 | ShadowPriest | 60 | Devouring Plague | 6 | 19280 | 985.00→985.00 | mana→mana | 24000→24000 | 0→0 | 1500→1500 | 60→60 | 24000→24000 | match |  | n/a | n/a | n/a |
-| ShadowPriest | 60 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750→0.000 | declared, differs: coefficient 0.750->0.000 |
-| ShadowPriest | 60 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750 x0.0500→0.0375 | declared, matches |
-| ShadowPriest | 60 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750 x0.3500→0.2625 | declared, matches |
-| ShadowPriest | 60 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 89.12-112.88→89.12-112.88 | 0.750 x0.6500→0.4875 | declared, matches |
-| ShadowPriest | 60 | Holy Fire | 5 | 15265 | 170.00→170.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | 10000→10000 | match |  | 101.56-128.44→101.56-128.44 | 0.750 x0.9500→0.7125 | declared, matches |
+| ShadowPriest | 60 | Holy Fire | 1 | 14914 | 85.00→85.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 20→20 | 10000→10000 | match |  | 52.47-65.93→52.47-65.93 | 0.750 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 60 | Holy Fire | 2 | 15262 | 95.00→95.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 24→24 | 10000→10000 | match |  | 63.47-79.33→63.47-79.33 | 0.750 x0.1000→0.0750 | declared, matches |
+| ShadowPriest | 60 | Holy Fire | 3 | 15263 | 125.00→125.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 30→30 | 10000→10000 | match |  | 78.85-99.15→78.85-99.15 | 0.750 x0.4000→0.3000 | declared, matches |
+| ShadowPriest | 60 | Holy Fire | 4 | 15264 | 145.00→145.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 36→36 | 10000→10000 | match |  | 89.12-112.88→89.12-112.88 | 0.750 x0.7000→0.5250 | declared, matches |
+| ShadowPriest | 60 | Holy Fire | 5 | 15265 | 170.00→170.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 42→42 | 10000→10000 | match |  | 101.56-128.44→101.56-128.44 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 60 | Holy Fire | 6 | 15266 | 200.00→200.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 48→48 | 10000→10000 | match |  | 131.59-166.81→131.59-166.81 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 60 | Holy Fire | 7 | 15267 | 230.00→230.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 54→54 | 10000→10000 | match |  | 162.49-206.31→162.49-206.31 | 0.750→0.750 | declared, matches |
 | ShadowPriest | 60 | Holy Fire | 8 | 15261 | 255.00→255.00 | mana→mana | 0→0 | 3500→3500 | 1500→1500 | 60→60 | 10000→10000 | match |  | 183.68-232.32→183.68-232.32 | 0.750→0.750 | declared, matches |
-| ShadowPriest | 60 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| ShadowPriest | 60 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| ShadowPriest | 60 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
+| ShadowPriest | 60 | Mind Blast | 1 | 8092 | 50.00→50.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 10→10 | n/a | match |  | 39.95-44.05→39.95-44.05 | 0.429 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 60 | Mind Blast | 2 | 8102 | 80.00→80.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 16→16 | n/a | match |  | 69.60-75.40→69.60-75.40 | 0.429 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 60 | Mind Blast | 3 | 8103 | 110.00→110.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 22→22 | n/a | match |  | 102.83-110.17→102.83-110.17 | 0.429 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 60 | Mind Blast | 4 | 8104 | 150.00→150.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 28→28 | n/a | match |  | 153.41-162.59→153.41-162.59 | 0.429 x0.2500→0.1072 | declared, matches |
 | ShadowPriest | 60 | Mind Blast | 5 | 8105 | 185.00→185.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 34→34 | n/a | match |  | 197.63-210.38→197.62-210.38 | 0.429 x0.5500→0.2359 | declared, matches |
 | ShadowPriest | 60 | Mind Blast | 6 | 8106 | 225.00→225.00 | mana→mana | 8000→8000 | 1500→1500 | 1500→1500 | 40→40 | n/a | match |  | 259.14-275.86→259.14-275.86 | 0.429 x0.8500→0.3646 | declared, matches |
@@ -544,19 +544,19 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ShadowPriest | 60 | Shadow Word: Death | 2 | 1309633 | 205.00→205.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | 368.02-390.98→368.02-390.98 | 0.429 x0.8500→0.3646 | declared, matches |
 | ShadowPriest | 60 | Shadow Word: Death | 3 | 1309635 | 250.00→250.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | 401.48-426.52→401.48-426.52 | 0.429→0.429 | declared, matches |
 | ShadowPriest | 60 | Shadow Word: Death | 4 | 1309636 | 340.00→340.00 | mana→mana | 18000→18000 | 0→0 | 1500→1500 | 56→56 | n/a | match |  | 444.15-471.85→444.15-471.85 | 0.429→0.429 | declared, matches |
-| ShadowPriest | 60 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
-| ShadowPriest | 60 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
-| ShadowPriest | 60 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200→0.000 | declared, differs: coefficient 0.200->0.000 |
+| ShadowPriest | 60 | Shadow Word: Pain | 1 | 589 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 18000→18000 | match |  | 5.00-5.00→5.00-5.00 | 0.200 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 60 | Shadow Word: Pain | 2 | 594 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 18000→18000 | match |  | 10.00-10.00→10.00-10.00 | 0.200 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 60 | Shadow Word: Pain | 3 | 970 | 95.00→95.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 18000→18000 | match |  | 18.00-18.00→18.00-18.00 | 0.200 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 60 | Shadow Word: Pain | 4 | 992 | 155.00→155.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 26→26 | 18000→18000 | match |  | 30.00-30.00→30.00-30.00 | 0.200 x0.1500→0.0300 | declared, matches |
 | ShadowPriest | 60 | Shadow Word: Pain | 5 | 2767 | 230.00→230.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 34→34 | 18000→18000 | match |  | 48.00-48.00→48.00-48.00 | 0.200 x0.5500→0.1100 | declared, matches |
 | ShadowPriest | 60 | Shadow Word: Pain | 6 | 10892 | 305.00→305.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 42→42 | 18000→18000 | match |  | 71.00-71.00→71.00-71.00 | 0.200 x0.9500→0.1900 | declared, matches |
 | ShadowPriest | 60 | Shadow Word: Pain | 7 | 10893 | 385.00→385.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 50→50 | 18000→18000 | match |  | 97.00-97.00→97.00-97.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 60 | Shadow Word: Pain | 8 | 10894 | 470.00→470.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 58→58 | 18000→18000 | match |  | 127.00-127.00→127.00-127.00 | 0.200→0.200 | declared, matches |
 | ShadowPriest | 60 | Shadowfiend | 0 | 401977 | 0.00→0.00 | mana→none | 300000→300000 | 0→0 | 1500→1500 | 1→1 | 15000→15000 | match |  | n/a | n/a | n/a |
-| ShadowPriest | 60 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429→0.000 | declared, differs: coefficient 0.429->0.000 |
-| ShadowPriest | 60 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571→0.000 | declared, differs: coefficient 0.571->0.000 |
-| ShadowPriest | 60 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714→0.000 | declared, differs: coefficient 0.714->0.000 |
-| ShadowPriest | 60 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714→0.000 | declared, differs: coefficient 0.714->0.000 |
+| ShadowPriest | 60 | Smite | 1 | 585 | 20.00→20.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | n/a | match |  | 13.43-17.57→13.43-17.57 | 0.429 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 60 | Smite | 2 | 591 | 30.00→30.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | n/a | match |  | 25.45-31.55→25.45-31.55 | 0.571 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 60 | Smite | 3 | 598 | 60.00→60.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 14→14 | n/a | match |  | 44.22-50.78→44.22-50.78 | 0.714 x0.0000→0.0000 | declared, matches |
+| ShadowPriest | 60 | Smite | 4 | 984 | 95.00→95.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 22→22 | n/a | match |  | 58.96-68.04→58.96-68.04 | 0.714 x0.0000→0.0000 | declared, matches |
 | ShadowPriest | 60 | Smite | 5 | 1004 | 140.00→140.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 30→30 | n/a | match |  | 80.62-91.38→80.62-91.38 | 0.714 x0.3500→0.2499 | declared, matches |
 | ShadowPriest | 60 | Smite | 6 | 6060 | 185.00→185.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 38→38 | n/a | match |  | 93.34-105.66→93.34-105.66 | 0.714 x0.7500→0.5355 | declared, matches |
 | ShadowPriest | 60 | Smite | 7 | 10933 | 230.00→230.00 | mana→mana | 0→0 | 2500→2500 | 1500→1500 | 46→46 | n/a | match |  | 123.74-139.26→123.74-139.26 | 0.714→0.714 | declared, matches |
@@ -570,19 +570,19 @@ Each spell below is built with exactly one point in the single talent that grant
 | HealingPriest (Holy Nova talent) | 20 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 25.20-28.80→25.20-28.80 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 30 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 26.32-30.08→26.32-30.08 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 30 | Holy Nova | 2 | 15430 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 46.11-53.49→46.11-53.49 | 0.107→0.107 | declared, matches |
-| HealingPriest (Holy Nova talent) | 38 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 26.32-30.08→26.32-30.08 | 0.107 x0.9500→0.1016 | declared, matches |
+| HealingPriest (Holy Nova talent) | 38 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 26.32-30.08→26.32-30.08 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 38 | Holy Nova | 2 | 15430 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 47.59-55.21→47.59-55.21 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 38 | Holy Nova | 3 | 15431 | 400.00→400.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 70.62-81.78→70.62-81.78 | 0.107→0.107 | declared, matches |
-| HealingPriest (Holy Nova talent) | 40 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 26.32-30.08→26.32-30.08 | 0.107 x0.8500→0.0909 | declared, matches |
+| HealingPriest (Holy Nova talent) | 40 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 26.32-30.08→26.32-30.08 | 0.107 x0.9000→0.0963 | declared, matches |
 | HealingPriest (Holy Nova talent) | 40 | Holy Nova | 2 | 15430 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 47.59-55.21→47.59-55.21 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 40 | Holy Nova | 3 | 15431 | 400.00→400.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 71.74-83.06→71.74-83.06 | 0.107→0.107 | declared, matches |
-| HealingPriest (Holy Nova talent) | 50 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 26.32-30.08→26.32-30.08 | 0.107 x0.3500→0.0374 | declared, matches |
-| HealingPriest (Holy Nova talent) | 50 | Holy Nova | 2 | 15430 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 47.59-55.21→47.59-55.21 | 0.107 x0.7500→0.0803 | declared, matches |
+| HealingPriest (Holy Nova talent) | 50 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 26.32-30.08→26.32-30.08 | 0.107 x0.4000→0.0428 | declared, matches |
+| HealingPriest (Holy Nova talent) | 50 | Holy Nova | 2 | 15430 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 47.59-55.21→47.59-55.21 | 0.107 x0.8000→0.0856 | declared, matches |
 | HealingPriest (Holy Nova talent) | 50 | Holy Nova | 3 | 15431 | 400.00→400.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 72.85-84.35→72.85-84.35 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 50 | Holy Nova | 4 | 27799 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 103.02-118.58→103.02-118.58 | 0.107→0.107 | declared, matches |
-| HealingPriest (Holy Nova talent) | 60 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 26.32-30.08→26.32-30.08 | 0.107→0.000 | declared, differs: coefficient 0.107->0.000 |
-| HealingPriest (Holy Nova talent) | 60 | Holy Nova | 2 | 15430 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 47.59-55.21→47.59-55.21 | 0.107 x0.2500→0.0267 | declared, matches |
-| HealingPriest (Holy Nova talent) | 60 | Holy Nova | 3 | 15431 | 400.00→400.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 72.85-84.35→72.85-84.35 | 0.107 x0.6500→0.0696 | declared, matches |
+| HealingPriest (Holy Nova talent) | 60 | Holy Nova | 1 | 15237 | 185.00→185.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | 26.32-30.08→26.32-30.08 | 0.107 x0.0000→0.0000 | declared, matches |
+| HealingPriest (Holy Nova talent) | 60 | Holy Nova | 2 | 15430 | 290.00→290.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | n/a | match |  | 47.59-55.21→47.59-55.21 | 0.107 x0.3000→0.0321 | declared, matches |
+| HealingPriest (Holy Nova talent) | 60 | Holy Nova | 3 | 15431 | 400.00→400.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | n/a | match |  | 72.85-84.35→72.85-84.35 | 0.107 x0.7000→0.0749 | declared, matches |
 | HealingPriest (Holy Nova talent) | 60 | Holy Nova | 4 | 27799 | 520.00→520.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | n/a | match |  | 103.02-118.58→103.02-118.58 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 60 | Holy Nova | 5 | 27800 | 635.00→635.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | n/a | match |  | 138.15-159.85→138.15-159.85 | 0.107→0.107 | declared, matches |
 | HealingPriest (Holy Nova talent) | 60 | Holy Nova | 6 | 27801 | 750.00→750.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | n/a | match |  | 173.57-200.43→173.57-200.43 | 0.107→0.107 | declared, matches |
@@ -613,19 +613,19 @@ Each spell below is built with exactly one point in the single talent that grant
 | ShadowPriest (Mind Flay talent) | 20 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167→0.167 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 30 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167→0.167 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 30 | Mind Flay | 2 | 17311 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 3000→3000 | match |  | 34.00-34.00→34.00-34.00 | 0.167→0.167 | declared, matches |
-| ShadowPriest (Mind Flay talent) | 38 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167 x0.9500→0.1587 | declared, matches |
+| ShadowPriest (Mind Flay talent) | 38 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167→0.167 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 38 | Mind Flay | 2 | 17311 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 3000→3000 | match |  | 34.00-34.00→34.00-34.00 | 0.167→0.167 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 38 | Mind Flay | 3 | 17312 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 3000→3000 | match |  | 51.00-51.00→51.00-51.00 | 0.167→0.167 | declared, matches |
-| ShadowPriest (Mind Flay talent) | 40 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167 x0.8500→0.1419 | declared, matches |
+| ShadowPriest (Mind Flay talent) | 40 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167→0.167 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 40 | Mind Flay | 2 | 17311 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 3000→3000 | match |  | 34.00-34.00→34.00-34.00 | 0.167→0.167 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 40 | Mind Flay | 3 | 17312 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 3000→3000 | match |  | 51.00-51.00→51.00-51.00 | 0.167→0.167 | declared, matches |
-| ShadowPriest (Mind Flay talent) | 50 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167 x0.3500→0.0585 | declared, matches |
-| ShadowPriest (Mind Flay talent) | 50 | Mind Flay | 2 | 17311 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 3000→3000 | match |  | 34.00-34.00→34.00-34.00 | 0.167 x0.7500→0.1253 | declared, matches |
+| ShadowPriest (Mind Flay talent) | 50 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167 x0.5000→0.0835 | declared, matches |
+| ShadowPriest (Mind Flay talent) | 50 | Mind Flay | 2 | 17311 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 3000→3000 | match |  | 34.00-34.00→34.00-34.00 | 0.167 x0.9000→0.1503 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 50 | Mind Flay | 3 | 17312 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 3000→3000 | match |  | 51.00-51.00→51.00-51.00 | 0.167→0.167 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 50 | Mind Flay | 4 | 17313 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | 3000→3000 | match |  | 75.00-75.00→75.00-75.00 | 0.167→0.167 | declared, matches |
-| ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167→0.000 | declared, differs: coefficient 0.167->0.000 |
-| ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 2 | 17311 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 3000→3000 | match |  | 34.00-34.00→34.00-34.00 | 0.167 x0.2500→0.0417 | declared, matches |
-| ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 3 | 17312 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 3000→3000 | match |  | 51.00-51.00→51.00-51.00 | 0.167 x0.6500→0.1086 | declared, matches |
+| ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 1 | 15407 | 45.00→45.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 3000→3000 | match |  | 21.00-21.00→21.00-21.00 | 0.167 x0.0000→0.0000 | declared, matches |
+| ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 2 | 17311 | 70.00→70.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 28→28 | 3000→3000 | match |  | 34.00-34.00→34.00-34.00 | 0.167 x0.4000→0.0668 | declared, matches |
+| ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 3 | 17312 | 100.00→100.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 36→36 | 3000→3000 | match |  | 51.00-51.00→51.00-51.00 | 0.167 x0.8000→0.1336 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 4 | 17313 | 135.00→135.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 44→44 | 3000→3000 | match |  | 75.00-75.00→75.00-75.00 | 0.167→0.167 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 5 | 17314 | 165.00→165.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 52→52 | 3000→3000 | match |  | 98.00-98.00→98.00-98.00 | 0.167→0.167 | declared, matches |
 | ShadowPriest (Mind Flay talent) | 60 | Mind Flay | 6 | 18807 | 205.00→205.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 60→60 | 3000→3000 | match |  | 130.00-130.00→130.00-130.00 | 0.167→0.167 | declared, matches |
