@@ -22,7 +22,7 @@ const (
 	healingStreamTotemID = 10463
 	lesserHealingWaveID  = 10468
 	chainHealID          = 10623
-	healingWaveID        = 332 // the tank's Healing Wave is rank 2 at 60 since round 14
+	healingWaveID        = 10396 // the tank's Healing Wave is the top rank since round 15 wave 2 (rank 2 keeps no healing bonus at 60)
 	riptideID            = 1239243
 	naturesSwiftnessID   = 16188
 	manaTideTotemID      = 1325256

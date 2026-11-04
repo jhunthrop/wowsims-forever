@@ -30,21 +30,22 @@ type rotationCase struct {
 }
 
 // The ranks the written rotations name (data/curated/apl in the site
-// repository): both priests renew at rank 1 and Holy heals with Heal rank 1
-// in a raid (round 14); Discipline shields at rank 4 and fills with Lesser
-// Heal rank 1.
+// repository): since round 15 wave 2 (Forever's level-gap rule) both priests
+// renew at rank 7 and Holy fills with Greater Heal rank 4 ahead of Heal rank 4;
+// Discipline shields at rank 4 and fills the party with Greater Heal rank 1
+// ahead of Lesser Heal rank 3.
 const (
 	prayerOfMendingRank3 = 1240827
-	renewRank1           = 139
-	healRank1            = 2054
-	lesserHealRank1      = 2050 // Discipline's party filler (rank 3 from round 11, rank 1 since round 14)
+	renewRank7           = 10927
+	greaterHealRank4     = 10965
+	greaterHealRank1     = 2060 // Discipline's party filler since round 15 wave 2
 	penanceRank4         = 1316995
 	powerWordShieldRank4 = 3747
 )
 
 var rotationCases = []rotationCase{
-	{"holy", "forever_holy", HolyTalents, []int32{prayerOfMendingRank3, renewRank1, healRank1}},
-	{"discipline", "forever_discipline", DiscTalents, []int32{penanceRank4, powerWordShieldRank4, lesserHealRank1}},
+	{"holy", "forever_holy", HolyTalents, []int32{prayerOfMendingRank3, renewRank7, greaterHealRank4}},
+	{"discipline", "forever_discipline", DiscTalents, []int32{penanceRank4, powerWordShieldRank4, greaterHealRank1}},
 }
 
 func loadRotation(t *testing.T, file string) *proto.APLRotation {

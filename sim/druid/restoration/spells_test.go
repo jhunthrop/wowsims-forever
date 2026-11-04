@@ -70,8 +70,8 @@ func assertDirectHeals(t *testing.T, sim *core.Simulation, spell *druid.DruidSpe
 	if !ok {
 		t.Fatalf("%s rank %d: the client has no effect %d", spell.ActionID, spell.Rank, effectIndex)
 	}
-	// A heal keeps its whole coefficient at any learn level (core levelPenalty).
-	coefficient := client.Effects[effectIndex].ResolvedSPCoefficient
+	// A rank far below the caster keeps only part of it (core.LevelPenalty).
+	coefficient := client.Effects[effectIndex].ResolvedSPCoefficient * core.LevelPenalty(client.SpellLevel, int(spell.Unit.Level))
 	power := coefficient * spell.HealingPower(target)
 	crit := critMultiplier(spell, target)
 
@@ -136,7 +136,7 @@ func assertHealOverTime(t *testing.T, sim *core.Simulation, spell *druid.DruidSp
 	}
 
 	low, _, _ := client.DamageRange(effectIndex, int(spell.Unit.Level))
-	want := low + effect.ResolvedSPCoefficient*spell.HealingPower(target)
+	want := low + effect.ResolvedSPCoefficient*core.LevelPenalty(client.SpellLevel, int(spell.Unit.Level))*spell.HealingPower(target)
 	if got := dot.SnapshotBaseDamage * dot.SnapshotAttackerMultiplier; math.Abs(got-want) > tolerance {
 		t.Errorf("%s rank %d ticks for %v, want %v", spell.ActionID, spell.Rank, got, want)
 	}

@@ -2,8 +2,10 @@ package holy
 
 import (
 	"math"
+	"slices"
 	"testing"
 
+	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/spellconst"
 	"github.com/wowsims/classic/sim/core/stats"
 )
@@ -56,8 +58,13 @@ func assertHealNumbers(t *testing.T, f fight, castID, healID int32) spellTotals 
 	if !ok {
 		t.Fatalf("spell %d has no effect 0", healID)
 	}
-	// A heal keeps its whole coefficient at any learn level (core levelPenalty).
+	// A cast rank far below the caster keeps only part of it (core.LevelPenalty),
+	// and so does Holy Shock's heal half, at its cast rank's level; any other
+	// heal another cast triggers keeps all of it.
 	coefficient := heal.Effects[0].ResolvedSPCoefficient
+	if castID == healID || slices.Contains(holyShockHealIDs, healID) {
+		coefficient *= core.LevelPenalty(clientSpell(t, castID).SpellLevel, int(level))
+	}
 	want := (low+high)/2 + coefficient*healingPower
 
 	totals := totalsOf(f.run(t, numericRuns), healID)

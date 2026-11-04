@@ -145,6 +145,7 @@ func (paladin *Paladin) registerHolyShockHeal(rank holyShockRank) *core.Spell {
 
 		RequiredLevel: rank.level,
 		Rank:          rank.number,
+		TriggeredRank: true,
 
 		SpellCode:      SpellCode_PaladinHolyShockHeal,
 		ClassSpellMask: PaladinSpellMaskHolyShockHeal,

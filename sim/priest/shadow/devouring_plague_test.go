@@ -1,6 +1,7 @@
 package shadow
 
 import (
+	"math"
 	"testing"
 	"time"
 
@@ -193,7 +194,7 @@ func TestDevouringPlagueSpellCoefficientMatchesClient(t *testing.T) {
 		if dot == nil {
 			t.Fatalf("Devouring Plague rank %d has no Dot template on the default target", rank)
 		}
-		if got, want := dot.BonusCoefficient, 0.1; got != want {
+		if got, want := dot.BonusCoefficient, 0.1*core.LevelPenalty(spell.RequiredLevel, int(spell.Unit.Level)); math.Abs(got-want) > 1e-9 {
 			t.Errorf("Devouring Plague rank %d BonusCoefficient = %v, want %v (client's flat sp_coefficient)", rank, got, want)
 		}
 	}

@@ -32,9 +32,9 @@ const (
 	holyShockRotationCast int32 = 1311606
 	flashOfLightPartyRank int32 = 19941
 	// flashOfLightTankRank is the rotation's Flash of Light on the tank:
-	// rank 1 (35 mana) since site round 9 (owner ruling 3, the rank that heals
-	// most over the raid fight).
-	flashOfLightTankRank int32 = 19750
+	// rank 5 (115 mana) since site round 15 wave 2 (Forever's level-gap rule:
+	// rank 1, learned at 20, keeps none of the healing bonus at 60).
+	flashOfLightTankRank int32 = 19942
 )
 
 // A healer with some gear: enough that the rotation's heals are the ones a
@@ -97,7 +97,8 @@ func TestDefaultRotationHealsTheFakeRaid(t *testing.T) {
 		t.Fatalf("effective HPS %.1f, want healing that landed", player.EffectiveHps.Avg)
 	}
 	overheal := 1 - player.EffectiveHps.Avg/player.Hps.Avg
-	if overheal < 0 || overheal >= maxOverheal {
+	// A fight with no overheal at all reads a hair below zero in floating point.
+	if overheal < -1e-9 || overheal >= maxOverheal {
 		t.Errorf("overheal share %.2f, want 0 to %.1f", overheal, maxOverheal)
 	}
 	for name, id := range map[string]int32{
@@ -142,7 +143,7 @@ func TestDefaultRotationUsesDivineFavorAndHolyLightWhenTheTankIsInDanger(t *test
 func TestDefaultRotationSpendsTheManaItsCastsCost(t *testing.T) {
 	result := rotationFight(t, 0).run(t, rotationIterations)
 	costs := map[int32]float64{
-		flashOfLightTankRank: 35, holyLightTrainerRank: 580, // client spellconst: rank 8 costs 580 (660 is the book rank 9)
+		flashOfLightTankRank: 115, holyLightTrainerRank: 580, // client spellconst: rank 8 costs 580 (660 is the book rank 9)
 	}
 	var want, got float64
 	for id, cost := range costs {
