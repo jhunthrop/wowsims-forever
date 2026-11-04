@@ -3753,22 +3753,9 @@ func init() {
 		registerCD(agent)
 	})
 
-	// data/builds/1.60.1.70009/items/*.json, id 249473 ("Dormant Heart of
-	// the Mountain") is NOT implemented. Client text: "Your casts of
-	// $?s2060[Greater Heal]?s5185[Healing Touch]?s331[Healing Wave]?s635[Holy
-	// Light][Greater Heal, Healing Touch, Healing Wave, or Holy Light] in
-	// combat grant up to 40 increased healing and up to 13 increased damage
-	// for 15 sec." (an equip proc, SpellID 1249118 "Eternal Power", 100%
-	// proc chance on casting the class's named heal, triggering SpellID
-	// 1249119). Of the four named heals, this fork models none as a real,
-	// registered spell: priest's GreaterHeal is fully commented out
-	// (sim/priest/greater_heal.go), druid has no Healing Touch spell at all,
-	// shaman declares SpellCode_ShamanHealingWave and a HealingWave field
-	// but no registration function ever builds it, and paladin has no Holy
-	// Light spell at all (only comments referencing it on set bonuses). With
-	// no heal spell to hook CallbackOnSpellHitDealt/OnCastComplete against
-	// for any of the four classes, there is nothing to proc this trinket off
-	// of, so it is left unregistered rather than guessed at.
+	// Dormant Heart of the Mountain (249473) is registered in
+	// item_effects/client_procs.go (Eternal Power on every rank of the four
+	// heals it names).
 
 	core.AddEffectsToTest = true
 }
