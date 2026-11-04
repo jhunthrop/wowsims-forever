@@ -19,6 +19,17 @@
   ],
   "priorityList": [
     {
+      "notes": "Curse of the Elements goes up once, before the bane: in Forever a curse and a bane hold separate slots (every bane reads \"Only one Bane per Warlock\", every curse \"Only one Curse per Warlock\"), so it sits beside Bane of Agony or Bane of Doom and lasts five minutes. It raises the target's magic damage taken, the warlock's and the Succubus' Lash of Pain alike. It is not cast when the raid's Curse of the Elements is already on the target: the two are the same debuff and do not stack.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1311680,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
       "notes": "Corruption goes down first and is kept up throughout: it is cheap sustained damage that does not compete with your casts.",
       "action": {
         "condition": {
@@ -66,17 +77,6 @@
           "spellId": {
             "spellId": 11689,
             "rank": 6
-          }
-        }
-      }
-    },
-    {
-      "notes": "Curse of the Elements goes up once, before the bane: in Forever a curse and a bane hold separate slots (every bane reads \"Only one Bane per Warlock\", every curse \"Only one Curse per Warlock\"), so it sits beside Bane of Agony or Bane of Doom and lasts five minutes. It raises the target's magic damage taken, the warlock's and the Succubus' Lash of Pain alike. It is not cast when the raid's Curse of the Elements is already on the target: the two are the same debuff and do not stack.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 1311680,
-            "rank": 4
           }
         }
       }
