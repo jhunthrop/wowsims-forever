@@ -52,6 +52,34 @@ func TestHitStepWindowSkipsACapturedStat(t *testing.T) {
 	}
 }
 
+// A level-60 one-hander who also casts damage spells (an Enhancement
+// shaman's Earth Shock and Lightning Bolt) against a level-63 boss: weapon
+// hit is capped at 9%, spell hit at 16%, and both read the one Hit stat.
+var meleeCaster = HitProfile{
+	Physical: true, Suppression: 1, SpecialCap: 9, WhiteCap: 9,
+	Spell: true, SpellProfile: SpellHitProfile{Cap: 16},
+}
+
+func meleeCasterAt(hit float64) HitProfile {
+	p := profileAt(meleeCaster, hit)
+	p.SpellProfile.Hit, p.SpellProfile.SchoolHit = hit, hit
+	return p
+}
+
+func TestHitStepWindowKeepsMeasuringPastTheWeaponCapWhileSpellsStillMiss(t *testing.T) {
+	low, high, ok := hitStepWindow(meleeCasterAt(11))
+	if !ok || low != -1 || high != 1 {
+		t.Fatalf("window at 11%% hit with spells capped at 16%% = (%v, %v, %v), want (-1, 1, true)", low, high, ok)
+	}
+	low, high, ok = hitStepWindow(meleeCasterAt(15.5))
+	if !ok || low != -1 || high != 0.5 {
+		t.Fatalf("window half a point under the spell cap = (%v, %v, %v), want (-1, 0.5, true)", low, high, ok)
+	}
+	if _, _, ok := hitStepWindow(meleeCasterAt(17)); ok {
+		t.Fatal("past both the weapon and the spell cap hit is worth nothing and must not be swept")
+	}
+}
+
 func TestHitStepWindowIsSymmetricForACaster(t *testing.T) {
 	low, high, ok := hitStepWindow(HitProfile{Hit: 3})
 	if !ok || low != -1 || high != 1 {
