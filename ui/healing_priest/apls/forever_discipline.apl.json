@@ -1170,37 +1170,14 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "and": {
-                      "vals": [
-                        {
-                          "cmp": {
-                            "op": "OpGe",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "40"
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "cmp": {
-                            "op": "OpLt",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "60"
-                              }
-                            }
-                          }
-                        }
-                      ]
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
                     }
                   }
                 }
@@ -1209,7 +1186,7 @@
           }
         }
       },
-      "notes": "Lesser Heal when Greater Heal rank 1 is out of reach: a small top-up for little mana. Skip it from 40 to 59, where it has lost your healing bonus and only breaks your mana regeneration."
+      "notes": "Lesser Heal is the party's small top-up for little mana before 40. From 40 on leave it off your bars for good: by your late forties it has lost your healing bonus, and every cast costs regeneration you need."
     },
     {
       "action": {
@@ -1331,37 +1308,14 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "and": {
-                      "vals": [
-                        {
-                          "cmp": {
-                            "op": "OpGe",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "40"
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "cmp": {
-                            "op": "OpLt",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "60"
-                              }
-                            }
-                          }
-                        }
-                      ]
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
                     }
                   }
                 }
@@ -1491,37 +1445,14 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "and": {
-                      "vals": [
-                        {
-                          "cmp": {
-                            "op": "OpGe",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "40"
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "cmp": {
-                            "op": "OpLt",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "60"
-                              }
-                            }
-                          }
-                        }
-                      ]
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
                     }
                   }
                 }
@@ -1651,37 +1582,14 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "and": {
-                      "vals": [
-                        {
-                          "cmp": {
-                            "op": "OpGe",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "40"
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "cmp": {
-                            "op": "OpLt",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "60"
-                              }
-                            }
-                          }
-                        }
-                      ]
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
                     }
                   }
                 }
@@ -1840,37 +1748,14 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "and": {
-                      "vals": [
-                        {
-                          "cmp": {
-                            "op": "OpGe",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "40"
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "cmp": {
-                            "op": "OpLt",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "60"
-                              }
-                            }
-                          }
-                        }
-                      ]
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
                     }
                   }
                 }
@@ -1946,37 +1831,14 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "and": {
-                      "vals": [
-                        {
-                          "cmp": {
-                            "op": "OpGe",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "40"
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "cmp": {
-                            "op": "OpLt",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "60"
-                              }
-                            }
-                          }
-                        }
-                      ]
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
                     }
                   }
                 }
@@ -2052,37 +1914,14 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "and": {
-                      "vals": [
-                        {
-                          "cmp": {
-                            "op": "OpGe",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "40"
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "cmp": {
-                            "op": "OpLt",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "60"
-                              }
-                            }
-                          }
-                        }
-                      ]
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
                     }
                   }
                 }
@@ -2158,37 +1997,14 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "and": {
-                      "vals": [
-                        {
-                          "cmp": {
-                            "op": "OpGe",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "40"
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "cmp": {
-                            "op": "OpLt",
-                            "lhs": {
-                              "currentLevel": {}
-                            },
-                            "rhs": {
-                              "const": {
-                                "val": "60"
-                              }
-                            }
-                          }
-                        }
-                      ]
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
                     }
                   }
                 }
