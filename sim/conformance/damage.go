@@ -213,7 +213,7 @@ func damageCells(c DamageComparison) (rangeCell, coefficientCell, statusCell str
 		engineRange = fmt.Sprintf("%.2f-%.2f", c.EngineMin, c.EngineMax)
 	}
 	coefficientCell = fmt.Sprintf("%.3f→%.3f", c.ClientCoefficient, c.EngineCoefficient)
-	if c.LevelPenalty != 0 && c.LevelPenalty != 1 {
+	if c.LevelPenalty != 1 {
 		// Four places for a penalised coefficient: a product such as 0.200 x 0.2875 = 0.0575
 		// sits exactly on a three-place boundary, and arm64's fused multiply-add rounds it to
 		// 0.058 where amd64 rounds it to 0.057, so a golden written on one architecture
@@ -264,22 +264,23 @@ func countDamage(rows []Row) DamageCounts {
 	return counts
 }
 
-// expectedCoefficient is the client's coefficient after the level penalty;
-// a comparison built without one keeps the whole coefficient.
+// expectedCoefficient is the client's coefficient after the level penalty
+// (compareDamage always sets it; a share of 0 leaves no coefficient).
 func (c DamageComparison) expectedCoefficient() float64 {
-	if c.LevelPenalty == 0 {
-		return c.ClientCoefficient
-	}
 	return c.ClientCoefficient * c.LevelPenalty
 }
 
 // levelPenaltyOf is the level penalty the engine applies to a rank the
 // player casts (core.RegisterSpell): a spell with a cost or a cast, not
-// physical, at the caster's level (core.LevelPenalty, Forever's level gap).
+// physical, at the caster's level (core.SpellLevelPenalty, Forever's level
+// gap), keyed here on the client row's own MaxLevel where it has one.
 func levelPenaltyOf(clientSpell spellconst.Spell, engine *core.Spell) float64 {
 	cast := engine.DefaultCast.GCD != 0 || engine.DefaultCast.CastTime != 0 || engine.Cost != nil
-	if !(cast || engine.TriggeredRank) || engine.SpellSchool == core.SpellSchoolPhysical || engine.Unit.Type == core.EnemyUnit || engine.ScalesToCasterLevel {
+	if !(cast || engine.TriggeredRank) || engine.SpellSchool == core.SpellSchoolPhysical || engine.Unit.Type == core.EnemyUnit {
 		return 1
+	}
+	if clientSpell.MaxLevel > 0 && clientSpell.SpellLevel > 0 {
+		return core.LevelPenaltyFromMaxLevel(clientSpell.MaxLevel, int(engine.Unit.Level))
 	}
 	return core.LevelPenalty(clientSpell.SpellLevel, int(engine.Unit.Level))
 }

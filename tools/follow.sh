@@ -71,6 +71,7 @@ allowlist() {
 		sim/core/base_stats_levels_auto_gen.go \
 		sim/core/client_sets_gen.go \
 		sim/core/periodic_crit_auto_gen.go \
+		sim/core/spell_max_level_auto_gen.go \
 		sim/core/eureka_auto_gen.go \
 		"$RACES" \
 		"assets/db_inputs/gametables/$build/*" \
@@ -190,6 +191,12 @@ gen_periodiccrit() {
 	make periodiccrit BUILD="$BUILD" SITE_DIR="$SITE" || die "make periodiccrit"
 }
 
+# 8d. The MaxLevel the low-rank penalty keys on.
+gen_spellmaxlevel() {
+	step "8d make spellmaxlevel"
+	make spellmaxlevel BUILD="$BUILD" SITE_DIR="$SITE" || die "make spellmaxlevel"
+}
+
 # 8c. Each class's Eureka! row and the spells its masks reach.
 gen_eureka() {
 	step "8c make eureka"
@@ -256,6 +263,7 @@ assert_stamps() {
 	assert_stamp sim/core/base_stats_auto_gen.go "Client build: $BUILD"
 	assert_stamp sim/core/client_sets_gen.go "client build $BUILD"
 	assert_stamp sim/core/periodic_crit_auto_gen.go "Client build: $BUILD"
+	assert_stamp sim/core/spell_max_level_auto_gen.go "Client build: $BUILD"
 	assert_stamp sim/core/eureka_auto_gen.go "Client build: $BUILD"
 }
 
@@ -330,6 +338,7 @@ main() {
 	gen_base_stats
 	gen_relicmods
 	gen_periodiccrit
+	gen_spellmaxlevel
 	gen_eureka
 	gen_set_rows
 	build_engine

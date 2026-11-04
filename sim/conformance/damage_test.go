@@ -126,3 +126,12 @@ func TestCompareDamage_ADummyOutsideTheWeaponSpeedListIsNotRead(t *testing.T) {
 		t.Errorf("status = %q, want %q: only the weapon-speed dummies are read", got.Status, DamageNone)
 	}
 }
+
+// A rank that keeps none of its coefficient at the caster's level expects an
+// engine coefficient of zero: a share of 0 is a share, not a missing one.
+func TestAFullyPenalisedRankExpectsNoCoefficient(t *testing.T) {
+	c := DamageComparison{ClientCoefficient: 1, EngineCoefficient: 0, LevelPenalty: 0, ClientCoefficientFromTable: true}
+	if got := c.expectedCoefficient(); got != 0 {
+		t.Errorf("a rank with no share left expects coefficient %v, want 0", got)
+	}
+}
