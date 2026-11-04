@@ -182,6 +182,32 @@
       }
     },
     {
+      "notes": "",
+      "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "autoTimeToNext": {
+                "autoType": "Ranged"
+              }
+            },
+            "rhs": {
+              "const": {
+                "val": "1.2s"
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1310786,
+            "rank": 3
+          }
+        }
+      }
+    },
+    {
       "notes": "Serpent Sting when it has under 1.5 seconds left and the shared cooldown is not about to come back. Refreshing any earlier throws away a tick. It is the best damage for its mana you have between the big shots, so keep it rolling for the whole fight.",
       "action": {
         "condition": {
