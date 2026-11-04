@@ -141,3 +141,25 @@ func TestASpellThatScalesToTheCasterKeepsItsCoefficient(t *testing.T) {
 		t.Errorf("a spell that scales to the caster's level: coefficient %v, want 0.286", spell.BonusCoefficient)
 	}
 }
+
+// A heal another cast triggers (Holy Shock's heal half) carries that cast
+// rank's learn level and is that rank, so it takes the cast rank's share
+// though it has no cost or cast of its own.
+func TestATriggeredRankTakesItsCastRanksShare(t *testing.T) {
+	_, caster, _ := newPeriodicCritFixture(t, 0)
+	heal := caster.RegisterSpell(SpellConfig{
+		ActionID:         ActionID{SpellID: 1311605},
+		SpellSchool:      SpellSchoolHoly,
+		DefenseType:      DefenseTypeMagic,
+		Flags:            SpellFlagHelpful,
+		ProcMask:         ProcMaskSpellHealing,
+		RequiredLevel:    30,
+		TriggeredRank:    true,
+		DamageMultiplier: 1,
+		ThreatMultiplier: 1,
+		BonusCoefficient: 0.429,
+	})
+	if got, want := heal.BonusCoefficient, 0.429*0.35; math.Abs(got-want) > 1e-9 {
+		t.Errorf("a triggered rank learned at 30, caster 60: coefficient %v, want %v", got, want)
+	}
+}

@@ -37,6 +37,10 @@ type SpellConfig struct {
 	// MaxLevel 60): it is not a rank below the caster, so the level-gap
 	// penalty (levelPenalty) leaves its coefficient whole.
 	ScalesToCasterLevel bool
+	// TriggeredRank marks a spell another cast triggers that is that cast's
+	// rank (Holy Shock's heal half carries the cast rank's RequiredLevel): the
+	// level-gap penalty applies to it though it has no cost or cast.
+	TriggeredRank bool
 
 	ManaCost   ManaCostOptions
 	EnergyCost EnergyCostOptions
@@ -133,6 +137,8 @@ type Spell struct {
 	RequiredLevel int
 	// ScalesToCasterLevel is the config's: the level-gap penalty left it whole.
 	ScalesToCasterLevel bool
+	// TriggeredRank is the config's: the level-gap penalty applied to it.
+	TriggeredRank bool
 
 	ResourceMetrics *ResourceMetrics
 	healthMetrics   []*ResourceMetrics
@@ -328,6 +334,7 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 	spell.Rank = config.Rank
 	spell.RequiredLevel = config.RequiredLevel
 	spell.ScalesToCasterLevel = config.ScalesToCasterLevel
+	spell.TriggeredRank = config.TriggeredRank
 
 	spell.CdSpell = spell
 
@@ -804,7 +811,7 @@ const (
 // low rank they caught, Rejuvenation ranks 3 (16) and 5 (28) among them; each
 // is within 17 levels of its caster, so they agree with this rule too.
 func levelPenalty(config SpellConfig, caster *Unit) float64 {
-	if config.SpellSchool == SpellSchoolPhysical || !isCastRank(config) || caster.Type == EnemyUnit || config.ScalesToCasterLevel {
+	if config.SpellSchool == SpellSchoolPhysical || !(isCastRank(config) || config.TriggeredRank) || caster.Type == EnemyUnit || config.ScalesToCasterLevel {
 		return 1
 	}
 	return LevelPenalty(config.RequiredLevel, int(caster.Level))

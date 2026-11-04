@@ -97,7 +97,8 @@ func TestDefaultRotationHealsTheFakeRaid(t *testing.T) {
 		t.Fatalf("effective HPS %.1f, want healing that landed", player.EffectiveHps.Avg)
 	}
 	overheal := 1 - player.EffectiveHps.Avg/player.Hps.Avg
-	if overheal < 0 || overheal >= maxOverheal {
+	// A fight with no overheal at all reads a hair below zero in floating point.
+	if overheal < -1e-9 || overheal >= maxOverheal {
 		t.Errorf("overheal share %.2f, want 0 to %.1f", overheal, maxOverheal)
 	}
 	for name, id := range map[string]int32{

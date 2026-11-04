@@ -1429,16 +1429,16 @@ Each spell below is built with exactly one point in the single talent that grant
 | HolyPaladin (Holy Shock talent) | 40 | Holy Shock | 0 | 1311606 | 160.00→160.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin (Holy Shock talent) | 40 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin (Holy Shock talent) | 40 | Holy Shock | 1 | 25914 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 150.11-161.89→150.11-161.89 | 0.429→0.429 | declared, matches |
-| HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 0 | 1311605 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 109.70-118.30→109.70-118.30 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 0 | 1311605 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 109.70-118.30→109.70-118.30 | 0.429 x0.8500→0.3646 | declared, matches |
 | HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 0 | 1311606 | 160.00→160.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 1 | 25914 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 150.11-161.89→150.11-161.89 | 0.429→0.429 | declared, matches |
 | HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 2 | 20929 | 275.00→275.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin (Holy Shock talent) | 50 | Holy Shock | 2 | 25913 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 48→48 | n/a | match |  | 221.28-238.72→221.28-238.72 | 0.429→0.429 | declared, matches |
-| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 0 | 1311605 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 109.70-118.30→109.70-118.30 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 0 | 1311605 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | n/a | match |  | 109.70-118.30→109.70-118.30 | 0.429 x0.3500→0.1501 | declared, matches |
 | HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 0 | 1311606 | 160.00→160.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 1 | 20473 | 225.00→225.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 40→40 | n/a | match |  | n/a | n/a | n/a |
-| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 1 | 25914 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 150.11-161.89→150.11-161.89 | 0.429→0.429 | declared, matches |
+| HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 1 | 25914 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | n/a | match |  | 150.11-161.89→150.11-161.89 | 0.429 x0.8500→0.3646 | declared, matches |
 | HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 2 | 20929 | 275.00→275.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 48→48 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 2 | 25913 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 48→48 | n/a | match |  | 221.28-238.72→221.28-238.72 | 0.429→0.429 | declared, matches |
 | HolyPaladin (Holy Shock talent) | 60 | Holy Shock | 3 | 20930 | 325.00→325.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 56→56 | n/a | match |  | n/a | n/a | n/a |

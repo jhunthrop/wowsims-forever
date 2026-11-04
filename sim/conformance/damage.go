@@ -278,7 +278,7 @@ func (c DamageComparison) expectedCoefficient() float64 {
 // physical, at the caster's level (core.LevelPenalty, Forever's level gap).
 func levelPenaltyOf(clientSpell spellconst.Spell, engine *core.Spell) float64 {
 	cast := engine.DefaultCast.GCD != 0 || engine.DefaultCast.CastTime != 0 || engine.Cost != nil
-	if !cast || engine.SpellSchool == core.SpellSchoolPhysical || engine.Unit.Type == core.EnemyUnit || engine.ScalesToCasterLevel {
+	if !(cast || engine.TriggeredRank) || engine.SpellSchool == core.SpellSchoolPhysical || engine.Unit.Type == core.EnemyUnit || engine.ScalesToCasterLevel {
 		return 1
 	}
 	return core.LevelPenalty(clientSpell.SpellLevel, int(engine.Unit.Level))
