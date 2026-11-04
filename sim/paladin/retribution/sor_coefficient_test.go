@@ -9,17 +9,14 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// sealOfRighteousnessRank8ProcID is the swing proc of Seal of Righteousness
-// rank 8 (20293), the rank a level-60 paladin casts.
-const sealOfRighteousnessRank8ProcID = 25713
-
 // sorTestWeaponID is Dal'Rend's Sacred Charge, a 2.8 s one-handed sword
 // with no proc of its own.
 const sorTestWeaponID = 12940
 
-// sorProcAverage is the average landed Seal of Righteousness swing proc of
-// an untalented level-60 paladin with a one-hander with the given spell damage.
-func sorProcAverage(t *testing.T, spellDamage float64) float64 {
+// sorProcAverage is the average landed Seal of Righteousness swing proc
+// (procID) of an untalented paladin of the given level, with a one-hander
+// and the given spell damage. The rotation casts the level's top rank.
+func sorProcAverage(t *testing.T, level int32, procID int32, spellDamage float64) float64 {
 	t.Helper()
 	bonus := stats.Stats{}
 	bonus[stats.SpellDamage] = spellDamage
@@ -27,7 +24,7 @@ func sorProcAverage(t *testing.T, spellDamage float64) float64 {
 	player := core.WithSpec(&proto.Player{
 		Class:              proto.Class_ClassPaladin,
 		Race:               proto.Race_RaceHuman,
-		Level:              60,
+		Level:              level,
 		Equipment:          &proto.EquipmentSpec{Items: []*proto.ItemSpec{{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {Id: sorTestWeaponID}}},
 		BonusStats:         bonusStats,
 		Rotation:           core.APLRotationFromJsonString(`{"type": "TypeAPL", "priorityList": [{"action": {"castPaladinPrimarySeal": {}}}]}`),
@@ -42,9 +39,9 @@ func sorProcAverage(t *testing.T, spellDamage float64) float64 {
 	if result.Error != nil {
 		t.Fatalf("sim error: %s", result.Error.Message)
 	}
-	metrics := findActionMetrics(result, sealOfRighteousnessRank8ProcID)
+	metrics := findActionMetrics(result, procID)
 	if metrics == nil {
-		t.Fatal("the Seal of Righteousness proc never landed")
+		t.Fatalf("the Seal of Righteousness proc %d never landed", procID)
 	}
 	var damage float64
 	var landed int32
@@ -55,21 +52,43 @@ func sorProcAverage(t *testing.T, spellDamage float64) float64 {
 	return damage / float64(landed)
 }
 
-// Blizzard's beta development notes (16 October 2026): "Fixed an issue
-// causing Seal of Righteousness to gain almost twice as much benefit from
-// Spell Damage than intended." The Classic port added the 0.1 coefficient
-// to the proc's base damage and let the spell add it again (0.2 in all),
-// the double benefit the fix removed. With a one-hander rank 8's base is
-// 0.85 x 0.01 x (1786 + 47 x 2) per second of swing (2.8 s here), and spell damage adds 0.1 of itself once, so the multipliers and
-// the crit rate cancel in the ratio of the two averages.
-func TestSealOfRighteousnessTakesSpellDamageOnce(t *testing.T) {
+// The 70755 client puts Seal of Righteousness's spell damage coefficient on
+// each rank's Seal aura (SpellEffect EffectBonusCoefficient, effect 0):
+// 0.1 on ranks 1 to 7 (20154/21084, 20287 to 20292), 0 on rank 8 (20293).
+// Every swing proc (25742, 25740 to 25735, 25713) carries 0 since 70425.
+// Before 70425 the procs carried 0.1 as well and the server added both,
+// which is the double benefit Blizzard's 16 October beta note fixed ("gain
+// almost twice as much benefit from Spell Damage than intended") by
+// zeroing the procs. That left rank 8, whose aura was 0 already (as in
+// Era), with nothing. Era's 0.029/0.063/0.093 on ranks 1 to 3 are gone:
+// Forever raised them to 0.1 from its first build (69893).
+//
+// With a one-hander a rank's base is 0.85 x 0.01 x (amount + per level x
+// levels) per second of swing (2.8 s here), and spell damage adds the
+// coefficient of itself once, so the multipliers and the crit rate cancel
+// in the ratio of the two averages.
+func TestSealOfRighteousnessCoefficientFollowsTheClientPerRank(t *testing.T) {
 	const spellDamage = 1000.0
-	const coefficient = 0.1
-	base := 0.85 * 0.01 * (1786 + 47*2) * 2.8
-	without := sorProcAverage(t, 0)
-	with := sorProcAverage(t, spellDamage)
-	got := (with/without - 1) * base / spellDamage
-	if math.Abs(got-coefficient) > 0.005 {
-		t.Errorf("Seal of Righteousness gains %.3f of spell damage a proc, want %.3f once", got, coefficient)
+	cases := []struct {
+		name   string
+		level  int32
+		procID int32
+		base   float64 // the rank's amount at this level
+		want   float64
+	}{
+		{"rank 3 at 25", 25, 25739, 352 + 23*6, 0.1},
+		{"rank 7 at 57", 57, 25735, 1407 + 47*6, 0.1},
+		{"rank 8 at 60", 60, 25713, 1786 + 47*2, 0},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			base := 0.85 * 0.01 * c.base * 2.8
+			without := sorProcAverage(t, c.level, c.procID, 0)
+			with := sorProcAverage(t, c.level, c.procID, spellDamage)
+			got := (with/without - 1) * base / spellDamage
+			if math.Abs(got-c.want) > 0.005 {
+				t.Errorf("Seal of Righteousness gains %.3f of spell damage a proc, want %.3f", got, c.want)
+			}
+		})
 	}
 }

@@ -38,6 +38,12 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 		coeff   float64
 	}
 
+	// coeff is the client's EffectBonusCoefficient on the rank's Seal aura
+	// (effect 0 of 20154 to 20293): 0.1 on ranks 1 to 7 (Forever raised
+	// Era's 0.029/0.063/0.093 on ranks 1 to 3) and 0 on rank 8, as in Era.
+	// The server adds the aura's and the proc's coefficients; 70425 zeroed
+	// every proc (25713 to 25742) for the 16 October fix of the double
+	// benefit, which left rank 8 with none.
 	var ranks = []struct {
 		level        int32
 		spellID      int32
@@ -46,14 +52,14 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 		proc         proc
 		judgeSpellID int32
 	}{
-		{level: 1, spellID: 20154, manaCost: 20, scaleLevel: 7, proc: proc{spellID: 25742, value: 108, scale: 18, coeff: 0.029}, judgeSpellID: 20187},
-		{level: 10, spellID: 20287, manaCost: 40, scaleLevel: 16, proc: proc{spellID: 25740, value: 216, scale: 17, coeff: 0.063}, judgeSpellID: 20280},
-		{level: 18, spellID: 20288, manaCost: 60, scaleLevel: 24, proc: proc{spellID: 25739, value: 352, scale: 23, coeff: 0.093}, judgeSpellID: 20281},
+		{level: 1, spellID: 20154, manaCost: 20, scaleLevel: 7, proc: proc{spellID: 25742, value: 108, scale: 18, coeff: 0.1}, judgeSpellID: 20187},
+		{level: 10, spellID: 20287, manaCost: 40, scaleLevel: 16, proc: proc{spellID: 25740, value: 216, scale: 17, coeff: 0.1}, judgeSpellID: 20280},
+		{level: 18, spellID: 20288, manaCost: 60, scaleLevel: 24, proc: proc{spellID: 25739, value: 352, scale: 23, coeff: 0.1}, judgeSpellID: 20281},
 		{level: 26, spellID: 20289, manaCost: 90, scaleLevel: 32, proc: proc{spellID: 25738, value: 541, scale: 31, coeff: 0.1}, judgeSpellID: 20282},
 		{level: 34, spellID: 20290, manaCost: 120, scaleLevel: 40, proc: proc{spellID: 25737, value: 785, scale: 37, coeff: 0.1}, judgeSpellID: 20283},
 		{level: 42, spellID: 20291, manaCost: 140, scaleLevel: 48, proc: proc{spellID: 25736, value: 1082, scale: 41, coeff: 0.1}, judgeSpellID: 20284},
 		{level: 50, spellID: 20292, manaCost: 170, scaleLevel: 56, proc: proc{spellID: 25735, value: 1407, scale: 47, coeff: 0.1}, judgeSpellID: 20285},
-		{level: 58, spellID: 20293, manaCost: 200, scaleLevel: 60, proc: proc{spellID: 25713, value: 1786, scale: 47, coeff: 0.1}, judgeSpellID: 20286},
+		{level: 58, spellID: 20293, manaCost: 200, scaleLevel: 60, proc: proc{spellID: 25713, value: 1786, scale: 47, coeff: 0}, judgeSpellID: 20286},
 	}
 
 	improvedSoR := paladin.improvedSoR()
