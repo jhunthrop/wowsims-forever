@@ -13,10 +13,10 @@ import (
 // of base mana, 40 energy, a 1 s global cooldown, learned at level 1, and a
 // 16 s cooldown that Improved Shifting Power (-4/8 sec) shortened.
 //
-// The 70707 hotfix removed Improved Shifting Power, and the live tooltip
-// (Wowhead's Forever tooltip for 1322605, read 2026-10-31) states an 8 sec
-// cooldown: the talent's full reduction is now the spell's own. The client
-// tables still say 16 s.
+// The 70707 hotfix removed Improved Shifting Power and folded its full
+// reduction into the spell. Since 1.60.1.70755 the client tables carry the
+// 8 s themselves: SpellCooldowns 101953 (RecoveryTime 8000, StartRecoveryTime
+// 1000) for spell 1322605, and Wowhead's Forever tooltip agrees.
 const (
 	shiftingPowerSpellID            = 1322605
 	shiftingPowerManaFractionOfBase = 0.55
