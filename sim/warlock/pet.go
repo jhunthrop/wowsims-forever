@@ -122,8 +122,11 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 
 	// Forever demons scale from the warlock (Warlock Pet Scaling 416189, the
 	// same server-computed channels as Hunter Pet Scaling 415429; see
-	// makeStatInheritance) and, like hunter pets, take no player buffs.
+	// makeStatInheritance) and, like hunter pets, take no player buffs but
+	// Heart of the Lion's area buff, the one group buff the 70755 client does
+	// not flag "can only target players" (409583, ImplicitTarget 31).
 	wp.RefusePlayerBuffs()
+	wp.TakeHeartOfTheLion()
 
 	core.ApplyPetConsumeEffects(&wp.Character, warlock.Consumes)
 
