@@ -99,7 +99,12 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 
 	// No Agility or Intellect crit of its own: a Forever pet's crit chance
 	// is the hunter's (see makeStatInheritance), and it takes no player
-	// buffs.
+	// buffs. The 70755 client flags every group buff "can only target
+	// players" (SpellMisc Attributes_3 0x100, absent in Era 1.15.9):
+	// Battle Shout, Leader of the Pack, Gift of the Wild, the Prayers,
+	// Arcane Brilliance, the Greater Blessings, Strength of Earth, Grace
+	// of Air, Moonkin Aura and Devotion Aura. That is Blizzard's "Pets can
+	// no longer receive player buffs that increase their stats".
 	hp.RefusePlayerBuffs()
 
 	core.ApplyPetConsumeEffects(&hp.Character, hunter.Consumes)
