@@ -250,7 +250,7 @@
           }
         }
       },
-      "notes": "Backstab is the builder until Mutilate whenever a dagger is in your main hand: from behind it hits far harder than Sinister Strike."
+      "notes": "Backstab from behind with a dagger in your main hand is the builder until Mutilate: it hits far harder than Sinister Strike."
     },
     {
       "action": {
@@ -304,7 +304,7 @@
           }
         }
       },
-      "notes": "Sinister Strike before Mutilate only when Backstab cannot be cast (no dagger in the main hand), held to 60 energy so a dagger rogue never spends Backstab's energy here."
+      "notes": "Sinister Strike before Mutilate only when Backstab cannot be cast: no dagger in the main hand, or the target is facing you. With a dagger it waits for 60 energy or more, so it never takes the energy Backstab needs."
     }
   ]
 }
