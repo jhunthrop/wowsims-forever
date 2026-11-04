@@ -12,7 +12,7 @@
       },
       "doAtValue": {
         "const": {
-          "val": "-2.5s"
+          "val": "-3s"
         }
       }
     },
@@ -31,7 +31,7 @@
       },
       "doAtValue": {
         "const": {
-          "val": "-1s"
+          "val": "-1.5s"
         }
       }
     }
@@ -83,7 +83,7 @@
           }
         }
       },
-      "notes": "Dark Sacrifice when the mana bar has room and you are not hurt. It trades your own health for mana over fifteen seconds and adds your Spirit to the mana, and its ten minute cooldown makes it a once-a-fight cast."
+      "notes": "Dark Sacrifice, Undead only, once you are under 70% mana and still healthy: it turns your own health into mana over 15 seconds, plus your Spirit, and its 10 minute cooldown makes it once a fight."
     },
     {
       "action": {
@@ -116,7 +116,7 @@
           }
         }
       },
-      "notes": "Penance on its 12 second cooldown: three pulses for the price of one cast and the best healing per mana the Discipline kit has."
+      "notes": "Penance on cooldown, on whoever is hurt: three heals one second apart for one cast every 12 seconds, your best heal per mana."
     },
     {
       "action": {
@@ -320,7 +320,7 @@
           }
         }
       },
-      "notes": "On a hurt tank whenever Weakened Soul is off him. Soul Warding makes it free of cooldown and 15% cheaper. Rank 4 is the rank this profile pays for: it costs about a third of the top rank's mana and returned more guarded score. Renewed Hope also turns the Weakened Soul into extra crit chance and Divine Aegis for the heals that follow."
+      "notes": "On the tank at the top rank whenever Weakened Soul is off him: it soaks the next hit and costs a warrior no rage, and the Weakened Soul it leaves turns on Renewed Hope, so the heals that follow crit more and leave Divine Aegis shields."
     },
     {
       "action": {
@@ -351,7 +351,7 @@
           }
         }
       },
-      "notes": "Renew stays on the tank for the whole fight at a cheap rank: a cheaper rank returns more health per mana for the spell power it is cast with, and the dearer ranks cost the mana the fight runs out of. Below 60, the rank each band casts is chosen on that band's own fight, sized to the dungeons a group of its level runs."
+      "notes": "Keep Renew rank 7 or higher on the tank all fight."
     },
     {
       "action": {
@@ -384,10 +384,10 @@
           }
         }
       },
-      "notes": "Flash Heal is the fast heal and the dear one: it is only for a tank that is genuinely low."
+      "notes": "Flash Heal at the top rank on a tank who is really low: the fast heal, and the dear one."
     },
     {
-      "notes": "An emergency Flash Heal on a party member, only while the mana bar keeps up with 70 percent of the share of the fight left.",
+      "notes": "Flash Heal on a party member about to die, as long as your mana is not far behind the fight.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -909,7 +909,7 @@
           }
         }
       },
-      "notes": "Prayer of Healing on a party member once three of the four are under 85%. It heals the healer's whole party. It is cast at rank 4, the top rank a trainer teaches (rank 5 is an Ahn'Qiraj book)."
+      "notes": "Prayer of Healing once three of your four party members are under 85%: it heals the target and the target's whole party. Rank 4 is the top rank a trainer teaches."
     },
     {
       "action": {
@@ -969,7 +969,85 @@
           }
         }
       },
-      "notes": "Greater Heal is the tank's filler: the tank takes the big hits, and the bigger heal lands where they are."
+      "notes": "Greater Heal as the tank's filler: he takes the big hits, so the big heal goes on him."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6064,
+            "rank": 4
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "math": {
+                            "op": "OpMul",
+                            "lhs": {
+                              "remainingTimePercent": {}
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "0.9"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentHealthPercent": {
+                            "sourceUnit": {
+                              "type": "Player",
+                              "index": 5
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.8"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "spellIsKnown": {
+                      "spellId": {
+                        "spellId": 2060,
+                        "rank": 1
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Heal as the tank's filler before you learn Greater Heal at 40: he takes the big hits, and it is the biggest heal you have."
     },
     {
       "action": {
@@ -1028,7 +1106,8 @@
             ]
           }
         }
-      }
+      },
+      "notes": "Greater Heal rank 1 on a party member who is missing a third of their health: it keeps most of your healing bonus for far less mana than the top rank."
     },
     {
       "action": {
@@ -1087,7 +1166,8 @@
             ]
           }
         }
-      }
+      },
+      "notes": "Lesser Heal when Greater Heal rank 1 would overheal: a small top-up for little mana."
     },
     {
       "action": {
@@ -1474,7 +1554,57 @@
           }
         }
       },
-      "notes": "Greater Heal is the tank's filler: the tank takes the big hits, and the bigger heal lands where they are."
+      "notes": "Greater Heal as the tank's filler: he takes the big hits, so the big heal goes on him."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 6064,
+            "rank": 4
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.5"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "spellIsKnown": {
+                      "spellId": {
+                        "spellId": 2060,
+                        "rank": 1
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
     },
     {
       "action": {

@@ -16,9 +16,13 @@ import (
 func TestInnerFireDoesNotCutIntoThePrepullCasts(t *testing.T) {
 	for _, c := range []struct {
 		file, talents string
+		// lightwellDone is when the pre-pull Lightwell (1.5 s) completes:
+		// Holy casts it at -2.5 s; Discipline at -3 s, so its Renew at
+		// -1.5 s finishes its global by the pull.
+		lightwellDone time.Duration
 	}{
-		{"forever_holy", HolyTalents},
-		{"forever_discipline", DiscTalents},
+		{"forever_holy", HolyTalents, -time.Second},
+		{"forever_discipline", DiscTalents, -1500 * time.Millisecond},
 	} {
 		player := healer(60, c.talents, &proto.HealingPriest_Options{UseInnerFire: true}, loadRotation(t, c.file))
 		sim, agent := agentSim(t, player)
@@ -28,8 +32,8 @@ func TestInnerFireDoesNotCutIntoThePrepullCasts(t *testing.T) {
 		if lightwell == nil {
 			t.Fatalf("%s: no Lightwell rank 3", c.file)
 		}
-		if got := lightwell.LastCastAt; got != -time.Second {
-			t.Errorf("%s: the pre-pull Lightwell completed at %v, want -1s (cast at -2.5s, 1.5s)", c.file, got)
+		if got := lightwell.LastCastAt; got != c.lightwellDone {
+			t.Errorf("%s: the pre-pull Lightwell completed at %v, want %v", c.file, got, c.lightwellDone)
 		}
 		if aura := agent.GetAura("Inner Fire (Rank 6)"); aura == nil || !aura.IsActive() {
 			t.Errorf("%s: Inner Fire is not up at the pull", c.file)
