@@ -864,13 +864,21 @@ func (shaman *Shaman) applyMaelstromWeapon() {
 	})
 	shaman.MaelstromWeaponAura = maelstromAura
 
-	// The trigger carries the talent's rank as its ActionID tag (the stacking
-	// buff keeps the bare id), so a rotation can tell a partial Maelstrom
-	// Weapon, whose five-stack Lightning Bolt still costs mana, from 5/5
-	// with auraIsKnown, as mage reads Missile Barrage's rank.
-	core.MakePermanent(shaman.RegisterAura(core.Aura{
-		Label:    "Maelstrom Weapon Trigger",
+	// A dormant marker carries the talent's rank as its ActionID tag (the
+	// stacking buff keeps the bare id), so a rotation can tell a partial
+	// Maelstrom Weapon, whose five-stack Lightning Bolt still costs mana,
+	// from 5/5 with auraIsKnown, as mage reads Missile Barrage's rank. It is
+	// never activated: auraIsKnown only asks whether the aura is registered,
+	// and a tagged permanent trigger would print a 100%-uptime "Maelstrom
+	// Weapon" line in the aura metrics (sim-accuracy round 20).
+	shaman.RegisterAura(core.Aura{
+		Label:    "Maelstrom Weapon Rank",
 		ActionID: core.ActionID{SpellID: maelstromWeaponDisplaySpellId}.WithTag(shaman.Talents.MaelstromWeapon),
+		Duration: core.NeverExpires,
+	})
+
+	core.MakePermanent(shaman.RegisterAura(core.Aura{
+		Label: "Maelstrom Weapon Trigger",
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			chance := shaman.maelstromWeaponChance(spell)
 			if chance == 0 || result.Damage <= 0 {
