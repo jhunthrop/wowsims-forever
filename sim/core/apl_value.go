@@ -83,6 +83,8 @@ func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
 	// Encounter
 	case *proto.APLValue_CurrentTime:
 		return rot.newValueCurrentTime(config.GetCurrentTime())
+	case *proto.APLValue_CurrentLevel:
+		return rot.newValueCurrentLevel(config.GetCurrentLevel())
 	case *proto.APLValue_CurrentTimePercent:
 		return rot.newValueCurrentTimePercent(config.GetCurrentTimePercent())
 	case *proto.APLValue_RemainingTime:

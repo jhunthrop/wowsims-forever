@@ -82,7 +82,7 @@ message APLAction {
     }
 }
 
-// NextIndex: 78
+// NextIndex: 79
 message APLValue {
     oneof value {
         // Operators
@@ -99,6 +99,8 @@ message APLValue {
         APLValueCurrentTime current_time = 7;
         APLValueCurrentTimePercent current_time_percent = 8;
         APLValueRemainingTime remaining_time = 9;
+        // The character's level: scopes a line to a level range (currentLevel >= 40 and < 60).
+        APLValueCurrentLevel current_level = 78;
         APLValueRemainingTimePercent remaining_time_percent = 10;
         APLValueIsExecutePhase is_execute_phase = 41;
         APLValueNumberTargets number_targets = 28;
@@ -361,6 +363,7 @@ message APLValueMin {
 message APLValueCurrentTime {}
 message APLValueCurrentTimePercent {}
 message APLValueRemainingTime {}
+message APLValueCurrentLevel {}
 message APLValueRemainingTimePercent {}
 message APLValueNumberTargets {}
 message APLValueIsExecutePhase {

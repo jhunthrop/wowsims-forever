@@ -42,3 +42,17 @@ func TestValueConst(t *testing.T) {
 		t.Fatalf("Unexpected coerced duration value %s", coercedDurVal.GetDuration(sim))
 	}
 }
+
+// Round 19 (priest lane): a rotation line can be scoped to a level range with
+// the character's level, e.g. currentLevel >= 40 and < 60.
+func TestValueCurrentLevelReadsTheCharactersLevel(t *testing.T) {
+	sim := &Simulation{}
+	rot := &APLRotation{unit: &Unit{Level: 45}}
+	value := rot.newValueCurrentLevel(&proto.APLValueCurrentLevel{})
+	if value.Type() != proto.APLValueType_ValueTypeInt {
+		t.Fatalf("type = %v, want int", value.Type())
+	}
+	if got := value.GetInt(sim); got != 45 {
+		t.Fatalf("currentLevel = %d, want 45", got)
+	}
+}
