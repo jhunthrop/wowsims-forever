@@ -29,7 +29,7 @@ func (warrior *Warrior) applyDeepWounds() {
 			Aura: core.Aura{
 				Label: "Deep Wounds",
 			},
-			NumberOfTicks: 4,
+			NumberOfTicks: deepWoundsTicks,
 			TickLength:    time.Second * 3,
 
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
@@ -40,7 +40,17 @@ func (warrior *Warrior) applyDeepWounds() {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.Dot(target).Apply(sim) //Resets the tick counter with Apply vs ApplyorRefresh
+			// A refresh keeps the running tick timer (forever-bugs #234);
+			// procDeepWounds has already rolled the damage over.
+			dot := spell.Dot(target)
+			if dot.IsActive() {
+				// Four ticks again on the running timer, the bleed ending
+				// on its last one.
+				dot.ApplyOrRefresh(sim)
+				dot.Aura.UpdateExpires(sim, dot.NextTickAt()+dot.TickPeriod()*time.Duration(deepWoundsTicks-1))
+			} else {
+				dot.Apply(sim)
+			}
 			spell.CalcAndDealOutcome(sim, target, spell.OutcomeAlwaysHitNoHitCounter)
 		},
 	})
@@ -64,24 +74,50 @@ func (warrior *Warrior) applyDeepWounds() {
 	}))
 }
 
+// deepWoundsTicks is the bleed's four 3 s ticks ("over 12 sec").
+const deepWoundsTicks = 4
+
+// procDeepWounds starts or rolls the bleed after a crit. Blizzard on
+// forever-bugs #234 (2026-10-05), describing Forever's Deep Wounds against
+// vanilla's: it "Rolls over its damage when refreshed", "Doesn't reset its
+// tick timer when it is refreshed" and "Doesn't scale with Attack Power"
+// ("it scales with your weapon damage and not with your Attack Power at
+// all"). The engine used to read the average weapon damage with attack
+// power in it, replace the running bleed and restart its ticks.
 func (warrior *Warrior) procDeepWounds(sim *core.Simulation, target *core.Unit, isOh bool) {
 	dot := warrior.DeepWounds.Dot(target)
 
-	var awd float64
+	weapon, castType, auto := warrior.AutoAttacks.MH(), proto.CastType_CastTypeMainHand, warrior.AutoAttacks.MHAuto()
 	if isOh {
-		attackTableOh := warrior.AttackTables[target.UnitIndex][proto.CastType_CastTypeOffHand]
-		adm := warrior.AutoAttacks.OHAuto().AttackerDamageMultiplier(attackTableOh, true)
-		awd = warrior.AutoAttacks.OH().CalculateAverageWeaponDamage(dot.Spell.MeleeAttackPower(target)) * 0.5 * adm
-	} else { // MH
-		attackTableMh := warrior.AttackTables[target.UnitIndex][proto.CastType_CastTypeMainHand]
-		adm := warrior.AutoAttacks.MHAuto().AttackerDamageMultiplier(attackTableMh, true)
-		awd = warrior.AutoAttacks.MH().CalculateAverageWeaponDamage(dot.Spell.MeleeAttackPower(target)) * adm
+		weapon, castType, auto = warrior.AutoAttacks.OH(), proto.CastType_CastTypeOffHand, warrior.AutoAttacks.OHAuto()
 	}
+	adm := auto.AttackerDamageMultiplier(warrior.AttackTables[target.UnitIndex][castType], true)
+	newDamage := deepWoundsTotal(weapon, isOh, warrior.Talents.DeepWounds) * adm
 
-	newDamage := awd * 0.2 * float64(warrior.Talents.DeepWounds) // 60% of average attackers damage
-
-	dot.SnapshotBaseDamage = newDamage / 4.0 // spread over 4 ticks of the dot
+	var tickDamage float64
+	var ticksRemaining int32
+	if dot.IsActive() {
+		tickDamage, ticksRemaining = dot.SnapshotBaseDamage, dot.MaxTicksRemaining()
+	}
+	dot.SnapshotBaseDamage = deepWoundsRolledTick(tickDamage, ticksRemaining, newDamage)
 	dot.SnapshotAttackerMultiplier = 1
 
 	warrior.DeepWounds.Cast(sim, target)
+}
+
+// deepWoundsTotal is the bleed one crit adds before the attacker
+// multiplier: 20% a point of the hand's average weapon damage, the off
+// hand at half, and no attack power (forever-bugs #234).
+func deepWoundsTotal(weapon *core.Weapon, offHand bool, points int32) float64 {
+	total := weapon.AverageDamage() * 0.2 * float64(points)
+	if offHand {
+		total *= 0.5
+	}
+	return total
+}
+
+// deepWoundsRolledTick is the tick after a crit: what the running bleed
+// has left plus the new bleed, over four ticks again.
+func deepWoundsRolledTick(tickDamage float64, ticksRemaining int32, newTotal float64) float64 {
+	return (tickDamage*float64(ticksRemaining) + newTotal) / deepWoundsTicks
 }
