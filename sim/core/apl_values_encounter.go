@@ -24,6 +24,26 @@ func (value *APLValueCurrentTime) String() string {
 	return "Current Time"
 }
 
+// APLValueCurrentLevel is the character's level, so a line can be scoped to a
+// level range (a downranked heal that applies only from 40 to 59).
+type APLValueCurrentLevel struct {
+	DefaultAPLValueImpl
+	level int32
+}
+
+func (rot *APLRotation) newValueCurrentLevel(_ *proto.APLValueCurrentLevel) APLValue {
+	return &APLValueCurrentLevel{level: rot.unit.Level}
+}
+func (value *APLValueCurrentLevel) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeInt
+}
+func (value *APLValueCurrentLevel) GetInt(_ *Simulation) int32 {
+	return value.level
+}
+func (value *APLValueCurrentLevel) String() string {
+	return fmt.Sprintf("Current Level(%d)", value.level)
+}
+
 type APLValueCurrentTimePercent struct {
 	DefaultAPLValueImpl
 }
