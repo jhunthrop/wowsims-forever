@@ -1,6 +1,9 @@
 package core
 
-import "github.com/wowsims/classic/sim/core/proto"
+import (
+	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/core/stats"
+)
 
 // base_stats_auto_gen.go is generated from the three GameTables files the
 // data lane has confirmed exist on the Classic lineage for build
@@ -47,8 +50,8 @@ import "github.com/wowsims/classic/sim/core/proto"
 // unconfirmed.
 var provisionalConstantNames = []string{
 	"ClassBaseStats (Str/Agi/Sta/Int/Spirit/Health/AttackPower fields) and RaceOffsets", // unconfirmed: no basestats table exists for build 1.60.1.69893; values are still Era's
-	"BaseStats[RaceHighOrderSkyborne]",                                                  // unconfirmed: Skyborne base stats are not in any mined table; cloned from Human
-	"BaseStats[RaceWindshaperSkyborne]",                                                 // unconfirmed: Skyborne base stats are not in any mined table; cloned from Orc
+	"BaseStats[RaceHighOrderSkyborne]",                                                  // unconfirmed: the beta character sheet; the launch build gives each Skyborne variant its own offsets, not yet read
+	"BaseStats[RaceWindshaperSkyborne]",                                                 // unconfirmed: the beta character sheet; the launch build gives each Skyborne variant its own offsets, not yet read
 }
 
 // ProvisionalConstants returns the names of every constant still carrying
@@ -65,24 +68,37 @@ func ProvisionalConstants() []string {
 	return out
 }
 
-// Skyborne base stats are not in any mined table (see the package comment
-// above). RaceHighOrderSkyborne clones the Human row and
-// RaceWindshaperSkyborne clones the Orc row, purely because those are the
-// two factions' baseline and nothing better is known. Cloning here -
-// rather than hand-typing numbers - means the day a real table lands,
-// TestSkyborneBaseStatsAreDeclaredClones fails and the diff is obvious.
+// Skyborne base stats are in no client table: ChrRaces 1.60.1.70755 has
+// no stat columns, RaceStat carries one zero column for every race, and
+// no ChrClassRaceSex table ships (checked on wago.tools for 70755 and
+// 70790, 2026-11-04). The only measured Forever value is the beta
+// character sheet: a naked level-1 Skyborne reads Human -1 Strength,
+// +1 Agility, -1 Stamina, +1 Intellect and +0 Spirit, for both variants
+// (ClassicWoWCommunity/forever-bugs #414, 2026-10-20, naked level-1
+// sheets; Warcraft Tavern's Skyborne guide prints the same sheet for all
+// six classes). Blizzard's reply on #414 says the launch build gives each
+// variant its own, larger offsets "following the same rules as the
+// original stat offsets", which nobody has published: until a launch
+// sheet is read, both variants carry the beta row and stay in
+// ProvisionalConstants. Before round 20 High Order cloned Human and
+// Windshaper cloned Orc, which no source ever supported.
 //
-// This only clones RaceOffsets, the map getBaseStatsCombo actually reads
+// This only fills RaceOffsets, the map getBaseStatsCombo actually reads
 // (character.go:153). It does not also populate the BaseStats[race,
 // class, level] map declared in base_stats.go: that map is unread by any
-// runtime path in this fork, and standing ruling (Task 9) is that no
-// production behaviour - including a package init() - exists purely to
-// give a test something to compare. TestSkyborneBaseStatsAreDeclaredClones
-// asserts the clone directly against RaceOffsets and getBaseStatsCombo
-// instead.
+// runtime path in this fork. TestSkyborneBaseStatsFollowTheBetaCharacterSheet
+// pins the row and refuses a Human or Orc clone.
+var skyborneBetaSheetOffsets = stats.Stats{
+	stats.Strength:  -1,
+	stats.Agility:   1,
+	stats.Stamina:   -1,
+	stats.Intellect: 1,
+	stats.Spirit:    0,
+}
+
 func init() {
 	// RaceOffsets is declared in base_stats.go; this file only adds
 	// entries to it, it does not redefine the map.
-	RaceOffsets[proto.Race_RaceHighOrderSkyborne] = RaceOffsets[proto.Race_RaceHuman] // unconfirmed: cloned from Human
-	RaceOffsets[proto.Race_RaceWindshaperSkyborne] = RaceOffsets[proto.Race_RaceOrc]  // unconfirmed: cloned from Orc
+	RaceOffsets[proto.Race_RaceHighOrderSkyborne] = skyborneBetaSheetOffsets  // unconfirmed: beta sheet; launch offsets per variant not yet read
+	RaceOffsets[proto.Race_RaceWindshaperSkyborne] = skyborneBetaSheetOffsets // unconfirmed: beta sheet; launch offsets per variant not yet read
 }
