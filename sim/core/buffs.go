@@ -436,7 +436,14 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 func applyPetBuffEffects(petAgent PetAgent, playerFaction proto.Faction, raidBuffs *proto.RaidBuffs, partyBuffs *proto.PartyBuffs, individualBuffs *proto.IndividualBuffs) {
 	// Summoned pets, like Mage Water Elemental, aren't around to receive raid buffs.
 	// Also assume that applicable world buffs are applied to the starting pet only
-	if petAgent.GetPet().IsGuardian() || !petAgent.GetPet().enabledOnStart || petAgent.GetPet().refusesPlayerBuffs {
+	pet := petAgent.GetPet()
+	if pet.IsGuardian() || !pet.enabledOnStart {
+		return
+	}
+	if pet.refusesPlayerBuffs {
+		if pet.takesHeartOfTheLion && raidBuffs.HeartOfTheLion {
+			HeartOfTheLionAreaAura(&pet.Unit)
+		}
 		return
 	}
 

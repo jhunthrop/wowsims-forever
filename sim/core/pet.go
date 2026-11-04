@@ -41,6 +41,10 @@ type Pet struct {
 	// Forever hunter pets take their stats from the hunter instead.
 	refusesPlayerBuffs bool
 
+	// takesHeartOfTheLion lets a pet that refuses player buffs still take
+	// Heart of the Lion's area buff (see TakeHeartOfTheLion).
+	takesHeartOfTheLion bool
+
 	OnPetEnable  OnPetEnable
 	OnPetDisable OnPetDisable
 
@@ -138,6 +142,15 @@ func (pet *Pet) IsGuardian() bool {
 // RefusePlayerBuffs stops the raid's player buffs from reaching this pet.
 func (pet *Pet) RefusePlayerBuffs() {
 	pet.refusesPlayerBuffs = true
+}
+
+// TakeHeartOfTheLion lets Heart of the Lion's area buff (409583) through a
+// RefusePlayerBuffs pet. The 70755 client keeps group buffs off pets by
+// flagging each one "can only target players" (SpellMisc Attributes_3
+// 0x100); 409583 has no such flag and targets every nearby ally
+// (ImplicitTarget 31), so a Forever pet in its area takes it.
+func (pet *Pet) TakeHeartOfTheLion() {
+	pet.takesHeartOfTheLion = true
 }
 
 // petAgent should be the PetAgent which embeds this Pet.

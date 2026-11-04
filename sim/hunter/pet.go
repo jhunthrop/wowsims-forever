@@ -106,6 +106,10 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 	// of Air, Moonkin Aura and Devotion Aura. That is Blizzard's "Pets can
 	// no longer receive player buffs that increase their stats".
 	hp.RefusePlayerBuffs()
+	// Heart of the Lion's area buff carries no such flag and reaches every
+	// nearby ally, the hunter's own pet included (as Trueshot Aura, also
+	// unflagged, lands on pets in the beta combat logs).
+	hp.TakeHeartOfTheLion()
 
 	core.ApplyPetConsumeEffects(&hp.Character, hunter.Consumes)
 
