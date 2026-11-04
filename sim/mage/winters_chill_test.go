@@ -129,7 +129,7 @@ func TestWintersChillDebuffCarriesTheClientSpellID(t *testing.T) {
 }
 
 // Winter's Chill's 7% a stack is spell power the Cone of Cold cast gains,
-// so a low rank keeps only its level-gap share of it (core.LevelPenalty),
+// so a low rank keeps only its level-gap share of it (core.SpellLevelPenalty),
 // the way the rank's own coefficient does. Rank 1 is learned at 26: at 60
 // it keeps 15%.
 func TestWintersChillCoefficientTakesTheRankLevelPenalty(t *testing.T) {
@@ -137,7 +137,7 @@ func TestWintersChillCoefficientTakesTheRankLevelPenalty(t *testing.T) {
 	stacks := float64(core.WintersChillMaxStacks)
 	for _, rank := range []int{1, ConeOfColdRanks} {
 		cone := mage.ConeOfCold[rank]
-		penalty := core.LevelPenalty(ConeOfColdLevel[rank], 60)
+		penalty := core.SpellLevelPenalty(ConeOfColdSpellId[rank], ConeOfColdLevel[rank], 60)
 		want := wintersChillConeOfColdCoefficientPerStack * stacks * penalty
 		if got := mage.wintersChillConeOfColdCoefficient(cone, stacks); math.Abs(got-want) > 1e-9 {
 			t.Errorf("rank %d (learned %d): Winter's Chill adds coefficient %.4f, want %.4f (x%.2f level penalty)", rank, ConeOfColdLevel[rank], got, want, penalty)
