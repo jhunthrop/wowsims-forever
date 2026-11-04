@@ -57,8 +57,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1329549,
-            "rank": 2
+            "spellId": 1329549
           }
         }
       }
@@ -339,7 +338,7 @@
           }
         }
       },
-      "notes": "Hemorrhage is the builder: one combo point, and its debuff makes your Rupture hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more."
+      "notes": "Hemorrhage is the builder: one combo point, and its debuff makes your Rupture and Garrote hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more."
     },
     {
       "action": {

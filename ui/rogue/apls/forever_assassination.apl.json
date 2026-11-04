@@ -43,8 +43,7 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1329549,
-            "rank": 2
+            "spellId": 1329549
           }
         }
       }
@@ -167,7 +166,7 @@
         "castSpell": {
           "spellId": {
             "spellId": 1241584,
-            "rank": 4
+            "rank": 3
           }
         }
       },
@@ -187,7 +186,7 @@
               "spellIsKnown": {
                 "spellId": {
                   "spellId": 1241584,
-                  "rank": 4
+                  "rank": 3
                 }
               }
             }
