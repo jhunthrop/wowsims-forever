@@ -28,6 +28,7 @@ import {
 	APLValueCurrentManaPercent,
 	APLValueCurrentRage,
 	APLValueCurrentSealRemainingTime,
+	APLValueCurrentLevel,
 	APLValueCurrentTime,
 	APLValueCurrentTimePercent,
 	APLValueDotIsActive,
@@ -553,6 +554,13 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		submenu: ['Encounter'],
 		shortDescription: 'Elapsed time of the current sim iteration.',
 		newValue: APLValueCurrentTime.create,
+		fields: [],
+	}),
+	currentLevel: inputBuilder({
+		label: 'Character Level',
+		submenu: ['Encounter'],
+		shortDescription: "The character's level, to scope a line to a level range (for example level >= 40 and < 60).",
+		newValue: APLValueCurrentLevel.create,
 		fields: [],
 	}),
 	currentTimePercent: inputBuilder({

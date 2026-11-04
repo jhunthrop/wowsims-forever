@@ -73,7 +73,7 @@
       }
     },
     {
-      "notes": "At the pull only if a second one fits before the boss dies. Otherwise hold it for the execute phase, or for the last 30 seconds when that phase is short.",
+      "notes": "At the pull when a second one still fits before the boss dies, otherwise in the execute phase, or in the last 30 seconds when that phase is short.",
       "action": {
         "condition": {
           "or": {
