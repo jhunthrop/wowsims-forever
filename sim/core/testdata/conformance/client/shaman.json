@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70755",
+  "build": "1.60.1.70790",
   "class_slug": "shaman",
   "family": 11,
   "spells": {
@@ -279,13 +279,13 @@
           "effect": 2,
           "aura": 0,
           "amount": 215,
-          "sp_coefficient": 0.71399998664856,
+          "sp_coefficient": 0.71399998665,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.1274509877,
-          "points_per_level": 1.3999999761581
+          "points_per_level": 1.39999997616
         }
       ],
       "cost_pct": 0.0,
@@ -567,13 +567,13 @@
           "effect": 2,
           "aura": 0,
           "amount": 348,
-          "sp_coefficient": 0.71399998664856,
+          "sp_coefficient": 0.71399998665,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.115646258,
-          "points_per_level": 2.2000000476837
+          "points_per_level": 2.20000004768
         }
       ],
       "cost_pct": 0.0,
@@ -645,7 +645,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.13432836533,
-          "points_per_level": 0.69999998807907
+          "points_per_level": 0.69999998808
         }
       ],
       "cost_pct": 0.0,
@@ -953,13 +953,13 @@
           "effect": 2,
           "aura": 0,
           "amount": 428,
-          "sp_coefficient": 0.71399998664856,
+          "sp_coefficient": 0.71399998665,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.11471320689,
-          "points_per_level": 2.7000000476837
+          "points_per_level": 2.70000004768
         }
       ],
       "cost_pct": 0.0,
@@ -5296,7 +5296,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.05273069814,
-          "points_per_level": 3.4000000953674
+          "points_per_level": 3.40000009537
         },
         {
           "index": 1,
@@ -7495,13 +7495,13 @@
           "effect": 2,
           "aura": 0,
           "amount": 510,
-          "sp_coefficient": 0.71399998664856,
+          "sp_coefficient": 0.71399998665,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.11111111194,
-          "points_per_level": 3.2999999523163
+          "points_per_level": 3.29999995232
         }
       ],
       "cost_pct": 0.0,
@@ -8286,7 +8286,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.11413043737,
-          "points_per_level": 1.6000000238419
+          "points_per_level": 1.60000002384
         }
       ],
       "cost_pct": 0.0,
@@ -8322,7 +8322,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.10835214704,
-          "points_per_level": 2.0999999046326
+          "points_per_level": 2.09999990463
         }
       ],
       "cost_pct": 0.0,
@@ -14333,7 +14333,7 @@
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
-          "points_per_level": 3.7999999523163
+          "points_per_level": 3.79999995232
         },
         {
           "index": 1,
