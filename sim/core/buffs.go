@@ -461,42 +461,21 @@ func SanctityAuraAura(character *Character) *Aura {
 	})
 }
 
+// BlessingOfKingsAura is +10% to every stat (20217 and Greater Blessing of
+// Kings 25898). It shares one exclusive category with Heart of the Lion's
+// area stats (kingsAndLionStatsCategory): the two are the same aura and
+// amount and do not stack (the Season of Discovery spell Forever ships;
+// Blizzard forums t/1738967, 2023-12-11, and Game Rant's SoD rune ranking).
 func BlessingOfKingsAura(character *Character) *Aura {
-	statDeps := []*stats.StatDependency{
-		character.NewDynamicMultiplyStat(stats.Stamina, 1.10),
-		character.NewDynamicMultiplyStat(stats.Agility, 1.10),
-		character.NewDynamicMultiplyStat(stats.Strength, 1.10),
-		character.NewDynamicMultiplyStat(stats.Intellect, 1.10),
-		character.NewDynamicMultiplyStat(stats.Spirit, 1.10),
-	}
-
-	return MakePermanent(character.RegisterAura(Aura{
-		Label:      "Blessing of Kings",
-		ActionID:   ActionID{SpellID: 20217},
-		BuildPhase: CharacterBuildPhaseBuffs,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			if aura.Unit.Env.MeasuringStats && aura.Unit.Env.State != Finalized {
-				for _, dep := range statDeps {
-					aura.Unit.StatDependencyManager.EnableDynamicStatDep(dep)
-				}
-			} else {
-				for _, dep := range statDeps {
-					aura.Unit.EnableDynamicStatDep(sim, dep)
-				}
-			}
-		},
-		OnExpire: func(aura *Aura, sim *Simulation) {
-			if aura.Unit.Env.MeasuringStats && aura.Unit.Env.State != Finalized {
-				for _, dep := range statDeps {
-					aura.Unit.StatDependencyManager.DisableDynamicStatDep(dep)
-				}
-			} else {
-				for _, dep := range statDeps {
-					aura.Unit.DisableDynamicStatDep(sim, dep)
-				}
-			}
-		},
+	aura := MakePermanent(character.RegisterAura(Aura{
+		Label:    "Blessing of Kings",
+		ActionID: ActionID{SpellID: 20217},
 	}))
+	makeExclusiveBuff(aura, BuffConfig{
+		Category: kingsAndLionStatsCategory,
+		Stats:    HeartOfTheLionStatConfigs(),
+	})
+	return aura
 }
 
 // TODO: Classic
@@ -1441,6 +1420,10 @@ const (
 	heartOfTheLionSelfCategory = "HeartOfTheLionSelf"
 	heartOfTheLionAreaLabel    = "Heart of the Lion (allies)"
 	heartOfTheLionAreaCategory = "HeartOfTheLion"
+
+	// kingsAndLionStatsCategory holds the +10% to every stat that Blessing
+	// of Kings and Heart of the Lion's area buff both grant; one applies.
+	kingsAndLionStatsCategory = "KingsAndLionStats"
 )
 
 // HeartOfTheLionStatConfigs is a percentage stat modifier on all five base
@@ -1499,10 +1482,15 @@ func HeartOfTheLionAreaAura(unit *Unit) *Aura {
 
 	makeExclusiveBuff(aura, BuffConfig{
 		Category: heartOfTheLionAreaCategory,
-		Stats: append(HeartOfTheLionStatConfigs(),
-			StatConfig{stats.AttackPower, attackPower, false},
-			StatConfig{stats.RangedAttackPower, attackPower, false},
-		),
+		Stats: []StatConfig{
+			{stats.AttackPower, attackPower, false},
+			{stats.RangedAttackPower, attackPower, false},
+		},
+	})
+	// The stats half does not stack with Blessing of Kings.
+	makeExclusiveBuff(aura, BuffConfig{
+		Category: kingsAndLionStatsCategory,
+		Stats:    HeartOfTheLionStatConfigs(),
 	})
 
 	return aura
