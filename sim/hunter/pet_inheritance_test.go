@@ -6,6 +6,7 @@ import (
 
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/core/simsignals"
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
@@ -36,17 +37,62 @@ func newLevel60HunterWithFullBuffs(t *testing.T) *Hunter {
 
 // Forever reworked hunter pets: they "can no longer receive player buffs
 // that boost their stats" (Blizzard's hunter deep dive, 2026-09-30). The
-// pet's stat sheet before it inherits anything is its own base: Strength
-// 136, Agility 100, and 136 x 2 - 20 = 252 attack power.
-func TestHunterPetReceivesNoPlayerBuffs(t *testing.T) {
-	pet := newLevel60HunterWithFullBuffs(t).pet
-	got := pet.GetStats()
-	if got[stats.Strength] != 136 || got[stats.Agility] != 100 {
-		t.Errorf("pet Strength/Agility = %.1f/%.1f, want the unbuffed 136/100", got[stats.Strength], got[stats.Agility])
+// 70755 client does it by flagging every group buff "can only target
+// players" (SpellMisc Attributes_3 0x100), so none of them reaches the pet.
+// Heart of the Lion's area buff (409583) carries no such flag and targets
+// every nearby ally (ImplicitTarget 31), so the hunter's own pet takes it:
+// +10% to every stat and 40 + 4 a level attack power (280 at 60). The
+// pet's base is Strength 136 and Agility 100; with the buff that is 149.6
+// and 110, and 149.6 x 2 - 20 + 280 = 559.2 attack power before the 10%
+// of the hunter's attack power it inherits.
+func TestHunterPetReceivesOnlyHeartOfTheLionFromPlayerBuffs(t *testing.T) {
+	player := core.WithSpec(
+		&proto.Player{
+			Class:              proto.Class_ClassHunter,
+			Race:               proto.Race_RaceOrc,
+			Level:              60,
+			Equipment:          &proto.EquipmentSpec{},
+			Buffs:              core.FullBuffs.Player,
+			DistanceFromTarget: 25,
+		},
+		P1PlayerOptions,
+	)
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
+	sim := core.NewSim(&proto.RaidSimRequest{
+		Raid:       raid,
+		Encounter:  &proto.Encounter{Duration: 60, Targets: []*proto.Target{core.NewDefaultTarget()}},
+		SimOptions: &proto.SimOptions{Iterations: 1, RandomSeed: 1, IsTest: true},
+	}, simsignals.CreateSignals())
+	sim.Reset()
+	sim.PrePull()
+	for i := 0; i < 10 && sim.CurrentTime <= 0; i++ {
+		sim.Step()
 	}
-	if math.Abs(got[stats.AttackPower]-252) > 1e-6 {
-		t.Errorf("pet attack power = %.1f, want the unbuffed 252", got[stats.AttackPower])
+	h := sim.Raid.Parties[0].Players[0].(*Hunter)
+	if !h.pet.IsEnabled() {
+		t.Fatal("the pet is not summoned")
 	}
+	if !hasActiveAuraWithSpellID(h.pet.GetAuras(), 409583) {
+		t.Error("the pet does not carry Heart of the Lion's area buff (409583)")
+	}
+	got := h.pet.GetStats()
+	if math.Abs(got[stats.Strength]-149.6) > 1e-6 || math.Abs(got[stats.Agility]-110) > 1e-6 {
+		t.Errorf("pet Strength/Agility = %.2f/%.2f, want 136/100 under Heart of the Lion's +10%% only (149.6/110)", got[stats.Strength], got[stats.Agility])
+	}
+	hs := h.GetStats()
+	inherited := 0.1 * max(hs[stats.AttackPower], hs[stats.RangedAttackPower])
+	if own := got[stats.AttackPower] - inherited; math.Abs(own-559.2) > 0.5 {
+		t.Errorf("pet attack power less the inherited %.1f = %.1f, want 149.6 x 2 - 20 + Heart of the Lion's 280 = 559.2", inherited, own)
+	}
+}
+
+func hasActiveAuraWithSpellID(auras []*core.Aura, spellID int32) bool {
+	for _, aura := range auras {
+		if aura.ActionID.SpellID == spellID && aura.IsActive() {
+			return true
+		}
+	}
+	return false
 }
 
 // A Forever pet inherits 10% of the hunter's attack power, whichever of
