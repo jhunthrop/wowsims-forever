@@ -7,7 +7,10 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
-// Recklessness now increases critical strike chance by 50% (was 100%) and the duration is reduced to 12 seconds, but the cooldown is reduced to 5 minutes.
+// Recklessness (1719, client 1.60.1.70755): 100% critical strike chance (e0
+// aura 290) and 20% more damage taken (e1 aura 87) for 15 s (DurationIndex 8),
+// 30 min cooldown, Berserker Stance. A crit chance past 100% is simply always a
+// crit, so a crit cooldown such as Elune's Light adds nothing inside it.
 func (warrior *Warrior) RegisterRecklessnessCD() {
 	if warrior.Level < 50 {
 		return
