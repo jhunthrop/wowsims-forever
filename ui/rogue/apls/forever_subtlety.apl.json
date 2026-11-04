@@ -165,7 +165,7 @@
       "notes": "Rupture at four or more combo points whenever it is not ticking. Hemorrhage and Serrated Blades both feed it, so it is the main finisher."
     },
     {
-      "notes": "Death Mark at five combo points while Rupture is ticking: for 6 seconds it stores a share of everything you hit the target for, Rupture and Garrote at twice the rate, then deals it back at once.",
+      "notes": "Death Mark at four or more combo points while Rupture is ticking: for 6 seconds it stores a share of everything you hit the target for, Rupture and Garrote at twice the rate, then deals it back at once. It comes back every 10 seconds, so a mark now beats a bigger one a few seconds later.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -184,7 +184,7 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "5"
+                      "val": "4"
                     }
                   }
                 }
