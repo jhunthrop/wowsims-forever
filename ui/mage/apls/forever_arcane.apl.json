@@ -103,7 +103,8 @@
               {
                 "spellIsKnown": {
                   "spellId": {
-                    "spellId": 18809
+                    "spellId": 18809,
+                    "rank": 8
                   }
                 }
               },
@@ -143,7 +144,8 @@
                   "val": {
                     "spellIsKnown": {
                       "spellId": {
-                        "spellId": 18809
+                        "spellId": 18809,
+                        "rank": 8
                       }
                     }
                   }
@@ -270,7 +272,7 @@
       }
     },
     {
-      "notes": "Fire Blast every time it is ready: every hit is a Heating Up stack, a crit adds another, and Improved Fire Blast makes it a 6 second cooldown.",
+      "notes": "Fire Blast every time it is ready with the raid build, once Heating Up is in: every hit is a stack, a crit adds another, and Improved Fire Blast makes it a 6 second cooldown. On the way to 60 it only finishes a mob or fills a step on the move.",
       "action": {
         "condition": {
           "auraIsKnown": {
