@@ -218,7 +218,7 @@
       }
     },
     {
-      "notes": "From Heating Up at 30, Scorch is the filler, not Fireball. You land two Scorches in the time of one Fireball, so you roll twice the crits for Heating Up and Ignite, and every cast keeps your Improved Scorch stacks rolling.",
+      "notes": "From Heating Up at 30, Scorch is the filler, not Fireball. You land more than two Scorches in the time of one Fireball, so you roll over twice the crits for Heating Up and Ignite, and every cast refreshes your 5 Improved Scorch stacks so you never spend a cast just to keep them up.",
       "action": {
         "condition": {
           "auraIsKnown": {
@@ -236,7 +236,7 @@
       }
     },
     {
-      "notes": "Fireball is your filler until Heating Up at 30. Before then Scorch only stacks Improved Scorch, from 27: Fireball does more damage for every point of mana, and in the 20s mana is what runs out first.",
+      "notes": "Below 30, Fireball is the filler. At the ranks you have in the 20s it does more damage per point of mana than Scorch, and mana is what runs out first, so Scorch waits for Improved Scorch at 27 and then only builds and refreshes the stacks.",
       "action": {
         "castSpell": {
           "spellId": {
