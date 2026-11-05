@@ -138,7 +138,7 @@
       }
     },
     {
-      "notes": "With Unsealed Wrath, straight after the opening Crusader Judgement, raid buffs or not. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then go straight to Seal of Command: three swings store three Commands and the twist is under way. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight.",
+      "notes": "With Unsealed Wrath, straight after the opening Crusader Judgement, in a dungeon or a raid. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then go straight to Seal of Command: three swings store three Commands and the twist is under way. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight.",
       "action": {
         "condition": {
           "and": {
@@ -241,7 +241,7 @@
       }
     },
     {
-      "notes": "With Unsealed Wrath, once three swings have stored Seal of Command. Switch to Seal of Righteousness for one swing, and that swing releases all three stored Commands. Only while your mana keeps pace with the fight: your mana percent at least four fifths of the percent of the fight left, the same pace as Consecration. Every Seal costs a global and its mana, 180 to 190 at 60.",
+      "notes": "With Unsealed Wrath, once three swings have stored Seal of Command, while your mana percent is at least four fifths of the fight left. Switch to Seal of Righteousness for one swing, and that swing releases all three stored Commands. It is the same pace as Consecration: every Seal costs a global and its mana, 180 to 190 at 60.",
       "action": {
         "condition": {
           "and": {
@@ -498,7 +498,7 @@
       }
     },
     {
-      "notes": "Last, while the mana left after it still pays for a Seal, a Judgement and a Holy Strike, and your mana percent is at least four fifths of the percent of the fight left (halfway through, 40% mana or more). Spam it and your Seal lapses before the execute; hold it too long and you end the fight with mana unspent.",
+      "notes": "Last, while your mana percent is at least four fifths of the fight left and covers a Seal, Judgement and Holy Strike (rank 4 at 60 without raid buffs). The mana left after it must still pay for those three, and halfway through a fight the pace means 40% mana or more. Spam it and your Seal lapses before the execute; hold it too long and you end the fight with mana unspent.",
       "action": {
         "castSpell": {
           "spellId": {
