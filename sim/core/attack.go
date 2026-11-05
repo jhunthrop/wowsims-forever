@@ -784,6 +784,7 @@ func (aa *AutoAttacks) ExtraMHAttack(sim *Simulation, attacks int32, actionID Ac
 		aa.mh.unit.Log(sim, "gained %d extra main-hand %s from %s triggered by %s", attacks, attacksText, actionID, triggerAction)
 	}
 
+	aa.mh.unit.Metrics.addExtraAttacks(sim, actionID, attacks)
 	aa.mh.swingAt = sim.CurrentTime
 	aa.mh.spell.SetMetricsSplit(1)
 	sim.rescheduleWeaponAttack(aa.mh.swingAt)
@@ -795,6 +796,7 @@ func (aa *AutoAttacks) StoreExtraMHAttack(sim *Simulation, attacks int32, action
 		return
 	}
 
+	aa.mh.unit.Metrics.addExtraAttacks(sim, actionID, attacks)
 	if aa.mh.extraAttacksAura == nil {
 		aa.mh.extraAttacksAura = aa.mh.unit.GetAuraByID(ActionID{SpellID: 21919})
 	}
@@ -828,6 +830,7 @@ func (aa *AutoAttacks) ExtraOHAttack(sim *Simulation, attacks int32, actionID Ac
 		attacksText := Ternary(attacks == 1, "attack", "attacks")
 		aa.oh.unit.Log(sim, "gained %d extra off-hand %s from %s triggered by %s", attacks, attacksText, actionID, triggerAction)
 	}
+	aa.oh.unit.Metrics.addExtraAttacks(sim, actionID, attacks)
 	aa.oh.swingAt = sim.CurrentTime + SpellBatchWindow
 	aa.oh.spell.SetMetricsSplit(1)
 	sim.rescheduleWeaponAttack(aa.oh.swingAt)
@@ -841,6 +844,7 @@ func (aa *AutoAttacks) ExtraRangedAttack(sim *Simulation, attacks int32, actionI
 		attacksText := Ternary(attacks == 1, "attack", "attacks")
 		aa.mh.unit.Log(sim, "gained %d extra ranged %s from %s triggered by %s", attacks, attacksText, actionID, triggerAction)
 	}
+	aa.ranged.unit.Metrics.addExtraAttacks(sim, actionID, attacks)
 	aa.ranged.swingAt = sim.CurrentTime + SpellBatchWindow
 	aa.ranged.spell.SetMetricsSplit(1)
 	sim.rescheduleWeaponAttack(aa.ranged.swingAt)

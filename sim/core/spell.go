@@ -621,6 +621,7 @@ func (spell *Spell) applyEffects(sim *Simulation, target *Unit) {
 	spell.SpellMetrics[target.UnitIndex].Casts++
 	spell.casts++
 
+	sim.beginSampleCast(spell)
 	spell.ApplyEffects(sim, target, spell)
 
 	// After the effects, so the resources recorded are the ones the
