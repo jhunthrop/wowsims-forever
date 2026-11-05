@@ -78,6 +78,12 @@ func (hunter *Hunter) NewHunterPet() *HunterPet {
 
 	hp.Pet.MobType = petConfig.MobType
 
+	// The summon inherits the full sheet, scope included; the hunter's
+	// stat changes after it map through the linear shares alone.
+	hp.OnPetEnable = func(_ *core.Simulation) {
+		hp.EnableDynamicStats(hunter.makeOwnerChangeInheritance())
+	}
+
 	hp.EnableAutoAttacks(hp, core.AutoAttackOptions{
 		MainHand: core.Weapon{
 			BaseDamageMin: baseMinDamage,
@@ -223,12 +229,26 @@ const petAttackPowerShare = 0.10
 // (Blizzard, 16 October 2026: pets were "only ever inheriting the player's
 // Melee Critical Strike chance instead of whichever is higher"); his ranged
 // crit is his melee crit plus any ranged-only rating (a scope), never less.
+// The scope's rating is a constant, not a share of a stat, so it is added
+// once at the summon; the owner's stat changes in the fight map through
+// makeOwnerChangeInheritance, which leaves it out.
 func (hunter *Hunter) makeStatInheritance() core.PetStatInheritance {
+	shares := hunter.makeOwnerChangeInheritance()
+	return func(ownerStats stats.Stats) stats.Stats {
+		inherited := shares(ownerStats)
+		inherited[stats.MeleeCrit] += hunter.RangedOnlyCritRating()
+		return inherited
+	}
+}
+
+// makeOwnerChangeInheritance is the linear part of makeStatInheritance:
+// the pet's share of each hunter stat, applied to a change in his stats.
+func (hunter *Hunter) makeOwnerChangeInheritance() core.PetStatInheritance {
 	return func(ownerStats stats.Stats) stats.Stats {
 		return stats.Stats{
 			stats.AttackPower: ownerStats[hunter.petAttackPowerSource] * petAttackPowerShare,
 			stats.Crit:        ownerStats[stats.Crit],
-			stats.MeleeCrit:   ownerStats[stats.MeleeCrit] + hunter.RangedOnlyCritRating(),
+			stats.MeleeCrit:   ownerStats[stats.MeleeCrit],
 			stats.SpellCrit:   ownerStats[stats.SpellCrit],
 			stats.Hit:         ownerStats[stats.Hit],
 		}
