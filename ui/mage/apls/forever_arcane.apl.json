@@ -72,7 +72,7 @@
       }
     },
     {
-      "notes": "Presence of Mind on cooldown, with Arcane Power. Your next spell is instant: spend it on Pyroblast, your longest cast, or on Frostbolt with the leveling build. Never spend it on an Arcane Blast that the global cooldown already caps at 1.5 seconds.",
+      "notes": "Presence of Mind on cooldown, and with Arcane Power once you have it. Your next spell is instant: spend it on Pyroblast, your longest cast, once the raid build has it at 54, and on Frostbolt before that and with the leveling build. Never spend it on an Arcane Blast that the global cooldown already caps at 1.5 seconds.",
       "action": {
         "condition": {
           "cmp": {
@@ -95,15 +95,15 @@
       }
     },
     {
-      "notes": "Pyroblast the moment Presence of Mind is up, once you have Heating Up: the 6 second cast goes out instant, the most cast time Presence of Mind can save you.",
+      "notes": "Pyroblast the moment Presence of Mind is up, from 54 on the raid build: a 6 second cast without Heating Up stacks goes out instant, the most cast time Presence of Mind can save you.",
       "action": {
         "condition": {
           "and": {
             "vals": [
               {
-                "auraIsKnown": {
-                  "auraId": {
-                    "spellId": 400625
+                "spellIsKnown": {
+                  "spellId": {
+                    "spellId": 18809
                   }
                 }
               },
@@ -133,7 +133,7 @@
       }
     },
     {
-      "notes": "Frostbolt the moment Presence of Mind is up with the leveling build, so the cast goes out instant. Presence of Mind on a 1.5 second Arcane Blast saves nothing, since the global cooldown already holds you that long.",
+      "notes": "Frostbolt the moment Presence of Mind is up with the leveling build, or before Pyroblast at 54 on the raid build, so the cast goes out instant. Presence of Mind on a 1.5 second Arcane Blast saves nothing, since the global cooldown already holds you that long.",
       "action": {
         "condition": {
           "and": {
@@ -141,9 +141,9 @@
               {
                 "not": {
                   "val": {
-                    "auraIsKnown": {
-                      "auraId": {
-                        "spellId": 400625
+                    "spellIsKnown": {
+                      "spellId": {
+                        "spellId": 18809
                       }
                     }
                   }
