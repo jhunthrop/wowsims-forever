@@ -191,7 +191,7 @@
       }
     },
     {
-      "notes": "Conflagrate on cooldown while Immolate is up, once you have Shadow and Flame. Each hit gives you 20 seconds of more Shadow damage, 4% a point, which is worth more than the burn it may eat, and at five points it never eats your Immolate.",
+      "notes": "Conflagrate once Immolate has 6 seconds or less left until you take Shadow and Flame, then on cooldown while Immolate is up. Each hit then gives you 20 seconds of more Shadow damage, 4% a point, which is worth more than the burn it may eat, and at five points it never eats your Immolate.",
       "action": {
         "condition": {
           "and": {
