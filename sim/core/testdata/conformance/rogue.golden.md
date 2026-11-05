@@ -14,12 +14,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | CombatDaggersRogue | 10 | Backstab | 0 | 53 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 10 | Eviscerate | 0 | 6760 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 8→8 | n/a | match |  | 3.00-11.00→3.00-11.00 | 1.000→1.000 | declared, matches |
-| CombatDaggersRogue | 10 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 10 | Gouge | 0 | 1776 | 45.00→45.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 6→6 | 4000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | 10.00-10.00→10.00-10.00 | 1.000→1.000 | declared, matches |
 | CombatDaggersRogue | 10 | Sinister Strike | 0 | 1757 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 10 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 10 | Stealth | 0 | 1784 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 10 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Ambush | 0 | 8676 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Backstab | 0 | 2590 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Eviscerate | 0 | 6761 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | 6.00-20.00→6.00-20.00 | 1.000→1.000 | declared, matches |
@@ -32,7 +30,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | CombatDaggersRogue | 20 | Sinister Strike | 0 | 1758 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 20 | Stealth | 0 | 1785 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
-| CombatDaggersRogue | 20 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatDaggersRogue | 30 | Ambush | 0 | 8724 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 30 | Backstab | 0 | 2591 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | CombatDaggersRogue | 30 | Cheap Shot | 0 | 1833 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→26 | 4000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
@@ -110,12 +107,10 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | CombatDaggersRogue | 60 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 10 | Backstab | 0 | 53 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 10 | Eviscerate | 0 | 6760 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 8→8 | n/a | match |  | 3.00-11.00→3.00-11.00 | 1.000→1.000 | declared, matches |
-| CombatSwordsRogue | 10 | Feint | 0 | 1966 | 20.00→20.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 10 | Gouge | 0 | 1776 | 45.00→45.00 | energy→energy | 10000→10000 | 0→0 | 1000→1000 | 6→6 | 4000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | 10.00-10.00→10.00-10.00 | 1.000→1.000 | declared, matches |
 | CombatSwordsRogue | 10 | Sinister Strike | 0 | 1757 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 10 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 10 | Stealth | 0 | 1784 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 1→1 | -1→-1 | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 10 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Ambush | 0 | 8676 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 18→18 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Backstab | 0 | 2590 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Eviscerate | 0 | 6761 | 35.00→35.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 16→16 | n/a | match |  | 6.00-20.00→6.00-20.00 | 1.000→1.000 | declared, matches |
@@ -128,7 +123,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | CombatSwordsRogue | 20 | Sinister Strike | 0 | 1758 | 45.00→45.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 14→14 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Slice and Dice | 0 | 5171 | 25.00→25.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 10→10 | 6000→6000 | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 20 | Stealth | 0 | 1785 | 0.00→0.00 | mana→none | 10000→10000 | 0→0 | 0→0 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
-| CombatSwordsRogue | 20 | Vanish | 0 | 1856 | 0.00→0.00 | energy→none | 300000→300000 | 0→0 | 0→0 | 22→22 | 0→10000 | client-scripted | duration_ms: client states none (0), engine keeps 10000ms | n/a | n/a | n/a |
 | CombatSwordsRogue | 30 | Ambush | 0 | 8724 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→26 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 30 | Backstab | 0 | 2591 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 28→28 | n/a | match |  | n/a | n/a | n/a |
 | CombatSwordsRogue | 30 | Cheap Shot | 0 | 1833 | 60.00→60.00 | energy→energy | 0→0 | 0→0 | 1000→1000 | 26→26 | 4000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
