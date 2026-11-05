@@ -121,7 +121,7 @@
       }
     },
     {
-      "notes": "On cooldown. Judgement is off the global cooldown, costs 6% of base mana and never consumes your Seal, and Sanctified Judgement hands back 60% of the judged Seal's cost.",
+      "notes": "On cooldown. Judgement is off the global cooldown, costs 6% of base mana, a tenth less once Benediction is full at 14, and never consumes your Seal, and from 22 Sanctified Judgement hands back 60% of the judged Seal's cost.",
       "action": {
         "condition": {
           "spellCanCast": {
@@ -479,7 +479,7 @@
       }
     },
     {
-      "notes": "On cooldown. Twenty mana for a Holy weapon strike, and with Sacred Arbiter it refreshes every Judgement on the target.",
+      "notes": "On cooldown. A cheap Holy weapon strike, 18 mana at 60 with Benediction, and with Sacred Arbiter it refreshes every Judgement on the target.",
       "action": {
         "condition": {
           "spellCanCast": {
@@ -567,17 +567,60 @@
                 "cmp": {
                   "op": "OpGe",
                   "lhs": {
-                    "currentManaPercent": {}
+                    "math": {
+                      "op": "OpAdd",
+                      "lhs": {
+                        "currentMana": {}
+                      },
+                      "rhs": {
+                        "math": {
+                          "op": "OpMul",
+                          "lhs": {
+                            "manaIncomePerSecond": {
+                              "windowSeconds": 10
+                            }
+                          },
+                          "rhs": {
+                            "remainingTime": {}
+                          }
+                        }
+                      }
+                    }
                   },
                   "rhs": {
                     "math": {
-                      "op": "OpMul",
+                      "op": "OpAdd",
                       "lhs": {
-                        "remainingTimePercent": {}
+                        "math": {
+                          "op": "OpMul",
+                          "lhs": {
+                            "math": {
+                              "op": "OpMul",
+                              "lhs": {
+                                "spellCurrentCost": {
+                                  "spellId": {
+                                    "spellId": 20271
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "remainingTime": {}
+                              }
+                            }
+                          },
+                          "rhs": {
+                            "const": {
+                              "val": "0.57"
+                            }
+                          }
+                        }
                       },
                       "rhs": {
-                        "const": {
-                          "val": "0.8"
+                        "spellCurrentCost": {
+                          "spellId": {
+                            "spellId": 20924,
+                            "rank": 5
+                          }
                         }
                       }
                     }
