@@ -24,8 +24,15 @@ import (
 // SPELL_ATTR2_CANT_CRIT, which the client's triggered heals that cannot
 // crit carry (Judgement of Light 20267, Living Seed 414683).
 //
-// unconfirmed: whether it takes the caster's healing modifiers (it does, as
-// every other druid heal here).
+// The amount is Spirit only (client 1.60.1.70790). The heal effect (SpellEffect
+// for 1328622, index 0, effect 10) has EffectBonusCoefficient 0, so healing
+// power adds nothing; BloomSpellCoeff's 0.2143 in constants_auto_gen.go is
+// the generator's convention fill for a zero column and is deliberately not
+// read. Its SpellClassMask is 0 in every word, so family-masked talents
+// (Gift of Nature, Improved Rejuvenation) do not reach it: the spell has no
+// ClassSpellMask. Its SpellMisc Attributes_3 (0x40010000) lacks
+// SPELL_ATTR3_IGNORE_CASTER_MODIFIERS (0x20000000), so unmasked caster and
+// target healing multipliers still apply.
 const (
 	bloomSpellID        = 1328622
 	bloomSpiritFraction = 1.0
