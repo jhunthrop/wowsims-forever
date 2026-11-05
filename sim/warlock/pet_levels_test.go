@@ -76,3 +76,19 @@ func TestDemonsCastTheirTopRankAtEveryBandLevel(t *testing.T) {
 		}
 	}
 }
+
+// A carried Succubus sheet swings a weapon of its own level. The level-50
+// sheet used to repeat the level-40 weapon (41-61, "Not updated" upstream),
+// so a level-50 Succubus hit no harder than a level-40 one and then jumped
+// to 95-131 at 60 (sim-accuracy round 20).
+func TestSuccubusWeaponGrowsBetweenCarriedSheets(t *testing.T) {
+	for i := 1; i < len(petSheetLevels); i++ {
+		lo, hi := succubusSheet(petSheetLevels[i-1]), succubusSheet(petSheetLevels[i])
+		if hi.AutoAttacks.MainHand.BaseDamageMin <= lo.AutoAttacks.MainHand.BaseDamageMin ||
+			hi.AutoAttacks.MainHand.BaseDamageMax <= lo.AutoAttacks.MainHand.BaseDamageMax {
+			t.Errorf("Succubus weapon at %d (%.0f-%.0f) is no better than at %d (%.0f-%.0f)",
+				petSheetLevels[i], hi.AutoAttacks.MainHand.BaseDamageMin, hi.AutoAttacks.MainHand.BaseDamageMax,
+				petSheetLevels[i-1], lo.AutoAttacks.MainHand.BaseDamageMin, lo.AutoAttacks.MainHand.BaseDamageMax)
+		}
+	}
+}
