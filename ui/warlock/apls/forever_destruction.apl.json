@@ -19,7 +19,7 @@
   ],
   "priorityList": [
     {
-      "notes": "Curse of the Elements goes up once, before the bane: in Forever a curse and a bane hold separate slots (every bane reads \"Only one Bane per Warlock\", every curse \"Only one Curse per Warlock\"), so it sits beside Bane of Agony or Bane of Doom and lasts five minutes. It raises the target's magic damage taken, the warlock's and the Succubus' Lash of Pain alike. It is not cast when the raid's Curse of the Elements is already on the target: the two are the same debuff and do not stack.",
+      "notes": "Curse of the Elements when no warlock's is on the target. Curses and banes have separate slots, so it sits beside your bane for five minutes; two copies do not stack, so leave it to whoever holds it.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -30,7 +30,7 @@
       }
     },
     {
-      "notes": "Corruption goes down first and is kept up throughout: it is cheap sustained damage that does not compete with your casts.",
+      "notes": "Corruption whenever it has fallen off. A 2 second cast until Improved Corruption makes it instant, and the whole run of damage comes from that one cast, so never clip it.",
       "action": {
         "condition": {
           "not": {
@@ -58,7 +58,7 @@
       }
     },
     {
-      "notes": "Life Tap to keep casting once mana runs low.",
+      "notes": "Life Tap below 10% mana. Each tap turns health, plus a point for every point of Spirit, into mana; a Healthstone or a healer covers the health.",
       "action": {
         "condition": {
           "cmp": {
@@ -82,7 +82,7 @@
       }
     },
     {
-      "notes": "Bane of Doom is the one curse kept up: it deals its whole damage when the minute is out, so recast it the moment it fires, while a minute or more of the fight remains. Bane of Agony and Curse of the Elements both measured lower in the search.",
+      "notes": "Bane of Doom the moment the last one fires, with a minute or more of the fight left. It hits once, hard, when its minute runs out, so a Doom cast in the last minute never lands.",
       "action": {
         "condition": {
           "and": {
@@ -122,7 +122,7 @@
       }
     },
     {
-      "notes": "Bane of Agony in the last minute, when a Doom would not fire before the fight ends.",
+      "notes": "Bane of Agony whenever Bane of Doom is not on the target: all fight before 60, and the last minute at 60, once Doom has fired. A new Doom would not land before the boss dies.",
       "action": {
         "condition": {
           "and": {
@@ -162,7 +162,7 @@
       }
     },
     {
-      "notes": "Immolate is the DoT both Conflagrate and Incinerate need on the target, so it is recast when under 3 seconds remain.",
+      "notes": "Immolate with 3 seconds or less left on it. It lands a moment before the old one ends, so it never drops; once you have Conflagrate and Incinerate, both need it too.",
       "action": {
         "condition": {
           "cmp": {
@@ -191,14 +191,28 @@
       }
     },
     {
-      "notes": "Conflagrate consumes part of Immolate's remaining damage as instant burst; only worth casting while Immolate is up. It requires the Conflagrate talent.",
+      "notes": "Conflagrate on cooldown while Immolate is up, once you have Shadow and Flame. Each hit gives you 20 seconds of more Shadow damage, 20% at five points, which is worth more than the burn it may eat, and at five points it never eats your Immolate.",
       "action": {
         "condition": {
-          "dotIsActive": {
-            "spellId": {
-              "spellId": 11668,
-              "rank": 7
-            }
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 426316,
+                    "tag": 1
+                  }
+                }
+              },
+              {
+                "dotIsActive": {
+                  "spellId": {
+                    "spellId": 11668,
+                    "rank": 7
+                  }
+                }
+              }
+            ]
           }
         },
         "castSpell": {
@@ -210,7 +224,62 @@
       }
     },
     {
-      "notes": "Shadowburn is cast on cooldown whenever its reagent cost is acceptable, with no execute-phase gate: it is strong burst at any target health.",
+      "notes": "Conflagrate once Immolate has 6 seconds or less left, until you take Shadow and Flame. Before then it always eats your Immolate, so let the burn do most of its work first and recast Immolate right after.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "auraIsKnown": {
+                      "auraId": {
+                        "spellId": 426316,
+                        "tag": 1
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "dotIsActive": {
+                  "spellId": {
+                    "spellId": 11668,
+                    "rank": 7
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 11668,
+                        "rank": 7
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "6s"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18932,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
+      "notes": "Shadowburn on cooldown, at any boss health. Each one costs a Soul Shard until the fifth point of Shadow and Flame hands it straight back, so bring enough for the fight. With Shadow and Flame each hit gives you 20 seconds of more Fire damage, 20% at five points.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -221,7 +290,7 @@
       }
     },
     {
-      "notes": "Incinerate is Destruction's signature filler, dealing bonus damage while Immolate is active. It requires the Incinerate talent, learned at level 40 and ranking up at 50 and 60.",
+      "notes": "Incinerate for every other cast. It deals 25% more while your Immolate is on the target.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -232,7 +301,7 @@
       }
     },
     {
-      "notes": "Shadow Bolt is the filler while you have not yet learned the Incinerate talent (or have not reached its level-40 requirement); once you have, Incinerate takes priority instead.",
+      "notes": "Shadow Bolt before you learn Incinerate at 40.",
       "action": {
         "condition": {
           "not": {
@@ -255,7 +324,7 @@
       }
     },
     {
-      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells. Life Tap below 10 percent mana keeps the rotation going first.",
+      "notes": "Shoot only when you are out of mana and cannot Life Tap. A wand shot cannot start during a global cooldown, so it never fits between spells.",
       "action": {
         "castSpell": {
           "spellId": {
