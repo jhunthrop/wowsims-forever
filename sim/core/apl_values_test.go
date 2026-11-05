@@ -111,3 +111,26 @@ func TestValueManaIncomePerSecondCountsOnlyWhatTheBarTook(t *testing.T) {
 		t.Fatalf("income with 150 overflowing = %v, want 50 over 5 s = 10", got)
 	}
 }
+
+// Round 23 (platform): the pacing budget multiplies a rate by the time left
+// (manaIncomePerSecond x remainingTime). A product or quotient of a number and a
+// duration read the duration through GetFloat and panicked, or multiplied two
+// durations in nanoseconds, constants included. It is now worked in floats, the
+// duration in seconds.
+func TestMathOfANumberAndADurationWorksInSeconds(t *testing.T) {
+	sim := &Simulation{CurrentTime: 2 * time.Second}
+	rot := &APLRotation{unit: &Unit{Level: 45}}
+	level := rot.newValueCurrentLevel(&proto.APLValueCurrentLevel{})
+	now := rot.newValueCurrentTime(&proto.APLValueCurrentTime{})
+	constant := rot.newValueConst(&proto.APLValueConst{Val: "45"}) // reads as an int
+	for _, operands := range [][2]APLValue{{level, now}, {now, level}, {constant, now}, {now, constant}} {
+		lhs, rhs := rot.coerceMathOperands(proto.APLValueMath_OpMul, operands[0], operands[1])
+		product := &APLValueMath{op: proto.APLValueMath_OpMul, lhs: lhs, rhs: rhs}
+		if product.Type() != proto.APLValueType_ValueTypeFloat {
+			t.Fatalf("%s x %s is %v, want float", operands[0], operands[1], product.Type())
+		}
+		if got := product.GetFloat(sim); got != 90 {
+			t.Fatalf("%s x %s = %v, want 45 x 2 s = 90", operands[0], operands[1], got)
+		}
+	}
+}
