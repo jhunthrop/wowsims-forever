@@ -376,10 +376,7 @@ type APLValueMath struct {
 }
 
 func (rot *APLRotation) newValueMath(config *proto.APLValueMath) APLValue {
-	lhs, rhs := rot.newAPLValue(config.Lhs), rot.newAPLValue(config.Rhs)
-	if config.Op == proto.APLValueMath_OpAdd || config.Op == proto.APLValueMath_OpSub {
-		lhs, rhs = rot.coerceToSameType(lhs, rhs)
-	}
+	lhs, rhs := rot.coerceMathOperands(config.Op, rot.newAPLValue(config.Lhs), rot.newAPLValue(config.Rhs))
 	if lhs == nil || rhs == nil {
 		return nil
 	}
@@ -400,6 +397,34 @@ func (rot *APLRotation) newValueMath(config *proto.APLValueMath) APLValue {
 		rhs: rhs,
 	}
 }
+
+// coerceMathOperands gives a sum or difference one type. A product or quotient of a number and
+// a duration (a rate times the time left) is worked in floats, the duration in seconds: read
+// as the left operand's type it called GetFloat or GetInt on a duration, or multiplied
+// nanoseconds.
+func (rot *APLRotation) coerceMathOperands(op proto.APLValueMath_MathOperator, lhs, rhs APLValue) (APLValue, APLValue) {
+	if lhs == nil || rhs == nil {
+		return lhs, rhs
+	}
+	switch op {
+	case proto.APLValueMath_OpAdd, proto.APLValueMath_OpSub:
+		return rot.coerceToSameType(lhs, rhs)
+	case proto.APLValueMath_OpMul, proto.APLValueMath_OpDiv:
+		if mixesNumberAndDuration(lhs.Type(), rhs.Type()) {
+			return rot.coerceTo(lhs, proto.APLValueType_ValueTypeFloat), rot.coerceTo(rhs, proto.APLValueType_ValueTypeFloat)
+		}
+	}
+	return lhs, rhs
+}
+
+func mixesNumberAndDuration(lhs, rhs proto.APLValueType) bool {
+	isNumber := func(t proto.APLValueType) bool {
+		return t == proto.APLValueType_ValueTypeInt || t == proto.APLValueType_ValueTypeFloat
+	}
+	isDuration := func(t proto.APLValueType) bool { return t == proto.APLValueType_ValueTypeDuration }
+	return (isNumber(lhs) && isDuration(rhs)) || (isDuration(lhs) && isNumber(rhs))
+}
+
 func (value *APLValueMath) GetInnerValues() []APLValue {
 	return []APLValue{value.lhs, value.rhs}
 }

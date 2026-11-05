@@ -406,7 +406,7 @@ func (x APLValueAutoTimeToNext_AttackType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use APLValueAutoTimeToNext_AttackType.Descriptor instead.
 func (APLValueAutoTimeToNext_AttackType) EnumDescriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{57, 0}
+	return file_apl_proto_rawDescGZIP(), []int{58, 0}
 }
 
 type APLValueAutoSwingTime_SwingType int32
@@ -458,7 +458,7 @@ func (x APLValueAutoSwingTime_SwingType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use APLValueAutoSwingTime_SwingType.Descriptor instead.
 func (APLValueAutoSwingTime_SwingType) EnumDescriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{58, 0}
+	return file_apl_proto_rawDescGZIP(), []int{59, 0}
 }
 
 type APLRotation struct {
@@ -1118,7 +1118,7 @@ func (*APLAction_CastPaladinPrimarySeal) isAPLAction_Action() {}
 
 func (*APLAction_CustomRotation) isAPLAction_Action() {}
 
-// NextIndex: 79
+// NextIndex: 80
 type APLValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
@@ -1144,6 +1144,7 @@ type APLValue struct {
 	//	*APLValue_CurrentMana
 	//	*APLValue_CurrentManaPercent
 	//	*APLValue_MaxMana
+	//	*APLValue_ManaIncomePerSecond
 	//	*APLValue_CurrentRage
 	//	*APLValue_CurrentEnergy
 	//	*APLValue_CurrentComboPoints
@@ -1415,6 +1416,15 @@ func (x *APLValue) GetMaxMana() *APLValueMaxMana {
 	if x != nil {
 		if x, ok := x.Value.(*APLValue_MaxMana); ok {
 			return x.MaxMana
+		}
+	}
+	return nil
+}
+
+func (x *APLValue) GetManaIncomePerSecond() *APLValueManaIncomePerSecond {
+	if x != nil {
+		if x, ok := x.Value.(*APLValue_ManaIncomePerSecond); ok {
+			return x.ManaIncomePerSecond
 		}
 	}
 	return nil
@@ -1917,6 +1927,11 @@ type APLValue_MaxMana struct {
 	MaxMana *APLValueMaxMana `protobuf:"bytes,75,opt,name=max_mana,json=maxMana,proto3,oneof"`
 }
 
+type APLValue_ManaIncomePerSecond struct {
+	// Mana gained per second over a trailing window, from every source, net of overflow.
+	ManaIncomePerSecond *APLValueManaIncomePerSecond `protobuf:"bytes,79,opt,name=mana_income_per_second,json=manaIncomePerSecond,proto3,oneof"`
+}
+
 type APLValue_CurrentRage struct {
 	CurrentRage *APLValueCurrentRage `protobuf:"bytes,14,opt,name=current_rage,json=currentRage,proto3,oneof"`
 }
@@ -2152,6 +2167,8 @@ func (*APLValue_CurrentMana) isAPLValue_Value() {}
 func (*APLValue_CurrentManaPercent) isAPLValue_Value() {}
 
 func (*APLValue_MaxMana) isAPLValue_Value() {}
+
+func (*APLValue_ManaIncomePerSecond) isAPLValue_Value() {}
 
 func (*APLValue_CurrentRage) isAPLValue_Value() {}
 
@@ -4201,6 +4218,54 @@ func (*APLValueMaxMana) Descriptor() ([]byte, []int) {
 	return file_apl_proto_rawDescGZIP(), []int{48}
 }
 
+// The character's mana gained over the trailing window divided by the window: regen ticks,
+// Judgement of Wisdom, potions, runes and Innervate alike, net of what overflowed a full bar.
+// Before the window has elapsed it divides by the time elapsed so far.
+type APLValueManaIncomePerSecond struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The window in seconds; 0 means 10.
+	WindowSeconds float64 `protobuf:"fixed64,1,opt,name=window_seconds,json=windowSeconds,proto3" json:"window_seconds,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *APLValueManaIncomePerSecond) Reset() {
+	*x = APLValueManaIncomePerSecond{}
+	mi := &file_apl_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *APLValueManaIncomePerSecond) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*APLValueManaIncomePerSecond) ProtoMessage() {}
+
+func (x *APLValueManaIncomePerSecond) ProtoReflect() protoreflect.Message {
+	mi := &file_apl_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use APLValueManaIncomePerSecond.ProtoReflect.Descriptor instead.
+func (*APLValueManaIncomePerSecond) Descriptor() ([]byte, []int) {
+	return file_apl_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *APLValueManaIncomePerSecond) GetWindowSeconds() float64 {
+	if x != nil {
+		return x.WindowSeconds
+	}
+	return 0
+}
+
 type APLValueCurrentRage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -4209,7 +4274,7 @@ type APLValueCurrentRage struct {
 
 func (x *APLValueCurrentRage) Reset() {
 	*x = APLValueCurrentRage{}
-	mi := &file_apl_proto_msgTypes[49]
+	mi := &file_apl_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4221,7 +4286,7 @@ func (x *APLValueCurrentRage) String() string {
 func (*APLValueCurrentRage) ProtoMessage() {}
 
 func (x *APLValueCurrentRage) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[49]
+	mi := &file_apl_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4234,7 +4299,7 @@ func (x *APLValueCurrentRage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueCurrentRage.ProtoReflect.Descriptor instead.
 func (*APLValueCurrentRage) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{49}
+	return file_apl_proto_rawDescGZIP(), []int{50}
 }
 
 type APLValueCurrentEnergy struct {
@@ -4245,7 +4310,7 @@ type APLValueCurrentEnergy struct {
 
 func (x *APLValueCurrentEnergy) Reset() {
 	*x = APLValueCurrentEnergy{}
-	mi := &file_apl_proto_msgTypes[50]
+	mi := &file_apl_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4257,7 +4322,7 @@ func (x *APLValueCurrentEnergy) String() string {
 func (*APLValueCurrentEnergy) ProtoMessage() {}
 
 func (x *APLValueCurrentEnergy) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[50]
+	mi := &file_apl_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4270,7 +4335,7 @@ func (x *APLValueCurrentEnergy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueCurrentEnergy.ProtoReflect.Descriptor instead.
 func (*APLValueCurrentEnergy) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{50}
+	return file_apl_proto_rawDescGZIP(), []int{51}
 }
 
 type APLValueCurrentComboPoints struct {
@@ -4281,7 +4346,7 @@ type APLValueCurrentComboPoints struct {
 
 func (x *APLValueCurrentComboPoints) Reset() {
 	*x = APLValueCurrentComboPoints{}
-	mi := &file_apl_proto_msgTypes[51]
+	mi := &file_apl_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4293,7 +4358,7 @@ func (x *APLValueCurrentComboPoints) String() string {
 func (*APLValueCurrentComboPoints) ProtoMessage() {}
 
 func (x *APLValueCurrentComboPoints) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[51]
+	mi := &file_apl_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4306,7 +4371,7 @@ func (x *APLValueCurrentComboPoints) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueCurrentComboPoints.ProtoReflect.Descriptor instead.
 func (*APLValueCurrentComboPoints) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{51}
+	return file_apl_proto_rawDescGZIP(), []int{52}
 }
 
 type APLValueTimeToEnergyTick struct {
@@ -4317,7 +4382,7 @@ type APLValueTimeToEnergyTick struct {
 
 func (x *APLValueTimeToEnergyTick) Reset() {
 	*x = APLValueTimeToEnergyTick{}
-	mi := &file_apl_proto_msgTypes[52]
+	mi := &file_apl_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4329,7 +4394,7 @@ func (x *APLValueTimeToEnergyTick) String() string {
 func (*APLValueTimeToEnergyTick) ProtoMessage() {}
 
 func (x *APLValueTimeToEnergyTick) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[52]
+	mi := &file_apl_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4342,7 +4407,7 @@ func (x *APLValueTimeToEnergyTick) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueTimeToEnergyTick.ProtoReflect.Descriptor instead.
 func (*APLValueTimeToEnergyTick) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{52}
+	return file_apl_proto_rawDescGZIP(), []int{53}
 }
 
 type APLValueEnergyThreshold struct {
@@ -4354,7 +4419,7 @@ type APLValueEnergyThreshold struct {
 
 func (x *APLValueEnergyThreshold) Reset() {
 	*x = APLValueEnergyThreshold{}
-	mi := &file_apl_proto_msgTypes[53]
+	mi := &file_apl_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4366,7 +4431,7 @@ func (x *APLValueEnergyThreshold) String() string {
 func (*APLValueEnergyThreshold) ProtoMessage() {}
 
 func (x *APLValueEnergyThreshold) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[53]
+	mi := &file_apl_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4379,7 +4444,7 @@ func (x *APLValueEnergyThreshold) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueEnergyThreshold.ProtoReflect.Descriptor instead.
 func (*APLValueEnergyThreshold) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{53}
+	return file_apl_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *APLValueEnergyThreshold) GetThreshold() int32 {
@@ -4397,7 +4462,7 @@ type APLValueCurrentAttackPower struct {
 
 func (x *APLValueCurrentAttackPower) Reset() {
 	*x = APLValueCurrentAttackPower{}
-	mi := &file_apl_proto_msgTypes[54]
+	mi := &file_apl_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4409,7 +4474,7 @@ func (x *APLValueCurrentAttackPower) String() string {
 func (*APLValueCurrentAttackPower) ProtoMessage() {}
 
 func (x *APLValueCurrentAttackPower) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[54]
+	mi := &file_apl_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4422,7 +4487,7 @@ func (x *APLValueCurrentAttackPower) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueCurrentAttackPower.ProtoReflect.Descriptor instead.
 func (*APLValueCurrentAttackPower) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{54}
+	return file_apl_proto_rawDescGZIP(), []int{55}
 }
 
 type APLValueGCDIsReady struct {
@@ -4433,7 +4498,7 @@ type APLValueGCDIsReady struct {
 
 func (x *APLValueGCDIsReady) Reset() {
 	*x = APLValueGCDIsReady{}
-	mi := &file_apl_proto_msgTypes[55]
+	mi := &file_apl_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4445,7 +4510,7 @@ func (x *APLValueGCDIsReady) String() string {
 func (*APLValueGCDIsReady) ProtoMessage() {}
 
 func (x *APLValueGCDIsReady) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[55]
+	mi := &file_apl_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4458,7 +4523,7 @@ func (x *APLValueGCDIsReady) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueGCDIsReady.ProtoReflect.Descriptor instead.
 func (*APLValueGCDIsReady) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{55}
+	return file_apl_proto_rawDescGZIP(), []int{56}
 }
 
 type APLValueGCDTimeToReady struct {
@@ -4469,7 +4534,7 @@ type APLValueGCDTimeToReady struct {
 
 func (x *APLValueGCDTimeToReady) Reset() {
 	*x = APLValueGCDTimeToReady{}
-	mi := &file_apl_proto_msgTypes[56]
+	mi := &file_apl_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4481,7 +4546,7 @@ func (x *APLValueGCDTimeToReady) String() string {
 func (*APLValueGCDTimeToReady) ProtoMessage() {}
 
 func (x *APLValueGCDTimeToReady) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[56]
+	mi := &file_apl_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4494,7 +4559,7 @@ func (x *APLValueGCDTimeToReady) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueGCDTimeToReady.ProtoReflect.Descriptor instead.
 func (*APLValueGCDTimeToReady) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{56}
+	return file_apl_proto_rawDescGZIP(), []int{57}
 }
 
 type APLValueAutoTimeToNext struct {
@@ -4506,7 +4571,7 @@ type APLValueAutoTimeToNext struct {
 
 func (x *APLValueAutoTimeToNext) Reset() {
 	*x = APLValueAutoTimeToNext{}
-	mi := &file_apl_proto_msgTypes[57]
+	mi := &file_apl_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4518,7 +4583,7 @@ func (x *APLValueAutoTimeToNext) String() string {
 func (*APLValueAutoTimeToNext) ProtoMessage() {}
 
 func (x *APLValueAutoTimeToNext) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[57]
+	mi := &file_apl_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4531,7 +4596,7 @@ func (x *APLValueAutoTimeToNext) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueAutoTimeToNext.ProtoReflect.Descriptor instead.
 func (*APLValueAutoTimeToNext) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{57}
+	return file_apl_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *APLValueAutoTimeToNext) GetAutoType() APLValueAutoTimeToNext_AttackType {
@@ -4550,7 +4615,7 @@ type APLValueAutoSwingTime struct {
 
 func (x *APLValueAutoSwingTime) Reset() {
 	*x = APLValueAutoSwingTime{}
-	mi := &file_apl_proto_msgTypes[58]
+	mi := &file_apl_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4562,7 +4627,7 @@ func (x *APLValueAutoSwingTime) String() string {
 func (*APLValueAutoSwingTime) ProtoMessage() {}
 
 func (x *APLValueAutoSwingTime) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[58]
+	mi := &file_apl_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4575,7 +4640,7 @@ func (x *APLValueAutoSwingTime) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueAutoSwingTime.ProtoReflect.Descriptor instead.
 func (*APLValueAutoSwingTime) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{58}
+	return file_apl_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *APLValueAutoSwingTime) GetAutoType() APLValueAutoSwingTime_SwingType {
@@ -4594,7 +4659,7 @@ type APLValueSpellIsKnown struct {
 
 func (x *APLValueSpellIsKnown) Reset() {
 	*x = APLValueSpellIsKnown{}
-	mi := &file_apl_proto_msgTypes[59]
+	mi := &file_apl_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4606,7 +4671,7 @@ func (x *APLValueSpellIsKnown) String() string {
 func (*APLValueSpellIsKnown) ProtoMessage() {}
 
 func (x *APLValueSpellIsKnown) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[59]
+	mi := &file_apl_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4619,7 +4684,7 @@ func (x *APLValueSpellIsKnown) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellIsKnown.ProtoReflect.Descriptor instead.
 func (*APLValueSpellIsKnown) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{59}
+	return file_apl_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *APLValueSpellIsKnown) GetSpellId() *ActionID {
@@ -4638,7 +4703,7 @@ type APLValueSpellCanCast struct {
 
 func (x *APLValueSpellCanCast) Reset() {
 	*x = APLValueSpellCanCast{}
-	mi := &file_apl_proto_msgTypes[60]
+	mi := &file_apl_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4650,7 +4715,7 @@ func (x *APLValueSpellCanCast) String() string {
 func (*APLValueSpellCanCast) ProtoMessage() {}
 
 func (x *APLValueSpellCanCast) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[60]
+	mi := &file_apl_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4663,7 +4728,7 @@ func (x *APLValueSpellCanCast) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellCanCast.ProtoReflect.Descriptor instead.
 func (*APLValueSpellCanCast) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{60}
+	return file_apl_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *APLValueSpellCanCast) GetSpellId() *ActionID {
@@ -4682,7 +4747,7 @@ type APLValueSpellIsReady struct {
 
 func (x *APLValueSpellIsReady) Reset() {
 	*x = APLValueSpellIsReady{}
-	mi := &file_apl_proto_msgTypes[61]
+	mi := &file_apl_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4694,7 +4759,7 @@ func (x *APLValueSpellIsReady) String() string {
 func (*APLValueSpellIsReady) ProtoMessage() {}
 
 func (x *APLValueSpellIsReady) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[61]
+	mi := &file_apl_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4707,7 +4772,7 @@ func (x *APLValueSpellIsReady) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellIsReady.ProtoReflect.Descriptor instead.
 func (*APLValueSpellIsReady) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{61}
+	return file_apl_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *APLValueSpellIsReady) GetSpellId() *ActionID {
@@ -4726,7 +4791,7 @@ type APLValueSpellTimeToReady struct {
 
 func (x *APLValueSpellTimeToReady) Reset() {
 	*x = APLValueSpellTimeToReady{}
-	mi := &file_apl_proto_msgTypes[62]
+	mi := &file_apl_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4738,7 +4803,7 @@ func (x *APLValueSpellTimeToReady) String() string {
 func (*APLValueSpellTimeToReady) ProtoMessage() {}
 
 func (x *APLValueSpellTimeToReady) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[62]
+	mi := &file_apl_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4751,7 +4816,7 @@ func (x *APLValueSpellTimeToReady) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellTimeToReady.ProtoReflect.Descriptor instead.
 func (*APLValueSpellTimeToReady) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{62}
+	return file_apl_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *APLValueSpellTimeToReady) GetSpellId() *ActionID {
@@ -4770,7 +4835,7 @@ type APLValueSpellCastTime struct {
 
 func (x *APLValueSpellCastTime) Reset() {
 	*x = APLValueSpellCastTime{}
-	mi := &file_apl_proto_msgTypes[63]
+	mi := &file_apl_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4782,7 +4847,7 @@ func (x *APLValueSpellCastTime) String() string {
 func (*APLValueSpellCastTime) ProtoMessage() {}
 
 func (x *APLValueSpellCastTime) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[63]
+	mi := &file_apl_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4795,7 +4860,7 @@ func (x *APLValueSpellCastTime) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellCastTime.ProtoReflect.Descriptor instead.
 func (*APLValueSpellCastTime) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{63}
+	return file_apl_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *APLValueSpellCastTime) GetSpellId() *ActionID {
@@ -4813,7 +4878,7 @@ type APLValueChannelClipDelay struct {
 
 func (x *APLValueChannelClipDelay) Reset() {
 	*x = APLValueChannelClipDelay{}
-	mi := &file_apl_proto_msgTypes[64]
+	mi := &file_apl_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4825,7 +4890,7 @@ func (x *APLValueChannelClipDelay) String() string {
 func (*APLValueChannelClipDelay) ProtoMessage() {}
 
 func (x *APLValueChannelClipDelay) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[64]
+	mi := &file_apl_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4838,7 +4903,7 @@ func (x *APLValueChannelClipDelay) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueChannelClipDelay.ProtoReflect.Descriptor instead.
 func (*APLValueChannelClipDelay) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{64}
+	return file_apl_proto_rawDescGZIP(), []int{65}
 }
 
 type APLValueFrontOfTarget struct {
@@ -4849,7 +4914,7 @@ type APLValueFrontOfTarget struct {
 
 func (x *APLValueFrontOfTarget) Reset() {
 	*x = APLValueFrontOfTarget{}
-	mi := &file_apl_proto_msgTypes[65]
+	mi := &file_apl_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4861,7 +4926,7 @@ func (x *APLValueFrontOfTarget) String() string {
 func (*APLValueFrontOfTarget) ProtoMessage() {}
 
 func (x *APLValueFrontOfTarget) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[65]
+	mi := &file_apl_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4874,7 +4939,7 @@ func (x *APLValueFrontOfTarget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueFrontOfTarget.ProtoReflect.Descriptor instead.
 func (*APLValueFrontOfTarget) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{65}
+	return file_apl_proto_rawDescGZIP(), []int{66}
 }
 
 type APLValueSpellTravelTime struct {
@@ -4886,7 +4951,7 @@ type APLValueSpellTravelTime struct {
 
 func (x *APLValueSpellTravelTime) Reset() {
 	*x = APLValueSpellTravelTime{}
-	mi := &file_apl_proto_msgTypes[66]
+	mi := &file_apl_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4898,7 +4963,7 @@ func (x *APLValueSpellTravelTime) String() string {
 func (*APLValueSpellTravelTime) ProtoMessage() {}
 
 func (x *APLValueSpellTravelTime) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[66]
+	mi := &file_apl_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4911,7 +4976,7 @@ func (x *APLValueSpellTravelTime) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellTravelTime.ProtoReflect.Descriptor instead.
 func (*APLValueSpellTravelTime) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{66}
+	return file_apl_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *APLValueSpellTravelTime) GetSpellId() *ActionID {
@@ -4930,7 +4995,7 @@ type APLValueSpellInFlight struct {
 
 func (x *APLValueSpellInFlight) Reset() {
 	*x = APLValueSpellInFlight{}
-	mi := &file_apl_proto_msgTypes[67]
+	mi := &file_apl_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4942,7 +5007,7 @@ func (x *APLValueSpellInFlight) String() string {
 func (*APLValueSpellInFlight) ProtoMessage() {}
 
 func (x *APLValueSpellInFlight) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[67]
+	mi := &file_apl_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4955,7 +5020,7 @@ func (x *APLValueSpellInFlight) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellInFlight.ProtoReflect.Descriptor instead.
 func (*APLValueSpellInFlight) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{67}
+	return file_apl_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *APLValueSpellInFlight) GetSpellId() *ActionID {
@@ -4974,7 +5039,7 @@ type APLValueSpellCPM struct {
 
 func (x *APLValueSpellCPM) Reset() {
 	*x = APLValueSpellCPM{}
-	mi := &file_apl_proto_msgTypes[68]
+	mi := &file_apl_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4986,7 +5051,7 @@ func (x *APLValueSpellCPM) String() string {
 func (*APLValueSpellCPM) ProtoMessage() {}
 
 func (x *APLValueSpellCPM) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[68]
+	mi := &file_apl_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4999,7 +5064,7 @@ func (x *APLValueSpellCPM) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellCPM.ProtoReflect.Descriptor instead.
 func (*APLValueSpellCPM) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{68}
+	return file_apl_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *APLValueSpellCPM) GetSpellId() *ActionID {
@@ -5018,7 +5083,7 @@ type APLValueSpellIsChanneling struct {
 
 func (x *APLValueSpellIsChanneling) Reset() {
 	*x = APLValueSpellIsChanneling{}
-	mi := &file_apl_proto_msgTypes[69]
+	mi := &file_apl_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5030,7 +5095,7 @@ func (x *APLValueSpellIsChanneling) String() string {
 func (*APLValueSpellIsChanneling) ProtoMessage() {}
 
 func (x *APLValueSpellIsChanneling) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[69]
+	mi := &file_apl_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5043,7 +5108,7 @@ func (x *APLValueSpellIsChanneling) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellIsChanneling.ProtoReflect.Descriptor instead.
 func (*APLValueSpellIsChanneling) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{69}
+	return file_apl_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *APLValueSpellIsChanneling) GetSpellId() *ActionID {
@@ -5062,7 +5127,7 @@ type APLValueSpellChanneledTicks struct {
 
 func (x *APLValueSpellChanneledTicks) Reset() {
 	*x = APLValueSpellChanneledTicks{}
-	mi := &file_apl_proto_msgTypes[70]
+	mi := &file_apl_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5074,7 +5139,7 @@ func (x *APLValueSpellChanneledTicks) String() string {
 func (*APLValueSpellChanneledTicks) ProtoMessage() {}
 
 func (x *APLValueSpellChanneledTicks) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[70]
+	mi := &file_apl_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5087,7 +5152,7 @@ func (x *APLValueSpellChanneledTicks) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellChanneledTicks.ProtoReflect.Descriptor instead.
 func (*APLValueSpellChanneledTicks) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{70}
+	return file_apl_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *APLValueSpellChanneledTicks) GetSpellId() *ActionID {
@@ -5106,7 +5171,7 @@ type APLValueSpellCurrentCost struct {
 
 func (x *APLValueSpellCurrentCost) Reset() {
 	*x = APLValueSpellCurrentCost{}
-	mi := &file_apl_proto_msgTypes[71]
+	mi := &file_apl_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5118,7 +5183,7 @@ func (x *APLValueSpellCurrentCost) String() string {
 func (*APLValueSpellCurrentCost) ProtoMessage() {}
 
 func (x *APLValueSpellCurrentCost) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[71]
+	mi := &file_apl_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5131,7 +5196,7 @@ func (x *APLValueSpellCurrentCost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSpellCurrentCost.ProtoReflect.Descriptor instead.
 func (*APLValueSpellCurrentCost) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{71}
+	return file_apl_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *APLValueSpellCurrentCost) GetSpellId() *ActionID {
@@ -5151,7 +5216,7 @@ type APLValueAuraIsKnown struct {
 
 func (x *APLValueAuraIsKnown) Reset() {
 	*x = APLValueAuraIsKnown{}
-	mi := &file_apl_proto_msgTypes[72]
+	mi := &file_apl_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5163,7 +5228,7 @@ func (x *APLValueAuraIsKnown) String() string {
 func (*APLValueAuraIsKnown) ProtoMessage() {}
 
 func (x *APLValueAuraIsKnown) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[72]
+	mi := &file_apl_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5176,7 +5241,7 @@ func (x *APLValueAuraIsKnown) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueAuraIsKnown.ProtoReflect.Descriptor instead.
 func (*APLValueAuraIsKnown) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{72}
+	return file_apl_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *APLValueAuraIsKnown) GetSourceUnit() *UnitReference {
@@ -5203,7 +5268,7 @@ type APLValueAuraIsActive struct {
 
 func (x *APLValueAuraIsActive) Reset() {
 	*x = APLValueAuraIsActive{}
-	mi := &file_apl_proto_msgTypes[73]
+	mi := &file_apl_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5215,7 +5280,7 @@ func (x *APLValueAuraIsActive) String() string {
 func (*APLValueAuraIsActive) ProtoMessage() {}
 
 func (x *APLValueAuraIsActive) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[73]
+	mi := &file_apl_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5228,7 +5293,7 @@ func (x *APLValueAuraIsActive) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueAuraIsActive.ProtoReflect.Descriptor instead.
 func (*APLValueAuraIsActive) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{73}
+	return file_apl_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *APLValueAuraIsActive) GetSourceUnit() *UnitReference {
@@ -5255,7 +5320,7 @@ type APLValueAuraIsActiveWithReactionTime struct {
 
 func (x *APLValueAuraIsActiveWithReactionTime) Reset() {
 	*x = APLValueAuraIsActiveWithReactionTime{}
-	mi := &file_apl_proto_msgTypes[74]
+	mi := &file_apl_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5267,7 +5332,7 @@ func (x *APLValueAuraIsActiveWithReactionTime) String() string {
 func (*APLValueAuraIsActiveWithReactionTime) ProtoMessage() {}
 
 func (x *APLValueAuraIsActiveWithReactionTime) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[74]
+	mi := &file_apl_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5280,7 +5345,7 @@ func (x *APLValueAuraIsActiveWithReactionTime) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use APLValueAuraIsActiveWithReactionTime.ProtoReflect.Descriptor instead.
 func (*APLValueAuraIsActiveWithReactionTime) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{74}
+	return file_apl_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *APLValueAuraIsActiveWithReactionTime) GetSourceUnit() *UnitReference {
@@ -5307,7 +5372,7 @@ type APLValueAuraRemainingTime struct {
 
 func (x *APLValueAuraRemainingTime) Reset() {
 	*x = APLValueAuraRemainingTime{}
-	mi := &file_apl_proto_msgTypes[75]
+	mi := &file_apl_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5319,7 +5384,7 @@ func (x *APLValueAuraRemainingTime) String() string {
 func (*APLValueAuraRemainingTime) ProtoMessage() {}
 
 func (x *APLValueAuraRemainingTime) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[75]
+	mi := &file_apl_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5332,7 +5397,7 @@ func (x *APLValueAuraRemainingTime) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueAuraRemainingTime.ProtoReflect.Descriptor instead.
 func (*APLValueAuraRemainingTime) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{75}
+	return file_apl_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *APLValueAuraRemainingTime) GetSourceUnit() *UnitReference {
@@ -5359,7 +5424,7 @@ type APLValueAuraNumStacks struct {
 
 func (x *APLValueAuraNumStacks) Reset() {
 	*x = APLValueAuraNumStacks{}
-	mi := &file_apl_proto_msgTypes[76]
+	mi := &file_apl_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5371,7 +5436,7 @@ func (x *APLValueAuraNumStacks) String() string {
 func (*APLValueAuraNumStacks) ProtoMessage() {}
 
 func (x *APLValueAuraNumStacks) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[76]
+	mi := &file_apl_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5384,7 +5449,7 @@ func (x *APLValueAuraNumStacks) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueAuraNumStacks.ProtoReflect.Descriptor instead.
 func (*APLValueAuraNumStacks) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{76}
+	return file_apl_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *APLValueAuraNumStacks) GetSourceUnit() *UnitReference {
@@ -5411,7 +5476,7 @@ type APLValueAuraInternalCooldown struct {
 
 func (x *APLValueAuraInternalCooldown) Reset() {
 	*x = APLValueAuraInternalCooldown{}
-	mi := &file_apl_proto_msgTypes[77]
+	mi := &file_apl_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5423,7 +5488,7 @@ func (x *APLValueAuraInternalCooldown) String() string {
 func (*APLValueAuraInternalCooldown) ProtoMessage() {}
 
 func (x *APLValueAuraInternalCooldown) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[77]
+	mi := &file_apl_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5436,7 +5501,7 @@ func (x *APLValueAuraInternalCooldown) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueAuraInternalCooldown.ProtoReflect.Descriptor instead.
 func (*APLValueAuraInternalCooldown) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{77}
+	return file_apl_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *APLValueAuraInternalCooldown) GetSourceUnit() *UnitReference {
@@ -5463,7 +5528,7 @@ type APLValueAuraICDIsReadyWithReactionTime struct {
 
 func (x *APLValueAuraICDIsReadyWithReactionTime) Reset() {
 	*x = APLValueAuraICDIsReadyWithReactionTime{}
-	mi := &file_apl_proto_msgTypes[78]
+	mi := &file_apl_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5475,7 +5540,7 @@ func (x *APLValueAuraICDIsReadyWithReactionTime) String() string {
 func (*APLValueAuraICDIsReadyWithReactionTime) ProtoMessage() {}
 
 func (x *APLValueAuraICDIsReadyWithReactionTime) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[78]
+	mi := &file_apl_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5488,7 +5553,7 @@ func (x *APLValueAuraICDIsReadyWithReactionTime) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use APLValueAuraICDIsReadyWithReactionTime.ProtoReflect.Descriptor instead.
 func (*APLValueAuraICDIsReadyWithReactionTime) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{78}
+	return file_apl_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *APLValueAuraICDIsReadyWithReactionTime) GetSourceUnit() *UnitReference {
@@ -5516,7 +5581,7 @@ type APLValueAuraShouldRefresh struct {
 
 func (x *APLValueAuraShouldRefresh) Reset() {
 	*x = APLValueAuraShouldRefresh{}
-	mi := &file_apl_proto_msgTypes[79]
+	mi := &file_apl_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5528,7 +5593,7 @@ func (x *APLValueAuraShouldRefresh) String() string {
 func (*APLValueAuraShouldRefresh) ProtoMessage() {}
 
 func (x *APLValueAuraShouldRefresh) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[79]
+	mi := &file_apl_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5541,7 +5606,7 @@ func (x *APLValueAuraShouldRefresh) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueAuraShouldRefresh.ProtoReflect.Descriptor instead.
 func (*APLValueAuraShouldRefresh) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{79}
+	return file_apl_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *APLValueAuraShouldRefresh) GetSourceUnit() *UnitReference {
@@ -5575,7 +5640,7 @@ type APLValueRuneIsEquipped struct {
 
 func (x *APLValueRuneIsEquipped) Reset() {
 	*x = APLValueRuneIsEquipped{}
-	mi := &file_apl_proto_msgTypes[80]
+	mi := &file_apl_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5587,7 +5652,7 @@ func (x *APLValueRuneIsEquipped) String() string {
 func (*APLValueRuneIsEquipped) ProtoMessage() {}
 
 func (x *APLValueRuneIsEquipped) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[80]
+	mi := &file_apl_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5600,7 +5665,7 @@ func (x *APLValueRuneIsEquipped) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueRuneIsEquipped.ProtoReflect.Descriptor instead.
 func (*APLValueRuneIsEquipped) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{80}
+	return file_apl_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *APLValueRuneIsEquipped) GetRuneId() *ActionID {
@@ -5620,7 +5685,7 @@ type APLValueDotIsActive struct {
 
 func (x *APLValueDotIsActive) Reset() {
 	*x = APLValueDotIsActive{}
-	mi := &file_apl_proto_msgTypes[81]
+	mi := &file_apl_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5632,7 +5697,7 @@ func (x *APLValueDotIsActive) String() string {
 func (*APLValueDotIsActive) ProtoMessage() {}
 
 func (x *APLValueDotIsActive) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[81]
+	mi := &file_apl_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5645,7 +5710,7 @@ func (x *APLValueDotIsActive) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueDotIsActive.ProtoReflect.Descriptor instead.
 func (*APLValueDotIsActive) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{81}
+	return file_apl_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *APLValueDotIsActive) GetTargetUnit() *UnitReference {
@@ -5672,7 +5737,7 @@ type APLValueDotRemainingTime struct {
 
 func (x *APLValueDotRemainingTime) Reset() {
 	*x = APLValueDotRemainingTime{}
-	mi := &file_apl_proto_msgTypes[82]
+	mi := &file_apl_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5684,7 +5749,7 @@ func (x *APLValueDotRemainingTime) String() string {
 func (*APLValueDotRemainingTime) ProtoMessage() {}
 
 func (x *APLValueDotRemainingTime) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[82]
+	mi := &file_apl_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5697,7 +5762,7 @@ func (x *APLValueDotRemainingTime) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueDotRemainingTime.ProtoReflect.Descriptor instead.
 func (*APLValueDotRemainingTime) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{82}
+	return file_apl_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *APLValueDotRemainingTime) GetTargetUnit() *UnitReference {
@@ -5723,7 +5788,7 @@ type APLValueSequenceIsComplete struct {
 
 func (x *APLValueSequenceIsComplete) Reset() {
 	*x = APLValueSequenceIsComplete{}
-	mi := &file_apl_proto_msgTypes[83]
+	mi := &file_apl_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5735,7 +5800,7 @@ func (x *APLValueSequenceIsComplete) String() string {
 func (*APLValueSequenceIsComplete) ProtoMessage() {}
 
 func (x *APLValueSequenceIsComplete) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[83]
+	mi := &file_apl_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5748,7 +5813,7 @@ func (x *APLValueSequenceIsComplete) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSequenceIsComplete.ProtoReflect.Descriptor instead.
 func (*APLValueSequenceIsComplete) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{83}
+	return file_apl_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *APLValueSequenceIsComplete) GetSequenceName() string {
@@ -5767,7 +5832,7 @@ type APLValueSequenceIsReady struct {
 
 func (x *APLValueSequenceIsReady) Reset() {
 	*x = APLValueSequenceIsReady{}
-	mi := &file_apl_proto_msgTypes[84]
+	mi := &file_apl_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5779,7 +5844,7 @@ func (x *APLValueSequenceIsReady) String() string {
 func (*APLValueSequenceIsReady) ProtoMessage() {}
 
 func (x *APLValueSequenceIsReady) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[84]
+	mi := &file_apl_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5792,7 +5857,7 @@ func (x *APLValueSequenceIsReady) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSequenceIsReady.ProtoReflect.Descriptor instead.
 func (*APLValueSequenceIsReady) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{84}
+	return file_apl_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *APLValueSequenceIsReady) GetSequenceName() string {
@@ -5811,7 +5876,7 @@ type APLValueSequenceTimeToReady struct {
 
 func (x *APLValueSequenceTimeToReady) Reset() {
 	*x = APLValueSequenceTimeToReady{}
-	mi := &file_apl_proto_msgTypes[85]
+	mi := &file_apl_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5823,7 +5888,7 @@ func (x *APLValueSequenceTimeToReady) String() string {
 func (*APLValueSequenceTimeToReady) ProtoMessage() {}
 
 func (x *APLValueSequenceTimeToReady) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[85]
+	mi := &file_apl_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5836,7 +5901,7 @@ func (x *APLValueSequenceTimeToReady) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueSequenceTimeToReady.ProtoReflect.Descriptor instead.
 func (*APLValueSequenceTimeToReady) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{85}
+	return file_apl_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *APLValueSequenceTimeToReady) GetSequenceName() string {
@@ -5855,7 +5920,7 @@ type APLValueTotemRemainingTime struct {
 
 func (x *APLValueTotemRemainingTime) Reset() {
 	*x = APLValueTotemRemainingTime{}
-	mi := &file_apl_proto_msgTypes[86]
+	mi := &file_apl_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5867,7 +5932,7 @@ func (x *APLValueTotemRemainingTime) String() string {
 func (*APLValueTotemRemainingTime) ProtoMessage() {}
 
 func (x *APLValueTotemRemainingTime) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[86]
+	mi := &file_apl_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5880,7 +5945,7 @@ func (x *APLValueTotemRemainingTime) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueTotemRemainingTime.ProtoReflect.Descriptor instead.
 func (*APLValueTotemRemainingTime) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{86}
+	return file_apl_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *APLValueTotemRemainingTime) GetTotemType() ShamanTotems_TotemType {
@@ -5898,7 +5963,7 @@ type APLValueCatExcessEnergy struct {
 
 func (x *APLValueCatExcessEnergy) Reset() {
 	*x = APLValueCatExcessEnergy{}
-	mi := &file_apl_proto_msgTypes[87]
+	mi := &file_apl_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5910,7 +5975,7 @@ func (x *APLValueCatExcessEnergy) String() string {
 func (*APLValueCatExcessEnergy) ProtoMessage() {}
 
 func (x *APLValueCatExcessEnergy) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[87]
+	mi := &file_apl_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5923,7 +5988,7 @@ func (x *APLValueCatExcessEnergy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueCatExcessEnergy.ProtoReflect.Descriptor instead.
 func (*APLValueCatExcessEnergy) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{87}
+	return file_apl_proto_rawDescGZIP(), []int{88}
 }
 
 type APLValueWarlockShouldRecastDrainSoul struct {
@@ -5934,7 +5999,7 @@ type APLValueWarlockShouldRecastDrainSoul struct {
 
 func (x *APLValueWarlockShouldRecastDrainSoul) Reset() {
 	*x = APLValueWarlockShouldRecastDrainSoul{}
-	mi := &file_apl_proto_msgTypes[88]
+	mi := &file_apl_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5946,7 +6011,7 @@ func (x *APLValueWarlockShouldRecastDrainSoul) String() string {
 func (*APLValueWarlockShouldRecastDrainSoul) ProtoMessage() {}
 
 func (x *APLValueWarlockShouldRecastDrainSoul) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[88]
+	mi := &file_apl_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5959,7 +6024,7 @@ func (x *APLValueWarlockShouldRecastDrainSoul) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use APLValueWarlockShouldRecastDrainSoul.ProtoReflect.Descriptor instead.
 func (*APLValueWarlockShouldRecastDrainSoul) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{88}
+	return file_apl_proto_rawDescGZIP(), []int{89}
 }
 
 type APLValueWarlockShouldRefreshCorruption struct {
@@ -5971,7 +6036,7 @@ type APLValueWarlockShouldRefreshCorruption struct {
 
 func (x *APLValueWarlockShouldRefreshCorruption) Reset() {
 	*x = APLValueWarlockShouldRefreshCorruption{}
-	mi := &file_apl_proto_msgTypes[89]
+	mi := &file_apl_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5983,7 +6048,7 @@ func (x *APLValueWarlockShouldRefreshCorruption) String() string {
 func (*APLValueWarlockShouldRefreshCorruption) ProtoMessage() {}
 
 func (x *APLValueWarlockShouldRefreshCorruption) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[89]
+	mi := &file_apl_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5996,7 +6061,7 @@ func (x *APLValueWarlockShouldRefreshCorruption) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use APLValueWarlockShouldRefreshCorruption.ProtoReflect.Descriptor instead.
 func (*APLValueWarlockShouldRefreshCorruption) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{89}
+	return file_apl_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *APLValueWarlockShouldRefreshCorruption) GetTargetUnit() *UnitReference {
@@ -6014,7 +6079,7 @@ type APLValueWarlockCurrentPetMana struct {
 
 func (x *APLValueWarlockCurrentPetMana) Reset() {
 	*x = APLValueWarlockCurrentPetMana{}
-	mi := &file_apl_proto_msgTypes[90]
+	mi := &file_apl_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6026,7 +6091,7 @@ func (x *APLValueWarlockCurrentPetMana) String() string {
 func (*APLValueWarlockCurrentPetMana) ProtoMessage() {}
 
 func (x *APLValueWarlockCurrentPetMana) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[90]
+	mi := &file_apl_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6039,7 +6104,7 @@ func (x *APLValueWarlockCurrentPetMana) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueWarlockCurrentPetMana.ProtoReflect.Descriptor instead.
 func (*APLValueWarlockCurrentPetMana) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{90}
+	return file_apl_proto_rawDescGZIP(), []int{91}
 }
 
 type APLValueWarlockCurrentPetManaPercent struct {
@@ -6050,7 +6115,7 @@ type APLValueWarlockCurrentPetManaPercent struct {
 
 func (x *APLValueWarlockCurrentPetManaPercent) Reset() {
 	*x = APLValueWarlockCurrentPetManaPercent{}
-	mi := &file_apl_proto_msgTypes[91]
+	mi := &file_apl_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6062,7 +6127,7 @@ func (x *APLValueWarlockCurrentPetManaPercent) String() string {
 func (*APLValueWarlockCurrentPetManaPercent) ProtoMessage() {}
 
 func (x *APLValueWarlockCurrentPetManaPercent) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[91]
+	mi := &file_apl_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6075,7 +6140,7 @@ func (x *APLValueWarlockCurrentPetManaPercent) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use APLValueWarlockCurrentPetManaPercent.ProtoReflect.Descriptor instead.
 func (*APLValueWarlockCurrentPetManaPercent) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{91}
+	return file_apl_proto_rawDescGZIP(), []int{92}
 }
 
 type APLValueWarlockPetIsActive struct {
@@ -6086,7 +6151,7 @@ type APLValueWarlockPetIsActive struct {
 
 func (x *APLValueWarlockPetIsActive) Reset() {
 	*x = APLValueWarlockPetIsActive{}
-	mi := &file_apl_proto_msgTypes[92]
+	mi := &file_apl_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6098,7 +6163,7 @@ func (x *APLValueWarlockPetIsActive) String() string {
 func (*APLValueWarlockPetIsActive) ProtoMessage() {}
 
 func (x *APLValueWarlockPetIsActive) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[92]
+	mi := &file_apl_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6111,7 +6176,7 @@ func (x *APLValueWarlockPetIsActive) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueWarlockPetIsActive.ProtoReflect.Descriptor instead.
 func (*APLValueWarlockPetIsActive) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{92}
+	return file_apl_proto_rawDescGZIP(), []int{93}
 }
 
 type APLValueCurrentSealRemainingTime struct {
@@ -6122,7 +6187,7 @@ type APLValueCurrentSealRemainingTime struct {
 
 func (x *APLValueCurrentSealRemainingTime) Reset() {
 	*x = APLValueCurrentSealRemainingTime{}
-	mi := &file_apl_proto_msgTypes[93]
+	mi := &file_apl_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6134,7 +6199,7 @@ func (x *APLValueCurrentSealRemainingTime) String() string {
 func (*APLValueCurrentSealRemainingTime) ProtoMessage() {}
 
 func (x *APLValueCurrentSealRemainingTime) ProtoReflect() protoreflect.Message {
-	mi := &file_apl_proto_msgTypes[93]
+	mi := &file_apl_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6147,7 +6212,7 @@ func (x *APLValueCurrentSealRemainingTime) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use APLValueCurrentSealRemainingTime.ProtoReflect.Descriptor instead.
 func (*APLValueCurrentSealRemainingTime) Descriptor() ([]byte, []int) {
-	return file_apl_proto_rawDescGZIP(), []int{93}
+	return file_apl_proto_rawDescGZIP(), []int{94}
 }
 
 var File_apl_proto protoreflect.FileDescriptor
@@ -6208,7 +6273,7 @@ const file_apl_proto_rawDesc = "" +
 	"\x1bcat_optimal_rotation_action\x18\x13 \x01(\v2(.proto.APLActionCatOptimalRotationActionH\x00R\x18catOptimalRotationAction\x12c\n" +
 	"\x19cast_paladin_primary_seal\x18\x15 \x01(\v2&.proto.APLActionCastPaladinPrimarySealH\x00R\x16castPaladinPrimarySeal\x12I\n" +
 	"\x0fcustom_rotation\x18\x14 \x01(\v2\x1e.proto.APLActionCustomRotationH\x00R\x0ecustomRotationB\b\n" +
-	"\x06action\"\xb9'\n" +
+	"\x06action\"\x94(\n" +
 	"\bAPLValue\x12,\n" +
 	"\x05const\x18\x01 \x01(\v2\x14.proto.APLValueConstH\x00R\x05const\x12&\n" +
 	"\x03and\x18\x02 \x01(\v2\x12.proto.APLValueAndH\x00R\x03and\x12#\n" +
@@ -6232,7 +6297,8 @@ const file_apl_proto_rawDesc = "" +
 	"max_health\x18L \x01(\v2\x18.proto.APLValueMaxHealthH\x00R\tmaxHealth\x12?\n" +
 	"\fcurrent_mana\x18\v \x01(\v2\x1a.proto.APLValueCurrentManaH\x00R\vcurrentMana\x12U\n" +
 	"\x14current_mana_percent\x18\f \x01(\v2!.proto.APLValueCurrentManaPercentH\x00R\x12currentManaPercent\x123\n" +
-	"\bmax_mana\x18K \x01(\v2\x16.proto.APLValueMaxManaH\x00R\amaxMana\x12?\n" +
+	"\bmax_mana\x18K \x01(\v2\x16.proto.APLValueMaxManaH\x00R\amaxMana\x12Y\n" +
+	"\x16mana_income_per_second\x18O \x01(\v2\".proto.APLValueManaIncomePerSecondH\x00R\x13manaIncomePerSecond\x12?\n" +
 	"\fcurrent_rage\x18\x0e \x01(\v2\x1a.proto.APLValueCurrentRageH\x00R\vcurrentRage\x12E\n" +
 	"\x0ecurrent_energy\x18\x0f \x01(\v2\x1c.proto.APLValueCurrentEnergyH\x00R\rcurrentEnergy\x12U\n" +
 	"\x14current_combo_points\x18\x10 \x01(\v2!.proto.APLValueCurrentComboPointsH\x00R\x12currentComboPoints\x12P\n" +
@@ -6407,7 +6473,9 @@ const file_apl_proto_rawDesc = "" +
 	"\x1aAPLValueCurrentManaPercent\x125\n" +
 	"\vsource_unit\x18\x01 \x01(\v2\x14.proto.UnitReferenceR\n" +
 	"sourceUnit\"\x11\n" +
-	"\x0fAPLValueMaxMana\"\x15\n" +
+	"\x0fAPLValueMaxMana\"D\n" +
+	"\x1bAPLValueManaIncomePerSecond\x12%\n" +
+	"\x0ewindow_seconds\x18\x01 \x01(\x01R\rwindowSeconds\"\x15\n" +
 	"\x13APLValueCurrentRage\"\x17\n" +
 	"\x15APLValueCurrentEnergy\"\x1c\n" +
 	"\x1aAPLValueCurrentComboPoints\"\x1a\n" +
@@ -6543,7 +6611,7 @@ func file_apl_proto_rawDescGZIP() []byte {
 }
 
 var file_apl_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_apl_proto_msgTypes = make([]protoimpl.MessageInfo, 94)
+var file_apl_proto_msgTypes = make([]protoimpl.MessageInfo, 95)
 var file_apl_proto_goTypes = []any{
 	(APLValueType)(0),                                 // 0: proto.APLValueType
 	(APLRotation_Type)(0),                             // 1: proto.APLRotation.Type
@@ -6602,62 +6670,63 @@ var file_apl_proto_goTypes = []any{
 	(*APLValueCurrentMana)(nil),                       // 54: proto.APLValueCurrentMana
 	(*APLValueCurrentManaPercent)(nil),                // 55: proto.APLValueCurrentManaPercent
 	(*APLValueMaxMana)(nil),                           // 56: proto.APLValueMaxMana
-	(*APLValueCurrentRage)(nil),                       // 57: proto.APLValueCurrentRage
-	(*APLValueCurrentEnergy)(nil),                     // 58: proto.APLValueCurrentEnergy
-	(*APLValueCurrentComboPoints)(nil),                // 59: proto.APLValueCurrentComboPoints
-	(*APLValueTimeToEnergyTick)(nil),                  // 60: proto.APLValueTimeToEnergyTick
-	(*APLValueEnergyThreshold)(nil),                   // 61: proto.APLValueEnergyThreshold
-	(*APLValueCurrentAttackPower)(nil),                // 62: proto.APLValueCurrentAttackPower
-	(*APLValueGCDIsReady)(nil),                        // 63: proto.APLValueGCDIsReady
-	(*APLValueGCDTimeToReady)(nil),                    // 64: proto.APLValueGCDTimeToReady
-	(*APLValueAutoTimeToNext)(nil),                    // 65: proto.APLValueAutoTimeToNext
-	(*APLValueAutoSwingTime)(nil),                     // 66: proto.APLValueAutoSwingTime
-	(*APLValueSpellIsKnown)(nil),                      // 67: proto.APLValueSpellIsKnown
-	(*APLValueSpellCanCast)(nil),                      // 68: proto.APLValueSpellCanCast
-	(*APLValueSpellIsReady)(nil),                      // 69: proto.APLValueSpellIsReady
-	(*APLValueSpellTimeToReady)(nil),                  // 70: proto.APLValueSpellTimeToReady
-	(*APLValueSpellCastTime)(nil),                     // 71: proto.APLValueSpellCastTime
-	(*APLValueChannelClipDelay)(nil),                  // 72: proto.APLValueChannelClipDelay
-	(*APLValueFrontOfTarget)(nil),                     // 73: proto.APLValueFrontOfTarget
-	(*APLValueSpellTravelTime)(nil),                   // 74: proto.APLValueSpellTravelTime
-	(*APLValueSpellInFlight)(nil),                     // 75: proto.APLValueSpellInFlight
-	(*APLValueSpellCPM)(nil),                          // 76: proto.APLValueSpellCPM
-	(*APLValueSpellIsChanneling)(nil),                 // 77: proto.APLValueSpellIsChanneling
-	(*APLValueSpellChanneledTicks)(nil),               // 78: proto.APLValueSpellChanneledTicks
-	(*APLValueSpellCurrentCost)(nil),                  // 79: proto.APLValueSpellCurrentCost
-	(*APLValueAuraIsKnown)(nil),                       // 80: proto.APLValueAuraIsKnown
-	(*APLValueAuraIsActive)(nil),                      // 81: proto.APLValueAuraIsActive
-	(*APLValueAuraIsActiveWithReactionTime)(nil),      // 82: proto.APLValueAuraIsActiveWithReactionTime
-	(*APLValueAuraRemainingTime)(nil),                 // 83: proto.APLValueAuraRemainingTime
-	(*APLValueAuraNumStacks)(nil),                     // 84: proto.APLValueAuraNumStacks
-	(*APLValueAuraInternalCooldown)(nil),              // 85: proto.APLValueAuraInternalCooldown
-	(*APLValueAuraICDIsReadyWithReactionTime)(nil),    // 86: proto.APLValueAuraICDIsReadyWithReactionTime
-	(*APLValueAuraShouldRefresh)(nil),                 // 87: proto.APLValueAuraShouldRefresh
-	(*APLValueRuneIsEquipped)(nil),                    // 88: proto.APLValueRuneIsEquipped
-	(*APLValueDotIsActive)(nil),                       // 89: proto.APLValueDotIsActive
-	(*APLValueDotRemainingTime)(nil),                  // 90: proto.APLValueDotRemainingTime
-	(*APLValueSequenceIsComplete)(nil),                // 91: proto.APLValueSequenceIsComplete
-	(*APLValueSequenceIsReady)(nil),                   // 92: proto.APLValueSequenceIsReady
-	(*APLValueSequenceTimeToReady)(nil),               // 93: proto.APLValueSequenceTimeToReady
-	(*APLValueTotemRemainingTime)(nil),                // 94: proto.APLValueTotemRemainingTime
-	(*APLValueCatExcessEnergy)(nil),                   // 95: proto.APLValueCatExcessEnergy
-	(*APLValueWarlockShouldRecastDrainSoul)(nil),      // 96: proto.APLValueWarlockShouldRecastDrainSoul
-	(*APLValueWarlockShouldRefreshCorruption)(nil),    // 97: proto.APLValueWarlockShouldRefreshCorruption
-	(*APLValueWarlockCurrentPetMana)(nil),             // 98: proto.APLValueWarlockCurrentPetMana
-	(*APLValueWarlockCurrentPetManaPercent)(nil),      // 99: proto.APLValueWarlockCurrentPetManaPercent
-	(*APLValueWarlockPetIsActive)(nil),                // 100: proto.APLValueWarlockPetIsActive
-	(*APLValueCurrentSealRemainingTime)(nil),          // 101: proto.APLValueCurrentSealRemainingTime
-	(*Cooldowns)(nil),                                 // 102: proto.Cooldowns
-	(*ActionID)(nil),                                  // 103: proto.ActionID
-	(*UnitReference)(nil),                             // 104: proto.UnitReference
-	(ShamanTotems_TotemType)(0),                       // 105: proto.ShamanTotems.TotemType
+	(*APLValueManaIncomePerSecond)(nil),               // 57: proto.APLValueManaIncomePerSecond
+	(*APLValueCurrentRage)(nil),                       // 58: proto.APLValueCurrentRage
+	(*APLValueCurrentEnergy)(nil),                     // 59: proto.APLValueCurrentEnergy
+	(*APLValueCurrentComboPoints)(nil),                // 60: proto.APLValueCurrentComboPoints
+	(*APLValueTimeToEnergyTick)(nil),                  // 61: proto.APLValueTimeToEnergyTick
+	(*APLValueEnergyThreshold)(nil),                   // 62: proto.APLValueEnergyThreshold
+	(*APLValueCurrentAttackPower)(nil),                // 63: proto.APLValueCurrentAttackPower
+	(*APLValueGCDIsReady)(nil),                        // 64: proto.APLValueGCDIsReady
+	(*APLValueGCDTimeToReady)(nil),                    // 65: proto.APLValueGCDTimeToReady
+	(*APLValueAutoTimeToNext)(nil),                    // 66: proto.APLValueAutoTimeToNext
+	(*APLValueAutoSwingTime)(nil),                     // 67: proto.APLValueAutoSwingTime
+	(*APLValueSpellIsKnown)(nil),                      // 68: proto.APLValueSpellIsKnown
+	(*APLValueSpellCanCast)(nil),                      // 69: proto.APLValueSpellCanCast
+	(*APLValueSpellIsReady)(nil),                      // 70: proto.APLValueSpellIsReady
+	(*APLValueSpellTimeToReady)(nil),                  // 71: proto.APLValueSpellTimeToReady
+	(*APLValueSpellCastTime)(nil),                     // 72: proto.APLValueSpellCastTime
+	(*APLValueChannelClipDelay)(nil),                  // 73: proto.APLValueChannelClipDelay
+	(*APLValueFrontOfTarget)(nil),                     // 74: proto.APLValueFrontOfTarget
+	(*APLValueSpellTravelTime)(nil),                   // 75: proto.APLValueSpellTravelTime
+	(*APLValueSpellInFlight)(nil),                     // 76: proto.APLValueSpellInFlight
+	(*APLValueSpellCPM)(nil),                          // 77: proto.APLValueSpellCPM
+	(*APLValueSpellIsChanneling)(nil),                 // 78: proto.APLValueSpellIsChanneling
+	(*APLValueSpellChanneledTicks)(nil),               // 79: proto.APLValueSpellChanneledTicks
+	(*APLValueSpellCurrentCost)(nil),                  // 80: proto.APLValueSpellCurrentCost
+	(*APLValueAuraIsKnown)(nil),                       // 81: proto.APLValueAuraIsKnown
+	(*APLValueAuraIsActive)(nil),                      // 82: proto.APLValueAuraIsActive
+	(*APLValueAuraIsActiveWithReactionTime)(nil),      // 83: proto.APLValueAuraIsActiveWithReactionTime
+	(*APLValueAuraRemainingTime)(nil),                 // 84: proto.APLValueAuraRemainingTime
+	(*APLValueAuraNumStacks)(nil),                     // 85: proto.APLValueAuraNumStacks
+	(*APLValueAuraInternalCooldown)(nil),              // 86: proto.APLValueAuraInternalCooldown
+	(*APLValueAuraICDIsReadyWithReactionTime)(nil),    // 87: proto.APLValueAuraICDIsReadyWithReactionTime
+	(*APLValueAuraShouldRefresh)(nil),                 // 88: proto.APLValueAuraShouldRefresh
+	(*APLValueRuneIsEquipped)(nil),                    // 89: proto.APLValueRuneIsEquipped
+	(*APLValueDotIsActive)(nil),                       // 90: proto.APLValueDotIsActive
+	(*APLValueDotRemainingTime)(nil),                  // 91: proto.APLValueDotRemainingTime
+	(*APLValueSequenceIsComplete)(nil),                // 92: proto.APLValueSequenceIsComplete
+	(*APLValueSequenceIsReady)(nil),                   // 93: proto.APLValueSequenceIsReady
+	(*APLValueSequenceTimeToReady)(nil),               // 94: proto.APLValueSequenceTimeToReady
+	(*APLValueTotemRemainingTime)(nil),                // 95: proto.APLValueTotemRemainingTime
+	(*APLValueCatExcessEnergy)(nil),                   // 96: proto.APLValueCatExcessEnergy
+	(*APLValueWarlockShouldRecastDrainSoul)(nil),      // 97: proto.APLValueWarlockShouldRecastDrainSoul
+	(*APLValueWarlockShouldRefreshCorruption)(nil),    // 98: proto.APLValueWarlockShouldRefreshCorruption
+	(*APLValueWarlockCurrentPetMana)(nil),             // 99: proto.APLValueWarlockCurrentPetMana
+	(*APLValueWarlockCurrentPetManaPercent)(nil),      // 100: proto.APLValueWarlockCurrentPetManaPercent
+	(*APLValueWarlockPetIsActive)(nil),                // 101: proto.APLValueWarlockPetIsActive
+	(*APLValueCurrentSealRemainingTime)(nil),          // 102: proto.APLValueCurrentSealRemainingTime
+	(*Cooldowns)(nil),                                 // 103: proto.Cooldowns
+	(*ActionID)(nil),                                  // 104: proto.ActionID
+	(*UnitReference)(nil),                             // 105: proto.UnitReference
+	(ShamanTotems_TotemType)(0),                       // 106: proto.ShamanTotems.TotemType
 }
 var file_apl_proto_depIdxs = []int32{
 	1,   // 0: proto.APLRotation.type:type_name -> proto.APLRotation.Type
 	9,   // 1: proto.APLRotation.simple:type_name -> proto.SimpleRotation
 	10,  // 2: proto.APLRotation.prepull_actions:type_name -> proto.APLPrepullAction
 	11,  // 3: proto.APLRotation.priority_list:type_name -> proto.APLListItem
-	102, // 4: proto.SimpleRotation.cooldowns:type_name -> proto.Cooldowns
+	103, // 4: proto.SimpleRotation.cooldowns:type_name -> proto.Cooldowns
 	12,  // 5: proto.APLPrepullAction.action:type_name -> proto.APLAction
 	13,  // 6: proto.APLPrepullAction.do_at_value:type_name -> proto.APLValue
 	12,  // 7: proto.APLListItem.action:type_name -> proto.APLAction
@@ -6705,130 +6774,131 @@ var file_apl_proto_depIdxs = []int32{
 	54,  // 49: proto.APLValue.current_mana:type_name -> proto.APLValueCurrentMana
 	55,  // 50: proto.APLValue.current_mana_percent:type_name -> proto.APLValueCurrentManaPercent
 	56,  // 51: proto.APLValue.max_mana:type_name -> proto.APLValueMaxMana
-	57,  // 52: proto.APLValue.current_rage:type_name -> proto.APLValueCurrentRage
-	58,  // 53: proto.APLValue.current_energy:type_name -> proto.APLValueCurrentEnergy
-	59,  // 54: proto.APLValue.current_combo_points:type_name -> proto.APLValueCurrentComboPoints
-	60,  // 55: proto.APLValue.time_to_energy_tick:type_name -> proto.APLValueTimeToEnergyTick
-	61,  // 56: proto.APLValue.energy_threshold:type_name -> proto.APLValueEnergyThreshold
-	62,  // 57: proto.APLValue.current_attack_power:type_name -> proto.APLValueCurrentAttackPower
-	63,  // 58: proto.APLValue.gcd_is_ready:type_name -> proto.APLValueGCDIsReady
-	64,  // 59: proto.APLValue.gcd_time_to_ready:type_name -> proto.APLValueGCDTimeToReady
-	65,  // 60: proto.APLValue.auto_time_to_next:type_name -> proto.APLValueAutoTimeToNext
-	66,  // 61: proto.APLValue.auto_swing_time:type_name -> proto.APLValueAutoSwingTime
-	67,  // 62: proto.APLValue.spell_is_known:type_name -> proto.APLValueSpellIsKnown
-	68,  // 63: proto.APLValue.spell_can_cast:type_name -> proto.APLValueSpellCanCast
-	69,  // 64: proto.APLValue.spell_is_ready:type_name -> proto.APLValueSpellIsReady
-	70,  // 65: proto.APLValue.spell_time_to_ready:type_name -> proto.APLValueSpellTimeToReady
-	71,  // 66: proto.APLValue.spell_cast_time:type_name -> proto.APLValueSpellCastTime
-	74,  // 67: proto.APLValue.spell_travel_time:type_name -> proto.APLValueSpellTravelTime
-	75,  // 68: proto.APLValue.spell_in_flight:type_name -> proto.APLValueSpellInFlight
-	76,  // 69: proto.APLValue.spell_cpm:type_name -> proto.APLValueSpellCPM
-	77,  // 70: proto.APLValue.spell_is_channeling:type_name -> proto.APLValueSpellIsChanneling
-	78,  // 71: proto.APLValue.spell_channeled_ticks:type_name -> proto.APLValueSpellChanneledTicks
-	79,  // 72: proto.APLValue.spell_current_cost:type_name -> proto.APLValueSpellCurrentCost
-	80,  // 73: proto.APLValue.aura_is_known:type_name -> proto.APLValueAuraIsKnown
-	81,  // 74: proto.APLValue.aura_is_active:type_name -> proto.APLValueAuraIsActive
-	82,  // 75: proto.APLValue.aura_is_active_with_reaction_time:type_name -> proto.APLValueAuraIsActiveWithReactionTime
-	83,  // 76: proto.APLValue.aura_remaining_time:type_name -> proto.APLValueAuraRemainingTime
-	84,  // 77: proto.APLValue.aura_num_stacks:type_name -> proto.APLValueAuraNumStacks
-	85,  // 78: proto.APLValue.aura_internal_cooldown:type_name -> proto.APLValueAuraInternalCooldown
-	86,  // 79: proto.APLValue.aura_icd_is_ready_with_reaction_time:type_name -> proto.APLValueAuraICDIsReadyWithReactionTime
-	87,  // 80: proto.APLValue.aura_should_refresh:type_name -> proto.APLValueAuraShouldRefresh
-	88,  // 81: proto.APLValue.rune_is_equipped:type_name -> proto.APLValueRuneIsEquipped
-	89,  // 82: proto.APLValue.dot_is_active:type_name -> proto.APLValueDotIsActive
-	90,  // 83: proto.APLValue.dot_remaining_time:type_name -> proto.APLValueDotRemainingTime
-	91,  // 84: proto.APLValue.sequence_is_complete:type_name -> proto.APLValueSequenceIsComplete
-	92,  // 85: proto.APLValue.sequence_is_ready:type_name -> proto.APLValueSequenceIsReady
-	93,  // 86: proto.APLValue.sequence_time_to_ready:type_name -> proto.APLValueSequenceTimeToReady
-	72,  // 87: proto.APLValue.channel_clip_delay:type_name -> proto.APLValueChannelClipDelay
-	73,  // 88: proto.APLValue.front_of_target:type_name -> proto.APLValueFrontOfTarget
-	94,  // 89: proto.APLValue.totem_remaining_time:type_name -> proto.APLValueTotemRemainingTime
-	95,  // 90: proto.APLValue.cat_excess_energy:type_name -> proto.APLValueCatExcessEnergy
-	96,  // 91: proto.APLValue.warlock_should_recast_drain_soul:type_name -> proto.APLValueWarlockShouldRecastDrainSoul
-	97,  // 92: proto.APLValue.warlock_should_refresh_corruption:type_name -> proto.APLValueWarlockShouldRefreshCorruption
-	98,  // 93: proto.APLValue.warlock_current_pet_mana:type_name -> proto.APLValueWarlockCurrentPetMana
-	99,  // 94: proto.APLValue.warlock_current_pet_mana_percent:type_name -> proto.APLValueWarlockCurrentPetManaPercent
-	100, // 95: proto.APLValue.warlock_pet_is_active:type_name -> proto.APLValueWarlockPetIsActive
-	101, // 96: proto.APLValue.current_seal_remaining_time:type_name -> proto.APLValueCurrentSealRemainingTime
-	103, // 97: proto.APLActionCastSpell.spell_id:type_name -> proto.ActionID
-	104, // 98: proto.APLActionCastSpell.target:type_name -> proto.UnitReference
-	103, // 99: proto.APLActionChannelSpell.spell_id:type_name -> proto.ActionID
-	104, // 100: proto.APLActionChannelSpell.target:type_name -> proto.UnitReference
-	13,  // 101: proto.APLActionChannelSpell.interrupt_if:type_name -> proto.APLValue
-	103, // 102: proto.APLActionMultidot.spell_id:type_name -> proto.ActionID
-	13,  // 103: proto.APLActionMultidot.max_overlap:type_name -> proto.APLValue
-	103, // 104: proto.APLActionMultishield.spell_id:type_name -> proto.ActionID
-	13,  // 105: proto.APLActionMultishield.max_overlap:type_name -> proto.APLValue
-	13,  // 106: proto.APLActionWait.duration:type_name -> proto.APLValue
-	13,  // 107: proto.APLActionWaitUntil.condition:type_name -> proto.APLValue
-	12,  // 108: proto.APLActionSchedule.inner_action:type_name -> proto.APLAction
-	12,  // 109: proto.APLActionSequence.actions:type_name -> proto.APLAction
-	12,  // 110: proto.APLActionStrictSequence.actions:type_name -> proto.APLAction
-	104, // 111: proto.APLActionChangeTarget.new_target:type_name -> proto.UnitReference
-	103, // 112: proto.APLActionCancelAura.aura_id:type_name -> proto.ActionID
-	103, // 113: proto.APLActionActivateAura.aura_id:type_name -> proto.ActionID
-	103, // 114: proto.APLActionActivateAuraWithStacks.aura_id:type_name -> proto.ActionID
-	103, // 115: proto.APLActionTriggerICD.aura_id:type_name -> proto.ActionID
-	2,   // 116: proto.APLActionItemSwap.swap_set:type_name -> proto.APLActionItemSwap.SwapSet
-	13,  // 117: proto.APLActionMove.range_from_target:type_name -> proto.APLValue
-	13,  // 118: proto.APLValueAnd.vals:type_name -> proto.APLValue
-	13,  // 119: proto.APLValueOr.vals:type_name -> proto.APLValue
-	13,  // 120: proto.APLValueNot.val:type_name -> proto.APLValue
-	3,   // 121: proto.APLValueCompare.op:type_name -> proto.APLValueCompare.ComparisonOperator
-	13,  // 122: proto.APLValueCompare.lhs:type_name -> proto.APLValue
-	13,  // 123: proto.APLValueCompare.rhs:type_name -> proto.APLValue
-	4,   // 124: proto.APLValueMath.op:type_name -> proto.APLValueMath.MathOperator
-	13,  // 125: proto.APLValueMath.lhs:type_name -> proto.APLValue
-	13,  // 126: proto.APLValueMath.rhs:type_name -> proto.APLValue
-	13,  // 127: proto.APLValueMax.vals:type_name -> proto.APLValue
-	13,  // 128: proto.APLValueMin.vals:type_name -> proto.APLValue
-	5,   // 129: proto.APLValueIsExecutePhase.threshold:type_name -> proto.APLValueIsExecutePhase.ExecutePhaseThreshold
-	104, // 130: proto.APLValueCurrentHealth.source_unit:type_name -> proto.UnitReference
-	104, // 131: proto.APLValueCurrentHealthPercent.source_unit:type_name -> proto.UnitReference
-	104, // 132: proto.APLValueCurrentMana.source_unit:type_name -> proto.UnitReference
-	104, // 133: proto.APLValueCurrentManaPercent.source_unit:type_name -> proto.UnitReference
-	6,   // 134: proto.APLValueAutoTimeToNext.auto_type:type_name -> proto.APLValueAutoTimeToNext.AttackType
-	7,   // 135: proto.APLValueAutoSwingTime.auto_type:type_name -> proto.APLValueAutoSwingTime.SwingType
-	103, // 136: proto.APLValueSpellIsKnown.spell_id:type_name -> proto.ActionID
-	103, // 137: proto.APLValueSpellCanCast.spell_id:type_name -> proto.ActionID
-	103, // 138: proto.APLValueSpellIsReady.spell_id:type_name -> proto.ActionID
-	103, // 139: proto.APLValueSpellTimeToReady.spell_id:type_name -> proto.ActionID
-	103, // 140: proto.APLValueSpellCastTime.spell_id:type_name -> proto.ActionID
-	103, // 141: proto.APLValueSpellTravelTime.spell_id:type_name -> proto.ActionID
-	103, // 142: proto.APLValueSpellInFlight.spell_id:type_name -> proto.ActionID
-	103, // 143: proto.APLValueSpellCPM.spell_id:type_name -> proto.ActionID
-	103, // 144: proto.APLValueSpellIsChanneling.spell_id:type_name -> proto.ActionID
-	103, // 145: proto.APLValueSpellChanneledTicks.spell_id:type_name -> proto.ActionID
-	103, // 146: proto.APLValueSpellCurrentCost.spell_id:type_name -> proto.ActionID
-	104, // 147: proto.APLValueAuraIsKnown.source_unit:type_name -> proto.UnitReference
-	103, // 148: proto.APLValueAuraIsKnown.aura_id:type_name -> proto.ActionID
-	104, // 149: proto.APLValueAuraIsActive.source_unit:type_name -> proto.UnitReference
-	103, // 150: proto.APLValueAuraIsActive.aura_id:type_name -> proto.ActionID
-	104, // 151: proto.APLValueAuraIsActiveWithReactionTime.source_unit:type_name -> proto.UnitReference
-	103, // 152: proto.APLValueAuraIsActiveWithReactionTime.aura_id:type_name -> proto.ActionID
-	104, // 153: proto.APLValueAuraRemainingTime.source_unit:type_name -> proto.UnitReference
-	103, // 154: proto.APLValueAuraRemainingTime.aura_id:type_name -> proto.ActionID
-	104, // 155: proto.APLValueAuraNumStacks.source_unit:type_name -> proto.UnitReference
-	103, // 156: proto.APLValueAuraNumStacks.aura_id:type_name -> proto.ActionID
-	104, // 157: proto.APLValueAuraInternalCooldown.source_unit:type_name -> proto.UnitReference
-	103, // 158: proto.APLValueAuraInternalCooldown.aura_id:type_name -> proto.ActionID
-	104, // 159: proto.APLValueAuraICDIsReadyWithReactionTime.source_unit:type_name -> proto.UnitReference
-	103, // 160: proto.APLValueAuraICDIsReadyWithReactionTime.aura_id:type_name -> proto.ActionID
-	104, // 161: proto.APLValueAuraShouldRefresh.source_unit:type_name -> proto.UnitReference
-	103, // 162: proto.APLValueAuraShouldRefresh.aura_id:type_name -> proto.ActionID
-	13,  // 163: proto.APLValueAuraShouldRefresh.max_overlap:type_name -> proto.APLValue
-	103, // 164: proto.APLValueRuneIsEquipped.rune_id:type_name -> proto.ActionID
-	104, // 165: proto.APLValueDotIsActive.target_unit:type_name -> proto.UnitReference
-	103, // 166: proto.APLValueDotIsActive.spell_id:type_name -> proto.ActionID
-	104, // 167: proto.APLValueDotRemainingTime.target_unit:type_name -> proto.UnitReference
-	103, // 168: proto.APLValueDotRemainingTime.spell_id:type_name -> proto.ActionID
-	105, // 169: proto.APLValueTotemRemainingTime.totem_type:type_name -> proto.ShamanTotems.TotemType
-	104, // 170: proto.APLValueWarlockShouldRefreshCorruption.target_unit:type_name -> proto.UnitReference
-	171, // [171:171] is the sub-list for method output_type
-	171, // [171:171] is the sub-list for method input_type
-	171, // [171:171] is the sub-list for extension type_name
-	171, // [171:171] is the sub-list for extension extendee
-	0,   // [0:171] is the sub-list for field type_name
+	57,  // 52: proto.APLValue.mana_income_per_second:type_name -> proto.APLValueManaIncomePerSecond
+	58,  // 53: proto.APLValue.current_rage:type_name -> proto.APLValueCurrentRage
+	59,  // 54: proto.APLValue.current_energy:type_name -> proto.APLValueCurrentEnergy
+	60,  // 55: proto.APLValue.current_combo_points:type_name -> proto.APLValueCurrentComboPoints
+	61,  // 56: proto.APLValue.time_to_energy_tick:type_name -> proto.APLValueTimeToEnergyTick
+	62,  // 57: proto.APLValue.energy_threshold:type_name -> proto.APLValueEnergyThreshold
+	63,  // 58: proto.APLValue.current_attack_power:type_name -> proto.APLValueCurrentAttackPower
+	64,  // 59: proto.APLValue.gcd_is_ready:type_name -> proto.APLValueGCDIsReady
+	65,  // 60: proto.APLValue.gcd_time_to_ready:type_name -> proto.APLValueGCDTimeToReady
+	66,  // 61: proto.APLValue.auto_time_to_next:type_name -> proto.APLValueAutoTimeToNext
+	67,  // 62: proto.APLValue.auto_swing_time:type_name -> proto.APLValueAutoSwingTime
+	68,  // 63: proto.APLValue.spell_is_known:type_name -> proto.APLValueSpellIsKnown
+	69,  // 64: proto.APLValue.spell_can_cast:type_name -> proto.APLValueSpellCanCast
+	70,  // 65: proto.APLValue.spell_is_ready:type_name -> proto.APLValueSpellIsReady
+	71,  // 66: proto.APLValue.spell_time_to_ready:type_name -> proto.APLValueSpellTimeToReady
+	72,  // 67: proto.APLValue.spell_cast_time:type_name -> proto.APLValueSpellCastTime
+	75,  // 68: proto.APLValue.spell_travel_time:type_name -> proto.APLValueSpellTravelTime
+	76,  // 69: proto.APLValue.spell_in_flight:type_name -> proto.APLValueSpellInFlight
+	77,  // 70: proto.APLValue.spell_cpm:type_name -> proto.APLValueSpellCPM
+	78,  // 71: proto.APLValue.spell_is_channeling:type_name -> proto.APLValueSpellIsChanneling
+	79,  // 72: proto.APLValue.spell_channeled_ticks:type_name -> proto.APLValueSpellChanneledTicks
+	80,  // 73: proto.APLValue.spell_current_cost:type_name -> proto.APLValueSpellCurrentCost
+	81,  // 74: proto.APLValue.aura_is_known:type_name -> proto.APLValueAuraIsKnown
+	82,  // 75: proto.APLValue.aura_is_active:type_name -> proto.APLValueAuraIsActive
+	83,  // 76: proto.APLValue.aura_is_active_with_reaction_time:type_name -> proto.APLValueAuraIsActiveWithReactionTime
+	84,  // 77: proto.APLValue.aura_remaining_time:type_name -> proto.APLValueAuraRemainingTime
+	85,  // 78: proto.APLValue.aura_num_stacks:type_name -> proto.APLValueAuraNumStacks
+	86,  // 79: proto.APLValue.aura_internal_cooldown:type_name -> proto.APLValueAuraInternalCooldown
+	87,  // 80: proto.APLValue.aura_icd_is_ready_with_reaction_time:type_name -> proto.APLValueAuraICDIsReadyWithReactionTime
+	88,  // 81: proto.APLValue.aura_should_refresh:type_name -> proto.APLValueAuraShouldRefresh
+	89,  // 82: proto.APLValue.rune_is_equipped:type_name -> proto.APLValueRuneIsEquipped
+	90,  // 83: proto.APLValue.dot_is_active:type_name -> proto.APLValueDotIsActive
+	91,  // 84: proto.APLValue.dot_remaining_time:type_name -> proto.APLValueDotRemainingTime
+	92,  // 85: proto.APLValue.sequence_is_complete:type_name -> proto.APLValueSequenceIsComplete
+	93,  // 86: proto.APLValue.sequence_is_ready:type_name -> proto.APLValueSequenceIsReady
+	94,  // 87: proto.APLValue.sequence_time_to_ready:type_name -> proto.APLValueSequenceTimeToReady
+	73,  // 88: proto.APLValue.channel_clip_delay:type_name -> proto.APLValueChannelClipDelay
+	74,  // 89: proto.APLValue.front_of_target:type_name -> proto.APLValueFrontOfTarget
+	95,  // 90: proto.APLValue.totem_remaining_time:type_name -> proto.APLValueTotemRemainingTime
+	96,  // 91: proto.APLValue.cat_excess_energy:type_name -> proto.APLValueCatExcessEnergy
+	97,  // 92: proto.APLValue.warlock_should_recast_drain_soul:type_name -> proto.APLValueWarlockShouldRecastDrainSoul
+	98,  // 93: proto.APLValue.warlock_should_refresh_corruption:type_name -> proto.APLValueWarlockShouldRefreshCorruption
+	99,  // 94: proto.APLValue.warlock_current_pet_mana:type_name -> proto.APLValueWarlockCurrentPetMana
+	100, // 95: proto.APLValue.warlock_current_pet_mana_percent:type_name -> proto.APLValueWarlockCurrentPetManaPercent
+	101, // 96: proto.APLValue.warlock_pet_is_active:type_name -> proto.APLValueWarlockPetIsActive
+	102, // 97: proto.APLValue.current_seal_remaining_time:type_name -> proto.APLValueCurrentSealRemainingTime
+	104, // 98: proto.APLActionCastSpell.spell_id:type_name -> proto.ActionID
+	105, // 99: proto.APLActionCastSpell.target:type_name -> proto.UnitReference
+	104, // 100: proto.APLActionChannelSpell.spell_id:type_name -> proto.ActionID
+	105, // 101: proto.APLActionChannelSpell.target:type_name -> proto.UnitReference
+	13,  // 102: proto.APLActionChannelSpell.interrupt_if:type_name -> proto.APLValue
+	104, // 103: proto.APLActionMultidot.spell_id:type_name -> proto.ActionID
+	13,  // 104: proto.APLActionMultidot.max_overlap:type_name -> proto.APLValue
+	104, // 105: proto.APLActionMultishield.spell_id:type_name -> proto.ActionID
+	13,  // 106: proto.APLActionMultishield.max_overlap:type_name -> proto.APLValue
+	13,  // 107: proto.APLActionWait.duration:type_name -> proto.APLValue
+	13,  // 108: proto.APLActionWaitUntil.condition:type_name -> proto.APLValue
+	12,  // 109: proto.APLActionSchedule.inner_action:type_name -> proto.APLAction
+	12,  // 110: proto.APLActionSequence.actions:type_name -> proto.APLAction
+	12,  // 111: proto.APLActionStrictSequence.actions:type_name -> proto.APLAction
+	105, // 112: proto.APLActionChangeTarget.new_target:type_name -> proto.UnitReference
+	104, // 113: proto.APLActionCancelAura.aura_id:type_name -> proto.ActionID
+	104, // 114: proto.APLActionActivateAura.aura_id:type_name -> proto.ActionID
+	104, // 115: proto.APLActionActivateAuraWithStacks.aura_id:type_name -> proto.ActionID
+	104, // 116: proto.APLActionTriggerICD.aura_id:type_name -> proto.ActionID
+	2,   // 117: proto.APLActionItemSwap.swap_set:type_name -> proto.APLActionItemSwap.SwapSet
+	13,  // 118: proto.APLActionMove.range_from_target:type_name -> proto.APLValue
+	13,  // 119: proto.APLValueAnd.vals:type_name -> proto.APLValue
+	13,  // 120: proto.APLValueOr.vals:type_name -> proto.APLValue
+	13,  // 121: proto.APLValueNot.val:type_name -> proto.APLValue
+	3,   // 122: proto.APLValueCompare.op:type_name -> proto.APLValueCompare.ComparisonOperator
+	13,  // 123: proto.APLValueCompare.lhs:type_name -> proto.APLValue
+	13,  // 124: proto.APLValueCompare.rhs:type_name -> proto.APLValue
+	4,   // 125: proto.APLValueMath.op:type_name -> proto.APLValueMath.MathOperator
+	13,  // 126: proto.APLValueMath.lhs:type_name -> proto.APLValue
+	13,  // 127: proto.APLValueMath.rhs:type_name -> proto.APLValue
+	13,  // 128: proto.APLValueMax.vals:type_name -> proto.APLValue
+	13,  // 129: proto.APLValueMin.vals:type_name -> proto.APLValue
+	5,   // 130: proto.APLValueIsExecutePhase.threshold:type_name -> proto.APLValueIsExecutePhase.ExecutePhaseThreshold
+	105, // 131: proto.APLValueCurrentHealth.source_unit:type_name -> proto.UnitReference
+	105, // 132: proto.APLValueCurrentHealthPercent.source_unit:type_name -> proto.UnitReference
+	105, // 133: proto.APLValueCurrentMana.source_unit:type_name -> proto.UnitReference
+	105, // 134: proto.APLValueCurrentManaPercent.source_unit:type_name -> proto.UnitReference
+	6,   // 135: proto.APLValueAutoTimeToNext.auto_type:type_name -> proto.APLValueAutoTimeToNext.AttackType
+	7,   // 136: proto.APLValueAutoSwingTime.auto_type:type_name -> proto.APLValueAutoSwingTime.SwingType
+	104, // 137: proto.APLValueSpellIsKnown.spell_id:type_name -> proto.ActionID
+	104, // 138: proto.APLValueSpellCanCast.spell_id:type_name -> proto.ActionID
+	104, // 139: proto.APLValueSpellIsReady.spell_id:type_name -> proto.ActionID
+	104, // 140: proto.APLValueSpellTimeToReady.spell_id:type_name -> proto.ActionID
+	104, // 141: proto.APLValueSpellCastTime.spell_id:type_name -> proto.ActionID
+	104, // 142: proto.APLValueSpellTravelTime.spell_id:type_name -> proto.ActionID
+	104, // 143: proto.APLValueSpellInFlight.spell_id:type_name -> proto.ActionID
+	104, // 144: proto.APLValueSpellCPM.spell_id:type_name -> proto.ActionID
+	104, // 145: proto.APLValueSpellIsChanneling.spell_id:type_name -> proto.ActionID
+	104, // 146: proto.APLValueSpellChanneledTicks.spell_id:type_name -> proto.ActionID
+	104, // 147: proto.APLValueSpellCurrentCost.spell_id:type_name -> proto.ActionID
+	105, // 148: proto.APLValueAuraIsKnown.source_unit:type_name -> proto.UnitReference
+	104, // 149: proto.APLValueAuraIsKnown.aura_id:type_name -> proto.ActionID
+	105, // 150: proto.APLValueAuraIsActive.source_unit:type_name -> proto.UnitReference
+	104, // 151: proto.APLValueAuraIsActive.aura_id:type_name -> proto.ActionID
+	105, // 152: proto.APLValueAuraIsActiveWithReactionTime.source_unit:type_name -> proto.UnitReference
+	104, // 153: proto.APLValueAuraIsActiveWithReactionTime.aura_id:type_name -> proto.ActionID
+	105, // 154: proto.APLValueAuraRemainingTime.source_unit:type_name -> proto.UnitReference
+	104, // 155: proto.APLValueAuraRemainingTime.aura_id:type_name -> proto.ActionID
+	105, // 156: proto.APLValueAuraNumStacks.source_unit:type_name -> proto.UnitReference
+	104, // 157: proto.APLValueAuraNumStacks.aura_id:type_name -> proto.ActionID
+	105, // 158: proto.APLValueAuraInternalCooldown.source_unit:type_name -> proto.UnitReference
+	104, // 159: proto.APLValueAuraInternalCooldown.aura_id:type_name -> proto.ActionID
+	105, // 160: proto.APLValueAuraICDIsReadyWithReactionTime.source_unit:type_name -> proto.UnitReference
+	104, // 161: proto.APLValueAuraICDIsReadyWithReactionTime.aura_id:type_name -> proto.ActionID
+	105, // 162: proto.APLValueAuraShouldRefresh.source_unit:type_name -> proto.UnitReference
+	104, // 163: proto.APLValueAuraShouldRefresh.aura_id:type_name -> proto.ActionID
+	13,  // 164: proto.APLValueAuraShouldRefresh.max_overlap:type_name -> proto.APLValue
+	104, // 165: proto.APLValueRuneIsEquipped.rune_id:type_name -> proto.ActionID
+	105, // 166: proto.APLValueDotIsActive.target_unit:type_name -> proto.UnitReference
+	104, // 167: proto.APLValueDotIsActive.spell_id:type_name -> proto.ActionID
+	105, // 168: proto.APLValueDotRemainingTime.target_unit:type_name -> proto.UnitReference
+	104, // 169: proto.APLValueDotRemainingTime.spell_id:type_name -> proto.ActionID
+	106, // 170: proto.APLValueTotemRemainingTime.totem_type:type_name -> proto.ShamanTotems.TotemType
+	105, // 171: proto.APLValueWarlockShouldRefreshCorruption.target_unit:type_name -> proto.UnitReference
+	172, // [172:172] is the sub-list for method output_type
+	172, // [172:172] is the sub-list for method input_type
+	172, // [172:172] is the sub-list for extension type_name
+	172, // [172:172] is the sub-list for extension extendee
+	0,   // [0:172] is the sub-list for field type_name
 }
 
 func init() { file_apl_proto_init() }
@@ -6884,6 +6954,7 @@ func file_apl_proto_init() {
 		(*APLValue_CurrentMana)(nil),
 		(*APLValue_CurrentManaPercent)(nil),
 		(*APLValue_MaxMana)(nil),
+		(*APLValue_ManaIncomePerSecond)(nil),
 		(*APLValue_CurrentRage)(nil),
 		(*APLValue_CurrentEnergy)(nil),
 		(*APLValue_CurrentComboPoints)(nil),
@@ -6936,7 +7007,7 @@ func file_apl_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_apl_proto_rawDesc), len(file_apl_proto_rawDesc)),
 			NumEnums:      8,
-			NumMessages:   94,
+			NumMessages:   95,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
