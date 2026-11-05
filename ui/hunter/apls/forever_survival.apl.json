@@ -1,22 +1,5 @@
 {
   "type": "TypeAPL",
-  "prepullActions": [
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 1299447,
-            "rank": 4
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-10s"
-        }
-      }
-    }
-  ],
   "priorityList": [
     {
       "action": {
@@ -24,7 +7,33 @@
       }
     },
     {
-      "notes": "Raptor Strike queued on every swing it is ready. It replaces your next white hit rather than costing a global, so keep it queued and never hold it back for mana: Resourcefulness takes 60% off its cost.",
+      "notes": "Hunter's Mark whenever the target is not marked. From 35, Expose Prey opens Mongoose Bite only on a marked target, so mark the boss before the pull. One mark per target is enough: if another hunter's mark is already up, leave it.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 14325,
+                  "rank": 4
+                },
+                "sourceUnit": {
+                  "type": "CurrentTarget"
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 14325,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
+      "notes": "Raptor Strike queued on every swing it is ready. It replaces your next white hit rather than costing a global, so keep it queued; once Resourcefulness is in at 33 and 34 it costs 60% less, so never hold it back for mana after that.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -60,7 +69,7 @@
       }
     },
     {
-      "notes": "Mongoose Bite the moment it lights up. A dodge opens it for 5 seconds, and Expose Prey opens it for 10 seconds off your hits on a target with Hunter's Mark, any hunter's, which is how it lights up on a boss that never swings at you. One press spends the window.",
+      "notes": "Mongoose Bite the moment it lights up. A dodge opens it for 5 seconds, and once you have Expose Prey at 35 and 36, your hits on a target with Hunter's Mark, any hunter's, open it for 10 seconds, which is how it lights up on a boss that never swings at you. One press spends the window.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -112,7 +121,7 @@
       }
     },
     {
-      "notes": "Immolation Trap at your feet on cooldown. You stand on the boss, so it walks straight into the trap, and Clever Traps and Survivalist's Discipline make it a real damage button. Its burn carries a share of your attack power in Forever, so it keeps up with your gear.",
+      "notes": "Immolation Trap at your feet on cooldown. You stand on the boss, so it walks straight into the trap, and once Clever Traps and Survivalist's Discipline are in it is a real damage button. Its burn carries a share of your attack power in Forever, so it keeps up with your gear.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -138,7 +147,39 @@
           }
         }
       },
-      "notes": "Wing Clip on any free global under a Windfury Totem, as a cheap melee special that can proc Windfury. It is a main hand hit that also rolls your weapon procs. Without the totem it is 50 damage for a global, so leave it alone."
+      "notes": "Wing Clip on any free global under a Windfury Totem, as a cheap melee special that can proc Windfury. It is a main hand hit that also rolls your weapon procs. Without the totem it does next to no damage of its own for a global, so leave it alone."
+    }
+  ],
+  "prepullActions": [
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14325,
+            "rank": 4
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-20s"
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1299447,
+            "rank": 4
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-10s"
+        }
+      }
     }
   ]
 }
