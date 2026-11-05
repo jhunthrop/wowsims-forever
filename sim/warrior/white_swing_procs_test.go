@@ -43,3 +43,34 @@ func TestTheNextSwingAbilitiesKeepTheirAutoBit(t *testing.T) {
 		t.Errorf("onNextSwingProcMask = %v, want main-hand auto plus main-hand special", onNextSwingProcMask)
 	}
 }
+
+// A Heroic Strike that misses outright spends a Flurry charge; a dodged or
+// parried one does not, and a landed one never does (S1 above). Tawl's
+// build 70450 log (magey/forever-warrior discussion #30, 1H and shield, so
+// no off-hand swing can share the timestamp): of the Heroic Strikes that
+// failed under Flurry, all 9 misses removed a charge within a millisecond
+// and none of the 10 dodges and parries did. Unbridled Wrath never procs
+// off any of them.
+func TestAMissedHeroicStrikeSpendsAFlurryCharge(t *testing.T) {
+	cases := []struct {
+		name    string
+		mask    core.ProcMask
+		outcome core.HitOutcome
+		want    bool
+	}{
+		{"white swing hit", core.ProcMaskMeleeMHAuto, core.OutcomeHit, true},
+		{"white swing miss", core.ProcMaskMeleeMHAuto, core.OutcomeMiss, true},
+		{"off-hand white swing dodge", core.ProcMaskMeleeOHAuto, core.OutcomeDodge, true},
+		{"Heroic Strike miss", onNextSwingProcMask, core.OutcomeMiss, true},
+		{"Heroic Strike hit", onNextSwingProcMask, core.OutcomeHit, false},
+		{"Heroic Strike crit", onNextSwingProcMask, core.OutcomeCrit, false},
+		{"Heroic Strike dodge", onNextSwingProcMask, core.OutcomeDodge, false},
+		{"Heroic Strike parry", onNextSwingProcMask, core.OutcomeParry, false},
+		{"Bloodthirst miss", core.ProcMaskMeleeMHSpecial, core.OutcomeMiss, false},
+	}
+	for _, c := range cases {
+		if got := spendsFlurryCharge(c.mask, c.outcome); got != c.want {
+			t.Errorf("%s: spendsFlurryCharge = %v, want %v", c.name, got, c.want)
+		}
+	}
+}

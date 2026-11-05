@@ -509,6 +509,19 @@ func countsAsWhiteSwing(procMask core.ProcMask) bool {
 	return procMask.Matches(core.ProcMaskMeleeWhiteHit) && !procMask.Matches(core.ProcMaskMeleeSpecial)
 }
 
+// spendsFlurryCharge reports whether an attack uses up a Flurry charge: a
+// white swing, landed or not, and a Heroic Strike or Cleave only when it
+// misses outright. Tawl's build 70450 log (magey/forever-warrior
+// discussion #30): all 9 Heroic Strikes that missed under Flurry removed a
+// charge, none of the 10 dodged or parried ones did, and none of the 228
+// landed ones.
+func spendsFlurryCharge(procMask core.ProcMask, outcome core.HitOutcome) bool {
+	if countsAsWhiteSwing(procMask) {
+		return true
+	}
+	return procMask == onNextSwingProcMask && outcome.Matches(core.OutcomeMiss)
+}
+
 // applyUnbridledWrath is Unbridled Wrath: "a 60% chance to generate 1
 // additional Rage when you deal melee damage with a weapon" at rank 5,
 // 12% a point, regardless of weapon (see unbridledWrathRage).
@@ -727,7 +740,7 @@ func (warrior *Warrior) makeFlurryConsumptionTrigger(flurryAura *core.Aura) *cor
 		Label: "Flurry Consume Trigger - " + flurryAura.Label,
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			// Remove a stack.
-			if flurryAura.IsActive() && countsAsWhiteSwing(spell.ProcMask) && icd.IsReady(sim) {
+			if flurryAura.IsActive() && spendsFlurryCharge(spell.ProcMask, result.Outcome) && icd.IsReady(sim) {
 				icd.Use(sim)
 				flurryAura.RemoveStack(sim)
 			}
