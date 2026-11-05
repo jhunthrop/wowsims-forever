@@ -325,14 +325,22 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		MakePermanent(BlessingOfMightAura(&character.Unit, GetTristateValueInt32(individualBuffs.BlessingOfMight, 0, 5)))
 	}
 
+	// A raid-buff Scroll of Strength or Agility gives its stat when no totem
+	// of the same stat is up (the rule the Intellect, Stamina and Spirit
+	// scrolls follow above), and is not counted again when the consume slot
+	// already holds the same scroll.
 	if raidBuffs.StrengthOfEarthTotem != proto.TristateEffect_TristateEffectMissing {
 		multiplier := GetTristateValueFloat(raidBuffs.StrengthOfEarthTotem, 1, 1.15)
 		MakePermanent(StrengthOfEarthTotemAura(&character.Unit, multiplier))
+	} else if raidBuffs.ScrollOfStrength && character.Consumes.GetStrengthBuff() != proto.StrengthBuff_ScrollOfStrength {
+		character.AddStats(BuffSpellValues[ScrollOfStrength])
 	}
 
 	if raidBuffs.GraceOfAirTotem > 0 {
 		multiplier := GetTristateValueFloat(raidBuffs.GraceOfAirTotem, 1, 1.15)
 		MakePermanent(GraceOfAirTotemAura(&character.Unit, multiplier))
+	} else if raidBuffs.ScrollOfAgility && character.Consumes.GetAgilityElixir() != proto.AgilityElixir_ScrollOfAgility {
+		character.AddStats(BuffSpellValues[ScrollOfAgility])
 	}
 
 	if raidBuffs.WindfuryTotem && windfuryTotemReaches(character) {

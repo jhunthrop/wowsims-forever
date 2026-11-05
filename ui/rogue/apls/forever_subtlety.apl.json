@@ -53,7 +53,7 @@
       }
     },
     {
-      "notes": "Shank on cooldown while you have three combo points or fewer or less than 50 energy: an off-hand stab that cannot miss and pays back more energy than it costs. With Boot Knife it can add two combo points, on every Shank once Boot Knife is 5/5 at 39, so at four or five with 50 energy or more you finish first and Shank right after; short on energy, the energy is worth more than a spilled point.",
+      "notes": "Shank on cooldown at three combo points or fewer, or under 50 energy: an off-hand stab that cannot miss and pays back more energy than it costs. Boot Knife, from 35, gives it a chance to add two combo points, on every Shank at 5/5 by 39, so at four or five with 50 energy or more you finish first and Shank right after; short on energy, the energy is worth more than a spilled point.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -115,7 +115,7 @@
           }
         }
       },
-      "notes": "Ghostly Strike on cooldown at four combo points or fewer: it hits harder than Hemorrhage for a little more energy (40 against Hemorrhage's 35, or 30 with both points of Efficient Strikes) and gives a combo point."
+      "notes": "Ghostly Strike on cooldown at four combo points or fewer: it hits harder than Sinister Strike for no more energy, and from 30 harder than Hemorrhage for a little more (40 against Hemorrhage's 35, or 30 once Efficient Strikes is full at 57), and gives a combo point."
     },
     {
       "action": {
@@ -487,12 +487,25 @@
                     }
                   }
                 }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "4"
+                    }
+                  }
+                }
               }
             ]
           }
         }
       },
-      "notes": "Hemorrhage, your builder for every global nothing above takes, and it keeps Hemorrhage's debuff up: one combo point a cast, and the debuff makes your Rupture and Garrote hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more, and hold it after a Ghostly Strike until the Garrote is in."
+      "notes": "Hemorrhage at four combo points or fewer, your builder for every global nothing above takes. At five the extra point is wasted, so save the energy for the finisher. It keeps Hemorrhage's debuff up: one combo point a cast, and the debuff makes your Rupture and Garrote hit 15% harder. Hold it for a moment when Ghostly Strike is under a second from ready, unless you are at 75 energy or more, and hold it after a Ghostly Strike until the Garrote is in."
     },
     {
       "action": {

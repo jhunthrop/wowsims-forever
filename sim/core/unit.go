@@ -36,6 +36,9 @@ type Unit struct {
 	// unit (claimDotAura).
 	dotAuraSpells map[*Aura]*Spell
 
+	// rangedOnlyCritRating sums AddBonusRangedCritRating.
+	rangedOnlyCritRating float64
+
 	// Index of this unit with its group.
 	//  For Players, this is the 0-indexed raid index (0-24).
 	//  For Enemies, this is its enemy index.
@@ -445,12 +448,22 @@ func (unit *Unit) AddBonusRangedHitRating(amount float64) {
 	})
 }
 
+// AddBonusRangedCritRating adds crit rating to the unit's ranged attacks
+// only (a scope). RangedOnlyCritRating reports the sum.
 func (unit *Unit) AddBonusRangedCritRating(amount float64) {
+	unit.rangedOnlyCritRating += amount
 	unit.OnSpellRegistered(func(spell *Spell) {
 		if spell.CastType == proto.CastType_CastTypeRanged {
 			spell.BonusCritRating += amount
 		}
 	})
+}
+
+// RangedOnlyCritRating is the crit rating the unit's ranged attacks carry
+// beyond its stat sheet (AddBonusRangedCritRating): its ranged crit chance
+// is its melee crit chance plus this.
+func (unit *Unit) RangedOnlyCritRating() float64 {
+	return unit.rangedOnlyCritRating
 }
 
 func (unit *Unit) SetCurrentPowerBar(bar PowerBarType) {

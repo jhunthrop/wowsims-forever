@@ -1,6 +1,49 @@
 {
   "type": "TypeAPL",
-  "prepullActions": [],
+  "prepullActions": [
+    {
+      "action": {
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 18788
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 688
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-60s"
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 18788
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 18788
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-45s"
+        }
+      }
+    }
+  ],
   "priorityList": [
     {
       "action": {
@@ -106,7 +149,7 @@
       }
     },
     {
-      "notes": "Amplify Curse before each Bane of Agony, whenever it is off cooldown. At 60, keep it for the fight's final Agony, once your last Doom has fired. It makes that Agony 50% stronger and costs no global.",
+      "notes": "Amplify Curse before each Bane of Agony whenever it is ready below 60, and at 60 only before the final Agony, once your last Doom has fired. It makes that Agony 50% stronger and costs no global.",
       "action": {
         "condition": {
           "and": {
@@ -238,24 +281,41 @@
       }
     },
     {
-      "notes": "Immolate with 3 seconds or less left on it. It lands a moment before the old one ends, and the fresh hit is worth the last tick.",
+      "notes": "Immolate with 3 seconds or less left on it. It lands a moment before the old one ends, and the fresh hit is worth the last tick. The raid build sacrifices the Imp and drops it: without Bane it is a 2 second Fire cast that Burning Shadow does nothing for, and Wrack does more in that time.",
       "action": {
         "condition": {
-          "cmp": {
-            "op": "OpLe",
-            "lhs": {
-              "dotRemainingTime": {
-                "spellId": {
-                  "spellId": 11668,
-                  "rank": 7
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "auraIsKnown": {
+                      "auraId": {
+                        "spellId": 18788
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 11668,
+                        "rank": 7
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3s"
+                    }
+                  }
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "3s"
-              }
-            }
+            ]
           }
         },
         "castSpell": {
@@ -267,7 +327,38 @@
       }
     },
     {
-      "notes": "Wrack with your DoTs up. With Soul Siphon it out-damages Shadow Bolt for a fraction of the mana, and your other Shadow DoTs take 10% more while it runs.",
+      "notes": "Shadow Bolt the moment Nightfall gives you a Shadow Trance, once your current Wrack ends and ahead of the next. It is instant, and each crit puts up Improved Shadow Bolt, so your Wrack and Shadow DoTs take 20% more for 12 seconds.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 18094
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 17941
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 11661,
+            "rank": 9
+          }
+        }
+      }
+    },
+    {
+      "notes": "Wrack with your DoTs up. With Soul Siphon it out-damages Shadow Bolt for a fraction of the mana, and your Corruption and Bane of Agony take 10% more while it runs.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -280,6 +371,17 @@
     {
       "notes": "Shadow Bolt with every DoT up, until Wrack at 40 takes over as your filler.",
       "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": {
+                "spellId": {
+                  "spellId": 1316697
+                }
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 11661,

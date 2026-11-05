@@ -49,7 +49,7 @@
       }
     },
     {
-      "notes": "Combustion once the boss carries 5 Improved Scorch stacks, with your on-use trinkets and your racial. Every Fire hit then adds 10% crit until three non-periodic crits land, and each crit is an Ignite and a Heating Up stack. Give a fresh tank a few seconds of threat first.",
+      "notes": "Combustion once the boss carries 5 Improved Scorch stacks, with your on-use trinkets and your racial. Every Fire hit then adds 10% crit until three non-periodic crits land, and each Fire crit is an Ignite and a Heating Up stack. Give a fresh tank a few seconds of threat first.",
       "action": {
         "condition": {
           "cmp": {
@@ -79,7 +79,7 @@
       }
     },
     {
-      "notes": "Scorch to build Improved Scorch to 5 stacks, or to refresh it with 1.5 seconds or less left. The debuff only boosts your own Fire damage, so every Fire mage keeps their own stacks, and a Scorch that misses adds none. Filler Scorches refresh it anyway, so this line matters after a move or a target swap.",
+      "notes": "Scorch to build Improved Scorch to 5 stacks, or to refresh it with 5 seconds or less left. A Fireball takes 3 seconds, so a later refresh can land after the stacks are gone. The debuff only boosts your own Fire damage, so every Fire mage keeps their own stacks, and a Scorch that misses adds none. At 27, with one point, a Scorch lands a stack only one time in three, so build them only on a mob that lives a minute or more; from 28 they pay on anything that lives 20 seconds.",
       "action": {
         "condition": {
           "and": {
@@ -146,7 +146,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "1.5s"
+                            "val": "5s"
                           }
                         }
                       }
@@ -166,7 +166,7 @@
       }
     },
     {
-      "notes": "Pyroblast only on 3 stacks of Heating Up, when it is a 1.5 second cast. Every Fire Blast hit and every Scorch, Fireball or Fire Blast crit adds a stack, and the cast spends them all. At 6 seconds, or on 1 or 2 stacks, it loses to Scorch.",
+      "notes": "Pyroblast only on 3 stacks of Heating Up, when it is a 1.5 second cast. Every Fire Blast hit and every Scorch, Fireball or Fire Blast crit adds a stack, and the cast spends them all. At 6 seconds, or on 1 or 2 stacks, it loses to your filler.",
       "action": {
         "condition": {
           "and": {
@@ -207,7 +207,7 @@
       }
     },
     {
-      "notes": "Fire Blast every time it is off cooldown, since every hit is a Heating Up stack. Improved Fire Blast makes it a 6 second cooldown. It is your most expensive spell for its damage, but skipping it to save mana costs more damage than the mana buys.",
+      "notes": "Fire Blast every time it is off cooldown: it is instant, and from Heating Up at 30 every hit is a stack. Both points of Improved Fire Blast, by 26, make it a 6 second cooldown. In raid gear it costs more mana for its damage than Scorch, Fireball or Pyroblast, but skipping it to save mana costs more damage than the mana buys.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -218,19 +218,169 @@
       }
     },
     {
-      "notes": "From Heating Up at 30, Scorch is the filler, not Fireball. You land more than two Scorches in the time of one Fireball, so you roll over twice the crits for Heating Up and Ignite, and every cast refreshes your 5 Improved Scorch stacks so you never spend a cast just to keep them up.",
+      "notes": "Arcane Missiles the moment Missile Barrage procs, while the proc is up. It is free and takes half the time, a missile every half second. Every Fireball has a 20% chance to give it and Arcane Blast 40%.",
       "action": {
         "condition": {
-          "auraIsKnown": {
-            "auraId": {
-              "spellId": 400625
-            }
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 400589
+                  }
+                }
+              },
+              {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 400589
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10212,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "Arcane Blast whenever its buff has dropped, once, then back to Fire. Each cast adds 12% of your Intellect as spell damage to every spell you cast for 18 seconds, has a 40% chance at Missile Barrage and takes Incineration's crit. A second cast while the buff is up doubles its cost for one more stack, so let it fall off first.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "spellIsKnown": {
+                  "spellId": {
+                    "spellId": 1239700,
+                    "rank": 5
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 400573
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 1239700,
+            "rank": 5
+          }
+        }
+      }
+    },
+    {
+      "notes": "Scorch when Fire Blast is back before a Scorch would finish. A 3 second Fireball would hold your next Fire Blast, and its Heating Up stack, until the cast ends.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "spellIsKnown": {
+                  "spellId": {
+                    "spellId": 1239700,
+                    "rank": 5
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "spellTimeToReady": {
+                      "spellId": {
+                        "spellId": 10199,
+                        "rank": 7
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "spellCastTime": {
+                      "spellId": {
+                        "spellId": 10207,
+                        "rank": 7
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         },
         "castSpell": {
           "spellId": {
             "spellId": 10207,
             "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "On the leveling build Scorch is the filler once you have Heating Up at 30, not Fireball. With one point of Accelerant you land two Scorches in the time of one Fireball, so you roll twice the crits for Ignite and Heating Up, and every cast keeps your Improved Scorch stacks rolling.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 400625
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "spellIsKnown": {
+                      "spellId": {
+                        "spellId": 1239700,
+                        "rank": 5
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10207,
+            "rank": 7
+          }
+        }
+      }
+    },
+    {
+      "notes": "On the raid build Fireball is the filler. Five points of Accelerant make it a 3 second cast, each one has a 20% chance to make your next Arcane Missiles free through Missile Barrage, and with Arcane Blast's spell damage up it does more over a boss than Scorch. Its crits feed Ignite and Heating Up like any other Fire crit.",
+      "action": {
+        "condition": {
+          "spellIsKnown": {
+            "spellId": {
+              "spellId": 1239700,
+              "rank": 5
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 10151,
+            "rank": 11
           }
         }
       }

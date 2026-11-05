@@ -219,12 +219,16 @@ const petAttackPowerShare = 0.10
 // own crit onto the same table. The beta logs agree: paired per hunter, a
 // pet's magic abilities crit about as often as its melee (11.7% of 1,920
 // against 11.0% of 12,163, levels 20 to 35).
+// The melee channel takes the higher of the hunter's melee and ranged crit
+// (Blizzard, 16 October 2026: pets were "only ever inheriting the player's
+// Melee Critical Strike chance instead of whichever is higher"); his ranged
+// crit is his melee crit plus any ranged-only rating (a scope), never less.
 func (hunter *Hunter) makeStatInheritance() core.PetStatInheritance {
 	return func(ownerStats stats.Stats) stats.Stats {
 		return stats.Stats{
 			stats.AttackPower: ownerStats[hunter.petAttackPowerSource] * petAttackPowerShare,
 			stats.Crit:        ownerStats[stats.Crit],
-			stats.MeleeCrit:   ownerStats[stats.MeleeCrit],
+			stats.MeleeCrit:   ownerStats[stats.MeleeCrit] + hunter.RangedOnlyCritRating(),
 			stats.SpellCrit:   ownerStats[stats.SpellCrit],
 			stats.Hit:         ownerStats[stats.Hit],
 		}

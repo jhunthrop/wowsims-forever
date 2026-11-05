@@ -104,8 +104,12 @@ func (priest *Priest) registerVampiricEmbraceSpell() {
 		// comment in sim/conformance/compare.go.
 		RelatedSelfBuff: priest.VampiricEmbraceAuras.Get(priest.CurrentTarget),
 
+		// Blizzard's 16 October 2026 notes: "Changed Vampiric Embrace so
+		// that it can't be resisted." The 70790 client marks 15286 to
+		// ignore the hit roll (SpellMisc Attributes_3 0x40000, which
+		// Era's row lacks), so every cast lands.
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcOutcome(sim, target, spell.OutcomeMagicHit)
+			result := spell.CalcOutcome(sim, target, spell.OutcomeAlwaysHit)
 			if result.Landed() {
 				priest.VampiricEmbraceAuras.Get(target).Activate(sim)
 			}
