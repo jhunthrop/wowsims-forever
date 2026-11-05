@@ -735,7 +735,7 @@
       }
     },
     {
-      "notes": "On the tank under 55%, only while your mana is ahead of the fight. While leveling, a lower rank heals more for the mana than the top rank: rank 2 at 20 (a tauren keeps it to 23), rank 3 from 30 to 33, rank 4 from 34 to 39, rank 5 from 40 to 45 and rank 6 from 46 to 49.",
+      "notes": "On the tank under 55%, only while your mana is ahead of the fight. While leveling, a lower rank heals more for the mana than the top rank: rank 2 at 20 (a tauren keeps it to 23, and takes rank 4 at 26 to 28), rank 3 from 30 to 33, rank 4 from 34 to 39, rank 5 from 40 to 45 and rank 6 from 46 to 49.",
       "action": {
         "castSpell": {
           "spellId": {
