@@ -162,7 +162,7 @@
       }
     },
     {
-      "notes": "Immolate with 3 seconds or less left on it. It lands a moment before the old one ends, so it never drops; once you have Conflagrate and Incinerate, both need it too.",
+      "notes": "Immolate with 3 seconds or less left on it. It lands a moment before the old one ends, so it never runs out; once you have Conflagrate and Incinerate, both need it too, and until Shadow and Flame is full, recast it whenever Conflagrate eats it.",
       "action": {
         "condition": {
           "cmp": {
