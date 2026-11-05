@@ -35,6 +35,24 @@ func (rogue *Rogue) DeadlyPoisonSnapshotMultiplierForTest(target *core.Unit) flo
 	return rogue.deadlyPoisonTick.Dot(target).SnapshotAttackerMultiplier
 }
 
+// DeadlyPoisonSnapshotBaseDamageForTest exposes the per-tick base damage
+// the Deadly Poison on target last snapshotted (every stack together).
+func (rogue *Rogue) DeadlyPoisonSnapshotBaseDamageForTest(target *core.Unit) float64 {
+	return rogue.deadlyPoisonTick.Dot(target).SnapshotBaseDamage
+}
+
+// PoisonAttackPowerForTest exposes the attack power the poisons read.
+func (rogue *Rogue) PoisonAttackPowerForTest(target *core.Unit) float64 {
+	return rogue.deadlyPoisonTick.MeleeAttackPower(target)
+}
+
+// InstantPoisonBaseDamageForTest exposes one Instant Poison hit's base
+// damage at the rogue's level, before the outcome roll and multipliers.
+func (rogue *Rogue) InstantPoisonBaseDamageForTest(sim *core.Simulation, target *core.Unit) float64 {
+	rank := core.HighestRankAtLevel(instantPoisonLearnLevels, rogue.Level)
+	return instantPoisonBaseDamage(sim, rogue.InstantPoison, target, InstantPoisonDamage[rank], int(rogue.Level))
+}
+
 // DeadlyPoisonStacksForTest exposes the Deadly Poison stacks on target.
 func (rogue *Rogue) DeadlyPoisonStacksForTest(target *core.Unit) int32 {
 	return rogue.deadlyPoisonTick.Dot(target).GetStacks()

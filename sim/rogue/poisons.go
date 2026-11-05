@@ -4,14 +4,27 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 )
 
 // Poison damage is the client's own: InstantPoisonDamage and
 // DeadlyPoisonTickDamage (client_damage.go), checked rank by rank against
-// the vendored client file. Wound Poison deals no damage in the client (its
-// effect is the healing reduction).
+// the vendored client file, plus a share of the rogue's attack power that
+// lives on the server. Blizzard's Forever beta development notes of 3
+// November 2026 (changes since the 15 October update): "Deadly Poison
+// Attack Power coefficient increased to 0.009 (Was 0.0045)" and "Instant
+// Poison Attack Power coefficient increased to 0.01 (Was 0.005)". The
+// client's SpellEffect rows carry 0 in BonusCoefficientFromAP for both, as
+// they do for Garrote's vanilla 0.03 a tick (also server-side), so the row
+// says nothing here; a SpellEffect coefficient is per hit, and per tick of
+// a periodic effect. Wound Poison deals no damage in the client (its effect
+// is the healing reduction).
+const (
+	instantPoisonAttackPowerCoefficient       = 0.01
+	deadlyPoisonAttackPowerCoefficientPerTick = 0.009
+)
 
 // TODO: Add charges to poisons
 
@@ -177,17 +190,14 @@ func (rogue *Rogue) registerDeadlyPoisonSpell() {
 
 			// Every application, a refresh at five stacks included, takes the
 			// caster's modifiers of that moment (Venom's 6-second 30% above
-			// all); only a new stack adds base damage.
-			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, applyStack bool) {
+			// all) and the attack power of that moment. Each stack ticks for
+			// the client amount plus 0.009 of that attack power; the dot is
+			// re-applied as a whole, so every stack reads the latest.
+			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
 				attackTable := dot.Spell.Unit.AttackTables[target.UnitIndex][dot.Spell.CastType]
 				dot.SnapshotAttackerMultiplier = dot.Spell.AttackerDamageMultiplier(attackTable, true)
-				if !applyStack {
-					return
-				}
-				if dot.GetStacks() == 1 {
-					dot.SnapshotBaseDamage = 0
-				}
-				dot.SnapshotBaseDamage += tickDamage.Roll(sim, casterLevel)
+				perStack := tickDamage.Roll(sim, casterLevel) + deadlyPoisonAttackPowerCoefficientPerTick*dot.Spell.MeleeAttackPower(target)
+				dot.SnapshotBaseDamage = float64(dot.GetStacks()) * perStack
 			},
 
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
@@ -256,9 +266,16 @@ func (rogue *Rogue) makeInstantPoison() *core.Spell {
 		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
+			spell.CalcAndDealDamage(sim, target, instantPoisonBaseDamage(sim, spell, target, damage, casterLevel), spell.OutcomeMagicHitAndCrit)
 		},
 	})
+}
+
+// instantPoisonBaseDamage is one Instant Poison hit before the outcome roll
+// and the poison multipliers: the client roll plus 0.01 of the rogue's
+// attack power.
+func instantPoisonBaseDamage(sim *core.Simulation, spell *core.Spell, target *core.Unit, damage clientdamage.Effect, casterLevel int) float64 {
+	return damage.Roll(sim, casterLevel) + instantPoisonAttackPowerCoefficient*spell.MeleeAttackPower(target)
 }
 
 func (rogue *Rogue) makeDeadlyPoison() *core.Spell {
