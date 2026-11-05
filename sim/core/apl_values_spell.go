@@ -21,8 +21,13 @@ func (rot *APLRotation) newValueSpellIsKnown(config *proto.APLValueSpellIsKnown)
 func (value *APLValueSpellIsKnown) Type() proto.APLValueType {
 	return proto.APLValueType_ValueTypeBool
 }
+
+// GetBool is true once the spell is registered and the unit has reached its
+// RequiredLevel: some spells are registered at every level and gated only at
+// cast time (Whirlwind below 36), and a trainer would not have taught them.
 func (value *APLValueSpellIsKnown) GetBool(sim *Simulation) bool {
-	return value.spell != nil
+	spell := value.spell
+	return spell != nil && int(spell.Unit.Level) >= spell.RequiredLevel
 }
 func (value *APLValueSpellIsKnown) String() string {
 	return fmt.Sprintf("Is Known(%s)", value.spell.ActionID)
