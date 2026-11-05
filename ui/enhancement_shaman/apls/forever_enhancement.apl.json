@@ -39,7 +39,7 @@
       }
     },
     {
-      "notes": "Strength of Earth Totem whenever it is down: Strength is your best stat, and in Forever the totem reaches the whole raid within 30 yards.",
+      "notes": "Strength of Earth Totem whenever it is down: it is Strength for every melee player near you, and in Forever the totem reaches the whole raid within 30 yards.",
       "action": {
         "condition": {
           "cmp": {
@@ -65,7 +65,7 @@
       }
     },
     {
-      "notes": "Grace of Air Totem whenever it is down: Agility for the whole raid in range. Windfury Weapon on your own weapon turns off any Windfury Totem's bonus for you, so your Air slot goes to Grace of Air. If no other shaman in the raid has Windfury Totem down, drop Windfury Totem for the warriors and rogues instead: it is worth far more to them than Grace of Air is to you. Learned at 42, rank 2 at 56.",
+      "notes": "Grace of Air Totem whenever your Air slot is empty: Agility for every raid member within 30 yards, you included. Take it when another shaman already has Windfury Totem down near the melee, and wear Rockbiter Weapon so that totem's swings reach you; if none does, Windfury Totem is the stronger drop for the warriors and rogues. Learned at 42, rank 2 at 56.",
       "action": {
         "condition": {
           "cmp": {
@@ -91,7 +91,7 @@
       }
     },
     {
-      "notes": "Stormstrike on cooldown: it is your hardest hit, and it makes your next Lightning Bolt, Chain Lightning or Earth Shock on the target hit 20% harder. 8 second cooldown.",
+      "notes": "Stormstrike on cooldown: it is your hardest hit, and it makes your next Lightning Bolt, Chain Lightning or Earth Shock on the target hit 20% harder. 6 second cooldown.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -101,7 +101,7 @@
       }
     },
     {
-      "notes": "Lightning Bolt at five Maelstrom Weapon stacks: it is instant and free then. Cast it right after Stormstrike when you can, so the bolt takes Stormstrike's 20%.",
+      "notes": "Lightning Bolt at five Maelstrom Weapon stacks once you have all five points: it is instant and free then. Cast it right after Stormstrike when you can, so the bolt takes Stormstrike's 20%. With fewer points even five stacks leave the bolt a cast that holds up your next swing, and the swing is worth more.",
       "action": {
         "condition": {
           "and": {
@@ -109,7 +109,8 @@
               {
                 "auraIsKnown": {
                   "auraId": {
-                    "spellId": 408498
+                    "spellId": 408498,
+                    "tag": 5
                   }
                 }
               },
@@ -215,7 +216,7 @@
       }
     },
     {
-      "notes": "Earth Shock on cooldown while you have more than a quarter of your mana: it takes Stormstrike's 20% when no bolt is ready. Keep that last quarter for Stormstrike and your totems. Until Maelstrom Weapon has all five points your five-stack bolts still cost mana, so keep half your mana instead.",
+      "notes": "Earth Shock on cooldown while your mana is above a quarter: once you have Stormstrike it takes Stormstrike's 20% when no bolt is ready. Keep that last quarter for your totems, and for Stormstrike once you have it.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -224,60 +225,16 @@
           }
         },
         "condition": {
-          "and": {
-            "vals": [
-              {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "25%"
-                    }
-                  }
-                }
-              },
-              {
-                "or": {
-                  "vals": [
-                    {
-                      "cmp": {
-                        "op": "OpGt",
-                        "lhs": {
-                          "currentManaPercent": {}
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "50%"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "not": {
-                        "val": {
-                          "auraIsKnown": {
-                            "auraId": {
-                              "spellId": 408498
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "auraIsKnown": {
-                        "auraId": {
-                          "spellId": 408498,
-                          "tag": 5
-                        }
-                      }
-                    }
-                  ]
-                }
+          "cmp": {
+            "op": "OpGt",
+            "lhs": {
+              "currentManaPercent": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "25%"
               }
-            ]
+            }
           }
         }
       }
