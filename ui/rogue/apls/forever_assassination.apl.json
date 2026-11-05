@@ -155,63 +155,6 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 11275,
-            "rank": 6
-          }
-        },
-        "condition": {
-          "and": {
-            "vals": [
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentComboPoints": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "4"
-                    }
-                  }
-                }
-              },
-              {
-                "not": {
-                  "val": {
-                    "dotIsActive": {
-                      "spellId": {
-                        "spellId": 11275,
-                        "rank": 6
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "auraIsActive": {
-                  "auraId": {
-                    "spellId": 6774,
-                    "rank": 2
-                  }
-                }
-              },
-              {
-                "auraIsKnown": {
-                  "auraId": {
-                    "spellId": 1329256
-                  }
-                }
-              }
-            ]
-          }
-        }
-      },
-      "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking, only with Blood Splatter (the raid build): it lasts 6 seconds longer, and its ticks can crit in Forever."
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
             "spellId": 14177
           }
         },
