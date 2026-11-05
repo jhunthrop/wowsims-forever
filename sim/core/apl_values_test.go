@@ -112,6 +112,70 @@ func TestValueManaIncomePerSecondCountsOnlyWhatTheBarTook(t *testing.T) {
 	}
 }
 
+// Round 24 (platform): mana spent per second over a trailing window, the other side of
+// the paladin pacing budget (Protection's Consecration gate reads spend against income).
+func TestValueManaSpentPerSecondReadsTheTrailingWindow(t *testing.T) {
+	sim := &Simulation{}
+	unit := &Unit{}
+	unit.manaBar.unit = unit
+	unit.stats[stats.Mana] = 10000
+	unit.currentMana = 10000
+	metrics := &ResourceMetrics{}
+	rot := &APLRotation{unit: unit}
+	value := rot.newValueManaSpentPerSecond(&proto.APLValueManaSpentPerSecond{})
+	if value == nil || value.Type() != proto.APLValueType_ValueTypeFloat {
+		t.Fatalf("manaSpentPerSecond = %v, want a float value", value)
+	}
+
+	// A 150 mana cast every 3 s is 50 per second once the 12 s window fills; the cast at
+	// 3 s falls out of a 12 s window read at 15 s.
+	for cast := 1; cast <= 5; cast++ {
+		sim.CurrentTime = time.Duration(cast) * 3 * time.Second
+		unit.SpendMana(sim, 150, metrics)
+	}
+	wide := rot.newValueManaSpentPerSecond(&proto.APLValueManaSpentPerSecond{WindowSeconds: 12})
+	if got := wide.GetFloat(sim); got != 50 {
+		t.Fatalf("spend over 12 s = %v, want 600 / 12 = 50", got)
+	}
+	if got := value.GetFloat(sim); got != 60 {
+		t.Fatalf("spend over the default 10 s = %v, want 600 / 10 = 60", got)
+	}
+
+	// Gains never count as spend, and spend never counts as income.
+	income := rot.newValueManaIncomePerSecond(&proto.APLValueManaIncomePerSecond{})
+	unit.AddMana(sim, 100, metrics)
+	if got := value.GetFloat(sim); got != 60 {
+		t.Fatalf("spend after a gain = %v, want 60", got)
+	}
+	if got := income.GetFloat(sim); got != 10 {
+		t.Fatalf("income after 100 gained = %v, want 100 / 10 = 10", got)
+	}
+
+	// Early in the fight it divides by the time elapsed; a new iteration starts empty.
+	unit.manaBar.reset()
+	early := &Simulation{CurrentTime: 2 * time.Second}
+	unit.SpendMana(early, 100, metrics)
+	if got := value.GetFloat(early); got != 50 {
+		t.Fatalf("spend at 2 s = %v, want 50", got)
+	}
+}
+
+// Round 24 (platform re-audit of round 23 M2): a duration constant in a product with a
+// number was coerced to a float const that kept no float value, so "30s" x 2 read 0.
+func TestMathOfANumberAndADurationConstantWorksInSeconds(t *testing.T) {
+	sim := &Simulation{}
+	rot := &APLRotation{unit: &Unit{Level: 2}}
+	level := rot.newValueCurrentLevel(&proto.APLValueCurrentLevel{})
+	thirty := rot.newValueConst(&proto.APLValueConst{Val: "30s"})
+	for _, operands := range [][2]APLValue{{level, thirty}, {thirty, level}} {
+		lhs, rhs := rot.coerceMathOperands(proto.APLValueMath_OpMul, operands[0], operands[1])
+		product := &APLValueMath{op: proto.APLValueMath_OpMul, lhs: lhs, rhs: rhs}
+		if got := product.GetFloat(sim); got != 60 {
+			t.Fatalf("%s x %s = %v, want 2 x 30 s = 60", operands[0], operands[1], got)
+		}
+	}
+}
+
 // Round 23 (platform): the pacing budget multiplies a rate by the time left
 // (manaIncomePerSecond x remainingTime). A product or quotient of a number and a
 // duration read the duration through GetFloat and panicked, or multiplied two

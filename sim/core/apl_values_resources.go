@@ -282,38 +282,47 @@ func (value *APLValueEnergyThreshold) String() string {
 	return "Energy Threshold"
 }
 
-// APLValueManaIncomePerSecond is the character's mana gained per second over a trailing
-// window, from every source, net of overflow. With currentMana and remainingTime it says
-// whether the mana on hand plus what will come in covers the casts a rotation still needs.
-type APLValueManaIncomePerSecond struct {
+// APLValueManaFlowPerSecond is the character's mana moved one way per second over a
+// trailing window. Income counts every gain net of overflow; spend counts every cost paid.
+// With currentMana and remainingTime they say whether the mana on hand plus what will come
+// in covers the casts a rotation still needs, and how fast the rotation is drawing it down.
+type APLValueManaFlowPerSecond struct {
 	DefaultAPLValueImpl
-	unit   *Unit
+	log    *manaFlowLog
 	window time.Duration
+	name   string
 }
 
-func (rot *APLRotation) newValueManaIncomePerSecond(config *proto.APLValueManaIncomePerSecond) APLValue {
+func (rot *APLRotation) newValueManaFlowPerSecond(name string, windowSeconds float64, log func(*Unit) *manaFlowLog) APLValue {
 	unit := rot.unit
 	if !unit.HasManaBar() {
 		rot.ValidationWarning("%s does not use Mana", unit.Label)
 		return nil
 	}
-	if config.WindowSeconds < 0 {
-		rot.ValidationWarning("manaIncomePerSecond window %v s is negative", config.WindowSeconds)
+	if windowSeconds < 0 {
+		rot.ValidationWarning("%s window %v s is negative", name, windowSeconds)
 		return nil
 	}
-	window := DurationFromSeconds(config.WindowSeconds)
+	window := DurationFromSeconds(windowSeconds)
 	if window == 0 {
-		window = DefaultManaIncomeWindow
+		window = DefaultManaFlowWindow
 	}
-	unit.manaIncome.track(window)
-	return &APLValueManaIncomePerSecond{unit: unit, window: window}
+	flow := log(unit)
+	flow.track(window)
+	return &APLValueManaFlowPerSecond{log: flow, window: window, name: name}
 }
-func (value *APLValueManaIncomePerSecond) Type() proto.APLValueType {
+func (rot *APLRotation) newValueManaIncomePerSecond(config *proto.APLValueManaIncomePerSecond) APLValue {
+	return rot.newValueManaFlowPerSecond("Mana Income Per Second", config.WindowSeconds, func(unit *Unit) *manaFlowLog { return &unit.manaIncome })
+}
+func (rot *APLRotation) newValueManaSpentPerSecond(config *proto.APLValueManaSpentPerSecond) APLValue {
+	return rot.newValueManaFlowPerSecond("Mana Spent Per Second", config.WindowSeconds, func(unit *Unit) *manaFlowLog { return &unit.manaSpend })
+}
+func (value *APLValueManaFlowPerSecond) Type() proto.APLValueType {
 	return proto.APLValueType_ValueTypeFloat
 }
-func (value *APLValueManaIncomePerSecond) GetFloat(sim *Simulation) float64 {
-	return value.unit.manaIncome.perSecond(sim.CurrentTime, value.window)
+func (value *APLValueManaFlowPerSecond) GetFloat(sim *Simulation) float64 {
+	return value.log.perSecond(sim.CurrentTime, value.window)
 }
-func (value *APLValueManaIncomePerSecond) String() string {
-	return fmt.Sprintf("Mana Income Per Second (%s window)", value.window)
+func (value *APLValueManaFlowPerSecond) String() string {
+	return fmt.Sprintf("%s (%s window)", value.name, value.window)
 }
