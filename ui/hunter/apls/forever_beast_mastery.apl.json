@@ -106,7 +106,7 @@
       }
     },
     {
-      "notes": "Rapid Fire on the pull with Bestial Wrath, as an auto shot leaves and Multi-Shot is about to come back. The haste starts on a fresh shot and the first Multi-Shot lands inside it. It is a five minute cooldown, so a boss fight gets one: put your trinkets and racial on the same press.",
+      "notes": "Rapid Fire on the pull with Bestial Wrath, as an auto shot leaves and the shared cooldown is about to come back. The haste starts on a fresh shot and the first Aimed Shot lands inside it. It is a five minute cooldown, so a boss fight gets one: put your trinkets and racial on the same press.",
       "action": {
         "condition": {
           "and": {
@@ -155,23 +155,8 @@
       }
     },
     {
-      "notes": "Aimed Shot when the shared cooldown comes up right after an auto shot fires. For Beast Mastery it is only a small extra over Multi-Shot, and Multi-Shot on every cooldown is fine. If you are partway to your next auto shot, take Multi-Shot and keep the auto rolling.",
+      "notes": "Aimed Shot whenever the shared cooldown is up. Your auto shots keep firing while you cast it, so there is no auto shot to wait for, and it hits harder than Multi-Shot.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "autoTimeToNext": {
-                "autoType": "Ranged"
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "1.2s"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 20904,
@@ -181,7 +166,7 @@
       }
     },
     {
-      "notes": "Multi-Shot on the shared cooldown when Aimed Shot's cast would hold an auto shot, while you are above a quarter of your mana. It is instant, so it never delays your next shot, but it is the worst damage for its mana you fire, so it is the first shot to go when the mana runs low.",
+      "notes": "Multi-Shot on cooldown at 18 and 19, while you are above a quarter of your mana. From 20 Aimed Shot takes the shared cooldown whenever it is up, so Multi-Shot is for packs and for moving. It is the worst damage for its mana you fire, so it is the first shot to go when the mana runs low.",
       "action": {
         "condition": {
           "cmp": {
@@ -205,7 +190,7 @@
       }
     },
     {
-      "notes": "Serpent Sting when it has under 1.5 seconds left, and from 18 never while Multi-Shot is about to come back. Refreshing any earlier throws away a tick. Every tick carries 5% of your ranged attack power on top of its own damage, so it does more for its mana than Arcane Shot or Multi-Shot: keep it rolling for the whole fight. When both are ready, Multi-Shot goes first: a late Multi-Shot pushes back the shared cooldown, while a late sting costs only a moment of its damage. Until 34, while you hold Multi-Shot under a quarter of your mana, do not wait on it: keep the sting rolling.",
+      "notes": "Serpent Sting when it has under 1.5 seconds left, and from 18 never while the shared cooldown is about to come back. Refreshing any earlier throws away a tick. Every tick carries 5% of your ranged attack power on top of its own damage, so it does more for its mana than Arcane Shot or Multi-Shot: keep it rolling for the whole fight. When both are ready, the shared cooldown goes first: a late Aimed Shot pushes it back, while a late sting costs only a moment of its damage. Until 34, while you hold Multi-Shot under a quarter of your mana, do not wait on it: keep the sting rolling.",
       "action": {
         "condition": {
           "and": {
@@ -295,7 +280,7 @@
       }
     },
     {
-      "notes": "Arcane Shot to fill a gap, and from 18 only when Multi-Shot is more than a global away. It is instant and never holds an auto shot, and every hit carries 15% of your ranged attack power, so it does far more for its mana than Multi-Shot: keep it going even when the mana runs low. Until 34, while you hold Multi-Shot under a quarter of your mana, fire it on cooldown instead of waiting for Multi-Shot.",
+      "notes": "Arcane Shot to fill a gap, and from 18 only when the shared cooldown is more than a global away. It is instant and never holds an auto shot, and every hit carries 15% of your ranged attack power, so it does far more for its mana than Multi-Shot: keep it going even when the mana runs low. Until 34, while you hold Multi-Shot under a quarter of your mana, fire it on cooldown instead of waiting for Multi-Shot.",
       "action": {
         "condition": {
           "or": {

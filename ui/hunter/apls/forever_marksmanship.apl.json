@@ -96,7 +96,7 @@
       }
     },
     {
-      "notes": "Rapid Fire on the pull, as an auto shot leaves and Multi-Shot is about to come back. The haste starts on a fresh shot and the first Multi-Shot lands inside it. It is a five minute cooldown, so a boss fight gets one: put your trinkets and racial on the same press.",
+      "notes": "Rapid Fire on the pull, as an auto shot leaves and the shared cooldown is about to come back. The haste starts on a fresh shot and the first Aimed Shot lands inside it. It is a five minute cooldown, so a boss fight gets one: put your trinkets and racial on the same press.",
       "action": {
         "condition": {
           "and": {
@@ -145,23 +145,8 @@
       }
     },
     {
-      "notes": "Aimed Shot when the shared cooldown comes up right after an auto shot fires. It outhits Multi-Shot whenever the cast fits. If you are partway to your next auto shot, take Multi-Shot instead and keep the auto rolling.",
+      "notes": "Aimed Shot whenever the shared cooldown is up. Your auto shots keep firing while you cast it, so there is no auto shot to wait for, and with Barrage it outhits Multi-Shot.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "autoTimeToNext": {
-                "autoType": "Ranged"
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "1.2s"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 20904,
@@ -171,7 +156,7 @@
       }
     },
     {
-      "notes": "Multi-Shot on the shared cooldown when Aimed Shot's cast would hold an auto shot, while you are above a quarter of your mana. It is instant, so it never delays your next shot, but it is the worst damage for its mana you fire, so it is the first shot to go when the mana runs low.",
+      "notes": "Multi-Shot on cooldown at 18 and 19, while you are above a quarter of your mana. From 20 Aimed Shot takes the shared cooldown whenever it is up, so Multi-Shot is for packs and for moving. It is the worst damage for its mana you fire, so it is the first shot to go when the mana runs low.",
       "action": {
         "condition": {
           "cmp": {
@@ -195,23 +180,8 @@
       }
     },
     {
-      "notes": "Sniper Shot when the shared cooldown is down and an auto shot has just left. Its 4 second cast holds your next auto, so start it right after one fires, never partway to the next. It is your hardest hit, on its own 15 second cooldown.",
+      "notes": "Sniper Shot whenever it is ready and the shared cooldown is not. Your auto shots keep firing through its 4 second cast, so start it the moment it comes up. It is your hardest hit, on its own 15 second cooldown.",
       "action": {
-        "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "autoTimeToNext": {
-                "autoType": "Ranged"
-              }
-            },
-            "rhs": {
-              "const": {
-                "val": "1.2s"
-              }
-            }
-          }
-        },
         "castSpell": {
           "spellId": {
             "spellId": 1310786,
