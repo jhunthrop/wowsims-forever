@@ -625,6 +625,10 @@ func (warlock *Warlock) applySoulLink() {
 // rank in the client's talent table).
 const demonicPactTalentSpellID = 425464
 
+// demonicSacrificeTalentSpellID is Demonic Sacrifice's talent spell (18788),
+// also the spell the rotation casts.
+const demonicSacrificeTalentSpellID = 18788
+
 // applyDemonicPact registers the passive as a permanent aura so a rotation
 // can read the talent (auraIsKnown): Demonology's prepull sacrifices the Imp
 // before summoning the Succubus only when Pact keeps the sacrifice. The
@@ -644,8 +648,16 @@ func (warlock *Warlock) applyDemonicSacrifice() {
 		return
 	}
 
+	// The talent itself, readable by a rotation (auraIsKnown 18788) the way
+	// Demonic Pact is: Affliction's raid prepull summons and sacrifices the
+	// Imp only when the build has the talent.
+	core.MakePermanent(warlock.RegisterAura(core.Aura{
+		Label:    "Demonic Sacrifice",
+		ActionID: core.ActionID{SpellID: demonicSacrificeTalentSpellID},
+	}))
+
 	impAura := warlock.GetOrRegisterAura(core.Aura{
-		Label:    "Burning Wish",
+		Label:    "Burning Shadow", // 18789 in the Forever client (Era: Burning Wish)
 		ActionID: core.ActionID{SpellID: 18789},
 		Duration: 30 * time.Minute,
 
