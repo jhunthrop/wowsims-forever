@@ -12,7 +12,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| BalanceDruid | 10 | Cat Form | 0 | 768 | 81.95 (55% base mana)→81.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | BalanceDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
 | BalanceDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 11.27-14.73→11.27-14.73 | 0.150→0.150 | declared, matches |
@@ -233,7 +232,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | FeralBearDruid | 60 | Frenzied Regeneration | 0 | 22842 | 0.00→0.00 | rage→none | 180000→180000 | 0→0 | 1500→1500 | 36→36 | 10000→10000 | match |  | n/a | n/a | n/a |
 | FeralBearDruid | 60 | Maul | 7 | 9881 | 15.00→15.00 | rage→rage | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | n/a | n/a | n/a |
 | FeralBearDruid | 60 | Swipe | 5 | 9908 | 20.00→20.00 | rage→rage | 0→0 | 0→0 | 1500→1500 | 54→54 | n/a | match |  | 83.00-83.00→83.00-83.00 | 1.000→1.000 | declared, matches |
-| FeralDruid | 10 | Cat Form | 0 | 768 | 81.95 (55% base mana)→81.95 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | -1→-1 | match |  | n/a | n/a | n/a |
 | FeralDruid | 10 | Faerie Fire | 0 | 9907 | 115.00→115.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 54→54 | 40000→40000 | match |  | n/a | n/a | n/a |
 | FeralDruid | 10 | Moonfire | 1 | 8921 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 4→4 | 9000→9000 | match |  | 9.19-11.81→9.19-11.81 | 0.150→0.150 | declared, matches |
 | FeralDruid | 10 | Moonfire | 2 | 8924 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 10→10 | 12000→12000 | match |  | 11.27-14.73→11.27-14.73 | 0.150→0.150 | declared, matches |
