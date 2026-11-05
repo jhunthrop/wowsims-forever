@@ -116,7 +116,7 @@
           }
         }
       },
-      "notes": "Penance on cooldown, on whoever is hurt: three heals one second apart for one cast every 12 seconds, your best heal per mana."
+      "notes": "Penance on cooldown, on whoever is hurt: three heals one second apart for one cast every 12 seconds, cheap for all it heals."
     },
     {
       "action": {
@@ -320,7 +320,7 @@
           }
         }
       },
-      "notes": "On the tank at the top rank whenever Weakened Soul is off him: it soaks the next hit and costs a warrior no rage, and the Weakened Soul it leaves turns on Renewed Hope, so the heals that follow crit more and leave Divine Aegis shields."
+      "notes": "On the tank at the top rank whenever Weakened Soul is off him: it soaks the next hit and costs a warrior no rage. Once you have Renewed Hope, the Weakened Soul it leaves makes your next heals on him crit more, and with Divine Aegis every one of those crits leaves a shield."
     },
     {
       "action": {
@@ -351,7 +351,7 @@
           }
         }
       },
-      "notes": "Keep Renew rank 7 or higher on the tank all fight."
+      "notes": "Keep Renew on the tank all fight; at 60 that means rank 7 or higher."
     },
     {
       "action": {
@@ -1053,6 +1053,85 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 2053,
+            "rank": 3
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "math": {
+                            "op": "OpMul",
+                            "lhs": {
+                              "remainingTimePercent": {}
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "0.9"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentHealthPercent": {
+                            "sourceUnit": {
+                              "type": "Player",
+                              "index": 5
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.8"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "16"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "Lesser Heal rank 3 on the tank until you learn Heal at 16: your shield and Renew alone will not keep him up."
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 2060,
             "rank": 1
           },
@@ -1107,7 +1186,7 @@
           }
         }
       },
-      "notes": "Greater Heal rank 1 on a party member who is missing a third of their health: it keeps most of your healing bonus for far less mana than the top rank."
+      "notes": "Greater Heal rank 1 on a party member who is missing a third of their health: once you have higher ranks it keeps most of your healing bonus for far less mana."
     },
     {
       "action": {
@@ -1186,7 +1265,7 @@
           }
         }
       },
-      "notes": "Lesser Heal is the party's small top-up for little mana before 40. From 40 on leave it off your bars for good: by your late forties it has lost your healing bonus, and every cast costs regeneration you need."
+      "notes": "Lesser Heal is the party's small top-up for little mana before 40. From 40 on, leave it off your bars for good: by your late forties it has lost your healing bonus, and every cast costs regeneration you need."
     },
     {
       "action": {
@@ -1630,7 +1709,7 @@
           }
         }
       },
-      "notes": "Greater Heal at the top rank as the tank's filler at 60: he takes the big hits, so the big heal goes on him."
+      "notes": "Greater Heal waits for a deeper hole once your mana falls behind the fight: a tank under 50%."
     },
     {
       "action": {
@@ -1686,6 +1765,57 @@
       "action": {
         "castSpell": {
           "spellId": {
+            "spellId": 2053,
+            "rank": 3
+          },
+          "target": {
+            "type": "Player",
+            "index": 5
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.5"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "16"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "castSpell": {
+          "spellId": {
             "spellId": 2060,
             "rank": 1
           },
@@ -1712,7 +1842,8 @@
             }
           }
         }
-      }
+      },
+      "notes": "Greater Heal rank 1 waits for a deeper hole too once your mana falls behind the fight: a party member under 35%."
     },
     {
       "action": {
