@@ -37,7 +37,7 @@ func (rot *APLRotation) newValueAuraIsActive(config *proto.APLValueAuraIsActive)
 	aura := rot.GetAPLAura(rot.GetSourceUnit(config.SourceUnit), config.AuraId)
 
 	if aura.Get() == nil {
-		return nil
+		return rot.unknownAuraValue("false")
 	}
 
 	return &APLValueAuraIsActive{
@@ -63,7 +63,7 @@ type APLValueAuraIsActiveWithReactionTime struct {
 func (rot *APLRotation) newValueAuraIsActiveWithReactionTime(config *proto.APLValueAuraIsActiveWithReactionTime) APLValue {
 	aura := rot.GetAPLAura(rot.GetSourceUnit(config.SourceUnit), config.AuraId)
 	if aura.Get() == nil {
-		return nil
+		return rot.unknownAuraValue("false")
 	}
 	return &APLValueAuraIsActiveWithReactionTime{
 		aura:         aura,
@@ -89,7 +89,7 @@ type APLValueAuraRemainingTime struct {
 func (rot *APLRotation) newValueAuraRemainingTime(config *proto.APLValueAuraRemainingTime) APLValue {
 	aura := rot.GetAPLAura(rot.GetSourceUnit(config.SourceUnit), config.AuraId)
 	if aura.Get() == nil {
-		return nil
+		return rot.unknownAuraValue("0ms")
 	}
 	return &APLValueAuraRemainingTime{
 		aura: aura,
@@ -113,7 +113,7 @@ type APLValueAuraNumStacks struct {
 func (rot *APLRotation) newValueAuraNumStacks(config *proto.APLValueAuraNumStacks) APLValue {
 	aura := rot.GetAPLAura(rot.GetSourceUnit(config.SourceUnit), config.AuraId)
 	if aura.Get() == nil {
-		return nil
+		return rot.unknownAuraValue("0")
 	}
 	if aura.Get().MaxStacks == 0 {
 		rot.ValidationWarning("%s is not a stackable aura", ProtoToActionID(config.AuraId))
@@ -217,4 +217,13 @@ func (value *APLValueAuraShouldRefresh) GetBool(sim *Simulation) bool {
 }
 func (value *APLValueAuraShouldRefresh) String() string {
 	return fmt.Sprintf("Should Refresh Aura(%s)", value.aura.String())
+}
+
+// unknownAuraValue is what a condition reads for an aura the character never
+// registered (a talent it did not take, a debuff no one applies): inactive, 0
+// stacks, 0 time remaining. Building it to nil instead let and/or/not/compare
+// drop the operand, so the gate vanished and the line ran with no condition
+// (round 22, warlock lane).
+func (rot *APLRotation) unknownAuraValue(val string) APLValue {
+	return rot.newValueConst(&proto.APLValueConst{Val: val})
 }
