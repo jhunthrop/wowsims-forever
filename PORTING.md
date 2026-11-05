@@ -255,6 +255,31 @@ is closest to the combined mean, because the raw per-iteration
 near-median rather than the true global median. See
 `pickSampleIteration` in `sim/core/sim_concurrent.go`.
 
+## The sample iteration records what happened, not only what was cast
+
+`SampleIteration` (proto/api.proto) carries more than the cast log, for the
+site's saved result page. `sim/core/sample_iteration.go` owns all of it; the
+hooks in `Spell.applyEffects`, `Spell.dealDamageInternal` and `Aura`
+(`Activate`, `Deactivate`, `SetStacks`) are a nil check when no sample runs.
+
+- `SampleCast.outcome` and `amount`: how a cast landed and what it dealt. A
+  white swing deals its damage a batch window after its cast, through a copy of
+  the spell, so a late landing finds its row by action id.
+- One extra `SampleCast` row per periodic tick (`SampleOutcomeTick`,
+  `SampleOutcomeTickCrit`). The rows' amounts sum to the iteration's damage.
+- `SampleIteration.auras`: gain, stack change and fade on the sampled player and
+  on every target. A refresh is not a change.
+- `SampleIteration.sheet`: the character and target as the fight starts, read
+  from an environment of its own so it cannot touch the replay.
+
+The recorder reads and never rolls: `TestSampleRecorderLeavesTheFightUntouched`
+pins every metric identical with and without it.
+
+`UnitMetrics.extra_attacks` books extra attacks per granting source
+(`UnitMetrics.addExtraAttacks`), summed over iterations and combined by the
+concurrent path, because the action metrics lump every extra swing under
+`other:attack/3`.
+
 ## No Forever artifacts are built here
 
 This repository stays a clean, upstreamable Go library plus its own UI.

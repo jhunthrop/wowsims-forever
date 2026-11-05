@@ -1,7 +1,9 @@
 package core
 
 import (
+	"cmp"
 	"math"
+	"slices"
 	"time"
 
 	"github.com/wowsims/classic/sim/core/proto"
@@ -112,6 +114,9 @@ type UnitMetrics struct {
 	petActiveTimeSum float64
 	actions          map[ActionID]*ActionMetrics
 	resources        []*ResourceMetrics
+	// extraAttacks is extra attacks granted per source, summed over every
+	// iteration and counted from the pull; see addExtraAttacks.
+	extraAttacks map[ActionID]int32
 }
 
 // Metrics for the current iteration, for 1 agent. Keep this as a separate
@@ -463,6 +468,34 @@ func (unitMetrics *UnitMetrics) addSpellMetrics(spell *Spell, actionID ActionID,
 // This should be called at the end of each iteration, to include metrics from Pets in
 // those of their owner.
 // Assumes that doneIteration() has already been called on the pet metrics.
+// addExtraAttacks books extra attacks to the source that granted them. The
+// engine's action metrics lump every extra swing under one tagged auto attack,
+// so this is the only record of where they came from. Pre-pull grants are left
+// out, as they are from every other metric.
+func (unitMetrics *UnitMetrics) addExtraAttacks(sim *Simulation, source ActionID, attacks int32) {
+	if sim.CurrentTime < 0 {
+		return
+	}
+	if unitMetrics.extraAttacks == nil {
+		unitMetrics.extraAttacks = make(map[ActionID]int32)
+	}
+	unitMetrics.extraAttacks[source] += attacks
+}
+
+func (unitMetrics *UnitMetrics) extraAttacksProto() []*proto.ExtraAttackMetrics {
+	sources := make([]ActionID, 0, len(unitMetrics.extraAttacks))
+	for source := range unitMetrics.extraAttacks {
+		sources = append(sources, source)
+	}
+	slices.SortFunc(sources, func(a, b ActionID) int { return cmp.Compare(a.String(), b.String()) })
+
+	out := make([]*proto.ExtraAttackMetrics, 0, len(sources))
+	for _, source := range sources {
+		out = append(out, &proto.ExtraAttackMetrics{Id: source.ToProto(), Attacks: unitMetrics.extraAttacks[source]})
+	}
+	return out
+}
+
 func (unitMetrics *UnitMetrics) AddFinalPetMetrics(petMetrics *UnitMetrics) {
 	unitMetrics.dps.Total += petMetrics.dps.Total
 }
@@ -645,6 +678,8 @@ func (unitMetrics *UnitMetrics) ToProto() *proto.UnitMetrics {
 		ChanceOfDeath: float64(unitMetrics.numItersDead) / n,
 
 		PetActiveSecondsAvg: unitMetrics.petActiveTimeSum / n,
+
+		ExtraAttacks: unitMetrics.extraAttacksProto(),
 	}
 
 	protoMetrics.Actions = make([]*proto.ActionMetrics, 0, len(unitMetrics.actions))

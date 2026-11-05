@@ -247,6 +247,16 @@ func (rsrc *raidSimResultCombiner) addResourceMetrics(unit *proto.UnitMetrics, a
 	rm.ActualGain += add.ActualGain
 }
 
+func (rsrc *raidSimResultCombiner) addExtraAttackMetrics(unit *proto.UnitMetrics, add *proto.ExtraAttackMetrics) {
+	for _, base := range unit.ExtraAttacks {
+		if base.Id.String() == add.Id.String() {
+			base.Attacks += add.Attacks
+			return
+		}
+	}
+	unit.ExtraAttacks = append(unit.ExtraAttacks, &proto.ExtraAttackMetrics{Id: add.Id, Attacks: add.Attacks})
+}
+
 func (rsrc *raidSimResultCombiner) combineUnitMetrics(base *proto.UnitMetrics, add *proto.UnitMetrics, isLast bool, weight float64) {
 	rsrc.combineDistMetrics(base.Dps, add.Dps, isLast, weight)
 	rsrc.combineDistMetrics(base.Dpasp, add.Dpasp, isLast, weight)
@@ -271,6 +281,10 @@ func (rsrc *raidSimResultCombiner) combineUnitMetrics(base *proto.UnitMetrics, a
 
 	for _, addResource := range add.Resources {
 		rsrc.addResourceMetrics(base, addResource)
+	}
+
+	for _, addExtraAttack := range add.ExtraAttacks {
+		rsrc.addExtraAttackMetrics(base, addExtraAttack)
 	}
 
 	for i, addPet := range add.Pets {

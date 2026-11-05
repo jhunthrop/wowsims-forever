@@ -362,6 +362,16 @@ message UnitMetrics {
 	repeated ResourceMetrics resources = 10;
 
 	repeated UnitMetrics pets = 7;
+
+	// Extra attacks granted to this unit, by the source that granted them.
+	// Forever addition; see PORTING.md.
+	repeated ExtraAttackMetrics extra_attacks = 20;
+}
+
+// Extra attacks one source granted, summed over every iteration.
+message ExtraAttackMetrics {
+	ActionID id = 1;
+	int32 attacks = 2;
 }
 
 // Results for a whole raid.
@@ -411,6 +421,69 @@ message SampleCast {
 	// Keyed by resource name: rage, energy, mana, combo_points. Only the
 	// bars the caster actually has are present.
 	map<string, int32> resources = 4;
+	// How this event landed; None for a cast that dealt no damage result of
+	// its own (a buff, a queued Heroic Strike before its swing).
+	SampleOutcome outcome = 5;
+	// The damage this event dealt.
+	double amount = 6;
+}
+
+// How one sample event landed, the same outcome the engine rolled for it.
+// Tick and TickCrit rows are periodic damage: the engine's cast log gains
+// one row per tick, on top of the row for the cast that applied the dot.
+// Forever addition; see PORTING.md.
+enum SampleOutcome {
+	SampleOutcomeNone = 0;
+	SampleOutcomeHit = 1;
+	SampleOutcomeCrit = 2;
+	SampleOutcomeMiss = 3;
+	SampleOutcomeDodge = 4;
+	SampleOutcomeParry = 5;
+	SampleOutcomeGlance = 6;
+	SampleOutcomeBlock = 7;
+	SampleOutcomeTick = 8;
+	SampleOutcomeTickCrit = 9;
+	SampleOutcomeCrush = 10;
+}
+
+// One change to an aura on the sampled player or on a target, inside the
+// sample iteration. A refresh is not a change. Forever addition; see
+// PORTING.md.
+message SampleAuraEvent {
+	// Milliseconds from the pull; negative during the pre-pull.
+	int64 at_ms = 1;
+	ActionID aura_id = 2;
+	// The target's label, empty when the aura is on the sampled player.
+	string target = 3;
+	// Whether the aura is up after this event.
+	bool active = 4;
+	// The aura's stacks after this event; zero for an aura that does not stack.
+	int32 stacks = 5;
+}
+
+// The character and the target as the fight starts, with every buff and
+// consumable and no cooldown or proc. Hit and crit are percent points.
+// Forever addition; see PORTING.md.
+message SampleSheet {
+	double attack_power = 1;
+	double melee_hit_pct = 2;
+	// Melee crit chance on this target's table, level suppression included.
+	double melee_crit_pct_vs_target = 3;
+	double melee_haste_pct = 4;
+	double main_hand_skill = 5;
+	double off_hand_skill = 6;
+	double ranged_skill = 7;
+	double spell_power = 8;
+	double spell_hit_pct = 9;
+	double spell_crit_pct = 10;
+	bool has_mana_bar = 11;
+
+	int32 target_level = 12;
+	double target_armor = 13;
+	// The target's armor once the debuffs the request applies are up.
+	double target_armor_after_debuffs = 14;
+
+	double ranged_attack_power = 15;
 }
 
 // SampleIteration is one iteration's cast log. The engine picks the
@@ -420,6 +493,8 @@ message SampleIteration {
 	double dps = 1;
 	double duration_seconds = 2;
 	repeated SampleCast casts = 3;
+	repeated SampleAuraEvent auras = 4;
+	SampleSheet sheet = 5;
 }
 
 // Result from running the raid sim.

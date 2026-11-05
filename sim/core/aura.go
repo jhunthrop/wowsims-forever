@@ -209,6 +209,7 @@ func (aura *Aura) SetStacks(sim *Simulation, newStacks int32) {
 		aura.Unit.Log(sim, "%s stacks: %d --> %d", aura.ActionID, oldStacks, newStacks)
 	}
 	aura.stacks = newStacks
+	sim.recordSampleAura(aura, sim.CurrentTime)
 	if aura.OnStacksChange != nil {
 		aura.OnStacksChange(aura, sim, oldStacks, newStacks)
 	}
@@ -594,6 +595,7 @@ func (aura *Aura) Activate(sim *Simulation) {
 	aura.startTime = sim.CurrentTime
 	aura.Refresh(sim)
 	aura.active = true
+	sim.recordSampleAura(aura, sim.CurrentTime)
 
 	if aura.Duration != NeverExpires {
 		aura.activeIndex = int32(len(aura.Unit.activeAuras))
@@ -672,6 +674,7 @@ func (aura *Aura) Deactivate(sim *Simulation) {
 		oldTime := sim.CurrentTime
 		sim.CurrentTime = min(sim.CurrentTime, aura.expires)
 		aura.metrics.Uptime += max(sim.CurrentTime, 0) - max(aura.startTime, 0)
+		sim.recordSampleAura(aura, sim.CurrentTime)
 		if sim.Log != nil {
 			aura.Unit.Log(sim, "Aura faded: %s", aura.ActionID)
 		}
