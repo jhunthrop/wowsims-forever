@@ -26,6 +26,25 @@ type critPair struct{ pet, hunter float64 }
 // enchant on the hunter's gun. Needs -tags=with_db.
 func petAndHunterCrit(t *testing.T, enchant int32, raidBuffs *proto.RaidBuffs) critPair {
 	t.Helper()
+	_, h := startHunterWithPet(t, enchant, raidBuffs)
+	return critsOf(h)
+}
+
+// critsOf reads the pet's and the hunter's every-table plus melee crit, in
+// percent.
+func critsOf(h *Hunter) critPair {
+	ps, hs := h.pet.GetStats(), h.GetStats()
+	return critPair{
+		pet:    (ps[stats.Crit] + ps[stats.MeleeCrit]) / core.CritRatingPerCritChance,
+		hunter: (hs[stats.Crit] + hs[stats.MeleeCrit]) / core.CritRatingPerCritChance,
+	}
+}
+
+// startHunterWithPet runs a level-60 Orc hunter's sim to the pull with his
+// pet summoned, under raidBuffs and with enchant on his gun. Needs
+// -tags=with_db.
+func startHunterWithPet(t *testing.T, enchant int32, raidBuffs *proto.RaidBuffs) (*core.Simulation, *Hunter) {
+	t.Helper()
 	if _, ok := core.EnchantsByEffectID[enchant]; !ok && enchant != 0 {
 		core.EnchantsByEffectID[enchant] = core.Enchant{EffectID: enchant}
 	}
@@ -59,11 +78,7 @@ func petAndHunterCrit(t *testing.T, enchant int32, raidBuffs *proto.RaidBuffs) c
 	if !h.pet.IsEnabled() {
 		t.Fatal("the pet is not summoned")
 	}
-	ps, hs := h.pet.GetStats(), h.GetStats()
-	return critPair{
-		pet:    (ps[stats.Crit] + ps[stats.MeleeCrit]) / core.CritRatingPerCritChance,
-		hunter: (hs[stats.Crit] + hs[stats.MeleeCrit]) / core.CritRatingPerCritChance,
-	}
+	return sim, h
 }
 
 // Blizzard, WoW Forever Beta Development Notes (16 October 2026), Pets:
@@ -95,5 +110,23 @@ func TestHunterPetTakesTheRaidCritAuraOnceThroughTheHunter(t *testing.T) {
 	}
 	if got := both.pet - bare.pet; math.Abs(got-3) > 1e-9 {
 		t.Errorf("the druid auras add %.2f to the pet's crit, want 3 (inherited once, never applied to the pet as well)", got)
+	}
+}
+
+// The scope's ranged-only crit reaches the pet once, at the summon. A
+// change to the hunter's stats in the fight (a crit buff here) moves the
+// pet's crit by that change alone, never by the scope again.
+func TestHunterPetTakesTheScopeOnceThroughTheFight(t *testing.T) {
+	sim, h := startHunterWithPet(t, 8720, &proto.RaidBuffs{})
+	before := critsOf(h)
+	for i := 0; i < 3; i++ {
+		h.AddStatsDynamic(sim, stats.Stats{stats.MeleeCrit: core.CritRatingPerCritChance})
+	}
+	after := critsOf(h)
+	if got := after.hunter - before.hunter; math.Abs(got-3) > 1e-9 {
+		t.Fatalf("the buffs add %.2f to the hunter's crit, want 3", got)
+	}
+	if got := after.pet - before.pet; math.Abs(got-3) > 1e-9 {
+		t.Errorf("the hunter's 3 crit moves the pet's by %.2f, want 3 (the scope is inherited once, at the summon)", got)
 	}
 }
