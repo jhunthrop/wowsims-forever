@@ -575,6 +575,13 @@ func makeBerserkingCooldown(character *Character, customPercentage float64, time
 		},
 	})
 
+	// Only the client's own Berserking autocasts. The custom-percentage
+	// variants share its timer and stay castable from an APL, but as major
+	// cooldowns they would fire on the pull whenever an APL takes the base
+	// spell out of "autocast other cooldowns" to time it itself.
+	if customPercentage != 0 {
+		return
+	}
 	character.AddMajorCooldown(MajorCooldown{
 		Spell:    berserkingSpell,
 		Type:     CooldownTypeDPS,

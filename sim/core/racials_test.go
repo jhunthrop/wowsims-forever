@@ -721,3 +721,28 @@ func TestTouchOfTheGraveMatchesTheClientRows(t *testing.T) {
 		t.Error("a Human must not have Touch of the Grave")
 	}
 }
+
+// Only the client's Berserking (20554, tag 0) is a major cooldown. The
+// custom-percentage variants are APL compatibility spells on the same
+// timer; were they major cooldowns too, an APL that casts Berserking itself
+// (Elemental holds it until Lightning Mastery ends) would take tag 0 out of
+// "autocast other cooldowns" and the next tag would still fire on the pull.
+func TestOnlyTheClientBerserkingIsAMajorCooldown(t *testing.T) {
+	troll, _ := racialPlayer(t, proto.Race_RaceTroll, proto.MobType_MobTypeUnknown)
+	var tags []int32
+	for _, mcd := range troll.initialMajorCooldowns {
+		if mcd.Spell.ActionID.SpellID == berserkingSpellID {
+			tags = append(tags, mcd.Spell.ActionID.Tag)
+		}
+	}
+	if len(tags) != 1 || tags[0] != 0 {
+		t.Errorf("Berserking major cooldowns carry tags %v, want only [0]", tags)
+	}
+
+	troll.removeInitialMajorCooldown(ActionID{SpellID: berserkingSpellID})
+	for _, mcd := range troll.initialMajorCooldowns {
+		if mcd.Spell.ActionID.SpellID == berserkingSpellID {
+			t.Errorf("an APL that casts Berserking still leaves %v to autocast", mcd.Spell.ActionID)
+		}
+	}
+}
