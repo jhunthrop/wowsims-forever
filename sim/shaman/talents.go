@@ -557,7 +557,7 @@ func (shaman *Shaman) totemManaMultiplier() int32 {
 }
 
 // elementalAlacrityCastTimeReduction is Elemental Alacrity's three
-// ranks (talents/shaman.json node 104765): "Reduces the cast time of
+// ranks (talents/shaman.json node 104771): "Reduces the cast time of
 // your Lightning Bolt and Chain Lightning spells by 0.17/0.33/0.50 sec."
 // (trait curve 85216; 1.60.1.70755 took Lava Burst out of the text with
 // the spell). A flat reduction to the pre-haste base cast time, applied
