@@ -798,3 +798,24 @@ func TestDivineProtectionAndDivineShieldShareOneCooldown(t *testing.T) {
 		t.Error("Templar's Bulwark shares the immunities' cooldown, want its own")
 	}
 }
+
+// Sanctified Judgement's mana comes from 1311077, whose SpellMisc row
+// carries Attributes_1 0x400, SPELL_ATTR1_NO_THREAT (1.60.1.70790), and
+// Blizzard's notes of 16 October say the same: "Sanctified Judgement's Mana
+// restore effect no longer generates threat."
+func TestSanctifiedJudgementManaAddsNoThreat(t *testing.T) {
+	metrics := shortRun{
+		Talents: map[string]int{"sanctified_judgement": 3},
+		Rotation: rotationOf(
+			[]string{prepullCast(spellSealOfFury, "2")},
+			[]string{cast(spellJudgement)}),
+		Seconds: 60,
+	}.metrics(t)
+
+	if got := resourceActualGain(metrics, 1311074); got <= 0 {
+		t.Fatalf("Sanctified Judgement restored %v mana over the run, want some", got)
+	}
+	if got := otherActionThreat(metrics, proto.OtherAction_OtherActionManaGain); got != 0 {
+		t.Errorf("Sanctified Judgement's mana made %v threat, want 0 (SPELL_ATTR1_NO_THREAT)", got)
+	}
+}

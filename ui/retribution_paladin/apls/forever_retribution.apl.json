@@ -138,7 +138,7 @@
       }
     },
     {
-      "notes": "With Unsealed Wrath, straight after the opening Crusader Judgement. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then go straight to Seal of Command: three swings store three Commands and the twist is under way. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight.",
+      "notes": "With Unsealed Wrath, straight after the opening Crusader Judgement. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then go straight to Seal of Command: three swings store three Commands and the twist is under way. Open this way without raid buffs too: let it run out, and your first swing under Seal of Righteousness releases the three Commands. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight.",
       "action": {
         "condition": {
           "and": {
