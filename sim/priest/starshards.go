@@ -54,12 +54,13 @@ func (priest *Priest) newStarshardsSpellConfig(rank int, tickIdx int32) core.Spe
 	tickLength := time.Second
 
 	return core.SpellConfig{
-		SpellCode:   SpellCode_PriestStarshards,
-		ActionID:    core.ActionID{SpellID: spellId}.WithTag(tickIdx),
-		SpellSchool: core.SpellSchoolArcane,
-		DefenseType: core.DefenseTypeMagic,
-		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       flags,
+		SpellCode:      SpellCode_PriestStarshards,
+		ClassSpellMask: PriestSpellMaskStarshards,
+		ActionID:       core.ActionID{SpellID: spellId}.WithTag(tickIdx),
+		SpellSchool:    core.SpellSchoolArcane,
+		DefenseType:    core.DefenseTypeMagic,
+		ProcMask:       core.ProcMaskSpellDamage,
+		Flags:          flags,
 
 		RequiredLevel: level,
 		Rank:          rank,
