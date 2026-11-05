@@ -82,7 +82,7 @@ message APLAction {
     }
 }
 
-// NextIndex: 79
+// NextIndex: 80
 message APLValue {
     oneof value {
         // Operators
@@ -112,6 +112,8 @@ message APLValue {
         APLValueCurrentMana current_mana = 11;
         APLValueCurrentManaPercent current_mana_percent = 12;
         APLValueMaxMana max_mana = 75;
+        // Mana gained per second over a trailing window, from every source, net of overflow.
+        APLValueManaIncomePerSecond mana_income_per_second = 79;
         APLValueCurrentRage current_rage = 14;
         APLValueCurrentEnergy current_energy = 15;
         APLValueCurrentComboPoints current_combo_points = 16;
@@ -390,6 +392,13 @@ message APLValueCurrentManaPercent {
     UnitReference source_unit = 1;
 }
 message APLValueMaxMana {}
+// The character's mana gained over the trailing window divided by the window: regen ticks,
+// Judgement of Wisdom, potions, runes and Innervate alike, net of what overflowed a full bar.
+// Before the window has elapsed it divides by the time elapsed so far.
+message APLValueManaIncomePerSecond {
+    // The window in seconds; 0 means 10.
+    double window_seconds = 1;
+}
 message APLValueCurrentRage {}
 message APLValueCurrentEnergy {}
 message APLValueCurrentComboPoints {}

@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/wowsims/classic/sim/core/proto"
 )
@@ -279,4 +280,40 @@ func (value *APLValueEnergyThreshold) GetBool(_ *Simulation) bool {
 }
 func (value *APLValueEnergyThreshold) String() string {
 	return "Energy Threshold"
+}
+
+// APLValueManaIncomePerSecond is the character's mana gained per second over a trailing
+// window, from every source, net of overflow. With currentMana and remainingTime it says
+// whether the mana on hand plus what will come in covers the casts a rotation still needs.
+type APLValueManaIncomePerSecond struct {
+	DefaultAPLValueImpl
+	unit   *Unit
+	window time.Duration
+}
+
+func (rot *APLRotation) newValueManaIncomePerSecond(config *proto.APLValueManaIncomePerSecond) APLValue {
+	unit := rot.unit
+	if !unit.HasManaBar() {
+		rot.ValidationWarning("%s does not use Mana", unit.Label)
+		return nil
+	}
+	if config.WindowSeconds < 0 {
+		rot.ValidationWarning("manaIncomePerSecond window %v s is negative", config.WindowSeconds)
+		return nil
+	}
+	window := DurationFromSeconds(config.WindowSeconds)
+	if window == 0 {
+		window = DefaultManaIncomeWindow
+	}
+	unit.manaIncome.track(window)
+	return &APLValueManaIncomePerSecond{unit: unit, window: window}
+}
+func (value *APLValueManaIncomePerSecond) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeFloat
+}
+func (value *APLValueManaIncomePerSecond) GetFloat(sim *Simulation) float64 {
+	return value.unit.manaIncome.perSecond(sim.CurrentTime, value.window)
+}
+func (value *APLValueManaIncomePerSecond) String() string {
+	return fmt.Sprintf("Mana Income Per Second (%s window)", value.window)
 }
