@@ -57,24 +57,79 @@
           }
         },
         "condition": {
-          "and": {
+          "or": {
             "vals": [
               {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentComboPoints": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "4"
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentComboPoints": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "4"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "or": {
+                        "vals": [
+                          {
+                            "not": {
+                              "val": {
+                                "auraIsActive": {
+                                  "auraId": {
+                                    "spellId": 6774,
+                                    "rank": 2
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "auraRemainingTime": {
+                                  "auraId": {
+                                    "spellId": 6774,
+                                    "rank": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "3"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
                     }
-                  }
+                  ]
                 }
               },
               {
-                "or": {
+                "and": {
                   "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentComboPoints": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3"
+                          }
+                        }
+                      }
+                    },
                     {
                       "not": {
                         "val": {
@@ -86,24 +141,6 @@
                           }
                         }
                       }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "auraRemainingTime": {
-                            "auraId": {
-                              "spellId": 6774,
-                              "rank": 2
-                            }
-                          }
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "3"
-                          }
-                        }
-                      }
                     }
                   ]
                 }
@@ -112,7 +149,7 @@
           }
         }
       },
-      "notes": "Slice and Dice at four or more combo points when it is down or has under 3 seconds left."
+      "notes": "Slice and Dice at four or more combo points when it is down or has under 3 seconds left, and at three once it has fallen off. With Improved Slice and Dice a three-point one still runs over 20 seconds, and getting the haste back now beats waiting a Mutilate for the fourth point."
     },
     {
       "action": {
@@ -169,7 +206,7 @@
           }
         }
       },
-      "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking, only with Blood Splatter (the raid build): it lasts 6 seconds longer, and bleeds always crit in Forever."
+      "notes": "Rupture at four or more combo points while Slice and Dice is up and Rupture is not ticking, only with Blood Splatter (the raid build): it lasts 6 seconds longer, and its ticks can crit in Forever."
     },
     {
       "action": {
@@ -216,7 +253,7 @@
           }
         }
       },
-      "notes": "Eviscerate at four or more combo points. Mutilate gives two points a cast and three on a Seal Fate crit, so waiting for exactly five wastes a Mutilate."
+      "notes": "Eviscerate at four or more combo points. From 40 Mutilate gives two points a cast, and from 45 a Seal Fate crit makes it three, so waiting for exactly five wastes a Mutilate."
     },
     {
       "action": {
