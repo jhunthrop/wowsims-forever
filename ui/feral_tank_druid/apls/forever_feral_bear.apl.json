@@ -235,7 +235,7 @@
       }
     },
     {
-      "notes": "Queued on your next swing whenever you have 15 rage. It costs 10 with Ferocity, so this keeps rage back for Primal Bite and Lacerate.",
+      "notes": "Queued on your next swing whenever you have 15 rage, and from 40 to 53 only at 30. Ferocity brings its cost down to 10 by 14, so the 15 keeps a little rage back for Lacerate from 25; in your forties and early fifties rage is short, and the 30 makes sure Primal Bite fires every time it comes off cooldown.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -245,16 +245,67 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentRage": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "15"
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentRage": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15"
+                    }
+                  }
+                }
+              },
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "40"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGt",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "53"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentRage": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "30"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
               }
-            }
+            ]
           }
         }
       }
