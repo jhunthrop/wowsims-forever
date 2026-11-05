@@ -254,6 +254,11 @@ type WeaponAttack struct {
 
 	replaceSwing ReplaceMHSwing
 
+	// shootsWhileCasting lets a ranged auto attack that comes due during a
+	// hardcast fire at once, without its own wind-up, instead of waiting
+	// for the cast to end (AutoAttackOptions.RangedShootsWhileCasting).
+	shootsWhileCasting bool
+
 	swingAt             time.Duration
 	lastSwingAt         time.Duration
 	extraAttacks        int32 // extra attacks that happen right away
@@ -339,6 +344,10 @@ func (wa *WeaponAttack) swing(sim *Simulation) time.Duration {
 	wa.castExtraAttacksStored(sim)
 
 	attackSpell := wa.spell
+
+	if wa.shootsWhileCasting && !isExtraAttack && wa.unit.IsCasting(sim) {
+		return wa.shootDuringCast(sim)
+	}
 
 	if wa.replaceSwing != nil {
 		// Need to check APL here to allow last-moment HS queue casts. A
@@ -440,6 +449,10 @@ type AutoAttackOptions struct {
 	AutoSwingMelee  bool // If true, core engine will handle calling SwingMelee() for you.
 	AutoSwingRanged bool // If true, core engine will handle calling SwingRanged() for you.
 	ReplaceMHSwing  ReplaceMHSwing
+	// RangedShootsWhileCasting: a ranged auto attack that comes due while
+	// the unit hardcasts fires at once instead of waiting for the cast to
+	// end (Forever hunters: Auto Shot keeps firing through Aimed Shot).
+	RangedShootsWhileCasting bool
 }
 
 func (unit *Unit) EnableAutoAttacks(agent Agent, options AutoAttackOptions) {
@@ -468,9 +481,10 @@ func (unit *Unit) EnableAutoAttacks(agent Agent, options AutoAttackOptions) {
 			Weapon: options.OffHand,
 		},
 		ranged: WeaponAttack{
-			agent:  agent,
-			unit:   unit,
-			Weapon: options.Ranged,
+			agent:              agent,
+			unit:               unit,
+			Weapon:             options.Ranged,
+			shootsWhileCasting: options.RangedShootsWhileCasting,
 		},
 	}
 
@@ -902,6 +916,26 @@ func (aa *AutoAttacks) DelayRangedUntil(sim *Simulation, readyAt time.Duration) 
 // Returns the time at which the next melee attack will occur.
 func (aa *AutoAttacks) NextAttackAt() time.Duration {
 	return min(aa.mh.swingAt, aa.oh.swingAt)
+}
+
+// shootDuringCast fires a ranged auto attack that came due during a
+// hardcast: the shot leaves at once (no wind-up of its own, which the cast
+// already occupies) and the timer runs on from now.
+func (wa *WeaponAttack) shootDuringCast(sim *Simulation) time.Duration {
+	target := wa.unit.CurrentTarget
+	if wa.spell.ExtraCastCondition != nil {
+		// The unit's own gate (range, a hunter's "not casting") is about the
+		// wind-up; the shot itself needs only a target in range.
+		if wa.unit.DistanceFromTarget < MinRangedAttackDistance {
+			wa.swingAt = max(wa.unit.Hardcast.Expires, sim.CurrentTime+time.Millisecond*100)
+			return wa.swingAt
+		}
+	}
+	wa.swingAt = sim.CurrentTime + wa.curSwingDuration
+	wa.lastSwingAt = sim.CurrentTime
+	wa.spell.SetMetricsSplit(0)
+	wa.spell.applyEffects(sim, target)
+	return wa.swingAt
 }
 
 // Returns the time at which the next attack will occur.

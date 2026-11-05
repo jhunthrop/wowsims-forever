@@ -293,6 +293,10 @@ func NewHunter(character *core.Character, options *proto.Player) *Hunter {
 		ReplaceMHSwing:  hunter.TryRaptorStrike,
 		AutoSwingRanged: true,
 		AutoSwingMelee:  true,
+		// Forever: Auto Shot keeps firing while Aimed Shot or Sniper Shot is
+		// cast (foreverlogs beta reports 2695-2764: about 60% of Aimed Shot
+		// casts carry an Auto Shot inside the cast, nine hunters).
+		RangedShootsWhileCasting: true,
 	})
 
 	hunter.AutoAttacks.RangedConfig().Flags |= core.SpellFlagCastTimeNoGCD

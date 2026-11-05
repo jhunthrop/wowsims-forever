@@ -41,7 +41,6 @@ func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.Spell
 			},
 			ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
 				cast.CastTime = spell.CastTime()
-				hunter.Unit.AutoAttacks.CancelAutoSwing(sim)
 			},
 			IgnoreHaste: true, // Hunter GCD is locked at 1.5s
 			CastTime: func(spell *core.Spell) time.Duration {
@@ -65,7 +64,6 @@ func (hunter *Hunter) getAimedShotConfig(rank int, timer *core.Timer) core.Spell
 				flatDamage.Roll(sim, casterLevel)
 
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeRangedHitAndCrit)
-			hunter.Unit.AutoAttacks.EnableAutoSwing(sim)
 			spell.WaitTravelTime(sim, func(s *core.Simulation) {
 				spell.DealDamage(sim, result)
 			})
