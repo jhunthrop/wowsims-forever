@@ -56,3 +56,25 @@ func TestValueCurrentLevelReadsTheCharactersLevel(t *testing.T) {
 		t.Fatalf("currentLevel = %d, want 45", got)
 	}
 }
+
+// Round 21 (platform; warrior round 20 X1): a spell registered at every
+// level but gated by its RequiredLevel (Whirlwind at 36) is not known
+// below that level, so spellIsKnown agrees with the trainer and with a
+// guide's level gate.
+func TestValueSpellIsKnownHonoursRequiredLevel(t *testing.T) {
+	sim := &Simulation{}
+	for _, c := range []struct {
+		level int32
+		want  bool
+	}{{30, false}, {35, false}, {36, true}, {60, true}} {
+		unit := &Unit{Level: c.level}
+		spell := &Spell{Unit: unit, RequiredLevel: 36}
+		value := &APLValueSpellIsKnown{spell: spell}
+		if got := value.GetBool(sim); got != c.want {
+			t.Errorf("level %d: spellIsKnown = %v, want %v", c.level, got, c.want)
+		}
+	}
+	if (&APLValueSpellIsKnown{}).GetBool(sim) {
+		t.Errorf("an unregistered spell is known")
+	}
+}

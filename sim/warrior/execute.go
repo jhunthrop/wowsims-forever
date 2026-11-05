@@ -17,6 +17,21 @@ func executeRageConversion(rank int) float64 {
 	return executeRageConversionByRank[rank]
 }
 
+// executeConvertedRage is the rage left after Execute's cost that turns into
+// damage. A percent cost cut (Gnome's Eureka!, the only one that reaches
+// Execute) lowers what Execute takes up front but converts nothing more:
+// the rage it saved is consumed with the rest and adds no damage
+// (forever-bugs #439, the reporter's 16 October log: 434 at 105 rage under
+// Eureka!, exactly 1.1 x the unbuffed 395). Flat cuts (Improved Execute)
+// still convert, as in Classic.
+func executeConvertedRage(rageLeft, paidCost float64, costMultiplierPct int32) float64 {
+	if costMultiplierPct <= 0 || costMultiplierPct >= 100 {
+		return rageLeft
+	}
+	saved := paidCost*100/float64(costMultiplierPct) - paidCost
+	return max(0, rageLeft-saved)
+}
+
 func (warrior *Warrior) registerExecuteSpell() {
 	rank := rankAtLevel(ExecuteLevel[:], warrior.Level)
 	flatDamage := ExecuteDamage[rank]
@@ -86,7 +101,8 @@ func (warrior *Warrior) registerExecuteSpell() {
 				rageMetrics.Events--
 			}
 
-			baseDamage := flatDamage.Roll(sim, casterLevel) + ragePointDamage*extraRage
+			convertedRage := executeConvertedRage(extraRage, spell.CurCast.Cost, spell.Cost.Multiplier)
+			baseDamage := flatDamage.Roll(sim, casterLevel) + ragePointDamage*convertedRage
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
