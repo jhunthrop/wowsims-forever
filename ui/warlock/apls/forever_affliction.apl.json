@@ -281,7 +281,7 @@
       }
     },
     {
-      "notes": "Immolate with 3 seconds or less left on it, unless your build sacrifices the Imp. It lands a moment before the old one ends, and the fresh hit is worth the last tick. The raid build drops it: without Bane it is a 2 second Fire cast that Burning Shadow does nothing for, and Wrack does more in that time.",
+      "notes": "Immolate with 3 seconds or less left on it. It lands a moment before the old one ends, and the fresh hit is worth the last tick. The raid build sacrifices the Imp and drops it: without Bane it is a 2 second Fire cast that Burning Shadow does nothing for, and Wrack does more in that time.",
       "action": {
         "condition": {
           "and": {
@@ -327,7 +327,7 @@
       }
     },
     {
-      "notes": "Shadow Bolt the moment Nightfall gives you a Shadow Trance, ahead of your next Wrack. It is instant, and each crit puts up Improved Shadow Bolt, so your Wrack and Shadow DoTs take 20% more for 12 seconds.",
+      "notes": "Shadow Bolt the moment Nightfall gives you a Shadow Trance, once your current Wrack ends and ahead of the next. It is instant, and each crit puts up Improved Shadow Bolt, so your Wrack and Shadow DoTs take 20% more for 12 seconds.",
       "action": {
         "condition": {
           "and": {
@@ -371,6 +371,17 @@
     {
       "notes": "Shadow Bolt with every DoT up, until Wrack at 40 takes over as your filler.",
       "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "spellIsKnown": {
+                "spellId": {
+                  "spellId": 1316697
+                }
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 11661,
