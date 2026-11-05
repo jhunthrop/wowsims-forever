@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Hunter's Mark whenever the target is not marked. From 35, Expose Prey opens Mongoose Bite only on a marked target, so mark the boss before the pull. One mark per target is enough: if another hunter's mark is already up, leave it.",
+      "notes": "Hunter's Mark whenever the target is not marked: from 35, Expose Prey needs it. It opens Mongoose Bite only on a marked target, so mark the boss before the pull. One mark per target is enough: if another hunter's mark is already up, leave it.",
       "action": {
         "condition": {
           "not": {
@@ -121,7 +121,7 @@
       }
     },
     {
-      "notes": "Immolation Trap at your feet on cooldown. You stand on the boss, so it walks straight into the trap, and once Clever Traps and Survivalist's Discipline are in it is a real damage button. Its burn carries a share of your attack power in Forever, so it keeps up with your gear.",
+      "notes": "Immolation Trap on cooldown. Drop it at your feet: you stand on the boss, so it walks straight into the trap, and once Clever Traps and Survivalist's Discipline are in it is a real damage button. Its burn carries a share of your attack power in Forever, so it keeps up with your gear.",
       "action": {
         "castSpell": {
           "spellId": {
