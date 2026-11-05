@@ -3,6 +3,7 @@ package core
 import (
 	"math"
 
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
@@ -323,6 +324,16 @@ func LeaderOfThePackReaches(level int32) bool { return level >= LeaderOfThePackL
 // MoonkinAuraReaches says whether a raid of this level can carry Moonkin
 // Aura.
 func MoonkinAuraReaches(level int32) bool { return level >= MoonkinAuraLevel }
+
+// RaidHasDruidCritAura says whether the raid buffs give a character of this
+// level a druid's 3% crit aura. Moonkin Aura (24907) and Leader of the Pack
+// (24932) are both aura 290 at 3% and, by Blizzard's Forever notes of 3
+// November 2026, "again exclusive" with each other: a raid with both gives
+// 3% once.
+func RaidHasDruidCritAura(raidBuffs *proto.RaidBuffs, level int32) bool {
+	return (raidBuffs.MoonkinAura && MoonkinAuraReaches(level)) ||
+		(raidBuffs.LeaderOfThePack && LeaderOfThePackReaches(level))
+}
 
 // manaSpringPulsesPerFive is Mana Spring's 2 s pulse read as mp5.
 const manaSpringPulsesPerFive = 2.5

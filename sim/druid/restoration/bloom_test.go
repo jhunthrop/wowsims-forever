@@ -100,3 +100,21 @@ func TestBloomCanCrit(t *testing.T) {
 		t.Error("Bloom at 200% crit chance did not crit")
 	}
 }
+
+// Bloom's heal is Spirit only. Its heal effect (SpellEffect 1328622 index 0,
+// effect 10) carries EffectBonusCoefficient 0, so healing power adds
+// nothing (the 0.2143 in constants_auto_gen.go is the generator's
+// convention fill for a zero column; nothing reads it). Its SpellClassMask
+// is 0 in every word, so no family-masked talent reaches it either: Gift of
+// Nature's aura 108 modifiers match by that mask.
+func TestBloomTakesNoHealingPowerOrGiftOfNature(t *testing.T) {
+	resto, sim := healer(t, map[string]int{"bloom": 1, "gift_of_nature": 5})
+	resto.AddStatDynamic(sim, stats.HealingPower, 1000)
+	resto.AddStatDynamic(sim, stats.SpellPower, 1000)
+	resto.Bloom.BonusCritRating -= 200 * core.CritRatingPerCritChance
+	spirit := resto.GetStat(stats.Spirit)
+	resto.Bloom.ApplyEffects(sim, &resto.Unit, resto.Bloom.Spell)
+	if got := bloomHealing(resto); !near(got, spirit) {
+		t.Errorf("Bloom healed %v with 1000 healing power and Gift of Nature 5, want the druid's Spirit %v", got, spirit)
+	}
+}

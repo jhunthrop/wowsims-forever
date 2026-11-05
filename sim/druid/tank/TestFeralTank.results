@@ -15,7 +15,7 @@ character_stats_results: {
   final_stats: 0
   final_stats: 84.45
   final_stats: 11
-  final_stats: 32
+  final_stats: 29
   final_stats: 0
   final_stats: 0
   final_stats: 1422.3
@@ -49,8 +49,8 @@ character_stats_results: {
 stat_weights_results: {
  key: "TestFeralTank-Phase1-StatWeights-Default"
  value: {
-  weights: 0.50617
-  weights: 0.25853
+  weights: 0.4954
+  weights: 0.27291
   weights: 0
   weights: 0
   weights: 0
@@ -63,22 +63,22 @@ stat_weights_results: {
   weights: 0
   weights: 0
   weights: 0.1142
-  weights: 4.37596
+  weights: 4.7334
   weights: 0
   weights: 0
-  weights: 0.20007
+  weights: 0.19581
   weights: 0
   weights: 0
-  weights: 14.95023
+  weights: 14.91933
   weights: 0
   weights: 0
   weights: 0
-  weights: 0.00464
+  weights: -0.00029
   weights: 0
-  weights: -0.01244
+  weights: -0.0128
   weights: 0
   weights: 0
-  weights: -0.28989
+  weights: -0.27324
   weights: 0
   weights: 0
   weights: 0
@@ -97,114 +97,114 @@ stat_weights_results: {
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-CenarionRaiment"
  value: {
-  dps: 405.53256
-  tps: 1455.89029
+  dps: 400.83201
+  tps: 1440.76129
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Champion'sRefuge"
  value: {
-  dps: 467.57775
-  tps: 1691.97339
+  dps: 456.12864
+  tps: 1647.81077
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Champion'sSanctuary"
  value: {
-  dps: 472.77089
-  tps: 1710.40253
+  dps: 459.75893
+  tps: 1656.0487
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-EyeoftheBeast-13968"
  value: {
-  dps: 481.50314
-  tps: 1754.13117
+  dps: 469.04606
+  tps: 1702.01921
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-FeralheartRaiment"
  value: {
-  dps: 453.04038
-  tps: 1632.50024
+  dps: 441.30678
+  tps: 1579.14497
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-FieldMarshal'sSanctuary"
  value: {
-  dps: 499.58407
-  tps: 1816.30902
+  dps: 493.83154
+  tps: 1784.9071
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Haruspex'sGarb"
  value: {
-  dps: 442.58979
-  tps: 1599.02305
+  dps: 428.83608
+  tps: 1544.82821
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sRefuge"
  value: {
-  dps: 467.57775
-  tps: 1691.97339
+  dps: 456.12864
+  tps: 1647.81077
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-LieutenantCommander'sSanctuary"
  value: {
-  dps: 472.77089
-  tps: 1710.40253
+  dps: 459.75893
+  tps: 1656.0487
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-StormrageRaiment"
  value: {
-  dps: 410.95339
-  tps: 1481.60131
+  dps: 402.59522
+  tps: 1446.179
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-SymbolsofUnendingLife"
  value: {
-  dps: 461.52554
-  tps: 1674.99624
+  dps: 448.86599
+  tps: 1619.9314
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-AllItems-Warlord'sSanctuary"
  value: {
-  dps: 499.58407
-  tps: 1816.30902
+  dps: 493.83154
+  tps: 1784.9071
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Average-Default"
  value: {
-  dps: 607.8827
-  tps: 2380.53393
-  dtps: 671.95513
+  dps: 594.88587
+  tps: 2328.95167
+  dtps: 671.93086
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-FullBuffs-Tank-Consumes-LongMultiTarget"
  value: {
-  dps: 3.19694
-  tps: 25.74686
+  dps: 3.15074
+  tps: 25.5482
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-FullBuffs-Tank-Consumes-LongSingleTarget"
  value: {
-  dps: 3.19694
-  tps: 14.34686
+  dps: 3.15074
+  tps: 14.1482
  }
 }
 dps_results: {
  key: "TestFeralTank-Phase1-Settings-Tauren-forever_l60-Default-forever_feral_bear-FullBuffs-Tank-Consumes-ShortSingleTarget"
  value: {
-  dps: 15.98472
-  tps: 71.7343
+  dps: 15.75372
+  tps: 70.741
  }
 }
 dps_results: {
@@ -231,8 +231,8 @@ dps_results: {
 dps_results: {
  key: "TestFeralTank-Phase1-SwitchInFrontOfTarget-Default"
  value: {
-  dps: 723.38797
-  tps: 2830.30584
+  dps: 707.91375
+  tps: 2769.26322
   dtps: 611.59039
  }
 }

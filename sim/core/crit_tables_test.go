@@ -163,13 +163,19 @@ func TestIntellectIsSpellCritOnly(t *testing.T) {
 }
 
 // Leader of the Pack (24932) and Moonkin Aura (24907) are aura 290 in
-// Forever: every table.
+// Forever: every table. Blizzard's notes of 3 November 2026 make them
+// "again exclusive" with each other, so the two together give 3%, once.
 func TestLeaderOfThePackAndMoonkinAuraReachEveryTable(t *testing.T) {
 	base := critTablesFor(t, proto.Class_ClassShaman, noConsumes(), &proto.RaidBuffs{})
-	buffed := critTablesFor(t, proto.Class_ClassShaman, noConsumes(),
-		&proto.RaidBuffs{LeaderOfThePack: true, MoonkinAura: true})
-	assertCritDelta(t, "Leader of the Pack and Moonkin Aura", buffed.minus(base),
-		critTables{melee: 6, ranged: 6, spell: 6, magicRanged: 6, healing: 6})
+	every3 := critTables{melee: 3, ranged: 3, spell: 3, magicRanged: 3, healing: 3}
+	for name, buffs := range map[string]*proto.RaidBuffs{
+		"Leader of the Pack":                  {LeaderOfThePack: true},
+		"Moonkin Aura":                        {MoonkinAura: true},
+		"Leader of the Pack and Moonkin Aura": {LeaderOfThePack: true, MoonkinAura: true},
+	} {
+		buffed := critTablesFor(t, proto.Class_ClassShaman, noConsumes(), buffs)
+		assertCritDelta(t, name, buffed.minus(base), every3)
+	}
 }
 
 // A rogue has no spell crit of its own (Era's base 0 and no Intellect

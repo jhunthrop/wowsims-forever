@@ -100,7 +100,7 @@ func (druid *Druid) newFerociousBiteSpellConfig(rank int) core.SpellConfig {
 
 			baseDamage := damage.Roll(sim, casterLevel) +
 				damagePerComboPoint*comboPoints +
-				attackPower*0.03*comboPoints +
+				attackPower*ferociousBiteAttackPowerShare(comboPoints) +
 				damagePerEnergy*excessEnergy
 			baseDamage *= druid.RendAndTearMultiplier(target)
 
@@ -120,4 +120,16 @@ func (druid *Druid) newFerociousBiteSpellConfig(rank int) core.SpellConfig {
 
 func (druid *Druid) CurrentFerociousBiteCost() float64 {
 	return druid.FerociousBite.Cost.GetCurrentCost()
+}
+
+// ferociousBiteAttackPowerPerPoint is Ferocious Bite's share of attack power
+// a combo point: Era's 3%, raised "about 25%" with the base points by
+// Blizzard's Forever notes of 3 November 2026 (the client's per-point step
+// went 145 to 181 at rank 6 in the same push).
+const ferociousBiteAttackPowerPerPoint = 0.0375
+
+// ferociousBiteAttackPowerShare is the attack power share of a bite at the
+// given combo points.
+func ferociousBiteAttackPowerShare(comboPoints float64) float64 {
+	return ferociousBiteAttackPowerPerPoint * comboPoints
 }

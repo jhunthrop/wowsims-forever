@@ -121,11 +121,17 @@ func init() {
 			Label:    "Metamorphosis Rune",
 			Duration: duration,
 			OnGain: func(aura *core.Aura, sim *core.Simulation) {
+				if druid.CatForm == nil {
+					return
+				}
 				druid.CatForm.Cost.Multiplier -= 100
 				//druid.BearForm.Cost.Multiplier -= 100
 				//druid.MoonkinForm.Cost.Multiplier -= 100
 			},
 			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+				if druid.CatForm == nil {
+					return
+				}
 				druid.CatForm.Cost.Multiplier += 100
 				//druid.BearForm.Cost.Multiplier += 100
 				//druid.MoonkinForm.Cost.Multiplier += 100

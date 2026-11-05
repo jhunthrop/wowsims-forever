@@ -63,6 +63,9 @@ func (cat *FeralDruid) NextRotationAction(sim *core.Simulation, kickAt time.Dura
 }
 
 func (cat *FeralDruid) tryPowershift(sim *core.Simulation) {
+	if cat.CatForm == nil { // below Cat Form's trainer level
+		return
+	}
 	if cat.InForm(druid.Cat) {
 		cat.CancelShapeshift(sim)
 		cat.TryUseCooldowns(sim)
@@ -86,10 +89,16 @@ func (cat *FeralDruid) shiftingPowerFits(sim *core.Simulation) bool {
 }
 
 func (cat *FeralDruid) maxShifts() int32 {
+	if cat.CatForm == nil {
+		return 0
+	}
 	return max(int32(cat.MaxMana()/cat.CatForm.DefaultCast.Cost), 0)
 }
 
 func (cat *FeralDruid) numShiftsRemaining() int32 {
+	if cat.CatForm == nil {
+		return 0
+	}
 	return max(int32(cat.CurrentMana()/cat.CatForm.DefaultCast.Cost), 0)
 }
 

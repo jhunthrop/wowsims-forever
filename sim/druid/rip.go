@@ -83,10 +83,8 @@ func (druid *Druid) newRipSpellConfig(rank int) core.SpellConfig {
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				cp := float64(druid.ComboPoints())
-				cpScaling := core.TernaryFloat64(cp == 5, 4, cp)
 				baseDamage := tickDamage.Center(casterLevel) + tickPerComboPoint*cp
-				// AP scaling is 6% per combo point from 1 to 4, and 24% again for 5
-				tickDamage := baseDamage + 0.01*cpScaling*dot.Spell.MeleeAttackPower(target)
+				tickDamage := baseDamage + ripTickAttackPowerShare(cp)*dot.Spell.MeleeAttackPower(target)
 				dot.Snapshot(target, tickDamage, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
@@ -113,4 +111,17 @@ func (druid *Druid) newRipSpellConfig(rank int) core.SpellConfig {
 
 func (druid *Druid) CurrentRipCost() float64 {
 	return druid.Rip.Cost.GetCurrentCost()
+}
+
+// ripAttackPowerPerPointTick is Rip's share of attack power a combo point on
+// each tick. Era's was 1% (6% a point over the six ticks, four points at
+// most); Blizzard's Forever notes of 3 November 2026 raise Rip's "base points
+// and attack power scaling ... by about 25%", and the base half matches the
+// client's push (15 to 19 a tick at rank 6), so the share is 1.25%.
+const ripAttackPowerPerPointTick = 0.0125
+
+// ripTickAttackPowerShare is the attack power share of one Rip tick at the
+// given combo points: the fifth point adds no attack power.
+func ripTickAttackPowerShare(comboPoints float64) float64 {
+	return ripAttackPowerPerPointTick * min(comboPoints, 4)
 }
