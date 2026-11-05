@@ -95,7 +95,7 @@
       }
     },
     {
-      "notes": "Pyroblast the moment Presence of Mind is up, once the raid build has Pyroblast: the 6 second cast goes out instant, the most cast time Presence of Mind can save you.",
+      "notes": "Pyroblast the moment Presence of Mind is up, from 54 on the raid build: a 6 second cast without Heating Up stacks goes out instant, the most cast time Presence of Mind can save you.",
       "action": {
         "condition": {
           "and": {
