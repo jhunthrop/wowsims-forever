@@ -376,7 +376,8 @@
             "val": {
               "spellIsKnown": {
                 "spellId": {
-                  "spellId": 1316697
+                  "spellId": 1316697,
+                  "rank": 1
                 }
               }
             }
