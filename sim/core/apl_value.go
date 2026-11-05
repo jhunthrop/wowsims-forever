@@ -111,6 +111,8 @@ func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
 		return rot.newValueMaxMana(config.GetMaxMana())
 	case *proto.APLValue_ManaIncomePerSecond:
 		return rot.newValueManaIncomePerSecond(config.GetManaIncomePerSecond())
+	case *proto.APLValue_ManaSpentPerSecond:
+		return rot.newValueManaSpentPerSecond(config.GetManaSpentPerSecond())
 	case *proto.APLValue_CurrentRage:
 		return rot.newValueCurrentRage(config.GetCurrentRage())
 	case *proto.APLValue_CurrentEnergy:

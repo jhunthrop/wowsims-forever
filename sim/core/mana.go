@@ -28,8 +28,9 @@ type manaBar struct {
 
 	ReplenishmentAura *Aura
 
-	// The trailing record an APL manaIncomePerSecond value reads.
-	manaIncome manaIncomeLog
+	// The trailing records the APL manaIncomePerSecond and manaSpentPerSecond values read.
+	manaIncome manaFlowLog
+	manaSpend  manaFlowLog
 
 	// For keeping track of OOM status.
 	waitingForMana          float64
@@ -111,6 +112,7 @@ func (unit *Unit) SpendMana(sim *Simulation, amount float64, metrics *ResourceMe
 
 	unit.currentMana = newMana
 	unit.Metrics.ManaSpent += amount
+	unit.manaSpend.record(sim.CurrentTime, amount)
 }
 
 func (mb *manaBar) doneIteration(sim *Simulation) {
@@ -298,6 +300,7 @@ func (mb *manaBar) reset() {
 
 	mb.currentMana = mb.unit.MaxMana()
 	mb.manaIncome.reset()
+	mb.manaSpend.reset()
 	mb.waitingForMana = 0
 	mb.waitingForManaStartTime = 0
 }
