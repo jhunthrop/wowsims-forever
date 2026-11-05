@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "When less time is left than a Wrath takes to cast, only an instant lands in time; Moonfire's direct damage is the best instant.",
+      "notes": "When less time is left than a Wrath takes to cast: only an instant lands in time, and Moonfire's hit is the best instant you have.",
       "action": {
         "condition": {
           "cmp": {
@@ -34,7 +34,7 @@
       }
     },
     {
-      "notes": "When the next Starfire would not finish before the fight ends: Wrath still does. The window is Starfire's cast time (3.0 sec with Improved Starfire at 5/5, 2.5 on an Eclipse charge; 3.5 seconds before Starfire is learned at level 20).",
+      "notes": "When the next Starfire would not finish before the fight ends. Wrath still does.",
       "action": {
         "condition": {
           "or": {
@@ -112,7 +112,7 @@
       }
     },
     {
-      "notes": "Keep Moonfire ticking: with Improved Moonfire and Nature's Splendor one cast does more damage per second of casting than Starfire, and the raid character has the mana for it.",
+      "notes": "When Moonfire is not ticking on the target. With Improved Moonfire and Nature's Splendor it is worth its global.",
       "action": {
         "condition": {
           "not": {
@@ -135,7 +135,7 @@
       }
     },
     {
-      "notes": "Keep Insect Swarm ticking; each refresh costs one global.",
+      "notes": "When Insect Swarm is not ticking on the target. Each refresh costs one global.",
       "action": {
         "condition": {
           "not": {
@@ -158,7 +158,7 @@
       }
     },
     {
-      "notes": "Eclipse (the talent): with no Eclipse charge banked, Wrath. Each Wrath banks two charges that take 0.5 sec off the next two Starfires (3.0 to 2.5 sec with Improved Starfire), and Improved Wrath makes the Wrath itself a 1.5 sec cast, so one Wrath plus two quick Starfires beats three plain Starfires in the same time. Without the talent there is no charge to bank and the line never fires.",
+      "notes": "From 35, whenever no Eclipse charge is banked. Each Wrath banks two charges, each taking time off one Starfire: 0.17 seconds a charge with the single point you level with, half a second with all three, and even the single point makes one Wrath and two quicker Starfires beat three plain ones.",
       "action": {
         "condition": {
           "and": {
@@ -193,34 +193,52 @@
       }
     },
     {
-      "notes": "Wrath as the filler while the mana pool is behind the fight's pace and Innervate is cooling down. With Improved Wrath, Wrath costs half as much and casts in half the time of Starfire, so a druid that would otherwise run dry keeps casting. Below 40 there is no Innervate, so the pace alone decides.",
+      "notes": "Before Starfire at 20 it is your filler; from 20 only while your mana is behind the fight, and from 40 only while Innervate is on cooldown. With Improved Wrath it is quick and cheap, and once Starfire arrives it costs a fraction of a Starfire's mana for half the cast, so you keep casting instead of running dry.",
       "action": {
         "condition": {
-          "not": {
-            "val": {
-              "or": {
-                "vals": [
-                  {
-                    "cmp": {
-                      "op": "OpGt",
-                      "lhs": {
-                        "currentManaPercent": {}
-                      },
-                      "rhs": {
-                        "remainingTimePercent": {}
-                      }
-                    }
-                  },
-                  {
-                    "spellIsReady": {
+          "or": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "spellIsKnown": {
                       "spellId": {
-                        "spellId": 29166
+                        "spellId": 9876,
+                        "rank": 6
                       }
                     }
                   }
-                ]
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "or": {
+                      "vals": [
+                        {
+                          "cmp": {
+                            "op": "OpGt",
+                            "lhs": {
+                              "currentManaPercent": {}
+                            },
+                            "rhs": {
+                              "remainingTimePercent": {}
+                            }
+                          }
+                        },
+                        {
+                          "spellIsReady": {
+                            "spellId": {
+                              "spellId": 29166
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         },
         "castSpell": {
@@ -232,7 +250,7 @@
       }
     },
     {
-      "notes": "Starfire is the rest of the rotation once Moonfire and Insect Swarm are ticking, spending the Eclipse charges Wrath banked.",
+      "notes": "Everything else, spending the Eclipse charges Wrath banked.",
       "action": {
         "castSpell": {
           "spellId": {
