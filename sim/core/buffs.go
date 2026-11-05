@@ -244,14 +244,8 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		ThornsAura(character)
 	}
 
-	if raidBuffs.MoonkinAura && MoonkinAuraReaches(character.Level) {
+	if RaidHasDruidCritAura(raidBuffs, character.Level) {
 		character.AddStat(stats.Crit, 3*CritRatingPerCritChance)
-	}
-
-	if raidBuffs.LeaderOfThePack && LeaderOfThePackReaches(character.Level) {
-		character.AddStats(stats.Stats{
-			stats.Crit: 3 * CritRatingPerCritChance,
-		})
 	}
 
 	if raidBuffs.TrueshotAura {

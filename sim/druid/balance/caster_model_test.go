@@ -152,7 +152,8 @@ func TestNaturesGraceIsTenPercentHasteAndGcdForThreeSeconds(t *testing.T) {
 // it was credited zero.
 func TestMoonkinFormRaisesTheDruidsOwnSpellCrit(t *testing.T) {
 	alone := googleProto.Clone(core.FullBuffs.Raid).(*proto.RaidBuffs)
-	alone.MoonkinAura = false // the only Moonkin is this druid (TestMoonkinCritIsGrantedOnce)
+	alone.MoonkinAura = false     // the only Moonkin is this druid (TestMoonkinCritIsGrantedOnce)
+	alone.LeaderOfThePack = false // exclusive with the form (TestMoonkinFormAddsNoCritBesideLeaderOfThePack)
 	built, sim, target := newBalanceDruidSimInRaid(t, druidTalentsString(t, map[int]int{moonkinFormField: 1}), &proto.EquipmentSpec{}, alone)
 	wrath := built.Wrath[8]
 
@@ -188,6 +189,7 @@ func TestMoonkinCritIsGrantedOnce(t *testing.T) {
 	withAura.MoonkinAura = true
 	withoutAura := googleProto.Clone(core.FullBuffs.Raid).(*proto.RaidBuffs)
 	withoutAura.MoonkinAura = false
+	withoutAura.LeaderOfThePack = false
 
 	if got := moonkinCritFromTalent(t, withoutAura); !near(got, 0.03) {
 		t.Errorf("with no other Moonkin in the raid, the form adds %v spell crit, want 0.03", got)
@@ -235,5 +237,46 @@ func TestBalanceDruidsMoonkinAuraIsCountedOnce(t *testing.T) {
 				t.Errorf("Moonkin Form gives %v spell crit, want %v", got, tc.formCrit)
 			}
 		})
+	}
+}
+
+// wrathCritUnder is a talentless druid's Wrath crit chance under the given
+// raid buffs.
+func wrathCritUnder(t *testing.T, raidBuffs *proto.RaidBuffs) float64 {
+	t.Helper()
+	built, _, target := newBalanceDruidSimInRaid(t, druidTalentsString(t, nil), &proto.EquipmentSpec{}, raidBuffs)
+	return built.Wrath[8].SpellCritChance(target)
+}
+
+// Blizzard's Forever notes of 3 November 2026: "Moonkin Form: The critical
+// strike bonus from this talent is again an increase to all types of
+// critical strikes and is again exclusive with Leader of the Pack" and
+// "Leader of the Pack: ... is again exclusive with Moonkin Aura." Both are
+// aura 290 at 3% (24907, 24932), so a raid with both gives 3%, not 6%.
+func TestLeaderOfThePackAndMoonkinAuraAreExclusive(t *testing.T) {
+	both := googleProto.Clone(core.FullBuffs.Raid).(*proto.RaidBuffs)
+	both.MoonkinAura, both.LeaderOfThePack = true, true
+	moonkinOnly := googleProto.Clone(both).(*proto.RaidBuffs)
+	moonkinOnly.LeaderOfThePack = false
+	packOnly := googleProto.Clone(both).(*proto.RaidBuffs)
+	packOnly.MoonkinAura = false
+	neither := googleProto.Clone(packOnly).(*proto.RaidBuffs)
+	neither.LeaderOfThePack = false
+
+	base := wrathCritUnder(t, neither)
+	for name, buffs := range map[string]*proto.RaidBuffs{"both": both, "Moonkin Aura": moonkinOnly, "Leader of the Pack": packOnly} {
+		if got := wrathCritUnder(t, buffs) - base; !near(got, 0.03) {
+			t.Errorf("%s gives %v crit, want 0.03", name, got)
+		}
+	}
+}
+
+// The druid's own Moonkin Form aura is exclusive with a raid Leader of the
+// Pack as well: in a raid with a feral druid the form adds no crit.
+func TestMoonkinFormAddsNoCritBesideLeaderOfThePack(t *testing.T) {
+	pack := googleProto.Clone(core.FullBuffs.Raid).(*proto.RaidBuffs)
+	pack.MoonkinAura, pack.LeaderOfThePack = false, true
+	if got := moonkinCritFromTalent(t, pack); !near(got, 0) {
+		t.Errorf("beside the raid's Leader of the Pack the form adds %v crit, want 0 (exclusive)", got)
 	}
 }

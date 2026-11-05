@@ -134,7 +134,8 @@ type Druid struct {
 
 	StartingForm DruidForm
 	// raidHasMoonkinAura: the raid buffs already give the druid Moonkin
-	// Aura's crit (see AddRaidBuffs).
+	// Aura's crit, or Leader of the Pack's, which is exclusive with it
+	// (see AddRaidBuffs).
 	raidHasMoonkinAura bool
 
 	// CastsNaturesSwiftnessByHand keeps Nature's Swiftness out of the generic
@@ -241,7 +242,11 @@ func (druid *Druid) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 	// adds no crit of its own. The form's aura gives the druid its 3%
 	// (registerMoonkinFormSpell), so the druid does not also raise the
 	// raid's flag: the raid buff would give it the same aura a second time.
-	druid.raidHasMoonkinAura = raidBuffs.MoonkinAura
+	//
+	// Leader of the Pack is exclusive with Moonkin Aura (Blizzard's notes of
+	// 3 November 2026), so a raid Leader of the Pack also leaves the form no
+	// crit to add.
+	druid.raidHasMoonkinAura = core.RaidHasDruidCritAura(raidBuffs, druid.Level)
 
 	if druid.InForm(Cat|Bear) && druid.Talents.LeaderOfThePack {
 		raidBuffs.LeaderOfThePack = true
