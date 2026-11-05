@@ -113,6 +113,12 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 		wp.EnableAutoAttacks(wp, cfg.AutoAttacks)
 	}
 
+	// The demon takes the crit its warlock wears, and only that (see
+	// makeStatInheritance): EquipStats is the gear plus the request's bonus
+	// stats, which stand for gear. It is fixed for the summon, so no owner
+	// buff or proc reaches it.
+	wp.AddStat(stats.Crit, warlock.EquipStats()[stats.Crit])
+
 	// Unholy Power: "Increases all damage done by your Imp, Voidwalker,
 	// Succubus, Incubus, and Felhunter pets by 2%" a rank; the Forever
 	// Firebolt tooltip applies it too, so it is pet-wide, not melee only.
@@ -220,11 +226,13 @@ func (wp *WarlockPet) ExecuteCustomRotation(sim *core.Simulation) {
 // _RES). wowsims/forever read the same tenth off beta pet sheets and a logged
 // Sayaad (sim/warlock/pets.go, c3d9ea951, 2026-10-14). Classic's 57% and 15%
 // (wowsims/sod, warcraft.wiki.gg) are not Forever's. The client sheet says
-// pets have no primary attributes (PET_BONUS_STAM and _INT 0); the 75%
-// Stamina (7.5 health a point, which wowsims/forever also reads) and 30%
-// Intellect stand in for the health and mana the server grants instead.
+// pets have no primary attributes (PET_BONUS_STAM and _INT 0); the 20%
+// Stamina and 30% Intellect stand in for the health and mana the server
+// grants instead. Blizzard's 3 Nov notes: "Pets now gain 2 Health per point
+// of Master's Stamina (was 7.5 Health per point of Master's Stamina)", so a
+// fifth of the warlock's Stamina at 10 health a point (the beta's 75% is gone).
 const (
-	petStaminaShare             = 0.75
+	petStaminaShare             = 0.20
 	petIntellectShare           = 0.30
 	petArmorShare               = 0.35
 	petResistanceShare          = 1.00
@@ -264,12 +272,15 @@ const (
 const petMeleeHitShare = 8.0 / 17
 
 // makeStatInheritance maps the warlock's stats to the demon's. Crit is not
-// inherited. Blizzard's intent is that a demon mirrors the warlock's spell
-// crit with no crit of its own (forever-bugs #331, 2026-10-14), but the beta
-// does not do it yet: demons keep their own crit (demonMeleeCritPercent and
-// its neighbours) and, by the same reply, take only the warlock's pure
-// "critical strike" stat (unconfirmed, single source, not wired: whether the
-// server counts the warlock's crit buffs in it is unpublished). Haste is not
+// in it. Blizzard's intent is that a demon mirrors the warlock's spell crit
+// with no crit of its own (forever-bugs #331, 2026-10-14), but it is not
+// enabled: demons keep their own crit (demonMeleeCritPercent and its
+// neighbours) and, by the same reply, "only scale with their master's +%
+// critical strike gear". makePet adds that gear crit once at the summon; the
+// warlock's crit from Intellect, racials, raid auras and procs never reaches
+// the demon (#371, crit racials missing from the pet sheet, closed as #331's
+// duplicate on 2026-10-16; no note through 2026-11-04 enables the mirror).
+// Haste is not
 // inherited: this engine carries haste as speed multipliers, not stats. The
 // mapping is linear in the owner's stats, so the same function maps the
 // owner's mid-fight stat changes; the school power it reads is fixed per
