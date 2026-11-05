@@ -162,6 +162,8 @@ message FeralTankDruid {
   message Options {
     UnitReference innervate_target = 1;
 		double starting_rage = 2;
+		// The raid keeps a bleed on the target (Rend and Tear), as FeralDruid's.
+		bool assume_bleed_active = 3;
   }
   Options options = 3;
 }
