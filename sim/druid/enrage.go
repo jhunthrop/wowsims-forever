@@ -39,6 +39,10 @@ func (druid *Druid) registerEnrageSpell() {
 		return
 	}
 	armorMultiplier := tier.EnrageArmorMultiplier()
+	instantRage := enrageInstantRage
+	if druid.wearsWolfsheadHelm() {
+		instantRage += wolfsheadHelmEnrageRage
+	}
 
 	druid.EnrageAura = druid.RegisterAura(core.Aura{
 		Label:    "Enrage Aura",
@@ -71,7 +75,7 @@ func (druid *Druid) registerEnrageSpell() {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-			druid.AddRage(sim, enrageInstantRage, rageMetrics)
+			druid.AddRage(sim, instantRage, rageMetrics)
 
 			core.StartPeriodicAction(sim, core.PeriodicActionOptions{
 				NumTicks: int(enrageDuration / enrageTickPeriod),

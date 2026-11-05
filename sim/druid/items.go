@@ -19,6 +19,26 @@ const (
 	IdolOfSwiftness     = 279250
 )
 
+// Wolfshead Helm (equip spell 17768): "You gain an additional 5 Rage from
+// activating Enrage and an additional 5 Energy from activating Shifting
+// Power." Effect 0 is aura 108 on Enrage's class mask 0x80000 (50 tenths of
+// a point); effect 1 is the dummy the server answers with the energize
+// 1310990 (5 energy). Blizzard's Forever notes of 8 October 2026 moved the
+// energy from the shift into Cat Form to Shifting Power: "Wolfshead Helm's
+// effect has changed to granting 5 additional Energy when shifting power is
+// used. Rage portion of the helm's effect remains the same."
+const (
+	wolfsheadHelmShiftingPowerEnergy = 5.0
+	wolfsheadHelmEnrageRage          = 5.0
+	wolfsheadHelmEnergySpellID       = 1310990
+)
+
+// wearsWolfsheadHelm says whether the druid has Wolfshead Helm on its head.
+func (druid *Druid) wearsWolfsheadHelm() bool {
+	head := druid.Equipment.Head()
+	return head != nil && head.ID == WolfsheadHelm
+}
+
 // Talons of Wrath: client spell 1248996 "Improved Wrath" procs at its
 // SpellAuraOptions.ProcChance (50) and triggers spell 1302521, whose energize
 // effect restores 35 mana.

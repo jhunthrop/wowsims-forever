@@ -33,6 +33,12 @@ func (druid *Druid) registerShiftingPowerSpell() {
 	}
 
 	energyMetrics := druid.NewEnergyMetrics(core.ActionID{SpellID: shiftingPowerSpellID})
+	wolfsheadEnergy := 0.0
+	var wolfsheadMetrics *core.ResourceMetrics
+	if druid.wearsWolfsheadHelm() {
+		wolfsheadEnergy = wolfsheadHelmShiftingPowerEnergy
+		wolfsheadMetrics = druid.NewEnergyMetrics(core.ActionID{SpellID: wolfsheadHelmEnergySpellID})
+	}
 
 	druid.ShiftingPower = druid.RegisterSpell(Cat, core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: shiftingPowerSpellID},
@@ -57,6 +63,9 @@ func (druid *Druid) registerShiftingPowerSpell() {
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			druid.AddEnergy(sim, ShiftingPowerEnergy, energyMetrics)
+			if wolfsheadEnergy > 0 {
+				druid.AddEnergy(sim, wolfsheadEnergy, wolfsheadMetrics)
+			}
 		},
 	})
 }
