@@ -41,7 +41,9 @@ func (druid *Druid) registerFaerieFireSpell() {
 			})
 		}
 	*/
-	flags |= core.SpellFlagAPL | core.SpellFlagResetAttackSwing
+	// No swing reset: "Faerie Fire no longer resets your swing timer when
+	// used" (Blizzard's Forever notes, 1 October 2026).
+	flags |= core.SpellFlagAPL
 
 	druid.FaerieFire = druid.RegisterSpell(formMask, core.SpellConfig{
 		SpellCode:   spellCode,
