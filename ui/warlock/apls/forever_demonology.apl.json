@@ -91,14 +91,52 @@
                 }
               },
               {
-                "not": {
-                  "val": {
-                    "auraIsKnown": {
-                      "auraId": {
-                        "spellId": 425464
+                "or": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "auraIsKnown": {
+                            "auraId": {
+                              "spellId": 425464
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpGe",
+                              "lhs": {
+                                "currentLevel": {}
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "56"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "currentLevel": {}
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "60"
+                                }
+                              }
+                            }
+                          }
+                        ]
                       }
                     }
-                  }
+                  ]
                 }
               }
             ]
@@ -111,7 +149,7 @@
           }
         }
       },
-      "notes": "Soul Fire every 6 seconds while Decimation is up. Below 35% each Shadow Bolt gives you 10 seconds of Soul Fires with 40% less cast time that cost no shard, 2.4 seconds once Bane is full. In the raid build, skip it: Soul Fire is Fire, and your Shadow bonuses make Shadow Bolt stronger. Outside Decimation it is never worth its shard."
+      "notes": "Soul Fire every 6 seconds while Decimation is up, except in the raid build at 60. Below 35% each Shadow Bolt gives you 10 seconds of Soul Fires with 40% less cast time that cost no shard, 2.4 seconds once Bane is full. The raid build casts them from rank 2 at 56, but at 60 Soul Fire is Fire, and on raid gear your Shadow bonuses make Shadow Bolt stronger. Outside Decimation it is never worth its shard."
     },
     {
       "notes": "Life Tap below 10% mana. Each tap turns health, plus a point for every point of Spirit, into mana; a Healthstone or a healer covers the health.",

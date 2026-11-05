@@ -291,6 +291,9 @@ func (warlock *Warlock) applySuppression() {
 // nightfallProcChancePerRank is Nightfall's 2% a rank (18094: 2% and 4%).
 const nightfallProcChancePerRank = 0.02
 
+// nightfallTalentSpellID is Nightfall's talent spell, both ranks.
+const nightfallTalentSpellID = 18094
+
 // nightfallTriggerSpellCodes are the spells the talent text names (18094,
 // 1.60.1.70707): "Gives your Corruption, Drain Soul, Drain Life, and Wrack
 // spells a 4% chance to cause you to enter a Shadow Trance after damaging the
@@ -328,7 +331,10 @@ func (warlock *Warlock) applyNightfall() {
 	procChance := nightfallProcChancePerRank * float64(warlock.Talents.Nightfall)
 
 	core.MakePermanent(warlock.RegisterAura(core.Aura{
-		Label: "Nightfall Hidden Aura",
+		// Under the talent's spell (18094), so a rotation can gate on knowing
+		// Nightfall (auraIsKnown), as Affliction's Shadow Trance bolt does.
+		Label:    "Nightfall",
+		ActionID: core.ActionID{SpellID: nightfallTalentSpellID},
 		OnPeriodicDamageDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			if slices.Contains(nightfallTriggerSpellCodes, spell.SpellCode) && sim.Proc(procChance, "Nightfall") {
 				shadowTranceAura.Activate(sim)
@@ -625,6 +631,10 @@ func (warlock *Warlock) applySoulLink() {
 // rank in the client's talent table).
 const demonicPactTalentSpellID = 425464
 
+// demonicSacrificeTalentSpellID is Demonic Sacrifice's talent spell (18788),
+// also the spell the rotation casts.
+const demonicSacrificeTalentSpellID = 18788
+
 // applyDemonicPact registers the passive as a permanent aura so a rotation
 // can read the talent (auraIsKnown): Demonology's prepull sacrifices the Imp
 // before summoning the Succubus only when Pact keeps the sacrifice. The
@@ -644,8 +654,16 @@ func (warlock *Warlock) applyDemonicSacrifice() {
 		return
 	}
 
+	// The talent itself, readable by a rotation (auraIsKnown 18788) the way
+	// Demonic Pact is: Affliction's raid prepull summons and sacrifices the
+	// Imp only when the build has the talent.
+	core.MakePermanent(warlock.RegisterAura(core.Aura{
+		Label:    "Demonic Sacrifice",
+		ActionID: core.ActionID{SpellID: demonicSacrificeTalentSpellID},
+	}))
+
 	impAura := warlock.GetOrRegisterAura(core.Aura{
-		Label:    "Burning Wish",
+		Label:    "Burning Shadow", // 18789 in the Forever client (Era: Burning Wish)
 		ActionID: core.ActionID{SpellID: 18789},
 		Duration: 30 * time.Minute,
 
