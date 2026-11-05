@@ -281,7 +281,7 @@
       }
     },
     {
-      "notes": "Immolate with 3 seconds or less left on it, unless you have sacrificed your Imp. It lands a moment before the old one ends, and the fresh hit is worth the last tick. The raid build drops it: without Bane it is a 2 second Fire cast that Burning Shadow does nothing for, and Wrack does more in that time.",
+      "notes": "Immolate with 3 seconds or less left on it, unless your build sacrifices the Imp. It lands a moment before the old one ends, and the fresh hit is worth the last tick. The raid build drops it: without Bane it is a 2 second Fire cast that Burning Shadow does nothing for, and Wrack does more in that time.",
       "action": {
         "condition": {
           "and": {
@@ -289,9 +289,9 @@
               {
                 "not": {
                   "val": {
-                    "auraIsActive": {
+                    "auraIsKnown": {
                       "auraId": {
-                        "spellId": 18789
+                        "spellId": 18788
                       }
                     }
                   }
@@ -335,7 +335,7 @@
               {
                 "auraIsKnown": {
                   "auraId": {
-                    "spellId": 17941
+                    "spellId": 18094
                   }
                 }
               },
