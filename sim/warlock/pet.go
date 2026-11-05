@@ -113,6 +113,12 @@ func (warlock *Warlock) makePet(cfg PetConfig, enabledOnStart bool) *WarlockPet 
 		wp.EnableAutoAttacks(wp, cfg.AutoAttacks)
 	}
 
+	// The demon takes the crit its warlock wears, and only that (see
+	// makeStatInheritance): EquipStats is the gear plus the request's bonus
+	// stats, which stand for gear. It is fixed for the summon, so no owner
+	// buff or proc reaches it.
+	wp.AddStat(stats.Crit, warlock.EquipStats()[stats.Crit])
+
 	// Unholy Power: "Increases all damage done by your Imp, Voidwalker,
 	// Succubus, Incubus, and Felhunter pets by 2%" a rank; the Forever
 	// Firebolt tooltip applies it too, so it is pet-wide, not melee only.
@@ -264,12 +270,15 @@ const (
 const petMeleeHitShare = 8.0 / 17
 
 // makeStatInheritance maps the warlock's stats to the demon's. Crit is not
-// inherited. Blizzard's intent is that a demon mirrors the warlock's spell
-// crit with no crit of its own (forever-bugs #331, 2026-10-14), but the beta
-// does not do it yet: demons keep their own crit (demonMeleeCritPercent and
-// its neighbours) and, by the same reply, take only the warlock's pure
-// "critical strike" stat (unconfirmed, single source, not wired: whether the
-// server counts the warlock's crit buffs in it is unpublished). Haste is not
+// in it. Blizzard's intent is that a demon mirrors the warlock's spell crit
+// with no crit of its own (forever-bugs #331, 2026-10-14), but it is not
+// enabled: demons keep their own crit (demonMeleeCritPercent and its
+// neighbours) and, by the same reply, "only scale with their master's +%
+// critical strike gear". makePet adds that gear crit once at the summon; the
+// warlock's crit from Intellect, racials, raid auras and procs never reaches
+// the demon (#371, crit racials missing from the pet sheet, closed as #331's
+// duplicate on 2026-10-16; no note through 2026-11-04 enables the mirror).
+// Haste is not
 // inherited: this engine carries haste as speed multipliers, not stats. The
 // mapping is linear in the owner's stats, so the same function maps the
 // owner's mid-fight stat changes; the school power it reads is fixed per
