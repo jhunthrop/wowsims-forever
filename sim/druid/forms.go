@@ -203,11 +203,6 @@ func (druid *Druid) registerCatFormSpell() {
 
 	energyMetrics := druid.NewEnergyMetrics(actionID)
 
-	hasWolfheadBonus := false
-	if head := druid.Equipment.Head(); head != nil && (head.ID == WolfsheadHelm) {
-		hasWolfheadBonus = true
-	}
-
 	druid.RegisterResetEffect(func(sim *core.Simulation) {
 		druid.energyOnLeavingCat = 0
 		druid.leftCatFormAt = 0
@@ -252,7 +247,6 @@ func (druid *Druid) registerCatFormSpell() {
 				spell.Cost.Multiplier += 100
 			} else {
 				shiftEnergy := furorCatFormEnergy(druid.Talents.Furor, druid.energyOnLeavingCat, sim.CurrentTime-druid.leftCatFormAt)
-				shiftEnergy = core.TernaryFloat64(hasWolfheadBonus, shiftEnergy+wolfsheadHelmCatFormEnergy, shiftEnergy)
 				energyDelta := shiftEnergy - druid.CurrentEnergy()
 
 				if energyDelta > 0 {
@@ -266,11 +260,6 @@ func (druid *Druid) registerCatFormSpell() {
 		},
 	})
 }
-
-// wolfsheadHelmCatFormEnergy is the energy Wolfshead Helm grants on a shift
-// into Cat Form: spell 1310990's energize effect, 20 until build
-// 1.60.1.70291.
-const wolfsheadHelmCatFormEnergy = 5.0
 
 func (druid *Druid) manageCooldownsEnabled() {
 	// Disable cooldowns not usable in form and/or delay others
