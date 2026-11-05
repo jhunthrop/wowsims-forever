@@ -19,15 +19,21 @@ import (
 //     carries the same two at 360), max health (aura 230: 20 + 18 a level /
 //     600 + 32 a level) and attack power (aura 99: 30 + 3 a level / 120 + 3
 //     a level, which is 3 a level at every level the tier is used).
-//   - Bear Form (Passive2) 21178: +30% threat (aura 10, all schools).
+//   - Bear Form (Passive2) 21178: the form's threat bonus (aura 10, all
+//     schools; bearFormThreatMultiplier).
 //
 // unconfirmed: what aura 466 modifies. It is read as the same percentage
 // applied to the armor items carry as bonus armor (stats.BonusArmor), the
 // pool aura 142 does not reach.
 const (
-	// bearFormThreatMultiplier is spell 21178's aura 10 amount 50 (30 until
-	// build 1.60.1.70291).
-	bearFormThreatMultiplier = 1.5
+	// bearFormThreatMultiplier: "Bear Form and Dire Bear Form: Threat bonus
+	// increased from 50% to 115%" (Blizzard's Forever patch notes, 3 November
+	// 2026). The cached 1.60.1.70790 row for 21178 (aura 10) still reads 50,
+	// as Defensive Stance Passive's still reads the 30 the same note raised
+	// to 80, which Wowhead's Forever tooltip renders: the note's threat
+	// bonuses are server data the cached table predates. 30 until build
+	// 1.60.1.70291, 50 until the note.
+	bearFormThreatMultiplier = 2.15
 
 	// bearFormAnnouncedMinLevel is Bear Form's own learn level.
 	bearFormAnnouncedMinLevel = 10

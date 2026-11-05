@@ -24,7 +24,7 @@
       }
     },
     {
-      "notes": "On cooldown: 20% less damage taken for 15 seconds of every minute, and Forever lets you cast it in Bear Form.",
+      "notes": "On cooldown: 20% less physical damage for 15 seconds of every minute, and Forever lets you cast it in Bear Form.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -182,7 +182,7 @@
       }
     },
     {
-      "notes": "Keep it on the boss: 204 attack power off it at 60 takes about a fifth of its melee damage away. Refresh it in its last 3 seconds.",
+      "notes": "Keep it on the boss: 204 less melee attack power at 60 takes a real slice off every swing. One is enough, since it does not stack with a warrior's Demoralizing Shout. Refresh it in its last 3 seconds.",
       "action": {
         "condition": {
           "or": {
@@ -260,7 +260,7 @@
       }
     },
     {
-      "notes": "Above 40 rage, as the rage dump. It hits up to three targets, so on a pack it is your main threat.",
+      "notes": "On two or more targets, above 40 rage. It hits up to three, so on a pack of three it is your main threat; on a single boss the same rage does more in Maul, Lacerate and Primal Bite.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -269,16 +269,35 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentRage": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "40"
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "numberTargets": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "2"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentRage": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         }
       }

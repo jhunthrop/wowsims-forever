@@ -149,7 +149,7 @@
       }
     },
     {
-      "notes": "At 5 combo points when Rip is off the boss or has under 2 seconds left. A new Rip throws away the ticks the old one had left, so let it run almost to the end. Rip comes first because it is the bleed that keeps Rend and Tear on.",
+      "notes": "At 5 combo points when Rip is off the boss or has under 2 seconds left. A new Rip throws away the ticks the old one had left, so let it run almost to the end. Rip comes first, and once you have Rend and Tear (37 leveling, 36 raid order) it is also the bleed that keeps Rend and Tear on.",
       "action": {
         "condition": {
           "and": {
@@ -245,13 +245,18 @@
       }
     },
     {
-      "notes": "Your builder from level 20, always from behind the target. Shred hits harder than Claw at every rank, but until Shredding Attacks is full at 22 it costs 8 to 14 more energy, and Claw does more for the energy.",
+      "notes": "Your builder from level 21, always from behind the target. Shred hits harder than Claw at every rank; only at 20, before the second point of Shredding Attacks, does its cost make Claw the better buy.",
       "action": {
         "condition": {
-          "spellIsKnown": {
-            "spellId": {
-              "spellId": 22829,
-              "rank": 5
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "currentLevel": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "21"
+              }
             }
           }
         },
@@ -264,16 +269,17 @@
       }
     },
     {
-      "notes": "Your builder at 20 and 21, before Shredding Attacks is full: Claw costs 40 to Shred's 54 at 20 and 48 at 21, and does more for its energy. Later, it is the button for a target you cannot get behind.",
+      "notes": "Your builder at 20, before the second point of Shredding Attacks: Claw costs 40 to Shred's 54 there and does more for its energy. Later, it is the button for a target you cannot get behind.",
       "action": {
         "condition": {
-          "not": {
-            "val": {
-              "spellIsKnown": {
-                "spellId": {
-                  "spellId": 22829,
-                  "rank": 5
-                }
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentLevel": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "21"
               }
             }
           }
