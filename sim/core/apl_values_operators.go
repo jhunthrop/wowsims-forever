@@ -39,6 +39,9 @@ func (rot *APLRotation) newValueConst(config *proto.APLValueConst) APLValue {
 
 	if durVal, err := time.ParseDuration(config.Val); err == nil {
 		result.durationVal = durVal
+		// Numbers keep their duration (below); a duration keeps its seconds, so a
+		// coerced copy in number x duration math reads its value, not 0.
+		result.floatVal = durVal.Seconds()
 		result.valType = proto.APLValueType_ValueTypeDuration
 		return result
 	}
