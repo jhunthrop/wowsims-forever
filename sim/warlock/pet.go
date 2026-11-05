@@ -226,11 +226,13 @@ func (wp *WarlockPet) ExecuteCustomRotation(sim *core.Simulation) {
 // _RES). wowsims/forever read the same tenth off beta pet sheets and a logged
 // Sayaad (sim/warlock/pets.go, c3d9ea951, 2026-10-14). Classic's 57% and 15%
 // (wowsims/sod, warcraft.wiki.gg) are not Forever's. The client sheet says
-// pets have no primary attributes (PET_BONUS_STAM and _INT 0); the 75%
-// Stamina (7.5 health a point, which wowsims/forever also reads) and 30%
-// Intellect stand in for the health and mana the server grants instead.
+// pets have no primary attributes (PET_BONUS_STAM and _INT 0); the 20%
+// Stamina and 30% Intellect stand in for the health and mana the server
+// grants instead. Blizzard's 3 Nov notes: "Pets now gain 2 Health per point
+// of Master's Stamina (was 7.5 Health per point of Master's Stamina)", so a
+// fifth of the warlock's Stamina at 10 health a point (the beta's 75% is gone).
 const (
-	petStaminaShare             = 0.75
+	petStaminaShare             = 0.20
 	petIntellectShare           = 0.30
 	petArmorShare               = 0.35
 	petResistanceShare          = 1.00

@@ -84,7 +84,7 @@ func TestDemonInheritsForeversShares(t *testing.T) {
 	}
 	got := warlock.makeStatInheritance()(owner)
 	want := stats.Stats{
-		stats.Stamina:          300,
+		stats.Stamina:          80, // 2 health a point: Blizzard, 3 Nov notes
 		stats.Intellect:        90,
 		stats.Armor:            700,
 		stats.FireResistance:   100,
@@ -115,7 +115,9 @@ func TestDemonInheritanceIsLinearForOwnerStatChanges(t *testing.T) {
 
 // A summoned Succubus follows the warlock's sheet: Demonic Knowledge's 60
 // spell power gives it 0.17 x 60 = 10.2 attack power on its own 129 x 2 -
-// 20 = 238, and three quarters of the warlock's Stamina.
+// 20 = 238, and a fifth of the warlock's Stamina: Blizzard's 3 Nov notes,
+// "Pets now gain 2 Health per point of Master's Stamina (was 7.5 Health per
+// point of Master's Stamina)", at 10 health a point of the demon's Stamina.
 func TestSummonedSuccubusFollowsTheWarlocksSheet(t *testing.T) {
 	_, warlock := newPetInheritanceTestWarlock(t, proto.WarlockOptions_Succubus)
 	succubus := warlock.Succubus
@@ -130,8 +132,8 @@ func TestSummonedSuccubusFollowsTheWarlocksSheet(t *testing.T) {
 	if want := 238 + 0.17*60; math.Abs(got[stats.AttackPower]-want) > 1e-6 {
 		t.Errorf("Succubus attack power = %.2f, want %.2f", got[stats.AttackPower], want)
 	}
-	if want := 234 + 0.75*owner[stats.Stamina]; math.Abs(got[stats.Stamina]-want) > 1e-6 {
-		t.Errorf("Succubus Stamina = %.2f, want 234 + 75%% of %.1f = %.2f", got[stats.Stamina], owner[stats.Stamina], want)
+	if want := 234 + 0.2*owner[stats.Stamina]; math.Abs(got[stats.Stamina]-want) > 1e-6 {
+		t.Errorf("Succubus Stamina = %.2f, want 234 + 20%% of %.1f = %.2f", got[stats.Stamina], owner[stats.Stamina], want)
 	}
 	if want := 0.10 * 60; math.Abs(got[stats.SpellDamage]-want) > 1e-6 {
 		t.Errorf("Succubus spell damage = %.2f, want %.2f", got[stats.SpellDamage], want)
