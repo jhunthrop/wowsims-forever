@@ -77,11 +77,16 @@ func TestBearFormIsActiveAtTheStartWithItsPaw(t *testing.T) {
 	}
 }
 
-// Bear Form (Passive2) 21178: aura 10 amount 50 (30 before build 1.60.1.70291).
-func TestBearFormThreatIsFiftyPercentOver(t *testing.T) {
+// Bear Form and Dire Bear Form: "Threat bonus increased from 50% to 115%"
+// (Blizzard's Forever patch notes, 3 November 2026). The cached 1.60.1.70790
+// SpellEffect row 700189 (21178 aura 10) still reads 50, as row 686475
+// (Defensive Stance Passive 7376) still reads 30 though the same note made it
+// 80 and Wowhead's Forever tooltip for 71 and 7376 renders the 80: the note's
+// threat bonuses are server data the cached table predates.
+func TestBearFormThreatIsOneHundredFifteenPercentOver(t *testing.T) {
 	bear, _, _ := newBearSim(t, 60, nil)
-	if got := bear.PseudoStats.ThreatMultiplier; !near(got, 1.5) {
-		t.Errorf("threat multiplier = %v, want 1.5", got)
+	if got := bear.PseudoStats.ThreatMultiplier; !near(got, 2.15) {
+		t.Errorf("threat multiplier = %v, want 2.15", got)
 	}
 }
 
@@ -380,5 +385,19 @@ func TestMaulAndSwipeCarryClassicThreat(t *testing.T) {
 	}
 	if got := bear.SwipeBear.ThreatMultiplier; !near(got, 1.75) {
 		t.Errorf("Swipe threat multiplier = %v, want 1.75", got)
+	}
+}
+
+// Swipe: "Fixed a bug causing Swipe to not scale with Attack Power. It will
+// now correctly gain 3% of the Druid's attack power." (Blizzard's Forever
+// patch notes, 1 October 2026). Every target's hit is the rank's flat amount
+// plus 3% of attack power; the client row's BonusCoefficientFromAP column is
+// 0 on every rank, the server applies the share.
+func TestSwipeGainsThreePercentOfAttackPower(t *testing.T) {
+	if got := druid.SwipeHitDamage(83, 1000); !near(got, 113) {
+		t.Errorf("rank 5 Swipe at 1000 attack power = %v, want 113", got)
+	}
+	if got := druid.SwipeHitDamage(18, 0); !near(got, 18) {
+		t.Errorf("rank 1 Swipe at 0 attack power = %v, want 18", got)
 	}
 }

@@ -7,7 +7,7 @@ package druid
 //
 // unconfirmed: 2.0 is Swipe's +100% from Season of Discovery's druid tuning
 // passive (spell 436895), the only threat modifier the client's druid rows
-// state, applied to the tier; Bear Form's own +30% (bearFormThreatMultiplier)
+// state, applied to the tier; Bear Form's own +115% (bearFormThreatMultiplier)
 // stacks on top as a unit multiplier.
 const HighThreatMultiplier = 2.0
 
@@ -18,6 +18,6 @@ const HighThreatMultiplier = 2.0
 // engine (Maul 1.75, Swipe 1.75 doubled by that season's tuning passive
 // 436895, which no 1.60.1.70707 SkillLineAbility row teaches, so a Forever
 // druid never has it). cmangos classic gives Maul's extra as a flat amount
-// instead (spell_threat 9881: 207). Bear Form's +50% stacks on top as a unit
+// instead (spell_threat 9881: 207). Bear Form's +115% stacks on top as a unit
 // multiplier.
 const ClassicBearThreatMultiplier = 1.75
