@@ -6,7 +6,15 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// vanishLevel is Vanish's trainer level (trainables 1856, level 22).
+const vanishLevel = 22
+
 func (rogue *Rogue) registerVanishSpell() {
+	// Nothing checks RequiredLevel at cast time, so a rogue below the trainer
+	// level must not have the spell (or its aura) at all.
+	if rogue.Level < vanishLevel {
+		return
+	}
 	rogue.VanishAura = rogue.RegisterAura(core.Aura{
 		Label:    "Vanish",
 		ActionID: core.ActionID{SpellID: 457437},
@@ -24,7 +32,7 @@ func (rogue *Rogue) registerVanishSpell() {
 		Flags:       core.SpellFlagAPL,
 		// Always registers rank 1 (1856, spell_level 22); this engine does
 		// not scale Vanish by rank.
-		RequiredLevel: 22,
+		RequiredLevel: vanishLevel,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

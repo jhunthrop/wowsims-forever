@@ -1013,8 +1013,10 @@ type FeralTankDruid_Options struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	InnervateTarget *UnitReference         `protobuf:"bytes,1,opt,name=innervate_target,json=innervateTarget,proto3" json:"innervate_target,omitempty"`
 	StartingRage    float64                `protobuf:"fixed64,2,opt,name=starting_rage,json=startingRage,proto3" json:"starting_rage,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// The raid keeps a bleed on the target (Rend and Tear), as FeralDruid's.
+	AssumeBleedActive bool `protobuf:"varint,3,opt,name=assume_bleed_active,json=assumeBleedActive,proto3" json:"assume_bleed_active,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *FeralTankDruid_Options) Reset() {
@@ -1059,6 +1061,13 @@ func (x *FeralTankDruid_Options) GetStartingRage() float64 {
 		return x.StartingRage
 	}
 	return 0
+}
+
+func (x *FeralTankDruid_Options) GetAssumeBleedActive() bool {
+	if x != nil {
+		return x.AssumeBleedActive
+	}
+	return false
 }
 
 type RestorationDruid_Rotation struct {
@@ -1233,16 +1242,17 @@ const file_druid_proto_rawDesc = "" +
 	"\x10innervate_target\x18\x01 \x01(\v2\x14.proto.UnitReferenceR\x0finnervateTarget\x12\x1d\n" +
 	"\n" +
 	"latency_ms\x18\x02 \x01(\x05R\tlatencyMs\x12.\n" +
-	"\x13assume_bleed_active\x18\x04 \x01(\bR\x11assumeBleedActive\"\xda\x02\n" +
+	"\x13assume_bleed_active\x18\x04 \x01(\bR\x11assumeBleedActive\"\x8b\x03\n" +
 	"\x0eFeralTankDruid\x127\n" +
 	"\aoptions\x18\x03 \x01(\v2\x1d.proto.FeralTankDruid.OptionsR\aoptions\x1a\x9d\x01\n" +
 	"\bRotation\x12.\n" +
 	"\x13maul_rage_threshold\x18\x01 \x01(\x05R\x11maulRageThreshold\x12<\n" +
 	"\x1amaintain_demoralizing_roar\x18\x02 \x01(\bR\x18maintainDemoralizingRoar\x12#\n" +
-	"\rlacerate_time\x18\x03 \x01(\x01R\flacerateTime\x1ao\n" +
+	"\rlacerate_time\x18\x03 \x01(\x01R\flacerateTime\x1a\x9f\x01\n" +
 	"\aOptions\x12?\n" +
 	"\x10innervate_target\x18\x01 \x01(\v2\x14.proto.UnitReferenceR\x0finnervateTarget\x12#\n" +
-	"\rstarting_rage\x18\x02 \x01(\x01R\fstartingRage\"\xa5\x01\n" +
+	"\rstarting_rage\x18\x02 \x01(\x01R\fstartingRage\x12.\n" +
+	"\x13assume_bleed_active\x18\x03 \x01(\bR\x11assumeBleedActive\"\xa5\x01\n" +
 	"\x10RestorationDruid\x129\n" +
 	"\aoptions\x18\x03 \x01(\v2\x1f.proto.RestorationDruid.OptionsR\aoptions\x1a\n" +
 	"\n" +

@@ -35,6 +35,8 @@ func NewFeralTankDruid(character *core.Character, options *proto.Player) *FeralT
 	}
 
 	bear.SelfBuffs.InnervateTarget = &proto.UnitReference{}
+	bear.AssumeBleedActive = tankOptions.Options.AssumeBleedActive
+
 	if tankOptions.Options.InnervateTarget != nil {
 		bear.SelfBuffs.InnervateTarget = tankOptions.Options.InnervateTarget
 	}
