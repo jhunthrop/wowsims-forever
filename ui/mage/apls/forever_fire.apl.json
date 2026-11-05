@@ -367,7 +367,7 @@
       }
     },
     {
-      "notes": "Once you have Arcane Blast, at 57 or on the raid build, Fireball is the filler. Five points of Accelerant make it a 3 second cast, each one has a 20% chance to make your next Arcane Missiles free through Missile Barrage, and with Arcane Blast's spell damage up it does more over a boss than Scorch. Its crits feed Ignite and Heating Up like any other Fire crit.",
+      "notes": "Fireball is the filler once you have Arcane Blast, which the leveling build takes at 57. Five points of Accelerant make it a 3 second cast, each one has a 20% chance to make your next Arcane Missiles free through Missile Barrage, and with Arcane Blast's spell damage up it does more over a boss than Scorch. Its crits feed Ignite and Heating Up like any other Fire crit.",
       "action": {
         "condition": {
           "spellIsKnown": {
