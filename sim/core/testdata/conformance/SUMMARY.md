@@ -617,7 +617,7 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage, period
 
 | Class | Declared | Matching | Differing | Not declared | n/a |
 |---|---|---|---|---|---|
-| Hunter | 12 | 12 | 0 | 0 | 31 |
+| Hunter | 19 | 19 | 0 | 0 | 38 |
 | Mage | 87 | 87 | 0 | 0 | 23 |
 | Warlock | 98 | 98 | 0 | 0 | 63 |
 | Paladin | 141 | 141 | 0 | 24 | 258 |
@@ -626,7 +626,7 @@ Per spec-and-rank row at level 60 whose client spell has a school-damage, period
 | Priest | 131 | 131 | 0 | 0 | 38 |
 | Shaman | 183 | 183 | 0 | 23 | 232 |
 | Rogue | 10 | 10 | 0 | 1 | 29 |
-| **Total** | 771 | 771 | 0 | 48 | 755 |
+| **Total** | 778 | 778 | 0 | 48 | 762 |
 
 <!-- damage-summary:end -->
 
