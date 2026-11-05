@@ -53,7 +53,7 @@
       }
     },
     {
-      "notes": "Shank on cooldown at three combo points or fewer: an off-hand stab that cannot miss, pays back more energy than it costs and, with Boot Knife, adds two combo points, so at four or five you finish first.",
+      "notes": "Shank on cooldown while you have three combo points or fewer or less than 50 energy: an off-hand stab that cannot miss and pays back more energy than it costs. With Boot Knife it can add two combo points, on every Shank once Boot Knife is 5/5 at 39, so at four or five with 50 energy or more you finish first and Shank right after; short on energy, the energy is worth more than a spilled point.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -61,16 +61,35 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpLe",
-            "lhs": {
-              "currentComboPoints": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "3"
+          "or": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentEnergy": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "50"
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         }
       }
@@ -96,7 +115,7 @@
           }
         }
       },
-      "notes": "Ghostly Strike on cooldown at four combo points or fewer: it hits harder than Hemorrhage for 10 more energy (Hemorrhage costs 30 with Efficient Strikes) and gives a combo point."
+      "notes": "Ghostly Strike on cooldown at four combo points or fewer: it hits harder than Hemorrhage for a little more energy (40 against Hemorrhage's 35, or 30 with both points of Efficient Strikes) and gives a combo point."
     },
     {
       "action": {
@@ -120,7 +139,7 @@
           }
         }
       },
-      "notes": "Garrote after every Ghostly Strike, at four combo points or fewer and ahead of Rupture at exactly four, even when the old one is still ticking: Ghostly Strike lets it in without Stealth, and a fresh Garrote is a bleed that Hemorrhage, Opportunity and Death Mark all feed."
+      "notes": "Garrote after every Ghostly Strike, at four combo points or fewer and ahead of Rupture at exactly four, even when the old one is still ticking: Ghostly Strike lets it in without Stealth, and a fresh Garrote is a bleed that Opportunity feeds, and Hemorrhage and Death Mark too once you have them."
     },
     {
       "action": {
@@ -162,7 +181,7 @@
           }
         }
       },
-      "notes": "Rupture at four or more combo points whenever it is not ticking, so it goes up right after the opener: Hemorrhage and Serrated Blades both feed it, which makes it the main finisher."
+      "notes": "Rupture at four or more combo points whenever it is not ticking, so it goes up right after the opener: it is the main finisher, and Serrated Blades from 21 and Hemorrhage's debuff from 30 make it hit harder still."
     },
     {
       "notes": "Death Mark at four or more combo points while Rupture is ticking, and between marks the points Rupture and Slice and Dice do not need wait for the next one: for 6 seconds it stores a share of everything you hit the target for, Rupture and Garrote at twice the rate, then deals it back at once. It comes back every 10 seconds, so a mark now beats a bigger one a few seconds later, and an Eviscerate in between costs more than it deals.",
@@ -230,11 +249,43 @@
                       }
                     },
                     {
-                      "dotIsActive": {
-                        "spellId": {
-                          "spellId": 11275,
-                          "rank": 6
-                        }
+                      "or": {
+                        "vals": [
+                          {
+                            "dotIsActive": {
+                              "spellId": {
+                                "spellId": 11275,
+                                "rank": 6
+                              }
+                            }
+                          },
+                          {
+                            "and": {
+                              "vals": [
+                                {
+                                  "not": {
+                                    "val": {
+                                      "spellIsKnown": {
+                                        "spellId": {
+                                          "spellId": 11275,
+                                          "rank": 6
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "auraIsActive": {
+                                    "auraId": {
+                                      "spellId": 6774,
+                                      "rank": 2
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -256,7 +307,7 @@
           }
         }
       },
-      "notes": "Eviscerate at three or more combo points while Rupture is ticking, only before you have Death Mark: from 40, five points go into Death Mark while Rupture ticks."
+      "notes": "Eviscerate at three or more combo points while Rupture is ticking, or before Rupture trains at 20 while Slice and Dice is up, and only before you have Death Mark: from 40, those points go into Death Mark instead."
     },
     {
       "action": {
@@ -325,18 +376,36 @@
                 }
               },
               {
-                "dotIsActive": {
-                  "spellId": {
-                    "spellId": 11275,
-                    "rank": 6
-                  }
+                "or": {
+                  "vals": [
+                    {
+                      "dotIsActive": {
+                        "spellId": {
+                          "spellId": 11275,
+                          "rank": 6
+                        }
+                      }
+                    },
+                    {
+                      "not": {
+                        "val": {
+                          "spellIsKnown": {
+                            "spellId": {
+                              "spellId": 11275,
+                              "rank": 6
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             ]
           }
         }
       },
-      "notes": "Slice and Dice at three or more combo points while Rupture is ticking, when it is down or has under 3 seconds left."
+      "notes": "Slice and Dice at three or more combo points while Rupture is ticking, or at any time before Rupture trains at 20, when it is down or has under 3 seconds left."
     },
     {
       "action": {
@@ -445,7 +514,7 @@
           }
         }
       },
-      "notes": "Backstab from behind with a dagger in your main hand is the builder until Hemorrhage: it hits far harder than Sinister Strike, and Opportunity adds 20% to it."
+      "notes": "Backstab from behind with a dagger in your main hand is the builder until Hemorrhage: it hits far harder than Sinister Strike, and every point of Opportunity, from 13, adds 4% to it."
     },
     {
       "action": {
