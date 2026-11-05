@@ -63,10 +63,10 @@
       "action": {
         "autocastOtherCooldowns": {}
       },
-      "notes": "Lightning Mastery, trinkets, racials and potions on cooldown: for Mastery's 15 seconds Lightning Bolt is a 1.5 second cast, so stack everything inside it."
+      "notes": "Lightning Mastery, trinkets and Blood Fury together: for its 15 seconds Lightning Bolt is half a second faster and Chain Lightning has no cooldown, so stack them inside it. A Troll presses Berserking after Mastery ends, since casting speed cannot push a bolt below the 1.5 second global cooldown."
     },
     {
-      "notes": "Flame Shock whenever it is not on the target: with Call of Flame it lasts 21 seconds and ticks for the whole of it.",
+      "notes": "Flame Shock whenever it is not on the target: with Call of Flame it ticks for 21 seconds, and nothing else wants the shock cooldown.",
       "action": {
         "condition": {
           "not": {
@@ -89,22 +89,40 @@
       }
     },
     {
-      "notes": "Searing Totem on a single target: it is your strongest Fire totem. Its bolts only reach 20 yards, so drop it within 20 yards of the boss.",
+      "notes": "Searing Totem on a single target, and in the pack until Magma Totem at 26: it is your strongest single-target Fire totem, and until 26 the only one Fire Nova can burst from. Its bolts only reach 20 yards, so on a boss drop it within 20 yards.",
       "action": {
         "condition": {
           "and": {
             "vals": [
               {
-                "cmp": {
-                  "op": "OpEq",
-                  "lhs": {
-                    "numberTargets": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "1"
+                "or": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpEq",
+                        "lhs": {
+                          "numberTargets": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "1"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "not": {
+                        "val": {
+                          "spellIsKnown": {
+                            "spellId": {
+                              "spellId": 10587,
+                              "rank": 4
+                            }
+                          }
+                        }
+                      }
                     }
-                  }
+                  ]
                 }
               },
               {
@@ -173,7 +191,7 @@
       }
     },
     {
-      "notes": "Chain Lightning on two or more targets: it hits each of them for more than a Lightning Bolt does.",
+      "notes": "Chain Lightning on two or more targets: the first hit is bigger than a Lightning Bolt and the jumps add most of another bolt on top, for the same cast time.",
       "action": {
         "condition": {
           "cmp": {
@@ -197,7 +215,7 @@
       }
     },
     {
-      "notes": "Fire Nova on two or more targets: it bursts from your Fire totem, so drop Magma Totem in the pack first. It only hits within 10 yards of that totem; on a single boss your Searing Totem stands 20 yards out, and Lightning Bolt is the better cast.",
+      "notes": "Fire Nova on two or more targets: it bursts from your Fire totem, so drop that totem in the pack first (Searing Totem until 26, Magma Totem from then on). It only hits within 10 yards of that totem; on a single boss your Searing Totem stands 20 yards out, and Lightning Bolt is the better cast.",
       "action": {
         "condition": {
           "cmp": {
@@ -221,7 +239,7 @@
       }
     },
     {
-      "notes": "Lightning Bolt at the top rank while your mana is ahead of the fight: more than the share of the fight left. Rank 10 costs 220 mana to rank 9's 190 for about 20% more base damage, so you spend the spare mana on it and drop to rank 9 as soon as you fall behind.",
+      "notes": "Lightning Bolt at the top rank while your mana is ahead of the fight: more than the share of the fight left. Rank 10 costs 220 mana to rank 9's 190 for about 20% more base damage, so you spend the spare mana on it and drop to a cheaper rank as soon as you fall behind. In a raid you never need to.",
       "action": {
         "condition": {
           "cmp": {
@@ -243,7 +261,7 @@
       }
     },
     {
-      "notes": "Lightning Bolt rank 9 for everything else: the cheaper rank, so a full raid fight never runs you dry. Below 60, and without raid buffs, a lower rank does more in total for the same reason.",
+      "notes": "Lightning Bolt for everything else. In a raid cast rank 10 here too: raid buffs carry its mana so close to the end that the bigger bolt is worth it. Without raid buffs a cheaper rank, rank 8 at 60, and while leveling the rank for your level: 3 at 26 and 27, the top rank at 28 and 29, 3 again from 30 to 33, 4 until 38, 5 until 44, 6 until 50, 7 until 56 and 8 from 57.",
       "action": {
         "castSpell": {
           "spellId": {
