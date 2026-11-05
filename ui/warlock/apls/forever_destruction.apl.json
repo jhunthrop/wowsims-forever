@@ -191,7 +191,7 @@
       }
     },
     {
-      "notes": "Conflagrate on cooldown while Immolate is up, once you have Shadow and Flame. Each hit gives you 20 seconds of more Shadow damage, 20% at five points, which is worth more than the burn it may eat, and at five points it never eats your Immolate.",
+      "notes": "Conflagrate on cooldown while Immolate is up, once you have Shadow and Flame. Each hit gives you 20 seconds of more Shadow damage, 4% a point, which is worth more than the burn it may eat, and at five points it never eats your Immolate.",
       "action": {
         "condition": {
           "and": {
@@ -279,7 +279,7 @@
       }
     },
     {
-      "notes": "Shadowburn on cooldown, at any boss health. Each one costs a Soul Shard until the fifth point of Shadow and Flame hands it straight back, so bring enough for the fight. With Shadow and Flame each hit gives you 20 seconds of more Fire damage, 20% at five points.",
+      "notes": "Shadowburn on cooldown, at any boss health. It costs a Soul Shard, and each point of Shadow and Flame gives a 20% chance to get it straight back, so bring enough shards for the fight. With Shadow and Flame each hit also gives you 20 seconds of more Fire damage, 4% a point.",
       "action": {
         "castSpell": {
           "spellId": {

@@ -106,7 +106,7 @@
       }
     },
     {
-      "notes": "Amplify Curse just before each Bane of Agony it is ready for. At 60, keep it for the Agony that covers the last minute, once Doom has fired. It makes that Agony 50% stronger and costs no global.",
+      "notes": "Amplify Curse before each Bane of Agony, whenever it is off cooldown. At 60, keep it for the fight's final Agony, once your last Doom has fired. It makes that Agony 50% stronger and costs no global.",
       "action": {
         "condition": {
           "and": {
