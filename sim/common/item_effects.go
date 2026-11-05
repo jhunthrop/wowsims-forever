@@ -3401,9 +3401,10 @@ func init() {
 
 	// Ankh of Life (1713), a Forever trinket: Use: heal your target. ItemEffect
 	// 97284 is spell 1317424 "Heal", 720 with variance 0.2 (648 to 792, as the Robe of the Archmage reads its variance), no
-	// coefficient, on a 5 min item cooldown (its 120 s category 1153 is not
-	// shared with anything this sim casts). Used on the healer's current
-	// target (the tank in the healing sim) once it is under 60% health.
+	// coefficient, on a 5 min item cooldown and the 2 min category 1153 it
+	// shares with the healthstones, runes, mana gems and Thistle Tea (their
+	// ItemEffect rows), which the conjured timer holds. Used on the healer's
+	// current target (the tank in the healing sim) once it is under 60% health.
 	core.NewItemEffect(AnkhOfLife, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		const ankhOfLifeHealUnderHealth = 0.6
@@ -3423,7 +3424,8 @@ func init() {
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
 			Cast: core.CastConfig{
-				CD: core.Cooldown{Timer: character.NewTimer(), Duration: 5 * time.Minute},
+				CD:       core.Cooldown{Timer: character.NewTimer(), Duration: 5 * time.Minute},
+				SharedCD: core.Cooldown{Timer: character.GetConjuredCD(), Duration: 2 * time.Minute},
 			},
 			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 				spell.CalcAndDealHealing(sim, target(), sim.Roll(648, 792), spell.OutcomeHealingCrit)

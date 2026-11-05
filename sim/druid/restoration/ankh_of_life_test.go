@@ -32,3 +32,28 @@ func TestAnkhOfLifeHealsOnUse(t *testing.T) {
 		t.Errorf("Ankh of Life's cooldown is %v, want 5m", got)
 	}
 }
+
+// Round 23 (items): Ankh of Life's ItemEffect row puts the use in category
+// 1153 with a 2 min category cooldown, the category of the healthstones,
+// Demonic and Dark Rune, the mana gems and Thistle Tea (their ItemEffect
+// rows). Using the Ankh holds a Demonic Rune for 2 minutes, and a rune
+// holds the Ankh.
+func TestAnkhOfLifeSharesTheConjuredCategory(t *testing.T) {
+	player := newPlayer(60, StandardTalents, healerBonusStats, nil)
+	player.Equipment = &proto.EquipmentSpec{Items: []*proto.ItemSpec{
+		{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {Id: 1713},
+	}}
+	resto, sim := newDruid(t, player)
+	ankh := resto.GetMajorCooldown(core.ActionID{ItemID: 1713}).Spell
+	resto.RemoveHealth(sim, resto.GetStat(stats.Health)/2)
+	ankh.Cast(sim, &resto.Unit)
+	if got := resto.GetConjuredCD().TimeToReady(sim); got != 2*time.Minute {
+		t.Errorf("the conjured items are ready %v after the Ankh, want 2m (category 1153)", got)
+	}
+
+	ankh.CD.Reset()
+	resto.GetConjuredCD().Set(sim.CurrentTime + 2*time.Minute)
+	if ankh.CanCast(sim, &resto.Unit) {
+		t.Error("Ankh of Life castable while a rune holds category 1153")
+	}
+}
