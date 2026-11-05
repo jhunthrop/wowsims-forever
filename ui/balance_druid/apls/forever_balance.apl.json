@@ -158,7 +158,7 @@
       }
     },
     {
-      "notes": "From 35, whenever no Eclipse charge is banked. Each Wrath banks two charges, each taking time off one Starfire: 0.17 seconds a charge with the single point you level with, half a second with all three, and even the single point makes one Wrath and two quicker Starfires beat three plain ones.",
+      "notes": "From 35 on the leveling order and 39 on the raid order, whenever no Eclipse charge is banked. Each Wrath banks two charges, each taking time off one Starfire: 0.17 seconds a charge with one point, half a second with all three, and even one point makes one Wrath and two quicker Starfires beat three plain ones.",
       "action": {
         "condition": {
           "and": {
@@ -250,7 +250,7 @@
       }
     },
     {
-      "notes": "Everything else. From 35 it spends the Eclipse charges Wrath banked.",
+      "notes": "Everything else. Once you have Eclipse (35 leveling, 39 raid order) it spends the charges Wrath banked.",
       "action": {
         "castSpell": {
           "spellId": {
