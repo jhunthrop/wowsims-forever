@@ -297,11 +297,14 @@ func runSampleIteration(rsr *proto.RaidSimRequest, samples []iterationSample, ba
 const sampleSheetDebuffSettle = 5 * time.Second
 
 // sampleSheet reads the character and the target as the fight starts. It
-// builds an environment of its own, so nothing it activates can reach the
-// replay. The player's half is the same build-phase measurement the engine's
-// ComputeStats reports (Character.FillPlayerStats). The target's armor then
-// comes from letting that environment's clock run with nobody pulled: no
-// swing, no rotation, only the debuffs the request schedules.
+// builds an environment of its own, so nothing here can reach the replay, and
+// lets that environment's clock run with nobody pulled: no swing, and
+// Interactive holds every rotation. What is up then is what the request gives
+// for the whole fight (gear, talents, buffs, consumables, a warrior's stance)
+// plus the debuffs it schedules, and no cooldown or proc.
+//
+// The live stats rather than Character.FillPlayerStats, whose build-phase
+// measurement leaves out what only a reset raises: Berserker Stance's crit.
 func sampleSheet(rsr *proto.RaidSimRequest) *proto.SampleSheet {
 	env, _, _ := NewEnvironment(rsr.Raid, rsr.Encounter, false)
 	character := firstPlayerCharacter(env.Raid)
@@ -309,20 +312,19 @@ func sampleSheet(rsr *proto.RaidSimRequest) *proto.SampleSheet {
 		return nil
 	}
 	target := env.Encounter.TargetUnits[0]
+	targetArmor := target.Armor()
 
-	character.applyBuildPhaseAuras(CharacterBuildPhaseAll)
-	sheet := readSheet(character, target)
-	character.clearBuildPhaseAuras(CharacterBuildPhaseAll)
-
-	sheet.TargetLevel = target.Level
-	sheet.TargetArmor = target.Armor()
-	sim := newSimWithEnv(env, &proto.SimOptions{Iterations: 1, RandomSeed: rsr.SimOptions.GetRandomSeed()}, simsignals.CreateSignals())
+	sim := newSimWithEnv(env, &proto.SimOptions{Iterations: 1, RandomSeed: rsr.SimOptions.GetRandomSeed(), Interactive: true}, simsignals.CreateSignals())
 	sim.reset()
 	for sim.CurrentTime < sampleSheetDebuffSettle {
 		if finished := sim.Step(); finished {
 			break
 		}
 	}
+
+	sheet := readSheet(character, target)
+	sheet.TargetLevel = target.Level
+	sheet.TargetArmor = targetArmor
 	sheet.TargetArmorAfterDebuffs = target.Armor()
 	return sheet
 }

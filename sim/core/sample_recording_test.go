@@ -286,8 +286,9 @@ func TestSampleAuraEventsRebuildTheUptime(t *testing.T) {
 	}
 }
 
-// The sheet is the engine's own stat measurement, read off a separate
-// environment. Debuffs the request applies show on the target's armor.
+// The sheet is read off a separate environment that nobody pulled: for an
+// agent with no stance it matches the engine's ComputeStats, and debuffs the
+// request applies show on the target's armor.
 func TestSampleSheetReadsTheCharacterAndTarget(t *testing.T) {
 	req := recordingRequest(1, true, &proto.Debuffs{SunderArmor: true})
 	armored := googleProto.Clone(DefaultTargetProtoLvl60).(*proto.Target)
@@ -372,4 +373,26 @@ func TestExtraAttacksAreBookedPerSource(t *testing.T) {
 			t.Errorf("combined %s = %d, want double %d", row.Id, row.Attacks, counts[row.Id.String()])
 		}
 	}
+}
+
+// Both entry points fill the DPS histogram: rounded to tens, and summing to the
+// iterations run.
+func TestDpsHistogramFillsOnBothEntryPoints(t *testing.T) {
+	check := func(name string, result *proto.RaidSimResult) {
+		if result.Error != nil {
+			t.Fatalf("%s: %s", name, result.Error.Message)
+		}
+		var total int32
+		for dps, count := range result.RaidMetrics.Dps.Hist {
+			if dps%10 != 0 {
+				t.Errorf("%s: bin %d is not a multiple of ten", name, dps)
+			}
+			total += count
+		}
+		if total != result.IterationsDone {
+			t.Errorf("%s: histogram sums to %d, %d iterations ran", name, total, result.IterationsDone)
+		}
+	}
+	check("single", RunSim(recordingRequest(64, false, &proto.Debuffs{}), nil, simsignals.CreateSignals()))
+	check("concurrent", runSimConcurrent(recordingRequest(64, false, &proto.Debuffs{}), nil, simsignals.CreateSignals()))
 }
