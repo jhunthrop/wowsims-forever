@@ -331,7 +331,7 @@
       }
     },
     {
-      "notes": "On the leveling build Scorch is the filler once you have Heating Up at 30, not Fireball. With one point of Accelerant you land two Scorches in the time of one Fireball, so you roll twice the crits for Ignite and Heating Up, and every cast keeps your Improved Scorch stacks rolling.",
+      "notes": "From Heating Up at 30 until Arcane Blast at 57, Scorch is the filler, not Fireball. You land about two Scorches in the time of one Fireball, so you roll twice the crits for Ignite and Heating Up, and every cast keeps your Improved Scorch stacks rolling.",
       "action": {
         "condition": {
           "and": {
@@ -367,7 +367,7 @@
       }
     },
     {
-      "notes": "On the raid build Fireball is the filler. Five points of Accelerant make it a 3 second cast, each one has a 20% chance to make your next Arcane Missiles free through Missile Barrage, and with Arcane Blast's spell damage up it does more over a boss than Scorch. Its crits feed Ignite and Heating Up like any other Fire crit.",
+      "notes": "Fireball is the filler once you have Arcane Blast, which the leveling build takes at 57. Five points of Accelerant make it a 3 second cast, each one has a 20% chance to make your next Arcane Missiles free through Missile Barrage, and with Arcane Blast's spell damage up it does more over a boss than Scorch. Its crits feed Ignite and Heating Up like any other Fire crit.",
       "action": {
         "condition": {
           "spellIsKnown": {
