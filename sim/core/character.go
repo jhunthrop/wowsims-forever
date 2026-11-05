@@ -86,7 +86,6 @@ type Character struct {
 	defensiveTrinketCD *Timer
 	offensiveTrinketCD *Timer
 	conjuredCD         *Timer
-	restoreCategoryCD  *Timer
 	// Used by Automatic Crowd Pummeler and Druid's Catnip
 	fiftyPercentHasteBuffCD *Timer
 	// Used by Rapid Fire and Juju Flurry for some strange reason
@@ -672,22 +671,6 @@ func (character *Character) GetConjuredCD() *Timer {
 	return character.GetOrInitTimer(&character.conjuredCD)
 }
 
-// RestoreCategoryRecovery is client spell category 30's recovery: the
-// use spells of Robe of the Archmage (18385), the mana gems (5405, 10052,
-// 10057, 10058) and Demonic Rune (16666) each carry a 60 s
-// CategoryRecoveryTime there, so any one holds the others a minute.
-const RestoreCategoryRecovery = time.Minute
-
-// GetRestoreCategoryCD is spell category 30's shared timer.
-func (character *Character) GetRestoreCategoryCD() *Timer {
-	return character.GetOrInitTimer(&character.restoreCategoryCD)
-}
-
-// HoldRestoreCategory starts category 30's recovery from now.
-func (character *Character) HoldRestoreCategory(sim *Simulation) {
-	timer := character.GetRestoreCategoryCD()
-	timer.Set(max(timer.ReadyAt(), sim.CurrentTime+RestoreCategoryRecovery))
-}
 func (character *Character) GetAttackSpeedBuffCD() *Timer {
 	return character.GetOrInitTimer(&character.attackSpeedBuffCD)
 }

@@ -12,10 +12,13 @@ import (
 // Robe of the Archmage (14152), worn in every published mage set, has a
 // use: ItemEffect 99905, spell 18385 "Restores $s1 mana", 500 with
 // variance 0.5 (375 to 625, as Wowhead Forever's tooltip reads), on a
-// 5 min item cooldown. Spell 18385 sits in category 30 with a 60 s
-// category recovery, the category of the mana gems, Demonic Rune and the
-// healthstones, so using the robe holds the conjured items for a minute.
-func TestRobeOfTheArchmageRestoresManaAndHoldsTheGems(t *testing.T) {
+// 5 min item cooldown and SpellCategoryID 0. An item's own ItemEffect
+// cooldown replaces its spell's SpellCooldowns and SpellCategories rows, so
+// the robe starts no category: spell 18385's category 30 does not apply to
+// it. Patch 1.4.0 says the same of the robe: "No longer triggers the
+// cooldowns of a Mage's mana gems. Mana gems are now on their own unique
+// cooldown category" (their ItemEffect category 1153, 2 min).
+func TestRobeOfTheArchmageRestoresManaAndLeavesTheGems(t *testing.T) {
 	player := core.WithSpec(&proto.Player{
 		Class: proto.Class_ClassMage, Race: proto.Race_RaceTroll, Level: 60,
 		Equipment: &proto.EquipmentSpec{Items: []*proto.ItemSpec{
@@ -47,17 +50,16 @@ func TestRobeOfTheArchmageRestoresManaAndHoldsTheGems(t *testing.T) {
 	if got := mcd.Spell.CD.TimeToReady(sim); got != 5*time.Minute {
 		t.Errorf("the robe's cooldown is %v, want 5m", got)
 	}
-	if got := mage.GetConjuredCD().TimeToReady(sim); got < time.Minute {
-		t.Errorf("the conjured items are ready in %v after the robe, want a 60 s category hold", got)
+	if got := mage.GetConjuredCD().TimeToReady(sim); got != 0 {
+		t.Errorf("the conjured items are held %v after the robe, want no hold (ItemEffect category 0)", got)
 	}
 }
 
-// Round 11 (casters, from the items lane): the category is shared both
-// ways. The mana gems' use spells (5405, 10052, 10057, 10058) and Demonic
-// Rune's (16666) sit in category 30 with the robe's 18385, each with a
-// 60 s CategoryRecoveryTime (SpellCategories, SpellCooldowns), so a gem
-// holds the robe for a minute too.
-func TestAManaGemHoldsRobeOfTheArchmageForAMinute(t *testing.T) {
+// Round 23 (items): the other way round. The mana gems' ItemEffect rows
+// (5513, 5514, 8007, 8008) put them in category 1153 for 2 min with Demonic
+// and Dark Rune and the healthstones; the robe's row is category 0. A gem
+// does not hold the robe.
+func TestAManaGemLeavesRobeOfTheArchmageReady(t *testing.T) {
 	player := core.WithSpec(&proto.Player{
 		Class: proto.Class_ClassMage, Race: proto.Race_RaceTroll, Level: 60,
 		Equipment: &proto.EquipmentSpec{Items: []*proto.ItemSpec{
@@ -85,11 +87,7 @@ func TestAManaGemHoldsRobeOfTheArchmageForAMinute(t *testing.T) {
 	if !gem.Cast(sim, nil) {
 		t.Fatal("the Mana Ruby did not cast")
 	}
-	if robe.CanCast(sim, nil) {
-		t.Error("Robe of the Archmage castable right after a mana gem; category 30 holds it for 60 s")
-	}
-	sim.CurrentTime += time.Minute
 	if !robe.CanCast(sim, nil) {
-		t.Error("Robe of the Archmage still held 60 s after the mana gem")
+		t.Error("Robe of the Archmage held right after a mana gem; the two share no category")
 	}
 }
