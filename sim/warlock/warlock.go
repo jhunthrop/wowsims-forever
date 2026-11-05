@@ -210,7 +210,7 @@ func NewWarlock(character *core.Character, options *proto.Player, warlockOptions
 	warlock := &Warlock{
 		Character: *character,
 		Talents:   &proto.WarlockTalents{},
-		Options:   warlockOptions,
+		Options:   withLearnedSummon(warlockOptions, character.Level),
 	}
 	core.FillTalentsProto(warlock.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
 	warlock.EnableManaBar()
