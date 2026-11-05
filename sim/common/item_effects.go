@@ -11,6 +11,11 @@ import (
 	"github.com/wowsims/classic/sim/core/stats"
 )
 
+// handOfJusticeProcChance is 15600's chance a melee hit against a target
+// that is not a Dwarf: the client's ProcChance 3 divided by its Dwarf
+// multiplier 3.
+const handOfJusticeProcChance = 0.01
+
 // Ordered by ID
 const (
 	Destiny                   = 647
@@ -2795,6 +2800,10 @@ func init() {
 	// Use: Increases damage done by magical spells and effects by up to 50, and decreases the magical resistances of your spell targets by 100 for 30 sec. (3 Min Cooldown)
 	core.NewSimpleStatOffensiveTrinketEffect(EyeOfMoam, stats.Stats{stats.SpellDamage: 50, stats.SpellPenetration: 100}, time.Second*30, time.Minute*3)
 
+	// Forever's 15600 reads "${$h/3}% chance on Melee hit": SpellAuraOptions
+	// 128409's ProcChance 3 is the rate against Dwarves ($s2 = 3 times as
+	// likely), so every other target rolls 1% (Wowhead Forever: "1% chance
+	// on Melee hit to gain 1 extra attack").
 	core.NewItemEffect(HandOfJustice, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		if !character.AutoAttacks.AutoSwingMelee {
@@ -2816,7 +2825,7 @@ func init() {
 				if spell.Flags.Matches(core.SpellFlagSuppressEquipProcs) {
 					return
 				}
-				if result.Landed() && spell.ProcMask.Matches(core.ProcMaskMelee) && icd.IsReady(sim) && sim.Proc(0.02, "HandOfJustice") {
+				if result.Landed() && spell.ProcMask.Matches(core.ProcMaskMelee) && icd.IsReady(sim) && sim.Proc(handOfJusticeProcChance, "HandOfJustice") {
 					icd.Use(sim)
 					aura.Unit.AutoAttacks.ExtraMHAttackProc(sim, 1, core.ActionID{SpellID: 15600}, spell)
 				}
