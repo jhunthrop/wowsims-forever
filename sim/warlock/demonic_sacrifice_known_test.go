@@ -65,3 +65,22 @@ func TestDemonicSacrificeTalentIsAKnownAura(t *testing.T) {
 		t.Errorf("with the talent Burning Shadow is up %.1f s of a 30 s fight, want all of it", got)
 	}
 }
+
+// Nightfall is readable as a known aura under its talent spell (18094), so
+// a card can gate its Shadow Trance bolt on the talent. Affliction field 12.
+func TestNightfallTalentIsAKnownAura(t *testing.T) {
+	known := &proto.APLValue{Value: &proto.APLValue_AuraIsKnown{AuraIsKnown: &proto.APLValueAuraIsKnown{AuraId: spellIDProto(18094)}}}
+	rot := &proto.APLRotation{
+		Type: proto.APLRotation_TypeAPL,
+		PriorityList: []*proto.APLListItem{{Action: &proto.APLAction{
+			Condition: known,
+			Action:    &proto.APLAction_CastSpell{CastSpell: &proto.APLActionCastSpell{SpellId: spellIDProto(686)}},
+		}}},
+	}
+	if got := castsOf(runWithRotation(t, "", rot), 686); got != 0 {
+		t.Errorf("without Nightfall the gated Shadow Bolt was cast %d times, want 0", got)
+	}
+	if got := castsOf(runWithRotation(t, "000000000002", rot), 686); got == 0 {
+		t.Error("with Nightfall the gated Shadow Bolt was never cast")
+	}
+}
