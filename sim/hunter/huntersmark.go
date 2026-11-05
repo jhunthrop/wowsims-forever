@@ -36,11 +36,15 @@ func (hunter *Hunter) registerHuntersMarkSpell() {
 	})
 
 	hunter.HuntersMark = hunter.RegisterSpell(core.SpellConfig{
-		SpellCode:     SpellCode_HunterHuntersMark,
-		ActionID:      core.ActionID{SpellID: spellID},
-		SpellSchool:   core.SpellSchoolArcane,
-		DefenseType:   core.DefenseTypeMagic,
-		ProcMask:      core.ProcMaskSpellDamage,
+		SpellCode:   SpellCode_HunterHuntersMark,
+		ActionID:    core.ActionID{SpellID: spellID},
+		SpellSchool: core.SpellSchoolArcane,
+		DefenseType: core.DefenseTypeMagic,
+		// The mark deals no damage. Without a damage mask the pre-pull
+		// landing hold (core.prepullLandingHold) leaves it where the
+		// rotation puts it, before the pull, instead of holding it to 0 and
+		// spending the opening global (sim-accuracy round 21).
+		ProcMask:      core.ProcMaskEmpty,
 		Flags:         core.SpellFlagAPL,
 		Rank:          rank,
 		RequiredLevel: HunterSMarkLevel[rank],
