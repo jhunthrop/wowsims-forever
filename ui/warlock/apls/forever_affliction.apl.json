@@ -8,7 +8,7 @@
       }
     },
     {
-      "notes": "Life Tap to keep casting once mana runs low; health is not a concern with three DoTs and Drain Life available.",
+      "notes": "Life Tap below 10% mana. Each tap turns health, plus a point for every point of Spirit, into mana; a Healthstone or a healer covers the health.",
       "action": {
         "condition": {
           "cmp": {
@@ -32,7 +32,7 @@
       }
     },
     {
-      "notes": "Curse of the Elements goes up once, before the bane: in Forever a curse and a bane hold separate slots (every bane reads \"Only one Bane per Warlock\", every curse \"Only one Curse per Warlock\"), so it sits beside Bane of Agony or Bane of Doom and lasts five minutes. It raises the target's magic damage taken, the warlock's and the Succubus' Lash of Pain alike. It is not cast when the raid's Curse of the Elements is already on the target: the two are the same debuff and do not stack.",
+      "notes": "Curse of the Elements when it is not already on the target (one per target, from any warlock). Curses and banes have separate slots, so it sits beside your bane for five minutes; two copies do not stack, so leave it to whoever holds it.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -43,7 +43,7 @@
       }
     },
     {
-      "notes": "Corruption is the cheapest DoT per damage and goes down first, then is kept up throughout.",
+      "notes": "Corruption whenever it has fallen off. Instant with Improved Corruption, and never clipped.",
       "action": {
         "condition": {
           "not": {
@@ -66,6 +66,7 @@
       }
     },
     {
+      "notes": "Bane of Doom while a minute or more of the fight is left. One global for a big hit after a minute, and Pandemic doubles the bonus on its crits.",
       "action": {
         "condition": {
           "and": {
@@ -105,6 +106,7 @@
       }
     },
     {
+      "notes": "Amplify Curse before each Bane of Agony, whenever it is off cooldown. At 60, keep it for the fight's final Agony, once your last Doom has fired. It makes that Agony 50% stronger and costs no global.",
       "action": {
         "condition": {
           "and": {
@@ -133,16 +135,33 @@
                 }
               },
               {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "remainingTime": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "60s"
+                "or": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "spellIsKnown": {
+                            "spellId": {
+                              "spellId": 603
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "remainingTime": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "60s"
+                          }
+                        }
+                      }
                     }
-                  }
+                  ]
                 }
               }
             ]
@@ -156,7 +175,7 @@
       }
     },
     {
-      "notes": "Bane of Agony is the curse kept up: it ticks, so it gains from Wrack's +10% to the warlock's other Shadow damage over time and from periodic crits, and it is an Affliction effect for Soul Siphon. With Siphon Life up and periodic crits in the engine it measured above Bane of Doom.",
+      "notes": "Bane of Agony whenever no Bane of Doom is on the target: all fight before 60, and the last minute at 60, once Doom has fired. Never clip it, since its biggest ticks come last, and once you have Amplify Curse it makes the Agony 50% stronger.",
       "action": {
         "condition": {
           "and": {
@@ -196,7 +215,7 @@
       }
     },
     {
-      "notes": "Siphon Life (talent) is kept up: the build takes it, it is an Affliction effect that raises Soul Siphon's bonus on Wrack and Drain, and its ticks crit. Recast when it drops.",
+      "notes": "Siphon Life whenever it has fallen off. Thirty seconds of Shadow damage that heals you.",
       "action": {
         "condition": {
           "not": {
@@ -219,7 +238,7 @@
       }
     },
     {
-      "notes": "Immolate is kept up as a fourth DoT, recast when under 3 seconds remain: its damage over time is worth more than the Shadow Bolt it replaces for a global, and recasting in its last 3 seconds beats waiting for it to lapse.",
+      "notes": "Immolate with 3 seconds or less left on it. It lands a moment before the old one ends, and the fresh hit is worth the last tick.",
       "action": {
         "condition": {
           "cmp": {
@@ -248,6 +267,7 @@
       }
     },
     {
+      "notes": "Wrack with your DoTs up. With Soul Siphon it out-damages Shadow Bolt for a fraction of the mana, and your other Shadow DoTs take 10% more while it runs.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -258,7 +278,7 @@
       }
     },
     {
-      "notes": "Shadow Bolt fills every remaining global while the DoTs run their course.",
+      "notes": "Shadow Bolt with every DoT up, until Wrack at 40 takes over as your filler.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -276,7 +296,7 @@
           }
         }
       },
-      "notes": "Shoot only when nothing else can be cast, which in practice means out of mana: a wand shot cannot start during the global cooldown and holds you for the wand's full speed, so it never fits between spells. Life Tap below 10 percent mana keeps the rotation going first."
+      "notes": "Shoot only when you are out of mana and cannot Life Tap. A wand shot cannot start during a global cooldown, so it never fits between spells."
     }
   ]
 }
