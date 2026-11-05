@@ -79,7 +79,7 @@
       }
     },
     {
-      "notes": "Scorch to build Improved Scorch to 5 stacks, or to refresh it with 5 seconds or less left. A Fireball takes 3 seconds, so a later refresh can land after the stacks are gone. The debuff only boosts your own Fire damage, so every Fire mage keeps their own stacks, and a Scorch that misses adds none.",
+      "notes": "Scorch to build Improved Scorch to 5 stacks, or to refresh it with 5 seconds or less left. A Fireball takes 3 seconds, so a later refresh can land after the stacks are gone. The debuff only boosts your own Fire damage, so every Fire mage keeps their own stacks, and a Scorch that misses adds none. At 27, with one point, a Scorch lands a stack only one time in three, so build them only on a mob that lives a minute or more; from 28 they pay on anything that lives 20 seconds.",
       "action": {
         "condition": {
           "and": {
@@ -285,7 +285,7 @@
       }
     },
     {
-      "notes": "Scorch instead of Fireball when Fire Blast comes back before a Scorch would finish. A 3 second Fireball would hold your next Fire Blast, and its Heating Up stack, until the cast ends.",
+      "notes": "Scorch when Fire Blast is back before a Scorch would finish. A 3 second Fireball would hold your next Fire Blast, and its Heating Up stack, until the cast ends.",
       "action": {
         "condition": {
           "and": {
@@ -367,7 +367,7 @@
       }
     },
     {
-      "notes": "On the raid build Fireball is the filler. Five points of Accelerant make it a 3 second cast, each one is a 20% chance at a free Missile Barrage, and with Arcane Blast's spell damage up it does more over a boss than Scorch. Its crits feed Ignite and Heating Up like any other Fire crit.",
+      "notes": "On the raid build Fireball is the filler. Five points of Accelerant make it a 3 second cast, each one has a 20% chance to make your next Arcane Missiles free through Missile Barrage, and with Arcane Blast's spell damage up it does more over a boss than Scorch. Its crits feed Ignite and Heating Up like any other Fire crit.",
       "action": {
         "condition": {
           "spellIsKnown": {
