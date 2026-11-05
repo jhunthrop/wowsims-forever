@@ -48,9 +48,13 @@ func NewFeralDruid(character *core.Character, options *proto.Player) *FeralDruid
 	cat.EnableEnergyBar(100.0)
 	cat.EnableRageBar(core.RageBarOptions{DamageDealtMultiplier: 1, DamageTakenMultiplier: 1})
 
+	// Base paw weapon; below Cat Form's level the druid swings its own.
+	mainHand := cat.WeaponFromMainHand()
+	if cat.StartingForm.Matches(druid.Cat) {
+		mainHand = cat.GetCatWeapon()
+	}
 	cat.EnableAutoAttacks(cat, core.AutoAttackOptions{
-		// Base paw weapon.
-		MainHand:       cat.GetCatWeapon(),
+		MainHand:       mainHand,
 		AutoSwingMelee: true,
 	})
 	/*
@@ -99,7 +103,9 @@ func (cat *FeralDruid) Initialize() {
 func (cat *FeralDruid) Reset(sim *core.Simulation) {
 	cat.Druid.Reset(sim)
 	cat.Druid.CancelShapeshift(sim)
-	cat.CatFormAura.Activate(sim)
+	if cat.StartingForm.Matches(druid.Cat) { // Cat Form is trained at 20
+		cat.CatFormAura.Activate(sim)
+	}
 	cat.readyToShift = false
 	//cat.berserkUsed = false
 	cat.poolingMana = false

@@ -213,6 +213,12 @@ func (druid *Druid) registerCatFormSpell() {
 		druid.leftCatFormAt = 0
 	})
 
+	// The spell is registered from its trainer level, 20; the aura stays
+	// so effects that read it need no level check.
+	if int(druid.Level) < CatFormLevel[0] {
+		return
+	}
+
 	druid.CatForm = druid.RegisterSpell(Any, core.SpellConfig{
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,

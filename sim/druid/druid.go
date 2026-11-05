@@ -376,6 +376,12 @@ func New(character *core.Character, form DruidForm, selfBuffs SelfBuffs, talents
 		druid.StartingForm = Humanoid
 		druid.form = Humanoid
 	}
+	// Cat Form is trained at 20 (CatFormLevel): a feral druid below it
+	// fights in caster form.
+	if form == Cat && int(character.Level) < CatFormLevel[0] {
+		druid.StartingForm = Humanoid
+		druid.form = Humanoid
+	}
 	druid.EnableManaBar()
 
 	druid.AddStatDependency(stats.Strength, stats.AttackPower, core.APPerStrength[character.Class])
