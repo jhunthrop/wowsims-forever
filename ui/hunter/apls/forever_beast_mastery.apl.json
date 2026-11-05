@@ -3,6 +3,21 @@
   "prepullActions": [
     {
       "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 14325,
+            "rank": 4
+          }
+        }
+      },
+      "doAtValue": {
+        "const": {
+          "val": "-20s"
+        }
+      }
+    },
+    {
+      "action": {
         "move": {
           "rangeFromTarget": {
             "const": {
@@ -29,21 +44,6 @@
       "doAtValue": {
         "const": {
           "val": "-10s"
-        }
-      }
-    },
-    {
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "spellId": 14325,
-            "rank": 4
-          }
-        }
-      },
-      "doAtValue": {
-        "const": {
-          "val": "-6s"
         }
       }
     },
@@ -205,7 +205,7 @@
       }
     },
     {
-      "notes": "Serpent Sting when it has under 1.5 seconds left and Multi-Shot is not about to come back. Refreshing any earlier throws away a tick. Every tick carries 5% of your ranged attack power on top of its own damage, so it is the best damage for its mana you fire: keep it rolling for the whole fight. When both are ready, Multi-Shot goes first: a late Multi-Shot pushes back the shared cooldown, while a late sting costs only a moment of its damage.",
+      "notes": "Serpent Sting when it has under 1.5 seconds left, and from 18 never while Multi-Shot is about to come back. Refreshing any earlier throws away a tick. Every tick carries 5% of your ranged attack power on top of its own damage, so it does more for its mana than Arcane Shot or Multi-Shot: keep it rolling for the whole fight. When both are ready, Multi-Shot goes first: a late Multi-Shot pushes back the shared cooldown, while a late sting costs only a moment of its damage. Until 34, while you hold Multi-Shot under a quarter of your mana, do not wait on it: keep the sting rolling.",
       "action": {
         "condition": {
           "and": {
@@ -229,21 +229,58 @@
                 }
               },
               {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "spellTimeToReady": {
-                      "spellId": {
-                        "spellId": 2643,
-                        "rank": 0
+                "or": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "spellTimeToReady": {
+                            "spellId": {
+                              "spellId": 2643,
+                              "rank": 0
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.5"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpLe",
+                              "lhs": {
+                                "currentManaPercent": {}
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "25%"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "not": {
+                              "val": {
+                                "spellIsKnown": {
+                                  "spellId": {
+                                    "spellId": 13813,
+                                    "rank": 1
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
                       }
                     }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "0.5"
-                    }
-                  }
+                  ]
                 }
               }
             ]
@@ -258,24 +295,61 @@
       }
     },
     {
-      "notes": "Arcane Shot to fill a gap when Multi-Shot is more than a global away. It is instant and never holds an auto shot, and every hit carries 15% of your ranged attack power, so it is second only to Serpent Sting for damage per mana: keep it going even when the mana runs low.",
+      "notes": "Arcane Shot to fill a gap, and from 18 only when Multi-Shot is more than a global away. It is instant and never holds an auto shot, and every hit carries 15% of your ranged attack power, so it does far more for its mana than Multi-Shot: keep it going even when the mana runs low. Until 34, while you hold Multi-Shot under a quarter of your mana, fire it on cooldown instead of waiting for Multi-Shot.",
       "action": {
         "condition": {
-          "cmp": {
-            "op": "OpGt",
-            "lhs": {
-              "spellTimeToReady": {
-                "spellId": {
-                  "spellId": 2643,
-                  "rank": 0
+          "or": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "spellTimeToReady": {
+                      "spellId": {
+                        "spellId": 2643,
+                        "rank": 0
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "1.5s"
+                    }
+                  }
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpLe",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "25%"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "not": {
+                        "val": {
+                          "spellIsKnown": {
+                            "spellId": {
+                              "spellId": 13813,
+                              "rank": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "1.5s"
-              }
-            }
+            ]
           }
         },
         "castSpell": {

@@ -32,6 +32,11 @@ const (
 	// swipeMaxTargets: Swipe strikes up to three enemies in front of the
 	// bear.
 	swipeMaxTargets = 3
+	// swipeAttackPowerShare: "Fixed a bug causing Swipe to not scale with
+	// Attack Power. It will now correctly gain 3% of the Druid's attack
+	// power." (Blizzard's Forever patch notes, 1 October 2026). The client
+	// row's BonusCoefficientFromAP is 0 on every rank; the server adds it.
+	swipeAttackPowerShare = 0.03
 
 	// SwipeThreatMultiplier is Classic's 1.75 (ClassicBearThreatMultiplier).
 	// It is not Season of Discovery's 2.0: that season's tuning passive
@@ -94,7 +99,7 @@ func (druid *Druid) registerSwipeBearSpell() {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			numHits := min(len(results), len(sim.Encounter.TargetUnits))
 			for idx := 0; idx < numHits; idx++ {
-				baseDamage := damage.Roll(sim, casterLevel) * druid.RendAndTearMultiplier(target)
+				baseDamage := SwipeHitDamage(damage.Roll(sim, casterLevel), spell.MeleeAttackPower(target)) * druid.RendAndTearMultiplier(target)
 				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 				target = sim.Environment.NextTargetUnit(target)
 			}
@@ -104,4 +109,10 @@ func (druid *Druid) registerSwipeBearSpell() {
 			}
 		},
 	})
+}
+
+// SwipeHitDamage is one target's hit before multipliers: the rank's roll plus
+// swipeAttackPowerShare of the druid's attack power.
+func SwipeHitDamage(roll, attackPower float64) float64 {
+	return roll + swipeAttackPowerShare*attackPower
 }
