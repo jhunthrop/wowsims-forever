@@ -94,9 +94,14 @@ func (shaman *Shaman) newStoneskinTotemSpellConfig(rank int) core.SpellConfig {
 }
 
 func (shaman *Shaman) registerTremorTotemSpell() {
-	spellId := int32(8143)
-	manaCost := float64(60)
-	level := 18
+	spellId := TremorTotemSpellId[0]
+	manaCost := TremorTotemManaCost[0]
+	level := TremorTotemLevel[0]
+	// Nothing checks RequiredLevel at cast time, so a shaman below the
+	// trainer level (trainables 8143, 18) must not have the totem at all.
+	if int(shaman.Level) < level {
+		return
+	}
 
 	lifetime := shaman.RegisterAura(newTotemLifetimeConfig("Tremor Totem", 0))
 

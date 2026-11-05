@@ -13,7 +13,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Spec | Level | Spell | Rank | SpellID | Cost (client→engine) | CostType (client→engine) | Cooldown ms (client→engine) | CastTime ms (client→engine) | GCD ms (client→engine) | ReqLevel (client→engine) | Duration ms (client→engine) | Verdict | Diff | Damage min-max at level (client→engine) | Coefficient (client→engine) | Damage |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Mage | 10 | Arcane Missiles | 1 | 5143 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 3000→3000 | match |  | n/a | n/a | n/a |
-| Mage | 10 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→24 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
 | Mage | 10 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | 26.06-34.74→26.06-34.74 | 0.429→0.429 | declared, matches |
 | Mage | 10 | Fireball | 1 | 133 | 30.00→30.00 | mana→mana | 0→0 | 1500→1500 | 1500→1500 | 1→1 | 4000→4000 | match |  | 14.62-22.98→14.62-22.98 | 0.429→0.429 | declared, matches |
 | Mage | 10 | Fireball | 2 | 143 | 45.00→45.00 | mana→mana | 0→0 | 2000→2000 | 1500→1500 | 6→6 | 6000→6000 | match |  | 27.08-39.32→27.08-39.32 | 0.571→0.571 | declared, matches |
@@ -24,7 +23,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | Mage | 20 | Arcane Missiles | 1 | 5143 | 85.00→85.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 3000→3000 | match |  | n/a | n/a | n/a |
 | Mage | 20 | Arcane Missiles | 2 | 5144 | 140.00→140.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 16→16 | 4000→4000 | match |  | n/a | n/a | n/a |
 | Mage | 20 | Blizzard | 1 | 10 | 320.00→320.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
-| Mage | 20 | Counterspell | 0 | 2139 | 100.00→100.00 | mana→mana | 30000→30000 | 0→0 | 0→0 | 24→24 | 10000→0 | unmodeled-duration | duration_ms: the client's duration belongs to a control or movement effect (slow, speed buff, stun, root, fear, silence, interrupt lockout, Shadowburn shard marker) no sim number reads, so the engine registers no aura for it by design | n/a | n/a | n/a |
 | Mage | 20 | Evocation | 0 | 12051 | 0.00→0.00 | mana→none | 480000→480000 | 0→0 | 1500→1500 | 20→20 | 8000→8000 | match |  | n/a | n/a | n/a |
 | Mage | 20 | Fire Blast | 1 | 2136 | 40.00→40.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | 26.57-35.43→26.57-35.43 | 0.429→0.429 | declared, matches |
 | Mage | 20 | Fire Blast | 2 | 2137 | 75.00→75.00 | mana→mana | 8000→8000 | 0→0 | 1500→1500 | 14→14 | n/a | match |  | 56.11-69.89→56.11-69.89 | 0.429→0.429 | declared, matches |
