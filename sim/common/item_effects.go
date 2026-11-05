@@ -3368,15 +3368,15 @@ func init() {
 	// https://www.wowhead.com/forever/item=14152/robe-of-the-archmage
 	// Use: Restores 375 to 625 mana. (5 Min Cooldown)
 	// ItemEffect 99905 is spell 18385, 500 with variance 0.5, on a 5 min
-	// item cooldown. 18385 is in category 30 with a 60 s category
-	// recovery: the mana gems, Demonic Rune and healthstones share it, so
-	// the robe holds the conjured cooldown for a minute.
+	// item cooldown in no category (SpellCategoryID 0). The item's own
+	// cooldown replaces the spell's category-30 rows, so the robe shares no
+	// cooldown with the mana gems, runes or healthstones (patch 1.4.0: "No
+	// longer triggers the cooldowns of a Mage's mana gems").
 	core.NewItemEffect(RobeOfTheArchmage, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		actionID := core.ActionID{ItemID: RobeOfTheArchmage}
 		manaMetrics := character.NewManaMetrics(actionID)
 		const maxMana = 625.0
-		conjured := character.GetConjuredCD()
 
 		spell := character.RegisterSpell(core.SpellConfig{
 			ActionID: actionID,
@@ -3384,14 +3384,8 @@ func init() {
 			Cast: core.CastConfig{
 				CD: core.Cooldown{Timer: character.NewTimer(), Duration: 5 * time.Minute},
 			},
-			// A mana gem or Demonic Rune in the last minute
-			// holds the robe (category 30, both ways).
-			ExtraCastCondition: func(sim *core.Simulation, _ *core.Unit) bool {
-				return character.GetRestoreCategoryCD().IsReady(sim)
-			},
 			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 				character.AddMana(sim, sim.RollWithLabel(375, maxMana, "Robe of the Archmage"), manaMetrics)
-				conjured.Set(max(conjured.ReadyAt(), sim.CurrentTime+core.RestoreCategoryRecovery))
 			},
 		})
 
