@@ -20,9 +20,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 10 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 10 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486→0.486 | declared, matches |
 | DSRuinWarlock | 10 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.41-26.99→21.41-26.99 | 0.629→0.629 | declared, matches |
-| DSRuinWarlock | 10 | Summon Felhunter | 0 | 691 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 10 | Summon Imp | 0 | 688 | 158.40 (80% base mana)→158.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| DSRuinWarlock | 10 | Summon Succubus | 0 | 712 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 10 | Summon Voidwalker | 0 | 697 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133→0.133 | declared, matches |
 | DSRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133→0.133 | declared, matches |
@@ -42,7 +40,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | DSRuinWarlock | 20 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629→0.629 | declared, matches |
 | DSRuinWarlock | 20 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800→0.800 | declared, matches |
 | DSRuinWarlock | 20 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 54.22-61.78→54.22-61.78 | 0.857→0.857 | declared, matches |
-| DSRuinWarlock | 20 | Summon Felhunter | 0 | 691 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Summon Imp | 0 | 688 | 306.40 (80% base mana)→306.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Summon Succubus | 0 | 712 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | DSRuinWarlock | 20 | Summon Voidwalker | 0 | 697 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
@@ -294,9 +291,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 10 | Life Tap | 1 | 1454 | 0.00→0.00 | client:-2→none | 0→0 | 0→0 | 1500→1500 | 6→6 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 10 | Shadow Bolt | 1 | 686 | 25.00→25.00 | mana→mana | 0→0 | 1700→1700 | 1500→1500 | 1→1 | n/a | match |  | 11.83-15.77→11.83-15.77 | 0.486→0.486 | declared, matches |
 | SMRuinWarlock | 10 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.41-26.99→21.41-26.99 | 0.629→0.629 | declared, matches |
-| SMRuinWarlock | 10 | Summon Felhunter | 0 | 691 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 10 | Summon Imp | 0 | 688 | 158.40 (80% base mana)→158.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
-| SMRuinWarlock | 10 | Summon Succubus | 0 | 712 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 10 | Summon Voidwalker | 0 | 697 | 198.00 (100% base mana)→198.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Bane of Agony | 1 | 980 | 25.00→25.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 8→8 | 24000→24000 | match |  | 6.00-6.00→6.00-6.00 | 0.133→0.133 | declared, matches |
 | SMRuinWarlock | 20 | Bane of Agony | 2 | 1014 | 50.00→50.00 | mana→mana | 0→0 | 0→0 | 1500→1500 | 18→18 | 24000→24000 | match |  | 10.00-10.00→10.00-10.00 | 0.133→0.133 | declared, matches |
@@ -316,7 +311,6 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | SMRuinWarlock | 20 | Shadow Bolt | 2 | 695 | 40.00→40.00 | mana→mana | 0→0 | 2200→2200 | 1500→1500 | 6→6 | n/a | match |  | 21.67-27.33→21.67-27.33 | 0.629→0.629 | declared, matches |
 | SMRuinWarlock | 20 | Shadow Bolt | 3 | 705 | 70.00→70.00 | mana→mana | 0→0 | 2800→2800 | 1500→1500 | 12→12 | n/a | match |  | 39.69-46.31→39.69-46.31 | 0.800→0.800 | declared, matches |
 | SMRuinWarlock | 20 | Shadow Bolt | 4 | 1088 | 110.00→110.00 | mana→mana | 0→0 | 3000→3000 | 1500→1500 | 20→20 | n/a | match |  | 54.22-61.78→54.22-61.78 | 0.857→0.857 | declared, matches |
-| SMRuinWarlock | 20 | Summon Felhunter | 0 | 691 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 30→30 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Summon Imp | 0 | 688 | 306.40 (80% base mana)→306.40 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 1→1 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Summon Succubus | 0 | 712 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | SMRuinWarlock | 20 | Summon Voidwalker | 0 | 697 | 383.00 (100% base mana)→383.00 | mana→mana | 0→0 | 10000→10000 | 1500→1500 | 10→10 | n/a | match |  | n/a | n/a | n/a |
