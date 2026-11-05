@@ -446,7 +446,7 @@ stat_weights_results: {
   weights: 0.22616
   weights: 0
   weights: 0
-  weights: 0
+  weights: 5.72193
   weights: 3.38895
   weights: 0
   weights: 0
@@ -494,7 +494,7 @@ stat_weights_results: {
   weights: 0.22461
   weights: 0
   weights: 0
-  weights: 0
+  weights: 5.70666
   weights: 3.41679
   weights: 0
   weights: 0
@@ -542,7 +542,7 @@ stat_weights_results: {
   weights: 0.22648
   weights: 0
   weights: 0
-  weights: 5.93146
+  weights: 6.87696
   weights: 2.8594
   weights: 0
   weights: 0
