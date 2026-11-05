@@ -6,7 +6,16 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
+// evocationLevel is Evocation's trainer level (trainables 12051, spell_level 20).
+const evocationLevel = 20
+
 func (mage *Mage) registerEvocationCD() {
+	// Unranked spells are not filtered by the rank tables, and nothing checks
+	// RequiredLevel at cast time, so a mage below the trainer level must not
+	// have the spell at all.
+	if mage.Level < evocationLevel {
+		return
+	}
 	actionID := core.ActionID{SpellID: 12051}
 	channelTime := time.Second * 8
 	cooldown := time.Minute * 8
@@ -32,7 +41,7 @@ func (mage *Mage) registerEvocationCD() {
 		ActionID:       actionID,
 		ClassSpellMask: MageSpellMaskEvocation,
 		Flags:          core.SpellFlagHelpful | core.SpellFlagChanneled | core.SpellFlagAPL,
-		RequiredLevel:  20,
+		RequiredLevel:  evocationLevel,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

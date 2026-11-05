@@ -557,7 +557,7 @@ func (shaman *Shaman) totemManaMultiplier() int32 {
 }
 
 // elementalAlacrityCastTimeReduction is Elemental Alacrity's three
-// ranks (talents/shaman.json node 104765): "Reduces the cast time of
+// ranks (talents/shaman.json node 104771): "Reduces the cast time of
 // your Lightning Bolt and Chain Lightning spells by 0.17/0.33/0.50 sec."
 // (trait curve 85216; 1.60.1.70755 took Lava Burst out of the text with
 // the spell). A flat reduction to the pre-haste base cast time, applied
@@ -799,7 +799,14 @@ func (shaman *Shaman) applyImprovedStormstrike() {
 // rank 5 at 5 stacks is a 100% reduction - an instant, free Lightning
 // Bolt - consistent with "Stacks up to 5 times" compounding rather
 // than capping at the rank's own number.
-const maelstromWeaponProcChance = 0.5
+//
+// Blizzard's Forever notes of 3 November: "Maelstrom Weapon: Chance to
+// trigger doubled." The client row kept its 50 (the doubling is server
+// side); before the push a two-hander gained a stack on about half its
+// hits (beta report 2748, 51 over 94 on a 3.2 s weapon). Whether the server
+// rolls a flat chance or 20 a minute only differs below a 3.0 s swing, and
+// a shaman's two-hander is slower (sim-accuracy round 21, shaman N1).
+const maelstromWeaponProcChance = 1.0
 const maelstromWeaponDisplaySpellId = 408498
 const maelstromWeaponMaxStacks = int32(5)
 

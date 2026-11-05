@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	defensiveStanceThreat = 1.3 // client spell 7376: +30%
+	defensiveStanceThreat = 1.8 // spell 7376: +80% since Blizzard's 3 Nov notes
 	defiancePerRank       = 0.05
 	floatEpsilon          = 1e-9
 )
@@ -35,7 +35,7 @@ func attackTaken(sim *core.Simulation, war *warrior.Warrior, outcome core.HitOut
 
 // Defiance: "Increases all threat generated in Defensive stance by an
 // additional 5%/10%/15% while a shield is equipped", added to the stance's
-// own 30%.
+// own 80%.
 func TestDefianceMultipliesTheStanceThreatWithAShield(t *testing.T) {
 	for rank := 0; rank <= 3; rank++ {
 		talents := talentsWith(t, emptyTalents, "defiance", rank)

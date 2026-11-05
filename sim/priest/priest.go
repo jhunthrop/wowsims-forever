@@ -78,6 +78,7 @@ const (
 	PriestSpellMaskContingencyPlanHeal
 	PriestSpellMaskInnerFire
 	PriestSpellMaskPowerInfusion
+	PriestSpellMaskStarshards
 )
 
 // PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
@@ -106,7 +107,7 @@ const PriestSpellMaskInstantHealing = PriestSpellMaskRenew | PriestSpellMaskPena
 // 0x1000000) by eff0, Contingency Plan's heal over time (1277456-1277460,
 // mask 0x20) by both effects.
 const PriestSpellMaskTwinDisciplines = PriestSpellMaskInstantShadowDamage | PriestSpellMaskInstantHealing |
-	PriestSpellMaskDivineGrace | PriestSpellMaskContingencyPlanHeal
+	PriestSpellMaskDivineGrace | PriestSpellMaskContingencyPlanHeal | PriestSpellMaskStarshards
 
 // PriestSpellMaskMentalAgility is what Mental Agility's cost modifier
 // names: the client mask of 14520 (SpellEffect 687728, aura 108 misc 14),

@@ -354,6 +354,11 @@ func (paladin *Paladin) applySanctifiedJudgement() {
 		return
 	}
 	paladin.sanctifiedJudgementManaMetrics = paladin.NewManaMetrics(core.ActionID{SpellID: sanctifiedJudgementActionID})
+	// The energize (1311077) carries SPELL_ATTR1_NO_THREAT (SpellMisc
+	// Attributes_1 0x400, 1.60.1.70790), as Blizzard's 16 October notes
+	// say: "Sanctified Judgement's Mana restore effect no longer generates
+	// threat."
+	paladin.sanctifiedJudgementManaMetrics.NoThreat = true
 }
 
 // trySanctifiedJudgementManaReturn is called from judgement.go's

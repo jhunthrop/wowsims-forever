@@ -24,7 +24,7 @@
       }
     },
     {
-      "notes": "On cooldown: 20% less damage taken for 15 seconds of every minute, and Forever lets you cast it in Bear Form.",
+      "notes": "On cooldown: 20% less physical damage for 15 seconds of every minute, and Forever lets you cast it in Bear Form.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -182,7 +182,7 @@
       }
     },
     {
-      "notes": "Keep it on the boss: 204 attack power off it at 60 takes about a fifth of its melee damage away. Refresh it in its last 3 seconds.",
+      "notes": "Keep it on the boss: 204 less melee attack power at 60 takes a real slice off every swing. One is enough, since it does not stack with a warrior's Demoralizing Shout. Refresh it in its last 3 seconds.",
       "action": {
         "condition": {
           "or": {
@@ -235,7 +235,7 @@
       }
     },
     {
-      "notes": "Queued on your next swing whenever you have 15 rage. It costs 10 with Ferocity, so this keeps rage back for Primal Bite and Lacerate.",
+      "notes": "Queued on your next swing whenever you have 15 rage, and at levels 40 to 53 only at 30 rage. Ferocity cuts its cost to 10 rage by level 14, so the 15 keeps a little rage back for Lacerate from level 25; in your forties and early fifties rage is short, and the 30 makes sure Primal Bite fires every time it comes off cooldown.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -245,22 +245,73 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentRage": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "15"
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentRage": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "15"
+                    }
+                  }
+                }
+              },
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "40"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGt",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "53"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentRage": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "30"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
               }
-            }
+            ]
           }
         }
       }
     },
     {
-      "notes": "Above 40 rage, as the rage dump. It hits up to three targets, so on a pack it is your main threat.",
+      "notes": "On two or more targets, above 40 rage. It hits up to three, so on a pack of three it is your main threat; on a single boss the same rage does more in Maul, Lacerate and Primal Bite.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -269,16 +320,35 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentRage": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "40"
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "numberTargets": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "2"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentRage": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "40"
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         }
       }

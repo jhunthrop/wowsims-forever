@@ -218,8 +218,15 @@
       }
     },
     {
-      "notes": "Scorch is the filler, not Fireball. At 150 mana for 1.5 seconds it does far more damage per mana than Fireball's 395 for 3.4 seconds, every cast keeps your stacks rolling, and a Fire mage runs short of mana long before a boss dies.",
+      "notes": "From Heating Up at 30, Scorch is the filler, not Fireball. You land more than two Scorches in the time of one Fireball, so you roll over twice the crits for Heating Up and Ignite, and every cast refreshes your 5 Improved Scorch stacks so you never spend a cast just to keep them up.",
       "action": {
+        "condition": {
+          "auraIsKnown": {
+            "auraId": {
+              "spellId": 400625
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 10207,
@@ -229,7 +236,7 @@
       }
     },
     {
-      "notes": "Fireball only before you train Scorch at level 22, when it is the only filler you have.",
+      "notes": "Below 30, Fireball is the filler. At the ranks you have in the 20s it does more damage per point of mana than Scorch, and mana is what runs out first, so Scorch waits for Improved Scorch at 27 and then only builds and refreshes the stacks.",
       "action": {
         "castSpell": {
           "spellId": {

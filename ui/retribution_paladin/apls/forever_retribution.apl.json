@@ -138,7 +138,7 @@
       }
     },
     {
-      "notes": "With Unsealed Wrath, straight after the opening Crusader Judgement. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then go straight to Seal of Command: three swings store three Commands and the twist is under way. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight.",
+      "notes": "With Unsealed Wrath, straight after the opening Crusader Judgement, in a dungeon or a raid. On a boss with no Crusader debuff on it, cast Seal of the Crusader before the pull, Judge it on your first swing, then go straight to Seal of Command: three swings store three Commands and the twist is under way. Your swings keep the debuff up, so the target takes more Holy damage for the whole fight.",
       "action": {
         "condition": {
           "and": {
@@ -241,7 +241,7 @@
       }
     },
     {
-      "notes": "With Unsealed Wrath, once three swings have stored Seal of Command. Switch to Seal of Righteousness for one swing, and that swing releases all three stored Commands. Only above 30% mana and with raid buffs on you (1200 attack power or more): every Seal costs a global and 180 to 190 mana, and with less attack power Seal of Command does less than Seal of Righteousness.",
+      "notes": "With Unsealed Wrath, once three swings have stored Seal of Command, while your mana percent is at least four fifths of the fight left. Switch to Seal of Righteousness for one swing, and that swing releases all three stored Commands. It is the same pace as Consecration: every Seal costs a global and its mana, 180 to 190 at 60.",
       "action": {
         "condition": {
           "and": {
@@ -280,26 +280,21 @@
               },
               {
                 "cmp": {
-                  "op": "OpGt",
+                  "op": "OpGe",
                   "lhs": {
                     "currentManaPercent": {}
                   },
                   "rhs": {
-                    "const": {
-                      "val": "30%"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentAttackPower": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "1200"
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.8"
+                        }
+                      }
                     }
                   }
                 }
@@ -363,26 +358,21 @@
               },
               {
                 "cmp": {
-                  "op": "OpGt",
+                  "op": "OpGe",
                   "lhs": {
                     "currentManaPercent": {}
                   },
                   "rhs": {
-                    "const": {
-                      "val": "30%"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentAttackPower": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "1200"
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.8"
+                        }
+                      }
                     }
                   }
                 }
@@ -399,7 +389,7 @@
       }
     },
     {
-      "notes": "Keep Seal of Command up with Unsealed Wrath, raid buffs and more than 30% mana. Recast it in its last second.",
+      "notes": "Keep Seal of Command up with Unsealed Wrath while your mana keeps pace with the fight. Recast it in its last second.",
       "action": {
         "condition": {
           "and": {
@@ -421,13 +411,21 @@
               },
               {
                 "cmp": {
-                  "op": "OpGt",
+                  "op": "OpGe",
                   "lhs": {
                     "currentManaPercent": {}
                   },
                   "rhs": {
-                    "const": {
-                      "val": "30%"
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "0.8"
+                        }
+                      }
                     }
                   }
                 }
@@ -444,19 +442,6 @@
                     }
                   }
                 }
-              },
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentAttackPower": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "1200"
-                    }
-                  }
-                }
               }
             ]
           }
@@ -470,7 +455,7 @@
       }
     },
     {
-      "notes": "Otherwise keep Seal of Righteousness up at the top rank you have trained, and recast it in its last second. That is every fight without Unsealed Wrath or raid buffs, and any time you drop under 30% mana.",
+      "notes": "Otherwise keep Seal of Righteousness up at the top rank you have trained, and recast it in its last second. That is every fight without Unsealed Wrath, and any time your mana falls behind the fight.",
       "action": {
         "condition": {
           "cmp": {
@@ -513,7 +498,7 @@
       }
     },
     {
-      "notes": "Last, while the mana left after it still pays for a Seal, a Judgement and a Holy Strike, and your mana percent is at least four fifths of the percent of the fight left (halfway through, 40% mana or more). Spam it and your Seal lapses before the execute; hold it too long and you end the fight with mana unspent.",
+      "notes": "Last, while your mana percent is at least four fifths of the fight left and covers a Seal, Judgement and Holy Strike (rank 4 at 60 without raid buffs). The mana left after it must still pay for those three, and halfway through a fight the pace means 40% mana or more. Spam it and your Seal lapses before the execute; hold it too long and you end the fight with mana unspent.",
       "action": {
         "castSpell": {
           "spellId": {
