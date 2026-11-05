@@ -50,7 +50,7 @@
       }
     },
     {
-      "notes": "Whenever rage is under 80: 10 rage at once and 10 more over 10 seconds, back every minute.",
+      "notes": "Whenever rage is under 80: with Improved Bloodrage, 15 rage at once and 15 more over 10 seconds, back every minute.",
       "action": {
         "condition": {
           "cmp": {
@@ -154,7 +154,7 @@
       }
     },
     {
-      "notes": "Whenever it drops. It is 10 rage for the whole group's attack power.",
+      "notes": "Whenever it drops: 10 rage for the attack power of everyone within 20 yards, raid included.",
       "action": {
         "condition": {
           "not": {
@@ -193,7 +193,7 @@
       }
     },
     {
-      "notes": "On cooldown: your best hit per rage.",
+      "notes": "On cooldown: the button you lose the most by delaying.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -224,18 +224,38 @@
       }
     },
     {
+      "notes": "From 36, under 80 rage: Improved Berserker Rage makes it 10 rage, back every 30 seconds. Hold it for the fear on Magmadar, Onyxia and Nefarian.",
       "action": {
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentRage": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "80"
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "36"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentRage": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "80"
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         },
         "castSpell": {
@@ -248,6 +268,19 @@
     {
       "notes": "Only before level 36, while you still fight in Battle Stance. Once Whirlwind is trained you live in Berserker Stance and it never comes up.",
       "action": {
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentLevel": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "36"
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 11585,
