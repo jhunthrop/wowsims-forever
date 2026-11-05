@@ -354,3 +354,35 @@ func TestNoOpenerBuffWithoutGhostlyStrike(t *testing.T) {
 		t.Error("untalented rogue has Ghostly Strike's opener buff")
 	}
 }
+
+// TestHackAndSlashAxeRegistersExtraAttackAura checks that a one-hand axe
+// reaches the Axe/Sword branch (13960: "Axe/Sword: ... extra attack").
+// Forever rogues train One-Handed Axes (spell 196, ClassMask 79 in
+// 70790 against Era's 71). The dagger prebis set carries no sword or axe,
+// so Bone Slicing Hatchet (18737, a one-hand axe) in the main hand is the
+// only route to the aura here.
+func TestHackAndSlashAxeRegistersExtraAttackAura(t *testing.T) {
+	build := func(talentsStr string) *rogue.Rogue {
+		player := core.WithSpec(
+			&proto.Player{
+				Class:              proto.Class_ClassRogue,
+				Race:               proto.Race_RaceHuman,
+				Equipment:          core.GetGearSet("../../ui/rogue/gear_sets", "combat_backstab_prebis").GearSet,
+				TalentsString:      talentsStr,
+				DistanceFromTarget: 5,
+			},
+			&proto.Player_Rogue{Rogue: &proto.Rogue{Options: &proto.RogueOptions{}}},
+		)
+		player.Equipment.Items[proto.ItemSlot_ItemSlotMainHand] = &proto.ItemSpec{Id: 18737}
+		raid := core.SinglePlayerRaidProto(player, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{})
+		env, _, _ := core.NewEnvironment(raid, &proto.Encounter{}, true)
+		return env.Raid.Parties[0].Players[0].(*dpsrogue.DpsRogue).GetRogue()
+	}
+	axe := build(talentStringWithRank(t, zeroRogueTalents, "hack_and_slash", 5))
+	if mh := axe.MainHand(); mh == nil || mh.WeaponType != proto.WeaponType_WeaponTypeAxe {
+		t.Fatalf("main hand %v is not an axe; item 18737 should be Bone Slicing Hatchet", mh)
+	}
+	if axe.GetAuraByID(hackAndSlashActionID) == nil {
+		t.Error("no Hack and Slash aura registered for an axe-wielding rogue with Hack and Slash spent")
+	}
+}
