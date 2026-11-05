@@ -238,6 +238,17 @@
     {
       "notes": "Below 30, Fireball is the filler. At the ranks you have in the 20s it does more damage per point of mana than Scorch, and mana is what runs out first, so Scorch waits for Improved Scorch at 27 and then only builds and refreshes the stacks.",
       "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsKnown": {
+                "auraId": {
+                  "spellId": 400625
+                }
+              }
+            }
+          }
+        },
         "castSpell": {
           "spellId": {
             "spellId": 10151,
