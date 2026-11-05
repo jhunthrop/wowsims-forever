@@ -62,7 +62,7 @@
       }
     },
     {
-      "notes": "Below level 20, before Cat Form, when Moonfire is not ticking on the target.",
+      "notes": "Below level 20, before Cat Form, when Moonfire is not ticking on the target. Rank 1 from 10 to 13 and rank 2 from 16 to 19 do more for your mana than the newest rank.",
       "action": {
         "condition": {
           "and": {
@@ -103,7 +103,7 @@
       }
     },
     {
-      "notes": "Below level 20, before Cat Form, once Moonfire is ticking.",
+      "notes": "Below level 20, before Cat Form, once Moonfire is ticking. Rank 1 from 10 to 13 does more for your mana than rank 2.",
       "action": {
         "condition": {
           "not": {

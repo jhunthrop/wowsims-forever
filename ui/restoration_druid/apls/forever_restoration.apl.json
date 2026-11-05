@@ -635,7 +635,7 @@
       }
     },
     {
-      "notes": "On the tank whenever it is not ticking. Let it run out before you recast it, so Bloom heals him when it does.",
+      "notes": "On the tank whenever it is not ticking. Let it run out before you recast it: from 20, Bloom heals him when it does. At 18 and 19 rank 1 heals more for your mana than rank 2.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -685,7 +685,7 @@
       }
     },
     {
-      "notes": "On the tank whenever it is not ticking, at rank 10 in a raid. Let it run out before you recast it, so Bloom heals him when it does. While leveling your mana runs out first, so a lower rank heals more for it: rank 2 from 20 to 39 (a night elf takes rank 3 for level 29 alone), rank 4 from 40 to 43, rank 5 from 44 to 48, rank 6 from 49 to 56 and rank 8 from 57 to 59.",
+      "notes": "On the tank whenever it is not ticking, at rank 10 in a raid. Let it run out before you recast it: from 20, Bloom heals him when it does. While leveling your mana runs out first, so a lower rank heals more for it: rank 1 from 17 to 19 (from 13 for an Alliance druid), rank 2 from 20 to 39 (a night elf takes rank 3 for level 29 alone), rank 4 from 40 to 43, rank 5 from 44 to 48, rank 6 from 49 to 56 and rank 8 from 57 to 59.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -735,7 +735,7 @@
       }
     },
     {
-      "notes": "On the tank under 55%, only while your mana is ahead of the fight. While leveling, a lower rank heals more for the mana than the top rank: rank 2 at 20 (a tauren keeps it to 23), rank 3 from 30 to 33, rank 4 from 34 to 39, rank 5 from 40 to 45 and rank 6 from 46 to 49.",
+      "notes": "On the tank under 55%, only while your mana is ahead of the fight. While leveling, a lower rank heals more for the mana than the top rank: rank 2 from 14 to 16, rank 1 from 17 to 19, rank 2 at 20 (a tauren keeps it to 23, and takes rank 4 at 26 to 28), rank 3 from 30 to 33, rank 4 from 34 to 39, rank 5 from 40 to 45 and rank 6 from 46 to 49.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -795,7 +795,7 @@
       }
     },
     {
-      "notes": "On a hurt party member under 70%, you included. It does not wait on the mana pace the costly heals follow.",
+      "notes": "On a hurt party member under 70%, you included. It does not wait on the mana pace the costly heals follow. While leveling, rank 1 heals the most for your mana, except rank 2 at 10 to 12 (a Horde druid to 15, then rank 3 at 16), 27 to 29 and 40 to 42.",
       "action": {
         "castSpell": {
           "spellId": {
