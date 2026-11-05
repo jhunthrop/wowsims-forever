@@ -111,19 +111,9 @@ func (warlock *Warlock) ApplyTalents() {
 	// Felhunter is a utility pet here, not a DPS pet.
 	_ = warlock.Talents.ImprovedFelhunter
 
-	// Demonic Brand (3 ranks): the threat-reduction half ("Searing Pain
-	// generates 17/33/50% less threat") is not a DPS stat. The other
-	// half - the pet's next 2/4/6 attacks dealing bonus Fire or Shadow
-	// damage "based on the pet" - has no resolvable number anywhere in
-	// the client data this fork reads: talents/warlock.json's
-	// description carries the unresolved template variables $<minDam>
-	// and $<maxDam>, and spellconst/warlock.json's single entry for
-	// spell 1293695 (shared, unchanged, across all three ranks) carries
-	// only the threat-reduction effect (aura 108) and a second effect
-	// (aura 107, amount 3) that is neither a flat damage amount nor
-	// consistent with the tooltip's rank-3 "6 attacks" - inventing a
-	// number here would not be a client number.
-	_ = warlock.Talents.DemonicBrand
+	// Demonic Brand: Searing Pain brands the target and the pet spends the
+	// charges on extra hits (demonic_brand.go).
+	warlock.applyDemonicBrand()
 
 	// Destruction
 	warlock.applyImprovedShadowBolt()
