@@ -67,7 +67,8 @@
     {
       "action": {
         "autocastOtherCooldowns": {}
-      }
+      },
+      "notes": ""
     },
     {
       "notes": "Hunter's Mark whenever the target is not marked. One mark per target is enough: if another hunter's mark is already up, leave it.",
@@ -155,7 +156,7 @@
       }
     },
     {
-      "notes": "Aimed Shot whenever the shared cooldown is up. Your auto shots keep firing while you cast it, so there is no auto shot to wait for, and it hits harder than Multi-Shot.",
+      "notes": "Aimed Shot whenever the cooldown it shares with Multi-Shot is up. Your auto shots keep firing while you cast it, so there is no auto shot to wait for, and it hits harder than Multi-Shot.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -190,7 +191,7 @@
       }
     },
     {
-      "notes": "Serpent Sting when it has under 1.5 seconds left, and from 18 never while the shared cooldown is about to come back. Refreshing any earlier throws away a tick. Every tick carries 5% of your ranged attack power on top of its own damage, so it does more for its mana than Arcane Shot or Multi-Shot: keep it rolling for the whole fight. When both are ready, the shared cooldown goes first: a late Aimed Shot pushes it back, while a late sting costs only a moment of its damage. Until 34, while you hold Multi-Shot under a quarter of your mana, do not wait on it: keep the sting rolling.",
+      "notes": "Serpent Sting when it has under 1.5 seconds left, and from 18 never while the shared cooldown is about to come back. Refreshing any earlier throws away a tick. Every tick carries 5% of your ranged attack power on top of its own damage, so it does more for its mana than Arcane Shot, and from 18 more than Multi-Shot too: keep it rolling for the whole fight. From 18, when both are ready, the shared cooldown goes first: a late Aimed Shot pushes it back, while a late sting costs only a moment of its damage. Under a quarter of your mana, do not wait on the shared cooldown: keep the sting rolling.",
       "action": {
         "condition": {
           "and": {
@@ -235,34 +236,16 @@
                       }
                     },
                     {
-                      "and": {
-                        "vals": [
-                          {
-                            "cmp": {
-                              "op": "OpLe",
-                              "lhs": {
-                                "currentManaPercent": {}
-                              },
-                              "rhs": {
-                                "const": {
-                                  "val": "25%"
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "not": {
-                              "val": {
-                                "spellIsKnown": {
-                                  "spellId": {
-                                    "spellId": 13813,
-                                    "rank": 1
-                                  }
-                                }
-                              }
-                            }
+                      "cmp": {
+                        "op": "OpLe",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "25%"
                           }
-                        ]
+                        }
                       }
                     }
                   ]
@@ -280,7 +263,7 @@
       }
     },
     {
-      "notes": "Arcane Shot to fill a gap, and from 18 only when the shared cooldown is more than a global away. It is instant and never holds an auto shot, and every hit carries 15% of your ranged attack power, so it does far more for its mana than Multi-Shot: keep it going even when the mana runs low. Until 34, while you hold Multi-Shot under a quarter of your mana, fire it on cooldown instead of waiting for Multi-Shot.",
+      "notes": "Arcane Shot to fill a gap, and from 18 only when the shared cooldown is more than a global away. It is instant and never holds an auto shot, and every hit carries 15% of your ranged attack power, so from 18 it does far more for its mana than Multi-Shot: keep it going even when the mana runs low. Under a quarter of your mana, fire it on cooldown instead of waiting on the shared cooldown.",
       "action": {
         "condition": {
           "or": {
@@ -304,34 +287,16 @@
                 }
               },
               {
-                "and": {
-                  "vals": [
-                    {
-                      "cmp": {
-                        "op": "OpLe",
-                        "lhs": {
-                          "currentManaPercent": {}
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "25%"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "not": {
-                        "val": {
-                          "spellIsKnown": {
-                            "spellId": {
-                              "spellId": 13813,
-                              "rank": 1
-                            }
-                          }
-                        }
-                      }
+                "cmp": {
+                  "op": "OpLe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "25%"
                     }
-                  ]
+                  }
                 }
               }
             ]
