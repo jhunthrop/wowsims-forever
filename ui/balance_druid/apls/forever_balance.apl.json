@@ -34,7 +34,7 @@
       }
     },
     {
-      "notes": "When the next Starfire would not finish before the fight ends. Wrath still does.",
+      "notes": "When the next Starfire would not finish before the fight ends; before you have Starfire at 20, in the fight's last few seconds. Wrath still lands in time.",
       "action": {
         "condition": {
           "or": {
@@ -250,7 +250,7 @@
       }
     },
     {
-      "notes": "Everything else, spending the Eclipse charges Wrath banked.",
+      "notes": "Everything else. From 35 it spends the Eclipse charges Wrath banked.",
       "action": {
         "castSpell": {
           "spellId": {
