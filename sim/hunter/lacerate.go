@@ -1,6 +1,7 @@
 package hunter
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
@@ -58,7 +59,7 @@ func (hunter *Hunter) getLacerateConfig(rank int) core.SpellConfig {
 
 		Dot: core.DotConfig{
 			Aura: core.Aura{
-				Label: "Lacerate",
+				Label: "Lacerate" + hunter.Label + strconv.Itoa(rank),
 				Tag:   "Lacerate",
 			},
 			NumberOfTicks: lacerateTicks,
@@ -88,5 +89,9 @@ func (hunter *Hunter) registerLacerateSpell() {
 	if rank == 0 {
 		return
 	}
-	hunter.Lacerate = hunter.GetOrRegisterSpell(hunter.getLacerateConfig(rank))
+	// Every learned rank is registered, as the spellbook keeps them, so a
+	// rotation can cast a lower one; hunter.Lacerate is the highest.
+	for r := 1; r <= rank; r++ {
+		hunter.Lacerate = hunter.GetOrRegisterSpell(hunter.getLacerateConfig(r))
+	}
 }

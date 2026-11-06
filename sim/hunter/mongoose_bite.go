@@ -15,7 +15,7 @@ var mongooseBiteLearnLevels = []int{16, 30, 44, 58}
 // numbers are well below vanilla Classic's here too (rank 4 is +57, not
 // vanilla's +115); corrected against the client.
 
-func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
+func (hunter *Hunter) getMongooseBiteConfig(rank int, cdTimer *core.Timer) core.SpellConfig {
 	spellId := [5]int32{0, 1495, 14269, 14270, 14271}[rank]
 	damage := MongooseBiteDamage[rank]
 	casterLevel := int(hunter.Level)
@@ -41,7 +41,7 @@ func (hunter *Hunter) getMongooseBiteConfig(rank int) core.SpellConfig {
 				GCD: core.GCDDefault,
 			},
 			CD: core.Cooldown{
-				Timer:    hunter.NewTimer(),
+				Timer:    cdTimer,
 				Duration: time.Second * 5,
 			},
 		},
@@ -136,7 +136,12 @@ func (hunter *Hunter) registerMongooseBiteSpell() {
 
 	hunter.registerMongooseBiteWindow()
 
-	config := hunter.getMongooseBiteConfig(rank)
-	hunter.MongooseBite = hunter.GetOrRegisterSpell(config)
+	// Every learned rank is registered, as the spellbook keeps them, so a
+	// rotation can cast a lower one; all share one cooldown (category 5000
+	// on every rank), and hunter.MongooseBite is the highest.
+	cdTimer := hunter.NewTimer()
+	for r := 1; r <= rank; r++ {
+		hunter.MongooseBite = hunter.GetOrRegisterSpell(hunter.getMongooseBiteConfig(r, cdTimer))
+	}
 	hunter.registerLaceratingStrikesDot()
 }
