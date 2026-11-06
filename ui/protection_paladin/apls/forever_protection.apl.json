@@ -365,16 +365,66 @@
           "and": {
             "vals": [
               {
-                "cmp": {
-                  "op": "OpGt",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "0.5"
+                "or": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "math": {
+                            "op": "OpAdd",
+                            "lhs": {
+                              "currentMana": {}
+                            },
+                            "rhs": {
+                              "math": {
+                                "op": "OpMul",
+                                "lhs": {
+                                  "math": {
+                                    "op": "OpSub",
+                                    "lhs": {
+                                      "manaIncomePerSecond": {
+                                        "windowSeconds": 60
+                                      }
+                                    },
+                                    "rhs": {
+                                      "manaSpentPerSecond": {
+                                        "windowSeconds": 60
+                                      }
+                                    }
+                                  }
+                                },
+                                "rhs": {
+                                  "remainingTime": {}
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "spellCurrentCost": {
+                            "spellId": {
+                              "spellId": 20924,
+                              "rank": 5
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentHealthPercent": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.35"
+                          }
+                        }
+                      }
                     }
-                  }
+                  ]
                 }
               },
               {
@@ -410,7 +460,7 @@
           }
         }
       },
-      "notes": "Last, and only above half mana. It makes far less threat per mana than Hammer of the Righteous, so it spends the mana you will not need."
+      "notes": "Last, while what you hold plus what you regain, less what you spend, over the rest of the fight still pays for it, or once you drop below 35% health. It spends only mana your strikes and, from 30, Holy Shield will not need, and from 40 Hammer of the Righteous makes far more threat for its mana. Rank 1 does more than the higher ranks at 30 and 31, 40 to 48 and 50 to 57 because it goes down far more often; rank 3 at 49, rank 4 at 58 and 59, and rank 1 again at 60 without raid buffs."
     }
   ]
 }
