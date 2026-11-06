@@ -36,7 +36,7 @@ type APLValueSpellCanCast struct {
 func (rot *APLRotation) newValueSpellCanCast(config *proto.APLValueSpellCanCast) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue("false")
 	}
 	return &APLValueSpellCanCast{
 		spell: spell,
@@ -60,7 +60,7 @@ type APLValueSpellIsReady struct {
 func (rot *APLRotation) newValueSpellIsReady(config *proto.APLValueSpellIsReady) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue("false")
 	}
 	return &APLValueSpellIsReady{
 		spell: spell,
@@ -84,7 +84,7 @@ type APLValueSpellTimeToReady struct {
 func (rot *APLRotation) newValueSpellTimeToReady(config *proto.APLValueSpellTimeToReady) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue(unknownSpellTimeToReady.String())
 	}
 	return &APLValueSpellTimeToReady{
 		spell: spell,
@@ -108,7 +108,7 @@ type APLValueSpellCastTime struct {
 func (rot *APLRotation) newValueSpellCastTime(config *proto.APLValueSpellCastTime) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue("0ms")
 	}
 	return &APLValueSpellCastTime{
 		spell: spell,
@@ -132,7 +132,7 @@ type APLValueSpellTravelTime struct {
 func (rot *APLRotation) newValueSpellTravelTime(config *proto.APLValueSpellTravelTime) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue("0ms")
 	}
 	return &APLValueSpellTravelTime{
 		spell: spell,
@@ -156,7 +156,7 @@ type APLValueSpellInFlight struct {
 func (rot *APLRotation) newValueSpellInFlight(config *proto.APLValueSpellInFlight) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue("false")
 	}
 	return &APLValueSpellInFlight{
 		spell: spell,
@@ -180,7 +180,7 @@ type APLValueSpellCPM struct {
 func (rot *APLRotation) newValueSpellCPM(config *proto.APLValueSpellCPM) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue("0.0")
 	}
 	return &APLValueSpellCPM{
 		spell: spell,
@@ -204,7 +204,7 @@ type APLValueSpellIsChanneling struct {
 func (rot *APLRotation) newValueSpellIsChanneling(config *proto.APLValueSpellIsChanneling) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue("false")
 	}
 	return &APLValueSpellIsChanneling{
 		spell: spell,
@@ -228,7 +228,7 @@ type APLValueSpellChanneledTicks struct {
 func (rot *APLRotation) newValueSpellChanneledTicks(config *proto.APLValueSpellChanneledTicks) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue("0.0")
 	}
 	return &APLValueSpellChanneledTicks{
 		spell: spell,
@@ -257,7 +257,7 @@ type APLValueSpellCurrentCost struct {
 func (rot *APLRotation) newValueSpellCurrentCost(config *proto.APLValueSpellCurrentCost) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
-		return nil
+		return rot.unknownSpellValue("0.0")
 	}
 	return &APLValueSpellCurrentCost{
 		spell: spell,
@@ -275,4 +275,17 @@ func (value *APLValueSpellCurrentCost) GetFloat(_ *Simulation) float64 {
 }
 func (value *APLValueSpellCurrentCost) String() string {
 	return fmt.Sprintf("CurrentCost(%s)", value.spell.ActionID)
+}
+
+// unknownSpellTimeToReady is when a spell the character has not registered
+// comes off cooldown: after any fight is over.
+const unknownSpellTimeToReady = 24 * time.Hour
+
+// unknownSpellValue is what a condition reads for a spell the character has not
+// registered (one it learns later, a talent it did not take): a spell it cannot
+// cast, never ready, with 0 for its counts and times. Building it to nil let
+// and/or/not/compare drop the operand, so the gate vanished (round 25, the
+// unknown-aura rule of round 22 applied to spells). GetAPLSpell still warns.
+func (rot *APLRotation) unknownSpellValue(val string) APLValue {
+	return rot.newValueConst(&proto.APLValueConst{Val: val})
 }
