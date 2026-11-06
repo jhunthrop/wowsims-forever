@@ -66,6 +66,27 @@
       "notes": "Lightning Mastery, trinkets and Blood Fury together: for its 15 seconds Lightning Bolt is half a second faster and Chain Lightning has no cooldown, so stack them inside it. A Troll presses Berserking after Mastery ends, since casting speed cannot push a bolt below the 1.5 second global cooldown."
     },
     {
+      "notes": "Troll: Berserking the moment Lightning Mastery ends, never inside it. Inside Mastery your bolts already sit on the 1.5 second global cooldown and casting speed cannot shorten it; after it, Berserking makes your next 15 seconds of bolts faster.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 20554
+          }
+        },
+        "condition": {
+          "not": {
+            "val": {
+              "auraIsActive": {
+                "auraId": {
+                  "spellId": 16166
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "notes": "Flame Shock whenever it is not on the target: with Call of Flame it ticks for 21 seconds, and nothing else wants the shock cooldown.",
       "action": {
         "condition": {
