@@ -2,7 +2,7 @@
 //
 // Class: druid
 // Client build: 1.60.1.70790
-// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/bisfinal/act/data/builds/1.60.1.70790/spellconst/druid.json
+// Source: /Users/jh/code/forever/.claude/worktrees/r24-data/data/builds/1.60.1.70790/spellconst/druid.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -508,7 +508,7 @@ var BearFormPassive2CooldownMS = [BearFormPassive2Ranks + 1]int32{0}
 var BearFormPassive2ManaCost = [BearFormPassive2Ranks + 1]float64{0}
 var BearFormPassive2ManaCostPct = [BearFormPassive2Ranks + 1]float64{0}
 var BearFormPassive2SpellCoeff = [BearFormPassive2Ranks + 1]float64{0.2143}
-var BearFormPassive2BaseDamage = [BearFormPassive2Ranks + 1][]float64{{50, 50}}
+var BearFormPassive2BaseDamage = [BearFormPassive2Ranks + 1][]float64{{115, 115}}
 var BearFormPassive2PointsPerLevel = [BearFormPassive2Ranks + 1]float64{0}
 var BearFormPassive2MaxLevel = [BearFormPassive2Ranks + 1]int{0}
 

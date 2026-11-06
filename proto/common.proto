@@ -405,6 +405,11 @@ enum Flask {
 	FlaskOfDistilledWisdom = 2;
 	FlaskOfSupremePower = 3;
 	FlaskOfChromaticResistance = 4;
+	// Forever's Barrow Deeps and Hyjal flasks (Alchemy 300).
+	FlaskOfNaturalAccuracy = 5;
+	FlaskOfNaturalAggression = 6;
+	FlaskOfNaturalPrecision = 7;
+	FlaskOfNaturalSwiftness = 8;
 }
 
 enum Alcohol {
