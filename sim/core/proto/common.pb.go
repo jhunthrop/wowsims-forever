@@ -1762,6 +1762,11 @@ const (
 	Flask_FlaskOfDistilledWisdom     Flask = 2
 	Flask_FlaskOfSupremePower        Flask = 3
 	Flask_FlaskOfChromaticResistance Flask = 4
+	// Forever's Barrow Deeps and Hyjal flasks (Alchemy 300).
+	Flask_FlaskOfNaturalAccuracy   Flask = 5
+	Flask_FlaskOfNaturalAggression Flask = 6
+	Flask_FlaskOfNaturalPrecision  Flask = 7
+	Flask_FlaskOfNaturalSwiftness  Flask = 8
 )
 
 // Enum value maps for Flask.
@@ -1772,6 +1777,10 @@ var (
 		2: "FlaskOfDistilledWisdom",
 		3: "FlaskOfSupremePower",
 		4: "FlaskOfChromaticResistance",
+		5: "FlaskOfNaturalAccuracy",
+		6: "FlaskOfNaturalAggression",
+		7: "FlaskOfNaturalPrecision",
+		8: "FlaskOfNaturalSwiftness",
 	}
 	Flask_value = map[string]int32{
 		"FlaskUnknown":               0,
@@ -1779,6 +1788,10 @@ var (
 		"FlaskOfDistilledWisdom":     2,
 		"FlaskOfSupremePower":        3,
 		"FlaskOfChromaticResistance": 4,
+		"FlaskOfNaturalAccuracy":     5,
+		"FlaskOfNaturalAggression":   6,
+		"FlaskOfNaturalPrecision":    7,
+		"FlaskOfNaturalSwiftness":    8,
 	}
 )
 
@@ -7134,13 +7147,17 @@ const file_common_proto_rawDesc = "" +
 	"\x17ConjuredRogueThistleTea\x10\x03\x12\x17\n" +
 	"\x13ConjuredHealthstone\x10\x04\x12\x1e\n" +
 	"\x1aConjuredGreaterHealthstone\x10\x05\x12\x1c\n" +
-	"\x18ConjuredMajorHealthstone\x10\x06*\x84\x01\n" +
+	"\x18ConjuredMajorHealthstone\x10\x06*\xf8\x01\n" +
 	"\x05Flask\x12\x10\n" +
 	"\fFlaskUnknown\x10\x00\x12\x14\n" +
 	"\x10FlaskOfTheTitans\x10\x01\x12\x1a\n" +
 	"\x16FlaskOfDistilledWisdom\x10\x02\x12\x17\n" +
 	"\x13FlaskOfSupremePower\x10\x03\x12\x1e\n" +
-	"\x1aFlaskOfChromaticResistance\x10\x04*\xae\x01\n" +
+	"\x1aFlaskOfChromaticResistance\x10\x04\x12\x1a\n" +
+	"\x16FlaskOfNaturalAccuracy\x10\x05\x12\x1c\n" +
+	"\x18FlaskOfNaturalAggression\x10\x06\x12\x1b\n" +
+	"\x17FlaskOfNaturalPrecision\x10\a\x12\x1b\n" +
+	"\x17FlaskOfNaturalSwiftness\x10\b*\xae\x01\n" +
 	"\aAlcohol\x12\x12\n" +
 	"\x0eAlcoholUnknown\x10\x00\x12\x1e\n" +
 	"\x1aAlcoholRumseyRumBlackLabel\x10\x01\x12\x1a\n" +

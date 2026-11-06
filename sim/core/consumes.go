@@ -63,7 +63,27 @@ func applyFlaskConsumes(character *Character, consumes *proto.Consumes) {
 		})
 	case proto.Flask_FlaskOfChromaticResistance:
 		character.AddResistances(25)
+	default:
+		character.AddStats(naturalFlaskStats[consumes.Flask])
 	}
+}
+
+// naturalFlaskStats are Forever's Natural flasks (items 274273-274276, spells
+// 1293740-1293743) as the 1.60.1.70790 server push 113570 leaves them: 30
+// Stamina everywhere (aura 29, misc 2) and 2 of the flask's stat (the dummy
+// aura 4 row the zone script reads) in Mount Hyjal, Hyjal Summit and the
+// Barrow Deeps, where the raid preset fights. The shipped rows read 60 and 5
+// (4 for Aggression). Precision's dodge and parry reduction is expertise;
+// Swiftness hastes melee, ranged (aura 342) and casts (aura 65).
+var naturalFlaskStats = map[proto.Flask]stats.Stats{
+	proto.Flask_FlaskOfNaturalAccuracy:   {stats.Stamina: 30, stats.Hit: 2 * HitRatingPerHitChance},
+	proto.Flask_FlaskOfNaturalAggression: {stats.Stamina: 30, stats.Crit: 2 * CritRatingPerCritChance},
+	proto.Flask_FlaskOfNaturalPrecision:  {stats.Stamina: 30, stats.Expertise: 2 * ExpertiseRatingPerExpertiseChance},
+	proto.Flask_FlaskOfNaturalSwiftness: {
+		stats.Stamina:    30,
+		stats.MeleeHaste: 2 * HasteRatingPerHastePercent,
+		stats.SpellHaste: 2 * HasteRatingPerHastePercent,
+	},
 }
 
 ///////////////////////////////////////////////////////////////////////////
