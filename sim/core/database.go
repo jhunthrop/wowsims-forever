@@ -258,6 +258,10 @@ func NewItem(itemSpec ItemSpec) Item {
 	item := Item{}
 	if foundItem, ok := ItemsByID[itemSpec.ID]; ok {
 		item = foundItem
+	} else if !WITH_DB {
+		// Without the tag only the items a request carries are known: a
+		// test's gear set panics on its first item though db.json has it.
+		panic(fmt.Sprintf("No item with id: %d (the item database is not compiled in; test suites need --tags=with_db)", itemSpec.ID))
 	} else {
 		panic(fmt.Sprintf("No item with id: %d", itemSpec.ID))
 	}
