@@ -532,8 +532,7 @@ func FullCharacterTestSuiteGenerator(configs []CharacterSuiteConfig) []TestGener
 
 		if len(config.StatsToWeigh) > 0 {
 			// Make a copy because the options are halved with each iteration
-			testOptions := *StatWeightsDefaultSimTestOptions
-			testOptionsPtr := &testOptions
+			testOptionsPtr := googleProto.Clone(StatWeightsDefaultSimTestOptions).(*proto.SimOptions)
 
 			generator.subgenerators = append(generator.subgenerators, SubGenerator{
 				name: makeGeneratorName("StatWeights", config.Phase),
