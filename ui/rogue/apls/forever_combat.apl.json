@@ -39,7 +39,7 @@
       }
     },
     {
-      "notes": "Shank on cooldown: an off-hand stab that cannot miss and pays back more energy than it costs, every 10 seconds.",
+      "notes": "Shank on cooldown: an off-hand stab that cannot miss and pays back more energy than it costs, every 10 seconds, and every 8 with five points of Flash of Steel.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -120,12 +120,25 @@
                     }
                   }
                 }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentLevel": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "60"
+                    }
+                  }
+                }
               }
             ]
           }
         }
       },
-      "notes": "Slice and Dice whenever it drops, at one or two combo points. Five points always go to Eviscerate; a short Slice and Dice keeps the attack speed up for far fewer points."
+      "notes": "At 60, Slice and Dice whenever it drops, at one or two combo points. Five points always go to Eviscerate; a short Slice and Dice keeps the attack speed up for far fewer points. While you level, leave it off a single target and put every five points into Eviscerate: your white swings miss too often for the attack speed to pay back the energy and the points."
     },
     {
       "action": {
@@ -136,7 +149,7 @@
           }
         }
       },
-      "notes": "Backstab with a dagger in the main hand: Puncturing Wounds raises its crit chance and can give it a second combo point, and in the raid build Opportunity and Lethality land on it too."
+      "notes": "Backstab from behind with a dagger in the main hand: once you have Puncturing Wounds it crits more often and can give a second combo point, and in the raid build Lethality from 54 and Opportunity from 56 land on it too."
     },
     {
       "action": {
@@ -146,7 +159,7 @@
           }
         }
       },
-      "notes": "Adrenaline Rush on cooldown, with your racial, a trinket and a potion."
+      "notes": "Adrenaline Rush on cooldown, with your damage racial if your race has one, a trinket and a potion."
     },
     {
       "action": {
