@@ -11,7 +11,6 @@ import (
 
 const (
 	defensiveStanceThreat = 1.8 // spell 7376: +80% since Blizzard's 3 Nov notes
-	defiancePerRank       = 0.05
 	floatEpsilon          = 1e-9
 )
 
@@ -33,15 +32,18 @@ func attackTaken(sim *core.Simulation, war *warrior.Warrior, outcome core.HitOut
 	swing.DisposeResult(result)
 }
 
+// defianceByRank is Defiance's 7/13/20% (Blizzard's 3 Nov notes, push 113326).
+var defianceByRank = [4]float64{0, 0.07, 0.13, 0.20}
+
 // Defiance: "Increases all threat generated in Defensive stance by an
-// additional 5%/10%/15% while a shield is equipped", added to the stance's
-// own 80%.
+// additional 7%/13%/20% while a shield is equipped", multiplied with the
+// stance's own 80%.
 func TestDefianceMultipliesTheStanceThreatWithAShield(t *testing.T) {
 	for rank := 0; rank <= 3; rank++ {
 		talents := talentsWith(t, emptyTalents, "defiance", rank)
 
 		withShield, _ := buildTank(t, talents, true)
-		assertNear(t, "threat with a shield", withShield.PseudoStats.ThreatMultiplier, defensiveStanceThreat*(1+defiancePerRank*float64(rank)))
+		assertNear(t, "threat with a shield", withShield.PseudoStats.ThreatMultiplier, defensiveStanceThreat*(1+defianceByRank[rank]))
 
 		withoutShield, _ := buildTank(t, talents, false)
 		assertNear(t, "threat without a shield", withoutShield.PseudoStats.ThreatMultiplier, defensiveStanceThreat)
