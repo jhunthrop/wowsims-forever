@@ -18,6 +18,11 @@ func (rogue *Rogue) HemorrhageWeaponDamageForTest(sim *core.Simulation, attackPo
 	return rogue.hemorrhageWeaponDamage(sim, attackPower)
 }
 
+// GhostlyStrikeWeaponDamageForTest exposes Ghostly Strike's weapon damage roll.
+func (rogue *Rogue) GhostlyStrikeWeaponDamageForTest(sim *core.Simulation, attackPower float64) float64 {
+	return rogue.ghostlyStrikeWeaponDamage(sim, attackPower)
+}
+
 // MutilateOHWeaponDamageForTest exposes Mutilate's off-hand weapon damage roll.
 func (rogue *Rogue) MutilateOHWeaponDamageForTest(sim *core.Simulation, attackPower float64) float64 {
 	return rogue.mutilateOHWeaponDamage(sim, attackPower)

@@ -56,6 +56,26 @@ func TestHemorrhageUsesNormalizedWeaponDamage(t *testing.T) {
 	}
 }
 
+// Ghostly Strike 14278 gained effect 121 (normalized weapon damage, SpellEffect
+// 1368764, amount 0) in the 70755 client, beside its effect 31 at 125% and
+// the dagger dummy at 180%: the same shape as Hemorrhage, so its attack power
+// counts at the normalized speed, not the weapon's own.
+func TestGhostlyStrikeUsesNormalizedWeaponDamage(t *testing.T) {
+	const ap = 1000.0
+	talents := talentStringWithRank(t, zeroRogueTalents, "ghostly_strike", 1)
+	sim, built := rogueSim(t, talents, "combat_sinister_strike_prebis")
+	got := built.GetRogue().GhostlyStrikeWeaponDamageForTest(sim, ap)
+	refSim, ref := rogueSim(t, talents, "combat_sinister_strike_prebis")
+	mh := ref.GetRogue().AutoAttacks.MH()
+	if mh.SwingSpeed == mh.NormalizedSwingSpeed {
+		t.Fatalf("the test weapon swings at its normalized %.1f s, so it cannot tell the two apart", mh.SwingSpeed)
+	}
+	want := mh.CalculateNormalizedWeaponDamage(refSim, ap)
+	if math.Abs(got-want) > 1e-9 {
+		t.Errorf("Ghostly Strike weapon damage = %.3f, want the normalized %.3f", got, want)
+	}
+}
+
 // Dual Wield Specialization 13715 is aura 122, the off-hand damage percent
 // (+25% a rank in 70755): it raises the off-hand weapon's damage, so
 // Mutilate's off-hand strike (1241590) takes it as the white off-hand

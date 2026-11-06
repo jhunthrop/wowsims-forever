@@ -9,7 +9,7 @@ import (
 )
 
 // Ghostly Strike (14278, 70755): e0 125% weapon damage (e3 180% with a
-// main-hand dagger), e1 +15% dodge for 7 sec, e2 one combo point, and e5
+// main-hand dagger), normalized by e4 (effect 121), e1 +15% dodge for 7 sec, e2 one combo point, and e5
 // (effect 64) triggers 1329326, "Next Ambush or Garrote does not require
 // Stealth": aura 275 on mask 768 (Garrote 256 + Ambush 512), DurationIndex
 // 165 (7 sec).
@@ -77,7 +77,7 @@ func (rogue *Rogue) registerGhostlyStrikeSpell() {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			rogue.BreakStealth(sim)
-			baseDamage := spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			baseDamage := rogue.ghostlyStrikeWeaponDamage(sim, spell.MeleeAttackPower(target))
 
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
@@ -112,4 +112,13 @@ func (rogue *Rogue) spendOpener(sim *core.Simulation) {
 		rogue.GhostlyStrikeOpenerAura.Deactivate(sim)
 	}
 	rogue.BreakStealth(sim)
+}
+
+// ghostlyStrikeWeaponDamage is Ghostly Strike's weapon damage before its 125%
+// (180% with a dagger) multiplier: normalized. The 70755 client added effect
+// 121 (normalized weapon damage, SpellEffect 1368764, amount 0) to 14278 in
+// the same change that added the opener trigger (e5), the shape Hemorrhage
+// has (hemorrhageWeaponDamage).
+func (rogue *Rogue) ghostlyStrikeWeaponDamage(sim *core.Simulation, attackPower float64) float64 {
+	return rogue.MHNormalizedWeaponDamage(sim, attackPower)
 }
