@@ -192,7 +192,7 @@
       }
     },
     {
-      "notes": "Serpent Sting when it has under 1.5 seconds left, and from 18 never while the shared cooldown is about to come back. Refreshing any earlier throws away a tick. Every tick carries 5% of your ranged attack power on top of its own damage, so it does more for its mana than Arcane Shot, and from 18 more than Multi-Shot too: keep it rolling for the whole fight. Under a quarter of your mana, do not wait on the shared cooldown: keep the sting rolling.",
+      "notes": "Serpent Sting when it has under 1.5 seconds left, and from 18 never while the shared cooldown is about to come back. Refreshing any earlier throws away a tick. Every tick carries 5% of your ranged attack power on top of its own damage, so from 18 it does more for its mana than Multi-Shot: keep it rolling for the whole fight. Under a quarter of your mana, do not wait on the shared cooldown: keep the sting rolling.",
       "action": {
         "condition": {
           "and": {
