@@ -1106,15 +1106,15 @@
           "ranks": [
             {
               "spell_id": 12792,
-              "description": "Increases all threat generated in Defensive stance by an additional 5% while a shield is equipped."
+              "description": "Increases all threat generated in Defensive stance by an additional 7% while a shield is equipped."
             },
             {
               "spell_id": 12792,
-              "description": "Increases all threat generated in Defensive stance by an additional 10% while a shield is equipped."
+              "description": "Increases all threat generated in Defensive stance by an additional 13% while a shield is equipped."
             },
             {
               "spell_id": 12792,
-              "description": "Increases all threat generated in Defensive stance by an additional 15% while a shield is equipped."
+              "description": "Increases all threat generated in Defensive stance by an additional 20% while a shield is equipped."
             }
           ],
           "spell_id": 12792

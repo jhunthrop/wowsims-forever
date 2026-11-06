@@ -1912,7 +1912,7 @@
           "index": 2,
           "effect": 6,
           "aura": 10,
-          "amount": 30,
+          "amount": 80,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,

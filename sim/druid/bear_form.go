@@ -26,18 +26,16 @@ import (
 // applied to the armor items carry as bonus armor (stats.BonusArmor), the
 // pool aura 142 does not reach.
 const (
-	// bearFormThreatMultiplier: "Bear Form and Dire Bear Form: Threat bonus
-	// increased from 50% to 115%" (Blizzard's Forever patch notes, 3 November
-	// 2026). The cached 1.60.1.70790 row for 21178 (aura 10) still reads 50,
-	// as Defensive Stance Passive's still reads the 30 the same note raised
-	// to 80, which Wowhead's Forever tooltip renders: the note's threat
-	// bonuses are server data the cached table predates. 30 until build
-	// 1.60.1.70291, 50 until the note.
-	bearFormThreatMultiplier = 2.15
-
 	// bearFormAnnouncedMinLevel is Bear Form's own learn level.
 	bearFormAnnouncedMinLevel = 10
 )
+
+// bearFormThreatMultiplier is the form's threat, read from Bear Form
+// (Passive2) 21178's aura 10 row: "Bear Form and Dire Bear Form: Threat bonus
+// increased from 50% to 115%" (Blizzard's Forever notes, 3 November 2026),
+// which the 1.60.1.70790 server push 113326 carries (the shipped row read 50;
+// 30 until build 1.60.1.70291).
+var bearFormThreatMultiplier = 1 + BearFormPassive2BaseDamage[0][0]/100
 
 // bearFormTier is one of the two forms' client numbers.
 type bearFormTier struct {

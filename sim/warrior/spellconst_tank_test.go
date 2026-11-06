@@ -163,10 +163,8 @@ func TestShieldAbilitiesMatchClient(t *testing.T) {
 	}
 
 	stance, _ := client.ByID(defensiveStancePassiveSpellID)
-	// The cached row predates the 3 Nov server change to 80% (stances.go).
-	// When a client build carries 80, this fails: drop the cached constant.
-	if got := findEffect(t, stance, clientEffectApplyAura, 10).Amount; got != 100*defensiveStanceCachedClientThreatBonus {
-		t.Errorf("Defensive Stance's cached client row reads %v%% threat, expected %v (the engine uses the live %v)", got, 100*defensiveStanceCachedClientThreatBonus, 100*defensiveStanceThreatBonus)
+	if got := findEffect(t, stance, clientEffectApplyAura, 10).Amount; got != 100*defensiveStanceThreatBonus {
+		t.Errorf("Defensive Stance adds %v%% threat, client %v%%", 100*defensiveStanceThreatBonus, got)
 	}
 	if got := findEffect(t, stance, clientEffectApplyAura, 87).Amount; got != -100*(1-defensiveStanceDamageMultiplier) {
 		t.Errorf("Defensive Stance cuts damage taken by %v%%, client %v", 100*(1-defensiveStanceDamageMultiplier), got)
