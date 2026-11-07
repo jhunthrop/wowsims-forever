@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Evocation when you are nearly dry and more than 30 seconds of the fight remain. It is an 8 second channel at +1500% mana regeneration on an 8 minute cooldown, so it comes once a boss: spend your gem, a Major Mana Potion and a Demonic Rune first. Inside the last 30 seconds the mana comes back too late to spend, so keep casting.",
+      "notes": "Evocation when you are nearly dry and more than 30 seconds of the fight remain. It is an 8 second channel at +1500% mana regeneration on an 8 minute cooldown, so it comes once a fight: spend your mana gem from 28 and a mana potion first, and at 60 a Demonic Rune too. Inside the last 30 seconds the mana comes back too late to spend, so keep casting.",
       "action": {
         "condition": {
           "and": {
@@ -72,7 +72,7 @@
       }
     },
     {
-      "notes": "Ice Lance while Fingers of Frost is up and its 8 second cooldown is ready. The charge makes the boss count as frozen, so Ice Lance hits for four times its damage with Shatter's 50% crit. Fingers of Frost gives two charges and Ice Lance spends one, so your next Frostbolt gets the other.",
+      "notes": "Ice Lance while Fingers of Frost is up and its 8 second cooldown is ready. The charge makes the boss count as frozen, so Ice Lance hits for four times its damage with Shatter's 50% crit. From 31 Fingers of Frost gives two charges and Ice Lance spends one, so your next Frostbolt gets the other.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -194,7 +194,7 @@
       }
     },
     {
-      "notes": "Frostbolt is the filler, and every cast can roll Fingers of Frost or Missile Barrage. Never stop casting to wait for a proc.",
+      "notes": "Frostbolt is the filler, and you never stop casting it to wait on a proc. Once Fingers of Frost at 30 and Missile Barrage at 51 are in, every cast can roll one.",
       "action": {
         "castSpell": {
           "spellId": {

@@ -149,7 +149,7 @@
       }
     },
     {
-      "notes": "At 5 combo points when Rip is off the boss or has under 2 seconds left. A new Rip throws away the ticks the old one had left, so let it run almost to the end. Rip comes first, and once you have Rend and Tear (37 leveling, 36 raid order) it is also the bleed that keeps Rend and Tear on.",
+      "notes": "At 5 combo points when Rip is off the boss or has under 2 seconds left. A new Rip throws away the ticks the old one had left, so let it run almost to the end. Rip comes first, and once you have Rend and Tear (from 36 in either order) it is also the bleed that keeps Rend and Tear on.",
       "action": {
         "condition": {
           "and": {

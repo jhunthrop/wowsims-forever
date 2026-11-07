@@ -7,7 +7,7 @@
       }
     },
     {
-      "notes": "Hunter's Mark whenever the target is not marked: from 35, Expose Prey needs it. It opens Mongoose Bite only on a marked target, so mark the boss before the pull. One mark per target is enough: if another hunter's mark is already up, leave it.",
+      "notes": "Hunter's Mark whenever the target is not marked, and from 33 Expose Prey needs it. It opens Mongoose Bite only on a marked target, so mark the boss before the pull. One mark per target is enough: if another hunter's mark is already up, leave it.",
       "action": {
         "condition": {
           "not": {
@@ -33,7 +33,7 @@
       }
     },
     {
-      "notes": "Raptor Strike queued on every swing it is ready. It replaces your next white hit rather than costing a global, so keep it queued; once Resourcefulness is in at 33 and 34 it costs 60% less, so never hold it back for mana after that.",
+      "notes": "Raptor Strike on every swing it is ready, with an older rank on your bar at 26 to 29, at 31, and at 46 and 47, and to 49 on most Horde characters. Most of its hit is your weapon, so an older rank does nearly the same damage for less mana, and the mana goes into traps: keep rank 3 at 26 to 29 (rank 2 for a Horde hunter at 26 and 27, and a Tauren at 28), rank 1 at 31 while only the first point of Resourcefulness is in, and rank 5 at 46 and 47, when the Immolation Trap rank you train at 46 costs more. At 48 move to rank 7; an Orc, Troll or Tauren keeps rank 5 through 49, a Windshaper Skyborne at 48. It replaces your next melee swing and does not use the global cooldown, so keep it queued; once Resourcefulness is in at 31 and 32 it costs 60% less, so never hold it back for mana after that.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -69,7 +69,7 @@
       }
     },
     {
-      "notes": "Mongoose Bite the moment it lights up. A dodge opens it for 5 seconds, and once you have Expose Prey at 35 and 36, your hits on a target with Hunter's Mark, any hunter's, open it for 10 seconds, which is how it lights up on a boss that never swings at you. One press spends the window.",
+      "notes": "Mongoose Bite the moment it lights up. A dodge opens it for 5 seconds, and once you have Expose Prey at 33 and 34, your hits on a target with Hunter's Mark, any hunter's, open it for 10 seconds, which is how it lights up on a boss that never swings at you. One press spends the window.",
       "action": {
         "castSpell": {
           "spellId": {
