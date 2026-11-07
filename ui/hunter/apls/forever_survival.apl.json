@@ -58,17 +58,6 @@
       }
     },
     {
-      "notes": "Counterattack the moment it lights up after you parry. It cannot be dodged, blocked or parried, so press it before anything else that is ready.",
-      "action": {
-        "castSpell": {
-          "spellId": {
-            "rank": 4,
-            "spellId": 20910
-          }
-        }
-      }
-    },
-    {
       "notes": "Mongoose Bite the moment it lights up. A dodge opens it for 5 seconds, and once you have Expose Prey at 33 and 34, your hits on a target with Hunter's Mark, any hunter's, open it for 10 seconds, which is how it lights up on a boss that never swings at you. One press spends the window.",
       "action": {
         "castSpell": {
