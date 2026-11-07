@@ -87,7 +87,7 @@
       }
     },
     {
-      "notes": "Until it has five stacks, and again when it has under 3 seconds left. Each stack makes the next cast hit harder, and the bleed turns on Rend and Tear.",
+      "notes": "Until it has five stacks, and again when it has under 3 seconds left. Each stack makes the next cast hit harder, and from 36 the bleed turns on Rend and Tear.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -235,7 +235,7 @@
       }
     },
     {
-      "notes": "Queued on your next swing whenever you have 15 rage, and at levels 40 to 53 only at 30 rage. Ferocity cuts its cost to 10 rage by level 14, so the 15 keeps a little rage back for Lacerate from level 25; in your forties and early fifties rage is short, and the 30 makes sure Primal Bite fires every time it comes off cooldown.",
+      "notes": "Queued on your next swing whenever you have 15 rage, and at levels 40 to 53 only at 30 rage. Ferocity cuts its cost to 10 rage by level 14, so the 15 keeps a little rage back for Lacerate from level 25; in your forties and early fifties rage is short, and the 30 keeps rage for Primal Bite nearly every time it comes off cooldown.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -349,6 +349,17 @@
                 }
               }
             ]
+          }
+        }
+      }
+    },
+    {
+      "notes": "Anything else on the global cooldown goes into Lacerate. With five stacks up it is still a hit that carries threat, and it keeps the bleed fresh, so you never stand there waiting for Primal Bite.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "spellId": 1235827,
+            "rank": 5
           }
         }
       }

@@ -39,11 +39,24 @@
       }
     },
     {
-      "notes": "Shank on cooldown: an off-hand stab that cannot miss and pays back more energy than it costs, every 10 seconds, and every 8 with five points of Flash of Steel.",
+      "notes": "Shank on cooldown while you are under 80 energy: an off-hand stab that cannot miss and pays back more energy than it costs, every 10 seconds, and every 8 with five points of Flash of Steel. Near the cap the energy it returns would be wasted, so spend first.",
       "action": {
         "castSpell": {
           "spellId": {
             "spellId": 1329549
+          }
+        },
+        "condition": {
+          "cmp": {
+            "op": "OpLt",
+            "lhs": {
+              "currentEnergy": {}
+            },
+            "rhs": {
+              "const": {
+                "val": "80"
+              }
+            }
           }
         }
       }
@@ -57,20 +70,58 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "currentComboPoints": {}
-            },
-            "rhs": {
-              "const": {
-                "val": "5"
+          "or": {
+            "vals": [
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "30"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentComboPoints": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "4"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentComboPoints": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5"
+                    }
+                  }
+                }
               }
-            }
+            ]
           }
         }
       },
-      "notes": "Eviscerate at five combo points."
+      "notes": "Eviscerate at four combo points from 30, at five before that."
     },
     {
       "action": {
@@ -84,44 +135,6 @@
           "and": {
             "vals": [
               {
-                "not": {
-                  "val": {
-                    "auraIsActive": {
-                      "auraId": {
-                        "spellId": 6774,
-                        "rank": 2
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentComboPoints": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "1"
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpLe",
-                  "lhs": {
-                    "currentComboPoints": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "2"
-                    }
-                  }
-                }
-              },
-              {
                 "cmp": {
                   "op": "OpGe",
                   "lhs": {
@@ -133,12 +146,112 @@
                     }
                   }
                 }
+              },
+              {
+                "or": {
+                  "vals": [
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpGe",
+                              "lhs": {
+                                "currentComboPoints": {}
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "1"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "not": {
+                              "val": {
+                                "auraIsActive": {
+                                  "auraId": {
+                                    "spellId": 6774,
+                                    "rank": 2
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpGe",
+                              "lhs": {
+                                "remainingTime": {}
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "6"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "cmp": {
+                              "op": "OpGe",
+                              "lhs": {
+                                "currentComboPoints": {}
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "5"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "auraRemainingTime": {
+                                  "auraId": {
+                                    "spellId": 6774,
+                                    "rank": 2
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "1"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpGt",
+                              "lhs": {
+                                "remainingTime": {}
+                              },
+                              "rhs": {
+                                "const": {
+                                  "val": "9"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
               }
             ]
           }
         }
       },
-      "notes": "At 60, Slice and Dice whenever it drops, at one or two combo points. Five points always go to Eviscerate; a short Slice and Dice keeps the attack speed up for far fewer points. While you level, leave it off a single target and put every five points into Eviscerate: your white swings miss too often for the attack speed to pay back the energy and the points."
+      "notes": "At 60, Slice and Dice whenever it drops, at any combo points, as long as 6 seconds of the fight are left. Do not refresh it early. While you level, leave it off a single target and put your points into Eviscerate: your white swings miss too often for the attack speed to pay back the energy and the points."
     },
     {
       "action": {
