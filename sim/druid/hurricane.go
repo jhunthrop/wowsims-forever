@@ -4,40 +4,50 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 )
 
-func (druid *Druid) registerHurricaneSpell() {
-	ranks := []struct {
-		level      int32
-		spellID    int32
-		manaCost   float64
-		scaleLevel int32
-		damage     float64
-		scale      float64
-	}{
-		{level: 40, spellID: 16914, manaCost: 880, scaleLevel: 46, damage: 70, scale: 0.2},
-		{level: 50, spellID: 17401, manaCost: 1180, scaleLevel: 56, damage: 100, scale: 0.2},
-		{level: 60, spellID: 17402, manaCost: 1495, scaleLevel: 66, damage: 134, scale: 0.3},
-	}
+// HurricaneChannelSpellId is the channel the druid casts (16914, 17401,
+// 17402). Its own effect 0 is a dummy; its area trigger casts the tick
+// spell every second, and the generated Hurricane* arrays
+// (constants_auto_gen.go) are those tick spells' rows: HurricaneSpellId
+// 1278965, 1278968 and 1278759 (rank 0 is a creature variant), with the
+// amount a tick does, its growth per level and its cap. A hand table once
+// read 70, 100 and 134 for the client's 68, 98 and 132 (2026-11-11
+// casters lane); sim/druid/spellconst_damage_test.go now holds every rank
+// to the vendored client file.
+var HurricaneChannelSpellId = [HurricaneRanks + 1]int32{0, 16914, 17401, 17402}
 
-	for i, rank := range ranks {
-		if druid.Level < rank.level {
+// HurricaneChannelManaCost is the channel's cost (spellconst 16914, 17401,
+// 17402); the tick spells cost nothing, so the generated HurricaneManaCost
+// reads 0 for them.
+var HurricaneChannelManaCost = [HurricaneRanks + 1]float64{0, 880, 1180, 1495}
+
+// HurricaneTickDamage is each rank's tick as a client damage effect, from
+// the generated rows.
+var HurricaneTickDamage = clientdamage.FromTable(HurricaneBaseDamage[:], HurricanePointsPerLevel[:], HurricaneLevel[:], HurricaneMaxLevel[:])
+
+func (druid *Druid) registerHurricaneSpell() {
+	for rank := 1; rank <= HurricaneRanks; rank++ {
+		level := HurricaneLevel[rank]
+		if int(druid.Level) < level {
 			break
 		}
 
-		damage := rank.damage + float64(min(druid.Level, rank.scaleLevel)-rank.level)*rank.scale
+		tickDamage := HurricaneTickDamage[rank]
+		casterLevel := int(druid.Level)
 		spell := druid.RegisterSpell(Humanoid|Moonkin, core.SpellConfig{
-			ActionID:    core.ActionID{SpellID: rank.spellID},
+			ActionID:    core.ActionID{SpellID: HurricaneChannelSpellId[rank]},
 			SpellSchool: core.SpellSchoolNature,
 			ProcMask:    core.ProcMaskSpellDamage,
 			Flags:       SpellFlagOmen | core.SpellFlagChanneled | core.SpellFlagBinary | core.SpellFlagAPL,
 
-			RequiredLevel: int(rank.level),
-			Rank:          i + 1,
+			RequiredLevel: level,
+			Rank:          rank,
 
 			ManaCost: core.ManaCostOptions{
-				FlatCost: rank.manaCost,
+				FlatCost: HurricaneChannelManaCost[rank],
 			},
 			// Hurricane carries no cooldown in 1.60.1.70009 spellconst/
 			// druid.json (cooldown_ms and category_cooldown_ms are both
@@ -51,20 +61,21 @@ func (druid *Druid) registerHurricaneSpell() {
 
 			DamageMultiplier: 1,
 			ThreatMultiplier: 1,
+			ClientBaseDamage: tickDamage.Range(casterLevel),
 
 			Dot: core.DotConfig{
 				IsAOE: true,
 				Aura: core.Aura{
-					Label: "Hurricane" + druid.Label + strconv.Itoa(i+1),
+					Label: "Hurricane" + druid.Label + strconv.Itoa(rank),
 				},
 				NumberOfTicks: 10,
 				TickLength:    time.Second * 1,
 
-				BonusCoefficient: 0.03,
+				BonusCoefficient: HurricaneSpellCoeff[rank],
 				Dynamic:          true,
 
 				OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-					dot.Snapshot(target, damage, isRollover)
+					dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)
 				},
 				OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 					for _, aoeTarget := range sim.Encounter.TargetUnits {
