@@ -72,18 +72,18 @@ func TestBurningTotemExtendsFlameShockByOneTickOnly(t *testing.T) {
 }
 
 // Totem of the Storm (client spell 1291078): Lightning Bolt can trigger
-// Maelstrom Weapon, at half the chance a melee hit has. The chance itself is
-// pinned in sim/shaman/relics_test.go; this checks the totem arms it.
+// Maelstrom Weapon, at half the chance a main-hand hit has. The chance is
+// pinned in sim/shaman/hotfix_1110_test.go; this checks the totem arms it.
 func TestTotemOfTheStormArmsLightningBoltsMaelstromWeaponChance(t *testing.T) {
 	chance := func(relicID int32) float64 {
 		raid := core.SinglePlayerRaidProto(relicPlayer(t, relicID), core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
 		env, _, _ := core.NewEnvironment(raid, &proto.Encounter{}, true)
-		return env.Raid.Parties[0].Players[0].(shaman.ShamanAgent).GetShaman().LightningBoltMaelstromChance
+		return env.Raid.Parties[0].Players[0].(shaman.ShamanAgent).GetShaman().LightningBoltMaelstromFactor
 	}
 	if got := chance(0); got != 0 {
-		t.Errorf("without the totem Lightning Bolt's chance is %v, want 0 (it cannot trigger the talent)", got)
+		t.Errorf("without the totem Lightning Bolt's share is %v, want 0 (it cannot trigger the talent)", got)
 	}
 	if got := chance(shaman.TotemOfTheStormForever); got <= 0 {
-		t.Errorf("with the totem Lightning Bolt's chance is %v, want it armed", got)
+		t.Errorf("with the totem Lightning Bolt's share is %v, want it armed", got)
 	}
 }

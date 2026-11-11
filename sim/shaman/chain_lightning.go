@@ -32,18 +32,19 @@ var ChainLightningManaCost = [ChainLightningRanks + 1]float64{0, 245, 360, 425, 
 var ChainLightningLevel = [ChainLightningRanks + 1]int{0, 32, 40, 48, 56}
 
 // ChainLightningOverload* are Lightning Overload's own per-rank Chain
-// Lightning spells (408479 .. 408484), unchanged by client 1.60.1.70755's
-// push (rank 4's is 62 + 1.2 a level at 0.2855 against the chain's 510 +
-// 3.3 at 0.714): the overload chain deals its own row.
+// Lightning spells (408479 .. 408484). Client 1.60.1.70888 (the 9 November
+// Lightning Overload hotfix) makes each half its chain rank (rank 4: 255 +
+// 1.65 a level at 0.357 against the chain's 510 + 3.3 at 0.714); hand rows
+// until the site's data moves to that client.
 var ChainLightningOverloadSpellId = [ChainLightningRanks + 1]int32{0, 408479, 408481, 408482, 408484}
 var ChainLightningOverloadDamage = [ChainLightningRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 44, Variance: 0.137255, PerLevel: 0.75, SpellLevel: 32, MaxLevel: 37},
-	{Amount: 50, Variance: 0.122449, PerLevel: 0.9, SpellLevel: 40, MaxLevel: 45},
-	{Amount: 56, Variance: 0.115, PerLevel: 1.05, SpellLevel: 48, MaxLevel: 53},
-	{Amount: 62, Variance: 0.114943, PerLevel: 1.2, SpellLevel: 56, MaxLevel: 61},
+	{Amount: 107.5, Variance: 0.137255, PerLevel: 0.7, SpellLevel: 32, MaxLevel: 37},
+	{Amount: 174, Variance: 0.122449, PerLevel: 1.1, SpellLevel: 40, MaxLevel: 45},
+	{Amount: 214, Variance: 0.115, PerLevel: 1.35, SpellLevel: 48, MaxLevel: 53},
+	{Amount: 255, Variance: 0.114943, PerLevel: 1.65, SpellLevel: 56, MaxLevel: 61},
 }
-var ChainLightningOverloadSpellCoef = [ChainLightningRanks + 1]float64{0, 0.2855, 0.2855, 0.2855, 0.2855}
+var ChainLightningOverloadSpellCoef = [ChainLightningRanks + 1]float64{0, 0.357, 0.357, 0.357, 0.357}
 
 // ChainLightningCastTime is every rank's CastingTimeIndex 19 (2500 ms)
 // and ChainLightningCooldown its category cooldown (6000 ms), client

@@ -131,7 +131,7 @@ func init() {
 	// Client spell 1291078. Equip: Your Lightning Bolt ability can now also
 	// trigger the Maelstrom Weapon talent, but with a 50% reduced chance.
 	core.NewItemEffect(TotemOfTheStormForever, func(agent core.Agent) {
-		agent.(ShamanAgent).GetShaman().LightningBoltMaelstromChance = maelstromWeaponProcChance * (1 - totemOfTheStormMaelstromReduction)
+		agent.(ShamanAgent).GetShaman().LightningBoltMaelstromFactor = 1 - totemOfTheStormMaelstromReduction
 	})
 
 	// https://www.wowhead.com/classic/item=19956/wushoolays-charm-of-spirits

@@ -6,6 +6,8 @@ import (
 
 	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
+	"github.com/wowsims/classic/sim/core/simsignals"
 	"github.com/wowsims/classic/sim/core/stats"
 	"github.com/wowsims/classic/sim/shaman"
 )
@@ -72,6 +74,27 @@ func TestMaelstromWeaponProcsPerMinuteByRank(t *testing.T) {
 	}
 }
 
+// Totem of the Storm (client spell 1291078): "Your Lightning Bolt ability can
+// now also trigger the Maelstrom Weapon talent, but with a 50% reduced
+// chance" - half a main-hand hit's; no other spell triggers it.
+func TestMaelstromWeaponChanceForLightningBoltAndShocks(t *testing.T) {
+	sim, built := enhancementSim(t)
+	sim.Reset()
+	bolt := &core.Spell{ProcMask: core.ProcMaskSpellDamage, SpellCode: shaman.SpellCode_ShamanLightningBolt}
+	shock := &core.Spell{ProcMask: core.ProcMaskSpellDamage, SpellCode: shaman.SpellCode_ShamanEarthShock}
+	melee := built.MaelstromWeaponChanceForTest(&core.Spell{ProcMask: core.ProcMaskMeleeMHAuto})
+	if got := built.MaelstromWeaponChanceForTest(bolt); got != 0 {
+		t.Errorf("Lightning Bolt without Totem of the Storm = %v, want 0", got)
+	}
+	built.LightningBoltMaelstromFactor = 0.5
+	if got, want := built.MaelstromWeaponChanceForTest(bolt), melee/2; math.Abs(got-want) > 1e-12 || want <= 0 {
+		t.Errorf("Lightning Bolt with Totem of the Storm = %v, want half a main-hand hit's (%v)", got, want)
+	}
+	if got := built.MaelstromWeaponChanceForTest(shock); got != 0 {
+		t.Errorf("Earth Shock = %v, want 0", got)
+	}
+}
+
 // "Lightning Overload now deals the correct amount of damage for Lightning
 // Bolt" (9 November): client 1.60.1.70888 makes every overload row half its
 // bolt rank's (408439-408477 and 408479-408484, SpellEffect). Read here, not
@@ -120,6 +143,38 @@ func assertRows(t *testing.T, name string, got, want []clientdamage.Effect) {
 		if math.Abs(g.Amount-w.Amount) > 1e-6 || math.Abs(g.Variance-w.Variance) > 1e-5 || math.Abs(g.PerLevel-w.PerLevel) > 1e-6 ||
 			g.SpellLevel != w.SpellLevel || g.MaxLevel != w.MaxLevel {
 			t.Errorf("%s rank %d = %+v, want %+v", name, i, g, w)
+		}
+	}
+}
+
+// "Weapon imbues and Weapon totems can now be used at the same time ... the
+// Shaman can benefit from Windfury Weapon and Windfury Totem at the same
+// time" (10 November). A shaman wearing Windfury Weapon on the main hand
+// takes the raid's Windfury and Flametongue Totems.
+func TestWeaponTotemsReachAShamanWearingTheirImbue(t *testing.T) {
+	for _, imbue := range []proto.WeaponImbue{proto.WeaponImbue_WindfuryWeapon, proto.WeaponImbue_FlametongueWeapon} {
+		player := core.WithSpec(
+			&proto.Player{
+				Class:         proto.Class_ClassShaman,
+				Race:          proto.Race_RaceOrc,
+				Level:         60,
+				Equipment:     core.GetGearSet("../../ui/enhancement_shaman/gear_sets", "phase_5").GearSet,
+				TalentsString: enhancementRaidTalents,
+				Consumes:      &proto.Consumes{MainHandImbue: imbue},
+			},
+			&proto.Player_EnhancementShaman{EnhancementShaman: &proto.EnhancementShaman{Options: &proto.EnhancementShaman_Options{}}},
+		)
+		raid := core.SinglePlayerRaidProto(player, nil, &proto.RaidBuffs{WindfuryTotem: true, FlametongueTotem: true}, nil)
+		sim := core.NewSim(&proto.RaidSimRequest{
+			Raid:       raid,
+			Encounter:  &proto.Encounter{Duration: 60, Targets: []*proto.Target{{Level: 63}}},
+			SimOptions: &proto.SimOptions{RandomSeed: 1, Iterations: 1},
+		}, simsignals.CreateSignals())
+		built := sim.Raid.Parties[0].Players[0].(shaman.ShamanAgent).GetShaman()
+		for _, label := range []string{core.WindfuryAuraLabel, core.FlametongueTotemAuraLabel} {
+			if built.GetAura(label) == nil {
+				t.Errorf("a shaman with %v on the main hand has no %q from the raid's totem", imbue, label)
+			}
 		}
 	}
 }

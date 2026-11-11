@@ -35,8 +35,8 @@ import (
 // that needs a decision above this lane (see PORTING.md's "no changes
 // to sim/core" boundary).
 // summonHawkRangedAPCoeff is the tooltip's 5% of Ranged Attack Power, the
-// one share the client's table does not carry; the flat, cost and level
-// follow the rank (SummonHawkDamage, SummonHawkManaCost, SummonHawkLevel).
+// one share the client's table does not carry; the flat and level follow
+// the rank (SummonHawkDamage, SummonHawkLevel).
 const summonHawkRangedAPCoeff = 0.05
 
 func (hunter *Hunter) getSummonHawkConfig(rank int, timer *core.Timer) core.SpellConfig {
@@ -54,8 +54,11 @@ func (hunter *Hunter) getSummonHawkConfig(rank int, timer *core.Timer) core.Spel
 		RequiredLevel: SummonHawkLevel[rank],
 		MissileSpeed:  summonHawkMissileSpeed,
 
+		// Blizzard's 10 November hotfix: "Summon Hawk Mana cost changed to
+		// 11% of base Mana for all ranks of Summon Hawk, same as Arcane
+		// Shot" (client 1.60.1.70888 SpellPower PowerCostPct 11).
 		ManaCost: core.ManaCostOptions{
-			FlatCost: SummonHawkManaCost[rank],
+			BaseCost: arcaneShotBaseManaCostPercent,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

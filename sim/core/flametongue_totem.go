@@ -75,13 +75,6 @@ func FlametongueTotemHitDamage(level int, weaponSpeed float64) (float64, bool) {
 	return FlametongueTotemRanks[index].Amount * weaponSpeed / FlametongueTotemSpeedDivisor, true
 }
 
-// flametongueTotemReaches says whether the aura applies to the character:
-// Flametongue Weapon on the main hand disables it (the weapon's text), and
-// a druid in feral form has no main-hand weapon to hit with.
-func flametongueTotemReaches(character *Character) bool {
-	return weaponTotemReaches(character, proto.WeaponImbue_FlametongueWeapon)
-}
-
 // FlametongueTotemAura registers the character's Flametongue Totem aura
 // and its proc spell, once, and returns the aura (inactive). The raid buff
 // makes it permanent; a shaman's own cast activates it for the totem's

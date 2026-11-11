@@ -10,16 +10,20 @@ import (
 // in client 1.60.1.70425, as the fraction ManaCostOptions.BaseCost takes.
 const stormstrikeBaseManaCostPercent = 0.08
 
-// stormstrikeWeaponDamagePercent is 17364 effect 2, Effect 31 (weapon
-// percent damage) with 150 points, the row client 1.60.1.70755's push
-// added: "Instantly strike for 150% weapon damage" (normal weapon damage
-// before). It scales effect 0's normalized weapon damage.
-const stormstrikeWeaponDamagePercent = 1.50
+// stormstrikeWeaponDamagePercent and stormstrikeCooldown are Blizzard's
+// 10 November hotfix (t/2403040, Enhancement): "Stormstrike damage reduced
+// to 100% weapon damage (was 150%), and cooldown increased to 8 seconds
+// (was 6 seconds)." Client 1.60.1.70888 and its pushes still carry 17364
+// effect 2 (Effect 31, weapon percent damage) at 150 (push 113380) and
+// RecoveryTime 6000, so both are hand values until a client or push row
+// states them. The percent scales effect 0's normalized weapon damage.
+const (
+	stormstrikeWeaponDamagePercent = 1.0
+	stormstrikeCooldownDuration    = 8 * time.Second
+)
 
-// stormstrikeCooldown is 17364's RecoveryTime, 6000 ms since client
-// 1.60.1.70755 (8000 before), the generated StormstrikeCooldownMS.
 func stormstrikeCooldown() time.Duration {
-	return time.Duration(StormstrikeCooldownMS[0]) * time.Millisecond
+	return stormstrikeCooldownDuration
 }
 
 func (shaman *Shaman) registerStormstrikeSpell() {
@@ -82,7 +86,7 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 // stormstrikeWeaponDamage is Stormstrike's strike: client 17364 effect 0 is
 // effect 121, normalized weapon damage (1.60.1.70707 SpellEffect), so attack
 // power counts at the weapon type's normalized speed, not its swing speed,
-// and effect 2 (1.60.1.70755) makes it 150% of that.
+// and effect 2 scales it (100% since the 10 November hotfix).
 func (shaman *Shaman) stormstrikeWeaponDamage(sim *core.Simulation, attackPower float64) float64 {
 	return stormstrikeWeaponDamagePercent * shaman.MHNormalizedWeaponDamage(sim, attackPower)
 }

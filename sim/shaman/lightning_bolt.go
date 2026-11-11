@@ -39,25 +39,26 @@ var LightningBoltManaCost = [LightningBoltRanks + 1]float64{0, 15, 30, 45, 60, 8
 var LightningBoltLevel = [LightningBoltRanks + 1]int{0, 1, 8, 14, 20, 26, 32, 38, 44, 50, 56}
 
 // LightningBoltOverload* are Lightning Overload's own per-rank spells
-// (408439 .. 408477, one per Lightning Bolt rank): spellconst/shaman.json's
-// roll and coefficient for each. Before client 1.60.1.70755 each was
-// exactly half its Lightning Bolt rank's amount and coefficient; the push
-// raised every Lightning Bolt rank and left these rows alone (rank 10's
-// overload is still 98 + 0.6 a level at 0.357 against the bolt's 353 + 2.1
-// at 0.714), so the overload deals its own row, not half the bolt.
+// (408439 .. 408477, one per Lightning Bolt rank). Blizzard's 9 November
+// hotfix (t/2403040): "Lightning Overload now deals the correct amount of
+// damage for Lightning Bolt." Client 1.60.1.70888's SpellEffect rows make
+// each one half its bolt rank again (rank 10: 176.5 + 1.05 a level against
+// the bolt's 353 + 2.1), after 1.60.1.70755 had raised the bolts alone.
+// These are the 70888 rows by hand until the site's data moves to that
+// client; the vendored 70790 file still holds the old ones.
 var LightningBoltOverloadSpellId = [LightningBoltRanks + 1]int32{0, 408439, 408440, 408441, 408442, 408443, 408472, 408473, 408474, 408475, 408477}
 var LightningBoltOverloadDamage = [LightningBoltRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 7, Variance: 0.142857, PerLevel: 0.2, SpellLevel: 1, MaxLevel: 6},
-	{Amount: 14, Variance: 0.142857, PerLevel: 0.25, SpellLevel: 8, MaxLevel: 13},
-	{Amount: 22, Variance: 0.163265, PerLevel: 0.3, SpellLevel: 14, MaxLevel: 19},
-	{Amount: 28, Variance: 0.134831, PerLevel: 0.3, SpellLevel: 20, MaxLevel: 25},
-	{Amount: 36, Variance: 0.134328, PerLevel: 0.35, SpellLevel: 26, MaxLevel: 31},
-	{Amount: 56, Variance: 0.120879, PerLevel: 0.4, SpellLevel: 32, MaxLevel: 37},
-	{Amount: 74, Variance: 0.125, PerLevel: 0.4, SpellLevel: 38, MaxLevel: 43},
-	{Amount: 81, Variance: 0.114094, PerLevel: 0.5, SpellLevel: 44, MaxLevel: 49},
-	{Amount: 89, Variance: 0.119565, PerLevel: 0.5, SpellLevel: 50, MaxLevel: 55},
-	{Amount: 98, Variance: 0.113122, PerLevel: 0.6, SpellLevel: 56, MaxLevel: 61},
+	{Amount: 8, Variance: 0.142857, PerLevel: 0.05, SpellLevel: 1, MaxLevel: 6},
+	{Amount: 15, Variance: 0.142857, PerLevel: 0.05, SpellLevel: 8, MaxLevel: 13},
+	{Amount: 26, Variance: 0.163265, PerLevel: 0.15, SpellLevel: 14, MaxLevel: 19},
+	{Amount: 36.5, Variance: 0.134831, PerLevel: 0.25, SpellLevel: 20, MaxLevel: 25},
+	{Amount: 54.5, Variance: 0.134328, PerLevel: 0.35, SpellLevel: 26, MaxLevel: 31},
+	{Amount: 74, Variance: 0.120879, PerLevel: 0.5, SpellLevel: 32, MaxLevel: 37},
+	{Amount: 97, Variance: 0.125, PerLevel: 0.5, SpellLevel: 38, MaxLevel: 43},
+	{Amount: 120, Variance: 0.114094, PerLevel: 0.75, SpellLevel: 44, MaxLevel: 49},
+	{Amount: 147.5, Variance: 0.119565, PerLevel: 0.8, SpellLevel: 50, MaxLevel: 55},
+	{Amount: 176.5, Variance: 0.113122, PerLevel: 1.05, SpellLevel: 56, MaxLevel: 61},
 }
 var LightningBoltOverloadSpellCoef = [LightningBoltRanks + 1]float64{0, 0.2145, 0.2855, 0.357, 0.357, 0.357, 0.357, 0.357, 0.357, 0.357, 0.357}
 

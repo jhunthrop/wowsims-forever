@@ -21,14 +21,8 @@ func TestChainLightningDamageMatchesClient(t *testing.T) {
 		ChainLightningSpellId[:], ChainLightningDamage[:], ChainLightningSpellCoef[:])
 }
 
-// The overload rows are Lightning Overload's own spells, one per rank.
-func TestLightningOverloadDamageMatchesClient(t *testing.T) {
-	class := clientdamagetest.Load(t, clientShamanSpellconst)
-	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Lightning Bolt overload",
-		LightningBoltOverloadSpellId[:], LightningBoltOverloadDamage[:], LightningBoltOverloadSpellCoef[:])
-	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Chain Lightning overload",
-		ChainLightningOverloadSpellId[:], ChainLightningOverloadDamage[:], ChainLightningOverloadSpellCoef[:])
-}
+// The overload rows are client 1.60.1.70888's, ahead of the vendored file:
+// TestLightningOverloadRowsAreThe70888Client (hotfix_1110_test.go).
 
 func TestEarthShockDamageMatchesClient(t *testing.T) {
 	class := clientdamagetest.Load(t, clientShamanSpellconst)

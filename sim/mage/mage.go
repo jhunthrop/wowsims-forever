@@ -139,6 +139,11 @@ type Mage struct {
 	// reads it to leave its charge on such a cast (talents.go).
 	missileBarrageChannel bool
 
+	// arcaneMissilesCount is how many missiles the current Arcane Missiles
+	// channel fires (arcane_missiles.go sets it as the channel applies);
+	// Arcane Concentration splits its chance over them and the cast.
+	arcaneMissilesCount int32
+
 	// fireBlastCategoryTimer is the client's cooldown category 19, which
 	// Fire Blast and Ice Lance share (fireBlastCategory).
 	fireBlastCategoryTimer *core.Timer

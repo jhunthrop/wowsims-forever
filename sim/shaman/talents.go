@@ -665,11 +665,13 @@ func (shaman *Shaman) rollLightningOverload(sim *core.Simulation) bool {
 }
 
 // mentalDexterityAttackPowerPercent is Mental Dexterity's three ranks
-// (talents/shaman.json node 104755): "Increases your Attack Power by
-// an amount equal to 50/100/150% of your Intellect." - trait curve 85272
-// (TraitDefinition 134216, spell 415140 effect 0), 50/100/150 since
-// client 1.60.1.70755 (33/67/100 before).
-var mentalDexterityAttackPowerPercent = [4]float64{0, 0.50, 1.0, 1.5}
+// (talents/shaman.json node 104755). Blizzard's 10 November hotfix
+// (t/2403040, Enhancement): "Mental Dexterity: Intellect to Attack Power
+// conversion ratio reduced to 33/66/100% (was 50/100/150%)." Client
+// 1.60.1.70888 and its push 113766 still carry trait curve 85272's
+// 50/100/150 (spell 415140 effect 0), so this is a hand row until a client
+// or push row states it.
+var mentalDexterityAttackPowerPercent = [4]float64{0, 0.33, 0.66, 1.0}
 
 func (shaman *Shaman) applyMentalDexterity() {
 	if shaman.Talents.MentalDexterity == 0 {
@@ -782,43 +784,39 @@ func (shaman *Shaman) applyImprovedStormstrike() {
 	}))
 }
 
-// maelstromWeaponProcChance is datamined, not from the rank text:
-// spellconst/shaman.json's "Lightning Bolt Can Activate Maelstrom
-// Weapon" (spell 1291078) carries amount 50, the same 50 that spell
-// 408498's own second effect carries, and the rank text itself never
-// states a chance ("you have a chance to reduce..."). 408498 is used
-// as the per-rank display id (matching talents_auto_gen.go's
+// Maelstrom Weapon (node 104741, five ranks) after Blizzard's 10 November
+// hotfix (t/2403040, Enhancement): "Maelstrom Weapon now grants 20% reduced
+// cast time and Mana cost per application at all ranks (was 4/8/12/16/20%
+// reduced cast time and Mana cost), and chance to activate now increases
+// with rank and activates 6/7/8/9/10 times per minute (was 20 times per
+// minute regardless of rank)." The tooltip line that follows is the PPM
+// rule on the main hand's speed: "5 points ... a 3.6 speed weapon ... 60%
+// chance to activate on swing", 10 x 3.6 / 60. Neither client 1.60.1.70888
+// nor its push 113766 carries it (408498 still reads 4% a rank, 408505
+// -20): the change is server side, so these are hand values until a
+// client or push row states them.
+//
+// 408498 is used as the per-rank display id (matching talents_auto_gen.go's
 // TalentSpellIDs, not the "Maelstrom Weapon"-named spell 409946 the
 // constants generator picked instead - 409946 is a wrapper that just
 // applies 408498, per its own aura/amount pair in that same file).
-//
-// maelstromWeaponPerStackPercent is the five ranks (talents/shaman.json
-// node 104741): "...reduce the cast time and Mana cost of your next
-// Lightning Bolt spell by 4/8/12/16/20%. Stacks up to 5 times." Read
-// literally, each stack contributes the rank's own percentage, so
-// rank 5 at 5 stacks is a 100% reduction - an instant, free Lightning
-// Bolt - consistent with "Stacks up to 5 times" compounding rather
-// than capping at the rank's own number.
-//
-// Blizzard's Forever notes of 3 November: "Maelstrom Weapon: Chance to
-// trigger doubled." The client row kept its 50 (the doubling is server
-// side); before the push a two-hander gained a stack on about half its
-// hits (beta report 2748, 51 over 94 on a 3.2 s weapon). Whether the server
-// rolls a flat chance or 20 a minute only differs below a 3.0 s swing, and
-// a shaman's two-hander is slower (sim-accuracy round 21, shaman N1).
-const maelstromWeaponProcChance = 1.0
+const maelstromWeaponPerStackPercent = int32(20)
 const maelstromWeaponDisplaySpellId = 408498
 const maelstromWeaponMaxStacks = int32(5)
 
-// maelstromWeaponChance is the chance a damaging hit by spell grants a
-// Maelstrom Weapon stack: a melee hit's own, or Lightning Bolt's reduced one
-// once Totem of the Storm lets it trigger the talent.
+// maelstromWeaponPPM is the rate by rank, 6/7/8/9/10 a minute.
+var maelstromWeaponPPM = [6]float64{0, 6, 7, 8, 9, 10}
+
+// MaelstromWeaponChance is the chance a damaging hit by spell grants a
+// Maelstrom Weapon stack: a melee hit rolls the rank's rate on the weapon's
+// speed, and Lightning Bolt, once Totem of the Storm lets it trigger the
+// talent, the main hand's chance less the relic's reduction.
 func (shaman *Shaman) maelstromWeaponChance(spell *core.Spell) float64 {
 	switch {
 	case spell.ProcMask.Matches(core.ProcMaskMelee):
-		return maelstromWeaponProcChance
+		return shaman.maelstromWeaponPPMM.Chance(spell.ProcMask)
 	case spell.SpellCode == SpellCode_ShamanLightningBolt:
-		return shaman.LightningBoltMaelstromChance
+		return shaman.LightningBoltMaelstromFactor * shaman.maelstromWeaponPPMM.Chance(core.ProcMaskMeleeMHAuto)
 	default:
 		return 0
 	}
@@ -829,8 +827,9 @@ func (shaman *Shaman) applyMaelstromWeapon() {
 		return
 	}
 
-	perStackPercent := int32(4 * shaman.Talents.MaelstromWeapon)
+	perStackPercent := maelstromWeaponPerStackPercent
 	perStackCastFraction := float64(perStackPercent) / 100.0
+	ppm := maelstromWeaponPPM[rankIndex(shaman.Talents.MaelstromWeapon, len(maelstromWeaponPPM))]
 
 	var maelstromProc core.ProcSource
 	var lightningBoltSpells []*core.Spell
@@ -886,6 +885,9 @@ func (shaman *Shaman) applyMaelstromWeapon() {
 
 	core.MakePermanent(shaman.RegisterAura(core.Aura{
 		Label: "Maelstrom Weapon Trigger",
+		OnReset: func(_ *core.Aura, _ *core.Simulation) {
+			shaman.maelstromWeaponPPMM = shaman.AutoAttacks.NewPPMManager(ppm, core.ProcMaskMelee)
+		},
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			chance := shaman.maelstromWeaponChance(spell)
 			if chance == 0 || result.Damage <= 0 {

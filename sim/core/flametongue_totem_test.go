@@ -3,9 +3,6 @@ package core
 import (
 	"math"
 	"testing"
-
-	"github.com/wowsims/classic/sim/core/proto"
-	"github.com/wowsims/classic/sim/core/stats"
 )
 
 // The Flametongue Totem is read from the 1.60.1.70009 client
@@ -75,29 +72,5 @@ func TestFlametongueTotemHitScalesWithWeaponSpeed(t *testing.T) {
 func TestFlametongueTotemIsNotLearnedBeforeLevel28(t *testing.T) {
 	if _, ok := FlametongueTotemHitDamage(27, 2.0); ok {
 		t.Error("a level 27 character receives Flametongue Totem")
-	}
-}
-
-// Blizzard's 10 November hotfix (t/2403040, Shaman): "Weapon imbues and
-// Weapon totems can now be used at the same time." Flametongue Weapon on
-// the main hand no longer shuts out Flametongue Totem; every character is
-// reached.
-func TestFlametongueTotemReaches(t *testing.T) {
-	cases := []struct {
-		name      string
-		character Character
-		want      bool
-	}{
-		{"no consumables", Character{}, true},
-		{"poison on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_InstantPoison}}, true},
-		{"flametongue weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_FlametongueWeapon}}, true},
-		{"flametongue weapon on the off hand only", Character{Consumes: &proto.Consumes{OffHandImbue: proto.WeaponImbue_FlametongueWeapon}}, true},
-		{"windfury weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_WindfuryWeapon}}, true},
-		{"feral (Forever: weapon procs work in a form)", Character{Unit: Unit{PseudoStats: stats.PseudoStats{FeralCombatEnabled: true}}}, true},
-	}
-	for _, c := range cases {
-		if got := flametongueTotemReaches(&c.character); got != c.want {
-			t.Errorf("%s: flametongueTotemReaches = %v, want %v", c.name, got, c.want)
-		}
 	}
 }

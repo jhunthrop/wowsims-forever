@@ -132,10 +132,13 @@ type Shaman struct {
 
 	Talents *proto.ShamanTalents
 
-	// LightningBoltMaelstromChance is the chance a damaging Lightning Bolt
-	// grants a Maelstrom Weapon stack, set by Totem of the Storm (items.go).
-	// Zero means it cannot.
-	LightningBoltMaelstromChance float64
+	// LightningBoltMaelstromFactor is the share of a main-hand hit's
+	// Maelstrom Weapon chance a damaging Lightning Bolt gets, set by Totem
+	// of the Storm (items.go); 0 without it.
+	LightningBoltMaelstromFactor float64
+	// maelstromWeaponPPMM is Maelstrom Weapon's rate on the weapons,
+	// built at reset once the auto attacks exist (talents.go).
+	maelstromWeaponPPMM core.PPMManager
 
 	// Spells
 	ChainHeal            []*core.Spell

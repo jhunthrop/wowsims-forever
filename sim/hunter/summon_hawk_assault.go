@@ -34,13 +34,17 @@ import (
 // 1.15 / 35 = 0.32 a level. The pooled fit through the origin gives 0.35,
 // and any armor on the beta mobs pushes the raw swing higher. It takes no
 // attack power from the hunter (the logs cannot show any), so gear does
-// not grow it. The owner's in-game check at 60 confirms or replaces it.
+// not grow it. Blizzard's 10 November hotfix (t/2403040, Beast Mastery):
+// "Melee damage dealt by the Hawk pet increased by about 80%", so the swing
+// is 1.8 times the logs' reading; hawkSwingHotfixScale until logs from
+// after the hotfix measure it.
 const (
 	hawkArrivalDelay        = 1070 * time.Millisecond
 	hawkAssaultDuration     = 18 * time.Second
 	hawkSwingSpeed          = 2.26
 	hawkMaxActive           = 2
 	hawkSwingDamagePerLevel = 0.32
+	hawkSwingHotfixScale    = 1.8
 	hawkSwingSpread         = 0.15 // the logs' non-crit range, about +/-15% of the mean
 	hawkAssaultSpellID      = 1312639
 	// hawkPool is one more hawk than can be out, so a fresh summon never
@@ -63,7 +67,7 @@ func (hunter *Hunter) newHawk(index int) *Hawk {
 		hunter: hunter,
 	}
 
-	mean := hawkSwingDamagePerLevel * float64(hunter.Level)
+	mean := hawkSwingDamagePerLevel * hawkSwingHotfixScale * float64(hunter.Level)
 	hawk.EnableAutoAttacks(hawk, core.AutoAttackOptions{
 		MainHand: core.Weapon{
 			BaseDamageMin: mean * (1 - hawkSwingSpread),

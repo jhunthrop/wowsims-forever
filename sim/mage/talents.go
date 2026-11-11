@@ -231,23 +231,43 @@ func (mage *Mage) applyArcaneConcentration() {
 	})
 
 	procCooldown := core.Cooldown{Timer: mage.NewTimer(), Duration: arcaneConcentrationProcCooldown}
+	roll := func(sim *core.Simulation, spell *core.Spell, chance float64) {
+		if !procCooldown.IsReady(sim) {
+			return
+		}
+		if sim.Proc(chance, "Arcane Concentration") {
+			procCooldown.Use(sim)
+			mage.ProcClearcasting(sim, spell)
+		}
+	}
+	// Blizzard's 9 November hotfix (t/2403040): "Arcane Concentration's
+	// activation chance now correctly splits across the cast and every bolt
+	// (was granting 10% on cast and per bolt)." An Arcane Missiles channel
+	// rolls the rank's chance once, shared evenly by its cast and each of its
+	// missiles. The client row (11213) is unchanged: the split is server side.
+	missilesShare := func() float64 {
+		return procChance / float64(1+mage.arcaneMissilesCount)
+	}
 	mage.RegisterAura(core.Aura{
 		Label:    "Arcane Concentration",
 		Duration: core.NeverExpires,
 		OnReset: func(aura *core.Aura, sim *core.Simulation) {
 			aura.Activate(sim)
 		},
+		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+			if spell.SpellCode == SpellCode_MageArcaneMissiles {
+				roll(sim, spell, missilesShare())
+			}
+		},
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			if !result.Landed() || !spell.Flags.Matches(SpellFlagMage) || spell.SpellCode == SpellCode_MageArcaneMissiles {
 				return
 			}
-			if !procCooldown.IsReady(sim) {
+			if spell.SpellCode == SpellCode_MageArcaneMissilesTick {
+				roll(sim, spell, missilesShare())
 				return
 			}
-			if sim.Proc(procChance, "Arcane Concentration") {
-				procCooldown.Use(sim)
-				mage.ProcClearcasting(sim, spell)
-			}
+			roll(sim, spell, procChance)
 		},
 	})
 }

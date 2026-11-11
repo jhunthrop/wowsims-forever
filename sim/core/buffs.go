@@ -343,11 +343,17 @@ func applyBuffEffects(agent Agent, playerFaction proto.Faction, raidBuffs *proto
 		character.AddStats(BuffSpellValues[ScrollOfAgility])
 	}
 
-	if raidBuffs.WindfuryTotem && windfuryTotemReaches(character) {
+	// Blizzard's 10 November hotfix (t/2403040, Shaman): "Weapon imbues and
+	// Weapon totems can now be used at the same time." A shaman's own
+	// Windfury or Flametongue Weapon no longer shuts out the matching totem,
+	// and a druid in a feral form receives both ("Weapon enchantments and
+	// procs now all work while shapeshifted, including ... Windfury Totem",
+	// Forever's druid deep dive).
+	if raidBuffs.WindfuryTotem {
 		ApplyWindfury(character)
 	}
 
-	if raidBuffs.FlametongueTotem && flametongueTotemReaches(character) {
+	if raidBuffs.FlametongueTotem {
 		MakePermanent(FlametongueTotemAura(character))
 	}
 
@@ -1693,25 +1699,6 @@ const WindfuryAuraLabel = "Windfury"
 // effective 1.5 s came from the buff's own length; here the buff lasts 1 s
 // and the client states 100 ms.
 const extraAttackProcICD = 100 * time.Millisecond
-
-// windfuryTotemReaches says whether the Windfury Totem aura applies to the
-// character. A shaman whose main hand carries Windfury Weapon does not
-// receive it (the weapon's text: "When applied to main hand, disables any
-// benefit you personally receive from Windfury Totem"). A feral druid does:
-// "Weapon enchantments and procs now all work while shapeshifted, including
-// effects like weightstones, Crusader enchant, and Windfury Totem" (Forever's
-// druid deep dive, news.blizzard.com article 24301515).
-func windfuryTotemReaches(character *Character) bool {
-	return weaponTotemReaches(character, proto.WeaponImbue_WindfuryWeapon)
-}
-
-// weaponTotemReaches says whether a weapon-hit totem aura applies to the
-// character: not when the totem's own weapon imbue sits on the main hand
-// (the imbue's text: "disables any benefit you personally receive from"
-// the totem). A druid in a feral form receives it.
-func weaponTotemReaches(character *Character, disablingImbue proto.WeaponImbue) bool {
-	return character.Consumes == nil || character.Consumes.MainHandImbue != disablingImbue
-}
 
 // WindfuryBuffDuration is the Windfury Totem attack power buff's length:
 // 1 second on every rank in the 1.60.1.70009 client (spells 8516, 10608,

@@ -96,6 +96,7 @@ func (mage *Mage) getArcaneMissilesSpellConfig(rank int) core.SpellConfig {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			dot := spell.Dot(target)
+			mage.arcaneMissilesCount = numTicks
 			// Missile Barrage (missile_barrage.go): "missiles fire every
 			// 0.5 sec" while its buff is up. The buff's own Cost.Multiplier
 			// swap is what makes this particular cast free; checked here

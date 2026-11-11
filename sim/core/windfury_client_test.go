@@ -1,8 +1,6 @@
 package core
 
 import (
-	"github.com/wowsims/classic/sim/core/proto"
-	"github.com/wowsims/classic/sim/core/stats"
 	"testing"
 	"time"
 )
@@ -26,28 +24,5 @@ func TestWindfuryTotemBuffMatchesClient(t *testing.T) {
 func TestWindfuryTotemProcCooldownMatchesClient(t *testing.T) {
 	if extraAttackProcICD != 100*time.Millisecond {
 		t.Errorf("Windfury Totem proc cooldown = %v, want 100ms", extraAttackProcICD)
-	}
-}
-
-// Blizzard's 10 November hotfix (t/2403040, Shaman): "Weapon imbues and
-// Weapon totems can now be used at the same time ... the Shaman can benefit
-// from Windfury Weapon and Windfury Totem at the same time, granting their
-// attacks a chance to activate both." Every character is reached.
-func TestWindfuryTotemReaches(t *testing.T) {
-	cases := []struct {
-		name      string
-		character Character
-		want      bool
-	}{
-		{"no consumables", Character{}, true},
-		{"poison on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_InstantPoison}}, true},
-		{"windfury weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_WindfuryWeapon}}, true},
-		{"windfury weapon on the off hand only", Character{Consumes: &proto.Consumes{OffHandImbue: proto.WeaponImbue_WindfuryWeapon}}, true},
-		{"feral (Forever: weapon procs work in a form)", Character{Unit: Unit{PseudoStats: stats.PseudoStats{FeralCombatEnabled: true}}}, true},
-	}
-	for _, c := range cases {
-		if got := windfuryTotemReaches(&c.character); got != c.want {
-			t.Errorf("%s: windfuryTotemReaches = %v, want %v", c.name, got, c.want)
-		}
 	}
 }
