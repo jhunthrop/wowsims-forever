@@ -91,7 +91,7 @@
       }
     },
     {
-      "notes": "Stormstrike on cooldown: it is your hardest hit, and it makes your next Lightning Bolt, Chain Lightning or Earth Shock on the target hit 20% harder. 8 second cooldown.",
+      "notes": "Stormstrike on cooldown: an instant strike that makes your next Lightning Bolt, Chain Lightning or Earth Shock on the target hit 20% harder. 8 second cooldown.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -104,20 +104,33 @@
       "notes": "Lightning Bolt at five Maelstrom Weapon stacks: each stack takes 20% off its cast time and mana at any rank, so five make it instant and free from your first point. Cast it right after Stormstrike when you can, so the bolt takes Stormstrike's 20%.",
       "action": {
         "condition": {
-          "cmp": {
-            "op": "OpGe",
-            "lhs": {
-              "auraNumStacks": {
-                "auraId": {
-                  "spellId": 408498
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 408498
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "auraNumStacks": {
+                      "auraId": {
+                        "spellId": 408498
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "5"
+                    }
+                  }
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "5"
-              }
-            }
+            ]
           }
         },
         "castSpell": {
