@@ -143,7 +143,9 @@ func TestHawkTakesFerocityAndUnleashedFuryNotTheHuntersCrit(t *testing.T) {
 		t.Errorf("hawk damage multiplier = %v, want Unleashed Fury's %v", got, want)
 	}
 	mh := hawk.AutoAttacks.MH()
-	mean := hawkSwingDamagePerLevel * 60
+	// Blizzard's 10 November hotfix: "Melee damage dealt by the Hawk pet
+	// increased by about 80%." on the beta logs' 0.32 a level.
+	mean := 0.32 * 1.8 * 60
 	if math.Abs(mh.BaseDamageMin-mean*(1-hawkSwingSpread)) > 1e-9 || math.Abs(mh.BaseDamageMax-mean*(1+hawkSwingSpread)) > 1e-9 {
 		t.Errorf("hawk swing %v-%v at 60, want %v +/- %v%%", mh.BaseDamageMin, mh.BaseDamageMax, mean, 100*hawkSwingSpread)
 	}

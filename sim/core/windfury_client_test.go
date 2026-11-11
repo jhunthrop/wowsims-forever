@@ -29,9 +29,10 @@ func TestWindfuryTotemProcCooldownMatchesClient(t *testing.T) {
 	}
 }
 
-// Windfury Weapon on the main hand "disables any benefit you personally
-// receive from Windfury Totem" (spells 8232 to 16362), and a feral druid
-// has no main-hand weapon to proc it; everyone else is reached.
+// Blizzard's 10 November hotfix (t/2403040, Shaman): "Weapon imbues and
+// Weapon totems can now be used at the same time ... the Shaman can benefit
+// from Windfury Weapon and Windfury Totem at the same time, granting their
+// attacks a chance to activate both." Every character is reached.
 func TestWindfuryTotemReaches(t *testing.T) {
 	cases := []struct {
 		name      string
@@ -40,7 +41,7 @@ func TestWindfuryTotemReaches(t *testing.T) {
 	}{
 		{"no consumables", Character{}, true},
 		{"poison on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_InstantPoison}}, true},
-		{"windfury weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_WindfuryWeapon}}, false},
+		{"windfury weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_WindfuryWeapon}}, true},
 		{"windfury weapon on the off hand only", Character{Consumes: &proto.Consumes{OffHandImbue: proto.WeaponImbue_WindfuryWeapon}}, true},
 		{"feral (Forever: weapon procs work in a form)", Character{Unit: Unit{PseudoStats: stats.PseudoStats{FeralCombatEnabled: true}}}, true},
 	}

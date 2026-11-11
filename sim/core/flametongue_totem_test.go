@@ -78,10 +78,10 @@ func TestFlametongueTotemIsNotLearnedBeforeLevel28(t *testing.T) {
 	}
 }
 
-// Flametongue Weapon on the main hand "disables any benefit you personally
-// receive from Flametongue Totem" (spells 8024 to 16342), and a feral druid
-// has no main-hand weapon; everyone else is reached, including a shaman
-// whose main hand carries Windfury Weapon.
+// Blizzard's 10 November hotfix (t/2403040, Shaman): "Weapon imbues and
+// Weapon totems can now be used at the same time." Flametongue Weapon on
+// the main hand no longer shuts out Flametongue Totem; every character is
+// reached.
 func TestFlametongueTotemReaches(t *testing.T) {
 	cases := []struct {
 		name      string
@@ -90,7 +90,7 @@ func TestFlametongueTotemReaches(t *testing.T) {
 	}{
 		{"no consumables", Character{}, true},
 		{"poison on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_InstantPoison}}, true},
-		{"flametongue weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_FlametongueWeapon}}, false},
+		{"flametongue weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_FlametongueWeapon}}, true},
 		{"flametongue weapon on the off hand only", Character{Consumes: &proto.Consumes{OffHandImbue: proto.WeaponImbue_FlametongueWeapon}}, true},
 		{"windfury weapon on the main hand", Character{Consumes: &proto.Consumes{MainHandImbue: proto.WeaponImbue_WindfuryWeapon}}, true},
 		{"feral (Forever: weapon procs work in a form)", Character{Unit: Unit{PseudoStats: stats.PseudoStats{FeralCombatEnabled: true}}}, true},
