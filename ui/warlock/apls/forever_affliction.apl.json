@@ -86,7 +86,7 @@
       }
     },
     {
-      "notes": "Corruption when it has fallen off or has under 3 seconds left. Instant with Improved Corruption. Wrack runs its clock twice as fast, so put a fresh one up before the next channel instead of letting it drop in the middle of one.",
+      "notes": "Corruption whenever it has fallen off. Instant with Improved Corruption. From 40, Wrack runs its clock twice as fast, so recast it before a channel once it has under 3 seconds left; never clip it earlier.",
       "action": {
         "condition": {
           "or": {
@@ -104,21 +104,35 @@
                 }
               },
               {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "dotRemainingTime": {
-                      "spellId": {
-                        "spellId": 11672,
-                        "rank": 6
+                "and": {
+                  "vals": [
+                    {
+                      "spellIsKnown": {
+                        "spellId": {
+                          "spellId": 1316697,
+                          "rank": 1
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "dotRemainingTime": {
+                            "spellId": {
+                              "spellId": 11672,
+                              "rank": 6
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3s"
+                          }
+                        }
                       }
                     }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "3s"
-                    }
-                  }
+                  ]
                 }
               }
             ]
@@ -133,7 +147,7 @@
       }
     },
     {
-      "notes": "Amplify Curse right before each Bane of Agony whenever it is ready. It makes that Agony 50% stronger and costs no global.",
+      "notes": "Amplify Curse on your next Bane of Agony refresh once it is off cooldown. It makes that Agony 50% stronger and costs no global; never clip a running Agony for it.",
       "action": {
         "condition": {
           "or": {
@@ -151,21 +165,35 @@
                 }
               },
               {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "dotRemainingTime": {
-                      "spellId": {
-                        "spellId": 11713,
-                        "rank": 6
+                "and": {
+                  "vals": [
+                    {
+                      "spellIsKnown": {
+                        "spellId": {
+                          "spellId": 1316697,
+                          "rank": 1
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "dotRemainingTime": {
+                            "spellId": {
+                              "spellId": 11713,
+                              "rank": 6
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3s"
+                          }
+                        }
                       }
                     }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "3s"
-                    }
-                  }
+                  ]
                 }
               }
             ]
@@ -179,7 +207,7 @@
       }
     },
     {
-      "notes": "Bane of Agony all fight, recast when it has fallen off or has under 3 seconds left. It is one of the three DoTs Wrack speeds up and Soul Siphon counts, so it beats Bane of Doom at 60, and Amplify Curse makes it 50% stronger whenever that is ready.",
+      "notes": "Bane of Agony all fight; from 40, also recast it before a channel once it has under 3 seconds left. It is one of the three DoTs Wrack speeds up and Soul Siphon counts, so it beats Bane of Doom at 60.",
       "action": {
         "condition": {
           "or": {
@@ -197,21 +225,35 @@
                 }
               },
               {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "dotRemainingTime": {
-                      "spellId": {
-                        "spellId": 11713,
-                        "rank": 6
+                "and": {
+                  "vals": [
+                    {
+                      "spellIsKnown": {
+                        "spellId": {
+                          "spellId": 1316697,
+                          "rank": 1
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "dotRemainingTime": {
+                            "spellId": {
+                              "spellId": 11713,
+                              "rank": 6
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3s"
+                          }
+                        }
                       }
                     }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "3s"
-                    }
-                  }
+                  ]
                 }
               }
             ]
@@ -226,7 +268,7 @@
       }
     },
     {
-      "notes": "Siphon Life when it has fallen off or has under 3 seconds left. Shadow damage that heals you, and the third DoT for Soul Siphon.",
+      "notes": "Siphon Life whenever it has fallen off; from 40, also before a channel once it has under 3 seconds left. Shadow damage that heals you, and the third DoT for Soul Siphon.",
       "action": {
         "condition": {
           "or": {
@@ -244,21 +286,35 @@
                 }
               },
               {
-                "cmp": {
-                  "op": "OpLt",
-                  "lhs": {
-                    "dotRemainingTime": {
-                      "spellId": {
-                        "spellId": 18881,
-                        "rank": 4
+                "and": {
+                  "vals": [
+                    {
+                      "spellIsKnown": {
+                        "spellId": {
+                          "spellId": 1316697,
+                          "rank": 1
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "dotRemainingTime": {
+                            "spellId": {
+                              "spellId": 18881,
+                              "rank": 4
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "3s"
+                          }
+                        }
                       }
                     }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "3s"
-                    }
-                  }
+                  ]
                 }
               }
             ]
@@ -319,7 +375,7 @@
       }
     },
     {
-      "notes": "Raid build, from 34: Shadow Bolt the moment Nightfall gives you a Shadow Trance, ahead of your next Wrack from 40. It is instant, and at 60 each crit puts up Improved Shadow Bolt, so your Wrack and Shadow DoTs take 20% more for 12 seconds.",
+      "notes": "Raid build: when a Wrack ends and a Shadow Trance is up, cast the instant Shadow Bolt before the next channel. At 60 each crit puts up Improved Shadow Bolt, so your Wrack and Shadow DoTs take 20% more for 12 seconds.",
       "action": {
         "condition": {
           "and": {
