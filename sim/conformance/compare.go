@@ -394,7 +394,11 @@ func verdictFor(row Row) (verdict string, diff string) {
 	}
 
 	cooldownMatches := row.ClientCooldownMS == row.EngineCooldownMS
-	if !cooldownMatches {
+	hotfix, hotfixed := serverHotfixCooldowns[row.ClassSlug+"/"+row.SpellName]
+	cooldownHotfixed := !cooldownMatches && hotfixed && hotfix.cooldownMS == row.EngineCooldownMS
+	if cooldownHotfixed {
+		cooldownMatches = true
+	} else if !cooldownMatches {
 		diffs = append(diffs, fmt.Sprintf("cooldown_ms %d->%d", row.ClientCooldownMS, row.EngineCooldownMS))
 	}
 
@@ -447,6 +451,8 @@ func verdictFor(row Row) (verdict string, diff string) {
 	otherFieldsMatch := costMatches && costTypeMatches && cooldownMatches && castMatches && gcdMatches && levelMatches
 
 	switch {
+	case cooldownHotfixed && otherFieldsMatch && (durationMatches || row.DurationReading != "" || (row.HasDuration && clientStatesNoDuration)):
+		return VerdictServerHotfix, fmt.Sprintf("cooldown_ms %d->%d: %s", row.ClientCooldownMS, row.EngineCooldownMS, hotfix.reason)
 	case otherFieldsMatch && row.DurationReading != "":
 		return VerdictUnmodeledDuration, "duration_ms: " + row.DurationReading
 	case otherFieldsMatch && (durationMatches || (row.HasDuration && clientStatesNoDuration)):
