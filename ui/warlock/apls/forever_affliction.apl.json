@@ -86,18 +86,42 @@
       }
     },
     {
-      "notes": "Corruption whenever it has fallen off. Instant with Improved Corruption, and never clipped.",
+      "notes": "Corruption when it has fallen off or has under 3 seconds left. Instant with Improved Corruption. Wrack runs its clock twice as fast, so put a fresh one up before the next channel instead of letting it drop in the middle of one.",
       "action": {
         "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
-                "spellId": {
-                  "spellId": 11672,
-                  "rank": 6
+          "or": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 11672,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 11672,
+                        "rank": 6
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3s"
+                    }
+                  }
                 }
               }
-            }
+            ]
           }
         },
         "castSpell": {
@@ -109,62 +133,11 @@
       }
     },
     {
-      "notes": "Bane of Doom while a minute or more of the fight is left. One global for a big hit after a minute, and Pandemic doubles the bonus on its crits.",
+      "notes": "Amplify Curse right before each Bane of Agony whenever it is ready. It makes that Agony 50% stronger and costs no global.",
       "action": {
         "condition": {
-          "and": {
+          "or": {
             "vals": [
-              {
-                "not": {
-                  "val": {
-                    "dotIsActive": {
-                      "spellId": {
-                        "spellId": 603
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "remainingTime": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "60s"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        },
-        "castSpell": {
-          "spellId": {
-            "spellId": 603
-          }
-        }
-      }
-    },
-    {
-      "notes": "Amplify Curse before each Bane of Agony whenever it is ready below 60, and at 60 only before the final Agony, once your last Doom has fired. It makes that Agony 50% stronger and costs no global.",
-      "action": {
-        "condition": {
-          "and": {
-            "vals": [
-              {
-                "not": {
-                  "val": {
-                    "dotIsActive": {
-                      "spellId": {
-                        "spellId": 603
-                      }
-                    }
-                  }
-                }
-              },
               {
                 "not": {
                   "val": {
@@ -178,33 +151,21 @@
                 }
               },
               {
-                "or": {
-                  "vals": [
-                    {
-                      "not": {
-                        "val": {
-                          "spellIsKnown": {
-                            "spellId": {
-                              "spellId": 603
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpLt",
-                        "lhs": {
-                          "remainingTime": {}
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "60s"
-                          }
-                        }
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 11713,
+                        "rank": 6
                       }
                     }
-                  ]
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3s"
+                    }
+                  }
                 }
               }
             ]
@@ -218,22 +179,11 @@
       }
     },
     {
-      "notes": "Bane of Agony whenever no Bane of Doom is on the target: all fight before 60, and the last minute at 60, once Doom has fired. Never clip it, since its biggest ticks come last, and once you have Amplify Curse it makes the Agony 50% stronger.",
+      "notes": "Bane of Agony all fight, recast when it has fallen off or has under 3 seconds left. It is one of the three DoTs Wrack speeds up and Soul Siphon counts, so it beats Bane of Doom at 60, and Amplify Curse makes it 50% stronger whenever that is ready.",
       "action": {
         "condition": {
-          "and": {
+          "or": {
             "vals": [
-              {
-                "not": {
-                  "val": {
-                    "dotIsActive": {
-                      "spellId": {
-                        "spellId": 603
-                      }
-                    }
-                  }
-                }
-              },
               {
                 "not": {
                   "val": {
@@ -242,6 +192,24 @@
                         "spellId": 11713,
                         "rank": 6
                       }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 11713,
+                        "rank": 6
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3s"
                     }
                   }
                 }
@@ -258,18 +226,42 @@
       }
     },
     {
-      "notes": "Siphon Life whenever it has fallen off. Thirty seconds of Shadow damage that heals you.",
+      "notes": "Siphon Life when it has fallen off or has under 3 seconds left. Shadow damage that heals you, and the third DoT for Soul Siphon.",
       "action": {
         "condition": {
-          "not": {
-            "val": {
-              "dotIsActive": {
-                "spellId": {
-                  "spellId": 18881,
-                  "rank": 4
+          "or": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 18881,
+                        "rank": 4
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "dotRemainingTime": {
+                      "spellId": {
+                        "spellId": 18881,
+                        "rank": 4
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "3s"
+                    }
+                  }
                 }
               }
-            }
+            ]
           }
         },
         "castSpell": {
@@ -327,7 +319,7 @@
       }
     },
     {
-      "notes": "Shadow Bolt the moment Nightfall gives you a Shadow Trance, once your current Wrack ends and ahead of the next. It is instant, and each crit puts up Improved Shadow Bolt, so your Wrack and Shadow DoTs take 20% more for 12 seconds.",
+      "notes": "Raid build, from 34: Shadow Bolt the moment Nightfall gives you a Shadow Trance, ahead of your next Wrack from 40. It is instant, and at 60 each crit puts up Improved Shadow Bolt, so your Wrack and Shadow DoTs take 20% more for 12 seconds.",
       "action": {
         "condition": {
           "and": {
@@ -358,7 +350,7 @@
       }
     },
     {
-      "notes": "Wrack with your DoTs up. With Soul Siphon it out-damages Shadow Bolt for a fraction of the mana, and your Corruption and Bane of Agony take 10% more while it runs.",
+      "notes": "Wrack with your DoTs up. While you channel it, your Corruption, Siphon Life and Bane of Agony tick twice as fast, and Soul Siphon adds 12% to it for each of the three on the target.",
       "action": {
         "castSpell": {
           "spellId": {
