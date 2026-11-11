@@ -90,16 +90,15 @@ func (warlock *Warlock) getDrainLifeBaseConfig(rank int) core.SpellConfig {
 				// dot.SnapshotAttackerMultiplier *= dot.Spell.TargetDamageMultiplier(dot.Spell.Unit.AttackTables[target.UnitIndex][dot.Spell.CastType], true)
 				if !isRollover {
 					// Soul Siphon (talents.go): "+4/8/12% per each of
-					// your other Affliction effects active on the
-					// target". Evaluated once per cast, same as every
-					// other snapshot field here, rather than per tick.
-					dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target, dot.Spell)
+					// your Corruption, Siphon Life, and Bane of Agony
+					// effects active on the target".
+					dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target)
 				}
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				// The per-tick read (Dynamic) re-took the plain snapshot;
 				// Soul Siphon's count is read at the tick too.
-				dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target, dot.Spell)
+				dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target)
 				result := dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
 				health := result.Damage
 				healingSpell.CalcAndDealHealing(sim, healingSpell.Unit, health, healingSpell.OutcomeHealing)

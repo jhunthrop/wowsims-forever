@@ -987,9 +987,9 @@ var (
 	// Siphon Life, and Wrack spells by 33/67/100%."
 	pandemicCritDamageBonus = [4]float64{0, 0.33, 0.67, 1.00}
 
-	// Soul Siphon: "...by 4/8/12% per each of your other Affliction
-	// effects active on the target, up to a maximum increase of
-	// 12/24/36%" - i.e. the per-effect rate times a 3-effect cap.
+	// Soul Siphon: "...by 4/8/12% per each of your Corruption, Siphon
+	// Life, and Bane of Agony effects active on the target, up to a
+	// maximum increase of 12/24/36%" - the per-effect rate, at most three.
 	soulSiphonPerEffectBonus = [4]float64{0, 0.04, 0.08, 0.12}
 
 	// Agonizing Flames' crit (Searing Pain) and damage (all
@@ -1122,44 +1122,33 @@ func (warlock *Warlock) applyMalevolence() {
 	})
 }
 
-// soulSiphonMultiplier is Soul Siphon's own damage/heal multiplier for
-// one snapshot of Drain Life, Drain Soul or Wrack: 1 plus the talent's
-// per-effect rate, times the number of OTHER Affliction DoTs currently
-// active on target (Corruption, Curse of Agony, Curse of Doom, Siphon
-// Life and - for Drain Life/Drain Soul's snapshot - Wrack too), capped
-// at 3 effects. excludeSpell is the caller's own spell, so Wrack (an
-// Affliction DoT itself) does not count against its own snapshot.
-//
-// Evaluated once per OnSnapshot call (cast time for Drain Life/Drain
-// Soul, since neither re-snapshots per tick; cast time for Wrack, its
-// only snapshot), not continuously for the channel's duration - the
-// engine's snapshot-at-cast convention Siphon Life's own OnSnapshot
-// already follows for its target-modifier snapshot, and the nearest
-// approximation to the tooltip's wording this architecture supports
-// without a wider change to how these three spells tick.
-func (warlock *Warlock) soulSiphonMultiplier(target *core.Unit, excludeSpell *core.Spell) float64 {
+// soulSiphonCountedSpellCodes are the DoTs Soul Siphon counts since the 10
+// Nov hotfix: "per each of your Corruption, Siphon Life, and Bane of Agony
+// spells active on the target ... (was any Affliction spell)".
+var soulSiphonCountedSpellCodes = []int32{SpellCode_WarlockCorruption, SpellCode_WarlockSiphonLife, SpellCode_WarlockCurseOfAgony}
+
+// soulSiphonMaxEffects is the text's cap: "up to a maximum increase of
+// ${$m1*3}%".
+const soulSiphonMaxEffects = 3
+
+// soulSiphonMultiplier is Soul Siphon's damage/heal multiplier for one
+// snapshot of Drain Life, Drain Soul or Wrack: 1 plus the talent's
+// per-effect rate for each of the warlock's Corruption, Siphon Life and
+// Bane of Agony active on target, at most three. Read at the snapshot and
+// again at each tick, as the drains' and Wrack's own hooks do.
+func (warlock *Warlock) soulSiphonMultiplier(target *core.Unit) float64 {
 	rank := warlock.Talents.SoulSiphon
 	if rank == 0 {
 		return 1
 	}
 
-	const maxEffects = 3
-	perEffect := soulSiphonPerEffectBonus[rank]
-
 	count := 0
 	for _, spell := range warlock.DoTSpells {
-		if spell == excludeSpell || !spell.Flags.Matches(WarlockFlagAffliction) {
-			continue
-		}
-		if spell.Dot(target).IsActive() {
+		if slices.Contains(soulSiphonCountedSpellCodes, spell.SpellCode) && spell.Dot(target).IsActive() {
 			count++
 		}
 	}
-	if count > maxEffects {
-		count = maxEffects
-	}
-
-	return 1 + perEffect*float64(count)
+	return 1 + soulSiphonPerEffectBonus[rank]*float64(min(count, soulSiphonMaxEffects))
 }
 
 func (warlock *Warlock) applySoulSiphon() {

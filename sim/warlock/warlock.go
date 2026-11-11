@@ -112,7 +112,6 @@ type Warlock struct {
 	ImprovedShadowBoltAuras core.AuraArray
 	SoulLinkAura            *core.Aura
 	MasterDemonologistAura  *core.Aura
-	WrackVulnerabilityAuras core.AuraArray
 
 	// Bane of Havoc (Destruction talent): BaneOfHavoc casts the curse,
 	// BaneOfHavocAuras tracks which enemy currently carries it, and

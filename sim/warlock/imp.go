@@ -71,13 +71,17 @@ func impSheet(level int32) (cfg PetConfig) {
 // FireboltDamage is the client's roll for Firebolt 3110 through 11763
 // (spellconst/warlock.json, 1.60.1.70707): rank 7 is a centre of 44 at its
 // own level 58, 0.1136 wide, growing 0.6 a level to 63, so 42.63-47.77 at 60.
-// The engine dealt a flat 44 before.
+// The engine dealt a flat 44 before. Ranks 1 to 4 are the 10 Nov hotfix
+// ("Imp base damage of the first 4 Ranks of Imp's Firebolt increased"),
+// push 113766 on 1.60.1.70888 (SpellEffect 681913, 685570 to 685572); they
+// were 4, 7, 12 and 17 growing 0.1, 0.2, 0.3 and 0.3 a level, and the active
+// build's tables (70790) still carry those until the client move.
 var FireboltDamage = [FireboltRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 4, Variance: 0.285714, PerLevel: 0.1, SpellLevel: 1, MaxLevel: 5},
-	{Amount: 7, Variance: 0.153846, PerLevel: 0.2, SpellLevel: 8, MaxLevel: 13},
-	{Amount: 12, Variance: 0.166667, PerLevel: 0.3, SpellLevel: 18, MaxLevel: 23},
-	{Amount: 17, Variance: 0.114286, PerLevel: 0.3, SpellLevel: 28, MaxLevel: 33},
+	{Amount: 6, Variance: 0.333333, PerLevel: 0.3, SpellLevel: 1, MaxLevel: 5},
+	{Amount: 11, Variance: 0.181818, PerLevel: 0.4, SpellLevel: 8, MaxLevel: 13},
+	{Amount: 15, Variance: 0.235294, PerLevel: 0.4, SpellLevel: 18, MaxLevel: 23},
+	{Amount: 18, Variance: 0.222222, PerLevel: 0.4, SpellLevel: 28, MaxLevel: 33},
 	{Amount: 25, Variance: 0.117647, PerLevel: 0.4, SpellLevel: 38, MaxLevel: 43},
 	{Amount: 35, Variance: 0.112676, PerLevel: 0.5, SpellLevel: 48, MaxLevel: 53},
 	{Amount: 44, Variance: 0.113636, PerLevel: 0.6, SpellLevel: 58, MaxLevel: 63},

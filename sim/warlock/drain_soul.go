@@ -79,13 +79,13 @@ func (warlock *Warlock) getDrainSoulBaseConfig(rank int) core.SpellConfig {
 				if !isRollover {
 					// Soul Siphon (talents.go): see drain_life.go's
 					// identical hook for the talent's wording.
-					dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target, dot.Spell)
+					dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target)
 				}
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				// The per-tick read (Dynamic) re-took the plain snapshot;
 				// Soul Siphon's count is read at the tick too.
-				dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target, dot.Spell)
+				dot.SnapshotAttackerMultiplier *= warlock.soulSiphonMultiplier(target)
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
 			},
 		},

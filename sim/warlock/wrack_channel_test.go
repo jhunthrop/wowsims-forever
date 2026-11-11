@@ -196,13 +196,13 @@ func TestSoulSiphonCountsCorruptionSiphonLifeAndAgony(t *testing.T) {
 	}
 	for _, step := range steps {
 		step.apply.Dot(target).Apply(sim)
-		if got := warlock.soulSiphonMultiplier(target, warlock.Wrack); !floatsNearlyEqual(got, step.want) {
+		if got := warlock.soulSiphonMultiplier(target); !floatsNearlyEqual(got, step.want) {
 			t.Errorf("Wrack's Soul Siphon multiplier after %v = %.2f, want %.2f", step.apply.ActionID, got, step.want)
 		}
 	}
 	warlock.Wrack.Dot(target).Apply(sim)
-	if got := warlock.soulSiphonMultiplier(target, last(warlock.DrainLife)); !floatsNearlyEqual(got, 1.36) {
-		t.Errorf("Drain Life's Soul Siphon multiplier with Wrack up = %.2f, want 1.36 (Wrack does not count)", got)
+	if got := warlock.soulSiphonMultiplier(target); !floatsNearlyEqual(got, 1.36) {
+		t.Errorf("Soul Siphon multiplier with Wrack up = %.2f, want 1.36 (Wrack does not count)", got)
 	}
 }
 

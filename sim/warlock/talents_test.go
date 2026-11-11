@@ -183,41 +183,6 @@ func TestMalevolenceIncreasesShadowCrit(t *testing.T) {
 	}
 }
 
-// TestSoulSiphonMultiplierCountsOtherAfflictionEffects checks rank 3
-// (max, +12% per other effect, up to 3): 0 active effects -> 1.0, 1
-// (Corruption landed) -> 1.12, 2 (Corruption + Curse of Agony) -> 1.24.
-func TestSoulSiphonMultiplierCountsOtherAfflictionEffects(t *testing.T) {
-	sim, built, target := newWarlockForDamageTest(t, "000000000000003") // Affliction field 15, rank 3.
-
-	drainLife := built.DrainLife[len(built.DrainLife)-1]
-	if got, want := built.soulSiphonMultiplier(target, drainLife), 1.0; got != want {
-		t.Errorf("soulSiphonMultiplier with no other effects = %v, want %v", got, want)
-	}
-
-	corruption := built.Corruption[len(built.Corruption)-1]
-	corruption.ApplyEffects(sim, target, corruption)
-	if !corruption.Dot(target).IsActive() {
-		t.Skip("Corruption did not land (hit-table roll); rerun")
-	}
-	if got, want := built.soulSiphonMultiplier(target, drainLife), 1.12; got != want {
-		t.Errorf("soulSiphonMultiplier with 1 other effect = %v, want %v", got, want)
-	}
-
-	curseOfAgony := built.CurseOfAgony[len(built.CurseOfAgony)-1]
-	curseOfAgony.ApplyEffects(sim, target, curseOfAgony)
-	if !curseOfAgony.Dot(target).IsActive() {
-		t.Skip("Curse of Agony did not land (hit-table roll); rerun")
-	}
-	if got, want := built.soulSiphonMultiplier(target, drainLife), 1.24; got != want {
-		t.Errorf("soulSiphonMultiplier with 2 other effects = %v, want %v", got, want)
-	}
-
-	// Wrack must not count against its own snapshot.
-	if len(built.DoTSpells) == 0 {
-		t.Fatal("warlock has no tracked DoT spells")
-	}
-}
-
 // TestFelVitalityIncreasesManaAndPetStats checks rank 3 (max, +15%) on
 // the warlock's own max Mana and the active pet's max Mana and Health.
 func TestFelVitalityIncreasesManaAndPetStats(t *testing.T) {

@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"time"
 )
@@ -117,6 +118,10 @@ type Dot struct {
 
 	// dynamicSnapshot carries DotConfig.DynamicSnapshot.
 	dynamicSnapshot bool
+
+	// clockRate is how fast the dot's own clock runs against the sim's;
+	// zero reads as 1. See SetClockRate.
+	clockRate float64
 }
 
 // TickPeriod is how fast the snapshot dot ticks.
@@ -242,11 +247,63 @@ func (dot *Dot) Cancel(sim *Simulation) {
 func (dot *Dot) RecomputeAuraDuration() {
 	if dot.AffectedByCastSpeed {
 		dot.tickPeriod = dot.Spell.Unit.ApplyCastSpeedForSpell(dot.TickLength, dot.Spell)
-		dot.Aura.Duration = dot.tickPeriod * time.Duration(dot.NumberOfTicks)
 	} else {
 		dot.tickPeriod = dot.TickLength
-		dot.Aura.Duration = dot.tickPeriod * time.Duration(dot.NumberOfTicks)
 	}
+	if rate := dot.ClockRate(); rate != 1 {
+		dot.tickPeriod = time.Duration(float64(dot.tickPeriod) / rate)
+	}
+	dot.Aura.Duration = dot.tickPeriod * time.Duration(dot.NumberOfTicks)
+}
+
+// ClockRate is how fast the dot's own clock runs against the sim's: 1
+// unless SetClockRate changed it.
+func (dot *Dot) ClockRate() float64 {
+	if dot.clockRate == 0 {
+		return 1
+	}
+	return dot.clockRate
+}
+
+// SetClockRate makes the dot's own clock run rate times as fast as the
+// sim's from now on: Forever's Wrack makes the caster's Corruption, Siphon
+// Life and Bane of Agony "deal their periodic damage 100% faster" while it
+// is channelled, and "the time it skips is kept" once it ends. An active
+// dot keeps the time it has run: its next tick and its expiry move to where
+// its clock reaches them at the new rate, on the same tick grid, and every
+// later tick comes at the new period. An inactive dot only stores the rate,
+// so an application while it holds runs at that rate too.
+func (dot *Dot) SetClockRate(sim *Simulation, rate float64) {
+	if rate <= 0 {
+		panic(fmt.Sprintf("dot %v: clock rate %v must be positive", dot.Spell.ActionID, rate))
+	}
+	old := dot.ClockRate()
+	if rate == old {
+		return
+	}
+	dot.clockRate = rate
+	if !dot.IsActive() || dot.tickAction == nil {
+		return
+	}
+
+	scale := func(d time.Duration) time.Duration { return time.Duration(float64(d) * old / rate) }
+	nextTickAt := sim.CurrentTime + scale(dot.tickAction.NextActionAt-sim.CurrentTime)
+	remaining := scale(dot.Aura.RemainingDuration(sim))
+	dot.tickPeriod = scale(dot.tickPeriod)
+	dot.Aura.Duration = dot.tickPeriod * time.Duration(dot.NumberOfTicks)
+
+	dot.tickAction.Cancel(sim)
+	periodicOptions := dot.basePeriodicOptions()
+	periodicOptions.Period = dot.tickPeriod
+	dot.tickAction = NewPeriodicAction(sim, periodicOptions)
+	dot.tickAction.NextActionAt = nextTickAt
+	dot.lastTickTime = nextTickAt - dot.tickPeriod
+	sim.AddPendingAction(dot.tickAction)
+
+	// The expiry stays on the tick grid, so the last tick and the fade still
+	// land together after the rounding a scaled duration can carry.
+	ticksAfterNext := math.Round(float64(remaining-(nextTickAt-sim.CurrentTime)) / float64(dot.tickPeriod))
+	dot.Aura.UpdateExpires(sim, nextTickAt+dot.tickPeriod*time.Duration(max(ticksAfterNext, 0)))
 }
 
 // Takes a new snapshot of this Dot's effects.
