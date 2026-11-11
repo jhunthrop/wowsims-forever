@@ -32,6 +32,15 @@ func TestInsectSwarmDamageMatchesClient(t *testing.T) {
 		InsectSwarmSpellId[:], InsectSwarmTickDamage[:], InsectSwarmTickSpellCoeff[:])
 }
 
+// Hurricane's channel (16914, 17401, 17402) carries a dummy effect; the
+// damage a tick does is the school-damage effect of the spell its area
+// trigger casts each second (the generated HurricaneSpellId rows 1278965,
+// 1278968 and 1278759), which the engine's tick table has to read.
+func TestHurricaneTickDamageMatchesClient(t *testing.T) {
+	clientdamagetest.AssertTable(t, clientdamagetest.Load(t, clientDruidSpellconst), clientdamagetest.Direct, "Hurricane",
+		HurricaneSpellId[:], HurricaneTickDamage[:], HurricaneSpellCoeff[:])
+}
+
 // The Rake, Rip and Ferocious Bite ladders read constants_auto_gen.go's
 // own rows; these check that the ranks the engine registers (1 and up)
 // still line up with the client's, rank 0 being a different spell.
