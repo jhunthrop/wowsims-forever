@@ -18,7 +18,7 @@ import (
 // The client row (11213) is unchanged: the split is server side.
 func TestArcaneConcentrationSplitsAcrossTheCastAndEveryMissile(t *testing.T) {
 	const channels = 600
-	built, sim, target := longFrostMageSim(t, channels*8*time.Second)
+	built, sim, target := longFrostMageSim(t, channels*25*time.Second)
 	if built.ClearcastingAura == nil {
 		t.Fatal("Clearcasting is not registered with Arcane Concentration taken")
 	}
@@ -31,7 +31,10 @@ func TestArcaneConcentrationSplitsAcrossTheCastAndEveryMissile(t *testing.T) {
 			t.Fatalf("Arcane Missiles did not cast on channel %d at %v (casting %v, channeling %v, GCD ready %v, mana %.0f)",
 				i, sim.CurrentTime, built.IsCasting(sim), built.IsChanneling(sim), built.GCD.IsReady(sim), built.CurrentMana())
 		}
-		stepUntil(sim, sim.CurrentTime+7*time.Second)
+		for deadline := sim.CurrentTime + 20*time.Second; sim.CurrentTime < deadline && !am.CanCast(sim, target); {
+			stepUntil(sim, sim.CurrentTime+500*time.Millisecond)
+		}
+		stepUntil(sim, sim.CurrentTime+time.Second) // the last missile's flight
 		if built.ClearcastingAura.IsActive() {
 			procs++
 			built.ClearcastingAura.Deactivate(sim)
