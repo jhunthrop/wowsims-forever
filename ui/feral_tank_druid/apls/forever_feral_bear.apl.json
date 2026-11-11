@@ -235,7 +235,7 @@
       }
     },
     {
-      "notes": "Queued on your next swing whenever you have 15 rage, and at levels 40 to 53 only at 30 rage. Ferocity cuts its cost to 10 rage by level 14, so the 15 keeps a little rage back for Lacerate from level 25; in your forties and early fifties rage is short, and the 30 keeps rage for Primal Bite nearly every time it comes off cooldown.",
+      "notes": "Queued on your next swing once you have the rage: 15 below 25, 20 from 25 when Lacerate arrives, 45 from 30 to 35, 25 from 36 to 39 so Frenzied Regeneration still has rage to turn into health, 45 again from 40 to 59 for Primal Bite and Lacerate, and 25 at 60. Maul only replaces a white swing, so the rage it does not spend goes into Lacerate and Primal Bite, which carry more threat for it.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -245,46 +245,20 @@
           }
         },
         "condition": {
-          "and": {
+          "or": {
             "vals": [
               {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentRage": {}
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "15"
-                    }
-                  }
-                }
-              },
-              {
-                "or": {
+                "and": {
                   "vals": [
                     {
                       "cmp": {
-                        "op": "OpLt",
+                        "op": "OpLe",
                         "lhs": {
                           "currentLevel": {}
                         },
                         "rhs": {
                           "const": {
-                            "val": "40"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "cmp": {
-                        "op": "OpGt",
-                        "lhs": {
-                          "currentLevel": {}
-                        },
-                        "rhs": {
-                          "const": {
-                            "val": "53"
+                            "val": "24"
                           }
                         }
                       }
@@ -297,7 +271,219 @@
                         },
                         "rhs": {
                           "const": {
+                            "val": "15"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "25"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "29"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentRage": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "20"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
                             "val": "30"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "35"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentRage": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "45"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "36"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "39"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentRage": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "25"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "40"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "59"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentRage": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "45"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentLevel": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "60"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentRage": {}
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "25"
                           }
                         }
                       }
@@ -354,7 +540,7 @@
       }
     },
     {
-      "notes": "Anything else on the global cooldown goes into Lacerate. With five stacks up it is still a hit that carries threat, and it keeps the bleed fresh, so you never stand there waiting for Primal Bite.",
+      "notes": "Anything else on the global cooldown goes into Lacerate. With five stacks up it is still a hit that carries threat, and it keeps the bleed fresh, so you never waste a global cooldown standing still.",
       "action": {
         "castSpell": {
           "spellId": {
