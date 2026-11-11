@@ -159,15 +159,23 @@ func TestWrackSpeedsUpSiphonLifeAndAgonyButNotDoom(t *testing.T) {
 	} {
 		sim, warlock, target := newWarlockForDamageTest(t, wrackSiphonTalents)
 		dot := c.spell(warlock).Dot(target)
+		start := sim.CurrentTime
+		dot.Apply(sim)
+		warlock.Wrack.Dot(target).Apply(sim)
 		period := dot.TickPeriod()
-		got := dotTickTimes(t, sim, dot, map[time.Duration]func(*core.Simulation){
-			0: func(sim *core.Simulation) { warlock.Wrack.Dot(target).Apply(sim) },
-		})
+		if c.hastens {
+			period *= 2 // the clock rate already halved the period
+		}
+		for dot.TickCount == 0 && sim.CurrentTime < start+time.Minute {
+			if done := sim.Step(); done {
+				break
+			}
+		}
 		want := period
 		if c.hastens {
 			want = period / 2
 		}
-		if len(got) == 0 || got[0] != want {
+		if got := sim.CurrentTime - start; got != want {
 			t.Errorf("%s: first tick at %v with Wrack channelled from its start, want %v", c.name, got, want)
 		}
 	}
