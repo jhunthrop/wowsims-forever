@@ -28,7 +28,8 @@ func TestArcaneConcentrationSplitsAcrossTheCastAndEveryMissile(t *testing.T) {
 	for i := 0; i < channels; i++ {
 		built.AddMana(sim, built.MaxMana(), refill)
 		if !am.Cast(sim, target) {
-			t.Fatalf("Arcane Missiles did not cast on channel %d", i)
+			t.Fatalf("Arcane Missiles did not cast on channel %d at %v (casting %v, channeling %v, GCD ready %v, mana %.0f)",
+				i, sim.CurrentTime, built.IsCasting(sim), built.IsChanneling(sim), built.GCD.IsReady(sim), built.CurrentMana())
 		}
 		stepUntil(sim, sim.CurrentTime+7*time.Second)
 		if built.ClearcastingAura.IsActive() {
