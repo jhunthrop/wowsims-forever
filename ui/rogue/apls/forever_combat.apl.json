@@ -43,7 +43,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1329549
+            "spellId": 1329549,
+            "rank": 2
           }
         },
         "condition": {

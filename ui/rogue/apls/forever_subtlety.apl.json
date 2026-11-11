@@ -57,7 +57,8 @@
       "action": {
         "castSpell": {
           "spellId": {
-            "spellId": 1329549
+            "spellId": 1329549,
+            "rank": 2
           }
         },
         "condition": {
@@ -115,7 +116,7 @@
           }
         }
       },
-      "notes": "Ghostly Strike on cooldown at four combo points or fewer: it hits harder than Sinister Strike for no more energy, and from 30 harder than Hemorrhage for a little more (40 against Hemorrhage's 35, or 30 once Efficient Strikes is full at 57), and gives a combo point."
+      "notes": "Ghostly Strike on cooldown at four combo points or fewer: with a dagger in the main hand it hits harder than Sinister Strike for no more energy, and from 30 harder than Hemorrhage with any weapon for a little more (40 against Hemorrhage's 35, or 30 once Efficient Strikes is full at 57), and gives a combo point."
     },
     {
       "action": {
