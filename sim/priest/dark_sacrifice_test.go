@@ -30,3 +30,22 @@ func TestDarkSacrificeManaAddsAllOfSpiritOverTheCast(t *testing.T) {
 		}
 	}
 }
+
+// SpellEffect's EffectRealPointsPerLevel is 1 on every rank's two effects and
+// SpellLevels caps the growth at 28/38/48/58/68: a priest above the rank's
+// level takes and gets a little more a tick than the rank's own row, and at
+// the rank's level exactly the row.
+func TestDarkSacrificeTickGrowsOneALevelAboveItsRank(t *testing.T) {
+	for _, tc := range []struct {
+		rank, level int
+		want        float64
+	}{
+		{1, 20, 80}, {1, 25, 85}, {1, 28, 88}, {1, 35, 88},
+		{4, 50, 258}, {4, 55, 263},
+		{5, 60, 320},
+	} {
+		if got := darkSacrificeTick(tc.rank, tc.level); got != tc.want {
+			t.Errorf("rank %d at level %d: tick %v, want %v", tc.rank, tc.level, got, tc.want)
+		}
+	}
+}
