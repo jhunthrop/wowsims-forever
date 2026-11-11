@@ -10,7 +10,7 @@ import (
 // including effects like weightstones, Crusader enchant, and Windfury Totem"
 // (the druid deep dive, news.blizzard.com article 24301515). A feral druid's
 // Elemental Sharpening Stone (enchant 2506, spell 22755, aura 52) gives it
-// its 2% melee crit, and a Windfury Totem reaches it.
+// its 2% melee crit. (Windfury Totem reaches every character, buffs.go.)
 func TestWeaponConsumablesReachAShapeshiftedDruid(t *testing.T) {
 	character := newGnomeEurekaTestCaster(proto.Class_ClassDruid)
 	character.PseudoStats.FeralCombatEnabled = true
@@ -25,9 +25,6 @@ func TestWeaponConsumablesReachAShapeshiftedDruid(t *testing.T) {
 	})
 	if got := claw.BonusCritRating; got != 2*CritRatingPerCritChance {
 		t.Errorf("a feral druid's stone gives its claw %v crit rating, want 2%%", got)
-	}
-	if !windfuryTotemReaches(character) {
-		t.Error("Windfury Totem must reach a feral druid")
 	}
 }
 
