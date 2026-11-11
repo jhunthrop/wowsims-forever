@@ -235,7 +235,7 @@
       }
     },
     {
-      "notes": "Queued on your next swing once you have the rage: 15 below 25, 20 from 25 when Lacerate arrives, 45 from 30 to 35, 25 from 36 to 39 so Frenzied Regeneration still has rage to turn into health, 45 again from 40 to 59 for Primal Bite and Lacerate, and 25 at 60. Maul only replaces a white swing, so the rage it does not spend goes into Lacerate and Primal Bite, which carry more threat for it.",
+      "notes": "Queued on your next swing once you have the rage: 15 below 25, 35 from 25 to 29, 45 from 30 to 35, 25 from 36 to 39, 45 from 40 to 59 and 25 at 60. Maul only replaces a white swing, so Lacerate and Primal Bite, which hit harder per rage, get the rage first, except from 36 to 39, where Frenzied Regeneration needs it.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -316,7 +316,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "20"
+                            "val": "35"
                           }
                         }
                       }
