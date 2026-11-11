@@ -55,7 +55,12 @@ func TestHolyStrikeWeaponPercentLeavesTheFlatAndSpellDamageWhole(t *testing.T) {
 		DistanceFromTarget: 5,
 	}, PlayerOptionsSealofRighteousness)
 	raid := core.SinglePlayerRaidProto(player, &proto.PartyBuffs{}, &proto.RaidBuffs{}, &proto.Debuffs{})
-	encounter := &proto.Encounter{Duration: fightSeconds, Targets: []*proto.Target{core.NewDefaultTarget()}}
+	// A target at the paladin's own level: three levels up, the engine's
+	// level-based partial resistance takes about 6% off a Holy hit, which
+	// is a separate mechanic from the formula this test is about.
+	target := core.NewDefaultTarget()
+	target.Level = 60
+	encounter := &proto.Encounter{Duration: fightSeconds, Targets: []*proto.Target{target}}
 
 	env, _, _ := core.NewEnvironment(raid, encounter, false)
 	character := env.Raid.Parties[0].Players[0].GetCharacter()
