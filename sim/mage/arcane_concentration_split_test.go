@@ -23,9 +23,10 @@ func TestArcaneConcentrationSplitsAcrossTheCastAndEveryMissile(t *testing.T) {
 		t.Fatal("Clearcasting is not registered with Arcane Concentration taken")
 	}
 	am := topRank(t, built.ArcaneMissiles)
+	refill := built.NewManaMetrics(core.ActionID{SpellID: 11213})
 	procs := 0
 	for i := 0; i < channels; i++ {
-		built.AddMana(sim, built.MaxMana(), nil)
+		built.AddMana(sim, built.MaxMana(), refill)
 		if !am.Cast(sim, target) {
 			t.Fatalf("Arcane Missiles did not cast on channel %d", i)
 		}
