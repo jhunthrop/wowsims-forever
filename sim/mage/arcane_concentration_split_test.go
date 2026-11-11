@@ -53,6 +53,7 @@ func longFrostMageSim(t *testing.T, fight time.Duration) (*Mage, *core.Simulatio
 			Equipment:          &proto.EquipmentSpec{},
 			TalentsString:      ForeverFrostTalents,
 			DistanceFromTarget: 5,
+			Rotation:           &proto.APLRotation{Type: proto.APLRotation_TypeAPL},
 		},
 		PlayerOptions,
 	)
