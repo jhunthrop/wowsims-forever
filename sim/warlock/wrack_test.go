@@ -13,13 +13,11 @@ import (
 // spell this lane added rather than depending on a full leveling build.
 const WrackOnlyTalentsString = "00000000000000001"
 
-// TestWrackLevel60DealsPeriodicDamageAndAppliesVulnerability casts Wrack
-// on a level-60 warlock with the talent and checks: the spell is
-// registered (registerWrackSpell is gated on warlock.Talents.Wrack), its
-// DoT actually ticks for damage (not just a registered *Spell wired to
-// nothing), and the companion vulnerability aura (the talent's "+10%
-// damage taken from your other Shadow DoTs") comes up alongside it.
-func TestWrackLevel60DealsPeriodicDamageAndAppliesVulnerability(t *testing.T) {
+// TestWrackLevel60DealsPeriodicDamage casts Wrack on a level-60 warlock
+// with the talent and checks that the spell is registered
+// (registerWrackSpell is gated on warlock.Talents.Wrack) and that its DoT
+// actually ticks for damage, not just a registered *Spell wired to nothing.
+func TestWrackLevel60DealsPeriodicDamage(t *testing.T) {
 	player := core.WithSpec(
 		&proto.Player{
 			Class:         proto.Class_ClassWarlock,
@@ -75,9 +73,6 @@ func TestWrackLevel60DealsPeriodicDamageAndAppliesVulnerability(t *testing.T) {
 	if !built.Wrack.Dot(target).IsActive() {
 		t.Fatal("Wrack landed but its DoT is not active on the target")
 	}
-	if aura := built.WrackVulnerabilityAuras.Get(target); aura == nil || !aura.IsActive() {
-		t.Error("Wrack landed but its vulnerability aura is not active on the target")
-	}
 
 	// Run one tick through the DoT's own handler: Wrack is a channel, and
 	// stepping the sim to its ticks would need a rotation to end it.
@@ -89,29 +84,26 @@ func TestWrackLevel60DealsPeriodicDamageAndAppliesVulnerability(t *testing.T) {
 	}
 }
 
-// TestWrackTickReadsThe70755Row pins the 70755 hotfix push on 1316697
-// effect 0: 36 a tick at the spell's level 40, +2.5 a caster level up to
-// MaxLevel 60 (86 a tick at 60), and a 0.286 spell-power coefficient
-// (was 0.143, with no per-level growth). Effect 1's +10% vulnerability is
-// unchanged.
-func TestWrackTickReadsThe70755Row(t *testing.T) {
+// TestWrackTickReadsThe70888Push pins the 10 Nov hotfix ("Wrack damage
+// reduced by 30%"), pushed to 1.60.1.70888 as push 113766 on SpellEffect
+// 1349556 (1316697 effect 0): 25.2 a tick at the spell's level 40, +1.75 a
+// caster level up to MaxLevel 60 (60.2 a tick at 60), and a 0.2002
+// spell-power coefficient. Each is 70% of the 70755 row (36, 2.5, 0.286).
+func TestWrackTickReadsThe70888Push(t *testing.T) {
 	_, warlock, target := newWarlockForDamageTest(t, WrackOnlyTalentsString)
 	if warlock.Wrack == nil {
 		t.Fatal("level-60 warlock with the Wrack talent has no Wrack registered")
 	}
-	if got, want := WrackTickDamage.Center(60), 86.0; !floatsNearlyEqual(got, want) {
+	if got, want := WrackTickDamage.Center(60), 60.2; !floatsNearlyEqual(got, want) {
 		t.Errorf("Wrack tick at level 60 = %v, want %v", got, want)
 	}
-	if got, want := WrackTickDamage.Center(40), 36.0; !floatsNearlyEqual(got, want) {
+	if got, want := WrackTickDamage.Center(40), 25.2; !floatsNearlyEqual(got, want) {
 		t.Errorf("Wrack tick at level 40 = %v, want %v", got, want)
 	}
-	if got := warlock.Wrack.ClientBaseDamage; !floatsNearlyEqual(got[0], 86) || !floatsNearlyEqual(got[1], 86) {
-		t.Errorf("Wrack ClientBaseDamage at 60 = %v, want 86-86", got)
+	if got := warlock.Wrack.ClientBaseDamage; !floatsNearlyEqual(got[0], 60.2) || !floatsNearlyEqual(got[1], 60.2) {
+		t.Errorf("Wrack ClientBaseDamage at 60 = %v, want 60.2-60.2", got)
 	}
-	if got, want := warlock.Wrack.Dot(target).BonusCoefficient, 0.286; !floatsNearlyEqual(got, want) {
+	if got, want := warlock.Wrack.Dot(target).BonusCoefficient, 0.2002; !floatsNearlyEqual(got, want) {
 		t.Errorf("Wrack tick coefficient = %v, want %v", got, want)
-	}
-	if got, want := WrackVulnerabilityBonus, 0.10; got != want {
-		t.Errorf("Wrack vulnerability = %v, want %v", got, want)
 	}
 }

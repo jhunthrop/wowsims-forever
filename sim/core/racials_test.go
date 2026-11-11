@@ -201,16 +201,20 @@ func TestOrcHasCommandAndNoSavage(t *testing.T) {
 	}
 }
 
-// Command in the 1.60.1.70753 client. The hunter's 20576 and the warlock's
-// 20575 add 5 to every effect of the "Tamed Pet Passive (DND)" aura (aura
-// 107, misc 8): 8875 on every hunter pet family, 18727 to 18730 on the
+// Command in the live client. The hunter's 20576 and the warlock's 20575
+// add 5 to every effect of the "Tamed Pet Passive (DND)" aura (aura 107,
+// misc 8): 8875 on every hunter pet family, 18727 to 18730 on the
 // Voidwalker, Imp, Succubus and Felhunter, each an aura 79 (damage done,
 // all schools) at 0. An item guardian (Emerald Dragon Whelp, Core Hound)
-// has no such passive, so it gains nothing. The warlock's row also gains
-// a second effect in 70753: aura 108 (percent modifier, damage) at 5 on
-// class mask 0x3000, the Imp's Firebolt (0x1000) and the Succubus' Lash
-// of Pain (0x2000).
-func TestCommandReachesClassPetsAndTheTwoDemonBolts(t *testing.T) {
+// has no such passive, so it gains nothing. The warlock's row gained a
+// second effect in 70753, aura 108 (percent modifier, damage) at 5 on class
+// mask 0x3000 (the Imp's Firebolt and the Succubus' Lash of Pain); the
+// 6 Nov hotfix ("Fixes an issue where some Warlock pet abilities were
+// benefitting too much from the Orc Command racial ability") sets it to 0
+// (client 1.60.1.70888 and hotfix push 113702, SpellEffect 697943), so the
+// two bolts take Command's 5% once, through the passive, like every other
+// demon attack.
+func TestCommandReachesClassPetsAndNotTheTwoDemonBoltsTwice(t *testing.T) {
 	command := racialNamed(t, proto.Race_RaceOrc, "Command")
 	newPet := func(guardian bool) *Pet {
 		return &Pet{Character: Character{Unit: Unit{PseudoStats: stats.NewPseudoStats()}}, isGuardian: guardian}
@@ -236,9 +240,9 @@ func TestCommandReachesClassPetsAndTheTwoDemonBolts(t *testing.T) {
 		id   int32
 		want float64
 	}{
-		{"Firebolt rank 7", 11763, 1.05},
-		{"Firebolt rank 1", 3110, 1.05},
-		{"Lash of Pain rank 6", 11780, 1.05},
+		{"Firebolt rank 7", 11763, 1},
+		{"Firebolt rank 1", 3110, 1},
+		{"Lash of Pain rank 6", 11780, 1},
 		{"Torment rank 6", 11775, 1},
 		{"Shadow Bite", 24450, 1},
 	} {
@@ -248,13 +252,6 @@ func TestCommandReachesClassPetsAndTheTwoDemonBolts(t *testing.T) {
 		}
 	}
 
-	hunterPet := newPet(false)
-	hunterPet.auraTracker = newAuraTracker()
-	hunter := &Character{Class: proto.Class_ClassHunter, Pets: []*Pet{hunterPet}}
-	command.Apply(hunter)
-	if spell := hunterPet.RegisterSpell(SpellConfig{ActionID: ActionID{SpellID: 3110}, SpellSchool: SpellSchoolFire, ProcMask: ProcMaskSpellDamage, DamageMultiplier: 1}); spell.DamageMultiplier != 1 {
-		t.Errorf("a hunter pet's spell with Firebolt's id took %v; the 0x3000 modifier is the warlock's row only", spell.DamageMultiplier)
-	}
 }
 
 // Command's +5 and a talent's points land on the same Tamed Pet Passive, so
