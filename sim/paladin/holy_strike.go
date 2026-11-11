@@ -34,19 +34,28 @@ const holyStrikeRankCount = 8
 // every rank.
 //
 // Each rank has three effects: index 0 (effect 121, normalized weapon
-// damage) gives flatBonus, a flat bonus added on top of normalized main
-// hand weapon damage, plus spell power scaling via sp_coefficient (a
-// constant 0.429 across all eight ranks -- see BonusCoefficient below,
-// same coefficient Exorcism uses); index 1 (effect 31, weapon percent
-// damage) gives percentOfWeapon, applied the way this fork's other
-// weapon-percent-damage attacks apply their percentage (e.g.
-// sim/rogue/backstab.go's 150%): as the spell's DamageMultiplier over the
-// same (flatBonus + normalized weapon damage) base, not as a second,
-// additive weapon-damage instance; index 2 (effect 77, script effect) has
-// no base_points at any rank (always 0) and appears to be a scripting
-// hook Forever uses server-side (Sacred Arbiter's refresh-Judgement
-// behavior is the likely candidate) rather than a value this engine needs
-// to read.
+// damage) gives flatBonus, a flat Holy bonus beside the normalized main
+// hand weapon damage, plus spell damage scaling via sp_coefficient (a
+// constant 0.429 across all eight ranks, see holyStrikeBonusCoefficient,
+// the same coefficient Exorcism uses); index 1 (effect 31, weapon percent
+// damage) gives percentOfWeapon, the share of the normalized weapon damage
+// the strike deals; index 2 (effect 77, script effect) has no base_points
+// at any rank (always 0) and is the server-side hook Sacred Arbiter's
+// refresh-Judgement behaviour hangs on, not a value this engine reads.
+//
+// The percent scales the weapon damage only. The flat bonus and the
+// spell damage term are added whole, as the client's text says ("causes
+// 50% weapon damage plus an additional 81 to 105 as Holy damage"), and as
+// the live logs show (sim-accuracy lane sim-paladins, 11 Nov 2026): a
+// level 30 to 35 Retribution paladin's 78 rank 4 hits averaged 106 against
+// his own pre-armor white swings of 198 and Seal of Command procs of 145,
+// which is 0.36 x 202 + 25 (98, 107 with his Judgement of the Crusader on
+// a quarter of them) and not (202 + 25) x 0.36 (82); two paladins on
+// foreverlogs.gg landed Holy Strike at 0.73 to 0.75 of a Seal of Command
+// proc, against 0.60 for the old reading. Until then this file applied
+// the percent as the spell's DamageMultiplier over flat and weapon alike,
+// the way Backstab's 150% multiplies its own flat, which halved the flat
+// and the spell damage at 60 and quartered them at rank 1.
 var holyStrikeRanks = []struct {
 	level           int32
 	spellID         int32
@@ -129,9 +138,10 @@ func (paladin *Paladin) registerHolyStrike() {
 		flatDamage := HolyStrikeFlatDamage[i+1]
 		casterLevel := int(paladin.Level)
 
-		damageMultiplier := rank.percentOfWeapon / 100
+		weaponShare := rank.percentOfWeapon / 100
+		damageMultiplier := 1.0
 		if hasSacredArbiter {
-			damageMultiplier *= holyStrikeSacredArbiterDamageMultiplier
+			damageMultiplier = holyStrikeSacredArbiterDamageMultiplier
 		}
 
 		paladin.RegisterSpell(core.SpellConfig{
@@ -163,7 +173,7 @@ func (paladin *Paladin) registerHolyStrike() {
 			ClientBaseDamage: flatDamage.Range(casterLevel),
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				baseDamage := flatDamage.Roll(sim, casterLevel) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
+				baseDamage := flatDamage.Roll(sim, casterLevel) + weaponShare*spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower(target))
 				result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 				// Iron Creed's proc (1311034, aura 231 on a done melee-class
 				// spell, no hit mask) needs a landed hit or crit.
