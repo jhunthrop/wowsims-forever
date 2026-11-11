@@ -2,8 +2,6 @@ package core
 
 import (
 	"time"
-
-	"github.com/wowsims/classic/sim/core/proto"
 )
 
 // Flametongue Totem as the 1.60.1.70009 client states it (rows quoted in
