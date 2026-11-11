@@ -188,15 +188,14 @@ func TestLightningOverloadExtraDamage(t *testing.T) {
 	if damageWith <= damageWithout {
 		t.Fatalf("Lightning Overload 3/3 (30%% per cast): %v total damage across %d casts, want more than the no-talent total %v", damageWith, casts, damageWithout)
 	}
-	// Expected uplift is close to 30%*98/353 = 8.3%; require at least
-	// half of that (4%) so a weak or miswired proc doesn't pass by
-	// accident, without being so tight that ordinary hit/crit variance
-	// fails it - and at most 12%, so the old half-the-bolt overload (15%)
-	// fails.
-	if minWant := damageWithout * 1.04; damageWith < minWant {
-		t.Errorf("Lightning Overload 3/3: total damage %v, want at least %v (>=4%% over the no-talent %v)", damageWith, minWant, damageWithout)
+	// Client 1.60.1.70888 (the 9 November hotfix) makes the overload half
+	// the bolt again, so the uplift is close to 30% * 0.5 = 15%; require at
+	// least 11% so the 70755 rows (98 against the bolt's 353, about 8%)
+	// fail, and at most 19% so a full-size second bolt fails.
+	if minWant := damageWithout * 1.11; damageWith < minWant {
+		t.Errorf("Lightning Overload 3/3: total damage %v, want at least %v (>=11%% over the no-talent %v)", damageWith, minWant, damageWithout)
 	}
-	if maxWant := damageWithout * 1.12; damageWith > maxWant {
-		t.Errorf("Lightning Overload 3/3: total damage %v, want at most %v (<=12%% over the no-talent %v)", damageWith, maxWant, damageWithout)
+	if maxWant := damageWithout * 1.19; damageWith > maxWant {
+		t.Errorf("Lightning Overload 3/3: total damage %v, want at most %v (<=19%% over the no-talent %v)", damageWith, maxWant, damageWithout)
 	}
 }

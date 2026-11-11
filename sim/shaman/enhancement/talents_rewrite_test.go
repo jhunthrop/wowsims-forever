@@ -104,9 +104,9 @@ func newIsolatedTalentShaman(t *testing.T, talentsString string) (*core.Simulati
 }
 
 // TestMentalDexterityAttackPower guards shaman.applyMentalDexterity:
-// node 104755, three ranks, Attack Power += 50/100/150% of Intellect
-// (trait curve 85272 for spell 415140 effect 0 in client 1.60.1.70755;
-// 33/67/100 before).
+// node 104755, three ranks, Attack Power += 33/66/100% of Intellect
+// (Blizzard's 10 November hotfix; the client's trait curve 85272 still
+// reads 50/100/150).
 func TestMentalDexterityAttackPower(t *testing.T) {
 	_, baseline := newIsolatedTalentShaman(t, shamanTalentString(nil, nil, nil))
 	baseAP := baseline.GetStat(stats.AttackPower)
@@ -118,7 +118,7 @@ func TestMentalDexterityAttackPower(t *testing.T) {
 	cases := []struct {
 		rank int
 		pct  float64
-	}{{1, 0.50}, {2, 1.0}, {3, 1.5}}
+	}{{1, 0.33}, {2, 0.66}, {3, 1.0}}
 	for _, c := range cases {
 		_, built := newIsolatedTalentShaman(t, shamanTalentString(nil, map[int]int{enhNodeMentalDexterity: c.rank}, nil))
 		if got, want := built.Talents.MentalDexterity, int32(c.rank); got != want {
