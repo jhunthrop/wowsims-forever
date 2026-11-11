@@ -65,7 +65,7 @@
       }
     },
     {
-      "notes": "Grace of Air Totem whenever your Air slot is empty: Agility for every raid member within 30 yards, you included. Take it when another shaman already has Windfury Totem down near the melee, and wear Rockbiter Weapon so that totem's swings reach you; if none does, Windfury Totem is the stronger drop for the warriors and rogues. Learned at 42, rank 2 at 56.",
+      "notes": "Grace of Air Totem whenever your Air slot is empty: Agility for every raid member within 30 yards, you included. Take it when another shaman already has Windfury Totem down near the melee: its swings reach you on top of your own Windfury Weapon. If no one does, Windfury Totem is the stronger drop for the warriors and rogues. Learned at 42, rank 2 at 56.",
       "action": {
         "condition": {
           "cmp": {
@@ -91,7 +91,7 @@
       }
     },
     {
-      "notes": "Stormstrike on cooldown: it is your hardest hit, and it makes your next Lightning Bolt, Chain Lightning or Earth Shock on the target hit 20% harder. 6 second cooldown.",
+      "notes": "Stormstrike on cooldown: it is your hardest hit, and it makes your next Lightning Bolt, Chain Lightning or Earth Shock on the target hit 20% harder. 8 second cooldown.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -101,37 +101,23 @@
       }
     },
     {
-      "notes": "Lightning Bolt at five Maelstrom Weapon stacks once you have all five points: it is instant and free then. Cast it right after Stormstrike when you can, so the bolt takes Stormstrike's 20%. With fewer points even five stacks leave the bolt a cast that holds up your next swing, and the swing is worth more.",
+      "notes": "Lightning Bolt at five Maelstrom Weapon stacks: each stack takes 20% off its cast time and mana at any rank, so five make it instant and free from your first point. Cast it right after Stormstrike when you can, so the bolt takes Stormstrike's 20%.",
       "action": {
         "condition": {
-          "and": {
-            "vals": [
-              {
-                "auraIsKnown": {
-                  "auraId": {
-                    "spellId": 408498,
-                    "tag": 5
-                  }
-                }
-              },
-              {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "auraNumStacks": {
-                      "auraId": {
-                        "spellId": 408498
-                      }
-                    }
-                  },
-                  "rhs": {
-                    "const": {
-                      "val": "5"
-                    }
-                  }
+          "cmp": {
+            "op": "OpGe",
+            "lhs": {
+              "auraNumStacks": {
+                "auraId": {
+                  "spellId": 408498
                 }
               }
-            ]
+            },
+            "rhs": {
+              "const": {
+                "val": "5"
+              }
+            }
           }
         },
         "castSpell": {
