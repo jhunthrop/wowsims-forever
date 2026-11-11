@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/stats"
 )
@@ -88,10 +89,21 @@ func darkSacrificeManaPerTick(tickAmount, spirit float64) float64 {
 	return tickAmount + spirit/float64(darkSacrificeTicks)
 }
 
+// darkSacrificeTick is one tick's health taken and mana given at the
+// priest's level. The client grows the rank's amount by 1 a level above the
+// rank's own level up to its max level (SpellEffect EffectRealPointsPerLevel
+// 1 and SpellLevels MaxLevel 28/38/48/58/68, the generated
+// DarkSacrificePointsPerLevel and DarkSacrificeMaxLevel), the rule every
+// damage spell here reads through clientRoll: rank 1 is 80 a tick at 20, 85
+// at 25 and 88 from 28 on.
+func darkSacrificeTick(rank, level int) float64 {
+	return periodicTick(clientdamage.Roll(DarkSacrificeBaseDamage[rank], DarkSacrificePointsPerLevel[rank], DarkSacrificeLevel[rank], DarkSacrificeMaxLevel[rank], level))
+}
+
 func (priest *Priest) darkSacrificeConfig(rank int) core.SpellConfig {
 	actionID := core.ActionID{SpellID: DarkSacrificeSpellId[rank]}
 	manaMetrics := priest.NewManaMetrics(actionID)
-	tick := DarkSacrificeBaseDamage[rank][0]
+	tick := darkSacrificeTick(rank, int(priest.Level))
 	cooldown := time.Duration(DarkSacrificeCooldownMS[rank]) * time.Millisecond
 
 	return core.SpellConfig{
