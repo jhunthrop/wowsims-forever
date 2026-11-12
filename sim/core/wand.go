@@ -134,9 +134,17 @@ type wandTiming struct {
 
 // newWandTiming tracks the character's casts for the wand and clears the
 // tracker at every reset. Shoot's own completion is left out: a shot ends no
-// spell, it is the run.
+// spell, it is the run. A character whose environment is already finalized
+// (a test harness registering Shoot on its own) cannot take the tracking
+// aura; it keeps the swing timer and never sees a windup.
 func newWandTiming(character *Character) *wandTiming {
 	timing := &wandTiming{lastSpellEnd: neverWanded, lastShot: neverWanded}
+	character.RegisterResetEffect(func(_ *Simulation) {
+		timing.lastSpellEnd, timing.lastShot = neverWanded, neverWanded
+	})
+	if character.Env != nil && character.Env.IsFinalized() {
+		return timing
+	}
 	isShoot := func(spell *Spell) bool { return spell.ActionID.SpellID == ShootSpellID }
 	MakePermanent(character.RegisterAura(Aura{
 		Label: "Wand Timing",
@@ -156,9 +164,6 @@ func newWandTiming(character *Character) *wandTiming {
 			}
 		},
 	}))
-	character.RegisterResetEffect(func(_ *Simulation) {
-		timing.lastSpellEnd, timing.lastShot = neverWanded, neverWanded
-	})
 	return timing
 }
 
