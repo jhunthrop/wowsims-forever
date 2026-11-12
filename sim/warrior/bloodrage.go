@@ -4,11 +4,18 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/stats"
 )
 
 const (
 	bloodrageInstantRage   = 10.0
 	bloodrageRagePerSecond = 1.0
+	// bloodrageHealthCostShare is the client's cost: SpellPower row for
+	// 2687 has PowerType -2 (health) and PowerCostPct 20, a fifth of the
+	// warrior's base health (the class's own health at the level, before
+	// Stamina: 1,689 at 60, so 338 health a cast). Vanilla's Bloodrage
+	// cost 16%; the engine had charged nothing.
+	bloodrageHealthCostShare = 0.20
 )
 
 func (warrior *Warrior) registerBloodrageCD() {
@@ -21,6 +28,8 @@ func (warrior *Warrior) registerBloodrageCD() {
 	rageScale := warrior.improvedBloodrageMultiplier()
 	instantRage := bloodrageInstantRage * rageScale
 	ragePerSec := bloodrageRagePerSecond * rageScale
+
+	healthCost := bloodrageHealthCostShare * warrior.GetBaseStats()[stats.Health]
 
 	warrior.BloodrageAura = warrior.RegisterAura(core.Aura{
 		Label:    "Bloodrage",
@@ -43,7 +52,14 @@ func (warrior *Warrior) registerBloodrageCD() {
 			},
 		},
 
+		ExtraCastCondition: func(sim *core.Simulation, _ *core.Unit) bool {
+			// A health cost needs the health: the client refuses the
+			// cast below it rather than letting it kill the warrior.
+			return warrior.CurrentHealth() > healthCost
+		},
+
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+			warrior.RemoveHealth(sim, healthCost)
 			warrior.BloodrageAura.Activate(sim)
 			warrior.AddRage(sim, instantRage, rageMetrics)
 

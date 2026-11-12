@@ -68,6 +68,45 @@ func damageTakenRageConversion(receiver, _ *Unit) float64 {
 	return GetRageConversion(receiver.Level)
 }
 
+// Forever's rage from damage taken ignores the receiver's own armor.
+// Blizzard's 30 September 2026 Priest and Warrior deep dive: "Rage gain
+// from damage is calculated by ignoring Armor. So, wearing Armor will no
+// longer reduce the Rage you gain. We are using the old formula as if you
+// always had 50% damage reduction from Armor"; the 8 October beta notes
+// retuned that stand-in: "we were balancing Rage gained around Warriors
+// having 50% Armor ... We have rebalanced Rage gains based on appropriate
+// values per level in the 20% to 40% range, varying by level", and made
+// the extra damage of critical strikes and crushing blows count. So the
+// rage is Kalgan's formula on the swing BEFORE armor (critical and
+// crushing multipliers in, as dealt) times one less the armor Blizzard
+// assumes for the level. The per-level table is not published: this is
+// a straight line from 20% at level 1 to 40% at the level cap, the two
+// ends Blizzard named (a hand row until a log at a known armor pins the
+// middle). Partial magic resists are not armor and stay in the damage.
+const (
+	assumedArmorReductionAtLevelOne = 0.20
+	assumedArmorReductionAtCap      = 0.40
+)
+
+// assumedArmorReduction is the armor damage reduction Forever assumes a
+// character of level has when it turns damage taken into rage.
+func assumedArmorReduction(level int32) float64 {
+	l := float64(min(max(level, 1), CharacterMaxLevel))
+	return assumedArmorReductionAtLevelOne + (assumedArmorReductionAtCap-assumedArmorReductionAtLevelOne)*(l-1)/float64(CharacterMaxLevel-1)
+}
+
+// damageTakenRage is the rage one hit taken generates before the rage
+// bar's own multipliers: Kalgan's 2.5 x damage / c on the hit as it was
+// before the receiver's armor, at the armor Forever assumes for the
+// receiver's level.
+func damageTakenRage(receiver, attacker *Unit, spell *Spell, result *SpellResult) float64 {
+	damage := result.Damage
+	if spell.SpellSchool.Matches(SpellSchoolPhysical) && result.ResistanceMultiplier > 0 {
+		damage = damage / result.ResistanceMultiplier * (1 - assumedArmorReduction(receiver.Level))
+	}
+	return damage * 2.5 / damageTakenRageConversion(receiver, attacker)
+}
+
 // Forever's normalized rage. The beta replaced vanilla's damage-based
 // rage (GetRageConversion above, now used only for rage from damage
 // TAKEN) with a fixed amount per successful auto-attack that depends on
@@ -186,8 +225,7 @@ func (unit *Unit) EnableRageBar(options RageBarOptions) {
 			if unit.GetCurrentPowerBar() != RageBar {
 				return
 			}
-			rageConversionDamageTaken := damageTakenRageConversion(unit, spell.Unit)
-			generatedRage := result.Damage * 2.5 / rageConversionDamageTaken
+			generatedRage := damageTakenRage(unit, spell.Unit, spell, result)
 			generatedRage *= unit.rageBar.damageTakenMultiplier
 			generatedRage += unit.rageBar.flatDamageTakenBonusRage
 			unit.AddRage(sim, generatedRage, rageFromDamageTakenMetrics)

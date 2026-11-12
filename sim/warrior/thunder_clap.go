@@ -30,7 +30,29 @@ const (
 	// (6000 ms); its slow is core.ThunderClapSlowPercent.
 	thunderClapCooldown               = 6 * time.Second
 	conquerorsBattlegear5pcSlowDamage = 1.5
+
+	// thunderClapAttackPowerCoefficient is the attack power each hit adds
+	// to the rank's amount. Blizzard's 30 September 2026 deep dive:
+	// "Thunder Clap: Now gains significant damage scaling from Attack
+	// Power ... Threat rebalanced (reduced) to account for being usable
+	// in Defensive Stance." The client rows carry no coefficient (a
+	// server value), so this is measured: eleven Protection warriors at
+	// 15 to 33 in the public Forever logs of 5 to 12 November
+	// (foreverlogs.gg), each one's Thunder Clap hits read against its
+	// own Revenge hits (whose 0.25 x attack power the client's
+	// description variable 1024 states) to take the target's armor out,
+	// give 0.05 to 0.07 of attack power with a median of 0.0625
+	// (design/reviews/2026-11-12-sim-accuracy/protection-warrior.md).
+	// The threat multiplier below is vanilla's 2.5 and UNCONFIRMED for
+	// Forever: Blizzard says it was reduced and names no number.
+	thunderClapAttackPowerCoefficient = 0.0625
 )
+
+// thunderClapBaseDamage is one Thunder Clap hit before mitigation: the
+// rank's roll plus the attack power share.
+func thunderClapBaseDamage(roll, attackPower float64) float64 {
+	return roll + thunderClapAttackPowerCoefficient*attackPower
+}
 
 func (warrior *Warrior) registerThunderClapSpell() {
 	rank := max(1, rankAtLevel(ThunderClapLevel[:], warrior.Level))
@@ -93,7 +115,7 @@ func (warrior *Warrior) registerThunderClapSpell() {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			numHits := min(len(results), len(sim.Encounter.TargetUnits))
 			for idx := 0; idx < numHits; idx++ {
-				results[idx] = spell.CalcDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMagicHitAndCrit)
+				results[idx] = spell.CalcDamage(sim, target, thunderClapBaseDamage(damage.Roll(sim, casterLevel), spell.MeleeAttackPower(target)), spell.OutcomeMagicHitAndCrit)
 				target = sim.Environment.NextTargetUnit(target)
 			}
 
