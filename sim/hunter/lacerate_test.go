@@ -88,10 +88,20 @@ func TestLacerateNeedsMeleeRange(t *testing.T) {
 	}
 }
 
-func TestLacerateTakesResourcefulnessCostReduction(t *testing.T) {
+// Resourcefulness's cost cut (440529 effect 0, aura 108 misc 14) names its
+// spells by class mask: 194 in word 0 (Raptor Strike, Mongoose Bite, Wing
+// Clip, the traps), 524288 in word 1 (Counterattack) and 2097152 in word 2
+// (Strider Kick). Lacerate (24118, 24119, 24120, 1299332) carries 4096 in
+// word 1, which Savage Strikes and Predator's Edge name (528384) and
+// Resourcefulness does not, so Lacerate keeps its full mana cost
+// (1.60.1.70790 and 1.60.1.70888; sim-accuracy 2026-11-12, melee-hunters H1).
+func TestResourcefulnessLeavesLacerateAtItsFullCost(t *testing.T) {
 	_, plain, _ := newBareMeleeHunterAtLevel(t, 60)
 	_, talented, _ := newRunningHunterForTalentTest(t, 60, "resourcefulness", 2, proto.Hunter_Options_PetNone, 5, nil)
-	if talented.Lacerate.Cost.Multiplier >= plain.Lacerate.Cost.Multiplier {
-		t.Error("Resourcefulness 2/2 did not reduce Lacerate's mana cost")
+	if got, want := talented.Lacerate.Cost.Multiplier, plain.Lacerate.Cost.Multiplier; got != want {
+		t.Errorf("Resourcefulness 2/2 moved Lacerate's cost multiplier to %d, want %d (Lacerate is not in 440529's mask)", got, want)
+	}
+	if talented.RaptorStrike.Cost.Multiplier >= plain.RaptorStrike.Cost.Multiplier {
+		t.Error("Resourcefulness 2/2 did not reduce Raptor Strike's mana cost")
 	}
 }

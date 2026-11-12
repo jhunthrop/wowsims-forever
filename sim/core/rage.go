@@ -382,8 +382,14 @@ func (rc *RageCost) SpendCost(sim *Simulation, spell *Spell) {
 		spell.Unit.SpendRage(sim, spell.CurCast.Cost, rc.ResourceMetrics)
 	}
 }
+
+// RefundAmount is the rage a failed cast gives back.
+func (rc *RageCost) RefundAmount(_ *Spell) float64 {
+	return rc.Refund
+}
+
 func (rc *RageCost) IssueRefund(sim *Simulation, spell *Spell) {
-	if rc.Refund > 0 {
-		spell.Unit.AddRage(sim, rc.Refund, rc.RefundMetrics)
+	if amount := rc.RefundAmount(spell); amount > 0 {
+		spell.Unit.AddRage(sim, amount, rc.RefundMetrics)
 	}
 }
