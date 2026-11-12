@@ -23,8 +23,15 @@ import (
 // (Wowhead's Forever spell tooltips, read 2026-10-31) state the same 20,
 // 30, 50, 60 and 75 over 15 sec. The hidden companion spell 414647 used to
 // be a flat 20% weapon damage hit; the live text makes the hit 10% weapon
-// damage for each stack already on the target, so the first application
-// lands no weapon damage.
+// damage for each stack. The first Forever bear logs (foreverlogs.gg, 5 to
+// 11 November 2026; sim-accuracy 2026-11-12 feral) show the hit counting the
+// stack it adds: a level 43 bear's hits against its paw's white hit read
+// 0.106, 0.206, 0.307, 0.44, 0.56 and 0.62 with 0 to 5 stacks already up, so
+// the first application lands 10% weapon damage and the sixth 60%
+// (lacerateHitDamage). The same logs show the bleed's ticks 15% larger from
+// the second application on, the bear's Rend and Tear 5/5: the server puts
+// the talent on the bleed it snapshots when the target already bleeds
+// (bleedRendAndTearMultiplier).
 //
 // unconfirmed: the stack count the client tables do not hold (five, as the
 // text says) with each stack adding the tick again; and the threat
@@ -34,7 +41,7 @@ const (
 	lacerateTickLength = 3 * time.Second
 	lacerateMaxStacks  = 5
 	// lacerateWeaponDamagePerStack is the hit's 10% weapon damage for each
-	// stack already on the target.
+	// stack on the target once it lands, the one it adds included.
 	lacerateWeaponDamagePerStack = 0.10
 	lacerateRageCost             = 15.0
 	lacerateMissRefund           = 0.8
@@ -139,7 +146,7 @@ func (druid *Druid) registerLacerateSpell() {
 			TickLength:    lacerateTickLength,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
 				// A new stack changes the tick, so every cast re-snapshots.
-				dot.Snapshot(target, tick.Center(casterLevel)*float64(dot.GetStacks()), false)
+				dot.Snapshot(target, tick.Center(casterLevel)*float64(dot.GetStacks())*druid.bleedRendAndTear, false)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
@@ -147,11 +154,13 @@ func (druid *Druid) registerLacerateSpell() {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			rendAndTear := druid.RendAndTearMultiplier(target)
 			baseDamage := lacerateHitDamage(spell.Dot(target).GetStacks(), spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target)))
-			baseDamage *= druid.RendAndTearMultiplier(target)
+			baseDamage *= rendAndTear
 
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 			if result.Landed() {
+				druid.bleedRendAndTear = rendAndTear
 				druid.stackLacerate(sim, spell.Dot(target))
 			} else {
 				spell.IssueRefund(sim)
@@ -162,9 +171,10 @@ func (druid *Druid) registerLacerateSpell() {
 }
 
 // lacerateHitDamage is the hit's weapon damage with existingStacks already
-// on the target.
+// on the target: 10% for each of them and for the stack the hit adds, so
+// the hit on a full stack of five lands 60%.
 func lacerateHitDamage(existingStacks int32, weaponDamage float64) float64 {
-	return lacerateWeaponDamagePerStack * float64(existingStacks) * weaponDamage
+	return lacerateWeaponDamagePerStack * float64(existingStacks+1) * weaponDamage
 }
 
 // stackLacerate adds a stack and restarts the bleed's clock.

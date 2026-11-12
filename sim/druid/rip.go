@@ -85,7 +85,9 @@ func (druid *Druid) newRipSpellConfig(rank int) core.SpellConfig {
 				cp := float64(druid.ComboPoints())
 				baseDamage := tickDamage.Center(casterLevel) + tickPerComboPoint*cp
 				tickDamage := baseDamage + ripTickAttackPowerShare(cp)*dot.Spell.MeleeAttackPower(target)
-				dot.Snapshot(target, tickDamage, isRollover)
+				// Rend and Tear on the bleed when the target already bled as it
+				// was applied (bleedRendAndTear, feral_talents.go).
+				dot.Snapshot(target, tickDamage*druid.bleedRendAndTear, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
@@ -97,6 +99,7 @@ func (druid *Druid) newRipSpellConfig(rank int) core.SpellConfig {
 
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMeleeSpecialHitNoHitCounter)
 			if result.Landed() {
+				druid.bleedRendAndTear = druid.RendAndTearMultiplier(target)
 				dot := spell.Dot(target)
 				dot.NumberOfTicks = RipNumberOfTicks + dot.ModNumberOfTicks
 				dot.Apply(sim)

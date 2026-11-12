@@ -16,12 +16,44 @@ var RakeInitialDamage = clientdamage.FromTable(RakeBaseDamage[:], RakePointsPerL
 // per-level growth, and its tick is not a generated column, so
 // RakeTickDamage is spellconst/druid.json's periodic effect for the same
 // ids (42 a tick at rank 4 after push 113403, 34 before it).
+//
+// Both halves scale on the server. Blizzard's Forever notes of 3 November
+// 2026: "Rake: Base points and attack power scaling increased by about
+// 25%" (the base half is the push above). The first Forever cat logs
+// (foreverlogs.gg, 5 to 11 November 2026; sim-accuracy 2026-11-12 feral,
+// C1) put the scaling on both halves: five cats at 24 to 30 land the hit at
+// their paw's white damage plus the rank's amount (0.93 to 1.01 of the paw
+// after the flat, across attack power from 179 to 296), and tick the bleed
+// for the rank's amount plus 0.070 to 0.089 of their attack power
+// (rakeTickAttackPowerShare, four Feral cats; a Balance druid in Cat Form
+// read 0.052). The live tooltip (9904) renders neither, as Rip's and
+// Ferocious Bite's attack power shares are not rendered either.
+//
+// unconfirmed: the share's exact value, measured on five logged cats whose
+// attack power is read off their stats; a level 60 cat log with known gear
+// would pin it.
 var RakeTickDamage = [RakeRanks + 1]clientdamage.Effect{
 	{},
 	{Amount: 20, SpellLevel: 24},
 	{Amount: 26, SpellLevel: 34},
 	{Amount: 32, SpellLevel: 44},
 	{Amount: 42, SpellLevel: 54},
+}
+
+// rakeTickAttackPowerShare is the attack power each Rake tick adds to the
+// rank's amount (0.24 over the three ticks), the logs' fit above.
+const rakeTickAttackPowerShare = 0.08
+
+// rakeHitDamage is Rake's hit before multipliers: the paw's weapon damage
+// plus the rank's roll.
+func rakeHitDamage(roll, weaponDamage float64) float64 {
+	return roll + weaponDamage
+}
+
+// rakeTickDamage is one Rake tick before multipliers: the rank's amount
+// plus the attack power share.
+func rakeTickDamage(center, attackPower float64) float64 {
+	return center + rakeTickAttackPowerShare*attackPower
 }
 
 func (druid *Druid) registerRakeSpell() {
@@ -77,7 +109,10 @@ func (druid *Druid) newRakeSpellConfig(rank int) core.SpellConfig {
 			NumberOfTicks: 3,
 			TickLength:    time.Second * 3,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)
+				// Rend and Tear on the bleed when the target already bled as it
+				// was applied (bleedRendAndTear, feral_talents.go).
+				tick := rakeTickDamage(tickDamage.Center(casterLevel), dot.Spell.MeleeAttackPower(target))
+				dot.Snapshot(target, tick*druid.bleedRendAndTear, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
@@ -87,11 +122,13 @@ func (druid *Druid) newRakeSpellConfig(rank int) core.SpellConfig {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			druid.BreakProwl(sim)
 
-			baseDamage := initialDamage.Roll(sim, casterLevel) * druid.RendAndTearMultiplier(target)
+			rendAndTear := druid.RendAndTearMultiplier(target)
+			baseDamage := rakeHitDamage(initialDamage.Roll(sim, casterLevel), spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))) * rendAndTear
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if result.Landed() {
 				druid.AddComboPoints(sim, 1, target, spell.ComboPointMetrics())
+				druid.bleedRendAndTear = rendAndTear
 				spell.Dot(target).Apply(sim)
 			} else {
 				spell.IssueRefund(sim)
@@ -99,7 +136,8 @@ func (druid *Druid) newRakeSpellConfig(rank int) core.SpellConfig {
 		},
 
 		ExpectedInitialDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, _ bool) *core.SpellResult {
-			initial := spell.CalcPeriodicDamage(sim, target, initialDamage.Center(casterLevel), spell.OutcomeExpectedMagicAlwaysHit)
+			hit := rakeHitDamage(initialDamage.Center(casterLevel), spell.Unit.AutoAttacks.MH().CalculateAverageWeaponDamage(spell.MeleeAttackPower(target)))
+			initial := spell.CalcPeriodicDamage(sim, target, hit, spell.OutcomeExpectedMagicAlwaysHit)
 
 			attackTable := spell.Unit.AttackTables[target.UnitIndex][spell.CastType]
 			critChance := spell.PhysicalCritChance(attackTable)
@@ -108,7 +146,7 @@ func (druid *Druid) newRakeSpellConfig(rank int) core.SpellConfig {
 			return initial
 		},
 		ExpectedTickDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, _ bool) *core.SpellResult {
-			ticks := spell.CalcPeriodicDamage(sim, target, tickDamage.Center(casterLevel), spell.OutcomeExpectedMagicAlwaysHit)
+			ticks := spell.CalcPeriodicDamage(sim, target, rakeTickDamage(tickDamage.Center(casterLevel), spell.MeleeAttackPower(target)), spell.OutcomeExpectedMagicAlwaysHit)
 			return ticks
 		},
 	}

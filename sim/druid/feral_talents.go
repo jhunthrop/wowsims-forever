@@ -84,11 +84,18 @@ func (druid *Druid) applyNaturalReaction() {
 // The client row (spell 1223246) is a dummy aura, so the server decides what
 // it touches; the text names every melee ability. It is applied to the direct
 // damage of the bear abilities and of the cat's Shred, Claw, Rake, Ravage,
-// Ferocious Bite and Primal Bite, never to a bleed's own ticks.
+// Ferocious Bite and Primal Bite, and to the bleed a melee ability leaves
+// when the target already bleeds as it is applied: the first Forever bear
+// logs (foreverlogs.gg, 5 to 11 November 2026) show a level 43 bear's
+// Lacerate ticks at the rank's amount on the first application and 15%
+// over it from the second on (sim-accuracy 2026-11-12 feral, L3). Lacerate,
+// Rake, Rip and Pounce snapshot that multiplier (bleedRendAndTear), read
+// before the bleed itself is applied so a bleed never counts itself.
 //
 // unconfirmed: whether the client applies it with the other damage
 // modifiers (additively) or after them; it is applied here as its own
-// multiplier.
+// multiplier. The bleed half is measured on Lacerate alone; Rake, Rip and
+// Pounce follow the same server rule.
 const (
 	rendAndTearMaxRank       = 5
 	rendAndTearDamagePerRank = 0.03

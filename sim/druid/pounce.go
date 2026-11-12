@@ -12,13 +12,19 @@ import (
 // Pounce cast (9005, 9823, 9827), whose own effects are the stun, the
 // trigger of that spell and one combo point, so neither the generated
 // PounceBaseDamage row (all zero) nor the vendored spellconst file carry
-// it. Source: 1.60.1.70009 SpellEffect.csv, effect 0 (aura 3, every 3 s)
-// of those three spells. TestPounceTickDamage pins the values.
+// it. Source: 1.60.1.70790 SpellEffect.csv, effect 0 (aura 3, every 3 s)
+// of those three spells: 19, 25 and 31 since Blizzard's 3 November 2026
+// notes ("Pounce: Base points and attack power scaling increased by about
+// 25%"; 15, 20 and 25 in 1.60.1.70009). TestPounceTickDamage pins the
+// values.
+//
+// unconfirmed: the attack power half of that line, which the client does
+// not carry and no log has measured (two logged Pounce ticks).
 var PounceTickDamage = [PounceRanks + 1]clientdamage.Effect{
 	{},
-	{Amount: 15, SpellLevel: 36},
-	{Amount: 20, SpellLevel: 46},
-	{Amount: 25, SpellLevel: 56},
+	{Amount: 19, SpellLevel: 36},
+	{Amount: 25, SpellLevel: 46},
+	{Amount: 31, SpellLevel: 56},
 }
 
 const (
@@ -87,7 +93,9 @@ func (druid *Druid) newPounceSpellConfig(rank int) core.SpellConfig {
 			NumberOfTicks: pounceBleedTicks,
 			TickLength:    pounceBleedTickLength,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
-				dot.Snapshot(target, tickDamage.Center(casterLevel), isRollover)
+				// Rend and Tear on the bleed when the target already bled as it
+				// was applied (bleedRendAndTear, feral_talents.go).
+				dot.Snapshot(target, tickDamage.Center(casterLevel)*druid.bleedRendAndTear, isRollover)
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeTick)
@@ -100,6 +108,7 @@ func (druid *Druid) newPounceSpellConfig(rank int) core.SpellConfig {
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMeleeSpecialHitNoHitCounter)
 			if result.Landed() {
 				druid.AddComboPoints(sim, pounceComboPoints, target, spell.ComboPointMetrics())
+				druid.bleedRendAndTear = druid.RendAndTearMultiplier(target)
 				spell.Dot(target).Apply(sim)
 			} else {
 				spell.IssueRefund(sim)

@@ -154,6 +154,10 @@ type Druid struct {
 	BleedsActive      int
 	AssumeBleedActive bool
 
+	// bleedRendAndTear is Rend and Tear's multiplier on the bleed being
+	// applied, read before it lands (RendAndTearMultiplier's note).
+	bleedRendAndTear float64
+
 	ReplaceBearMHFunc core.ReplaceMHSwing
 
 	Barkskin             *DruidSpell
@@ -364,6 +368,7 @@ func (druid *Druid) IsProwling() bool {
 
 func (druid *Druid) Reset(_ *core.Simulation) {
 	druid.BleedsActive = 0
+	druid.bleedRendAndTear = 1
 	druid.form = druid.StartingForm
 	druid.disabledMCDs = []*core.MajorCooldown{}
 }
