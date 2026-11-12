@@ -27,11 +27,9 @@ const (
 	infusionOfLightCastTimePerRank = 500 * time.Millisecond
 
 	// Illumination (node 20210): a 20% chance a rank, on a heal crit, to
-	// gain 50% of the spell's base mana cost.
+	// gain 50% of the spell's base mana cost. The live energize is
+	// 1310908 (effect 30 alone); the mana is reported under the talent.
 	illuminationActionID            = 20210
-	illuminationRegenSpellID        = 20272
-	illuminationRegenWhileCasting   = 0.50
-	illuminationRegenDuration       = 15 * time.Second
 	illuminationChancePerRank       = 0.20
 	illuminationManaShareOfBaseCost = 0.50
 
@@ -146,21 +144,14 @@ func (paladin *Paladin) applyIllumination() {
 
 	chance := illuminationChancePerRank * float64(rank)
 	manaMetrics := paladin.NewManaMetrics(core.ActionID{SpellID: illuminationActionID})
-	// Forever's 20272 also carries effect 1, aura 134 (regeneration while
-	// casting) at 50 for 15 s (SpellEffect 1237075, DurationIndex 8,
-	// 1.60.1.70707); Wowhead's buff text: "Regenerating at 50% of normal
-	// rate while casting spells".
-	castingRegen := paladin.RegisterAura(core.Aura{
-		Label:    "Illumination Casting Regen",
-		ActionID: core.ActionID{SpellID: illuminationRegenSpellID},
-		Duration: illuminationRegenDuration,
-		OnGain: func(_ *core.Aura, sim *core.Simulation) {
-			paladin.PseudoStats.SpiritRegenRateCasting += illuminationRegenWhileCasting
-		},
-		OnExpire: func(_ *core.Aura, sim *core.Simulation) {
-			paladin.PseudoStats.SpiritRegenRateCasting -= illuminationRegenWhileCasting
-		},
-	})
+	// Mana and nothing else. The client's 20272 row carries a 50%
+	// regeneration-while-casting aura for 15 s beside its energize
+	// (effect 1, aura 134, since 1.60.1.70707), but the live server never
+	// casts it: a logged Holy paladin's 24 crit heals brought 24 gains of
+	// half the base cost, every one from 1310908, and no Illumination buff
+	// (foreverlogs.gg 2834; design/reviews/2026-11-12-sim-accuracy/
+	// holy-paladin.md). Sim-accuracy rounds 7 to 29 had the aura from the
+	// client row.
 	paladin.RegisterAura(core.Aura{
 		Label:    "Illumination",
 		ActionID: core.ActionID{SpellID: illuminationActionID},
@@ -176,7 +167,6 @@ func (paladin *Paladin) applyIllumination() {
 				return
 			}
 			paladin.AddMana(sim, paladin.illuminationBaseCost[spell]*illuminationManaShareOfBaseCost, manaMetrics)
-			castingRegen.Activate(sim)
 		},
 	})
 }
