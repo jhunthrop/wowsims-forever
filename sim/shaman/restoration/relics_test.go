@@ -10,6 +10,16 @@ import (
 	"github.com/wowsims/classic/sim/shaman"
 )
 
+// clientTotems are the Forever totems the site's simdb carries and the
+// fork's own database lacks; a request wearing one carries the item.
+var clientTotems = &proto.SimDatabase{Items: []*proto.SimItem{{
+	Id:               shaman.TidalTotem,
+	Name:             "Tidal Totem",
+	Type:             proto.ItemType_ItemTypeRanged,
+	RangedWeaponType: proto.RangedWeaponType_RangedWeaponTypeTotem,
+	RequiredLevel:    60,
+}}}
+
 func healingRelicFingerprints(t *testing.T, relicID int32) map[string]core.SpellFingerprint {
 	t.Helper()
 	player := core.WithSpec(&proto.Player{
@@ -17,6 +27,7 @@ func healingRelicFingerprints(t *testing.T, relicID int32) map[string]core.Spell
 		Race:      proto.Race_RaceTroll,
 		Level:     60,
 		Equipment: core.RelicEquipment(relicID),
+		Database:  clientTotems,
 	}, restorationOptions)
 	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, core.FullBuffs.Raid, core.FullBuffs.Debuffs)
 	env, _, _ := core.NewEnvironment(raid, &proto.Encounter{}, true)

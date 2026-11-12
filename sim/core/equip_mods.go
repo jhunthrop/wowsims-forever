@@ -123,6 +123,19 @@ func (mod EquipSpellMod) SpellModConfig(engineMask uint64) (SpellModConfig, erro
 // does not model or an (aura, op) pair it cannot express: an item must not
 // count as modelled while a part of it does nothing.
 func NewEquipModItemEffect(itemID int32, mods []EquipSpellMod, table ClassMaskTable) {
+	NewItemEffect(itemID, equipModsEffect(itemID, mods, table))
+}
+
+// NewClientEquipModItemEffect is NewEquipModItemEffect for a Forever relic
+// the site's simdb carries and this fork's own database lacks (Tidal Totem):
+// the request supplies the item, as NewClientItemEffect's items are.
+func NewClientEquipModItemEffect(itemID int32, mods []EquipSpellMod, table ClassMaskTable) {
+	NewClientItemEffect(itemID, equipModsEffect(itemID, mods, table))
+}
+
+// equipModsEffect resolves every modifier against the class's table now and
+// returns the effect that applies them to a wearer.
+func equipModsEffect(itemID int32, mods []EquipSpellMod, table ClassMaskTable) ApplyEffect {
 	configs := make([]SpellModConfig, 0, len(mods))
 	for _, mod := range mods {
 		engineMask := table.Resolve(mod.Families)
@@ -135,10 +148,10 @@ func NewEquipModItemEffect(itemID int32, mods []EquipSpellMod, table ClassMaskTa
 		}
 		configs = append(configs, config)
 	}
-	NewItemEffect(itemID, func(agent Agent) {
+	return func(agent Agent) {
 		character := agent.GetCharacter()
 		for _, config := range configs {
 			character.AddStaticMod(config)
 		}
-	})
+	}
 }

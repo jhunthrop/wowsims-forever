@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
 	"github.com/wowsims/classic/sim/druid"
 )
@@ -44,9 +45,19 @@ func TestIdolOfSwiftnessCutsSwiftmendsCooldownOnly(t *testing.T) {
 // the raids open.
 func TestIdolOfSynthesisCutsSwiftmendsRemainingCooldownPerHoT(t *testing.T) {
 	talents := talentsString(t, map[string]int{"swiftmend": 1})
+	// The fork's own database lacks the idol; the request carries it, as the
+	// site's simdb does.
+	database := &proto.SimDatabase{Items: []*proto.SimItem{{
+		Id:               druid.IdolOfSynthesis,
+		Name:             "Idol of Synthesis",
+		Type:             proto.ItemType_ItemTypeRanged,
+		RangedWeaponType: proto.RangedWeaponType_RangedWeaponTypeIdol,
+		RequiredLevel:    60,
+	}}}
 	remaining := func(relic int32, hots int) time.Duration {
 		player := newPlayer(60, talents, stats.Stats{}, nil)
 		player.Equipment = core.RelicEquipment(relic)
+		player.Database = database
 		resto, sim := newDruid(t, player)
 		self := &resto.Unit
 		if hots >= 1 {

@@ -104,13 +104,14 @@ func init() {
 	core.NewEquipModItemEffect(IdolOfSwiftness, relicEquipMods[IdolOfSwiftness], relicClassMasks)
 
 	// Idol of Synthesis (a Pix Xizzix vendor relic, client 1.60.1.70790
-	// items/druid.json): "Each of your heal over time effects on the target
+	// items/druid.json, which the site's simdb carries and this fork's own
+	// database lacks): "Each of your heal over time effects on the target
 	// reduces the remaining cooldown on Swiftmend by 1 sec when you cast
 	// it." Its equip spell is a dummy aura the server scripts, so the cut is
 	// hand-written in swiftmend.go (cutSwiftmendCooldownPerHoT): with
 	// Rejuvenation and Regrowth on the tank every Swiftmend comes back 2 s
 	// sooner.
-	core.NewItemEffect(IdolOfSynthesis, func(agent core.Agent) {
+	core.NewClientItemEffect(IdolOfSynthesis, func(agent core.Agent) {
 		agent.(DruidAgent).GetDruid().swiftmendCooldownCutPerHoT = idolOfSynthesisCutPerHoT
 	})
 

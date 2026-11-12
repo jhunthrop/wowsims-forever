@@ -136,9 +136,10 @@ func init() {
 	core.NewEquipModItemEffect(BurningTotem, relicEquipMods[BurningTotem], relicClassMasks)
 
 	// Client spell 1291076. Equip: Reduces the Mana cost of your Healing
-	// Wave ability by 5%. A Pix Xizzix vendor relic; an unregistered effect
-	// left the gear search an empty totem slot for a Restoration shaman.
-	core.NewEquipModItemEffect(TidalTotem, relicEquipMods[TidalTotem], relicClassMasks)
+	// Wave ability by 5%. A Pix Xizzix vendor relic the site's simdb carries
+	// and this fork's own database lacks; an unregistered effect left the
+	// gear search an empty totem slot for a Restoration shaman.
+	core.NewClientEquipModItemEffect(TidalTotem, relicEquipMods[TidalTotem], relicClassMasks)
 
 	// Equip: Increases the maximum number of charges on your Water Shield by
 	// 1 (totemOfSustainingExtraCharges).
