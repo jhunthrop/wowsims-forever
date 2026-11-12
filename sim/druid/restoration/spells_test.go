@@ -292,26 +292,50 @@ func TestSwiftmendNeedsAnEffectAndLeavesItUp(t *testing.T) {
 	}
 }
 
-// With both effects up, every logged Swiftmend healed for Regrowth's whole
-// duration (16 of 16, whichever had less time left), never Rejuvenation's.
-func TestSwiftmendReadsRegrowthWhenBothAreUp(t *testing.T) {
-	resto, sim := resto60(t)
-	self := &resto.Unit
-	rejuvenation, regrowth := resto.Rejuvenation[10], resto.Regrowth[9]
-	regrowth.ApplyEffects(sim, self, regrowth.Spell)
-	rejuvenation.ApplyEffects(sim, self, rejuvenation.Spell)
-	dot := regrowth.Hot(self)
-	wantHeal := dot.SnapshotBaseDamage * dot.SnapshotAttackerMultiplier * float64(dot.NumberOfTicks)
+// With both effects up, Swiftmend heals for the larger full duration. In
+// the launch logs (foreverlogs.gg 2823 and 2838, levels 22 to 27) all 15
+// decidable both-up Swiftmends matched the bigger of the two totals: 11 the
+// Rejuvenation's four ticks, 4 the Regrowth's seven; neither the effect with
+// less time left nor the later cast explains them. At 60 on the standard
+// build Regrowth's seven ticks are the larger; against a rank 1 Regrowth the
+// Rejuvenation's are.
+func TestSwiftmendReadsTheLargerEffectWhenBothAreUp(t *testing.T) {
+	cases := []struct {
+		name         string
+		regrowthRank int
+		wantLarger   string
+	}{
+		{"top-rank Regrowth outheals Rejuvenation", 9, "Regrowth"},
+		{"rank 1 Regrowth loses to Rejuvenation", 1, "Rejuvenation"},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			resto, sim := resto60(t)
+			self := &resto.Unit
+			rejuvenation, regrowth := resto.Rejuvenation[10], resto.Regrowth[c.regrowthRank]
+			regrowth.ApplyEffects(sim, self, regrowth.Spell)
+			rejuvenation.ApplyEffects(sim, self, rejuvenation.Spell)
+			totals := map[string]float64{}
+			for name, dot := range map[string]*core.Dot{"Regrowth": regrowth.Hot(self), "Rejuvenation": rejuvenation.Hot(self)} {
+				totals[name] = dot.SnapshotBaseDamage * dot.SnapshotAttackerMultiplier * float64(dot.NumberOfTicks)
+			}
+			larger, smaller := c.wantLarger, map[string]string{"Regrowth": "Rejuvenation", "Rejuvenation": "Regrowth"}[c.wantLarger]
+			if totals[larger] <= totals[smaller] {
+				t.Fatalf("the case is wrong: %s heals %v over its run, %s %v", larger, totals[larger], smaller, totals[smaller])
+			}
+			wantHeal := totals[larger]
 
-	heal := castHeal(sim, resto.Swiftmend, self)
-	if heal.crit {
-		wantHeal *= critMultiplier(resto.Swiftmend, self)
-	}
-	if math.Abs(heal.amount-wantHeal) > tolerance {
-		t.Errorf("Swiftmend healed %v, want the whole of the Regrowth, %v", heal.amount, wantHeal)
-	}
-	if !rejuvenation.Hot(self).IsActive() || !regrowth.Hot(self).IsActive() {
-		t.Error("Swiftmend took an effect off the target")
+			heal := castHeal(sim, resto.Swiftmend, self)
+			if heal.crit {
+				wantHeal *= critMultiplier(resto.Swiftmend, self)
+			}
+			if math.Abs(heal.amount-wantHeal) > tolerance {
+				t.Errorf("Swiftmend healed %v, want the whole of the %s, %v (the %s is %v)", heal.amount, larger, wantHeal, smaller, totals[smaller])
+			}
+			if !rejuvenation.Hot(self).IsActive() || !regrowth.Hot(self).IsActive() {
+				t.Error("Swiftmend took an effect off the target")
+			}
+		})
 	}
 }
 

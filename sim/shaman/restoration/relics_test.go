@@ -1,6 +1,8 @@
 package restoration
 
 import (
+	"github.com/wowsims/classic/sim/core/simsignals"
+	"github.com/wowsims/classic/sim/healsim"
 	"testing"
 
 	"github.com/wowsims/classic/sim/core"
@@ -42,5 +44,48 @@ func TestTotemOfUrgencyRaisesLesserHealingWaveCritOnly(t *testing.T) {
 		if got := change.After.BonusCritRating - change.Before.BonusCritRating; got != 4*core.CritRatingPerCritChance {
 			t.Errorf("%s bonus crit moved by %v, want 4%%", change.Key, got)
 		}
+	}
+}
+
+// Tidal Totem 272431 (client spell 1291076, aura 108 op 14, mask 0x40):
+// "Reduces the Mana cost of your Healing Wave ability by 5%". A Pix Xizzix
+// vendor relic in open content; its generated mod sat unregistered, so the
+// gear search left a Restoration shaman's totem slot empty.
+func TestTidalTotemCutsHealingWavesCostOnly(t *testing.T) {
+	for _, change := range changedByHealingRelic(t, shaman.TidalTotem) {
+		if change.After.ClassSpellMask&shaman.ShamanSpellMaskHealingWave == 0 {
+			t.Errorf("%s changed but is not Healing Wave: %+v", change.Key, change.After)
+		}
+		if got := change.Before.CostMultiplier - change.After.CostMultiplier; got != 5 {
+			t.Errorf("%s cost multiplier moved by %d points, want 5 (5%% cheaper)", change.Key, got)
+		}
+	}
+}
+
+// Totem of Sustaining 23200 (Scholomance): "Increases the maximum number of
+// charges on your Water Shield by 1", Forever's redesign of the totem. A
+// fourth globe is one more 2% of the mana pool a cast.
+func TestTotemOfSustainingGivesWaterShieldAFourthGlobe(t *testing.T) {
+	stacks := func(relicID int32) int32 {
+		player := core.WithSpec(&proto.Player{
+			Class:         proto.Class_ClassShaman,
+			Race:          proto.Race_RaceTroll,
+			Level:         60,
+			Equipment:     core.RelicEquipment(relicID),
+			TalentsString: restoTalents(map[int]int{posWaterShield: 1}),
+		}, restorationOptions)
+		req := healsim.Request(player, quietRaid(), 60, 1)
+		sim := core.NewSim(req, simsignals.CreateSignals())
+		sim.Reset()
+		sim.PrePull()
+		healer := sim.Raid.Parties[0].Players[healsim.HealerIndex].(*RestorationShaman)
+		healer.WaterShield.Cast(sim, &healer.Unit)
+		return healer.ActiveShieldAura.GetStacks()
+	}
+	if got := stacks(0); got != 3 {
+		t.Errorf("Water Shield starts with %d globes, want 3", got)
+	}
+	if got := stacks(shaman.TotemOfSustaining); got != 4 {
+		t.Errorf("Water Shield with Totem of Sustaining starts with %d globes, want 4", got)
 	}
 }
