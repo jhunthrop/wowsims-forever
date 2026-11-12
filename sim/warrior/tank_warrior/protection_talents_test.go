@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/stats"
 	"github.com/wowsims/classic/sim/warrior"
 )
 
@@ -229,5 +230,26 @@ func TestSunderArmorRegistersTheClientThreat(t *testing.T) {
 	war, _ := buildTank(t, emptyTalents, true)
 	if got := war.SunderArmor.FlatThreatBonus; got != 206 {
 		t.Errorf("Sunder Armor flat threat = %v, want 206", got)
+	}
+}
+
+// Bloodrage (client 2687) costs a fifth of base health: SpellPower
+// PowerType -2 at PowerCostPct 20. The warrior's base health at 60 is
+// 1,689, so a cast spends 337.8 and refuses to fire with less.
+func TestBloodrageCostsAFifthOfBaseHealth(t *testing.T) {
+	war, sim := buildTank(t, emptyTalents, true)
+	want := 0.2 * war.GetBaseStats()[stats.Health]
+	before := war.CurrentHealth()
+	if !war.Bloodrage.CanCast(sim, &war.Unit) {
+		t.Fatal("Bloodrage cannot be cast at full health")
+	}
+	war.Bloodrage.ApplyEffects(sim, &war.Unit, war.Bloodrage.Spell)
+	assertNear(t, "health spent", before-war.CurrentHealth(), want)
+	if want < 300 || want > 400 {
+		t.Errorf("a fifth of base health at 60 = %v, want about 338", want)
+	}
+	war.RemoveHealth(sim, war.CurrentHealth()-want/2)
+	if war.Bloodrage.CanCast(sim, &war.Unit) {
+		t.Error("Bloodrage can be cast with less health than it costs")
 	}
 }

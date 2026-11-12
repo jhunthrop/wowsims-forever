@@ -18,6 +18,7 @@ const (
 	clientAuraAttackPower    = 99 // Demoralizing Shout's attack power reduction
 	clientAuraSlowAttack     = 319
 	clientEffectApplyAura    = 6
+	clientPowerTypeHealth    = -2 // SpellPower.PowerType for a health cost
 	attackPowerAmountEpsilon = 1e-6
 )
 
@@ -181,5 +182,9 @@ func TestBloodrageMatchesClient(t *testing.T) {
 	tick, _ := client.ByID(29131)
 	if got := findEffect(t, tick, clientEffectApplyAura, 24).Amount; got != bloodrageRagePerSecond*10 {
 		t.Errorf("Bloodrage rage a second %v, client %v tenths", bloodrageRagePerSecond, got)
+	}
+	// The cost is health (power type -2), a share of base health.
+	if cast.CostType != clientPowerTypeHealth || cast.CostPct != bloodrageHealthCostShare*100 {
+		t.Errorf("Bloodrage cost type %d at %v%%, client health (%d) at %v%%", cast.CostType, bloodrageHealthCostShare*100, clientPowerTypeHealth, cast.CostPct)
 	}
 }
