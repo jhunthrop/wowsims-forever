@@ -150,3 +150,34 @@ func TestRegisterShootSpellIsIdempotent(t *testing.T) {
 		t.Fatalf("Spellbook has %d entries after registering Shoot twice, want 1", len(character.Spellbook))
 	}
 }
+
+// A wand's first shot of a run fires after a 0.5 s windup measured from the
+// end of the caster's last spell, not after a full wand speed, and a shot
+// inside a run waits only for the wand's swing timer. Read from foreverlogs
+// reports 2820, 2839 and 2847 (2026-11-12 sim-accuracy, shadow): every shot
+// is logged as a start and a fire 0.50 s apart; after an instant the first
+// start sits 1.0 to 1.3 s after the cast (the fire at the global cooldown's
+// end); after a channel the first fire sits 0.2 to 1.1 s after its end; and
+// shots in a run are the wand's speed apart.
+func TestShootCastTimeIsTheWindupLeftOrTheSwingLeft(t *testing.T) {
+	const swing = 1600 * time.Millisecond
+	const long = -time.Hour
+	cases := []struct {
+		name                       string
+		now, lastSpellEnd, lastShot time.Duration
+		want                       time.Duration
+	}{
+		{"first shot at the end of an instant's global cooldown", 1500 * time.Millisecond, 0, long, 0},
+		{"first shot right after a hardcast or channel ends", 3 * time.Second, 3 * time.Second, long, wandWindup},
+		{"first shot 200 ms after a cast ended", 3200 * time.Millisecond, 3 * time.Second, long, 300 * time.Millisecond},
+		{"a shot inside a run waits the swing", 5 * time.Second, long, 5 * time.Second, swing},
+		{"a shot inside a run with 1 s of the swing left", 5600 * time.Millisecond, long, 5 * time.Second, 1000 * time.Millisecond},
+		{"the longer of windup and swing wins", 5 * time.Second, 5 * time.Second, 4800 * time.Millisecond, swing - 200*time.Millisecond},
+		{"nothing ever cast", 0, long, long, 0},
+	}
+	for _, c := range cases {
+		if got := shootCastTime(c.now, c.lastSpellEnd, c.lastShot, swing); got != c.want {
+			t.Errorf("%s: shootCastTime = %v, want %v", c.name, got, c.want)
+		}
+	}
+}
