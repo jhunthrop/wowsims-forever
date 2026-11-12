@@ -71,11 +71,20 @@ func TestShootDealsWandDamageAgainstARealTarget(t *testing.T) {
 }
 
 // A wand shot is a cast of its own: it never starts inside another spell's
-// global cooldown, and once started it holds the caster for the wand's whole
-// speed. Before this held, the rotation fired Shoot in the same instant as
-// every instant spell (Fire Blast, Corruption, Shadow Word: Pain), dealt a
-// free wand hit and let the next spell start before that GCD had run out:
-// a 1.2 s wand ended a 1.5 s GCD 0.3 s early.
+// global cooldown, and once a run is going each shot holds the caster until
+// the wand's speed has passed since the last one. Before the first held, the
+// rotation fired Shoot in the same instant as every instant spell (Fire
+// Blast, Corruption, Shadow Word: Pain), dealt a free wand hit and let the
+// next spell start before that GCD had run out: a 1.2 s wand ended a 1.5 s
+// GCD 0.3 s early.
+//
+// The first shot of a run is not held for a full wand speed: the Shadow lane
+// of 2026-11-12 read the logs (foreverlogs.gg 2820, 2839, 2847) and after an
+// instant the first fire sits at the global cooldown's end, its 0.5 s windup
+// having run inside the GCD, so pressing Shoot the moment the GCD ends fires
+// at once (core.shootCastTime). This harness registers Shoot after the
+// environment is finalized, so the wand tracker keeps only the swing timer;
+// the windup after a hardcast or a channel is core/wand_test.go's.
 func TestShootNeverShortensTheGlobalCooldown(t *testing.T) {
 	built, sim, target := newFrostMageSim(t, core.DefaultTargetProtoLvl60)
 	built.Equipment[proto.ItemSlot_ItemSlotRanged] = core.Item{
@@ -98,15 +107,28 @@ func TestShootNeverShortensTheGlobalCooldown(t *testing.T) {
 		t.Fatalf("Shoot is castable %v into Fire Blast's GCD; a wand shot must wait for the GCD", sim.CurrentTime)
 	}
 
+	// The run's first shot: pressed as the GCD ends, it fires at once.
 	sim.CurrentTime = gcdEnd
 	if !built.Shoot.Cast(sim, target) {
 		t.Fatal("Shoot did not cast once the GCD was ready")
 	}
+	if built.IsCasting(sim) {
+		t.Errorf("the first shot of a run holds the caster until %v; after an instant it fires at the GCD's end, %v", built.Hardcast.Expires, gcdEnd)
+	}
+	if got := built.Shoot.SpellMetrics[target.UnitIndex].Casts; got != 1 {
+		t.Errorf("Shoot fired %d times at the GCD's end, want 1", got)
+	}
+
+	// The run's second shot: pressed right after the first, it holds the
+	// caster for the swing left, and no spell may start before it fires.
+	if !built.Shoot.Cast(sim, target) {
+		t.Fatal("the second Shoot of the run did not cast")
+	}
 	want := gcdEnd + time.Duration(1.2*float64(time.Second))
 	if got := built.Hardcast.Expires; got != want {
-		t.Errorf("Shoot's cast ends at %v, want %v (the wand's full speed)", got, want)
+		t.Errorf("the second shot fires at %v, want %v (the wand's speed after the first)", got, want)
 	}
 	if got := built.GCD.ReadyAt(); got < want {
-		t.Errorf("the next spell may start at %v, before the wand shot ends at %v", got, want)
+		t.Errorf("the next spell may start at %v, before the wand shot fires at %v", got, want)
 	}
 }
