@@ -86,7 +86,7 @@
       }
     },
     {
-      "notes": "Corruption whenever it has fallen off. Instant with Improved Corruption. From 40, Wrack runs its clock twice as fast, so recast it before a channel once it has under 3 seconds left; never clip it earlier.",
+      "notes": "Corruption whenever it has fallen off. Instant with Improved Corruption. From 40, Wrack runs its clock twice as fast, so recast it before a channel once it has 3 seconds or less left; never clip it earlier.",
       "action": {
         "condition": {
           "or": {
@@ -116,7 +116,7 @@
                     },
                     {
                       "cmp": {
-                        "op": "OpLt",
+                        "op": "OpLe",
                         "lhs": {
                           "dotRemainingTime": {
                             "spellId": {
@@ -177,7 +177,7 @@
                     },
                     {
                       "cmp": {
-                        "op": "OpLt",
+                        "op": "OpLe",
                         "lhs": {
                           "dotRemainingTime": {
                             "spellId": {
@@ -207,7 +207,7 @@
       }
     },
     {
-      "notes": "Bane of Agony all fight; from 40, also recast it before a channel once it has under 3 seconds left. It is one of the three DoTs Wrack speeds up and Soul Siphon counts, so it beats Bane of Doom at 60.",
+      "notes": "Bane of Agony all fight; from 40, also recast it before a channel once it has 3 seconds or less left. It is one of the three DoTs Wrack speeds up and Soul Siphon counts, so it beats Bane of Doom at 60.",
       "action": {
         "condition": {
           "or": {
@@ -237,7 +237,7 @@
                     },
                     {
                       "cmp": {
-                        "op": "OpLt",
+                        "op": "OpLe",
                         "lhs": {
                           "dotRemainingTime": {
                             "spellId": {
@@ -268,7 +268,7 @@
       }
     },
     {
-      "notes": "Siphon Life whenever it has fallen off; from 40, also before a channel once it has under 3 seconds left. Shadow damage that heals you, and the third DoT for Soul Siphon.",
+      "notes": "Siphon Life whenever it has fallen off; from 40, also before a channel once it has 3 seconds or less left. Shadow damage that heals you, and the third DoT for Soul Siphon.",
       "action": {
         "condition": {
           "or": {
@@ -298,7 +298,7 @@
                     },
                     {
                       "cmp": {
-                        "op": "OpLt",
+                        "op": "OpLe",
                         "lhs": {
                           "dotRemainingTime": {
                             "spellId": {
@@ -375,7 +375,7 @@
       }
     },
     {
-      "notes": "Raid build: when a Wrack ends and a Shadow Trance is up, cast the instant Shadow Bolt before the next channel. At 60 each crit puts up Improved Shadow Bolt, so your Wrack and Shadow DoTs take 20% more for 12 seconds.",
+      "notes": "With Nightfall (the raid build, and the leveling build from 52): when a Wrack ends and a Shadow Trance is up, cast the instant Shadow Bolt before the next channel. In the raid build at 60 each crit puts up Improved Shadow Bolt, so your Wrack and Shadow DoTs take 20% more for 12 seconds.",
       "action": {
         "condition": {
           "and": {
