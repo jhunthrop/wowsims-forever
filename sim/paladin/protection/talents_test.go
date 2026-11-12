@@ -30,7 +30,7 @@ const (
 
 	auraRedoubt          = 20128
 	auraIronCreed        = 1311033
-	auraSealOfFuryShield = 1311648
+	auraSealOfFuryShield = 1310927 // Light's Fury, the client's own shield spell
 	auraHolyShield       = 20928
 	auraForbearance      = 25771
 
@@ -722,12 +722,14 @@ func TestManaGainThreatIgnoresRighteousFury(t *testing.T) {
 // moved Judgement of Righteousness and Command to the melee table with:
 // SpellCategories DefenseType 2 (row 76345) and SpellMisc Attributes_0
 // 0x250000, which holds 0x200000, no active defense. It rolled the spell
-// table instead: about 13% misses and 1.5x crits.
-func TestJudgementOfFuryRollsTheMeleeTableWithoutActiveDefenses(t *testing.T) {
+// table instead: about 13% misses and 1.5x crits. Blizzard's 11 November
+// 2026 hotfix then made every Judgement a ranged attack (judgement.go):
+// the ranged table's miss, still no dodge, parry or block, 2x crits.
+func TestJudgementOfFuryRollsTheRangedTableWithoutActiveDefenses(t *testing.T) {
 	f := shortRun{}.start(t)
 	judgement := f.spellOf(t, spellJudgementOfFury)
-	if judgement.DefenseType != core.DefenseTypeMelee {
-		t.Errorf("Judgement of Fury defense type = %v, want melee", judgement.DefenseType)
+	if judgement.DefenseType != core.DefenseTypeRanged {
+		t.Errorf("Judgement of Fury defense type = %v, want ranged", judgement.DefenseType)
 	}
 	misses := 0
 	const casts = 4000
