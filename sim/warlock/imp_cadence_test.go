@@ -2,6 +2,7 @@ package warlock
 
 import (
 	"testing"
+	"time"
 
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
@@ -56,18 +57,15 @@ func fireboltMetrics(imp *proto.UnitMetrics) *proto.ActionMetrics {
 // target: medians 2.423, 2.431 and 2.431 s, quartiles 2.41 to 2.46 s) all
 // read the same, while a Succubus swings on an exact 2.0 s timer. The cast
 // is 2 s, so the pet AI's delay between casts is about 430 ms, not the 200
-// ms the engine carried from upstream. The fight is short enough that the
-// bare Imp's mana lasts it (its pool is about nine Firebolts at 60; 80 s
-// and 300 s both left it waiting on regen).
+// ms the engine carried from upstream. The cooldown starts with the cast
+// (core/cast.go sets it to the cast time plus its length), so the cadence
+// is the cast time plus the cooldown. A cast count over a fight does not
+// read it: the bare Imp's mana is about nine Firebolts and its first cast
+// lands a little after the pull.
 func TestImpFireboltCadenceMatchesTheLogs(t *testing.T) {
-	const fightSeconds = 20
-	imp := runImpOnly(t, fightSeconds, 3)
-	casts := float64(castsOf(imp, 11763)) / 3
-	// The first cast is at the pull, then one every 2.43 s: 9.2, so 9. At
-	// 2.2 s it is 10.1, so 10.
-	want := 1 + fightSeconds/2.43
-	if casts < want-0.6 || casts > want+0.6 {
-		t.Errorf("the Imp cast Firebolt %.1f times in %d s, want about %.1f (one every 2.43 s)", casts, fightSeconds, want)
+	firebolt := newWarlockAtLevel(t, 60).Imp.primaryAbility
+	if cadence := firebolt.DefaultCast.CastTime + firebolt.CD.Duration; cadence != 2430*time.Millisecond {
+		t.Errorf("the Imp casts a Firebolt every %s, want 2.43 s (the live Imps)", cadence)
 	}
 }
 
