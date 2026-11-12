@@ -82,12 +82,19 @@ func TestSummonsDuringTheFightPayTheirCostCutByMasterSummoner(t *testing.T) {
 	if castsOf(plain, summonSuccubusSpellID) == 0 {
 		t.Fatal("the rotation never summoned the Succubus in the fight")
 	}
-	full := manaSpentBy(plain, summonSuccubusSpellID, 5)
+	full := manaPerCast(plain, summonSuccubusSpellID)
 	if full <= 0 {
 		t.Fatalf("a Succubus summoned in the fight took %.0f mana, want its full cost", full)
 	}
-	cut := manaSpentBy(runRotation(t, "-000000000120", summonInFight()), summonSuccubusSpellID, 5)
+	cut := manaPerCast(runRotation(t, "-000000000120", summonInFight()), summonSuccubusSpellID)
 	if ratio := cut / full; ratio < 0.59 || ratio > 0.61 {
-		t.Errorf("Master Summoner 2 cut the in-fight summon's mana to %.0f of %.0f (%.2f), want 0.60", cut, full, ratio)
+		t.Errorf("Master Summoner 2 cut an in-fight summon's mana to %.0f of %.0f (%.2f), want 0.60", cut, full, ratio)
 	}
+}
+
+// manaPerCast is the mana one cast of the spell took (Master Summoner also
+// shortens the cast, so a 30 s fight fits more summons; totals would not
+// compare).
+func manaPerCast(player *proto.UnitMetrics, id int32) float64 {
+	return manaSpentBy(player, id, 1) / float64(castsOf(player, id))
 }
