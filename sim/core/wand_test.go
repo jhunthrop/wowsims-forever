@@ -163,9 +163,9 @@ func TestShootCastTimeIsTheWindupLeftOrTheSwingLeft(t *testing.T) {
 	const swing = 1600 * time.Millisecond
 	const long = -time.Hour
 	cases := []struct {
-		name                       string
+		name                        string
 		now, lastSpellEnd, lastShot time.Duration
-		want                       time.Duration
+		want                        time.Duration
 	}{
 		{"first shot at the end of an instant's global cooldown", 1500 * time.Millisecond, 0, long, 0},
 		{"first shot right after a hardcast or channel ends", 3 * time.Second, 3 * time.Second, long, wandWindup},
