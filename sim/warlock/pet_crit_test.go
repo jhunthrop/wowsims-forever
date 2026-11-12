@@ -20,7 +20,10 @@ import (
 //   - Lash of Pain: 13 of 205 in the same test and 7 of 105 in the public logs
 //     of warlocks without Malevolence, 6.4%; Blizzard: "their base spell crit
 //     is around normal levels";
-//   - Firebolt: 53 of 2,383 (2.2%) in 17 public logs, levels 12 to 30.
+//   - Firebolt: 207 of 3,501 (5.9%) by 13 live Imps (foreverlogs.gg 2816 to
+//     2853, 5 to 12 Nov, owners at 12 to 40, each Imp 3.6 to 7.7%); the beta
+//     logs read 2.2% (53 of 2,383), and the sim-accuracy 2026-11-12 warlock
+//     logs lane moved it to the live rate.
 func TestDemonCritMatchesTheForeverLogs(t *testing.T) {
 	for _, level := range []int32{20, 30, 40, 60} {
 		warlock := newWarlockAtLevel(t, level)
@@ -31,7 +34,7 @@ func TestDemonCritMatchesTheForeverLogs(t *testing.T) {
 			if pet != warlock.Imp && math.Abs(melee-0.7) > 1e-9 {
 				t.Errorf("level %d %s melee crit = %.2f%%, want 0.70%%", level, pet.Name, melee)
 			}
-			wantSpell := map[*WarlockPet]float64{warlock.Imp: 2.2, warlock.Succubus: 6.4}[pet]
+			wantSpell := map[*WarlockPet]float64{warlock.Imp: 5.9, warlock.Succubus: 6.4}[pet]
 			if wantSpell != 0 && math.Abs(spell-wantSpell) > 1e-9 {
 				t.Errorf("level %d %s spell crit = %.2f%%, want %.2f%%", level, pet.Name, spell, wantSpell)
 			}
