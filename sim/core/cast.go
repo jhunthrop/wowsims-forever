@@ -113,7 +113,9 @@ func (unit *Unit) applySpellPushback() {
 // server sums the two. The roll is taken even at no chance, so a unit
 // with neither draws the same numbers it always did.
 func (unit *Unit) keepsCastingTime(sim *Simulation, spell *Spell) bool {
-	return sim.Roll(0, 1.0) <= spell.PushbackReduction+unit.PseudoStats.PushbackResistChance
+	// SCRATCH (lane sim-healers2): no cast is ever pushed back, to measure the ceiling.
+	sim.Roll(0, 1.0)
+	return true
 }
 
 // pushBackChannel shortens the channel the unit is in: the ticks that
