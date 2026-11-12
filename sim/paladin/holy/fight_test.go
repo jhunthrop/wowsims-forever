@@ -32,6 +32,8 @@ type fight struct {
 	realMana bool
 	// consumes is what the healer carries (nil for nothing).
 	consumes *proto.Consumes
+	// aura is the paladin aura the healer runs (none by default).
+	aura proto.PaladinAura
 }
 
 const (
@@ -70,6 +72,7 @@ func (f fight) player(t *testing.T) *proto.Player {
 		Consumes:      f.consumes,
 	}, &proto.Player_HolyPaladin{HolyPaladin: &proto.HolyPaladin{Options: &proto.PaladinOptions{
 		PrimarySeal: proto.PaladinSeal_Righteousness,
+		Aura:        f.aura,
 	}}})
 }
 
