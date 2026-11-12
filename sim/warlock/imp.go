@@ -87,6 +87,10 @@ var FireboltDamage = [FireboltRanks + 1]clientdamage.Effect{
 	{Amount: 44, Variance: 0.113636, PerLevel: 0.6, SpellLevel: 58, MaxLevel: 63},
 }
 
+// impCastDelay is the pet AI's gap between the end of one Firebolt cast
+// and the start of the next, from the logs (see the cooldown below).
+const impCastDelay = 430 * time.Millisecond
+
 func (wp *WarlockPet) registerImpFireboltSpell() {
 	// The highest rank the demon's level has learned.
 	rank := topLearnedRank(FireboltLevel[1:], int(wp.owner.Level))
@@ -127,10 +131,15 @@ func (wp *WarlockPet) registerImpFireboltSpell() {
 				// CastTime: time.Millisecond * (2000 - time.Duration(500*wp.owner.Talents.ImprovedFirebolt)),
 				CastTime: time.Millisecond * 2000,
 			},
-			// Adding an artificial CD to account for real delay in imp casts in-game
+			// The pet AI's delay between casts. Three live Imps land a
+			// Firebolt every 2.43 s (foreverlogs.gg 2847 and 2850 after the
+			// 10 Nov hotfix, 674 gaps, medians 2.423 to 2.431 s, quartiles
+			// 2.41 to 2.46 s), a 2 s cast plus about 430 ms; upstream's
+			// 200 ms gave one every 2.2 s. The cooldown starts with the
+			// cast, so it is the cast plus the delay.
 			CD: core.Cooldown{
 				Timer:    wp.NewTimer(),
-				Duration: time.Millisecond * 200,
+				Duration: impCastDelay,
 			},
 		},
 
