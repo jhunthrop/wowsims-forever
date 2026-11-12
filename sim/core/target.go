@@ -314,8 +314,14 @@ func GetWeaponSkill(unit *Unit, weapon *Item) float64 {
 			return 0
 		}
 	} else if weapon.HandType == proto.HandType_HandTypeUnknown && weapon.RangedWeaponType == proto.RangedWeaponType_RangedWeaponTypeUnknown {
-		// Needed for Paladin Hammer of Wrath to use 300 skill
-		return float64(unit.Level) * 5.0
+		// A relic (a libram, idol or totem the item database leaves
+		// untyped) is no weapon: the ranged attack rolls on the class's
+		// base skill, which every caller adds on its own. This returned
+		// level x 5 "for Paladin Hammer of Wrath to use 300 skill", which
+		// doubled the skill and gave the wearer's ranged attacks a table
+		// with no miss, dodge or glance at any level (sim-accuracy
+		// 2026-11-12, paladins).
+		return 0
 	} else {
 		return 0
 	}
