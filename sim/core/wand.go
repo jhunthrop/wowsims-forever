@@ -53,6 +53,10 @@ func (character *Character) RegisterShootSpell(wandDamageMultiplier float64) *Sp
 		return nil
 	}
 
+	if shoot := character.GetSpell(ActionID{SpellID: ShootSpellID}); shoot != nil {
+		return shoot
+	}
+
 	weapon := character.WeaponFromRanged()
 	swing := DurationFromSeconds(weapon.SwingSpeed)
 	timing := newWandTiming(character)
