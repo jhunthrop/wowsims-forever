@@ -245,6 +245,29 @@
       }
     },
     {
+      "notes": "When Rake is not on the target, from 24. Its hit is your paw's damage plus the rank's bonus, and the bleed takes a share of your attack power on every tick, so 40 energy buys more here than as Shred; on a target that already bleeds, Rend and Tear reaches the bleed too.",
+      "action": {
+        "condition": {
+          "not": {
+            "val": {
+              "dotIsActive": {
+                "spellId": {
+                  "spellId": 9904,
+                  "rank": 4
+                }
+              }
+            }
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 9904,
+            "rank": 4
+          }
+        }
+      }
+    },
+    {
       "notes": "Your builder from level 21, always from behind the target. Shred hits harder than Claw at every rank; only at 20, before the second point of Shredding Attacks, does its cost make Claw the better buy.",
       "action": {
         "condition": {
