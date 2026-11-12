@@ -38,9 +38,9 @@ const (
 // holds the live client's, and the row below says which. Remove an entry
 // once the vendored table carries it.
 var clientHotfixedCoefficients = map[int32]float64{
-	408120:  wildGrowthTickCoefficient, // Wild Growth rank 1, client 1.60.1.70888 SpellEffect 1072065
-	1238214: wildGrowthTickCoefficient, // rank 2, SpellEffect 1235327
-	1238215: wildGrowthTickCoefficient, // rank 3, SpellEffect 1235329
+	408120:  WildGrowthTickCoefficient, // Wild Growth rank 1, client 1.60.1.70888 SpellEffect 1072065
+	1238214: WildGrowthTickCoefficient, // rank 2, SpellEffect 1235327
+	1238215: WildGrowthTickCoefficient, // rank 3, SpellEffect 1235329
 }
 
 func assertEffect(t *testing.T, label string, client spellconst.Spell, index int, got healingEffect) {
