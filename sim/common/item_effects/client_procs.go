@@ -183,9 +183,16 @@ func init() {
 	// "- 01" (aura 54, 1), each restricted to ranged weapons
 	// (SpellEquippedItems subclass mask 262156), so the hit is the ranged
 	// weapon's. The site's simdb rows carry none of it.
+	// The restriction holds: a wearer with no bow, gun, crossbow or thrown
+	// weapon (a paladin with a libram, whose Judgements and Hammer of
+	// Wrath are ranged attacks) gets nothing from them.
 	for item, hit := range map[int32]float64{13255: 3, 17754: 1, 18296: 1, 18388: 1} {
 		core.NewClientItemEffect(item, func(agent core.Agent) {
-			agent.GetCharacter().AddBonusRangedHitRating(hit * core.HitRatingPerHitChance)
+			character := agent.GetCharacter()
+			if !wieldsRangedWeapon(character) {
+				return
+			}
+			character.AddBonusRangedHitRating(hit * core.HitRatingPerHitChance)
 		})
 	}
 
@@ -412,4 +419,16 @@ func registerMindtap() {
 			},
 		})
 	})
+}
+
+// wieldsRangedWeapon reports whether the ranged slot holds a weapon the
+// client's ranged-weapon restriction (subclass mask 262156: bows, guns,
+// crossbows and thrown) accepts; a relic, a wand or an empty slot does not.
+func wieldsRangedWeapon(character *core.Character) bool {
+	switch character.Ranged().RangedWeaponType {
+	case proto.RangedWeaponType_RangedWeaponTypeBow, proto.RangedWeaponType_RangedWeaponTypeGun,
+		proto.RangedWeaponType_RangedWeaponTypeCrossbow, proto.RangedWeaponType_RangedWeaponTypeThrown:
+		return true
+	}
+	return false
 }
