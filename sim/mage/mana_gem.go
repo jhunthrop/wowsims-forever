@@ -11,7 +11,14 @@ const ManaGemRanks = 4
 
 var ManaGemItemId = [ManaGemRanks + 1]int32{0, 5514, 5513, 8007, 8008}
 var ManaGemManaRestored = [ManaGemRanks + 1][]float64{{0, 0}, {375, 425}, {550, 650}, {775, 925}, {1000, 1200}}
-var ManaGemLevel = [ManaGemRanks + 1]int{0, 23, 38, 48, 58}
+
+// ManaGemLevel is the level the trainer teaches each Conjure spell
+// (trainables 759 Mana Agate 28, 3552 Mana Jade 38, 10053 Mana Citrine 48,
+// 10054 Mana Ruby 58, client 1.60.1.70790): a mage has a gem only once it
+// can make one. The Mana Agate item (5514) says required level 23 where
+// the other three gems say their conjure level; reading the item here gave
+// a mage at 23 to 27 a gem five levels before the spell.
+var ManaGemLevel = [ManaGemRanks + 1]int{0, 28, 38, 48, 58}
 
 func (mage *Mage) registerManaGemCD() {
 	mage.ManaGem = make([]*core.Spell, ManaGemRanks+1)
