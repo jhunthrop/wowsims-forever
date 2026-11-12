@@ -18,9 +18,7 @@ var FlametongueWeaponLevel = [FlametongueWeaponRanks + 1]int32{0, 10, 18, 26, 36
 func (shaman *Shaman) newFlametongueImbueSpell(weapon *core.Item) *core.Spell {
 	rank := weaponImbueRankAtLevel(FlametongueWeaponLevel[:], shaman.Level)
 	spellID := FlametongueWeaponSpellId[rank]
-	maxDamage := FlametongueWeaponMaxDamage[rank]
 
-	baseDamage := maxDamage / 4
 	spellCoeff := .1
 
 	return shaman.RegisterSpell(core.SpellConfig{
@@ -36,11 +34,17 @@ func (shaman *Shaman) newFlametongueImbueSpell(weapon *core.Item) *core.Spell {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			if weapon.SwingSpeed != 0 {
-				damage := (baseDamage * weapon.SwingSpeed)
+				damage := flametongueWeaponHitDamage(rank, shaman.Level, weapon.SwingSpeed)
 				spell.CalcAndDealDamage(sim, target, damage, spell.OutcomeMagicHitAndCrit)
 			}
 		},
 	})
+}
+
+// flametongueWeaponHitDamage is the Fire damage one hit adds at the rank,
+// level and weapon speed.
+func flametongueWeaponHitDamage(rank int32, _ int32, weaponSpeed float64) float64 {
+	return FlametongueWeaponMaxDamage[rank] / 4 * weaponSpeed
 }
 
 func (shaman *Shaman) ApplyFlametongueImbueToItem(item *core.Item) {
