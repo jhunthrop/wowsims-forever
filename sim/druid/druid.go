@@ -145,6 +145,11 @@ type Druid struct {
 	// major-cooldown pass: the spec's rotation times it itself.
 	CastsNaturesSwiftnessByHand bool
 
+	// swiftmendCooldownCutPerHoT is what each of the druid's own heal over
+	// time effects on the target takes off Swiftmend's remaining cooldown
+	// when it is cast (Idol of Synthesis, items.go); zero without the idol.
+	swiftmendCooldownCutPerHoT time.Duration
+
 	RebirthTiming     float64
 	BleedsActive      int
 	AssumeBleedActive bool

@@ -60,6 +60,8 @@ const (
 // DamageComparison is the damage half of a Row.
 type DamageComparison struct {
 	Status string
+	// SpellID is the client spell the row compares (clientHotfixCoefficients).
+	SpellID int32
 
 	ClientMin, ClientMax float64
 	// ClientCoefficient is the effect's spell-power share; ClientCoefficientFromTable
@@ -170,6 +172,7 @@ func compareDamage(clientSpell spellconst.Spell, casterLevel int, engine *core.S
 	}
 	minDamage, maxDamage, _ := clientSpell.DamageRange(effect.Index, casterLevel)
 	result := DamageComparison{
+		SpellID:                    clientSpell.ID,
 		ClientMin:                  minDamage,
 		ClientMax:                  maxDamage,
 		ClientCoefficient:          effect.ResolvedSPCoefficient,
@@ -191,12 +194,29 @@ func compareDamage(clientSpell spellconst.Spell, casterLevel int, engine *core.S
 	return result
 }
 
+// clientHotfixCoefficients are the spell-power coefficients a newer client
+// carries than the vendored table, keyed by spell id: the engine holds the
+// live client's value and the row reads as a match when it does. Remove an
+// entry once the vendored table carries it.
+var clientHotfixCoefficients = map[int32]struct {
+	coefficient float64
+	reason      string
+}{
+	408120:  {0.066, "client 1.60.1.70888 SpellEffect 1072065 (Wild Growth rank 1); 1.60.1.70790 carries 0.033"},
+	1238214: {0.066, "client 1.60.1.70888 SpellEffect 1235327 (Wild Growth rank 2); 1.60.1.70790 carries 0.033"},
+	1238215: {0.066, "client 1.60.1.70888 SpellEffect 1235329 (Wild Growth rank 3); 1.60.1.70790 carries 0.033"},
+}
+
 func damageDiff(c DamageComparison) string {
 	var diffs []string
 	if math.Abs(c.ClientMin-c.EngineMin) > damageTolerance || math.Abs(c.ClientMax-c.EngineMax) > damageTolerance {
 		diffs = append(diffs, fmt.Sprintf("damage %.0f-%.0f->%.0f-%.0f", c.ClientMin, c.ClientMax, c.EngineMin, c.EngineMax))
 	}
-	if want := c.expectedCoefficient(); c.ClientCoefficientFromTable && math.Abs(want-c.EngineCoefficient) > coefficientTolerance {
+	want := c.expectedCoefficient()
+	if hotfix, ok := clientHotfixCoefficients[c.SpellID]; ok && math.Abs(hotfix.coefficient*c.LevelPenalty-c.EngineCoefficient) <= coefficientTolerance {
+		want = c.EngineCoefficient
+	}
+	if c.ClientCoefficientFromTable && math.Abs(want-c.EngineCoefficient) > coefficientTolerance {
 		diffs = append(diffs, fmt.Sprintf("coefficient %.3f->%.3f", want, c.EngineCoefficient))
 	}
 	return joinDiffs(diffs)

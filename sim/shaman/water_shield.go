@@ -49,6 +49,9 @@ func (shaman *Shaman) registerWaterShieldSpell() {
 	actionID := core.ActionID{SpellID: waterShieldBuffSpellId}
 	manaMetrics := shaman.NewManaMetrics(core.ActionID{SpellID: WaterShieldSpellId[0]})
 	icd := core.Cooldown{Timer: shaman.NewTimer(), Duration: waterShieldICD}
+	// The gear's extra globes (Totem of Sustaining) are read here: item
+	// effects apply before the spells register.
+	maxCharges := waterShieldMaxCharges + shaman.waterShieldExtraCharges
 
 	restoreMana := func(sim *core.Simulation, aura *core.Aura) {
 		if aura.GetStacks() == 0 || !icd.IsReady(sim) {
@@ -63,9 +66,9 @@ func (shaman *Shaman) registerWaterShieldSpell() {
 		Label:     "Water Shield",
 		ActionID:  actionID,
 		Duration:  waterShieldDuration,
-		MaxStacks: waterShieldMaxCharges,
+		MaxStacks: maxCharges,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.SetStacks(sim, waterShieldMaxCharges)
+			aura.SetStacks(sim, maxCharges)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			if shaman.ActiveShieldAura == aura {

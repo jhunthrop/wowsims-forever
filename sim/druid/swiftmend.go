@@ -31,8 +31,15 @@ const (
 // Forever does not consume the effect, whatever the text says: 55 of the 57
 // effects up at a logged Swiftmend ticked on to their natural end, and the
 // client row has one effect, the heal, with nothing that removes an aura.
-// With both up, all 16 logged Swiftmends healed for the Regrowth, whichever
-// had less time left.
+//
+// With both up it heals for the larger of the two full durations. In the
+// launch logs (foreverlogs.gg reports 2823 and 2838, levels 22 to 27, read
+// 2026-11-11) every one of the 15 decidable non-critical Swiftmends with
+// both effects up matched the bigger total: 11 the Rejuvenation's four
+// ticks (where Regrowth's seven ticks were smaller), 4 the Regrowth's seven
+// (where they were bigger); which effect had less time left, or was cast
+// later, explains neither set. The beta logs' 16 Regrowth reads were at
+// levels where Regrowth's total was the larger.
 func (druid *Druid) registerSwiftmendSpell() {
 	if !druid.Talents.Swiftmend {
 		return
@@ -65,25 +72,66 @@ func (druid *Druid) registerSwiftmendSpell() {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			source := druid.swiftmendSource(sim, target)
-			total := source.SnapshotBaseDamage * source.SnapshotAttackerMultiplier * float64(source.NumberOfTicks)
-			spell.CalcAndDealHealing(sim, target, total, spell.OutcomeHealingCrit)
+			spell.CalcAndDealHealing(sim, target, hotFullDuration(source), spell.OutcomeHealingCrit)
+			druid.cutSwiftmendCooldownPerHoT(sim, target, spell)
 		},
 	})
 }
 
-// swiftmendSource is the effect on the target Swiftmend heals for: the
-// druid's Regrowth when one is up, else its Rejuvenation, or nil when
-// there is neither.
+// hotFullDuration is what a heal over time lands over its whole run: its
+// snapshot tick times its tick count.
+func hotFullDuration(dot *core.Dot) float64 {
+	return dot.SnapshotBaseDamage * dot.SnapshotAttackerMultiplier * float64(dot.NumberOfTicks)
+}
+
+// swiftmendSource is the effect on the target Swiftmend heals for: whichever
+// of the druid's own Regrowth and Rejuvenation on it heals more over its
+// full duration (Regrowth on a tie), or nil when there is neither.
 func (druid *Druid) swiftmendSource(_ *core.Simulation, target *core.Unit) *core.Dot {
+	var best *core.Dot
 	for _, ranks := range [][]*DruidSpell{druid.Regrowth, druid.Rejuvenation} {
 		for _, ds := range ranks {
 			if ds == nil {
 				continue
 			}
-			if dot := ds.Hot(target); dot != nil && dot.IsActive() {
-				return dot
+			dot := ds.Hot(target)
+			if dot == nil || !dot.IsActive() {
+				continue
+			}
+			if best == nil || hotFullDuration(dot) > hotFullDuration(best) {
+				best = dot
 			}
 		}
 	}
-	return nil
+	return best
+}
+
+// swiftmendHoTCount is how many of the druid's own heal over time effects
+// (Rejuvenation, Regrowth, Wild Growth) are on the target.
+func (druid *Druid) swiftmendHoTCount(target *core.Unit) int {
+	count := 0
+	for _, ranks := range [][]*DruidSpell{druid.Regrowth, druid.Rejuvenation, druid.WildGrowth} {
+		for _, ds := range ranks {
+			if ds == nil {
+				continue
+			}
+			if dot := ds.Hot(target); dot != nil && dot.IsActive() {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+// cutSwiftmendCooldownPerHoT is Idol of Synthesis (items.go): "Each of your
+// heal over time effects on the target reduces the remaining cooldown on
+// Swiftmend by 1 sec when you cast it." The cast has already started the
+// cooldown (core's cast flow sets it before the effects run), so the cut
+// comes straight off its ready time.
+func (druid *Druid) cutSwiftmendCooldownPerHoT(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+	if druid.swiftmendCooldownCutPerHoT == 0 {
+		return
+	}
+	cut := time.Duration(druid.swiftmendHoTCount(target)) * druid.swiftmendCooldownCutPerHoT
+	spell.CD.Set(max(sim.CurrentTime, spell.CD.ReadyAt()-cut))
 }

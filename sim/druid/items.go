@@ -16,6 +16,7 @@ const (
 	TalonsOfWrath       = 249441
 	IdolOfTheDream      = 220606
 	HowlingIdol         = 272427
+	IdolOfSynthesis     = 272429
 	IdolOfSwiftness     = 279250
 )
 
@@ -47,6 +48,10 @@ const (
 	talonsOfWrathMana       = 35.0
 	talonsOfWrathManaSpell  = 1302521
 )
+
+// idolOfSynthesisCutPerHoT is the "1 sec" of Idol of Synthesis's text, off
+// Swiftmend's remaining cooldown for each heal over time on the target.
+const idolOfSynthesisCutPerHoT = time.Second
 
 // relicClassMasks says which engine spells each client spell family is, for
 // the idols in relic_mods_auto_gen.go (SpellClassOptions masks of Rip 9896,
@@ -97,6 +102,17 @@ func init() {
 	// Client spell 1306488. Equip: Reduces the cooldown of your Swiftmend
 	// spell by 3 sec. An Enchanting relic, like the shaman's Totem of Urgency.
 	core.NewEquipModItemEffect(IdolOfSwiftness, relicEquipMods[IdolOfSwiftness], relicClassMasks)
+
+	// Idol of Synthesis (a Pix Xizzix vendor relic, client 1.60.1.70790
+	// items/druid.json): "Each of your heal over time effects on the target
+	// reduces the remaining cooldown on Swiftmend by 1 sec when you cast
+	// it." Its equip spell is a dummy aura the server scripts, so the cut is
+	// hand-written in swiftmend.go (cutSwiftmendCooldownPerHoT): with
+	// Rejuvenation and Regrowth on the tank every Swiftmend comes back 2 s
+	// sooner.
+	core.NewItemEffect(IdolOfSynthesis, func(agent core.Agent) {
+		agent.(DruidAgent).GetDruid().swiftmendCooldownCutPerHoT = idolOfSynthesisCutPerHoT
+	})
 
 	// Client spell 1248996. Equip: Causes Wrath to have a 50% chance to
 	// restore 35 Mana.

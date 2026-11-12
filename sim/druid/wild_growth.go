@@ -28,6 +28,14 @@ const (
 	// last 15% under it, so the whole is still seven average ticks (the 336 of
 	// the talent text is 7 x 48).
 	wildGrowthTickDecay = 0.05
+
+	// wildGrowthTickCoefficient is each tick's share of healing power on
+	// every rank. Client 1.60.1.70888 (SpellEffect 1072065, 1235327 and
+	// 1235329, read 2026-11-11) doubles it from the 0.033 the site's
+	// 1.60.1.70790 tables carry to 0.066; Blizzard's 10 November notes
+	// name only Nature's Swiftness for Wild Growth, so this is the live
+	// client's own row. Hand value until the site's data moves to 70888.
+	wildGrowthTickCoefficient = 0.066
 )
 
 // wildGrowthTickWeight is the multiplier of the average tick for the tick-th

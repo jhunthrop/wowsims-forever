@@ -197,6 +197,9 @@ type Shaman struct {
 	// Shield
 	ActiveShield     *core.Spell // Tracks the Shaman's active shield spell
 	ActiveShieldAura *core.Aura
+	// waterShieldExtraCharges is what the shaman's gear adds to Water
+	// Shield's three globes (Totem of Sustaining, items.go).
+	waterShieldExtraCharges int32
 
 	ChainLightningBounceCoefficient float64
 

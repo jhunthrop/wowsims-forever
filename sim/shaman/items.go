@@ -13,11 +13,22 @@ const (
 	WushoolaysCharmOfSpirits = 19956
 	TotemOfRage              = 22395
 	TotemOfTheStorm          = 23199
+	TotemOfSustaining        = 23200
 	TotemOfThunder           = 228176
+	TidalTotem               = 272431
 	TotemOfTheStormForever   = 272432
 	BurningTotem             = 272433
 	TotemOfUrgency           = 279249
 )
+
+// totemOfSustainingExtraCharges is Totem of Sustaining's "Increases the
+// maximum number of charges on your Water Shield by 1" (client 1.60.1.70790
+// items/shaman.json; Forever's redesign of the Scholomance totem, whose
+// Classic text added healing to Lesser Healing Wave). Its equip spell
+// (28856 "Increased Water Shield Charges", aura 107 op 4 on Water Shield's
+// family) is a charges modifier the generated relic table leaves out, so
+// water_shield.go reads it by hand.
+const totemOfSustainingExtraCharges = 1
 
 // totemOfTheStormMaelstromReduction is the 50 in client spell 1291078
 // ("Your Lightning Bolt ability can now also trigger the Maelstrom Weapon
@@ -123,6 +134,17 @@ func init() {
 	// Client spell 1291077. Equip: Increases the duration of your Flame Shock
 	// ability by 3 sec.
 	core.NewEquipModItemEffect(BurningTotem, relicEquipMods[BurningTotem], relicClassMasks)
+
+	// Client spell 1291076. Equip: Reduces the Mana cost of your Healing
+	// Wave ability by 5%. A Pix Xizzix vendor relic; an unregistered effect
+	// left the gear search an empty totem slot for a Restoration shaman.
+	core.NewEquipModItemEffect(TidalTotem, relicEquipMods[TidalTotem], relicClassMasks)
+
+	// Equip: Increases the maximum number of charges on your Water Shield by
+	// 1 (totemOfSustainingExtraCharges).
+	core.NewItemEffect(TotemOfSustaining, func(agent core.Agent) {
+		agent.(ShamanAgent).GetShaman().waterShieldExtraCharges += totemOfSustainingExtraCharges
+	})
 
 	// Client spell 1306448. Equip: Increases the critical strike chance of
 	// your Lesser Healing Wave spell by 4%.

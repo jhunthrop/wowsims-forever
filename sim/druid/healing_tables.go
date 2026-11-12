@@ -244,24 +244,26 @@ var tranquilityTable = []healingRank{
 	},
 }
 
-// wildGrowthTable is Wild Growth ranks 1-3; the tick is each target's average (see wildGrowthTickWeights).
+// wildGrowthTable is Wild Growth ranks 1-3; the tick is each target's average
+// (see wildGrowthTickWeights). The coefficient is client 1.60.1.70888's
+// (wildGrowthTickCoefficient), not the vendored 70790 table's 0.033.
 var wildGrowthTable = []healingRank{
 	{
 		spellID:  408120,
 		manaCost: 550,
 		castTime: wildGrowthCastTime,
-		tick:     healingEffect{fx{Amount: 40, PerLevel: 1, SpellLevel: 40, MaxLevel: 48}, 0.033},
+		tick:     healingEffect{fx{Amount: 40, PerLevel: 1, SpellLevel: 40, MaxLevel: 48}, wildGrowthTickCoefficient},
 	},
 	{
 		spellID:  1238214,
 		manaCost: 755,
 		castTime: wildGrowthCastTime,
-		tick:     healingEffect{fx{Amount: 60, PerLevel: 1.3, SpellLevel: 50, MaxLevel: 58}, 0.033},
+		tick:     healingEffect{fx{Amount: 60, PerLevel: 1.3, SpellLevel: 50, MaxLevel: 58}, wildGrowthTickCoefficient},
 	},
 	{
 		spellID:  1238215,
 		manaCost: 1050,
 		castTime: wildGrowthCastTime,
-		tick:     healingEffect{fx{Amount: 97, PerLevel: 1.6, SpellLevel: 60, MaxLevel: 68}, 0.033},
+		tick:     healingEffect{fx{Amount: 97, PerLevel: 1.6, SpellLevel: 60, MaxLevel: 68}, wildGrowthTickCoefficient},
 	},
 }
