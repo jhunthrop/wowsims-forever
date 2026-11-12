@@ -344,6 +344,9 @@ type RageCostOptions struct {
 	RefundMetrics *ResourceMetrics // Optional, will default to unit.RageRefundMetrics if not supplied.
 }
 type RageCost struct {
+	// Refund is the share of the cost a failed cast gives back (0.8 for
+	// the warrior's attacks): a share of what the cast paid, after the
+	// talents and racials that cut the cost, as the energy bar does.
 	Refund          float64
 	RefundMetrics   *ResourceMetrics
 	ResourceMetrics *ResourceMetrics
@@ -359,7 +362,7 @@ func newRageCost(spell *Spell, options RageCostOptions) *SpellCost {
 		BaseCost:   options.Cost,
 		Multiplier: 100,
 		SpellCostFunctions: &RageCost{
-			Refund:          options.Refund * options.Cost,
+			Refund:          options.Refund,
 			RefundMetrics:   options.RefundMetrics,
 			ResourceMetrics: spell.Unit.NewRageMetrics(spell.ActionID),
 		},
@@ -383,9 +386,11 @@ func (rc *RageCost) SpendCost(sim *Simulation, spell *Spell) {
 	}
 }
 
-// RefundAmount is the rage a failed cast gives back.
-func (rc *RageCost) RefundAmount(_ *Spell) float64 {
-	return rc.Refund
+// RefundAmount is the rage a failed cast gives back: Refund of the rage
+// the cast actually paid (spell.CurCast.Cost), never of the base cost, so
+// a discounted Heroic Strike or Execute never returns more than it spent.
+func (rc *RageCost) RefundAmount(spell *Spell) float64 {
+	return rc.Refund * spell.CurCast.Cost
 }
 
 func (rc *RageCost) IssueRefund(sim *Simulation, spell *Spell) {
