@@ -4,6 +4,16 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
+)
+
+// The attack table, defense type and proc mask every damage judgement
+// shares since the 11 November 2026 hotfix made Judgement a ranged attack
+// (see registerJudgement).
+const (
+	judgementCastType    = proto.CastType_CastTypeRanged
+	judgementDefenseType = core.DefenseTypeRanged
+	judgementProcMask    = core.ProcMaskRangedSpecial
 )
 
 func (paladin *Paladin) registerJudgement() {
@@ -14,11 +24,23 @@ func (paladin *Paladin) registerJudgement() {
 	//
 	// Forever: "Judgement no longer consumes Seals" (Blizzard's Deep Dive
 	// recap), so the seal stays up and Judgement only triggers its effect.
+	//
+	// Blizzard's 11 November 2026 hotfix (t/2403040): "Judgement changed to
+	// now be considered a Ranged Attack. This means it no longer counts as
+	// a Melee attack for the purposes of item and effect procs and uses the
+	// Paladin's Ranged Hit chance." Server side: client 1.60.1.70888 still
+	// files the judgements on the melee table. So this ability and every
+	// judgement it triggers (judgementCastType, judgementDefenseType and
+	// judgementProcMask below) roll the paladin's ranged attack table, the
+	// base skill of a class with no ranged weapon, never a weapon racial,
+	// and carry a ranged proc mask that no melee proc reads: Windfury
+	// Totem, weapon enchants and Hand of Justice no longer fire on one.
 	paladin.judgement = paladin.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 20271},
 		ClassSpellMask: PaladinSpellMaskJudgement,
 		SpellSchool:    core.SpellSchoolHoly,
 		ProcMask:       core.ProcMaskEmpty,
+		CastType:       judgementCastType,
 		// core.SpellFlagPassiveSpell used to sit here too. That flag
 		// tells core/metrics_aggregator.go's addSpellMetrics to drop
 		// the spell's OWN Casts count ("applied as a result of another

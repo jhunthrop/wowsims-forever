@@ -243,6 +243,15 @@ const (
 	tagExtraAttack = 3
 )
 
+// IsExtraAttack reports whether a weapon spell is landing as an extra attack
+// (Windfury, Reckoning, Thrash, Hand of Justice): swing() files those casts
+// under the extra-attack metrics split, whose tag the spell carries while the
+// attack resolves. A proc that must ignore extra attacks reads this on the
+// hit.
+func (spell *Spell) IsExtraAttack() bool {
+	return spell.Tag == tagExtraAttack
+}
+
 type WeaponAttack struct {
 	Weapon
 

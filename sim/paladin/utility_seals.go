@@ -133,13 +133,15 @@ func (paladin *Paladin) registerUtilitySeal(seal utilitySeal) {
 const sealDuration = 30 * time.Second
 
 // registerUtilityJudgement is the spell Judgement resolves to while the
-// seal is up. It rolls on the spell hit table and lays the judgement on a
-// hit; it deals no damage.
+// seal is up. It lays the judgement on a hit and deals no damage. It rolled
+// the spell hit table until the 11 November 2026 hotfix made every
+// Judgement a ranged attack (judgement.go): the ranged table's miss now.
 func (paladin *Paladin) registerUtilityJudgement(rank utilitySealRank, debuffs core.AuraArray) *core.Spell {
 	return paladin.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: rank.judgementID},
 		SpellSchool: core.SpellSchoolHoly,
-		DefenseType: core.DefenseTypeMagic,
+		DefenseType: judgementDefenseType,
+		CastType:    judgementCastType,
 		ProcMask:    core.ProcMaskEmpty,
 		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
 
@@ -148,7 +150,7 @@ func (paladin *Paladin) registerUtilityJudgement(rank utilitySealRank, debuffs c
 		RequiredLevel: int(rank.level),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			if spell.CalcAndDealOutcome(sim, target, spell.OutcomeMagicHit).Landed() {
+			if spell.CalcAndDealOutcome(sim, target, spell.OutcomeRangedHit).Landed() {
 				debuffs.Get(target).Activate(sim)
 			}
 		},

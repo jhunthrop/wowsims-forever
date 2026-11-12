@@ -65,9 +65,13 @@ const (
 	// stored Seal once per stack (its proc chance, without Seal of
 	// Command's 1 second internal cooldown, which guards one Seal against
 	// double swings rather than a stored copy) and then starts a new
-	// stack of the Seal that is up. Unconfirmed: whether special attacks
-	// (Holy Strike) store or consume, and whether each copy keeps its own
-	// 15 seconds.
+	// stack of the Seal that is up. Blizzard's 11 November 2026 hotfix
+	// (t/2403040): "Unsealed Fury no longer generates echoes from Windfury
+	// Totem attacks", so an extra attack (Windfury Totem, Reckoning, Hand
+	// of Justice) still releases stored copies, being a landed attack
+	// under whatever Seal is up, but stores none. Unconfirmed: whether
+	// special attacks (Holy Strike) store or consume, and whether each
+	// copy keeps its own 15 seconds.
 	unsealedWrathActionID  = 1310735
 	unsealedWrathDuration  = 15 * time.Second
 	unsealedWrathMaxStacks = 3
@@ -110,6 +114,9 @@ func (paladin *Paladin) registerUnsealedWrath() {
 					stored.tryActivate(sim, result.Target, spell.ProcMask)
 				}
 				copies.Deactivate(sim)
+			}
+			if spell.IsExtraAttack() {
+				return
 			}
 			if !copies.IsActive() {
 				copies.Activate(sim)

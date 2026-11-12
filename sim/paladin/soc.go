@@ -79,9 +79,15 @@ func (paladin *Paladin) registerSealOfCommand() {
 			ClassSpellMask: PaladinSpellMaskJudgementOfCommand,
 			ActionID:       core.ActionID{SpellID: rank.judgeSpellID},
 			SpellSchool:    core.SpellSchoolHoly,
-			DefenseType:    core.DefenseTypeMelee,
-			ProcMask:       core.ProcMaskMeleeMHSpecial,
-			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
+			// A ranged attack since the 11 November 2026 hotfix
+			// (judgement.go): no melee proc fires on it, and its hit
+			// is the ranged table's. ProcMaskMeleeMHSpecial before,
+			// which let Windfury Totem, the weapon's enchant and Hand
+			// of Justice fire on every Judgement of Command.
+			DefenseType: judgementDefenseType,
+			CastType:    judgementCastType,
+			ProcMask:    judgementProcMask,
+			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
 
 			// source 1.60.1.70009 client spell data (spellconst/paladin.json):
 			// Judgement of Command's spell_level equals the owning Seal
@@ -100,11 +106,15 @@ func (paladin *Paladin) registerSealOfCommand() {
 
 				// Seal of Command requires this spell to act as its intermediary dummy:
 				// it rolls the hit, and if it lands the actual Judgement of Command rolls
-				// the melee special attack crit/hit table, so two discrete spells.
-				// 1.60.1.70707 puts the hit on the melee table with no active defense
-				// (20968: DefenseType 2, Attributes_0 0x200000; Era rolled the spell
-				// table). All other judgements are cast directly.
-				dummyJudgeLanded := paladin.judgement.CalcOutcome(sim, target, paladin.judgement.OutcomeMeleeSpecialNoBlockDodgeParryNoCrit).Landed()
+				// the crit, so two discrete spells. 1.60.1.70707 put the hit on the
+				// melee table with no active defense (20968: DefenseType 2, Attributes_0
+				// 0x200000; Era rolled the spell table); the 11 November 2026 hotfix
+				// made it a ranged attack, so the dummy rolls the ranged table: a miss
+				// or a hit, never dodged, parried or blocked. All other judgements are
+				// cast directly. The crit roll is a separate roll on the physical crit
+				// chance, which is the same for a ranged and a melee attack here; the
+				// melee-named applier is the one that rolls no block.
+				dummyJudgeLanded := paladin.judgement.CalcOutcome(sim, target, paladin.judgement.OutcomeRangedHit).Landed()
 
 				outcomeApplier := core.Ternary(dummyJudgeLanded, spell.OutcomeMeleeSpecialCritOnly, spell.OutcomeAlwaysMiss)
 				spell.CalcAndDealDamage(sim, target, baseDamage, outcomeApplier)
