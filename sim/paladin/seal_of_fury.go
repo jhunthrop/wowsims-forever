@@ -69,20 +69,23 @@ const (
 	// recap), read as half of the proc's damage.
 	sealOfFuryAbsorbShare = 0.5
 
-	// sealOfFuryAbsorbDuration is unconfirmed: neither the client table
-	// nor the recap states how long the shield lasts. Ten seconds outlasts
-	// any weapon swing, so the shield is up whenever the tank has swung
-	// recently; the duration only matters if it were shorter than a swing.
+	// sealOfFuryAbsorbDuration is the shield's own row (sealOfFuryShieldID,
+	// duration_ms 10000). The launch logs spend it on the next hit taken,
+	// within a second or two; it only matters if it were shorter than a
+	// swing.
 	sealOfFuryAbsorbDuration = 10 * time.Second
 
 	// sealOfFuryProcSpellLevel is the proc spells' own spell_level.
 	sealOfFuryProcSpellLevel = 1
 
-	// sealOfFuryShieldID names the shield aura. The client table does not
-	// carry the shield's own spell, so this is the unused id between rank
-	// 1's proc (1311647) and the seal (1311649): unconfirmed, and chosen so
-	// the aura does not read as a sibling of the Seal of Fury spells.
-	sealOfFuryShieldID = 1311648
+	// sealOfFuryShieldID is the shield's own spell, "Light's Fury"
+	// (spellconst/paladin.json: effect 6, aura 69 school absorb of every
+	// school, 10 s, no rank). The launch logs (foreverlogs.gg 2849, a
+	// Seal of Fury paladin at 18: 186 applications, 124 absorbs of 4 off a
+	// proc of 9 and 8 off a crit of 18) name it on every Seal of Fury
+	// proc; the engine had named it with an unused id before.
+	sealOfFuryShieldID   = 1310927
+	sealOfFuryShieldName = "Light's Fury"
 )
 
 type sealOfFuryRank struct {
@@ -120,7 +123,7 @@ func (paladin *Paladin) registerSealOfFury() {
 // replaces the shield, whatever rank is active.
 func (paladin *Paladin) newSealOfFuryShield() *damageAbsorb {
 	aura := paladin.RegisterAura(core.Aura{
-		Label:    "Seal of Fury Shield",
+		Label:    sealOfFuryShieldName,
 		ActionID: core.ActionID{SpellID: sealOfFuryShieldID},
 		Duration: sealOfFuryAbsorbDuration,
 	})
@@ -181,9 +184,10 @@ func (paladin *Paladin) registerSealOfFuryRank(rank int, config sealOfFuryRank, 
 }
 
 // registerJudgementOfFury registers the judgement Seal of Fury resolves
-// to. Like Judgement of Righteousness it rolls the melee table with no
-// active defense: SpellCategories DefenseType 2 and SpellMisc Attributes_0
-// 0x200000 on every rank (1.60.1.70707).
+// to. Like Judgement of Righteousness it rolled the melee table with no
+// active defense (SpellCategories DefenseType 2 and SpellMisc Attributes_0
+// 0x200000 on every rank, 1.60.1.70707) until the 11 November 2026 hotfix
+// made every Judgement a ranged attack (judgement.go).
 func (paladin *Paladin) registerJudgementOfFury(rank int, config sealOfFuryRank) *core.Spell {
 	damage := JudgementOfFuryDamage[rank]
 	casterLevel := int(paladin.Level)
@@ -193,8 +197,9 @@ func (paladin *Paladin) registerJudgementOfFury(rank int, config sealOfFuryRank)
 		ClassSpellMask: PaladinSpellMaskJudgementOfFury,
 		ActionID:       core.ActionID{SpellID: config.judgeSpell},
 		SpellSchool:    core.SpellSchoolHoly,
-		DefenseType:    core.DefenseTypeMelee,
-		ProcMask:       core.ProcMaskSpellDamage,
+		DefenseType:    judgementDefenseType,
+		CastType:       judgementCastType,
+		ProcMask:       judgementProcMask,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagSuppressWeaponProcs | core.SpellFlagSuppressEquipProcs | core.SpellFlagBinary,
 
 		// The judgement's own row: rank 3 is learned with a level-26 seal
@@ -208,7 +213,7 @@ func (paladin *Paladin) registerJudgementOfFury(rank int, config sealOfFuryRank)
 		ClientBaseDamage: damage.Range(casterLevel),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeMeleeSpecialNoBlockDodgeParry)
+			spell.CalcAndDealDamage(sim, target, damage.Roll(sim, casterLevel), spell.OutcomeRangedHitAndCritNoBlock)
 		},
 	})
 }

@@ -107,9 +107,12 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 			SpellSchool:    core.SpellSchoolHoly,
 			// 1.60.1.70707 moved the Judgement to the melee table:
 			// SpellCategories DefenseType 2 (Era: 1, magic) and SpellMisc
-			// Attributes_0 0x200000, no dodge, parry or block.
-			DefenseType: core.DefenseTypeMelee,
-			ProcMask:    core.ProcMaskSpellDamage,
+			// Attributes_0 0x200000, no dodge, parry or block. The 11
+			// November 2026 hotfix made it a ranged attack (judgement.go):
+			// the ranged table's miss, never dodged, parried or blocked.
+			DefenseType: judgementDefenseType,
+			CastType:    judgementCastType,
+			ProcMask:    judgementProcMask,
 			Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagSuppressWeaponProcs | core.SpellFlagSuppressEquipProcs | core.SpellFlagBinary,
 
 			// source 1.60.1.70009 client spell data (spellconst/paladin.json):
@@ -127,7 +130,7 @@ func (paladin *Paladin) registerSealOfRighteousness() {
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				baseDamage := judgeDamage.Roll(sim, casterLevel) * improvedSoR
-				spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
+				spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeRangedHitAndCritNoBlock)
 			},
 		})
 
