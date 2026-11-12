@@ -253,15 +253,22 @@ const (
 //     in 105 in the public logs of warlocks without Malevolence (6.4%). The
 //     Felhunter and Voidwalker cast nothing the engine models and take the
 //     same value.
-//   - impSpellCritPercent: Firebolt 53 in 2,383 (2.2%) in 17 public logs,
-//     levels 12 to 30.
+//   - impSpellCritPercent: Firebolt 207 in 3,501 (5.9%) by 13 live Imps
+//     (foreverlogs.gg 2816 to 2853, 5 to 12 Nov, owners at 12 to 40; each
+//     Imp between 3.6 and 7.7%, no owner with crit gear to speak of). The
+//     beta's 17 public logs read 2.2% (53 in 2,383); the live Imp crits at
+//     the other demons' spell rate, as Blizzard's "base spell crit is
+//     around normal levels" says. The live Lash of Pain rate, 60 in 1,061
+//     by eight Succubi (5.7%), keeps demonSpellCritPercent.
 //
-// unconfirmed: the rates are measured at levels 12 to 35; no level-60 demon
-// log exists yet.
+// unconfirmed: the rates are measured at levels 12 to 40; no level-60 demon
+// log exists yet. One live Succubus (Zahnia, 2845 and 2853) crits 4.0% of
+// 1,206 swings where Voidwalkers crit 0 of 733; whether that is her owner's
+// gear or a Succubus rate needs his sheet.
 const (
 	demonMeleeCritPercent = 0.7
 	demonSpellCritPercent = 6.4
-	impSpellCritPercent   = 2.2
+	impSpellCritPercent   = 5.9
 )
 
 // petMeleeHitShare is the part of the warlock's hit a demon's melee takes.
