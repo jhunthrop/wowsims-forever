@@ -111,7 +111,15 @@ func (shaman *Shaman) newChainLightningSpellConfig(rank int, cdTimer *core.Timer
 		// second one (talents.go's rollLightningOverload, with the rank's
 		// own overload roll): the chain starts from the primary target
 		// each time, and the damage multiplier it entered with is
-		// restored when the chain ends.
+		// restored once every bounce is rolled, BEFORE the hits are
+		// dealt. Dealing a hit can change the multiplier on its own
+		// (the Stormstrike charge's dynamic mod leaves on the first
+		// Lightning Bolt, Chain Lightning or Earth Shock hit, dividing
+		// it by 1.2), and a restore after the hits put the spent charge
+		// back on the spell for good, compounding 1.2 on every
+		// Stormstrike and Chain Lightning pair (sim-accuracy 2026-11-12,
+		// shamans at 60: the rotation search valued a Chain Lightning
+		// line at 1e40 DPS for an Enhancement shaman).
 		dealBounces := func(roll clientdamage.Effect) {
 			enteringMultiplier := spell.DamageMultiplier
 			bounceTarget := target
@@ -120,12 +128,11 @@ func (shaman *Shaman) newChainLightningSpellConfig(rank int, cdTimer *core.Timer
 				bounceTarget = sim.Environment.NextTargetUnit(bounceTarget)
 				spell.DamageMultiplier *= shaman.ChainLightningBounceCoefficient
 			}
+			spell.DamageMultiplier = enteringMultiplier
 
 			for _, result := range results[:numHits] {
 				spell.DealDamage(sim, result)
 			}
-
-			spell.DamageMultiplier = enteringMultiplier
 		}
 
 		dealBounces(damage)
