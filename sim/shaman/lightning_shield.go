@@ -11,7 +11,17 @@ const LightningShieldRanks = 7
 
 var LightningShieldSpellId = [LightningShieldRanks + 1]int32{0, 324, 325, 905, 945, 8134, 10431, 10432}
 var LightningShieldProcSpellId = [LightningShieldRanks + 1]int32{0, 26364, 26365, 26366, 26367, 26369, 26370, 26363}
-var LightningShieldBaseDamage = [LightningShieldRanks + 1]float64{0, 13, 29, 51, 80, 114, 154, 198}
+
+// LightningShieldBaseDamage is each orb's own spell (26364, 26365, 26366,
+// 26367, 26369, 26370, 26363: Effect 2 school damage, coefficient 0.267) in
+// clients 1.60.1.70790 and 70888, the amounts the rank tooltips name
+// ("struck for 40 Nature damage" at rank 3, 178 at rank 7). The vanilla
+// orbs this replaces (13, 29, 51, 80, 114, 154, 198) were 11 to 27% too
+// big from rank 2; logs agree with the client: the 8 Nov advanced report's
+// rank 3 orb lands for 43 to 45 against 12 spell power, and foreverlogs.gg
+// shamans' rank 2 orbs for 23 to 26, rank 3 for 38 to 46, rank 4 for 62 to
+// 80 (sim-accuracy 2026-11-12, shamans).
+var LightningShieldBaseDamage = [LightningShieldRanks + 1]float64{0, 13, 24, 40, 64, 96, 134, 178}
 var LightningShieldSpellCoef = [LightningShieldRanks + 1]float64{0, .147, .227, .267, .267, .267, .267, .267}
 
 // The literal here used to stop at rank 6 (305), leaving rank 7's
