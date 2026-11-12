@@ -76,7 +76,7 @@ func (warlock *Warlock) registerSummonDemon() {
 		// The client's SpellPower.csv gives Summon Imp PowerCostPct 80 where
 		// the other three summons are 100.
 		manaCost := core.TernaryFloat64(demon.option == proto.WarlockOptions_Imp, 0.8, 1) * warlock.BaseMana
-		warlock.SummonDemonSpells = append(warlock.SummonDemonSpells, warlock.RegisterSpell(core.SpellConfig{
+		spell := warlock.RegisterSpell(core.SpellConfig{
 			ActionID:      core.ActionID{SpellID: demon.spellID},
 			SpellSchool:   core.SpellSchoolShadow,
 			ProcMask:      core.ProcMaskEmpty,
@@ -89,6 +89,31 @@ func (warlock *Warlock) registerSummonDemon() {
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 				warlock.changeActivePet(sim, demon.pet(warlock), false)
 			},
-		}))
+		})
+		spell.Cost.SpellCostFunctions = prepullSummonCost{spell.Cost.SpellCostFunctions}
+		warlock.SummonDemonSpells = append(warlock.SummonDemonSpells, spell)
 	}
+}
+
+// prepullSummonCost is a summon's mana cost, paid only once the fight has
+// started. The demons are summoned a minute before the pull, the warlock
+// Life Taps back to full and a healer tops the health up (the guides'
+// pre-pull lists), so a pre-pull summon never takes mana out of the
+// fight. A summon during the fight (a dead Succubus) pays the full cost,
+// and Master Summoner's 40% off it. Sim-accuracy round 29 W2.
+type prepullSummonCost struct{ core.SpellCostFunctions }
+
+func (cost prepullSummonCost) MeetsRequirement(sim *core.Simulation, spell *core.Spell) bool {
+	if sim.CurrentTime < 0 {
+		spell.CurCast.Cost = 0
+		return true
+	}
+	return cost.SpellCostFunctions.MeetsRequirement(sim, spell)
+}
+
+func (cost prepullSummonCost) SpendCost(sim *core.Simulation, spell *core.Spell) {
+	if sim.CurrentTime < 0 {
+		return
+	}
+	cost.SpellCostFunctions.SpendCost(sim, spell)
 }
