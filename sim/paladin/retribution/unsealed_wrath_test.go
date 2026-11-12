@@ -76,3 +76,88 @@ func TestUnsealedWrathReleasesTheStoredSealOnASwap(t *testing.T) {
 		t.Errorf("Unsealed Wrath added %d Seal of Righteousness procs on the swap, want 3 (one per stored copy)", got)
 	}
 }
+
+// unsealedWrathShortSwapRotation holds Seal of Righteousness for two unarmed
+// swings (0 and 2 s) and swaps to Seal of Command at 3.5 s, so the swing at
+// 4 s releases what the two swings stored: two copies, unless an extra
+// attack in the window stored a third.
+const unsealedWrathShortSwapRotation = `{
+	"type": "TypeAPL",
+	"prepullActions": [
+		{"action": {"castSpell": {"spellId": {"spellId": 20293}}}, "doAtValue": {"const": {"val": "-1.5s"}}}
+	],
+	"priorityList": [
+		{"action": {"condition": {"and": {"vals": [
+			{"cmp": {"op": "OpGe", "lhs": {"currentTime": {}}, "rhs": {"const": {"val": "3.5s"}}}},
+			{"not": {"val": {"auraIsActive": {"auraId": {"spellId": 20920}}}}}
+		]}}, "castSpell": {"spellId": {"spellId": 20920}}}}
+	]
+}`
+
+// sealOfRighteousnessProcCastsUnderWindfury runs the short swap rotation
+// for 8 seconds under the raid's Windfury Totem at a seed and counts Seal
+// of Righteousness's weapon procs and the paladin's extra attacks.
+func sealOfRighteousnessProcCastsUnderWindfury(t *testing.T, talents map[string]int, seed int64) (procs int32, extraAttacks int32) {
+	t.Helper()
+	player := core.WithSpec(&proto.Player{
+		Class:              proto.Class_ClassPaladin,
+		Race:               proto.Race_RaceHuman,
+		Level:              60,
+		Equipment:          &proto.EquipmentSpec{},
+		Buffs:              core.FullBuffs.Player,
+		TalentsString:      talentString(t, talents),
+		Rotation:           core.APLRotationFromJsonString(unsealedWrathShortSwapRotation),
+		DistanceFromTarget: 5,
+	}, &proto.Player_RetributionPaladin{
+		RetributionPaladin: &proto.RetributionPaladin{
+			Options: &proto.PaladinOptions{PrimarySeal: proto.PaladinSeal_Righteousness},
+		},
+	})
+	raidBuffs := &proto.RaidBuffs{WindfuryTotem: true}
+	raid := core.SinglePlayerRaidProto(player, core.FullBuffs.Party, raidBuffs, core.FullBuffs.Debuffs)
+	result := core.RunRaidSim(&proto.RaidSimRequest{
+		Raid:       raid,
+		Encounter:  &proto.Encounter{Duration: 8, Targets: []*proto.Target{core.NewDefaultTarget()}},
+		SimOptions: &proto.SimOptions{Iterations: 1, RandomSeed: seed, IsTest: true},
+	})
+	if result.Error != nil {
+		t.Fatalf("sim error: %s", result.Error.Message)
+	}
+	if metrics := findActionMetrics(result, sealOfRighteousnessProcRank8SpellID); metrics != nil {
+		for _, target := range metrics.Targets {
+			procs += target.Casts
+		}
+	}
+	for _, action := range result.RaidMetrics.Parties[0].Players[0].Actions {
+		if action.Id.GetOtherId() == proto.OtherAction_OtherActionAttack && action.Id.Tag == 3 {
+			for _, target := range action.Targets {
+				extraAttacks += target.Casts
+			}
+		}
+	}
+	return procs, extraAttacks
+}
+
+// Blizzard's 11 November 2026 hotfix: "Unsealed Fury no longer generates
+// echoes from Windfury Totem attacks". Two unarmed swings land under Seal
+// of Righteousness before the swap, so the swing under Seal of Command
+// releases at most two copies whatever Windfury adds in the window; before
+// the fix a Windfury extra attack in the window stored a third.
+func TestUnsealedWrathStoresNoCopyFromAWindfuryAttack(t *testing.T) {
+	const seeds = 40
+	const swingsBeforeTheSwap = 2
+	var extraAttacksSeen int32
+	for seed := int64(1); seed <= seeds; seed++ {
+		talents := map[string]int{"seal_of_command": 1}
+		without, _ := sealOfRighteousnessProcCastsUnderWindfury(t, talents, seed)
+		talents["unsealed_wrath"] = 1
+		with, extraAttacks := sealOfRighteousnessProcCastsUnderWindfury(t, talents, seed)
+		extraAttacksSeen += extraAttacks
+		if released := with - without; released > swingsBeforeTheSwap {
+			t.Errorf("seed %d: Unsealed Wrath released %d copies, more than the %d swings that landed before the swap: a Windfury extra attack stored one", seed, released, swingsBeforeTheSwap)
+		}
+	}
+	if extraAttacksSeen == 0 {
+		t.Fatal("Windfury Totem gave no extra attack over the seeds; the test exercises nothing")
+	}
+}
