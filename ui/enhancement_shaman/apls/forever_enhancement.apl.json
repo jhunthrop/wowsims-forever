@@ -215,7 +215,7 @@
       }
     },
     {
-      "notes": "Earth Shock on cooldown while your mana is above a quarter: once you have Stormstrike it takes Stormstrike's 20% when no bolt is ready. Keep that last quarter for your totems, and for Stormstrike once you have it.",
+      "notes": "Earth Shock on cooldown while your mana is above 15%: once you have Stormstrike it takes Stormstrike's 20% when no bolt is ready. That last 15% keeps Stormstrike and a totem drop paid for; holding a quarter back costs shocks since Stormstrike's 10 November cooldown spends less mana.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -231,7 +231,7 @@
             },
             "rhs": {
               "const": {
-                "val": "25%"
+                "val": "15%"
               }
             }
           }
