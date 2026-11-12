@@ -131,8 +131,9 @@ func TestThickHideAddsFormMultipliedBaseArmor(t *testing.T) {
 		t.Errorf("Thick Hide 3/3 armor = %v, want %v", got, want)
 	}
 
+	// Rank 1 is 1 plus 3 a level above level 1 (thick_hide.go): 178 at 60.
 	one, _, _ := newBearSim(t, 60, map[string]int{"thick_hide": 1})
-	if got, want := one.GetStat(stats.Armor)-plain.GetStat(stats.Armor), 1.0*60*4.6; !near(got, want) {
+	if got, want := one.GetStat(stats.Armor)-plain.GetStat(stats.Armor), 178.0*4.6; !near(got, want) {
 		t.Errorf("Thick Hide 1/3 armor = %v, want %v", got, want)
 	}
 }
