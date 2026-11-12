@@ -712,10 +712,12 @@ func resourcefulnessProcChance(rank int32) float64 {
 // Mana Regeneration to continue while casting for 30 sec."
 // (1.60.1.70425; the 1.60.1.70374 live text read 30/60% for the chance.)
 //
-// "melee abilities" is read as every melee special (ProcMaskMeleeMHSpecial
-// | ProcMaskMeleeOHSpecial, the same mask hunter.go's Initialize uses to
-// populate MeleeSpells), which also covers Mongoose Bite, Raptor
-// Strike, Wing Clip, Counterattack, and Strider Kick.
+// The cost cut (440529 effect 0, aura 108 misc 14) names its spells by
+// class mask: 194 in word 0 (Raptor Strike, Mongoose Bite, Wing Clip, the
+// traps), 524288 in word 1 (Counterattack), 2097152 in word 2 (Strider
+// Kick). Every melee special but Lacerate is in it: Lacerate's 4096 in
+// word 1 is in Savage Strikes' and Predator's Edge's masks (528384), not
+// this one, so Lacerate keeps its full cost (1.60.1.70790 and 70888).
 func (hunter *Hunter) applyResourcefulness() {
 	if hunter.Talents.Resourcefulness == 0 {
 		return
@@ -724,6 +726,9 @@ func (hunter *Hunter) applyResourcefulness() {
 	costReduction := -30 * hunter.Talents.Resourcefulness
 	hunter.OnSpellRegistered(func(spell *core.Spell) {
 		if spell.Cost == nil {
+			return
+		}
+		if spell.SpellCode == SpellCode_HunterLacerate {
 			return
 		}
 		if spell.Flags.Matches(SpellFlagTrap) || spell.ProcMask.Matches(core.ProcMaskMeleeMHSpecial|core.ProcMaskMeleeOHSpecial) {
