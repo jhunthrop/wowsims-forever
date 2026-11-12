@@ -38,6 +38,15 @@ type DotConfig struct {
 	// still chooses them.
 	CanCrit bool
 
+	// NeverCrits keeps this dot's ticks off the crit roll whatever
+	// periodicCanCrit says: the client marks the periodic effect Can't
+	// Crit (SPELL_ATTR2_CANT_CRIT, Attributes_2 0x20000000), which
+	// overrides Forever's bleed rule. Deep Wounds (the warrior's 412613)
+	// is the one bleed that carries it, and the launch logs agree: 0 of
+	// 146 Deep Wound ticks crit where the same warriors' Rend ticks crit
+	// at their melee crit chance.
+	NeverCrits bool
+
 	// CritMultiplier is the multiplier a critical tick uses. Zero means
 	// "the parent spell's", which is the safe default; Forever's
 	// periodic figure is unpublished and may differ from the direct
@@ -450,7 +459,7 @@ func (spell *Spell) createDots(config DotConfig, isHot bool) {
 		DamageMultiplier: config.DamageMultiplier,
 		BonusCoefficient: config.BonusCoefficient,
 
-		CanCrit:        config.CanCrit || periodicCanCrit(config.Spell, isHot),
+		CanCrit:        !config.NeverCrits && (config.CanCrit || periodicCanCrit(config.Spell, isHot)),
 		CritMultiplier: config.CritMultiplier,
 
 		dynamic:         config.Dynamic,

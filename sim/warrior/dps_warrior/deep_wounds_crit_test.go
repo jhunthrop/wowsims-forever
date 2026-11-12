@@ -8,12 +8,12 @@ import (
 	"github.com/wowsims/classic/sim/warrior"
 )
 
-// Forever's Deep Wounds ticks crit (the owner's periodic crit rule: every
-// bleed crits), on the melee table with the physical multiplier. A tick
-// crit must not refresh Deep Wounds: the talent's proc mask (spell 12834,
-// SpellAuraOptions ProcTypeMask 0x11154) has no periodic bit, so one
-// application runs its four ticks and ends.
-func TestDeepWoundsTicksCritWithoutRefreshing(t *testing.T) {
+// Deep Wounds' ticks never crit: the client marks Forever's Deep Wound
+// (412613) Can't Crit, and the launch logs hold 0 critical ticks in 146
+// where the same warriors' Rend ticks crit at their melee crit chance. It
+// is the one bleed outside the owner's periodic crit rule. A tick must not
+// refresh Deep Wounds either: one application runs its four ticks and ends.
+func TestDeepWoundsTicksNeverCrit(t *testing.T) {
 	sim, war := newWarriorSim(t, warrior.ForeverFuryTalents)
 	if war.DeepWounds == nil {
 		t.Fatal("the Fury build should train Deep Wounds")
@@ -33,10 +33,10 @@ func TestDeepWoundsTicksCritWithoutRefreshing(t *testing.T) {
 	}
 
 	m := deepWounds.SpellMetrics[target.UnitIndex]
-	if m.CritTicks != ticks {
-		t.Errorf("Deep Wounds CritTicks = %d (plain %d), want %d at 100%% crit", m.CritTicks, m.Ticks, ticks)
+	if m.CritTicks != 0 || m.Ticks != ticks {
+		t.Errorf("Deep Wounds ticked %d plain and %d critical at 200%% crit, want %d plain and none", m.Ticks, m.CritTicks, ticks)
 	}
-	if m.Casts != 1 || m.CritTicks+m.Ticks != ticks {
-		t.Errorf("Deep Wounds tick crits refreshed it: %d casts, %d ticks, want 1 cast and %d ticks", m.Casts, m.CritTicks+m.Ticks, ticks)
+	if m.Casts != 1 {
+		t.Errorf("Deep Wounds was applied %d times from one forced cast, want 1", m.Casts)
 	}
 }

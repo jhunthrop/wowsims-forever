@@ -31,6 +31,15 @@ func (warrior *Warrior) applyDeepWounds() {
 			},
 			NumberOfTicks: deepWoundsTicks,
 			TickLength:    time.Second * 3,
+			// Forever's Deep Wound (the server's 412613, what the talent's
+			// 12162 trigger deals each tick) is flagged Can't Crit in the
+			// client (SpellMisc Attributes_2 0x20000000 in 1.60.1.70790
+			// and 70888), the one bleed that is: its ticks never crit,
+			// where Forever's other bleeds roll at the melee crit chance.
+			// The launch logs read the same: 0 critical ticks in 146 Deep
+			// Wound ticks over 17 warriors whose Rend ticks crit 13 times
+			// in 193 (foreverlogs.gg 2815 to 2853).
+			NeverCrits: true,
 
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				attackTable := warrior.AttackTables[target.UnitIndex][proto.CastType_CastTypeMainHand]
