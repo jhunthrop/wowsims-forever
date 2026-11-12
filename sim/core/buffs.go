@@ -492,6 +492,34 @@ func SanctityAuraAura(character *Character) *Aura {
 	})
 }
 
+// ConcentrationAuraAura is the paladin's Concentration Aura (19746): "Gives
+// a 35% chance of ignoring spell interruption when damaged to all party
+// members" (SpellEffect aura 149, 35, client 1.60.1.70790 and 70888). The
+// chance adds to the cast spell's own (Spiritual Focus's 70% at five
+// points makes 105%, and a healing paladin under its own aura is never
+// pushed back). It is the paladin's own aura here: nothing else in the
+// healing sim's raid casts, so the party half has no one to reach.
+func ConcentrationAuraAura(character *Character) *Aura {
+	return character.GetOrRegisterAura(Aura{
+		Label:    "Concentration Aura",
+		ActionID: ActionID{SpellID: 19746},
+		Duration: NeverExpires,
+		OnReset: func(aura *Aura, sim *Simulation) {
+			aura.Activate(sim)
+		},
+		OnGain: func(aura *Aura, sim *Simulation) {
+			character.PseudoStats.PushbackResistChance += concentrationAuraPushbackResist
+		},
+		OnExpire: func(aura *Aura, sim *Simulation) {
+			character.PseudoStats.PushbackResistChance -= concentrationAuraPushbackResist
+		},
+	})
+}
+
+// concentrationAuraPushbackResist is Concentration Aura's effect 0 amount
+// (35) as a chance.
+const concentrationAuraPushbackResist = 0.35
+
 // BlessingOfKingsAura is +10% to every stat (20217 and Greater Blessing of
 // Kings 25898). It shares one exclusive category with Heart of the Lion's
 // area stats (kingsAndLionStatsCategory): the two are the same aura and

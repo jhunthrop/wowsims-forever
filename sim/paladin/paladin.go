@@ -270,9 +270,7 @@ func NewPaladin(character *core.Character, options *proto.Player, paladinOptions
 	}
 	core.FillTalentsProto(paladin.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
 
-	if paladin.Options.Aura == proto.PaladinAura_SanctityAura {
-		paladin.primaryPaladinAura = paladin.Options.Aura
-	}
+	paladin.primaryPaladinAura = paladin.Options.Aura
 
 	paladin.PseudoStats.CanParry = true
 	paladin.EnableManaBar()
@@ -312,8 +310,14 @@ func (paladin *Paladin) registerStopAttackMacros() {
 
 func (paladin *Paladin) ResetCurrentPaladinAura() {
 	paladin.currentPaladinAura = nil
-	if paladin.primaryPaladinAura == proto.PaladinAura_SanctityAura {
+	// The auras the engine models: Sanctity (Holy damage) and Concentration
+	// (the healer's cast pushback). Devotion, Retribution and the resistance
+	// auras change nothing a single-target sim measures.
+	switch paladin.primaryPaladinAura {
+	case proto.PaladinAura_SanctityAura:
 		paladin.currentPaladinAura = core.SanctityAuraAura(paladin.GetCharacter())
+	case proto.PaladinAura_ConcentrationAura:
+		paladin.currentPaladinAura = core.ConcentrationAuraAura(paladin.GetCharacter())
 	}
 }
 

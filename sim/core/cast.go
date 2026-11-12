@@ -106,11 +106,21 @@ func (unit *Unit) applySpellPushback() {
 	})
 }
 
+// keepsCastingTime is whether the hit that just landed leaves the cast of
+// spell alone: one roll against the spell's own chance (Spiritual Focus,
+// Nature's Focus and the rest, SPELLMOD_NOT_LOSE_CASTING_TIME) plus the
+// unit's (Concentration Aura, SPELL_AURA_REDUCE_PUSHBACK), the way the
+// server sums the two. The roll is taken even at no chance, so a unit
+// with neither draws the same numbers it always did.
+func (unit *Unit) keepsCastingTime(sim *Simulation, spell *Spell) bool {
+	return sim.Roll(0, 1.0) <= spell.PushbackReduction+unit.PseudoStats.PushbackResistChance
+}
+
 // pushBackChannel shortens the channel the unit is in: the ticks that
 // would land after the new end are lost, and a channel left with no tick
 // ends now and hands the unit back to its rotation.
 func (unit *Unit) pushBackChannel(sim *Simulation, dot *Dot) {
-	if sim.Roll(0, 1.0) <= dot.Spell.PushbackReduction {
+	if unit.keepsCastingTime(sim, dot.Spell) {
 		return
 	}
 	pushback := DurationFromSeconds(max(0.2, unit.channelPushback))
@@ -180,7 +190,7 @@ func (unit *Unit) PushBackCast(sim *Simulation) {
 	if !hcSpell.Flags.Matches(SpellFlagChanneled) && sim.sameServerBatch(hc.Expires-sim.CurrentTime) {
 		return
 	}
-	if sim.Roll(0, 1.0) <= hcSpell.PushbackReduction {
+	if unit.keepsCastingTime(sim, hcSpell) {
 		return
 	}
 	pushback := DurationFromSeconds(max(0.2, hc.Pushback))

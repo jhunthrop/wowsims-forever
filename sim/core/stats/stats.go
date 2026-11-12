@@ -409,6 +409,12 @@ type PseudoStats struct {
 
 	FiveSecondRuleRefreshTime time.Duration // last time a spell was cast
 	SpiritRegenRateCasting    float64       // percentage of spirit regen allowed during casting. Spell effect MOD_MANA_REGEN_INTERRUPT (134)
+	// PushbackResistChance is the unit's own chance to keep its casting time
+	// when a hit lands mid-cast, added to the spell's PushbackReduction before
+	// one roll (the server sums SPELL_AURA_REDUCE_PUSHBACK, 149, with the
+	// spell's SPELLMOD_NOT_LOSE_CASTING_TIME, 9: Concentration Aura's 35 on
+	// top of Spiritual Focus's 70 is 105, and never a pushback).
+	PushbackResistChance float64
 
 	// Both of these are currently only used for innervate.
 	ForceFullSpiritRegen  bool    // If set, automatically uses full spirit regen regardless of FSR refresh time.
