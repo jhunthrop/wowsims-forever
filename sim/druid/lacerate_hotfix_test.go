@@ -6,12 +6,12 @@ import (
 )
 
 // Lacerate's hit since client 1.60.1.70707: "10% weapon damage per existing
-// application of Lacerate on the target". The first application lands no
-// weapon damage; the fifth lands 40%. Before the hotfix every hit was a flat
-// 20% weapon damage.
-func TestLacerateHitScalesWithExistingStacks(t *testing.T) {
+// application of Lacerate on the target", which the first Forever bear logs
+// read as counting the stack the hit adds (lacerate.go): the first
+// application lands 10% weapon damage, the sixth 60%.
+func TestLacerateHitCountsTheStackItAdds(t *testing.T) {
 	const weaponDamage = 200.0
-	for stacks, want := range []float64{0, 20, 40, 60, 80} {
+	for stacks, want := range []float64{20, 40, 60, 80, 100, 120} {
 		if got := lacerateHitDamage(int32(stacks), weaponDamage); math.Abs(got-want) > 1e-9 {
 			t.Errorf("hit with %d stacks up = %v, want %v", stacks, got, want)
 		}

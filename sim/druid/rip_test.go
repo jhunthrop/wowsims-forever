@@ -24,9 +24,10 @@ func TestRipComboPointStepsMatchClient(t *testing.T) {
 }
 
 // PounceTickDamage is the "Pounce Bleed" spells' effect 0 (SpellEffect.csv
-// 9007, 9824, 9826), which the vendored spellconst file does not carry.
+// 9007, 9824, 9826 in 1.60.1.70790), which the vendored spellconst file does
+// not carry: 19, 25 and 31 since the 3 November 2026 notes.
 func TestPounceTickDamage(t *testing.T) {
-	want := [PounceRanks + 1]float64{0, 15, 20, 25}
+	want := [PounceRanks + 1]float64{0, 19, 25, 31}
 	for rank := 1; rank <= PounceRanks; rank++ {
 		got := PounceTickDamage[rank]
 		if got.Amount != want[rank] || got.SpellLevel != PounceLevel[rank] {

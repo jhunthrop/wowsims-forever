@@ -328,6 +328,35 @@ func TestRendAndTearNeedsABleed(t *testing.T) {
 	}
 }
 
+// Rend and Tear reaches the bleed Lacerate leaves when the target already
+// bleeds as it lands: the first application snapshots the rank's tick, the
+// second (the target bleeding from the first) snapshots two stacks' ticks
+// 15% larger, as the first Forever bear logs read (feral_talents.go).
+func TestRendAndTearReachesLaceratesBleedFromTheSecondStack(t *testing.T) {
+	bear, sim, target := newBearSim(t, 60, map[string]int{"rend_and_tear": 5, "lacerate": 1})
+	dot := bear.Lacerate.Dot(target)
+	tick := druid.LacerateTickDamage[len(druid.LacerateTickDamage)-1].Center(60)
+	castUntil := func(stacks int32) {
+		t.Helper()
+		for i := 0; i < 40 && dot.GetStacks() < stacks; i++ {
+			bear.AddRage(sim, 100, bear.NewRageMetrics(core.ActionID{SpellID: 1}))
+			sim.CurrentTime += 2 * time.Second
+			bear.Lacerate.Cast(sim, target)
+		}
+		if dot.GetStacks() != stacks {
+			t.Fatalf("Lacerate at %d stacks after 40 casts, want %d", dot.GetStacks(), stacks)
+		}
+	}
+	castUntil(1)
+	if got, want := dot.SnapshotBaseDamage, tick; !near(got, want) {
+		t.Errorf("first application's tick = %v, want %v (no bleed on the target as it landed)", got, want)
+	}
+	castUntil(2)
+	if got, want := dot.SnapshotBaseDamage, 2*tick*1.15; !near(got, want) {
+		t.Errorf("second application's tick = %v, want %v (Rend and Tear on a bleeding target)", got, want)
+	}
+}
+
 func TestLacerateStacksToFive(t *testing.T) {
 	bear, sim, target := newBearSim(t, 60, map[string]int{"lacerate": 1})
 	for i := 0; i < 40 && bear.Lacerate.Dot(target).GetStacks() < 5; i++ {
