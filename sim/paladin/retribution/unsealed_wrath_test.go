@@ -78,9 +78,10 @@ func TestUnsealedWrathReleasesTheStoredSealOnASwap(t *testing.T) {
 }
 
 // unsealedWrathShortSwapRotation holds Seal of Righteousness for two unarmed
-// swings (0 and 2 s) and swaps to Seal of Command at 3.5 s, so the swing at
-// 4 s releases what the two swings stored: two copies, unless an extra
-// attack in the window stored a third.
+// swings (0 and 2 s) and swaps to Seal of Command right after the second
+// (the rotation runs after a swing lands, so a 1.5 s floor is the 2 s
+// swing), so the swing at 4 s releases what the two swings stored: two
+// copies, unless an extra attack in the window stored a third.
 const unsealedWrathShortSwapRotation = `{
 	"type": "TypeAPL",
 	"prepullActions": [
@@ -88,7 +89,7 @@ const unsealedWrathShortSwapRotation = `{
 	],
 	"priorityList": [
 		{"action": {"condition": {"and": {"vals": [
-			{"cmp": {"op": "OpGe", "lhs": {"currentTime": {}}, "rhs": {"const": {"val": "3.5s"}}}},
+			{"cmp": {"op": "OpGe", "lhs": {"currentTime": {}}, "rhs": {"const": {"val": "1.5s"}}}},
 			{"not": {"val": {"auraIsActive": {"auraId": {"spellId": 20920}}}}}
 		]}}, "castSpell": {"spellId": {"spellId": 20920}}}}
 	]
