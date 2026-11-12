@@ -304,65 +304,6 @@ func (warlock *Warlock) registerCurseDebuff(base core.SpellConfig, newAura func(
 	return warlock.RegisterSpell(base)
 }
 
-func (warlock *Warlock) registerCurseOfShadowSpell() {
-	playerLevel := warlock.Level
-	if playerLevel < 50 {
-		return
-	}
-
-	warlock.CurseOfShadowAuras = warlock.NewEnemyAuraArray(core.CurseOfShadowAura)
-
-	spellID := map[int32]int32{
-		50: 17862,
-		60: 17937,
-	}[playerLevel]
-
-	rank := map[int32]int{
-		50: 1,
-		60: 2,
-	}[playerLevel]
-
-	manaCost := map[int32]float64{
-		50: 150.0,
-		60: 200.0,
-	}[playerLevel]
-
-	warlock.CurseOfShadow = warlock.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: spellID},
-		SpellSchool: core.SpellSchoolShadow,
-		ProcMask:    core.ProcMaskEmpty,
-		Flags:       core.SpellFlagAPL | WarlockFlagAffliction,
-		Rank:        rank,
-
-		ManaCost: core.ManaCostOptions{
-			FlatCost: manaCost,
-		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-		},
-
-		ThreatMultiplier: 1,
-		FlatThreatBonus:  156,
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			result := spell.CalcOutcome(sim, target, spell.OutcomeMagicHitNoHitCounter)
-			if result.Landed() {
-				aura := warlock.CurseOfShadowAuras.Get(target)
-				if activeCurse := warlock.ActiveCurseAura.Get(target); activeCurse != nil && activeCurse != aura {
-					activeCurse.Deactivate(sim)
-				}
-
-				warlock.ActiveCurseAura[target.UnitIndex] = aura
-				warlock.ActiveCurseAura.Get(target).Activate(sim)
-			}
-		},
-
-		RelatedAuras: []core.AuraArray{warlock.CurseOfShadowAuras},
-	})
-}
-
 func (warlock *Warlock) registerAmplifyCurseSpell() {
 	if !warlock.Talents.AmplifyCurse {
 		return

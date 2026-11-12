@@ -1472,10 +1472,16 @@ func (warlock *Warlock) applyBaneOfHavoc() {
 			BaseCost: baneOfHavocManaCostPct / 100,
 		},
 
-		// The client flags Bane of Havoc GCD-less (gcd_ms 0,
-		// spellconst/warlock.json build 1.60.1.70009) - it is a
-		// cooldown-only curse placement, not a cast - so DefaultCast is
-		// left zero-valued instead of taking core.GCDDefault.
+		// The 70790 tables carry no cooldown row for Bane of Havoc (gcd_ms
+		// 0 in spellconst/warlock.json). The 10 Nov hotfix, push 113766 on
+		// 1.60.1.70888, adds SpellCooldowns 102518 (StartRecoveryTime 1500)
+		// and SpellCategories 174286 (StartRecoveryCategory 133): the
+		// ordinary 1.5 s global cooldown, as every other curse has.
+		Cast: core.CastConfig{
+			DefaultCast: core.Cast{
+				GCD: core.GCDDefault,
+			},
+		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			warlock.baneOfHavocTarget = target

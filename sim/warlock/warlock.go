@@ -91,8 +91,6 @@ type Warlock struct {
 	ActiveCurseAura          core.AuraArray // the curse slot: Elements, Recklessness
 	ActiveBaneAura           core.AuraArray // the bane slot: Agony, Doom, Havoc
 	CurseOfElements          []*core.Spell
-	CurseOfShadow            *core.Spell
-	CurseOfShadowAuras       core.AuraArray
 	CurseOfRecklessness      *core.Spell
 	CurseOfRecklessnessAuras core.AuraArray
 	CurseOfWeakness          *core.Spell
@@ -166,7 +164,6 @@ func (warlock *Warlock) Initialize() {
 	warlock.registerShootSpell()
 
 	warlock.registerCurseOfElementsSpell()
-	warlock.registerCurseOfShadowSpell()
 	warlock.registerCurseOfRecklessnessSpell()
 	warlock.registerCurseOfAgonySpell()
 	warlock.registerAmplifyCurseSpell()
