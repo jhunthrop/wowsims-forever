@@ -57,15 +57,16 @@ func fireboltMetrics(imp *proto.UnitMetrics) *proto.ActionMetrics {
 // read the same, while a Succubus swings on an exact 2.0 s timer. The cast
 // is 2 s, so the pet AI's delay between casts is about 430 ms, not the 200
 // ms the engine carried from upstream. The fight is short enough that the
-// bare Imp's mana lasts it (300 s left it waiting on regen).
+// bare Imp's mana lasts it (its pool is about nine Firebolts at 60; 80 s
+// and 300 s both left it waiting on regen).
 func TestImpFireboltCadenceMatchesTheLogs(t *testing.T) {
-	const fightSeconds = 80
+	const fightSeconds = 20
 	imp := runImpOnly(t, fightSeconds, 3)
 	casts := float64(castsOf(imp, 11763)) / 3
-	// The first cast is at the pull, then one every 2.43 s: 33.9. At 2.2 s
-	// it is 37.4.
+	// The first cast is at the pull, then one every 2.43 s: 9.2, so 9. At
+	// 2.2 s it is 10.1, so 10.
 	want := 1 + fightSeconds/2.43
-	if casts < want-1 || casts > want+1 {
+	if casts < want-0.6 || casts > want+0.6 {
 		t.Errorf("the Imp cast Firebolt %.1f times in %d s, want about %.1f (one every 2.43 s)", casts, fightSeconds, want)
 	}
 }
