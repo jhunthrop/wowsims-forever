@@ -98,7 +98,7 @@ dps_results: {
  key: "TestProtection-Phase1-AllItems-Avenger'sBattlegear"
  value: {
   dps: 607.04792
-  tps: 1421.89071
+  tps: 1421.89072
  }
 }
 dps_results: {
@@ -126,7 +126,7 @@ dps_results: {
  key: "TestProtection-Phase1-AllItems-LawbringerArmor"
  value: {
   dps: 535.49499
-  tps: 1240.92275
+  tps: 1240.92274
  }
 }
 dps_results: {
@@ -191,7 +191,7 @@ dps_results: {
  key: "TestProtection-Phase1-Settings-Dwarf-forever_l60-Righteous Fury-forever_protection-FullBuffs-Forever-Consumes-ShortSingleTarget"
  value: {
   dps: 364.49866
-  tps: 1035.76904
+  tps: 1035.76903
  }
 }
 dps_results: {
