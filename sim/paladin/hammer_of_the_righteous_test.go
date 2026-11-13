@@ -4,6 +4,8 @@ import (
 	"math"
 	"testing"
 
+	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/spellconst"
 )
 
@@ -38,5 +40,32 @@ func TestHammerOfTheRighteousMultipleMatchesTheClient(t *testing.T) {
 	}
 	if got, want := hammerOfTheRighteousFlat, spell.Effects[0].Amount; got != want {
 		t.Errorf("flat damage %v, client %v", got, want)
+	}
+}
+
+// The client's SpellEquippedItems row for 407632 (1.60.1.70888, hotfixed)
+// is item class 2 with subclass mask 145: one-handed axes (0), one-handed
+// maces (4) and one-handed swords (7). A two-hander, a dagger, a fist
+// weapon or no weapon cannot cast it.
+func TestHammerOfTheRighteousNeedsAOneHandedAxeMaceOrSword(t *testing.T) {
+	cases := []struct {
+		name string
+		item *core.Item
+		want bool
+	}{
+		{"one-handed mace", &core.Item{HandType: proto.HandType_HandTypeOneHand, WeaponType: proto.WeaponType_WeaponTypeMace}, true},
+		{"main-hand sword", &core.Item{HandType: proto.HandType_HandTypeMainHand, WeaponType: proto.WeaponType_WeaponTypeSword}, true},
+		{"one-handed axe", &core.Item{HandType: proto.HandType_HandTypeOneHand, WeaponType: proto.WeaponType_WeaponTypeAxe}, true},
+		{"two-handed sword", &core.Item{HandType: proto.HandType_HandTypeTwoHand, WeaponType: proto.WeaponType_WeaponTypeSword}, false},
+		{"two-handed mace", &core.Item{HandType: proto.HandType_HandTypeTwoHand, WeaponType: proto.WeaponType_WeaponTypeMace}, false},
+		{"polearm", &core.Item{HandType: proto.HandType_HandTypeTwoHand, WeaponType: proto.WeaponType_WeaponTypePolearm}, false},
+		{"dagger", &core.Item{HandType: proto.HandType_HandTypeOneHand, WeaponType: proto.WeaponType_WeaponTypeDagger}, false},
+		{"fist weapon", &core.Item{HandType: proto.HandType_HandTypeOneHand, WeaponType: proto.WeaponType_WeaponTypeFist}, false},
+		{"no weapon", nil, false},
+	}
+	for _, c := range cases {
+		if got := hammerOfTheRighteousWeaponAllowed(c.item); got != c.want {
+			t.Errorf("%s: allowed %v, want %v", c.name, got, c.want)
+		}
 	}
 }
