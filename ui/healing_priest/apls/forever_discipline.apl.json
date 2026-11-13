@@ -320,7 +320,7 @@
           }
         }
       },
-      "notes": "On the tank at the top rank whenever Weakened Soul is off him: it soaks the next hit and costs a warrior no rage. Once you have Renewed Hope, the Weakened Soul it leaves makes your next heals on him crit more, and with Divine Aegis every one of those crits leaves a shield."
+      "notes": "On the tank once he is hurt and Weakened Soul is off him, while your mana keeps pace with the fight: it soaks the next hit and costs a warrior no rage. Cast the top rank at 60; while leveling, some races keep the older rank for a few levels after a new one arrives. Once you have Renewed Hope, the Weakened Soul it leaves makes your next heals on him crit more, and with Divine Aegis every one of those crits leaves a shield."
     },
     {
       "action": {
@@ -366,25 +366,76 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentHealthPercent": {
-                "sourceUnit": {
-                  "type": "Player",
-                  "index": 5
+          "or": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.2"
+                    }
+                  }
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentHealthPercent": {
+                            "sourceUnit": {
+                              "type": "Player",
+                              "index": 5
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.35"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "math": {
+                            "op": "OpMul",
+                            "lhs": {
+                              "remainingTimePercent": {}
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "0.9"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.35"
-              }
-            }
+            ]
           }
         }
       },
-      "notes": "Flash Heal at the top rank on a tank who is really low: the fast heal, and the dear one."
+      "notes": "Flash Heal at the top rank on a tank about to die, whatever your mana; on a tank who is only low, as long as your mana keeps up with the fight: the fast heal, and the expensive one."
     },
     {
       "notes": "Flash Heal on a party member about to die, as long as your mana is not far behind the fight.",
@@ -1047,7 +1098,7 @@
           }
         }
       },
-      "notes": "Heal on the tank until you learn Greater Heal at 40: it is your biggest heal until then."
+      "notes": "Heal rank 1 on the tank through 35 (36 as an Undead) and rank 3 from 36, until you learn Greater Heal at 40: rank 1 keeps your whole healing bonus until 33 and heals the most for its mana, and rank 4 costs more mana than its extra healing is worth."
     },
     {
       "action": {
@@ -1186,7 +1237,7 @@
           }
         }
       },
-      "notes": "Greater Heal rank 1 on a party member who is missing a third of their health: once you have higher ranks it keeps most of your healing bonus for far less mana."
+      "notes": "On a party member missing a third of their health, since once you have higher ranks it keeps most of your healing bonus for far less mana."
     },
     {
       "action": {
@@ -1709,7 +1760,7 @@
           }
         }
       },
-      "notes": "Greater Heal waits for a deeper hole once your mana falls behind the fight: a tank under 50%."
+      "notes": "When your mana falls behind the fight, only on a tank under 50%, so it waits for a deeper hole."
     },
     {
       "action": {
@@ -1843,7 +1894,7 @@
           }
         }
       },
-      "notes": "Greater Heal rank 1 waits for a deeper hole too once your mana falls behind the fight: a party member under 35%."
+      "notes": "When your mana falls behind the fight, only on a party member under 35%, so it waits for a deeper hole too."
     },
     {
       "action": {

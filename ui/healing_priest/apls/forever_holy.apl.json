@@ -64,7 +64,7 @@
           }
         }
       },
-      "notes": "Dark Sacrifice when the mana bar has room and you are not hurt. It trades your own health for mana over fifteen seconds and adds your Spirit to the mana, and its ten minute cooldown makes it a once-a-fight cast."
+      "notes": "Dark Sacrifice, Undead only, once you are under 70% mana and still healthy: it turns your own health into mana over 15 seconds, plus your Spirit, and its 10 minute cooldown makes it once a fight."
     },
     {
       "action": {
@@ -79,7 +79,7 @@
           }
         }
       },
-      "notes": "Prayer of Mending goes on the tank every time it is ready and the mana pace allows it: a 10 second cooldown, five charges, and at the top rank it is the cheapest healing per mana the Holy kit has. Rank 1 (level 40) is not: it heals little for its price, so it waits for the same mana pace as the filler. It heals its holder the next time they take damage or receive a direct heal, so keep it on the tank, who is hit and healed most."
+      "notes": "Prayer of Mending on the tank every time it is ready: up to five heals for one cast on a 10 second cooldown, the cheapest healing you can cast all fight. It heals whoever holds it on their next hit or direct heal, and the tank is hit and healed the most. It is not held back by the mana pace the costlier heals follow: it is the last heal to give up when mana runs short."
     },
     {
       "action": {
@@ -110,7 +110,7 @@
           }
         }
       },
-      "notes": "Renew stays on the tank for the whole fight at a cheap rank: a cheaper rank returns more health per mana for the spell power it is cast with, and the dearer ranks cost the mana the fight runs out of. Below 60, the rank each band casts is chosen on that band's own fight, sized to the dungeons a group of its level runs."
+      "notes": "Keep Renew on the tank all fight; at 60 that means rank 7 or higher."
     },
     {
       "action": {
@@ -125,25 +125,76 @@
           }
         },
         "condition": {
-          "cmp": {
-            "op": "OpLt",
-            "lhs": {
-              "currentHealthPercent": {
-                "sourceUnit": {
-                  "type": "Player",
-                  "index": 5
+          "or": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.2"
+                    }
+                  }
+                }
+              },
+              {
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentHealthPercent": {
+                            "sourceUnit": {
+                              "type": "Player",
+                              "index": 5
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.35"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "math": {
+                            "op": "OpMul",
+                            "lhs": {
+                              "remainingTimePercent": {}
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "0.9"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
-            },
-            "rhs": {
-              "const": {
-                "val": "0.35"
-              }
-            }
+            ]
           }
         }
       },
-      "notes": "Flash Heal is the fast heal and the dear one: it is only for a tank that is genuinely low. The tank's Flash Heal is cast at rank 2 (9472): over the raid fight it returns more effective healing for far less mana."
+      "notes": "Flash Heal on a tank about to die, whatever your mana, and on a tank who is only low while your mana keeps up with the fight: it heals less for its mana than your slower heals, so spend it where the speed matters."
     },
     {
       "action": {
@@ -175,7 +226,8 @@
             }
           }
         }
-      }
+      },
+      "notes": "Flash Heal on a party member under 30%: when someone is about to die, the speed matters more than the mana."
     },
     {
       "action": {
@@ -559,7 +611,7 @@
           }
         }
       },
-      "notes": "Prayer of Healing on a party member once three of the four are under 85%. It heals the healer's whole party."
+      "notes": "Prayer of Healing once three of your four party members are under 85%: it heals the target and the target's whole party."
     },
     {
       "action": {
@@ -619,7 +671,7 @@
           }
         }
       },
-      "notes": "Heal is the mana-efficient filler at the band's rank: once Greater Heal is known, a mid rank of Heal shares its spell power coefficient for far less mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). Lower ranks of Heal were tried and did not beat it by the one percent the rule asks. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
+      "notes": "Greater Heal is the filler while your mana keeps pace with the fight: rank 1 until 60, then rank 3 or your top trainer rank, which heal about the same for their mana."
     },
     {
       "action": {
@@ -888,7 +940,7 @@
           }
         }
       },
-      "notes": "Behind the mana pace, the filler waits for a lower tank and member health, so the bar is spent on the holes that matter."
+      "notes": "When your mana falls behind the fight, only on a tank under 50% or a party member under 35%, so it waits for a deeper hole."
     },
     {
       "action": {
@@ -1076,7 +1128,7 @@
           }
         }
       },
-      "notes": "Heal is the mana-efficient filler at the band's rank: once Greater Heal is known, a mid rank of Heal shares its spell power coefficient for far less mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). Lower ranks of Heal were tried and did not beat it by the one percent the rule asks. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
+      "notes": "Once you have higher ranks, when the top rank would overheal or your mana runs short: it costs far less and still keeps most of your healing bonus at 60."
     },
     {
       "action": {
@@ -1345,7 +1397,7 @@
           }
         }
       },
-      "notes": "Behind the mana pace, the filler waits for a lower tank and member health, so the bar is spent on the holes that matter."
+      "notes": "When your mana falls behind the fight, only on a tank under 50% or a party member under 35%, so it waits for a deeper hole too."
     },
     {
       "action": {
@@ -1533,7 +1585,7 @@
           }
         }
       },
-      "notes": "Heal is the mana-efficient filler at the band's rank: once Greater Heal is known, a mid rank of Heal shares its spell power coefficient for far less mana, so with healing power it returns more health per mana than any Greater Heal rank (the classic downrank). Lower ranks of Heal were tried and did not beat it by the one percent the rule asks. Mana pacing: while the mana bar is at least as full as the share of the fight left, the filler fires at the normal thresholds."
+      "notes": "Heal is the step down when Greater Heal rank 1 costs more than you can spend, and your filler before Greater Heal at 40. Below 34 cast rank 1, though some races cast rank 2 or 3 at a few levels, since it keeps your whole healing bonus until then and heals the most for its mana. Rank 2 or 3 takes over at 28 and 32 for most races, at 27 for a Human, Gnome or Night Elf, and at 30 and 31 for an Undead or Troll. Rank 4 costs more mana than its extra healing is worth in its first levels, so keep rank 3 from 34 to 37 and to 38 as an Undead; a Troll stays on rank 1 at 34 and casts rank 2 at 38 and 39, and an Undead casts rank 2 at 39. From 40 Greater Heal is your main heal; fall back to Heal rank 4 only when you are short of mana for Greater Heal rank 1, since rank 4 is cheaper but keeps only about half your bonus at 60."
     },
     {
       "action": {
@@ -1802,7 +1854,7 @@
           }
         }
       },
-      "notes": "Behind the mana pace, the filler waits for a lower tank and member health, so the bar is spent on the holes that matter."
+      "notes": "When your mana falls behind the fight, only on a tank under 50% or a party member under 35%, so it waits for a deeper hole."
     },
     {
       "action": {
@@ -2008,7 +2060,8 @@
             ]
           }
         }
-      }
+      },
+      "notes": "Lesser Heal is your filler until you learn Heal at 16: rank 3, on the tank first and on the party once they are low. Pace your mana the way you will with Heal."
     },
     {
       "action": {
