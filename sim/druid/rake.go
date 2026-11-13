@@ -21,13 +21,17 @@ var RakeInitialDamage = clientdamage.FromTable(RakeBaseDamage[:], RakePointsPerL
 // 2026: "Rake: Base points and attack power scaling increased by about
 // 25%" (the base half is the push above). The first Forever cat logs
 // (foreverlogs.gg, 5 to 11 November 2026; sim-accuracy 2026-11-12 feral,
-// C1) put the scaling on both halves: five cats at 24 to 30 land the hit at
-// their paw's white damage plus the rank's amount (0.93 to 1.01 of the paw
-// after the flat, across attack power from 179 to 296), and tick the bleed
-// for the rank's amount plus 0.070 to 0.089 of their attack power
-// (rakeTickAttackPowerShare, four Feral cats; a Balance druid in Cat Form
-// read 0.052). The live tooltip (9904) renders neither, as Rip's and
-// Ferocious Bite's attack power shares are not rendered either.
+// C1) tick the bleed for the rank's amount plus 0.070 to 0.089 of the cat's
+// attack power (rakeTickAttackPowerShare, four Feral cats; a Balance druid
+// in Cat Form read 0.052). The hit takes the same attack power share on the
+// rank's own amount and no weapon damage (sim-accuracy 2026-11-13
+// feral-60): every non-crit hit of one cat in our advanced logs is the same
+// number (61 on 20 hits at level 29 while its white swings rolled 56 to 69
+// before armor; Valdo's on foreverlogs 48 to 49), the hit sits the ranks'
+// 7 (times the cat's multipliers) above the tick on every logged cat, and
+// both move together when attack power moves (Daigoro: +2 each). The live
+// tooltip (9904) renders neither share, as Rip's and Ferocious Bite's
+// attack power shares are not rendered either.
 //
 // unconfirmed: the share's exact value, measured on five logged cats whose
 // attack power is read off their stats; a level 60 cat log with known gear
@@ -44,10 +48,10 @@ var RakeTickDamage = [RakeRanks + 1]clientdamage.Effect{
 // rank's amount (0.24 over the three ticks), the logs' fit above.
 const rakeTickAttackPowerShare = 0.08
 
-// rakeHitDamage is Rake's hit before multipliers: the paw's weapon damage
-// plus the rank's roll.
-func rakeHitDamage(roll, weaponDamage float64) float64 {
-	return roll + weaponDamage
+// rakeHitDamage is Rake's hit before multipliers: the rank's roll plus the
+// attack power share a tick takes.
+func rakeHitDamage(roll, attackPower float64) float64 {
+	return roll + rakeTickAttackPowerShare*attackPower
 }
 
 // rakeTickDamage is one Rake tick before multipliers: the rank's amount
@@ -123,7 +127,7 @@ func (druid *Druid) newRakeSpellConfig(rank int) core.SpellConfig {
 			druid.BreakProwl(sim)
 
 			rendAndTear := druid.RendAndTearMultiplier(target)
-			baseDamage := rakeHitDamage(initialDamage.Roll(sim, casterLevel), spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))) * rendAndTear
+			baseDamage := rakeHitDamage(initialDamage.Roll(sim, casterLevel), spell.MeleeAttackPower(target)) * rendAndTear
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if result.Landed() {
@@ -136,7 +140,7 @@ func (druid *Druid) newRakeSpellConfig(rank int) core.SpellConfig {
 		},
 
 		ExpectedInitialDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, _ bool) *core.SpellResult {
-			hit := rakeHitDamage(initialDamage.Center(casterLevel), spell.Unit.AutoAttacks.MH().CalculateAverageWeaponDamage(spell.MeleeAttackPower(target)))
+			hit := rakeHitDamage(initialDamage.Center(casterLevel), spell.MeleeAttackPower(target))
 			initial := spell.CalcPeriodicDamage(sim, target, hit, spell.OutcomeExpectedMagicAlwaysHit)
 
 			attackTable := spell.Unit.AttackTables[target.UnitIndex][spell.CastType]
