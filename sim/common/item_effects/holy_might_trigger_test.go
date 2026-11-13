@@ -9,13 +9,14 @@ import (
 )
 
 // Gloves of Holy Might (867) since Blizzard's 9 November 2026 hotfix ("Gloves
-// of Holy Might now work as intended"), native in client 1.60.1.70938:
-// ItemEffect 238916 is TriggerType 1 (on equip) to 1330855, aura 42 with
-// ProcChance 15, ProcCategoryRecovery 20000 and ProcTypeMask 69636 (0x11004:
-// done melee auto attack, done harmful spell of no class, done harmful magic
-// spell), triggering the 1325229 Smite. Before it, 70790's row was a chance
-// on any melee hit. So a white swing procs it at 15% with 20 seconds between
-// procs, and a melee special (0x10, done melee-class spell) never does.
+// of Holy Might now work as intended"): ItemEffect 238916 is TriggerType 1 (on
+// equip) to 1330855, aura 42 with ProcChance 15 and ProcCategoryRecovery
+// 20000, triggering the 1325229 Smite. Client 1.60.1.70938 ships ProcTypeMask
+// 69636 (0x11004: a melee auto attack or a harmful spell); the server's push
+// 114008 of 13 November 2026 (SpellAuraOptions 249242) widens it to 69972
+// (0x11154), adding melee specials (0x10), ranged auto attacks (0x40) and
+// ranged specials (0x100). So a white swing and a melee special each proc it
+// at 15%, with 20 seconds between procs.
 func TestGlovesOfHolyMightProcsOnWhiteSwingsAtFifteenPercentEveryTwentySeconds(t *testing.T) {
 	for _, tc := range []struct {
 		name  string
@@ -29,7 +30,7 @@ func TestGlovesOfHolyMightProcsOnWhiteSwingsAtFifteenPercentEveryTwentySeconds(t
 		// Each step is a spell batch, so the swings span a few seconds:
 		// the 20 s recovery allows one proc.
 		{"white swing", func(c *core.Character) *core.Spell { return c.AutoAttacks.MHAuto() }, true, 1, 1},
-		{"melee special (Wing Clip)", func(c *core.Character) *core.Spell { return c.GetSpell(core.ActionID{SpellID: 14268}) }, false, 0, 0},
+		{"melee special (Wing Clip)", func(c *core.Character) *core.Spell { return c.GetSpell(core.ActionID{SpellID: 14268}) }, false, 1, 1},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			sim, character := unbuffedCharacter(t, proto.Class_ClassHunter, proto.ItemSlot_ItemSlotHands, 867)
