@@ -125,7 +125,7 @@
           }
         },
         "condition": {
-          "and": {
+          "or": {
             "vals": [
               {
                 "cmp": {
@@ -140,37 +140,61 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "0.35"
+                      "val": "0.2"
                     }
                   }
                 }
               },
               {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "math": {
-                      "op": "OpMul",
-                      "lhs": {
-                        "remainingTimePercent": {}
-                      },
-                      "rhs": {
-                        "const": {
-                          "val": "0.9"
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentHealthPercent": {
+                            "sourceUnit": {
+                              "type": "Player",
+                              "index": 5
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.35"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "math": {
+                            "op": "OpMul",
+                            "lhs": {
+                              "remainingTimePercent": {}
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "0.9"
+                              }
+                            }
+                          }
                         }
                       }
                     }
-                  }
+                  ]
                 }
               }
             ]
           }
         }
       },
-      "notes": "Flash Heal on a tank who is really low or on anyone about to die: it heals less for its mana than your slower heals, so spend it where the speed matters, and on the tank only while your mana keeps up with the fight."
+      "notes": "Flash Heal on a tank about to die, whatever your mana, and on a tank who is only low while your mana keeps up with the fight: it heals less for its mana than your slower heals, so spend it where the speed matters."
     },
     {
       "action": {

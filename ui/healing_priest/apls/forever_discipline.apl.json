@@ -366,7 +366,7 @@
           }
         },
         "condition": {
-          "and": {
+          "or": {
             "vals": [
               {
                 "cmp": {
@@ -381,37 +381,61 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "0.35"
+                      "val": "0.2"
                     }
                   }
                 }
               },
               {
-                "cmp": {
-                  "op": "OpGe",
-                  "lhs": {
-                    "currentManaPercent": {}
-                  },
-                  "rhs": {
-                    "math": {
-                      "op": "OpMul",
-                      "lhs": {
-                        "remainingTimePercent": {}
-                      },
-                      "rhs": {
-                        "const": {
-                          "val": "0.9"
+                "and": {
+                  "vals": [
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "currentHealthPercent": {
+                            "sourceUnit": {
+                              "type": "Player",
+                              "index": 5
+                            }
+                          }
+                        },
+                        "rhs": {
+                          "const": {
+                            "val": "0.35"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "currentManaPercent": {}
+                        },
+                        "rhs": {
+                          "math": {
+                            "op": "OpMul",
+                            "lhs": {
+                              "remainingTimePercent": {}
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "0.9"
+                              }
+                            }
+                          }
                         }
                       }
                     }
-                  }
+                  ]
                 }
               }
             ]
           }
         }
       },
-      "notes": "Flash Heal at the top rank on a tank who is really low, as long as your mana keeps up with the fight: the fast heal, and the dear one. Once you are behind, Greater Heal started early is the save."
+      "notes": "Flash Heal at the top rank on a tank about to die, whatever your mana; on a tank who is only low, as long as your mana keeps up with the fight: the fast heal, and the expensive one."
     },
     {
       "notes": "Flash Heal on a party member about to die, as long as your mana is not far behind the fight.",
