@@ -10,330 +10,330 @@
 package core
 
 var clientPeriodicCanCrit = map[int32]struct{}{
-	133: {}, // Fireball
-	136: {}, // Mend Pet
-	139: {}, // Renew
-	143: {}, // Fireball
-	145: {}, // Fireball
-	172: {}, // Corruption
-	339: {}, // Entangling Roots
-	348: {}, // Immolate
-	589: {}, // Shadow Word: Pain
-	594: {}, // Shadow Word: Pain
-	603: {}, // Bane of Doom
-	689: {}, // Drain Life
-	699: {}, // Drain Life
-	703: {}, // Garrote
-	707: {}, // Immolate
-	709: {}, // Drain Life
-	740: {}, // Tranquility
-	772: {}, // Rend
-	774: {}, // Rejuvenation
-	970: {}, // Shadow Word: Pain
-	980: {}, // Bane of Agony
-	992: {}, // Shadow Word: Pain
-	1014: {}, // Bane of Agony
-	1058: {}, // Rejuvenation
-	1062: {}, // Entangling Roots
-	1079: {}, // Rip
-	1094: {}, // Immolate
-	1120: {}, // Drain Soul
-	1430: {}, // Rejuvenation
-	1822: {}, // Rake
-	1823: {}, // Rake
-	1824: {}, // Rake
-	1943: {}, // Rupture
-	1949: {}, // Hellfire
-	1978: {}, // Serpent Sting
-	2090: {}, // Rejuvenation
-	2091: {}, // Rejuvenation
-	2767: {}, // Shadow Word: Pain
-	2818: {}, // Deadly Poison
-	2819: {}, // Deadly Poison II
-	2941: {}, // Immolate
-	2944: {}, // Devouring Plague
-	3111: {}, // Mend Pet
-	3140: {}, // Fireball
-	3627: {}, // Rejuvenation
-	3661: {}, // Mend Pet
-	3662: {}, // Mend Pet
-	5195: {}, // Entangling Roots
-	5196: {}, // Entangling Roots
-	5570: {}, // Insect Swarm
-	5672: {}, // Healing Stream
-	5707: {}, // Lifestone Regeneration
-	6074: {}, // Renew
-	6075: {}, // Renew
-	6076: {}, // Renew
-	6077: {}, // Renew
-	6078: {}, // Renew
-	6217: {}, // Bane of Agony
-	6222: {}, // Corruption
-	6223: {}, // Corruption
-	6371: {}, // Healing Stream
-	6372: {}, // Healing Stream
-	6546: {}, // Rend
-	6547: {}, // Rend
-	6548: {}, // Rend
-	7001: {}, // Lightwell Renew
-	7648: {}, // Corruption
-	7651: {}, // Drain Life
-	8050: {}, // Flame Shock
-	8052: {}, // Flame Shock
-	8053: {}, // Flame Shock
-	8288: {}, // Drain Soul
-	8289: {}, // Drain Soul
-	8313: {}, // Poison
-	8348: {}, // Julie's Blessing
-	8400: {}, // Fireball
-	8401: {}, // Fireball
-	8402: {}, // Fireball
-	8631: {}, // Garrote
-	8632: {}, // Garrote
-	8633: {}, // Garrote
-	8639: {}, // Rupture
-	8640: {}, // Rupture
-	8910: {}, // Rejuvenation
-	8918: {}, // Tranquility
-	8921: {}, // Moonfire
-	8924: {}, // Moonfire
-	8925: {}, // Moonfire
-	8926: {}, // Moonfire
-	8927: {}, // Moonfire
-	8928: {}, // Moonfire
-	8929: {}, // Moonfire
-	8936: {}, // Regrowth
-	8938: {}, // Regrowth
-	8939: {}, // Regrowth
-	8940: {}, // Regrowth
-	8941: {}, // Regrowth
-	9007: {}, // Pounce Bleed
-	9492: {}, // Rip
-	9493: {}, // Rip
-	9750: {}, // Regrowth
-	9752: {}, // Rip
-	9796: {}, // Blight
-	9824: {}, // Pounce Bleed
-	9826: {}, // Pounce Bleed
-	9833: {}, // Moonfire
-	9834: {}, // Moonfire
-	9835: {}, // Moonfire
-	9839: {}, // Rejuvenation
-	9840: {}, // Rejuvenation
-	9841: {}, // Rejuvenation
-	9852: {}, // Entangling Roots
-	9853: {}, // Entangling Roots
-	9856: {}, // Regrowth
-	9857: {}, // Regrowth
-	9858: {}, // Regrowth
-	9862: {}, // Tranquility
-	9863: {}, // Tranquility
-	9894: {}, // Rip
-	9896: {}, // Rip
-	9904: {}, // Rake
-	10148: {}, // Fireball
-	10149: {}, // Fireball
-	10150: {}, // Fireball
-	10151: {}, // Fireball
-	10447: {}, // Flame Shock
-	10448: {}, // Flame Shock
-	10460: {}, // Healing Stream
-	10461: {}, // Healing Stream
-	10578: {}, // Fireball
-	10797: {}, // Starshards
-	10892: {}, // Shadow Word: Pain
-	10893: {}, // Shadow Word: Pain
-	10894: {}, // Shadow Word: Pain
-	10927: {}, // Renew
-	10928: {}, // Renew
-	10929: {}, // Renew
-	11273: {}, // Rupture
-	11274: {}, // Rupture
-	11275: {}, // Rupture
-	11289: {}, // Garrote
-	11290: {}, // Garrote
-	11353: {}, // Deadly Poison III
-	11354: {}, // Deadly Poison IV
-	11366: {}, // Pyroblast
-	11572: {}, // Rend
-	11573: {}, // Rend
-	11574: {}, // Rend
-	11658: {}, // Sul'thraze
-	11665: {}, // Immolate
-	11667: {}, // Immolate
-	11668: {}, // Immolate
-	11671: {}, // Corruption
-	11672: {}, // Corruption
-	11675: {}, // Drain Soul
-	11683: {}, // Hellfire
-	11684: {}, // Hellfire
-	11699: {}, // Drain Life
-	11700: {}, // Drain Life
-	11711: {}, // Bane of Agony
-	11712: {}, // Bane of Agony
-	11713: {}, // Bane of Agony
-	11790: {}, // Poison Cloud
-	12505: {}, // Pyroblast
-	12522: {}, // Pyroblast
-	12523: {}, // Pyroblast
-	12524: {}, // Pyroblast
-	12525: {}, // Pyroblast
-	12526: {}, // Pyroblast
-	13318: {}, // Rend
-	13438: {}, // Fireball
-	13518: {}, // Poison
-	13526: {}, // Corrosive Poison
-	13530: {}, // Corruption
-	13542: {}, // Mend Pet
-	13543: {}, // Mend Pet
-	13544: {}, // Mend Pet
-	13549: {}, // Serpent Sting
-	13550: {}, // Serpent Sting
-	13551: {}, // Serpent Sting
-	13552: {}, // Serpent Sting
-	13553: {}, // Serpent Sting
-	13554: {}, // Serpent Sting
-	13555: {}, // Serpent Sting
-	13797: {}, // Immolation Trap
-	13812: {}, // Explosive Trap
-	14087: {}, // Rend
-	14118: {}, // Rend
-	14298: {}, // Immolation Trap
-	14299: {}, // Immolation Trap
-	14300: {}, // Immolation Trap
-	14301: {}, // Immolation Trap
-	14314: {}, // Explosive Trap
-	14315: {}, // Explosive Trap
-	14914: {}, // Holy Fire
-	15261: {}, // Holy Fire
-	15262: {}, // Holy Fire
-	15263: {}, // Holy Fire
-	15264: {}, // Holy Fire
-	15265: {}, // Holy Fire
-	15266: {}, // Holy Fire
-	15267: {}, // Holy Fire
-	15407: {}, // Mind Flay
-	15662: {}, // Fireball
-	16393: {}, // Rend
-	16400: {}, // Poison
-	16401: {}, // Poison
-	16402: {}, // Corruption
-	16403: {}, // Rend
-	16406: {}, // Rend
-	16412: {}, // Fireball
-	16415: {}, // Fireball
-	16528: {}, // Numbing Pain
-	16898: {}, // Blaze
-	17153: {}, // Rend
-	17183: {}, // Poison
-	17196: {}, // Seeping Willow
-	17292: {}, // Poison
-	17311: {}, // Mind Flay
-	17312: {}, // Mind Flay
-	17313: {}, // Mind Flay
-	17314: {}, // Mind Flay
-	17407: {}, // Wound
-	17483: {}, // Shadow Bolt
-	17484: {}, // Skullforge Brand
-	17504: {}, // Rend
-	17506: {}, // Soul Breaker
-	17510: {}, // Corruption
-	17511: {}, // Poison
-	17767: {}, // Consume Shadows
-	17850: {}, // Consume Shadows
-	17851: {}, // Consume Shadows
-	17852: {}, // Consume Shadows
-	17853: {}, // Consume Shadows
-	17854: {}, // Consume Shadows
-	18075: {}, // Rend
-	18077: {}, // Poison
-	18078: {}, // Rend
-	18082: {}, // Fireball
-	18088: {}, // Corruption
-	18105: {}, // Fireball
-	18106: {}, // Rend
-	18108: {}, // Fireball
-	18197: {}, // Poison
-	18199: {}, // Fireball
-	18200: {}, // Rend
-	18202: {}, // Rend
-	18203: {}, // Poison
-	18208: {}, // Poison
-	18265: {}, // Siphon Life
-	18289: {}, // Creeping Mold
-	18633: {}, // Weakening Disease
-	18652: {}, // Siphon Health
-	18656: {}, // Corruption
-	18764: {}, // Fungal Regrowth
-	18796: {}, // Fireball
-	18807: {}, // Mind Flay
-	18809: {}, // Pyroblast
-	18879: {}, // Siphon Life
-	18880: {}, // Siphon Life
-	18881: {}, // Siphon Life
-	18956: {}, // Restore Life
-	19276: {}, // Devouring Plague
-	19277: {}, // Devouring Plague
-	19278: {}, // Devouring Plague
-	19279: {}, // Devouring Plague
-	19280: {}, // Devouring Plague
-	19296: {}, // Starshards
-	19299: {}, // Starshards
-	19302: {}, // Starshards
-	19303: {}, // Starshards
-	19304: {}, // Starshards
-	19305: {}, // Starshards
-	19970: {}, // Entangling Roots
-	19971: {}, // Entangling Roots
-	19972: {}, // Entangling Roots
-	19973: {}, // Entangling Roots
-	19974: {}, // Entangling Roots
-	19975: {}, // Entangling Roots
-	20586: {}, // Windreaper
-	21141: {}, // Shadow Bolt
-	21159: {}, // Fireball
-	21162: {}, // Fireball
-	21949: {}, // Rend
-	21952: {}, // Poison
-	22009: {}, // Greater Heal
-	22639: {}, // Eskhandar's Rake
-	24118: {}, // Lacerate
-	24119: {}, // Lacerate
-	24120: {}, // Lacerate
-	24583: {}, // Scorpid Poison
-	24586: {}, // Scorpid Poison
-	24587: {}, // Scorpid Poison
-	24640: {}, // Scorpid Poison
-	24974: {}, // Insect Swarm
-	24975: {}, // Insect Swarm
-	24976: {}, // Insect Swarm
-	24977: {}, // Insect Swarm
-	25295: {}, // Serpent Sting
-	25299: {}, // Rejuvenation
-	25306: {}, // Fireball
-	25309: {}, // Immolate
-	25311: {}, // Corruption
-	25315: {}, // Renew
-	25349: {}, // Deadly Poison V
-	26226: {}, // Widow Bite
-	27873: {}, // Lightwell Renew
-	27874: {}, // Lightwell Renew
-	29228: {}, // Flame Shock
-	401502: {}, // Frostfire Bolt
-	408120: {}, // Wild Growth
-	408521: {}, // Riptide
-	414644: {}, // Lacerate
-	417441: {}, // Thrash (Bear)
-	417448: {}, // Thrash (Cat)
-	427717: {}, // Unstable Affliction
-	434312: {}, // Deadly Poison
-	434313: {}, // Deadly Poison II
-	434314: {}, // Deadly Poison III
-	434315: {}, // Deadly Poison IV
-	434316: {}, // Deadly Poison V
-	435169: {}, // Poison Cloud
-	443265: {}, // Infernal Lasso
-	458820: {}, // Occult Poison I
+	133:     {}, // Fireball
+	136:     {}, // Mend Pet
+	139:     {}, // Renew
+	143:     {}, // Fireball
+	145:     {}, // Fireball
+	172:     {}, // Corruption
+	339:     {}, // Entangling Roots
+	348:     {}, // Immolate
+	589:     {}, // Shadow Word: Pain
+	594:     {}, // Shadow Word: Pain
+	603:     {}, // Bane of Doom
+	689:     {}, // Drain Life
+	699:     {}, // Drain Life
+	703:     {}, // Garrote
+	707:     {}, // Immolate
+	709:     {}, // Drain Life
+	740:     {}, // Tranquility
+	772:     {}, // Rend
+	774:     {}, // Rejuvenation
+	970:     {}, // Shadow Word: Pain
+	980:     {}, // Bane of Agony
+	992:     {}, // Shadow Word: Pain
+	1014:    {}, // Bane of Agony
+	1058:    {}, // Rejuvenation
+	1062:    {}, // Entangling Roots
+	1079:    {}, // Rip
+	1094:    {}, // Immolate
+	1120:    {}, // Drain Soul
+	1430:    {}, // Rejuvenation
+	1822:    {}, // Rake
+	1823:    {}, // Rake
+	1824:    {}, // Rake
+	1943:    {}, // Rupture
+	1949:    {}, // Hellfire
+	1978:    {}, // Serpent Sting
+	2090:    {}, // Rejuvenation
+	2091:    {}, // Rejuvenation
+	2767:    {}, // Shadow Word: Pain
+	2818:    {}, // Deadly Poison
+	2819:    {}, // Deadly Poison II
+	2941:    {}, // Immolate
+	2944:    {}, // Devouring Plague
+	3111:    {}, // Mend Pet
+	3140:    {}, // Fireball
+	3627:    {}, // Rejuvenation
+	3661:    {}, // Mend Pet
+	3662:    {}, // Mend Pet
+	5195:    {}, // Entangling Roots
+	5196:    {}, // Entangling Roots
+	5570:    {}, // Insect Swarm
+	5672:    {}, // Healing Stream
+	5707:    {}, // Lifestone Regeneration
+	6074:    {}, // Renew
+	6075:    {}, // Renew
+	6076:    {}, // Renew
+	6077:    {}, // Renew
+	6078:    {}, // Renew
+	6217:    {}, // Bane of Agony
+	6222:    {}, // Corruption
+	6223:    {}, // Corruption
+	6371:    {}, // Healing Stream
+	6372:    {}, // Healing Stream
+	6546:    {}, // Rend
+	6547:    {}, // Rend
+	6548:    {}, // Rend
+	7001:    {}, // Lightwell Renew
+	7648:    {}, // Corruption
+	7651:    {}, // Drain Life
+	8050:    {}, // Flame Shock
+	8052:    {}, // Flame Shock
+	8053:    {}, // Flame Shock
+	8288:    {}, // Drain Soul
+	8289:    {}, // Drain Soul
+	8313:    {}, // Poison
+	8348:    {}, // Julie's Blessing
+	8400:    {}, // Fireball
+	8401:    {}, // Fireball
+	8402:    {}, // Fireball
+	8631:    {}, // Garrote
+	8632:    {}, // Garrote
+	8633:    {}, // Garrote
+	8639:    {}, // Rupture
+	8640:    {}, // Rupture
+	8910:    {}, // Rejuvenation
+	8918:    {}, // Tranquility
+	8921:    {}, // Moonfire
+	8924:    {}, // Moonfire
+	8925:    {}, // Moonfire
+	8926:    {}, // Moonfire
+	8927:    {}, // Moonfire
+	8928:    {}, // Moonfire
+	8929:    {}, // Moonfire
+	8936:    {}, // Regrowth
+	8938:    {}, // Regrowth
+	8939:    {}, // Regrowth
+	8940:    {}, // Regrowth
+	8941:    {}, // Regrowth
+	9007:    {}, // Pounce Bleed
+	9492:    {}, // Rip
+	9493:    {}, // Rip
+	9750:    {}, // Regrowth
+	9752:    {}, // Rip
+	9796:    {}, // Blight
+	9824:    {}, // Pounce Bleed
+	9826:    {}, // Pounce Bleed
+	9833:    {}, // Moonfire
+	9834:    {}, // Moonfire
+	9835:    {}, // Moonfire
+	9839:    {}, // Rejuvenation
+	9840:    {}, // Rejuvenation
+	9841:    {}, // Rejuvenation
+	9852:    {}, // Entangling Roots
+	9853:    {}, // Entangling Roots
+	9856:    {}, // Regrowth
+	9857:    {}, // Regrowth
+	9858:    {}, // Regrowth
+	9862:    {}, // Tranquility
+	9863:    {}, // Tranquility
+	9894:    {}, // Rip
+	9896:    {}, // Rip
+	9904:    {}, // Rake
+	10148:   {}, // Fireball
+	10149:   {}, // Fireball
+	10150:   {}, // Fireball
+	10151:   {}, // Fireball
+	10447:   {}, // Flame Shock
+	10448:   {}, // Flame Shock
+	10460:   {}, // Healing Stream
+	10461:   {}, // Healing Stream
+	10578:   {}, // Fireball
+	10797:   {}, // Starshards
+	10892:   {}, // Shadow Word: Pain
+	10893:   {}, // Shadow Word: Pain
+	10894:   {}, // Shadow Word: Pain
+	10927:   {}, // Renew
+	10928:   {}, // Renew
+	10929:   {}, // Renew
+	11273:   {}, // Rupture
+	11274:   {}, // Rupture
+	11275:   {}, // Rupture
+	11289:   {}, // Garrote
+	11290:   {}, // Garrote
+	11353:   {}, // Deadly Poison III
+	11354:   {}, // Deadly Poison IV
+	11366:   {}, // Pyroblast
+	11572:   {}, // Rend
+	11573:   {}, // Rend
+	11574:   {}, // Rend
+	11658:   {}, // Sul'thraze
+	11665:   {}, // Immolate
+	11667:   {}, // Immolate
+	11668:   {}, // Immolate
+	11671:   {}, // Corruption
+	11672:   {}, // Corruption
+	11675:   {}, // Drain Soul
+	11683:   {}, // Hellfire
+	11684:   {}, // Hellfire
+	11699:   {}, // Drain Life
+	11700:   {}, // Drain Life
+	11711:   {}, // Bane of Agony
+	11712:   {}, // Bane of Agony
+	11713:   {}, // Bane of Agony
+	11790:   {}, // Poison Cloud
+	12505:   {}, // Pyroblast
+	12522:   {}, // Pyroblast
+	12523:   {}, // Pyroblast
+	12524:   {}, // Pyroblast
+	12525:   {}, // Pyroblast
+	12526:   {}, // Pyroblast
+	13318:   {}, // Rend
+	13438:   {}, // Fireball
+	13518:   {}, // Poison
+	13526:   {}, // Corrosive Poison
+	13530:   {}, // Corruption
+	13542:   {}, // Mend Pet
+	13543:   {}, // Mend Pet
+	13544:   {}, // Mend Pet
+	13549:   {}, // Serpent Sting
+	13550:   {}, // Serpent Sting
+	13551:   {}, // Serpent Sting
+	13552:   {}, // Serpent Sting
+	13553:   {}, // Serpent Sting
+	13554:   {}, // Serpent Sting
+	13555:   {}, // Serpent Sting
+	13797:   {}, // Immolation Trap
+	13812:   {}, // Explosive Trap
+	14087:   {}, // Rend
+	14118:   {}, // Rend
+	14298:   {}, // Immolation Trap
+	14299:   {}, // Immolation Trap
+	14300:   {}, // Immolation Trap
+	14301:   {}, // Immolation Trap
+	14314:   {}, // Explosive Trap
+	14315:   {}, // Explosive Trap
+	14914:   {}, // Holy Fire
+	15261:   {}, // Holy Fire
+	15262:   {}, // Holy Fire
+	15263:   {}, // Holy Fire
+	15264:   {}, // Holy Fire
+	15265:   {}, // Holy Fire
+	15266:   {}, // Holy Fire
+	15267:   {}, // Holy Fire
+	15407:   {}, // Mind Flay
+	15662:   {}, // Fireball
+	16393:   {}, // Rend
+	16400:   {}, // Poison
+	16401:   {}, // Poison
+	16402:   {}, // Corruption
+	16403:   {}, // Rend
+	16406:   {}, // Rend
+	16412:   {}, // Fireball
+	16415:   {}, // Fireball
+	16528:   {}, // Numbing Pain
+	16898:   {}, // Blaze
+	17153:   {}, // Rend
+	17183:   {}, // Poison
+	17196:   {}, // Seeping Willow
+	17292:   {}, // Poison
+	17311:   {}, // Mind Flay
+	17312:   {}, // Mind Flay
+	17313:   {}, // Mind Flay
+	17314:   {}, // Mind Flay
+	17407:   {}, // Wound
+	17483:   {}, // Shadow Bolt
+	17484:   {}, // Skullforge Brand
+	17504:   {}, // Rend
+	17506:   {}, // Soul Breaker
+	17510:   {}, // Corruption
+	17511:   {}, // Poison
+	17767:   {}, // Consume Shadows
+	17850:   {}, // Consume Shadows
+	17851:   {}, // Consume Shadows
+	17852:   {}, // Consume Shadows
+	17853:   {}, // Consume Shadows
+	17854:   {}, // Consume Shadows
+	18075:   {}, // Rend
+	18077:   {}, // Poison
+	18078:   {}, // Rend
+	18082:   {}, // Fireball
+	18088:   {}, // Corruption
+	18105:   {}, // Fireball
+	18106:   {}, // Rend
+	18108:   {}, // Fireball
+	18197:   {}, // Poison
+	18199:   {}, // Fireball
+	18200:   {}, // Rend
+	18202:   {}, // Rend
+	18203:   {}, // Poison
+	18208:   {}, // Poison
+	18265:   {}, // Siphon Life
+	18289:   {}, // Creeping Mold
+	18633:   {}, // Weakening Disease
+	18652:   {}, // Siphon Health
+	18656:   {}, // Corruption
+	18764:   {}, // Fungal Regrowth
+	18796:   {}, // Fireball
+	18807:   {}, // Mind Flay
+	18809:   {}, // Pyroblast
+	18879:   {}, // Siphon Life
+	18880:   {}, // Siphon Life
+	18881:   {}, // Siphon Life
+	18956:   {}, // Restore Life
+	19276:   {}, // Devouring Plague
+	19277:   {}, // Devouring Plague
+	19278:   {}, // Devouring Plague
+	19279:   {}, // Devouring Plague
+	19280:   {}, // Devouring Plague
+	19296:   {}, // Starshards
+	19299:   {}, // Starshards
+	19302:   {}, // Starshards
+	19303:   {}, // Starshards
+	19304:   {}, // Starshards
+	19305:   {}, // Starshards
+	19970:   {}, // Entangling Roots
+	19971:   {}, // Entangling Roots
+	19972:   {}, // Entangling Roots
+	19973:   {}, // Entangling Roots
+	19974:   {}, // Entangling Roots
+	19975:   {}, // Entangling Roots
+	20586:   {}, // Windreaper
+	21141:   {}, // Shadow Bolt
+	21159:   {}, // Fireball
+	21162:   {}, // Fireball
+	21949:   {}, // Rend
+	21952:   {}, // Poison
+	22009:   {}, // Greater Heal
+	22639:   {}, // Eskhandar's Rake
+	24118:   {}, // Lacerate
+	24119:   {}, // Lacerate
+	24120:   {}, // Lacerate
+	24583:   {}, // Scorpid Poison
+	24586:   {}, // Scorpid Poison
+	24587:   {}, // Scorpid Poison
+	24640:   {}, // Scorpid Poison
+	24974:   {}, // Insect Swarm
+	24975:   {}, // Insect Swarm
+	24976:   {}, // Insect Swarm
+	24977:   {}, // Insect Swarm
+	25295:   {}, // Serpent Sting
+	25299:   {}, // Rejuvenation
+	25306:   {}, // Fireball
+	25309:   {}, // Immolate
+	25311:   {}, // Corruption
+	25315:   {}, // Renew
+	25349:   {}, // Deadly Poison V
+	26226:   {}, // Widow Bite
+	27873:   {}, // Lightwell Renew
+	27874:   {}, // Lightwell Renew
+	29228:   {}, // Flame Shock
+	401502:  {}, // Frostfire Bolt
+	408120:  {}, // Wild Growth
+	408521:  {}, // Riptide
+	414644:  {}, // Lacerate
+	417441:  {}, // Thrash (Bear)
+	417448:  {}, // Thrash (Cat)
+	427717:  {}, // Unstable Affliction
+	434312:  {}, // Deadly Poison
+	434313:  {}, // Deadly Poison II
+	434314:  {}, // Deadly Poison III
+	434315:  {}, // Deadly Poison IV
+	434316:  {}, // Deadly Poison V
+	435169:  {}, // Poison Cloud
+	443265:  {}, // Infernal Lasso
+	458820:  {}, // Occult Poison I
 	1214170: {}, // Occult Poison II
 	1235826: {}, // Lacerate
 	1235827: {}, // Lacerate

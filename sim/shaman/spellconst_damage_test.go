@@ -21,9 +21,19 @@ func TestChainLightningDamageMatchesClient(t *testing.T) {
 		ChainLightningSpellId[:], ChainLightningDamage[:], ChainLightningSpellCoef[:])
 }
 
-// The overload rows are client 1.60.1.70888's, native in the vendored 70938
-// file but with half points rounded away (36.5 reads 36), so they are pinned
-// exactly by TestLightningOverloadRowsAreThe70888Client (hotfix_1110_test.go).
+// "Lightning Overload now deals the correct amount of damage for Lightning
+// Bolt" (9 November): client 1.60.1.70888 makes every overload row half its
+// bolt rank's (408439-408477 and 408479-408484). Native in 70938, and the
+// site's spellconst keeps the half points (36.5, 54.5, 147.5, 176.5; Chain
+// Lightning's 107.5), so the overload tables are checked against the
+// vendored client rows like every other rank table here.
+func TestLightningOverloadDamageMatchesClient(t *testing.T) {
+	class := clientdamagetest.Load(t, clientShamanSpellconst)
+	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Lightning Bolt overload",
+		LightningBoltOverloadSpellId[:], LightningBoltOverloadDamage[:], LightningBoltOverloadSpellCoef[:])
+	clientdamagetest.AssertTable(t, class, clientdamagetest.Direct, "Chain Lightning overload",
+		ChainLightningOverloadSpellId[:], ChainLightningOverloadDamage[:], ChainLightningOverloadSpellCoef[:])
+}
 
 func TestEarthShockDamageMatchesClient(t *testing.T) {
 	class := clientdamagetest.Load(t, clientShamanSpellconst)

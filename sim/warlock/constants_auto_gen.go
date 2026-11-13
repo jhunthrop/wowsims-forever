@@ -2,7 +2,7 @@
 //
 // Class: warlock
 // Client build: 1.60.1.70938
-// Source: /home/runner/work/foreversixty/foreversixty/data/builds/1.60.1.70938/spellconst/warlock.json
+// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/site/data/builds/1.60.1.70938/spellconst/warlock.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -1551,7 +1551,7 @@ var FireboltCooldownMS = [FireboltRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var FireboltManaCost = [FireboltRanks + 1]float64{20, 10, 20, 35, 50, 70, 95, 115}
 var FireboltManaCostPct = [FireboltRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var FireboltSpellCoeff = [FireboltRanks + 1]float64{0.529, 0.164, 0.314, 0.529, 0.571, 0.571, 0.571, 0.571}
-var FireboltBaseDamage = [FireboltRanks + 1][]float64{{146.1538, 157.8462}, {5, 7}, {10, 12}, {13.2353, 16.7647}, {16, 20}, {23.5294, 26.4706}, {33.0282, 36.9718}, {41.5, 46.5}}
+var FireboltBaseDamage = [FireboltRanks + 1][]float64{{146.1744, 157.8683}, {5, 7}, {10, 12}, {13.2353, 16.7647}, {16, 20}, {23.5294, 26.4706}, {33.0282, 36.9718}, {41.5, 46.5}}
 var FireboltPointsPerLevel = [FireboltRanks + 1]float64{0, 0.3, 0.4, 0.4, 0.4, 0.4, 0.5, 0.6}
 var FireboltMaxLevel = [FireboltRanks + 1]int{0, 5, 13, 23, 33, 43, 53, 63}
 
@@ -3545,7 +3545,7 @@ var ShadowBurstCooldownMS = [ShadowBurstRanks + 1]int32{0}
 var ShadowBurstManaCost = [ShadowBurstRanks + 1]float64{380}
 var ShadowBurstManaCostPct = [ShadowBurstRanks + 1]float64{0}
 var ShadowBurstSpellCoeff = [ShadowBurstRanks + 1]float64{0.4286}
-var ShadowBurstBaseDamage = [ShadowBurstRanks + 1][]float64{{1403.2, 2104.8}}
+var ShadowBurstBaseDamage = [ShadowBurstRanks + 1][]float64{{1403.2738, 2104.9107}}
 var ShadowBurstPointsPerLevel = [ShadowBurstRanks + 1]float64{0}
 var ShadowBurstMaxLevel = [ShadowBurstRanks + 1]int{56}
 
@@ -4211,7 +4211,7 @@ var WrackCooldownMS = [WrackRanks + 1]int32{0, 0}
 var WrackManaCost = [WrackRanks + 1]float64{0, 200}
 var WrackManaCostPct = [WrackRanks + 1]float64{0, 0}
 var WrackSpellCoeff = [WrackRanks + 1]float64{0, 0.2002}
-var WrackBaseDamage = [WrackRanks + 1][]float64{{0, 0}, {25, 25}}
+var WrackBaseDamage = [WrackRanks + 1][]float64{{0, 0}, {25.2, 25.2}}
 var WrackPointsPerLevel = [WrackRanks + 1]float64{0, 1.75}
 var WrackMaxLevel = [WrackRanks + 1]int{0, 60}
 

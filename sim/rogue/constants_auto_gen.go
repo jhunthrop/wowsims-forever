@@ -2,7 +2,7 @@
 //
 // Class: rogue
 // Client build: 1.60.1.70938
-// Source: /home/runner/work/foreversixty/foreversixty/data/builds/1.60.1.70938/spellconst/rogue.json
+// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/site/data/builds/1.60.1.70938/spellconst/rogue.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -2513,7 +2513,7 @@ var RuptureCooldownMS = [RuptureRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var RuptureManaCost = [RuptureRanks + 1]float64{0, 25, 25, 25, 25, 25, 25}
 var RuptureManaCostPct = [RuptureRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var RuptureSpellCoeff = [RuptureRanks + 1]float64{0.6667, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4}
-var RuptureBaseDamage = [RuptureRanks + 1][]float64{{9, 9}, {5, 5}, {7, 7}, {11, 11}, {16, 16}, {22, 22}, {35, 35}}
+var RuptureBaseDamage = [RuptureRanks + 1][]float64{{8.7046, 8.7046}, {5, 5}, {7, 7}, {11, 11}, {16, 16}, {22, 22}, {35, 35}}
 var RupturePointsPerLevel = [RuptureRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var RuptureMaxLevel = [RuptureRanks + 1]int{0, 0, 0, 0, 0, 0, 0}
 

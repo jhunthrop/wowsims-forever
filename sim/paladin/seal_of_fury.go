@@ -41,19 +41,11 @@ var sealOfFuryProcDamage = [sealOfFuryRankCount + 1]clientdamage.Effect{
 	{Amount: 35, SpellLevel: 1},
 }
 
-// JudgementOfFuryDamage is spellconst/paladin.json's roll for the
-// judgement's ids 1311650 through 20414 (rank 7 rolls 146-160 at level 60,
-// a centre of 153 at its own level, growing 3.69 a level to level 64).
-var JudgementOfFuryDamage = [sealOfFuryRankCount + 1]clientdamage.Effect{
-	{},
-	{Amount: 23, Variance: 0.1, PerLevel: 1.71, SpellLevel: 10, MaxLevel: 16},
-	{Amount: 37, Variance: 0.1, PerLevel: 2.16, SpellLevel: 18, MaxLevel: 24},
-	{Amount: 54, Variance: 0.1, PerLevel: 2.52, SpellLevel: 25, MaxLevel: 31},
-	{Amount: 74, Variance: 0.09756097, PerLevel: 2.79, SpellLevel: 34, MaxLevel: 40},
-	{Amount: 96, Variance: 0.09756097, PerLevel: 3.42, SpellLevel: 42, MaxLevel: 48},
-	{Amount: 123, Variance: 0.087591, PerLevel: 3.69, SpellLevel: 50, MaxLevel: 56},
-	{Amount: 153, Variance: 0.087591, PerLevel: 3.69, SpellLevel: 58, MaxLevel: 64},
-}
+// JudgementOfFuryDamage is the generated roll for the judgement's ids
+// 1311650 through 20414 (rank 7 rolls 146-160 at level 60, a centre of 153
+// at its own level, growing 3.69 a level to level 64). Rank 2's centre is
+// the client's 36.9, which a rounded table read as 37.
+var JudgementOfFuryDamage = clientdamage.FromTable(JudgementOfFuryBaseDamage[:], JudgementOfFuryPointsPerLevel[:], JudgementOfFuryLevel[:], JudgementOfFuryMaxLevel[:])
 
 const (
 	sealOfFuryRankCount = 7

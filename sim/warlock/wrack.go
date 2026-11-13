@@ -23,11 +23,10 @@ import (
 //     (SpellEffect 1349556): 25.2 a tick at the spell's level 40 plus 1.75
 //     a caster level up to SpellLevels.MaxLevel 60 (60.2 a tick at 60),
 //     EffectBonusCoefficient 0.2002. Each is 70% of the 70755 push's row
-//     (36, 2.5, 0.286). Client 1.60.1.70938 carries the row natively, and
-//     the generated tables read 1.75 and 0.2002, but their amount is 25:
-//     the site's spellconst rounds EffectBasePointsF (25.2) to a whole
-//     number, so the amount stays stated here (wrack_test.go checks the
-//     rest against the generated row).
+//     (36, 2.5, 0.286). Client 1.60.1.70938 carries the row natively and
+//     the site's spellconst keeps the fraction, so the tick and its
+//     coefficient read the generated tables (wrack_test.go checks them
+//     against the client row).
 //   - effect 1: the same push turns it from aura 271 (+10% damage taken
 //     from the caster on Corruption and Bane of Agony) into a dummy at 100:
 //     the speed-up. "Wrack no longer increases the damage of the Warlock's
@@ -44,10 +43,10 @@ import (
 // for 1 second during a 3-second Corruption tick, Corruption advances 2
 // seconds instead of 1, so its next tick lands 1 second later instead of
 // 2." Each DoT therefore ends sooner and deals the same ticks.
-var WrackTickDamage = clientdamage.Effect{Amount: 25.2, PerLevel: 1.75, SpellLevel: 40, MaxLevel: 60}
+var WrackTickDamage = clientdamage.FromTable(WrackBaseDamage[:], WrackPointsPerLevel[:], WrackLevel[:], WrackMaxLevel[:])[1]
 
 // WrackTickCoefficient is effect 0's EffectBonusCoefficient (push 113766).
-const WrackTickCoefficient = 0.2002
+var WrackTickCoefficient = WrackSpellCoeff[1]
 
 const WrackNumTicks = 6
 const WrackTickLength = time.Second * 1

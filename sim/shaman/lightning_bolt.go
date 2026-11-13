@@ -44,9 +44,8 @@ var LightningBoltLevel = [LightningBoltRanks + 1]int{0, 1, 8, 14, 20, 26, 32, 38
 // damage for Lightning Bolt." Client 1.60.1.70888's SpellEffect rows make
 // each one half its bolt rank again (rank 10: 176.5 + 1.05 a level against
 // the bolt's 353 + 2.1), after 1.60.1.70755 had raised the bolts alone.
-// Client 1.60.1.70938 carries them natively, but the site's spellconst
-// rounds EffectBasePointsF to a whole number (36.5 reads 36, 176.5 reads
-// 176), so the exact rows stay stated here.
+// Client 1.60.1.70938 carries them natively with their half points, and
+// spellconst_damage_test.go checks every rank against those client rows.
 var LightningBoltOverloadSpellId = [LightningBoltRanks + 1]int32{0, 408439, 408440, 408441, 408442, 408443, 408472, 408473, 408474, 408475, 408477}
 var LightningBoltOverloadDamage = [LightningBoltRanks + 1]clientdamage.Effect{
 	{},

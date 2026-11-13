@@ -63,24 +63,31 @@ const BaseStatsBuild = "1.60.1.70938"
 // Forever: one crit stat for spells and melee.
 // Ratings are straight percentages in the Classic lineage.
 const CritRatingPerCritChance = 1
+
 // Forever: one hit stat for spells, melee and ranged.
 // Ratings are straight percentages in the Classic lineage.
 const HitRatingPerHitChance = 1
+
 // Forever keeps melee, ranged and spell haste separate.
 // Ratings are straight percentages in the Classic lineage.
 const HasteRatingPerHastePercent = 1
+
 // The item unit is a percentage (Edgemaster's 1.0%), not expertise points.
 // Ratings are straight percentages in the Classic lineage.
 const ExpertiseRatingPerExpertiseChance = 1
+
 // combatratings.txt carries a 'Defense Skill' column, but it is not the rule (see header).
 // Ratings are straight percentages in the Classic lineage.
 const DefenseRatingPerDefense = 1
+
 // combatratings.txt carries a 'Dodge' column, but it is not the rule (see header).
 // Ratings are straight percentages in the Classic lineage.
 const DodgeRatingPerDodgeChance = 1
+
 // combatratings.txt carries a 'Parry' column, but it is not the rule (see header).
 // Ratings are straight percentages in the Classic lineage.
 const ParryRatingPerParryChance = 1
+
 // combatratings.txt carries a 'Block' column, but it is not the rule (see header).
 // Ratings are straight percentages in the Classic lineage.
 const BlockRatingPerBlockChance = 1

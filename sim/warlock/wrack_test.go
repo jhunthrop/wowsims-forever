@@ -1,9 +1,10 @@
 package warlock
 
 import (
-	"math"
 	"testing"
 
+	"github.com/wowsims/classic/sim/common/clientdamage"
+	"github.com/wowsims/classic/sim/common/clientdamage/clientdamagetest"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
@@ -109,18 +110,12 @@ func TestWrackTickReadsThe70888Push(t *testing.T) {
 	}
 }
 
-// TestWrackTickAgreesWithTheGeneratedRow: client 1.60.1.70938 carries push
-// 113766's Wrack row natively. The generated per-level growth and coefficient
-// are the hand row's; the generated amount is EffectBasePointsF 25.2 rounded
-// to a whole number by the site's spellconst, so it may differ by under 0.5.
-func TestWrackTickAgreesWithTheGeneratedRow(t *testing.T) {
-	if got, want := WrackTickDamage.PerLevel, WrackPointsPerLevel[1]; !floatsNearlyEqual(got, want) {
-		t.Errorf("Wrack per-level growth = %v, generated %v", got, want)
-	}
-	if got, want := WrackTickCoefficient, WrackSpellCoeff[1]; !floatsNearlyEqual(got, want) {
-		t.Errorf("Wrack tick coefficient = %v, generated %v", got, want)
-	}
-	if got, want := WrackTickDamage.Amount, WrackBaseDamage[1][0]; math.Abs(got-want) >= 0.5 {
-		t.Errorf("Wrack tick amount = %v, generated %v (rounded)", got, want)
-	}
+// TestWrackTickMatchesTheClientRow: client 1.60.1.70938 carries push
+// 113766's Wrack row natively (SpellEffect 1349556, EffectBasePointsF 25.2)
+// and the site's spellconst keeps its fraction, so the generated table the
+// engine reads is checked against the vendored client row at every level.
+func TestWrackTickMatchesTheClientRow(t *testing.T) {
+	class := clientdamagetest.Load(t, clientWarlockSpellconst)
+	clientdamagetest.AssertTable(t, class, clientdamagetest.Periodic, "Wrack tick",
+		WrackSpellId[:], []clientdamage.Effect{{}, WrackTickDamage}, []float64{0, WrackTickCoefficient})
 }

@@ -2,7 +2,7 @@
 //
 // Class: priest
 // Client build: 1.60.1.70938
-// Source: /home/runner/work/foreversixty/foreversixty/data/builds/1.60.1.70938/spellconst/priest.json
+// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/site/data/builds/1.60.1.70938/spellconst/priest.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -264,7 +264,7 @@ var BaronRivendareSSoulDrainCooldownMS = [BaronRivendareSSoulDrainRanks + 1]int3
 var BaronRivendareSSoulDrainManaCost = [BaronRivendareSSoulDrainRanks + 1]float64{60}
 var BaronRivendareSSoulDrainManaCostPct = [BaronRivendareSSoulDrainRanks + 1]float64{0}
 var BaronRivendareSSoulDrainSpellCoeff = [BaronRivendareSSoulDrainRanks + 1]float64{0.1}
-var BaronRivendareSSoulDrainBaseDamage = [BaronRivendareSSoulDrainRanks + 1][]float64{{11694, 11694}}
+var BaronRivendareSSoulDrainBaseDamage = [BaronRivendareSSoulDrainRanks + 1][]float64{{11693.9482, 11693.9482}}
 var BaronRivendareSSoulDrainPointsPerLevel = [BaronRivendareSSoulDrainRanks + 1]float64{0}
 var BaronRivendareSSoulDrainMaxLevel = [BaronRivendareSSoulDrainRanks + 1]int{0}
 
@@ -294,7 +294,7 @@ var BindingHealCooldownMS = [BindingHealRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var BindingHealManaCost = [BindingHealRanks + 1]float64{0, 155, 185, 215, 265, 315, 380}
 var BindingHealManaCostPct = [BindingHealRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var BindingHealSpellCoeff = [BindingHealRanks + 1]float64{0, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
-var BindingHealBaseDamage = [BindingHealRanks + 1][]float64{{0, 0}, {222.8182, 271.1818}, {283.4001, 340.5999}, {348.9749, 417.0251}, {463.1851, 550.8149}, {589.1135, 698.8865}, {756.949, 893.051}}
+var BindingHealBaseDamage = [BindingHealRanks + 1][]float64{{0, 0}, {222.8182, 271.1818}, {283.4001, 340.5999}, {348.9749, 417.0251}, {463.1851, 550.8149}, {589.1137, 698.8866}, {756.949, 893.051}}
 var BindingHealPointsPerLevel = [BindingHealRanks + 1]float64{0, 2.2, 2.5, 2.8, 3.3, 3.7, 4.2}
 var BindingHealMaxLevel = [BindingHealRanks + 1]int{0, 31, 37, 43, 49, 55, 61}
 
@@ -1231,7 +1231,7 @@ var FlashHealCooldownMS = [FlashHealRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var FlashHealManaCost = [FlashHealRanks + 1]float64{125, 125, 155, 185, 215, 265, 315, 380}
 var FlashHealManaCostPct = [FlashHealRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var FlashHealSpellCoeff = [FlashHealRanks + 1]float64{0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
-var FlashHealBaseDamage = [FlashHealRanks + 1][]float64{{2326.9116, 2701.0884}, {174.1488, 213.8512}, {224.6224, 273.3776}, {283.4, 340.6}, {348.9749, 417.0251}, {463.1852, 550.8148}, {589.1136, 698.8864}, {812, 958}}
+var FlashHealBaseDamage = [FlashHealRanks + 1][]float64{{2327.0958, 2701.3022}, {174.1488, 213.8512}, {224.6224, 273.3776}, {283.4, 340.6}, {348.9749, 417.0251}, {463.1852, 550.8148}, {589.1136, 698.8864}, {812, 958}}
 var FlashHealPointsPerLevel = [FlashHealRanks + 1]float64{0, 1.9, 2.2, 2.5, 2.8, 3.3, 3.7, 4.2}
 var FlashHealMaxLevel = [FlashHealRanks + 1]int{0, 25, 31, 37, 43, 49, 55, 61}
 
@@ -2268,7 +2268,7 @@ var MindFlayCooldownMS = [MindFlayRanks + 1]int32{0, 0, 0, 0, 0, 0, 0}
 var MindFlayManaCost = [MindFlayRanks + 1]float64{60, 45, 70, 100, 135, 165, 205}
 var MindFlayManaCostPct = [MindFlayRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var MindFlaySpellCoeff = [MindFlayRanks + 1]float64{0.1, 0.167, 0.167, 0.167, 0.167, 0.167, 0.167}
-var MindFlayBaseDamage = [MindFlayRanks + 1][]float64{{468, 468}, {21, 21}, {34, 34}, {51, 51}, {75, 75}, {98, 98}, {130, 130}}
+var MindFlayBaseDamage = [MindFlayRanks + 1][]float64{{467.758, 467.758}, {21, 21}, {34, 34}, {51, 51}, {75, 75}, {98, 98}, {130, 130}}
 var MindFlayPointsPerLevel = [MindFlayRanks + 1]float64{0, 0, 0, 0, 0, 0, 0}
 var MindFlayMaxLevel = [MindFlayRanks + 1]int{0, 28, 36, 44, 52, 60, 68}
 

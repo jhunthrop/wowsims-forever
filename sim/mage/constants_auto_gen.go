@@ -2,7 +2,7 @@
 //
 // Class: mage
 // Client build: 1.60.1.70938
-// Source: /home/runner/work/foreversixty/foreversixty/data/builds/1.60.1.70938/spellconst/mage.json
+// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/site/data/builds/1.60.1.70938/spellconst/mage.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -366,7 +366,7 @@ var ArcaneMissilesCooldownMS = [ArcaneMissilesRanks + 1]int32{0, 0, 0, 0, 0, 0, 
 var ArcaneMissilesManaCost = [ArcaneMissilesRanks + 1]float64{0, 85, 0, 0, 0, 0, 0, 0, 0}
 var ArcaneMissilesManaCostPct = [ArcaneMissilesRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0, 0}
 var ArcaneMissilesSpellCoeff = [ArcaneMissilesRanks + 1]float64{0.2, 0.2, 0.286, 0.286, 0.286, 0.286, 0.286, 0.286, 0.286}
-var ArcaneMissilesBaseDamage = [ArcaneMissilesRanks + 1][]float64{{1310, 1310}, {0, 0}, {34, 34}, {47, 47}, {66, 66}, {95, 95}, {130, 130}, {171, 171}, {209, 209}}
+var ArcaneMissilesBaseDamage = [ArcaneMissilesRanks + 1][]float64{{1309.7223, 1309.7223}, {0, 0}, {34, 34}, {47, 47}, {66, 66}, {95, 95}, {130, 130}, {171, 171}, {209, 209}}
 var ArcaneMissilesPointsPerLevel = [ArcaneMissilesRanks + 1]float64{0, 0, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 1}
 var ArcaneMissilesMaxLevel = [ArcaneMissilesRanks + 1]int{0, 12, 20, 28, 36, 44, 52, 60, 64}
 
@@ -1785,7 +1785,7 @@ var FireWardCooldownMS = [FireWardRanks + 1]int32{5000, 30000, 30000, 30000, 300
 var FireWardManaCost = [FireWardRanks + 1]float64{95, 85, 135, 195, 255, 320}
 var FireWardManaCostPct = [FireWardRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var FireWardSpellCoeff = [FireWardRanks + 1]float64{4, 2, 2, 2, 2, 2}
-var FireWardBaseDamage = [FireWardRanks + 1][]float64{{702, 702}, {330, 330}, {580, 580}, {940, 940}, {1350, 1350}, {1840, 1840}}
+var FireWardBaseDamage = [FireWardRanks + 1][]float64{{701.6369, 701.6369}, {330, 330}, {580, 580}, {940, 940}, {1350, 1350}, {1840, 1840}}
 var FireWardPointsPerLevel = [FireWardRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var FireWardMaxLevel = [FireWardRanks + 1]int{0, 0, 0, 0, 0, 0}
 
@@ -1902,7 +1902,7 @@ var FlamebreakCooldownMS = [FlamebreakRanks + 1]int32{0}
 var FlamebreakManaCost = [FlamebreakRanks + 1]float64{0}
 var FlamebreakManaCostPct = [FlamebreakRanks + 1]float64{0}
 var FlamebreakSpellCoeff = [FlamebreakRanks + 1]float64{0.4286}
-var FlamebreakBaseDamage = [FlamebreakRanks + 1][]float64{{1356.736, 1567.264}}
+var FlamebreakBaseDamage = [FlamebreakRanks + 1][]float64{{1356.498, 1566.9891}}
 var FlamebreakPointsPerLevel = [FlamebreakRanks + 1]float64{0}
 var FlamebreakMaxLevel = [FlamebreakRanks + 1]int{0}
 
@@ -2109,7 +2109,7 @@ var FrostWardCooldownMS = [FrostWardRanks + 1]int32{5000, 30000, 30000, 30000, 3
 var FrostWardManaCost = [FrostWardRanks + 1]float64{95, 85, 135, 195, 255, 320}
 var FrostWardManaCostPct = [FrostWardRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var FrostWardSpellCoeff = [FrostWardRanks + 1]float64{4, 2, 2, 2, 2, 2}
-var FrostWardBaseDamage = [FrostWardRanks + 1][]float64{{702, 702}, {330, 330}, {580, 580}, {940, 940}, {1350, 1350}, {1840, 1840}}
+var FrostWardBaseDamage = [FrostWardRanks + 1][]float64{{701.6369, 701.6369}, {330, 330}, {580, 580}, {940, 940}, {1350, 1350}, {1840, 1840}}
 var FrostWardPointsPerLevel = [FrostWardRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var FrostWardMaxLevel = [FrostWardRanks + 1]int{0, 0, 0, 0, 0, 0}
 
@@ -2405,7 +2405,7 @@ var HandOfThaurissanCooldownMS = [HandOfThaurissanRanks + 1]int32{0}
 var HandOfThaurissanManaCost = [HandOfThaurissanRanks + 1]float64{0}
 var HandOfThaurissanManaCostPct = [HandOfThaurissanRanks + 1]float64{0}
 var HandOfThaurissanSpellCoeff = [HandOfThaurissanRanks + 1]float64{0.3333}
-var HandOfThaurissanBaseDamage = [HandOfThaurissanRanks + 1][]float64{{1403, 1403}}
+var HandOfThaurissanBaseDamage = [HandOfThaurissanRanks + 1][]float64{{1403.2738, 1403.2738}}
 var HandOfThaurissanPointsPerLevel = [HandOfThaurissanRanks + 1]float64{0}
 var HandOfThaurissanMaxLevel = [HandOfThaurissanRanks + 1]int{0}
 
@@ -4728,7 +4728,7 @@ var ScaldCooldownMS = [ScaldRanks + 1]int32{0}
 var ScaldManaCost = [ScaldRanks + 1]float64{0}
 var ScaldManaCostPct = [ScaldRanks + 1]float64{0}
 var ScaldSpellCoeff = [ScaldRanks + 1]float64{0.2667}
-var ScaldBaseDamage = [ScaldRanks + 1][]float64{{585, 585}}
+var ScaldBaseDamage = [ScaldRanks + 1][]float64{{584.6974, 584.6974}}
 var ScaldPointsPerLevel = [ScaldRanks + 1]float64{0}
 var ScaldMaxLevel = [ScaldRanks + 1]int{0}
 
@@ -4744,7 +4744,7 @@ var ScorchCooldownMS = [ScorchRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var ScorchManaCost = [ScorchRanks + 1]float64{50, 50, 65, 80, 100, 115, 135, 150}
 var ScorchManaCostPct = [ScorchRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var ScorchSpellCoeff = [ScorchRanks + 1]float64{1, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
-var ScorchBaseDamage = [ScorchRanks + 1][]float64{{672.1111, 905.8889}, {35.0339, 42.9661}, {49.8235, 60.1765}, {62.7273, 75.2727}, {84.7192, 101.2808}, {106.1695, 125.8305}, {136.6438, 163.3562}, {163.2835, 192.7165}}
+var ScorchBaseDamage = [ScorchRanks + 1][]float64{{672.402, 906.281}, {35.0339, 42.9661}, {49.8235, 60.1765}, {62.7273, 75.2727}, {84.7192, 101.2808}, {106.1695, 125.8305}, {136.6438, 163.3562}, {163.2835, 192.7165}}
 var ScorchPointsPerLevel = [ScorchRanks + 1]float64{0, 0.8, 1, 1, 1.2, 1.4, 1.5, 1.7}
 var ScorchMaxLevel = [ScorchRanks + 1]int{26, 26, 32, 38, 44, 50, 56, 62}
 

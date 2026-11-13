@@ -2,7 +2,7 @@
 //
 // Class: paladin
 // Client build: 1.60.1.70938
-// Source: /home/runner/work/foreversixty/foreversixty/data/builds/1.60.1.70938/spellconst/paladin.json
+// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/site/data/builds/1.60.1.70938/spellconst/paladin.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -2147,7 +2147,7 @@ var JudgementOfFuryCooldownMS = [JudgementOfFuryRanks + 1]int32{0, 0, 0, 0, 0, 0
 var JudgementOfFuryManaCost = [JudgementOfFuryRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfFuryManaCostPct = [JudgementOfFuryRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var JudgementOfFurySpellCoeff = [JudgementOfFuryRanks + 1]float64{0.1, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429, 0.429}
-var JudgementOfFuryBaseDamage = [JudgementOfFuryRanks + 1][]float64{{0, 0}, {21.85, 24.15}, {35.15, 38.85}, {51.3, 56.7}, {70.3902, 77.6098}, {91.3171, 100.6829}, {117.6132, 128.3868}, {146.2993, 159.7007}}
+var JudgementOfFuryBaseDamage = [JudgementOfFuryRanks + 1][]float64{{0, 0}, {21.85, 24.15}, {35.055, 38.745}, {51.3, 56.7}, {70.3902, 77.6098}, {91.3171, 100.6829}, {117.6132, 128.3868}, {146.2993, 159.7007}}
 var JudgementOfFuryPointsPerLevel = [JudgementOfFuryRanks + 1]float64{0, 1.71, 2.16, 2.52, 2.79, 3.42, 3.69, 3.69}
 var JudgementOfFuryMaxLevel = [JudgementOfFuryRanks + 1]int{0, 16, 24, 31, 40, 48, 56, 64}
 
@@ -3816,7 +3816,7 @@ var SealOfFuryCooldownMS = [SealOfFuryRanks + 1]int32{0, 0, 0, 0, 0, 0, 0, 0}
 var SealOfFuryManaCost = [SealOfFuryRanks + 1]float64{0, 40, 60, 90, 120, 140, 170, 200}
 var SealOfFuryManaCostPct = [SealOfFuryRanks + 1]float64{0, 0, 0, 0, 0, 0, 0, 0}
 var SealOfFurySpellCoeff = [SealOfFuryRanks + 1]float64{0, 0.09, 0.09, 0.09, 0.9, 0.09, 0.09, 1}
-var SealOfFuryBaseDamage = [SealOfFuryRanks + 1][]float64{{0, 0}, {194, 194}, {317, 317}, {487, 487}, {707, 707}, {974, 974}, {1266, 1266}, {1607, 1607}}
+var SealOfFuryBaseDamage = [SealOfFuryRanks + 1][]float64{{0, 0}, {194, 194}, {317, 317}, {486.9, 486.9}, {707, 707}, {974, 974}, {1266, 1266}, {1607, 1607}}
 var SealOfFuryPointsPerLevel = [SealOfFuryRanks + 1]float64{0, 15.3, 20.7, 27.9, 33.3, 37, 42, 42}
 var SealOfFuryMaxLevel = [SealOfFuryRanks + 1]int{0, 16, 24, 32, 40, 48, 56, 64}
 

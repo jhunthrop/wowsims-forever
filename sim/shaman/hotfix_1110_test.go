@@ -4,7 +4,6 @@ import (
 	"math"
 	"testing"
 
-	"github.com/wowsims/classic/sim/common/clientdamage"
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/simsignals"
@@ -92,59 +91,6 @@ func TestMaelstromWeaponChanceForLightningBoltAndShocks(t *testing.T) {
 	}
 	if got := built.MaelstromWeaponChanceForTest(shock); got != 0 {
 		t.Errorf("Earth Shock = %v, want 0", got)
-	}
-}
-
-// "Lightning Overload now deals the correct amount of damage for Lightning
-// Bolt" (9 November): client 1.60.1.70888 makes every overload row half its
-// bolt rank's (408439-408477 and 408479-408484, SpellEffect). Read here, not
-// from the vendored client file: 70938's spellconst carries the rows but
-// rounds EffectBasePointsF to a whole number (36.5 reads 36).
-func TestLightningOverloadRowsAreThe70888Client(t *testing.T) {
-	bolt := []clientdamage.Effect{{},
-		{Amount: 8, Variance: 0.142857, PerLevel: 0.05, SpellLevel: 1, MaxLevel: 6},
-		{Amount: 15, Variance: 0.142857, PerLevel: 0.05, SpellLevel: 8, MaxLevel: 13},
-		{Amount: 26, Variance: 0.163265, PerLevel: 0.15, SpellLevel: 14, MaxLevel: 19},
-		{Amount: 36.5, Variance: 0.134831, PerLevel: 0.25, SpellLevel: 20, MaxLevel: 25},
-		{Amount: 54.5, Variance: 0.134328, PerLevel: 0.35, SpellLevel: 26, MaxLevel: 31},
-		{Amount: 74, Variance: 0.120879, PerLevel: 0.5, SpellLevel: 32, MaxLevel: 37},
-		{Amount: 97, Variance: 0.125, PerLevel: 0.5, SpellLevel: 38, MaxLevel: 43},
-		{Amount: 120, Variance: 0.114094, PerLevel: 0.75, SpellLevel: 44, MaxLevel: 49},
-		{Amount: 147.5, Variance: 0.119565, PerLevel: 0.8, SpellLevel: 50, MaxLevel: 55},
-		{Amount: 176.5, Variance: 0.113122, PerLevel: 1.05, SpellLevel: 56, MaxLevel: 61},
-	}
-	chain := []clientdamage.Effect{{},
-		{Amount: 107.5, Variance: 0.137255, PerLevel: 0.7, SpellLevel: 32, MaxLevel: 37},
-		{Amount: 174, Variance: 0.122449, PerLevel: 1.1, SpellLevel: 40, MaxLevel: 45},
-		{Amount: 214, Variance: 0.115, PerLevel: 1.35, SpellLevel: 48, MaxLevel: 53},
-		{Amount: 255, Variance: 0.114943, PerLevel: 1.65, SpellLevel: 56, MaxLevel: 61},
-	}
-	assertRows(t, "Lightning Bolt overload", shaman.LightningBoltOverloadDamage[:], bolt)
-	assertRows(t, "Chain Lightning overload", shaman.ChainLightningOverloadDamage[:], chain)
-	boltCoef := []float64{0, 0.2145, 0.2855, 0.357, 0.357, 0.357, 0.357, 0.357, 0.357, 0.357, 0.357}
-	for i, want := range boltCoef {
-		if got := shaman.LightningBoltOverloadSpellCoef[i]; math.Abs(got-want) > 1e-4 {
-			t.Errorf("Lightning Bolt overload rank %d coefficient = %v, want %v", i, got, want)
-		}
-	}
-	for i := 1; i < len(shaman.ChainLightningOverloadSpellCoef); i++ {
-		if got := shaman.ChainLightningOverloadSpellCoef[i]; math.Abs(got-0.357) > 1e-4 {
-			t.Errorf("Chain Lightning overload rank %d coefficient = %v, want 0.357", i, got)
-		}
-	}
-}
-
-func assertRows(t *testing.T, name string, got, want []clientdamage.Effect) {
-	t.Helper()
-	if len(got) != len(want) {
-		t.Fatalf("%s: %d ranks, want %d", name, len(got)-1, len(want)-1)
-	}
-	for i := range want {
-		g, w := got[i], want[i]
-		if math.Abs(g.Amount-w.Amount) > 1e-6 || math.Abs(g.Variance-w.Variance) > 1e-5 || math.Abs(g.PerLevel-w.PerLevel) > 1e-6 ||
-			g.SpellLevel != w.SpellLevel || g.MaxLevel != w.MaxLevel {
-			t.Errorf("%s rank %d = %+v, want %+v", name, i, g, w)
-		}
 	}
 }
 

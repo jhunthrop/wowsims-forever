@@ -2,7 +2,7 @@
 //
 // Class: hunter
 // Client build: 1.60.1.70938
-// Source: /home/runner/work/foreversixty/foreversixty/data/builds/1.60.1.70938/spellconst/hunter.json
+// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/site/data/builds/1.60.1.70938/spellconst/hunter.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -367,7 +367,7 @@ var AynashaSBowCooldownMS = [AynashaSBowRanks + 1]int32{0}
 var AynashaSBowManaCost = [AynashaSBowRanks + 1]float64{0}
 var AynashaSBowManaCostPct = [AynashaSBowRanks + 1]float64{0}
 var AynashaSBowSpellCoeff = [AynashaSBowRanks + 1]float64{1}
-var AynashaSBowBaseDamage = [AynashaSBowRanks + 1][]float64{{210.8571, 281.1429}}
+var AynashaSBowBaseDamage = [AynashaSBowRanks + 1][]float64{{210.4911, 280.6548}}
 var AynashaSBowPointsPerLevel = [AynashaSBowRanks + 1]float64{0}
 var AynashaSBowMaxLevel = [AynashaSBowRanks + 1]int{0}
 
@@ -796,7 +796,7 @@ var CopyOfShootCooldownMS = [CopyOfShootRanks + 1]int32{0}
 var CopyOfShootManaCost = [CopyOfShootRanks + 1]float64{0}
 var CopyOfShootManaCostPct = [CopyOfShootRanks + 1]float64{0}
 var CopyOfShootSpellCoeff = [CopyOfShootRanks + 1]float64{1}
-var CopyOfShootBaseDamage = [CopyOfShootRanks + 1][]float64{{210.8571, 281.1429}}
+var CopyOfShootBaseDamage = [CopyOfShootRanks + 1][]float64{{210.4911, 280.6548}}
 var CopyOfShootPointsPerLevel = [CopyOfShootRanks + 1]float64{0}
 var CopyOfShootMaxLevel = [CopyOfShootRanks + 1]int{0}
 
@@ -1649,7 +1649,7 @@ var ImpaleCooldownMS = [ImpaleRanks + 1]int32{0}
 var ImpaleManaCost = [ImpaleRanks + 1]float64{0}
 var ImpaleManaCostPct = [ImpaleRanks + 1]float64{0}
 var ImpaleSpellCoeff = [ImpaleRanks + 1]float64{1}
-var ImpaleBaseDamage = [ImpaleRanks + 1][]float64{{234, 234}}
+var ImpaleBaseDamage = [ImpaleRanks + 1][]float64{{233.879, 233.879}}
 var ImpalePointsPerLevel = [ImpaleRanks + 1]float64{0}
 var ImpaleMaxLevel = [ImpaleRanks + 1]int{0}
 
@@ -4370,7 +4370,7 @@ var ShootCooldownMS = [ShootRanks + 1]int32{0}
 var ShootManaCost = [ShootRanks + 1]float64{0}
 var ShootManaCostPct = [ShootRanks + 1]float64{0}
 var ShootSpellCoeff = [ShootRanks + 1]float64{1}
-var ShootBaseDamage = [ShootRanks + 1][]float64{{258, 344}}
+var ShootBaseDamage = [ShootRanks + 1][]float64{{257.942, 343.9226}}
 var ShootPointsPerLevel = [ShootRanks + 1]float64{0}
 var ShootMaxLevel = [ShootRanks + 1]int{0}
 
@@ -4428,7 +4428,7 @@ var ShootSilithusRiflemanLongRangeCooldownMS = [ShootSilithusRiflemanLongRangeRa
 var ShootSilithusRiflemanLongRangeManaCost = [ShootSilithusRiflemanLongRangeRanks + 1]float64{0}
 var ShootSilithusRiflemanLongRangeManaCostPct = [ShootSilithusRiflemanLongRangeRanks + 1]float64{0}
 var ShootSilithusRiflemanLongRangeSpellCoeff = [ShootSilithusRiflemanLongRangeRanks + 1]float64{1}
-var ShootSilithusRiflemanLongRangeBaseDamage = [ShootSilithusRiflemanLongRangeRanks + 1][]float64{{210.8571, 281.1429}}
+var ShootSilithusRiflemanLongRangeBaseDamage = [ShootSilithusRiflemanLongRangeRanks + 1][]float64{{210.4911, 280.6548}}
 var ShootSilithusRiflemanLongRangePointsPerLevel = [ShootSilithusRiflemanLongRangeRanks + 1]float64{0}
 var ShootSilithusRiflemanLongRangeMaxLevel = [ShootSilithusRiflemanLongRangeRanks + 1]int{0}
 
@@ -4442,7 +4442,7 @@ var ShootTaurenRiflemanCooldownMS = [ShootTaurenRiflemanRanks + 1]int32{0}
 var ShootTaurenRiflemanManaCost = [ShootTaurenRiflemanRanks + 1]float64{0}
 var ShootTaurenRiflemanManaCostPct = [ShootTaurenRiflemanRanks + 1]float64{0}
 var ShootTaurenRiflemanSpellCoeff = [ShootTaurenRiflemanRanks + 1]float64{1}
-var ShootTaurenRiflemanBaseDamage = [ShootTaurenRiflemanRanks + 1][]float64{{497.25, 672.75}}
+var ShootTaurenRiflemanBaseDamage = [ShootTaurenRiflemanRanks + 1][]float64{{496.9928, 672.4021}}
 var ShootTaurenRiflemanPointsPerLevel = [ShootTaurenRiflemanRanks + 1]float64{0}
 var ShootTaurenRiflemanMaxLevel = [ShootTaurenRiflemanRanks + 1]int{0}
 
@@ -4533,7 +4533,7 @@ var SpitCooldownMS = [SpitRanks + 1]int32{0}
 var SpitManaCost = [SpitRanks + 1]float64{0}
 var SpitManaCostPct = [SpitRanks + 1]float64{0}
 var SpitSpellCoeff = [SpitRanks + 1]float64{1}
-var SpitBaseDamage = [SpitRanks + 1][]float64{{497.25, 672.75}}
+var SpitBaseDamage = [SpitRanks + 1][]float64{{496.9928, 672.4021}}
 var SpitPointsPerLevel = [SpitRanks + 1]float64{10}
 var SpitMaxLevel = [SpitRanks + 1]int{0}
 

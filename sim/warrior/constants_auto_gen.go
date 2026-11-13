@@ -2,7 +2,7 @@
 //
 // Class: warrior
 // Client build: 1.60.1.70938
-// Source: /home/runner/work/foreversixty/foreversixty/data/builds/1.60.1.70938/spellconst/warrior.json
+// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/site/data/builds/1.60.1.70938/spellconst/warrior.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -2277,7 +2277,7 @@ var MockingBlowCooldownMS = [MockingBlowRanks + 1]int32{0, 120000, 120000, 12000
 var MockingBlowManaCost = [MockingBlowRanks + 1]float64{0, 100, 100, 100, 100, 100}
 var MockingBlowManaCostPct = [MockingBlowRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var MockingBlowSpellCoeff = [MockingBlowRanks + 1]float64{1, 1, 1, 1, 1, 1}
-var MockingBlowBaseDamage = [MockingBlowRanks + 1][]float64{{181, 181}, {22, 22}, {31, 31}, {46, 46}, {71, 71}, {93, 93}}
+var MockingBlowBaseDamage = [MockingBlowRanks + 1][]float64{{181.2562, 181.2562}, {22, 22}, {31, 31}, {46, 46}, {71, 71}, {93, 93}}
 var MockingBlowPointsPerLevel = [MockingBlowRanks + 1]float64{0, 0, 0, 0, 0, 0}
 var MockingBlowMaxLevel = [MockingBlowRanks + 1]int{0, 0, 0, 0, 0, 0}
 
