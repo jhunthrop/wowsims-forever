@@ -11,7 +11,6 @@ import (
 	"github.com/wowsims/classic/sim/core"
 	"github.com/wowsims/classic/sim/core/proto"
 	"github.com/wowsims/classic/sim/core/stats"
-	"github.com/wowsims/classic/sim/druid"
 	"github.com/wowsims/classic/sim/healsim"
 )
 
@@ -133,8 +132,8 @@ func TestWildGrowthHealsTheTargetsPartyOverSevenTicksThatFadeAway(t *testing.T) 
 	player := newPlayer(60, talents, healerBonusStats, castOnce(1238215, 1))
 	result := runOnce(t, player, 20)
 
-	// The coefficient is client 1.60.1.70888's.
-	const rank3TickAtLevel60, coefficient = 97, druid.WildGrowthTickCoefficient
+	// The coefficient is the client's (1238215 effect 0, 0.066 since 1.60.1.70888).
+	const rank3TickAtLevel60, coefficient = 97, 0.066
 	average := rank3TickAtLevel60 + coefficient*power
 	assertPartyHealing(t, result, 1238215, 7, average)
 

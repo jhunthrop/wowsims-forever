@@ -57,7 +57,7 @@ func TestUnholyPowerRaisesAllDemonDamageOnce(t *testing.T) {
 
 // TestFireboltLowRanksReadThe70888Push pins the 10 Nov hotfix ("Imp base
 // damage of the first 4 Ranks of Imp's Firebolt increased"), push 113766 on
-// SpellEffect 681913 and 685570 to 685572: ranks 1 to 4 are centres of 6, 11,
+// 1.60.1.70888 and native in the 1.60.1.70938 tables, on SpellEffect 681913 and 685570 to 685572: ranks 1 to 4 are centres of 6, 11,
 // 15 and 18 (were 4, 7, 12 and 17), 0.3333, 0.1818, 0.2353 and 0.2222 wide,
 // growing 0.3, 0.4, 0.4 and 0.4 a level (were 0.1, 0.2, 0.3 and 0.3).
 // Ranks 5 to 7 are unchanged.

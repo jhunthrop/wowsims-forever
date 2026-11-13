@@ -98,7 +98,8 @@ func TestMaelstromWeaponChanceForLightningBoltAndShocks(t *testing.T) {
 // "Lightning Overload now deals the correct amount of damage for Lightning
 // Bolt" (9 November): client 1.60.1.70888 makes every overload row half its
 // bolt rank's (408439-408477 and 408479-408484, SpellEffect). Read here, not
-// from the vendored client file, until the site's data moves to 70888.
+// from the vendored client file: 70938's spellconst carries the rows but
+// rounds EffectBasePointsF to a whole number (36.5 reads 36).
 func TestLightningOverloadRowsAreThe70888Client(t *testing.T) {
 	bolt := []clientdamage.Effect{{},
 		{Amount: 8, Variance: 0.142857, PerLevel: 0.05, SpellLevel: 1, MaxLevel: 6},

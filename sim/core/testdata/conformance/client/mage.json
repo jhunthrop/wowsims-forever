@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_slug": "mage",
   "family": 3,
   "spells": {
@@ -30957,6 +30957,104 @@
       ],
       "cost_pct": 0.0,
       "max_level": 61
+    },
+    "1283419": {
+      "name": "Frost Armor",
+      "rank": 0,
+      "school_mask": 16,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 10000,
+      "category_cooldown_ms": 0,
+      "duration_ms": 1800000,
+      "cost": 10,
+      "cost_type": 0,
+      "spell_level": 1,
+      "family_mask": [
+        524288,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 674,
+          "amount": 12,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 1,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 12.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 42,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 6136,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1291176": {
+      "name": "Blast Wave",
+      "rank": 0,
+      "school_mask": 4,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 2000,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 0,
+      "family_mask": [
+        131072,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 2,
+          "aura": 0,
+          "amount": 15,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.14933332801,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 6,
+          "aura": 33,
+          "amount": -10,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
     },
     "1292739": {
       "name": "Hydra Strike",

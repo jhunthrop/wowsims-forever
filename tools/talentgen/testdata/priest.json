@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_id": 5,
   "class_slug": "priest",
   "trees": [
@@ -1084,7 +1084,7 @@
           "ranks": [
             {
               "spell_id": 15407,
-              "description": "Assault the target's mind with Shadow energy, causing 63 Shadow damage over 3 sec  and slowing their movement speed by 50%."
+              "description": "Assault the target's mind with Shadow energy, causing 63 Shadow damage over 3 sec and slowing their movement speed by 50%."
             }
           ],
           "spell_id": 15407

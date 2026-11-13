@@ -33,25 +33,12 @@ const (
 	coefficientTolerance = 0.002
 )
 
-// clientHotfixedCoefficients are the coefficients a newer client carries
-// than the vendored table: the table's row is 1.60.1.70790's, the engine
-// holds the live client's, and the row below says which. Remove an entry
-// once the vendored table carries it.
-var clientHotfixedCoefficients = map[int32]float64{
-	408120:  WildGrowthTickCoefficient, // Wild Growth rank 1, client 1.60.1.70888 SpellEffect 1072065
-	1238214: WildGrowthTickCoefficient, // rank 2, SpellEffect 1235327
-	1238215: WildGrowthTickCoefficient, // rank 3, SpellEffect 1235329
-}
-
 func assertEffect(t *testing.T, label string, client spellconst.Spell, index int, got healingEffect) {
 	t.Helper()
 	if got.roll.SpellLevel != client.SpellLevel || got.roll.MaxLevel != client.MaxLevel {
 		t.Errorf("%s: spell level %d / max %d, client %d / %d", label, got.roll.SpellLevel, got.roll.MaxLevel, client.SpellLevel, client.MaxLevel)
 	}
 	wantCoefficient := client.Effects[index].ResolvedSPCoefficient
-	if hotfixed, ok := clientHotfixedCoefficients[client.ID]; ok {
-		wantCoefficient = hotfixed
-	}
 	if math.Abs(got.coefficient-wantCoefficient) > coefficientTolerance {
 		t.Errorf("%s: coefficient %v, client %v", label, got.coefficient, wantCoefficient)
 	}

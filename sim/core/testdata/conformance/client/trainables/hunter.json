@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_slug": "hunter",
   "trainables": [
     {
@@ -49,7 +49,7 @@
       "skill_line": "Marksmanship",
       "source": "skill_line_ability",
       "active": true,
-      "cost": 190,
+      "cost": 0,
       "cost_type": 0,
       "cast_time_ms": -1000000,
       "cooldown_ms": 6000,
@@ -402,7 +402,7 @@
         {
           "id": 19306,
           "rank": 1,
-          "level": 30
+          "level": 25
         },
         {
           "id": 1242634,
@@ -1215,7 +1215,7 @@
       "skill_line": "Beast Mastery",
       "source": "talent",
       "active": true,
-      "cost": 190,
+      "cost": 0,
       "cost_type": 0,
       "cast_time_ms": -1000000,
       "cooldown_ms": 6000,

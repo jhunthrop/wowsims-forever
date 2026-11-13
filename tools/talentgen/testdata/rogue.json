@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_id": 4,
   "class_slug": "rogue",
   "trees": [
@@ -1271,7 +1271,7 @@
           "ranks": [
             {
               "spell_id": 1316709,
-              "description": "Finishing move that marks the target, storing a portion of the damage dealt by your attacks per Combo Point. Garrote and Rupture damage is stored at twice the rate. After 6 sec, the stored damage is dealt, up to a maximum increased by Attack Power and Critical Strike chance:\n   1 point  : 12% stored, (((63 + 102 + 0.04 * Attack Power) * ($mcrit / 100 + 1)) * 1) damage cap\n   2 points: 24% stored, (((63 + (204) + 2 * 0.04 * Attack Power) * ($mcrit / 100 + 1)) * 1) damage cap\n   3 points: 36% stored, (((63 + (306) + 3 * 0.04 * Attack Power) * ($mcrit / 100 + 1)) * 1) damage cap\n   4 points: 48% stored, (((63 + (408) + 4 * 0.04 * Attack Power) * ($mcrit / 100 + 1)) * 1) damage cap\n   5 points: 60% stored, (((63 + (510) + 5 * 0.04 * Attack Power) * ($mcrit / 100 + 1)) * 1) damage cap"
+              "description": "Finishing move that marks the target, storing a portion of the damage dealt by your attacks per Combo Point. Garrote and Rupture damage is stored at twice the rate. After 6 sec, the stored damage is dealt, up to a maximum increased by Attack Power and Critical Strike chance:\n   1 point  : 12% stored, (((63 + 102 + 0.04 * Attack Power) * (Critical Strike chance / 100 + 1)) * 1) damage cap\n   2 points: 24% stored, (((63 + (204) + 2 * 0.04 * Attack Power) * (Critical Strike chance / 100 + 1)) * 1) damage cap\n   3 points: 36% stored, (((63 + (306) + 3 * 0.04 * Attack Power) * (Critical Strike chance / 100 + 1)) * 1) damage cap\n   4 points: 48% stored, (((63 + (408) + 4 * 0.04 * Attack Power) * (Critical Strike chance / 100 + 1)) * 1) damage cap\n   5 points: 60% stored, (((63 + (510) + 5 * 0.04 * Attack Power) * (Critical Strike chance / 100 + 1)) * 1) damage cap"
             }
           ],
           "spell_id": 1316709

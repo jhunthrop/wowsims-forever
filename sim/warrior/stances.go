@@ -162,8 +162,10 @@ func (warrior *Warrior) registerBattleStanceAura() {
 //
 // The threat bonus is 80%: Blizzard's Forever notes of 3 November, "Defensive
 // Stance: Threat bonus increased from 30% to 80%", and SpellEffect row 686475
-// (aura 10) as the 1.60.1.70790 server push 113326 leaves it (the shipped row
-// read 30).
+// (aura 10): the 1.60.1.70790 server push 113326 carried it (the shipped row
+// read 30), and client 1.60.1.70938's own row reads 80.
+// TestShieldAbilitiesMatchClient (spellconst_tank_test.go) checks the
+// constant against it.
 const (
 	defensiveStanceDamageMultiplier = 0.9
 	defensiveStanceThreatBonus      = 0.8

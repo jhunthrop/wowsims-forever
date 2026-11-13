@@ -119,15 +119,6 @@ func TestRegrowthRanksHealForTheClientRoll(t *testing.T) {
 // assertHealOverTime checks the spell's periodic heal against the client's
 // periodic-heal effect: the tick count and period from its duration, and the
 // tick (the roll plus coefficient times healing power) every tick lands for.
-// clientHotfixedCoefficients are the coefficients a newer client carries than
-// the vendored 1.60.1.70790 table: Wild Growth's three ranks read 0.066 in
-// 1.60.1.70888 (sim/druid/wild_growth.go).
-var clientHotfixedCoefficients = map[int32]float64{
-	408120:  druid.WildGrowthTickCoefficient,
-	1238214: druid.WildGrowthTickCoefficient,
-	1238215: druid.WildGrowthTickCoefficient,
-}
-
 func assertHealOverTime(t *testing.T, sim *core.Simulation, spell *druid.DruidSpell, target *core.Unit, effectIndex int) {
 	t.Helper()
 	client := clientSpell(t, spell.SpellID)
@@ -146,9 +137,6 @@ func assertHealOverTime(t *testing.T, sim *core.Simulation, spell *druid.DruidSp
 
 	low, _, _ := client.DamageRange(effectIndex, int(spell.Unit.Level))
 	coefficient := effect.ResolvedSPCoefficient
-	if hotfixed, ok := clientHotfixedCoefficients[client.ID]; ok {
-		coefficient = hotfixed
-	}
 	want := low + coefficient*core.SpellLevelPenalty(client.ID, client.SpellLevel, int(spell.Unit.Level))*spell.HealingPower(target)
 	if got := dot.SnapshotBaseDamage * dot.SnapshotAttackerMultiplier; math.Abs(got-want) > tolerance {
 		t.Errorf("%s rank %d ticks for %v, want %v", spell.ActionID, spell.Rank, got, want)
