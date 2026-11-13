@@ -69,9 +69,12 @@ const (
 	// (t/2403040): "Unsealed Fury no longer generates echoes from Windfury
 	// Totem attacks", so an extra attack (Windfury Totem, Reckoning, Hand
 	// of Justice) still releases stored copies, being a landed attack
-	// under whatever Seal is up, but stores none. Unconfirmed: whether
-	// special attacks (Holy Strike) store or consume, and whether each
-	// copy keeps its own 15 seconds.
+	// under whatever Seal is up, but stores none. Our launch logs (Echo of
+	// Command 1311703, Echo of Righteousness 1311704, Echo of Fury 1311701,
+	// three Retribution paladins at 33 to 45) agree: 62 of 62 stacks were
+	// added by a white swing and none by any of 33 Holy Strikes, and the
+	// copies share one 15 second timer that each new stack restarts (three
+	// expiries 15.0 to 15.1 seconds after the last stack).
 	unsealedWrathActionID  = 1310735
 	unsealedWrathDuration  = 15 * time.Second
 	unsealedWrathMaxStacks = 3
