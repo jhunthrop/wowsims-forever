@@ -47,7 +47,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 20 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 20 | Judgement | 0 | 20271 | 24.72 (6% base mana)→24.72 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 20 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| HolyPaladin | 20 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 39.25-43.39→39.25-43.39 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 20 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 39.16-43.28→39.16-43.28 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 43.57-48.03→43.57-48.03 | 0.429→0.429 | declared, matches |
@@ -92,7 +92,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 30 | Judgement | 0 | 20271 | 42.12 (6% base mana)→42.12 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Judgement of Fury | 0 | 20183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 25→25 | n/a | match |  | 63.27-69.93→63.27-69.93 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 30 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| HolyPaladin | 30 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 30 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 30 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 30 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.429→0.429 | declared, matches |
@@ -155,7 +155,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 38 | Judgement of Fury | 0 | 20183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 25→25 | n/a | match |  | 65.66-72.58→65.66-72.58 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 38 | Judgement of Fury | 0 | 20411 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 81.01-89.31→81.01-89.31 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 38 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| HolyPaladin | 38 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 38 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 38 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 38 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 38 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.429→0.429 | declared, matches |
@@ -229,7 +229,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 40 | Judgement of Fury | 0 | 20183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 25→25 | n/a | match |  | 65.66-72.58→65.66-72.58 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 40 | Judgement of Fury | 0 | 20411 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 86.31-95.17→86.31-95.17 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 40 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| HolyPaladin | 40 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 40 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 40 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Judgement of Light | 0 | 20344 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 40 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
@@ -318,7 +318,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 50 | Judgement of Fury | 0 | 20412 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 110.84-122.20→110.84-122.20 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 50 | Judgement of Fury | 0 | 20413 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 117.61-128.39→117.61-128.39 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 50 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| HolyPaladin | 50 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 50 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 50 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Judgement of Light | 0 | 20344 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 50 | Judgement of Light | 0 | 20345 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -445,7 +445,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | HolyPaladin | 60 | Judgement of Fury | 0 | 20413 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 138.78-151.50→138.78-151.50 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 60 | Judgement of Fury | 0 | 20414 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | 153.36-167.40→153.36-167.40 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 60 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| HolyPaladin | 60 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| HolyPaladin | 60 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | HolyPaladin | 60 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Judgement of Light | 0 | 20344 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 40000→40000 | match |  | n/a | n/a | n/a |
 | HolyPaladin | 60 | Judgement of Light | 0 | 20345 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -545,7 +545,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 20 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Judgement | 0 | 20271 | 24.72 (6% base mana)→24.72 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 20 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| ProtectionPaladin | 20 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 39.25-43.39→39.25-43.39 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 20 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 39.16-43.28→39.16-43.28 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 43.57-48.03→43.57-48.03 | 0.429→0.429 | declared, matches |
@@ -583,7 +583,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 30 | Judgement | 0 | 20271 | 42.12 (6% base mana)→42.12 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Judgement of Fury | 0 | 20183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 25→25 | n/a | match |  | 63.27-69.93→63.27-69.93 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 30 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| ProtectionPaladin | 30 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 30 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 30 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.429→0.429 | declared, matches |
@@ -637,7 +637,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 38 | Judgement of Fury | 0 | 20183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 25→25 | n/a | match |  | 65.66-72.58→65.66-72.58 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 38 | Judgement of Fury | 0 | 20411 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 81.01-89.31→81.01-89.31 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 38 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| ProtectionPaladin | 38 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 38 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 38 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 38 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.429→0.429 | declared, matches |
@@ -702,7 +702,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 40 | Judgement of Fury | 0 | 20183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 25→25 | n/a | match |  | 65.66-72.58→65.66-72.58 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 40 | Judgement of Fury | 0 | 20411 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 86.31-95.17→86.31-95.17 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 40 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| ProtectionPaladin | 40 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 40 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 40 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Judgement of Light | 0 | 20344 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 40 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
@@ -779,7 +779,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 50 | Judgement of Fury | 0 | 20412 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 110.84-122.20→110.84-122.20 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 50 | Judgement of Fury | 0 | 20413 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 117.61-128.39→117.61-128.39 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 50 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| ProtectionPaladin | 50 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 50 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 50 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Judgement of Light | 0 | 20344 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 50 | Judgement of Light | 0 | 20345 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -891,7 +891,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | ProtectionPaladin | 60 | Judgement of Fury | 0 | 20413 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 138.78-151.50→138.78-151.50 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 60 | Judgement of Fury | 0 | 20414 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | 153.36-167.40→153.36-167.40 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 60 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| ProtectionPaladin | 60 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| ProtectionPaladin | 60 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | ProtectionPaladin | 60 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Judgement of Light | 0 | 20344 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 40000→40000 | match |  | n/a | n/a | n/a |
 | ProtectionPaladin | 60 | Judgement of Light | 0 | 20345 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -991,7 +991,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 20 | Holy Strike | 3 | 1866 | 12.00→12.00 | mana→mana | 10000→10000 | 0→0 | 1500→1500 | 20→20 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Judgement | 0 | 20271 | 24.72 (6% base mana)→24.72 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 20 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| RetributionPaladin | 20 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 39.25-43.39→39.25-43.39 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 20 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 39.16-43.28→39.16-43.28 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 20 | Judgement of Righteousness | 0 | 20281 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 43.57-48.03→43.57-48.03 | 0.429→0.429 | declared, matches |
@@ -1029,7 +1029,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 30 | Judgement | 0 | 20271 | 42.12 (6% base mana)→42.12 | mana→mana | 10000→10000 | 0→0 | 0→0 | 4→4 | n/a | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Judgement of Fury | 0 | 20183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 25→25 | n/a | match |  | 63.27-69.93→63.27-69.93 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 30 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| RetributionPaladin | 30 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 30 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 30 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 30 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.429→0.429 | declared, matches |
@@ -1083,7 +1083,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 38 | Judgement of Fury | 0 | 20183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 25→25 | n/a | match |  | 65.66-72.58→65.66-72.58 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 38 | Judgement of Fury | 0 | 20411 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 81.01-89.31→81.01-89.31 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 38 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| RetributionPaladin | 38 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 38 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 38 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 38 | Judgement of Righteousness | 0 | 20280 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 35.96-38.84→35.96-38.84 | 0.429→0.429 | declared, matches |
@@ -1148,7 +1148,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 40 | Judgement of Fury | 0 | 20183 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 25→25 | n/a | match |  | 65.66-72.58→65.66-72.58 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 40 | Judgement of Fury | 0 | 20411 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 34→34 | n/a | match |  | 86.31-95.17→86.31-95.17 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 40 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| RetributionPaladin | 40 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 40 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 40 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Judgement of Light | 0 | 20344 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 40 | Judgement of Righteousness | 0 | 20187 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 1→1 | n/a | match |  | 24.81-26.79→24.81-26.79 | 0.429→0.429 | declared, matches |
@@ -1225,7 +1225,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 50 | Judgement of Fury | 0 | 20412 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 42→42 | n/a | match |  | 110.84-122.20→110.84-122.20 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 50 | Judgement of Fury | 0 | 20413 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 117.61-128.39→117.61-128.39 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 50 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| RetributionPaladin | 50 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 50 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 50 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Judgement of Light | 0 | 20344 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 50 | Judgement of Light | 0 | 20345 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | 40000→40000 | match |  | n/a | n/a | n/a |
@@ -1337,7 +1337,7 @@ Every preset below is built with an EMPTY talent string (see sim/conformance/bui
 | RetributionPaladin | 60 | Judgement of Fury | 0 | 20413 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | n/a | match |  | 138.78-151.50→138.78-151.50 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 60 | Judgement of Fury | 0 | 20414 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 58→58 | n/a | match |  | 153.36-167.40→153.36-167.40 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 60 | Judgement of Fury | 0 | 1311650 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 10→10 | n/a | match |  | 31.60-34.92→31.60-34.92 | 0.429→0.429 | declared, matches |
-| RetributionPaladin | 60 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.46-52.46→47.46-52.46 | 0.429→0.429 | declared, matches |
+| RetributionPaladin | 60 | Judgement of Fury | 0 | 1311655 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 18→18 | n/a | match |  | 47.37-52.35→47.37-52.35 | 0.429→0.429 | declared, matches |
 | RetributionPaladin | 60 | Judgement of Light | 0 | 20185 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 30→30 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Judgement of Light | 0 | 20344 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 40→40 | 40000→40000 | match |  | n/a | n/a | n/a |
 | RetributionPaladin | 60 | Judgement of Light | 0 | 20345 | 0.00→0.00 | mana→none | 0→0 | 0→0 | 0→0 | 50→50 | 40000→40000 | match |  | n/a | n/a | n/a |
