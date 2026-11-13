@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_slug": "warrior",
   "family": 4,
   "spells": {
@@ -20407,6 +20407,117 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 127,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1283073": {
+      "name": "Charge",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 20,
+      "family_mask": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 96,
+          "aura": 0,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 58,
+          "aura": 0,
+          "amount": 10,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1283407": {
+      "name": "Shield Charge",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 1,
+      "spell_level": 20,
+      "family_mask": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 96,
+          "aura": 0,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 1,
+          "effect": 98,
+          "aura": 0,
+          "amount": 75,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 150,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        },
+        {
+          "index": 2,
+          "effect": 58,
+          "aura": 0,
+          "amount": 20,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0

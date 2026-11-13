@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_id": 1,
   "class_slug": "warrior",
   "trees": [
@@ -759,11 +759,11 @@
           "ranks": [
             {
               "spell_id": 1323967,
-              "description": "Your Enrage, Berserker Rage, Bloodrage, Death Wish, and Bloodthirst abilities cause your next 3 melee attacks to restore 0.5% of your maximum Health."
+              "description": "Your Enrage, Berserker Rage, Bloodrage, Death Wish, Reckless Swings, and Bloodthirst abilities cause your next 3 melee attacks to restore 0.5% of your maximum Health."
             },
             {
               "spell_id": 1323967,
-              "description": "Your Enrage, Berserker Rage, Bloodrage, Death Wish, and Bloodthirst abilities cause your next 3 melee attacks to restore 1.0% of your maximum Health."
+              "description": "Your Enrage, Berserker Rage, Bloodrage, Death Wish, Reckless Swings, and Bloodthirst abilities cause your next 3 melee attacks to restore 1.0% of your maximum Health."
             }
           ],
           "spell_id": 1323967

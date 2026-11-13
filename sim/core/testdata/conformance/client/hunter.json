@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_slug": "hunter",
   "family": 9,
   "spells": {
@@ -872,7 +872,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 25,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 6,
       "family_mask": [
@@ -896,7 +896,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "3045": {
@@ -2124,7 +2124,7 @@
           "ap_coefficient": 0.0,
           "period_ms": 2000,
           "misc_value": 0,
-          "trigger_spell": 18350,
+          "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
         }
@@ -2900,7 +2900,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 35,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 12,
       "family_mask": [
@@ -2924,7 +2924,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "14282": {
@@ -2936,7 +2936,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 50,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 20,
       "family_mask": [
@@ -2960,7 +2960,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "14283": {
@@ -2972,7 +2972,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 80,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 28,
       "family_mask": [
@@ -2996,7 +2996,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "14284": {
@@ -3008,7 +3008,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 105,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 36,
       "family_mask": [
@@ -3032,7 +3032,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "14285": {
@@ -3044,7 +3044,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 135,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 44,
       "family_mask": [
@@ -3068,7 +3068,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "14286": {
@@ -3080,7 +3080,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 160,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 52,
       "family_mask": [
@@ -3104,7 +3104,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "14287": {
@@ -3116,7 +3116,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 190,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 60,
       "family_mask": [
@@ -3140,7 +3140,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "14294": {
@@ -29392,6 +29392,42 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
+    "1283679": {
+      "name": "Shoot",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 0,
+      "cost": 0,
+      "cost_type": 0,
+      "spell_level": 20,
+      "family_mask": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 2,
+          "aura": 0,
+          "amount": 13,
+          "sp_coefficient": 1.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.28571429849,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
     "1293020": {
       "name": "Hydra Shot",
       "rank": 4,
@@ -29437,7 +29473,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 80,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 25,
       "family_mask": [
@@ -29500,7 +29536,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "1293525": {
@@ -29512,7 +29548,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 105,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 36,
       "family_mask": [
@@ -29575,7 +29611,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "1293526": {
@@ -29587,7 +29623,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 135,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 48,
       "family_mask": [
@@ -29650,7 +29686,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "1293527": {
@@ -29662,7 +29698,7 @@
       "cooldown_ms": 0,
       "category_cooldown_ms": 6000,
       "duration_ms": 0,
-      "cost": 190,
+      "cost": 0,
       "cost_type": 0,
       "spell_level": 60,
       "family_mask": [
@@ -29725,7 +29761,7 @@
           "points_per_level": 0.0
         }
       ],
-      "cost_pct": 0.0,
+      "cost_pct": 11.0,
       "max_level": 0
     },
     "1293639": {

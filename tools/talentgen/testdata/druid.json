@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_id": 11,
   "class_slug": "druid",
   "trees": [
@@ -1172,7 +1172,7 @@
           "ranks": [
             {
               "spell_id": 18562,
-              "description": "Instantly heals a target with your active Rejuvenation or Regrowth effect for an amount equal to the full duration of the periodic effect of the consumed spell."
+              "description": "Instantly heals a target with your active Rejuvenation or Regrowth effect for an amount equal to the full duration of the periodic effect."
             }
           ],
           "spell_id": 18562

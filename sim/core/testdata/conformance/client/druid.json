@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_slug": "druid",
   "family": 7,
   "spells": {
@@ -4988,6 +4988,42 @@
       "cost_pct": 0.0,
       "max_level": 0
     },
+    "9007": {
+      "name": "Pounce Bleed",
+      "rank": 1,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 18000,
+      "cost": 0,
+      "cost_type": 3,
+      "spell_level": 36,
+      "family_mask": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 3,
+          "amount": 19,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 3000,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
     "9033": {
       "name": "Shapeshift Form Effect",
       "rank": 0,
@@ -5793,6 +5829,78 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 4,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "9824": {
+      "name": "Pounce Bleed",
+      "rank": 2,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 18000,
+      "cost": 0,
+      "cost_type": 3,
+      "spell_level": 46,
+      "family_mask": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 3,
+          "amount": 25,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 3000,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "9826": {
+      "name": "Pounce Bleed",
+      "rank": 3,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": 18000,
+      "cost": 0,
+      "cost_type": 3,
+      "spell_level": 56,
+      "family_mask": [
+        0,
+        0,
+        0,
+        128
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 3,
+          "amount": 31,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 3000,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0
@@ -16346,7 +16454,7 @@
           "effect": 6,
           "aura": 8,
           "amount": 40,
-          "sp_coefficient": 0.03299999982,
+          "sp_coefficient": 0.06599999964,
           "ap_coefficient": 0.0,
           "period_ms": 1000,
           "misc_value": 0,
@@ -28510,7 +28618,7 @@
           "effect": 6,
           "aura": 8,
           "amount": 60,
-          "sp_coefficient": 0.03299999982,
+          "sp_coefficient": 0.06599999964,
           "ap_coefficient": 0.0,
           "period_ms": 1000,
           "misc_value": 0,
@@ -28559,7 +28667,7 @@
           "effect": 6,
           "aura": 8,
           "amount": 97,
-          "sp_coefficient": 0.03299999982,
+          "sp_coefficient": 0.06599999964,
           "ap_coefficient": 0.0,
           "period_ms": 1000,
           "misc_value": 0,
@@ -30923,6 +31031,78 @@
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 14,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1330763": {
+      "name": "Poised",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": -1,
+      "cost": 0,
+      "cost_type": -2,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 4,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 0,
+          "misc_value": 0,
+          "trigger_spell": 0,
+          "variance": 0.0,
+          "points_per_level": 0.0
+        }
+      ],
+      "cost_pct": 0.0,
+      "max_level": 0
+    },
+    "1330765": {
+      "name": "Poised",
+      "rank": 0,
+      "school_mask": 1,
+      "cast_time_ms": 0,
+      "gcd_ms": 0,
+      "cooldown_ms": 0,
+      "category_cooldown_ms": 0,
+      "duration_ms": -1,
+      "cost": 0,
+      "cost_type": -2,
+      "spell_level": 0,
+      "family_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effects": [
+        {
+          "index": 0,
+          "effect": 6,
+          "aura": 226,
+          "amount": 0,
+          "sp_coefficient": 0.0,
+          "ap_coefficient": 0.0,
+          "period_ms": 500,
+          "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
           "points_per_level": 0.0

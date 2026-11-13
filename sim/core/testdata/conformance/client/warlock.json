@@ -1,5 +1,5 @@
 {
-  "build": "1.60.1.70790",
+  "build": "1.60.1.70938",
   "class_slug": "warlock",
   "family": 5,
   "spells": {
@@ -2062,14 +2062,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 4,
+          "amount": 6,
           "sp_coefficient": 0.16400000453,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
-          "variance": 0.28571429849,
-          "points_per_level": 0.10000000149
+          "variance": 0.33333340287,
+          "points_per_level": 0.30000001192
         }
       ],
       "cost_pct": 0.0,
@@ -3716,14 +3716,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 7,
+          "amount": 11,
           "sp_coefficient": 0.31400001049,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
-          "variance": 0.15384615958,
-          "points_per_level": 0.20000000298
+          "variance": 0.18181821704,
+          "points_per_level": 0.40000000596
         }
       ],
       "cost_pct": 0.0,
@@ -3752,14 +3752,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 12,
+          "amount": 15,
           "sp_coefficient": 0.52899998426,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
-          "variance": 0.16666667163,
-          "points_per_level": 0.30000001192
+          "variance": 0.23529414833,
+          "points_per_level": 0.40000000596
         }
       ],
       "cost_pct": 0.0,
@@ -3788,14 +3788,14 @@
           "index": 0,
           "effect": 2,
           "aura": 0,
-          "amount": 17,
+          "amount": 18,
           "sp_coefficient": 0.57099997997,
           "ap_coefficient": 0.0,
           "period_ms": 0,
           "misc_value": 0,
           "trigger_spell": 0,
-          "variance": 0.11428570747,
-          "points_per_level": 0.30000001192
+          "variance": 0.22222217917,
+          "points_per_level": 0.40000000596
         }
       ],
       "cost_pct": 0.0,
@@ -13524,7 +13524,7 @@
           "index": 1,
           "effect": 6,
           "aura": 108,
-          "amount": 5,
+          "amount": 0,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
@@ -24915,7 +24915,7 @@
       "rank": 0,
       "school_mask": 1,
       "cast_time_ms": 0,
-      "gcd_ms": 0,
+      "gcd_ms": 1500,
       "cooldown_ms": 0,
       "category_cooldown_ms": 0,
       "duration_ms": 300000,
@@ -27528,20 +27528,20 @@
           "index": 0,
           "effect": 6,
           "aura": 3,
-          "amount": 36,
-          "sp_coefficient": 0.28600001335,
+          "amount": 25,
+          "sp_coefficient": 0.20020000637,
           "ap_coefficient": 0.0,
           "period_ms": 1000,
           "misc_value": 0,
           "trigger_spell": 0,
           "variance": 0.0,
-          "points_per_level": 2.5
+          "points_per_level": 1.75
         },
         {
           "index": 1,
           "effect": 6,
-          "aura": 271,
-          "amount": 10,
+          "aura": 4,
+          "amount": 100,
           "sp_coefficient": 0.0,
           "ap_coefficient": 0.0,
           "period_ms": 0,
