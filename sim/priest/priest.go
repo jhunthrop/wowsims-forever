@@ -79,6 +79,7 @@ const (
 	PriestSpellMaskInnerFire
 	PriestSpellMaskPowerInfusion
 	PriestSpellMaskStarshards
+	PriestSpellMaskShadowform
 )
 
 // PriestSpellMaskInstantShadowDamage is every Shadow damage spell this
@@ -113,11 +114,12 @@ const PriestSpellMaskTwinDisciplines = PriestSpellMaskInstantShadowDamage | Prie
 // names: the client mask of 14520 (SpellEffect 687728, aura 108 misc 14),
 // not its "instant cast spells" text. It leaves out Mind Flay, Shadow
 // Word: Death, Penance and Desperate Prayer, and names Inner Fire (mask
-// 0x2 on every rank).
+// 0x2 on every rank) and Shadowform (15473, word 0 bit 31).
 const PriestSpellMaskMentalAgility = PriestSpellMaskSmite | PriestSpellMaskHolyFire |
 	PriestSpellMaskShadowWordPain | PriestSpellMaskDevouringPlague | PriestSpellMaskRenew |
 	PriestSpellMaskPowerWordShield | PriestSpellMaskHolyNova | PriestSpellMaskPrayerOfMending |
-	PriestSpellMaskVampiricEmbrace | PriestSpellMaskInnerFire | PriestSpellMaskPowerInfusion
+	PriestSpellMaskVampiricEmbrace | PriestSpellMaskInnerFire | PriestSpellMaskPowerInfusion |
+	PriestSpellMaskShadowform
 
 // PriestSpellMaskSpiritualHealing is what Spiritual Healing (14898) names:
 // the direct heals of SpellEffect 692104 (Lesser Heal, Heal, Greater Heal,

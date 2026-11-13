@@ -532,6 +532,8 @@ func (priest *Priest) registerShadowform() {
 	priest.Shadowform = priest.RegisterSpell(core.SpellConfig{
 		ActionID: actionID,
 		Flags:    core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		// The mask is how Mental Agility's cost modifier reaches the form.
+		ClassSpellMask: PriestSpellMaskShadowform,
 
 		// 40% of base mana: the client prices the form through
 		// SpellPower.PowerCostPct (ShadowformManaCostPct), not the flat
