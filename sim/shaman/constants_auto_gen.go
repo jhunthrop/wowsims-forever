@@ -2,7 +2,7 @@
 //
 // Class: shaman
 // Client build: 1.60.1.70938
-// Source: /private/tmp/claude-501/-Users-jh-code-forever/54c69daf-a689-41fc-ad89-a21df2102a2f/scratchpad/site/data/builds/1.60.1.70938/spellconst/shaman.json
+// Source: sim/core/testdata/conformance/client/shaman.json
 //
 // Regenerate with `make spellconst`. A coefficient marked
 // "convention" was derived from the vanilla cast_time/3.5 and
@@ -4199,7 +4199,7 @@ const StormstrikeRanks = 1
 var StormstrikeSpellId = [StormstrikeRanks + 1]int32{17364, 410156}
 var StormstrikeLevel = [StormstrikeRanks + 1]int{40, 1}
 var StormstrikeCastTime = [StormstrikeRanks + 1]int32{0, 0}
-var StormstrikeCooldownMS = [StormstrikeRanks + 1]int32{6000, 0}
+var StormstrikeCooldownMS = [StormstrikeRanks + 1]int32{8000, 0}
 var StormstrikeManaCost = [StormstrikeRanks + 1]float64{0, 0}
 var StormstrikeManaCostPct = [StormstrikeRanks + 1]float64{8, 0}
 var StormstrikeSpellCoeff = [StormstrikeRanks + 1]float64{0.4, 0.2143}
