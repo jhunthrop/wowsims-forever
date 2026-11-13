@@ -38,24 +38,29 @@ var JudgementOfCommandDamage = [judgementOfCommandRanks + 1]clientdamage.Effect{
 
 const judgementOfCommandRanks = 5
 
-func (paladin *Paladin) registerSealOfCommand() {
-	type proc struct {
-		spellID int32
-	}
+// sealOfCommandProcID is the one proc spell every Seal of Command rank
+// triggers in the Forever client (effect 0 of 20375, 20915, 20918, 20919 and
+// 20920: 70% weapon damage, 0.29 of spell damage), and the id the launch logs
+// name on every proc. The Era client's per-rank procs (20944 to 20947) are not
+// in the Forever client.
+const sealOfCommandProcID = 20424
 
+func (paladin *Paladin) registerSealOfCommand() {
 	ranks := []struct {
 		level        int32
 		spellID      int32
 		manaCost     float64
 		scaleLevel   int32
-		proc         proc
 		judgeSpellID int32
 	}{
-		{level: 20, spellID: 20375, manaCost: 65, scaleLevel: 28, proc: proc{spellID: 20424}, judgeSpellID: 20467},
-		{level: 30, spellID: 20915, manaCost: 110, scaleLevel: 38, proc: proc{spellID: 20944}, judgeSpellID: 20963},
-		{level: 40, spellID: 20918, manaCost: 140, scaleLevel: 48, proc: proc{spellID: 20945}, judgeSpellID: 20964},
-		{level: 50, spellID: 20919, manaCost: 180, scaleLevel: 58, proc: proc{spellID: 20946}, judgeSpellID: 20965},
-		{level: 60, spellID: 20920, manaCost: 210, scaleLevel: 60, proc: proc{spellID: 20947}, judgeSpellID: 20966},
+		{level: 20, spellID: 20375, manaCost: 65, scaleLevel: 28, judgeSpellID: 20467},
+		{level: 30, spellID: 20915, manaCost: 110, scaleLevel: 38, judgeSpellID: 20963},
+		{level: 40, spellID: 20918, manaCost: 140, scaleLevel: 48, judgeSpellID: 20964},
+		{level: 50, spellID: 20919, manaCost: 180, scaleLevel: 58, judgeSpellID: 20965},
+		{level: 60, spellID: 20920, manaCost: 210, scaleLevel: 60, judgeSpellID: 20966},
+	}
+	if paladin.Level < ranks[0].level {
+		return
 	}
 
 	ppmm := paladin.AutoAttacks.NewPPMManager(7, core.ProcMaskMelee)
@@ -64,6 +69,32 @@ func (paladin *Paladin) registerSealOfCommand() {
 		Timer:    paladin.NewTimer(),
 		Duration: time.Second * 1,
 	}
+
+	procSpell := paladin.RegisterSpell(core.SpellConfig{
+		ClassSpellMask: PaladinSpellMaskSealOfCommandProc,
+		ActionID:       core.ActionID{SpellID: sealOfCommandProcID},
+		SpellSchool:    core.SpellSchoolHoly,
+		DefenseType:    core.DefenseTypeMelee,
+		ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeProc | core.ProcMaskMeleeDamageProc,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNotAProc,
+
+		DamageMultiplier: 0.7,
+		ThreatMultiplier: 1,
+
+		BonusCoefficient: 0.29,
+
+		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			baseDamage := spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
+			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
+
+			core.StartDelayedAction(sim, core.DelayedActionOptions{
+				DoAt: sim.CurrentTime + core.SpellBatchWindow,
+				OnAction: func(s *core.Simulation) {
+					spell.DealDamage(sim, result)
+				},
+			})
+		},
+	})
 
 	for i, rank := range ranks {
 		rank := rank
@@ -118,32 +149,6 @@ func (paladin *Paladin) registerSealOfCommand() {
 
 				outcomeApplier := core.Ternary(dummyJudgeLanded, spell.OutcomeMeleeSpecialCritOnly, spell.OutcomeAlwaysMiss)
 				spell.CalcAndDealDamage(sim, target, baseDamage, outcomeApplier)
-			},
-		})
-
-		procSpell := paladin.RegisterSpell(core.SpellConfig{
-			ClassSpellMask: PaladinSpellMaskSealOfCommandProc,
-			ActionID:       core.ActionID{SpellID: rank.proc.spellID},
-			SpellSchool:    core.SpellSchoolHoly,
-			DefenseType:    core.DefenseTypeMelee,
-			ProcMask:       core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeProc | core.ProcMaskMeleeDamageProc,
-			Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagNotAProc,
-
-			DamageMultiplier: 0.7,
-			ThreatMultiplier: 1,
-
-			BonusCoefficient: 0.29,
-
-			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				baseDamage := spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target))
-				result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
-
-				core.StartDelayedAction(sim, core.DelayedActionOptions{
-					DoAt: sim.CurrentTime + core.SpellBatchWindow,
-					OnAction: func(s *core.Simulation) {
-						spell.DealDamage(sim, result)
-					},
-				})
 			},
 		})
 
