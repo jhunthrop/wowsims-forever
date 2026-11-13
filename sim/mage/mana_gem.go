@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 )
 
 // Technically 4 different items
@@ -20,6 +21,32 @@ var ManaGemManaRestored = [ManaGemRanks + 1][]float64{{0, 0}, {375, 425}, {550, 
 // a mage at 23 to 27 a gem five levels before the spell.
 var ManaGemLevel = [ManaGemRanks + 1]int{0, 28, 38, 48, 58}
 
+// The four gems and the runes share one item category (ItemEffect
+// SpellCategoryID 1153, 120000 ms), so every use of one holds all of them
+// for two minutes and a 180 s raid fight fits two. A mage spends its
+// biggest gem first and a smaller one only once every bigger gem is gone;
+// with a Demonic Rune (900 to 1500) in the conjured slot, which restores
+// more than every gem below the Ruby and is there for every use, the
+// gems below the biggest stay in the bag.
+func (mage *Mage) manaGemWaits(rank int) bool {
+	for bigger := rank + 1; bigger <= ManaGemRanks; bigger++ {
+		if mage.ManaGem[bigger] != nil && mage.manaGemsLeft[bigger] > 0 {
+			return true
+		}
+	}
+	return rank < mage.biggestManaGem() && mage.Consumes.DefaultConjured == proto.Conjured_ConjuredDemonicRune
+}
+
+// biggestManaGem is the highest gem rank the mage can make at its level.
+func (mage *Mage) biggestManaGem() int {
+	for rank := ManaGemRanks; rank >= 1; rank-- {
+		if mage.ManaGem[rank] != nil {
+			return rank
+		}
+	}
+	return 0
+}
+
 func (mage *Mage) registerManaGemCD() {
 	mage.ManaGem = make([]*core.Spell, ManaGemRanks+1)
 
@@ -35,6 +62,9 @@ func (mage *Mage) registerManaGemCD() {
 				Priority: int32(minMana),
 				Type:     core.CooldownTypeMana,
 				ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
+					if mage.manaGemWaits(rank) {
+						return false
+					}
 					// Only pop if we have less than the max mana provided by the potion minus 1mp5 tick.
 					totalRegen := character.ManaRegenPerSecondWhileCasting() * 2
 					return (character.MaxMana()-(character.CurrentMana()+totalRegen) >= maxMana)
@@ -52,9 +82,8 @@ func (mage *Mage) newManaGemCooldown(rank int) core.SpellConfig {
 	actionID := core.ActionID{ItemID: itemID}
 	manaMetrics := mage.NewManaMetrics(actionID)
 
-	var remainingManaGems int
 	mage.RegisterResetEffect(func(sim *core.Simulation) {
-		remainingManaGems = 1
+		mage.manaGemsLeft[rank] = 1
 	})
 
 	return core.SpellConfig{
@@ -74,15 +103,15 @@ func (mage *Mage) newManaGemCooldown(rank int) core.SpellConfig {
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			mage.AddMana(sim, sim.Roll(manaRestoredLow, manaRestoredHigh), manaMetrics)
 
-			remainingManaGems--
-			if remainingManaGems == 0 {
+			mage.manaGemsLeft[rank]--
+			if mage.manaGemsLeft[rank] == 0 {
 				// Disable this cooldown since we're out of emeralds.
 				mage.GetMajorCooldown(actionID).Disable()
 			}
 		},
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return remainingManaGems != 0
+			return mage.manaGemsLeft[rank] != 0
 		},
 	}
 }

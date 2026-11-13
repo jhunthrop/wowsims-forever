@@ -169,6 +169,7 @@ type Mage struct {
 	IceLance                []*core.Spell
 	igniteTick              *core.Spell
 	ManaGem                 []*core.Spell
+	manaGemsLeft            [ManaGemRanks + 1]int // gems of each rank still in the bag this iteration
 	PresenceOfMind          *core.Spell
 	Pyroblast               []*core.Spell
 	Scorch                  []*core.Spell
