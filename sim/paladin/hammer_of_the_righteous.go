@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
 )
 
 // Hammer of the Righteous (spell 407632) is learned at level 40 on the
@@ -31,6 +32,21 @@ const (
 	hammerOfTheRighteousDPSMultiple = 3
 	hammerOfTheRighteousTargets     = 4
 )
+
+// hammerOfTheRighteousWeaponAllowed is the client's SpellEquippedItems row
+// for 407632 (1.60.1.70888, hotfixed): item class 2, subclass mask 145, a
+// one-handed axe, mace or sword in the main hand. A two-hander cannot cast
+// it, so a Retribution paladin never presses it.
+func hammerOfTheRighteousWeaponAllowed(weapon *core.Item) bool {
+	if weapon == nil || weapon.HandType == proto.HandType_HandTypeTwoHand {
+		return false
+	}
+	switch weapon.WeaponType {
+	case proto.WeaponType_WeaponTypeAxe, proto.WeaponType_WeaponTypeMace, proto.WeaponType_WeaponTypeSword:
+		return true
+	}
+	return false
+}
 
 // hammerOfTheRighteousSwingShare is the share of one main hand swing's
 // damage that "3 times the damage per second" makes of a weapon of the
@@ -67,6 +83,10 @@ func (paladin *Paladin) registerHammerOfTheRighteous() {
 				Timer:    paladin.NewTimer(),
 				Duration: hammerOfTheRighteousCooldown,
 			},
+		},
+
+		ExtraCastCondition: func(_ *core.Simulation, _ *core.Unit) bool {
+			return hammerOfTheRighteousWeaponAllowed(paladin.MainHand())
 		},
 
 		DamageMultiplier: 1,
