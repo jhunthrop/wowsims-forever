@@ -665,12 +665,14 @@ func (shaman *Shaman) rollLightningOverload(sim *core.Simulation) bool {
 }
 
 // mentalDexterityAttackPowerPercent is Mental Dexterity's three ranks
-// (talents/shaman.json node 104755). Blizzard's 10 November hotfix
-// (t/2403040, Enhancement): "Mental Dexterity: Intellect to Attack Power
-// conversion ratio reduced to 33/66/100% (was 50/100/150%)." Client
-// 1.60.1.70888 and its push 113766 still carry trait curve 85272's
-// 50/100/150 (spell 415140 effect 0), so this is a hand row until a client
-// or push row states it.
+// (talents/shaman.json node 104755) after Blizzard's 10 November hotfix
+// (t/2403040, Enhancement): "Intellect to Attack Power conversion ratio
+// reduced to 33/66/100% (was 50/100/150%)". Push 113722 states it in the
+// 1.60.1.70938 data: trait curve 85272 (CurvePoint 251264 to 251266) is
+// 33/66/100 for spell 415140 effect 0. The generated tables carry no trait
+// curve, only the top rank's amount, so TestMentalDexterityIsTheClientRow
+// checks rank 3 against the vendored client row and the curve's lower
+// points stay stated here.
 var mentalDexterityAttackPowerPercent = [4]float64{0, 0.33, 0.66, 1.0}
 
 func (shaman *Shaman) applyMentalDexterity() {
@@ -791,10 +793,13 @@ func (shaman *Shaman) applyImprovedStormstrike() {
 // with rank and activates 6/7/8/9/10 times per minute (was 20 times per
 // minute regardless of rank)." The tooltip line that follows is the PPM
 // rule on the main hand's speed: "5 points ... a 3.6 speed weapon ... 60%
-// chance to activate on swing", 10 x 3.6 / 60. Neither client 1.60.1.70888
-// nor its push 113766 carries it (408498 still reads 4% a rank, 408505
-// -20): the change is server side, so these are hand values until a
-// client or push row states them.
+// chance to activate on swing", 10 x 3.6 / 60. Push 113722 states both in
+// the 1.60.1.70938 data: curve 85306 is -20 at every rank (408498 effect 0;
+// the stack 408505 takes -20 off cast time and cost, five stacks, 30 s) and
+// a new curve 128299 (TraitDefinitionEffectPoints 25235) gives 408498 effect
+// 1 its 6/7/8/9/10 by rank. TestMaelstromWeaponIsTheClientRow checks the
+// stack against the vendored client rows; the rate stays stated here, since
+// the generated tables carry no trait curve.
 //
 // 408498 is used as the per-rank display id (matching talents_auto_gen.go's
 // TalentSpellIDs, not the "Maelstrom Weapon"-named spell 409946 the
@@ -803,6 +808,7 @@ func (shaman *Shaman) applyImprovedStormstrike() {
 const maelstromWeaponPerStackPercent = int32(20)
 const maelstromWeaponDisplaySpellId = 408498
 const maelstromWeaponMaxStacks = int32(5)
+const maelstromWeaponDuration = 30 * time.Second
 
 // maelstromWeaponPPM is the rate by rank, 6/7/8/9/10 a minute.
 var maelstromWeaponPPM = [6]float64{0, 6, 7, 8, 9, 10}
@@ -842,7 +848,7 @@ func (shaman *Shaman) applyMaelstromWeapon() {
 	maelstromAura := shaman.RegisterAura(core.Aura{
 		Label:     "Maelstrom Weapon",
 		ActionID:  core.ActionID{SpellID: maelstromWeaponDisplaySpellId},
-		Duration:  time.Second * 30,
+		Duration:  maelstromWeaponDuration,
 		MaxStacks: maelstromWeaponMaxStacks,
 		OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks, newStacks int32) {
 			delta := newStacks - oldStacks

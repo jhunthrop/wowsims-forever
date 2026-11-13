@@ -6,24 +6,25 @@ import (
 	"github.com/wowsims/classic/sim/core"
 )
 
-// stormstrikeBaseManaCostPercent is SpellPower.PowerCostPct for spell 17364
-// in client 1.60.1.70425, as the fraction ManaCostOptions.BaseCost takes.
-const stormstrikeBaseManaCostPercent = 0.08
-
-// stormstrikeWeaponDamagePercent and stormstrikeCooldown are Blizzard's
-// 10 November hotfix (t/2403040, Enhancement): "Stormstrike damage reduced
-// to 100% weapon damage (was 150%), and cooldown increased to 8 seconds
-// (was 6 seconds)." Client 1.60.1.70888 and its pushes still carry 17364
-// effect 2 (Effect 31, weapon percent damage) at 150 (push 113380) and
-// RecoveryTime 6000, so both are hand values until a client or push row
-// states them. The percent scales effect 0's normalized weapon damage.
-const (
-	stormstrikeWeaponDamagePercent = 1.0
-	stormstrikeCooldownDuration    = 8 * time.Second
-)
+// Stormstrike is the client's 17364 after Blizzard's 10 November hotfix
+// (t/2403040, Enhancement: "Stormstrike damage reduced to 100% weapon damage
+// (was 150%), and cooldown increased to 8 seconds (was 6 seconds)"), which
+// push 113722 states in the 1.60.1.70938 data: SpellCooldowns 55241
+// RecoveryTime 8000 and SpellEffect 1368308 (effect 2, Effect 31, weapon
+// percent damage) 100. The cooldown and the 8% base mana cost read the
+// generated constants. The weapon percent scales effect 0's normalized
+// weapon damage; the generated arrays carry no effect-2 column, so
+// TestStormstrikeIsTheClientRow checks it against the vendored client row.
+const stormstrikeWeaponDamagePercent = 1.0
 
 func stormstrikeCooldown() time.Duration {
-	return stormstrikeCooldownDuration
+	return time.Duration(StormstrikeCooldownMS[0]) * time.Millisecond
+}
+
+// stormstrikeBaseManaCost is SpellPower.PowerCostPct for 17364 as the
+// fraction ManaCostOptions.BaseCost takes.
+func stormstrikeBaseManaCost() float64 {
+	return StormstrikeManaCostPct[0] / 100
 }
 
 func (shaman *Shaman) registerStormstrikeSpell() {
@@ -44,11 +45,8 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 
 		RequiredLevel: 40,
 
-		// FOREVER: spellconst/shaman.json spell 17364 prices Stormstrike
-		// at 8% of base mana since client 1.60.1.70425 (SpellPower
-		// PowerCostPct 8; the 1.60.1.70374 client carried a flat 125).
 		ManaCost: core.ManaCostOptions{
-			BaseCost: stormstrikeBaseManaCostPercent,
+			BaseCost: stormstrikeBaseManaCost(),
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

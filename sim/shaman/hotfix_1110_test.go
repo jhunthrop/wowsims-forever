@@ -12,8 +12,9 @@ import (
 )
 
 // Blizzard's 9 and 10 November hotfixes (us.forums.blizzard.com t/2403040,
-// posts 5 and 6). Client 1.60.1.70888 and its push carry the Lightning
-// Overload rows; the Enhancement changes are server side.
+// posts 5 and 6). Client 1.60.1.70888 carries the Lightning Overload rows;
+// push 113722 states the Enhancement changes in the 1.60.1.70938 data
+// (hotfix_rows_70938_test.go checks the engine against those rows).
 
 // withEnhancementRank sets one Enhancement talent's rank in the raid build.
 func withEnhancementRank(index int, rank byte) string {
