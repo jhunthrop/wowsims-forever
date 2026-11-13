@@ -33,7 +33,10 @@ type DotConfig struct {
 	// CanCrit forces this dot's ticks to roll crit under Dot.OutcomeTick.
 	// Forever's rule (periodicDamageCanCrit) already lets every bleed,
 	// every dot that is not channelled and every client-flagged channel
-	// crit; set it only for an unflagged channel a patch note says crits.
+	// crit; set it for an unflagged channel a patch note says crits, or
+	// one that pulses through a server tick row the client lets crit
+	// (Blizzard, Hurricane, Rain of Fire, Volley: direct damage rows
+	// without Can't Crit, and the logs show their ticks crit).
 	// It does not gate the upstream snapshot-crit outcomes, whose OnTick
 	// still chooses them.
 	CanCrit bool
@@ -41,10 +44,10 @@ type DotConfig struct {
 	// NeverCrits keeps this dot's ticks off the crit roll whatever
 	// periodicCanCrit says: the client marks the periodic effect Can't
 	// Crit (SPELL_ATTR2_CANT_CRIT, Attributes_2 0x20000000), which
-	// overrides Forever's bleed rule. Deep Wounds (the warrior's 412613)
-	// is the one bleed that carries it, and the launch logs agree: 0 of
-	// 146 Deep Wound ticks crit where the same warriors' Rend ticks crit
-	// at their melee crit chance.
+	// overrides Forever's bleed and true-dot rules. Deep Wounds (the
+	// warrior's 412613) and Ignite (the mage's 412545) carry it; the
+	// launch logs agree for Deep Wounds: 0 of 206 Deep Wound ticks crit
+	// where the same warriors' Rend ticks crit at their melee crit chance.
 	NeverCrits bool
 
 	// CritMultiplier is the multiplier a critical tick uses. Zero means
@@ -511,8 +514,11 @@ func periodicCanCrit(spell *Spell, isHot bool) bool {
 // 2026-10-31): a periodic damage effect crits if it is a bleed (Deep
 // Wounds included), OR a dot that is not channelled (Ignite included), OR
 // the client marks its spell PERIODIC_CAN_CRIT. Only a channel depends on
-// the client flag, so Mind Flay crits while Blizzard, Rain of Fire,
-// Hurricane and Volley tick flat.
+// the client flag, so Mind Flay crits while an unflagged channel ticks
+// flat. A spell's DotConfig can still override the rule both ways:
+// NeverCrits for a Can't Crit server tick (Deep Wounds, Ignite), CanCrit
+// for a ground channel that pulses through a direct-damage row (Blizzard,
+// Hurricane, Rain of Fire, Volley).
 func periodicDamageCanCrit(spell *Spell) bool {
 	return spell.periodicIsBleed() ||
 		!spell.Flags.Matches(SpellFlagChanneled) ||

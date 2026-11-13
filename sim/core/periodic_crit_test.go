@@ -313,10 +313,11 @@ func TestOutcomeMagicCritPerTickHonoursCanCrit(t *testing.T) {
 // Forever's periodic crit rule (owner, 2026-10-31): a periodic damage
 // effect crits if it is a bleed, OR a dot that is not channelled, OR the
 // client marks its spell PERIODIC_CAN_CRIT (SpellMisc Attributes_8 0x200).
-// Deep Wounds and Ignite carry no flag and crit anyway: Deep Wounds on the
-// melee table with the physical multiplier, Ignite on the spell table with
-// the spell multiplier. Channels follow the flag: Mind Flay crits,
-// Blizzard does not. A crit uses the spell's own multiplier, so talents
+// An unflagged bleed or true dot crits under the rule: on the melee table
+// with the physical multiplier, or on the spell table with the spell
+// multiplier. Channels follow the flag: Mind Flay crits, an unflagged
+// channel does not. (Deep Wounds' and Ignite's own configs set NeverCrits,
+// Blizzard's CanCrit; this test pins the rule underneath them.) A crit uses the spell's own multiplier, so talents
 // that raise a spell's crit damage (Pandemic) reach its ticks.
 func TestPeriodicCritRule(t *testing.T) {
 	for _, tc := range []struct {

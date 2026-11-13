@@ -73,6 +73,12 @@ func (mage *Mage) applyIgnite() {
 				Tag:      mageFireEffectTag,
 				Duration: time.Second * 4,
 			},
+			// 412538 is a dummy periodic aura (226); each pulse casts the
+			// server tick 412545, which the client marks Can't Crit
+			// (SPELL_ATTR2_CANT_CRIT, Attributes_2 0x20000004, 70888 and
+			// 70938), as Deep Wound's 412613 is. The flag overrides the
+			// owner's true-dot rule (crit-flags sweep, 2026-11-13).
+			NeverCrits:    true,
 			NumberOfTicks: IgniteTicks,
 			TickLength:    time.Second * 2,
 

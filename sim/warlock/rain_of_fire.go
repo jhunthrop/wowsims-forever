@@ -60,6 +60,11 @@ func (warlock *Warlock) getRainOfFireBaseConfig(rank int) core.SpellConfig {
 			Aura: core.Aura{
 				Label: "RainOfFire-" + warlock.Label + strconv.Itoa(rank),
 			},
+			// Each pulse is the server tick (1282380 to 1282385): direct school damage with no
+			// SPELL_ATTR2_CANT_CRIT, so it crits like any direct spell; the
+			// channel itself is a dummy aura with no periodic effect for
+			// PERIODIC_CAN_CRIT to mark (crit-flags sweep, 2026-11-13).
+			CanCrit:          true,
 			NumberOfTicks:    4,
 			TickLength:       time.Second * 2,
 			BonusCoefficient: spellCoeff,

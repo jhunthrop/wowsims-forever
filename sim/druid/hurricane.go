@@ -68,6 +68,11 @@ func (druid *Druid) registerHurricaneSpell() {
 				Aura: core.Aura{
 					Label: "Hurricane" + druid.Label + strconv.Itoa(rank),
 				},
+				// Each pulse is the server tick (1278759, 1278965, 1278968): direct school damage with no
+				// SPELL_ATTR2_CANT_CRIT, so it crits like any direct spell; the
+				// channel itself is a dummy aura with no periodic effect for
+				// PERIODIC_CAN_CRIT to mark (crit-flags sweep, 2026-11-13).
+				CanCrit:       true,
 				NumberOfTicks: 10,
 				TickLength:    time.Second * 1,
 

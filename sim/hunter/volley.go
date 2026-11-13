@@ -47,6 +47,10 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 		SpellCode:   SpellCode_HunterVolley,
 		ActionID:    core.ActionID{SpellID: spellId},
 		SpellSchool: core.SpellSchoolArcane,
+		// The tick rows are DefenseType 3 (SpellCategories): a pulse crits
+		// on the ranged table with the ranged multiplier, and the logs agree
+		// (52 crits in 478 ticks, a hunter's ranged rate, not his spell crit).
+		DefenseType: core.DefenseTypeRanged,
 		ProcMask:    core.ProcMaskSpellDamage,
 		Flags:       core.SpellFlagChanneled | core.SpellFlagAPL,
 
@@ -75,6 +79,11 @@ func (hunter *Hunter) getVolleyConfig(rank int) core.SpellConfig {
 			Aura: core.Aura{
 				Label: auraLabel,
 			},
+			// Each pulse is the server tick (1279715, 1279719, 1279721): direct school damage with no
+			// SPELL_ATTR2_CANT_CRIT, so it crits like any direct spell; the
+			// channel itself is a dummy aura with no periodic effect for
+			// PERIODIC_CAN_CRIT to mark (crit-flags sweep, 2026-11-13).
+			CanCrit:       true,
 			NumberOfTicks: 6,
 			TickLength:    time.Second * 1,
 			// Volley's damage rows (1279715, 1279719, 1279721) carry

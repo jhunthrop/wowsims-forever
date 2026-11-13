@@ -99,6 +99,11 @@ func (mage *Mage) newBlizzardSpellConfig(rank int) core.SpellConfig {
 			Aura: core.Aura{
 				Label: fmt.Sprintf("Blizzard (Rank %d)", rank),
 			},
+			// Each pulse is the server tick (1279976 to 1279980, 1279949): direct school damage with no
+			// SPELL_ATTR2_CANT_CRIT, so it crits like any direct spell; the
+			// channel itself is a dummy aura with no periodic effect for
+			// PERIODIC_CAN_CRIT to mark (crit-flags sweep, 2026-11-13).
+			CanCrit:          true,
 			NumberOfTicks:    numTicks,
 			TickLength:       tickLength,
 			BonusCoefficient: spellCoeff,
