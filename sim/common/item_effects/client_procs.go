@@ -39,9 +39,9 @@ const (
 )
 
 // Gloves of Holy Might's equip trigger, client 1.60.1.70938 spell 1330855:
-// ProcChance 15 and ProcCategoryRecovery 20000.
+// ProcChance 15 and ProcCategoryRecovery 20000. The trigger aura carries no
+// action id of its own; the result reports the Smite (1325229).
 const (
-	glovesOfHolyMightTrigger      = 1330855
 	glovesOfHolyMightProcChance   = 0.15
 	glovesOfHolyMightProcRecovery = 20 * time.Second
 )
@@ -131,7 +131,6 @@ func init() {
 		})
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 			Name:              "Gloves of Holy Might Proc",
-			ActionID:          core.ActionID{SpellID: glovesOfHolyMightTrigger},
 			Callback:          core.CallbackOnSpellHitDealt,
 			Outcome:           core.OutcomeLanded,
 			ProcMask:          core.ProcMaskMeleeWhiteHit | core.ProcMaskSpellDamage,
