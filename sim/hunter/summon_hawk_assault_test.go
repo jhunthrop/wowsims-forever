@@ -143,9 +143,11 @@ func TestHawkTakesFerocityAndUnleashedFuryNotTheHuntersCrit(t *testing.T) {
 		t.Errorf("hawk damage multiplier = %v, want Unleashed Fury's %v", got, want)
 	}
 	mh := hawk.AutoAttacks.MH()
-	// Blizzard's 10 November hotfix: "Melee damage dealt by the Hawk pet
-	// increased by about 80%." on the beta logs' 0.32 a level.
-	mean := 0.32 * 1.8 * 60
+	// Our own advanced logs after Blizzard's 10 November hotfix: 447
+	// landed non-crit swings from 21 hunters at 17 to 36 read 1.10 a level
+	// before armor (median), the same on 9, 10 and 11 November; at
+	// Unleashed Fury 5 that is 1.10 / 1.15 = 0.96 a level unbuffed.
+	mean := 0.96 * 60
 	if math.Abs(mh.BaseDamageMin-mean*(1-hawkSwingSpread)) > 1e-9 || math.Abs(mh.BaseDamageMax-mean*(1+hawkSwingSpread)) > 1e-9 {
 		t.Errorf("hawk swing %v-%v at 60, want %v +/- %v%%", mh.BaseDamageMin, mh.BaseDamageMax, mean, 100*hawkSwingSpread)
 	}
