@@ -38,8 +38,8 @@ const (
 	RazorGauntlets             = 18326
 )
 
-// Gloves of Holy Might's equip trigger, client 1.60.1.70938 spell 1330855:
-// ProcChance 15 and ProcCategoryRecovery 20000. The trigger aura carries no
+// Gloves of Holy Might's equip trigger, client 1.60.1.70938 spell 1330855
+// with push 114008: ProcChance 15 and ProcCategoryRecovery 20000. The trigger aura carries no
 // action id of its own; the result reports the Smite (1325229).
 const (
 	glovesOfHolyMightProcChance   = 0.15
@@ -103,12 +103,13 @@ func init() {
 	// table: melee hit and crit, double damage on a crit.
 	//
 	// The trigger is Blizzard's 9 November 2026 fix ("Gloves of Holy Might
-	// now work as intended"), native in client 1.60.1.70938: ItemEffect
-	// 238916 equips 1330855, aura 42 at ProcChance 15 with
-	// ProcCategoryRecovery 20000 and ProcTypeMask 69636 (0x11004: a melee
-	// auto attack, a harmful spell of no class, a harmful magic spell). The
-	// site's 70790 row was a chance on any melee hit. A melee special or a
-	// ranged attack never procs it.
+	// now work as intended"): ItemEffect 238916 equips 1330855, aura 42 at
+	// ProcChance 15 with ProcCategoryRecovery 20000. Client 1.60.1.70938
+	// ships ProcTypeMask 69636 (0x11004: a melee auto attack, a harmful
+	// spell of no class, a harmful magic spell); the server's push 114008 of
+	// 13 November 2026 (SpellAuraOptions 249242) widens it to 69972
+	// (0x11154), adding melee specials (0x10), ranged auto attacks (0x40)
+	// and ranged specials (0x100). The push wins over the client row.
 	core.NewItemEffect(GlovesOfHolyMight, func(agent core.Agent) {
 		character := agent.GetCharacter()
 		smite := character.GetOrRegisterSpell(core.SpellConfig{
@@ -133,7 +134,7 @@ func init() {
 			Name:              "Gloves of Holy Might Proc",
 			Callback:          core.CallbackOnSpellHitDealt,
 			Outcome:           core.OutcomeLanded,
-			ProcMask:          core.ProcMaskMeleeWhiteHit | core.ProcMaskSpellDamage,
+			ProcMask:          core.ProcMaskMelee | core.ProcMaskRanged | core.ProcMaskSpellDamage,
 			SpellFlagsExclude: core.SpellFlagSuppressEquipProcs,
 			ProcChance:        glovesOfHolyMightProcChance,
 			ICD:               glovesOfHolyMightProcRecovery,
