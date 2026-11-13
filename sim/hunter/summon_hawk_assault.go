@@ -27,24 +27,25 @@ import (
 //     the hunter's level: non-crit means 8.4, 9.1, 10.1, 9.4, 10.4, 12.8 at
 //     25, 26, 27, 28, 30, 35.
 //
-// The level-60 swing is a projection. hawkSwingDamagePerLevel is the
-// floor of the defensible readings: the level-35 talented mean (12.8 on
-// level-35 mobs, Unleashed Fury 5) taken as unarmored and proportional to
-// level, like a hunter pet's weapon (hunterPetDamageLevelScale), 12.8 /
-// 1.15 / 35 = 0.32 a level. The pooled fit through the origin gives 0.35,
-// and any armor on the beta mobs pushes the raw swing higher. It takes no
-// attack power from the hunter (the logs cannot show any), so gear does
-// not grow it. Blizzard's 10 November hotfix (t/2403040, Beast Mastery):
-// "Melee damage dealt by the Hawk pet increased by about 80%", so the swing
-// is 1.8 times the logs' reading; hawkSwingHotfixScale until logs from
-// after the hotfix measure it.
+// The swing size is our own advanced logs' (design/reviews/2026-11-13-sim-
+// accuracy/hunters-60/logs/logs-60.md): 447 landed non-crit swings from 21
+// hunters at 17 to 36, read before armor (base_amount), median 1.10 a level
+// (p10 1.04, p90 1.25), 33 at 30. The ratio is the same on 9 and 10 November
+// (1.107, n=26) as after Blizzard's 10 November hotfix ("Melee damage dealt
+// by the Hawk pet increased by about 80%"; 1.100, n=377), so the reading
+// already carries it. The bulk is Beast Mastery hunters at Unleashed Fury 5,
+// which the hawk takes on top (+15%), so the unbuffed swing is 1.10 / 1.15 =
+// 0.96 a level, proportional to level like a hunter pet's weapon; the level-60
+// swing is a projection. The round 16 reading (0.32 a level, then x1.8 for the
+// hotfix) was the beta logs' damage after armor taken as unarmored. The logs
+// cannot separate a share of attack power from the level (both rise
+// together), so it takes none from the hunter and gear does not grow it.
 const (
 	hawkArrivalDelay        = 1070 * time.Millisecond
 	hawkAssaultDuration     = 18 * time.Second
 	hawkSwingSpeed          = 2.26
 	hawkMaxActive           = 2
-	hawkSwingDamagePerLevel = 0.32
-	hawkSwingHotfixScale    = 1.8
+	hawkSwingDamagePerLevel = 0.96
 	hawkSwingSpread         = 0.15 // the logs' non-crit range, about +/-15% of the mean
 	hawkAssaultSpellID      = 1312639
 	// hawkPool is one more hawk than can be out, so a fresh summon never
@@ -67,7 +68,7 @@ func (hunter *Hunter) newHawk(index int) *Hawk {
 		hunter: hunter,
 	}
 
-	mean := hawkSwingDamagePerLevel * hawkSwingHotfixScale * float64(hunter.Level)
+	mean := hawkSwingDamagePerLevel * float64(hunter.Level)
 	hawk.EnableAutoAttacks(hawk, core.AutoAttackOptions{
 		MainHand: core.Weapon{
 			BaseDamageMin: mean * (1 - hawkSwingSpread),
