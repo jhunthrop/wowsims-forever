@@ -36,7 +36,7 @@
       "action": {
         "autocastOtherCooldowns": {}
       },
-      "notes": "Mana potions, runes and other consumables the preset brings: the Major Mana Potion and the Demonic Rune, each used whenever it is ready and the bar has room for it. Nature's Swiftness is not spent here: the engine holds it back for a healer, and the list below casts it by hand."
+      "notes": "Mana potions and runes as soon as they fit under your mana cap: both are on their own cooldowns, so early use means a second use. Nature's Swiftness is saved for the emergency Healing Wave on the tank."
     },
     {
       "action": {
@@ -60,7 +60,7 @@
           }
         }
       },
-      "notes": "Mana Tide Totem once mana is low; it replaces the water totem for 13 s and the Healing Stream below is dropped again after."
+      "notes": "Mana Tide Totem when you drop below 25% mana: it restores mana to your whole party for 12 seconds. It takes the Water slot, so put Healing Stream back down when it ends. Rank 4 at 58."
     },
     {
       "action": {
@@ -81,7 +81,7 @@
           }
         }
       },
-      "notes": "Water Shield (the Restoration talent) is kept up for its mana: a globe returns mana when you are hit and when your spells crit."
+      "notes": "Water Shield whenever it is down: each of its three globes returns 2% of your maximum mana when you are hit or when one of your heals crits."
     },
     {
       "action": {
@@ -107,7 +107,7 @@
           }
         }
       },
-      "notes": "Healing Stream Totem heals the whole group every 2 s for its five-minute life."
+      "notes": "Healing Stream Totem whenever your Water slot is empty: it heals your party every 2 seconds for 5 minutes."
     },
     {
       "action": {
@@ -135,7 +135,7 @@
           }
         }
       },
-      "notes": "Nature's Swiftness turns the next Healing Wave into an instant heal when the tank is in danger."
+      "notes": "Nature's Swiftness when the tank drops below 25%: your next Healing Wave becomes instant."
     },
     {
       "action": {
@@ -188,7 +188,7 @@
           }
         }
       },
-      "notes": "The instant Healing Wave."
+      "notes": "Your highest rank of Healing Wave right after Nature's Swiftness, on the tank under 25%: Nature's Swiftness makes any rank instant, so spend it on the biggest heal you have."
     },
     {
       "action": {
@@ -234,7 +234,7 @@
                   },
                   "rhs": {
                     "const": {
-                      "val": "0.9"
+                      "val": "0.95"
                     }
                   }
                 }
@@ -243,7 +243,7 @@
           }
         }
       },
-      "notes": "Riptide on the tank first: it is the most mana-efficient heal and lifts the Chain Heal below."
+      "notes": "Riptide on the tank when it is hurt and your last Riptide has run out: it is ready again at 12 seconds but heals for 15, so an early recast loses its last tick. No single-target heal gives more healing for its mana, and Chain Heal cast on a target with your Riptide heals it 25% more."
     },
     {
       "action": {
@@ -276,7 +276,7 @@
           }
         }
       },
-      "notes": "Lesser Healing Wave is the fast heal for a tank that is falling."
+      "notes": "Lesser Healing Wave when the tank drops below 30%: a 1.5 second heal for a tank that is falling fast."
     },
     {
       "action": {
@@ -781,7 +781,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "0.9"
+                            "val": "0.92"
                           }
                         }
                       }
@@ -799,7 +799,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "0.9"
+                            "val": "0.92"
                           }
                         }
                       }
@@ -817,7 +817,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "0.9"
+                            "val": "0.92"
                           }
                         }
                       }
@@ -835,7 +835,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "0.9"
+                            "val": "0.92"
                           }
                         }
                       }
@@ -853,7 +853,7 @@
                         },
                         "rhs": {
                           "const": {
-                            "val": "0.9"
+                            "val": "0.92"
                           }
                         }
                       }
@@ -886,7 +886,7 @@
           }
         }
       },
-      "notes": "Chain Heal on the tank once any of the five party members (you among them) is under 90 percent, while the mana bar keeps up with 90 percent of the share of the fight left."
+      "notes": "Chain Heal on the tank as soon as anyone near it is under 92%, while your mana is ahead of the fight: it heals three targets, each jump half the last. Cast on someone in your own party it only jumps inside your party; cast on anyone else it can jump to any raid member near them. While leveling, cast rank 1 until 59, even after ranks 2 (46) and 3 (54) arrive: with Tidal Focus it costs 247 mana to about 300 for rank 2 and 385 for rank 3, so in healing gear it heals more before your mana runs out. At 60 without raid buffs, cast rank 2."
     },
     {
       "action": {
@@ -919,7 +919,7 @@
           }
         }
       },
-      "notes": "Healing Wave is the efficient tank heal. Below 60, the rank each band casts is chosen on that band's own fight, sized to the dungeons a group of its level runs."
+      "notes": "Healing Wave when the tank drops below 60%. To save mana at 60 drop to rank 8, never lower: a rank loses your healing bonus once you are 17 levels past it, and ranks 1 to 4 keep none of it at 60. While leveling a cheaper rank heals more before your mana runs out than your top rank: rank 1 at 18 and 19, and once you wear healing gear from 20, rank 2 to 22 (a dwarf or Windshaper takes rank 3 at 22), 3 at 23 and 24, 2 at 25 (a dwarf stays on 3), 3 until 36, your newest rank (6) at 37 to 39, 5 from 40 to 43, 6 from 44 to 55, 7 from 56 to 58, and 8 at 59."
     }
   ]
 }

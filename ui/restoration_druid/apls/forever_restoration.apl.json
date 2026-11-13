@@ -635,7 +635,7 @@
       }
     },
     {
-      "notes": "On the tank whenever it is not ticking. Let it run out before you recast it: from 20, Bloom heals him when it does. At 18 and 19 rank 1 heals more for your mana than rank 2.",
+      "notes": "On the tank once he is below 90% and it is not ticking. Let it run out before you recast it: from 20, Bloom heals him when it does. At 18 and 19 rank 1 heals more for your mana than rank 2.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -678,6 +678,24 @@
                     }
                   }
                 }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.9"
+                    }
+                  }
+                }
               }
             ]
           }
@@ -685,7 +703,7 @@
       }
     },
     {
-      "notes": "On the tank whenever it is not ticking, at rank 10 in a raid. Let it run out before you recast it: from 20, Bloom heals him when it does. While leveling your mana runs out first, so a lower rank heals more for it: rank 1 at 10 (a Skyborne keeps rank 2) and from 13 to 22 (from 12 for an Alliance Skyborne), rank 2 from 23 to 39 (a night elf takes rank 3 for level 29 alone), rank 4 from 40 to 43, rank 5 from 44 to 48, rank 6 from 49 to 56 and rank 8 from 57 to 59.",
+      "notes": "On the tank whenever it is not ticking and he has taken a hit, at rank 10 in a raid. Let it run out before you recast it: from 20, Bloom heals him when it does. While leveling your mana runs out first, so a lower rank heals more for it: rank 1 at 10 (a Skyborne keeps rank 2) and from 13 to 22 (from 12 for an Alliance Skyborne), rank 2 from 23 to 39 (a night elf takes rank 3 for level 29 alone), rank 4 from 40 to 43, rank 5 from 44 to 48, rank 6 from 49 to 55, rank 9 from 56 to 58 and rank 8 at 59.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -725,6 +743,24 @@
                   "rhs": {
                     "const": {
                       "val": "0.05"
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 5
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.97"
                     }
                   }
                 }
@@ -795,7 +831,7 @@
       }
     },
     {
-      "notes": "On a hurt party member under 70%, you included. It does not wait on the mana pace the costly heals follow. While leveling, rank 1 heals the most for your mana, except rank 2 at 10 to 14 (a night elf takes rank 1 at 10, a Horde Skyborne rank 1 from 13, and a tauren rank 3 at 16), 26 to 29 (25 too for an Alliance druid) and 40 to 42.",
+      "notes": "On a hurt party member under 70%, you included. It does not wait on the mana pace the costly heals follow. While leveling, rank 1 heals the most for your mana, except rank 2 at 10 to 14 (a night elf takes rank 1 at 10, a Horde Skyborne rank 1 from 13, and a tauren rank 3 at 16), 26 to 29 (25 too for an Alliance druid) and 40 to 42, rank 4 at 44 and rank 5 at 45 to 48.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -1061,6 +1097,382 @@
                 }
               }
             ]
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 0
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.9"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 8910,
+                        "rank": 7
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 0
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.0"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 8910,
+            "rank": 7
+          },
+          "target": {
+            "type": "Player",
+            "index": 0
+          }
+        }
+      },
+      "notes": "Rejuvenation on anyone in your party below 90%, you included, while your mana is level with the fight or ahead of it: in a raid the group's small hits add up, and a ticking Rejuvenation clears them before the next one lands. Same rank as the line above."
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 1
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.9"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 8910,
+                        "rank": 7
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 1
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.0"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 8910,
+            "rank": 7
+          },
+          "target": {
+            "type": "Player",
+            "index": 1
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 2
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.9"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 8910,
+                        "rank": 7
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 2
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.0"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 8910,
+            "rank": 7
+          },
+          "target": {
+            "type": "Player",
+            "index": 2
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 3
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.9"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 8910,
+                        "rank": 7
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 3
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.0"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 8910,
+            "rank": 7
+          },
+          "target": {
+            "type": "Player",
+            "index": 3
+          }
+        }
+      }
+    },
+    {
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentHealthPercent": {
+                      "sourceUnit": {
+                        "type": "Player",
+                        "index": 4
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "0.9"
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 8910,
+                        "rank": 7
+                      },
+                      "targetUnit": {
+                        "type": "Player",
+                        "index": 4
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGe",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "math": {
+                      "op": "OpMul",
+                      "lhs": {
+                        "remainingTimePercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "1.0"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 8910,
+            "rank": 7
+          },
+          "target": {
+            "type": "Player",
+            "index": 4
           }
         }
       }
