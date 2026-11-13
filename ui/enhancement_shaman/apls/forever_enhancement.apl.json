@@ -101,6 +101,48 @@
       }
     },
     {
+      "notes": "Flame Shock when it is not on the target and your mana is above about a third: its burn ticks for the whole time the shared shock cooldown is down, so one Flame Shock between your Earth Shocks does more than one more Earth Shock. Below a third, keep the mana for Stormstrike and Earth Shock.",
+      "action": {
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 29228,
+                        "rank": 6
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "cmp": {
+                  "op": "OpGt",
+                  "lhs": {
+                    "currentManaPercent": {}
+                  },
+                  "rhs": {
+                    "const": {
+                      "val": "30%"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "castSpell": {
+          "spellId": {
+            "spellId": 29228,
+            "rank": 6
+          }
+        }
+      }
+    },
+    {
       "notes": "Lightning Bolt at five Maelstrom Weapon stacks: each stack takes 20% off its cast time and mana at any rank, so five make it instant and free from your first point. Cast it right after Stormstrike when you can, so the bolt takes Stormstrike's 20%.",
       "action": {
         "condition": {
@@ -215,7 +257,7 @@
       }
     },
     {
-      "notes": "Earth Shock on cooldown while your mana is above 15%: once you have Stormstrike it takes Stormstrike's 20% when no bolt is ready. That last 15% keeps Stormstrike and a totem drop paid for; holding a quarter back costs shocks since Stormstrike's 10 November cooldown spends less mana.",
+      "notes": "Earth Shock on cooldown while your mana is above about a sixth: once you have Stormstrike it takes Stormstrike's 20% when no bolt is ready. That last sixth keeps Stormstrike and a totem drop paid for; holding a quarter back costs shocks, since after the 10 November hotfix Stormstrike comes every 8 seconds and spends less mana over a fight.",
       "action": {
         "castSpell": {
           "spellId": {
