@@ -56,9 +56,9 @@ func (hunter *Hunter) getSummonHawkConfig(rank int, timer *core.Timer) core.Spel
 
 		// Blizzard's 10 November hotfix: "Summon Hawk Mana cost changed to
 		// 11% of base Mana for all ranks of Summon Hawk, same as Arcane
-		// Shot" (client 1.60.1.70888 SpellPower PowerCostPct 11).
+		// Shot" (the client's SpellPower rows, PowerCostPct 11).
 		ManaCost: core.ManaCostOptions{
-			BaseCost: arcaneShotBaseManaCostPercent,
+			BaseCost: SummonHawkManaCostPct[rank] / 100,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

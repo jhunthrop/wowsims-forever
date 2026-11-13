@@ -9,9 +9,9 @@ import (
 // TestBaneOfHavocTakesTheGlobalCooldown pins the 10 Nov hotfix row for Bane
 // of Havoc (1225228): push 113766 on client 1.60.1.70888 adds SpellCooldowns
 // 102518 (StartRecoveryTime 1500) and SpellCategories 174286
-// (StartRecoveryCategory 133), the ordinary 1.5 s global cooldown. The 70790
-// tables carried no cooldown row at all, which is why the cast was GCD-less
-// here. Sim-accuracy 2026-11-12, warlocks pass 3.
+// (StartRecoveryCategory 133), the ordinary 1.5 s global cooldown, native in
+// client 1.60.1.70938. The 70790 tables carried no cooldown row at all, which
+// is why the cast was GCD-less here. Sim-accuracy 2026-11-12, warlocks pass 3.
 func TestBaneOfHavocTakesTheGlobalCooldown(t *testing.T) {
 	_, built, _, _ := newWarlockForDamageTestMultiTarget(t, "--0000000000001") // Destruction field 13.
 

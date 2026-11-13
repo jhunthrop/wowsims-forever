@@ -351,9 +351,10 @@ func (warrior *Warrior) applyDeclarativeTalents() {
 	_ = t.LingeringRage
 
 	// Gore Drinker (Fury node 113569, hotfix_only, needs Enrage x5):
-	// "Your Enrage, Berserker Rage, Bloodrage, Death Wish, and
-	// Bloodthirst abilities cause your next 3 melee attacks to restore
-	// 1.0% of your maximum Health." Healing the warrior changes no damage
+	// "Your Enrage, Berserker Rage, Bloodrage, Death Wish, Reckless
+	// Swings, and Bloodthirst abilities cause your next 3 melee attacks to
+	// restore 1.0% of your maximum Health." (Reckless Swings joined the
+	// list in client 1.60.1.70938.) Healing the warrior changes no damage
 	// number and the sim has no warrior health model, so it is an
 	// explicit no-DPS-effect talent.
 	_ = t.GoreDrinker

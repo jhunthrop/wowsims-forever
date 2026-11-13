@@ -7,13 +7,6 @@ import (
 	"github.com/wowsims/classic/sim/core/proto"
 )
 
-// arcaneShotBaseManaCostPercent is Blizzard's 10 November hotfix
-// (t/2403040): "Arcane Shot mana cost changed to 11% of base Mana for all
-// ranks of Arcane Shot." Client 1.60.1.70888's SpellPower rows for 3044 and
-// 14281-14287 carry PowerCostPct 11 and no flat cost (25 to 190 before).
-// Summon Hawk shares it ("same as Arcane Shot").
-const arcaneShotBaseManaCostPercent = 0.11
-
 func (hunter *Hunter) getArcaneShotConfig(rank int, timer *core.Timer) core.SpellConfig {
 	spellId := [9]int32{0, 3044, 14281, 14282, 14283, 14284, 14285, 14286, 14287}[rank]
 	damage := ArcaneShotDamage[rank]
@@ -32,8 +25,11 @@ func (hunter *Hunter) getArcaneShotConfig(rank int, timer *core.Timer) core.Spel
 		RequiredLevel: level,
 		MissileSpeed:  arcaneShotMissileSpeed,
 
+		// Blizzard's 10 November hotfix (t/2403040): "Arcane Shot mana cost
+		// changed to 11% of base Mana for all ranks of Arcane Shot." The
+		// client's SpellPower rows carry it (PowerCostPct 11, no flat cost).
 		ManaCost: core.ManaCostOptions{
-			BaseCost: arcaneShotBaseManaCostPercent,
+			BaseCost: ArcaneShotManaCostPct[rank] / 100,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

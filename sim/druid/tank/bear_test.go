@@ -78,11 +78,10 @@ func TestBearFormIsActiveAtTheStartWithItsPaw(t *testing.T) {
 }
 
 // Bear Form and Dire Bear Form: "Threat bonus increased from 50% to 115%"
-// (Blizzard's Forever patch notes, 3 November 2026). The cached 1.60.1.70790
-// SpellEffect row 700189 (21178 aura 10) still reads 50, as row 686475
-// (Defensive Stance Passive 7376) still reads 30 though the same note made it
-// 80 and Wowhead's Forever tooltip for 71 and 7376 renders the 80: the note's
-// threat bonuses are server data the cached table predates.
+// (Blizzard's Forever patch notes, 3 November 2026). The 1.60.1.70790 client
+// row 700189 (21178 aura 10) read 50 and took the 115 from server push
+// 113326; client 1.60.1.70938's own row reads 115, as row 686475 (Defensive
+// Stance Passive 7376) reads the same note's 80.
 func TestBearFormThreatIsOneHundredFifteenPercentOver(t *testing.T) {
 	bear, _, _ := newBearSim(t, 60, nil)
 	if got := bear.PseudoStats.ThreatMultiplier; !near(got, 2.15) {

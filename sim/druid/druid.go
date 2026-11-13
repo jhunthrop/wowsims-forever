@@ -113,8 +113,8 @@ const (
 	// instant: the client's mask (17116, SpellEffect 695239) names Wrath,
 	// Healing Touch and Regrowth, and since client 1.60.1.70888 (Blizzard's
 	// 10 November hotfix, "Nature's Swiftness now also makes Wild Growth
-	// instant") Wild Growth too (mask_1 0x4000000). Hand mask until the
-	// site's data moves to that client.
+	// instant") Wild Growth too (mask_1 0x4000000), native in client
+	// 1.60.1.70938's row (mask_1 0x6000000).
 	DruidSpellMaskNatureCasts = DruidSpellMaskWrath | DruidSpellMaskHealingTouch | DruidSpellMaskRegrowth | DruidSpellMaskWildGrowth
 
 	// Every Cat Form melee special this package registers, for

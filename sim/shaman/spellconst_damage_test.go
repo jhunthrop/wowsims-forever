@@ -21,8 +21,9 @@ func TestChainLightningDamageMatchesClient(t *testing.T) {
 		ChainLightningSpellId[:], ChainLightningDamage[:], ChainLightningSpellCoef[:])
 }
 
-// The overload rows are client 1.60.1.70888's, ahead of the vendored file:
-// TestLightningOverloadRowsAreThe70888Client (hotfix_1110_test.go).
+// The overload rows are client 1.60.1.70888's, native in the vendored 70938
+// file but with half points rounded away (36.5 reads 36), so they are pinned
+// exactly by TestLightningOverloadRowsAreThe70888Client (hotfix_1110_test.go).
 
 func TestEarthShockDamageMatchesClient(t *testing.T) {
 	class := clientdamagetest.Load(t, clientShamanSpellconst)

@@ -19,7 +19,8 @@ const (
 // registerSwiftmendSpell registers Swiftmend (spell 18562), when the druid
 // has the talent: "Instantly heals a target with your active Rejuvenation
 // or Regrowth effect for an amount equal to the full duration of the
-// periodic effect of the consumed spell."
+// periodic effect." Client 1.60.1.70938 dropped the text's "of the consumed
+// spell", which the engine never modeled (see below).
 //
 // The heal is what the effect's snapshot says it would have landed in all:
 // its tick times its tick count, already carrying the caster's healing
@@ -28,7 +29,7 @@ const (
 // 2026-11-02) every non-critical Swiftmend is exactly 4 Rejuvenation or 7
 // Regrowth ticks of the effect on the target.
 //
-// Forever does not consume the effect, whatever the text says: 55 of the 57
+// Forever does not consume the effect, as the 70938 text now agrees: 55 of the 57
 // effects up at a logged Swiftmend ticked on to their natural end, and the
 // client row has one effect, the heal, with nothing that removes an aura.
 //

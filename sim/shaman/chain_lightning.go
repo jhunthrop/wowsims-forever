@@ -34,8 +34,9 @@ var ChainLightningLevel = [ChainLightningRanks + 1]int{0, 32, 40, 48, 56}
 // ChainLightningOverload* are Lightning Overload's own per-rank Chain
 // Lightning spells (408479 .. 408484). Client 1.60.1.70888 (the 9 November
 // Lightning Overload hotfix) makes each half its chain rank (rank 4: 255 +
-// 1.65 a level at 0.357 against the chain's 510 + 3.3 at 0.714); hand rows
-// until the site's data moves to that client.
+// 1.65 a level at 0.357 against the chain's 510 + 3.3 at 0.714). Native in
+// client 1.60.1.70938; stated here because the site's spellconst rounds rank
+// 1's 107.5 to 108.
 var ChainLightningOverloadSpellId = [ChainLightningRanks + 1]int32{0, 408479, 408481, 408482, 408484}
 var ChainLightningOverloadDamage = [ChainLightningRanks + 1]clientdamage.Effect{
 	{},
