@@ -37,13 +37,14 @@ const (
 // models only the payload, so the payload's duration is the comparable one.
 //
 // Build 1.60.1.70291 renamed the Freezing and Immolation payload spells to
-// the trap's own name ("Freezing Trap Effect" became "Freezing Trap"), so
-// for those two the payload is the same-rank spell of that name with another
-// id; Explosive Trap's payload keeps its "Effect" name.
+// the trap's own name ("Freezing Trap Effect" became "Freezing Trap"), and
+// the client tables since 1.60.1.70790 name Explosive Trap's payload the same
+// way (13812, 14314 and 14315 are "Explosive Trap", a 20 s burn), so for all
+// three the payload is the same-rank spell of that name with another id.
 var durationPayloadSpells = map[string]string{
 	"Freezing Trap":   "Freezing Trap",
 	"Immolation Trap": "Immolation Trap",
-	"Explosive Trap":  "Explosive Trap Effect",
+	"Explosive Trap":  "Explosive Trap",
 }
 
 // unsimulatedDurations names, per class and spell, the client durations of
