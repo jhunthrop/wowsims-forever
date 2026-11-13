@@ -84,13 +84,16 @@ func TestIgniteDoesNotCountDamageBonusesTwice(t *testing.T) {
 	}
 }
 
-// Forever's Ignite ticks crit (the owner's periodic crit rule: every true
-// dot crits), on the spell table with the spell multiplier. A tick crit
-// must not feed Ignite: the talent's proc mask (spell 11119,
-// SpellAuraOptions ProcTypeMask 0x10000, harmful spell damage) has no
+// Forever's Ignite ticks never crit. The talent (11119) applies 412538, a
+// dummy periodic aura (226) whose 2 s pulses cast the server tick 412545,
+// and 412545 carries SPELL_ATTR2_CANT_CRIT (Attributes_2 0x20000004, 70888
+// and 70938): the same flag that keeps Deep Wound's 412613 off the crit
+// roll, which overrides the owner's "every true dot crits" rule. The logs
+// are silent (3 Ignite ticks in every readable Forever log, none critical).
+// A tick must not feed Ignite either: the talent's proc mask has no
 // periodic bit, so only the triggering Fireball creates the burn and the
 // burn runs its two ticks and ends.
-func TestIgniteTicksCritWithoutFeedingIgnite(t *testing.T) {
+func TestIgniteTicksNeverCrit(t *testing.T) {
 	sim, built := newIgniteMageSim(t)
 	target := sim.Encounter.TargetUnits[0]
 	fireball := built.Fireball[core.MaxTrainerRank(FireballRanks)]
@@ -109,11 +112,8 @@ func TestIgniteTicksCritWithoutFeedingIgnite(t *testing.T) {
 	}
 
 	m := built.igniteTick.SpellMetrics[target.UnitIndex]
-	if m.CritTicks != IgniteTicks {
-		t.Errorf("Ignite CritTicks = %d (plain %d), want %d at 100%% crit", m.CritTicks, m.Ticks, IgniteTicks)
-	}
-	if m.CritTicks+m.Ticks != IgniteTicks {
-		t.Errorf("Ignite's own crits fed Ignite: %d ticks, want %d", m.CritTicks+m.Ticks, IgniteTicks)
+	if m.CritTicks != 0 || m.Ticks != IgniteTicks {
+		t.Errorf("Ignite ticked %d plain and %d critical at a forced crit, want %d plain and none", m.Ticks, m.CritTicks, IgniteTicks)
 	}
 }
 
