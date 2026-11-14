@@ -67,9 +67,11 @@ const (
 	// double swings rather than a stored copy) and then starts a new
 	// stack of the Seal that is up. Blizzard's 11 November 2026 hotfix
 	// (t/2403040): "Unsealed Fury no longer generates echoes from Windfury
-	// Totem attacks", so an extra attack (Windfury Totem, Reckoning, Hand
-	// of Justice) still releases stored copies, being a landed attack
-	// under whatever Seal is up, but stores none. Our launch logs (Echo of
+	// Totem attacks", so an extra attack (Reckoning, Hand of Justice)
+	// still releases stored copies, being a landed attack under whatever
+	// Seal is up, but stores none. Since push 113887 a Windfury Totem
+	// attack is a yellow strike (core.ApplyWindfury), not a white swing,
+	// so it neither stores nor releases. Our launch logs (Echo of
 	// Command 1311703, Echo of Righteousness 1311704, Echo of Fury 1311701,
 	// three Retribution paladins at 33 to 45) agree: 62 of 62 stacks were
 	// added by a white swing and none by any of 33 Holy Strikes, and the

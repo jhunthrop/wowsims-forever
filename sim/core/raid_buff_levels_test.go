@@ -53,7 +53,7 @@ func TestBloodPactFollowsTheClientRanks(t *testing.T) {
 }
 
 // Windfury Totem 8512, 10613, 10614 are learned at 32, 42 and 52; their
-// buffs 8516, 10608, 10610 add 95, 179 and 246 attack power. Below 32 a
+// strikes 8516, 10608, 10610 carry 95, 179 and 246 attack power. Below 32 a
 // raid has no Windfury Totem. The engine gave rank 3 at every level.
 func TestWindfuryTotemFollowsTheClientRanks(t *testing.T) {
 	for _, c := range []struct {
@@ -66,8 +66,8 @@ func TestWindfuryTotemFollowsTheClientRanks(t *testing.T) {
 			t.Errorf("Windfury Totem at level %d = rank %d, want %d", c.level, rank, c.rank)
 			continue
 		}
-		if rank > 0 && WindfuryBuffBonusAP[rank] != c.ap {
-			t.Errorf("Windfury Totem rank %d = %v attack power, want %v", rank, WindfuryBuffBonusAP[rank], c.ap)
+		if rank > 0 && WindfuryBonusAP[rank] != c.ap {
+			t.Errorf("Windfury Totem rank %d = %v attack power, want %v", rank, WindfuryBonusAP[rank], c.ap)
 		}
 	}
 }

@@ -64,15 +64,21 @@ func TestACatUsesItsConsumablesWithoutLeavingCatForm(t *testing.T) {
 	}
 
 	uptime := map[int32]float64{}
-	procs := map[int32]float64{}
 	for _, aura := range metrics.Auras {
 		uptime[aura.Id.GetSpellId()] = aura.UptimeSecondsAvg
-		procs[aura.Id.GetSpellId()] = aura.ProcsAvg
 	}
 	if got := uptime[768]; got < duration-1 {
 		t.Errorf("Cat Form was up %.1f s of %d: a consumable broke the form", got, duration)
 	}
-	if procs[10610] == 0 {
-		t.Error("Windfury Totem never procced for the cat")
+	var windfuryStrikes int32
+	for _, action := range metrics.Actions {
+		if action.Id.GetSpellId() == core.WindfuryStrikeSpellId[3] {
+			for _, target := range action.Targets {
+				windfuryStrikes += target.Hits
+			}
+		}
+	}
+	if windfuryStrikes == 0 {
+		t.Error("Windfury Totem never struck for the cat")
 	}
 }

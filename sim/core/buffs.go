@@ -1645,106 +1645,32 @@ func BattleSquawkAura(character *Unit, stackcount int32) *Aura {
 // 	})
 // }
 
-func CreateExtraAttackAuraCommon(character *Character, buffActionID ActionID, auraLabel string, rank int32, buffDuration time.Duration, getBonusAP func(aura *Aura, rank int32) float64) *Aura {
-	var bonusAP float64
-
-	apBuffAura := character.GetOrRegisterAura(Aura{
-		Label:     auraLabel + " Buff",
-		ActionID:  buffActionID,
-		Duration:  buffDuration,
-		MaxStacks: 2,
-		OnGain: func(aura *Aura, sim *Simulation) {
-			bonusAP = getBonusAP(aura, rank)
-			aura.Unit.AddStatsDynamic(sim, stats.Stats{stats.AttackPower: bonusAP})
-		},
-		OnExpire: func(aura *Aura, sim *Simulation) {
-			aura.Unit.AddStatsDynamic(sim, stats.Stats{stats.AttackPower: -bonusAP})
-		},
-	})
-
-	MakePermanent(character.GetOrRegisterAura(Aura{
-		Label:     "Extra Attacks  (Main Hand)", // Tracks Stored Extra Attacks from all sources
-		ActionID:  ActionID{SpellID: 21919},     // Thrash ID
-		Duration:  NeverExpires,
-		MaxStacks: 4, // Max is 4 extra attacks stored - more can proc after
-		OnInit: func(aura *Aura, sim *Simulation) {
-			aura.Unit.AutoAttacks.mh.extraAttacksAura = aura
-		},
-	}))
-
-	icd := Cooldown{
-		Timer:    character.NewTimer(),
-		Duration: extraAttackProcICD,
-	}
-
-	apBuffAura.Icd = &icd
-
-	MakePermanent(character.GetOrRegisterAura(Aura{
-		Label: auraLabel,
-		OnSpellHitDealt: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
-			// charges are removed by every auto or next melee, whether it lands or not
-			//  this directly contradicts https://github.com/magey/classic-warrior/wiki/Windfury-Totem#triggered-by-melee-spell-while-an-on-next-swing-attack-is-queued
-			//  but can be seen in both "vanilla" and "sod" era logs
-			if apBuffAura.IsActive() && spell.ProcMask.Matches(ProcMaskMeleeWhiteHit) {
-				apBuffAura.RemoveStack(sim)
-			}
-
-			if !result.Landed() || !spell.ProcMask.Matches(ProcMaskMeleeMH) || spell.Flags.Matches(SpellFlagSuppressEquipProcs) {
-				return
-			}
-
-			if icd.IsReady(sim) && sim.RandomFloat(auraLabel) < 0.2 {
-				icd.Use(sim)
-				apBuffAura.Activate(sim)
-				// aura is up _before_ the triggering swing lands, so if triggered by an auto attack, the aura fades right after the extra attack lands.
-				if spell.ProcMask == ProcMaskMeleeMHAuto {
-					apBuffAura.SetStacks(sim, 1)
-				} else {
-					apBuffAura.SetStacks(sim, 2)
-				}
-
-				aura.Unit.AutoAttacks.ExtraMHAttackProc(sim, 1, buffActionID, spell)
-			}
-		},
-	}))
-
-	return apBuffAura
-}
-
-func GetWildStrikesAP(aura *Aura, rank int32) float64 {
-	return 0.2 * aura.Unit.GetStat(stats.AttackPower)
-}
-
 const WindfuryRanks = 3
 
-// WindfuryAuraLabel names the permanent proc aura a Windfury Totem (or the
-// weapon's own Windfury) puts on the character.
+// WindfuryAuraLabel names the permanent proc aura a Windfury Totem puts on
+// the character.
 const WindfuryAuraLabel = "Windfury"
 
-// extraAttackProcICD is the internal cooldown between extra-attack procs:
-// the 100 ms ProcCategoryRecovery on the totem's proc aura (spells 8515 and
-// 10612, SpellAuraOptions) in the 1.60.1.70009 client. Vanilla Classic's
-// effective 1.5 s came from the buff's own length; here the buff lasts 1 s
-// and the client states 100 ms.
-const extraAttackProcICD = 100 * time.Millisecond
-
-// WindfuryBuffDuration is the Windfury Totem attack power buff's length:
-// 1 second on every rank in the 1.60.1.70009 client (spells 8516, 10608,
-// 10610), not vanilla's 1.5.
-const WindfuryBuffDuration = time.Second
+// windfuryProcChance and windfuryProcICD are the totem aura's own rows
+// (8515, 10609, 10612 SpellAuraOptions): ProcChance 20 and
+// ProcCategoryRecovery 100 ms on ProcTypeMask 0x14 (a melee auto attack or
+// a melee ability).
+const (
+	windfuryProcChance = 0.2
+	windfuryProcICD    = 100 * time.Millisecond
+)
 
 var (
 	// WindfuryTotemLevel is the level each totem rank (8512, 10613, 10614)
 	// is learned at: below 32 a raid has no Windfury Totem.
-	WindfuryTotemLevel  = [WindfuryRanks + 1]int{0, 32, 42, 52}
-	WindfuryBuffSpellId = [WindfuryRanks + 1]int32{0, 8516, 10608, 10610}
-	// Attack power by rank, source: 1.60.1.70009 client spells 8516, 10608, 10610.
-	WindfuryBuffBonusAP = [WindfuryRanks + 1]float64{0, 95, 179, 246}
+	WindfuryTotemLevel = [WindfuryRanks + 1]int{0, 32, 42, 52}
+	// WindfuryStrikeSpellId is each rank's strike (8516, 10608, 10610).
+	WindfuryStrikeSpellId = [WindfuryRanks + 1]int32{0, 8516, 10608, 10610}
+	// WindfuryBonusAP is the attack power each rank's strike carries: the
+	// dummy (aura 4) push 113887 gave the totem auras 8515, 10609 and 10612
+	// as effect 1, 95, 179 and 246, the "$8515m2" of the totem's text.
+	WindfuryBonusAP = [WindfuryRanks + 1]float64{0, 95, 179, 246}
 )
-
-func GetWindfuryAP(aura *Aura, rank int32) float64 {
-	return WindfuryBuffBonusAP[rank]
-}
 
 // WindfuryTotemRankAtLevel is the totem rank a raid of this level has; 0
 // before the first.
@@ -1754,20 +1680,76 @@ func WindfuryTotemRankAtLevel(level int32) int32 {
 
 // ApplyWindfury puts the Windfury Totem's proc on the character at the rank
 // its level has learned, and nothing below the first rank.
+//
+// Push 113887 (13 November 2026) made the proc a strike. Before it the
+// rank's spell (8516, 10608, 10610) was vanilla's: a 1 s self aura of the
+// rank's attack power (aura 99, two charges on white swings) and one extra
+// white swing (effect 19). Since, it is a main-hand weapon strike on the
+// target (effect 58 with no bonus points, SpellMisc Attributes_3 0x400 main
+// hand and 0x200 triggered can proc, DefenseType 2, category 2619 at
+// 100 ms), and the attack power moved to the totem aura's dummy. So a proc
+// is one yellow hit at the weapon's own speed: it cannot glance, it is not a
+// white swing (no rage from it, no Flurry charge spent, no queued Heroic
+// Strike taken), and it rolls the procs a melee ability rolls. Our first
+// report after the push logs it so: the totem's rank 2 as SPELL_DAMAGE and
+// SPELL_MISSED at the instant of the hit that triggered it, two crits at
+// double damage, where every report before logs SPELL_EXTRA_ATTACKS.
+//
+// Blizzard's 13 November hotfix: "Windfury Totem is now correctly activated
+// by all melee abilities even if it doesn't involve your main hand weapon
+// ... Strikes from abilities that involve your offhand weapon like
+// Whirlwind or Mutilate do not have a chance to activate Windfury. The
+// main-hand strike from those abilities still does." The trigger is a
+// landed main-hand melee hit, auto or special, as before.
 func ApplyWindfury(character *Character) *Aura {
 	rank := WindfuryTotemRankAtLevel(character.Level)
 	if rank == 0 {
 		return nil
 	}
-	spellId := WindfuryBuffSpellId[rank]
-	buffActionID := ActionID{SpellID: spellId}
+	actionID := ActionID{SpellID: WindfuryStrikeSpellId[rank]}
+	bonusAP := WindfuryBonusAP[rank]
 
-	buffAura := CreateExtraAttackAuraCommon(character, buffActionID, WindfuryAuraLabel, rank, WindfuryBuffDuration, GetWindfuryAP)
+	strike := character.GetOrRegisterSpell(SpellConfig{
+		ActionID:    actionID,
+		SpellSchool: SpellSchoolPhysical,
+		DefenseType: DefenseTypeMelee,
+		ProcMask:    ProcMaskMeleeMHSpecial,
+		Flags:       SpellFlagMeleeMetrics | SpellFlagNoOnCastComplete | SpellFlagPassiveSpell,
+
+		DamageMultiplier: 1,
+		ThreatMultiplier: 1,
+
+		ApplyEffects: func(sim *Simulation, target *Unit, spell *Spell) {
+			baseDamage := spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower(target)+bonusAP)
+			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
+		},
+	})
+
+	icd := Cooldown{
+		Timer:    character.NewTimer(),
+		Duration: windfuryProcICD,
+	}
+
+	// The aura carries the strike's id, so a rotation can ask whether a
+	// totem reaches the character (the Arms and Survival filler gates).
+	aura := MakePermanent(character.GetOrRegisterAura(Aura{
+		Label:    WindfuryAuraLabel,
+		ActionID: actionID,
+		OnSpellHitDealt: func(aura *Aura, sim *Simulation, spell *Spell, result *SpellResult) {
+			if !result.Landed() || !spell.ProcMask.Matches(ProcMaskMeleeMH) || spell.Flags.Matches(SpellFlagSuppressEquipProcs) {
+				return
+			}
+			if !icd.IsReady(sim) || sim.RandomFloat(WindfuryAuraLabel) >= windfuryProcChance {
+				return
+			}
+			icd.Use(sim)
+			strike.Cast(sim, result.Target)
+		},
+	}))
 	// The totem's proc aura holds the melee totem category, so the
 	// Flametongue Totem's does not stack with it.
-	character.GetAura(WindfuryAuraLabel).NewExclusiveEffect(meleeTotemCategory, false, ExclusiveEffect{Priority: meleeTotemWindfury})
-	return buffAura
-
+	aura.NewExclusiveEffect(meleeTotemCategory, false, ExclusiveEffect{Priority: meleeTotemWindfury})
+	return aura
 }
 
 ///////////////////////////////////////////////////////////////////////////

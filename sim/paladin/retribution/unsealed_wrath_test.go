@@ -97,8 +97,9 @@ const unsealedWrathShortSwapRotation = `{
 
 // sealOfRighteousnessProcCastsUnderWindfury runs the short swap rotation
 // for 8 seconds under the raid's Windfury Totem at a seed and counts Seal
-// of Righteousness's weapon procs and the paladin's extra attacks.
-func sealOfRighteousnessProcCastsUnderWindfury(t *testing.T, talents map[string]int, seed int64) (procs int32, extraAttacks int32) {
+// of Righteousness's weapon procs and the totem's landed strikes (10610,
+// a main-hand strike since push 113887, core.ApplyWindfury).
+func sealOfRighteousnessProcCastsUnderWindfury(t *testing.T, talents map[string]int, seed int64) (procs int32, windfuryStrikes int32) {
 	t.Helper()
 	player := core.WithSpec(&proto.Player{
 		Class:              proto.Class_ClassPaladin,
@@ -130,35 +131,37 @@ func sealOfRighteousnessProcCastsUnderWindfury(t *testing.T, talents map[string]
 		}
 	}
 	for _, action := range result.RaidMetrics.Parties[0].Players[0].Actions {
-		if action.Id.GetOtherId() == proto.OtherAction_OtherActionAttack && action.Id.Tag == 3 {
+		if action.Id.GetSpellId() == core.WindfuryStrikeSpellId[3] {
 			for _, target := range action.Targets {
-				extraAttacks += target.Casts
+				windfuryStrikes += target.Hits
 			}
 		}
 	}
-	return procs, extraAttacks
+	return procs, windfuryStrikes
 }
 
 // Blizzard's 11 November 2026 hotfix: "Unsealed Fury no longer generates
 // echoes from Windfury Totem attacks". Two unarmed swings land under Seal
 // of Righteousness before the swap, so the swing under Seal of Command
 // releases at most two copies whatever Windfury adds in the window; before
-// the fix a Windfury extra attack in the window stored a third.
+// the fix a Windfury extra attack in the window stored a third. Since push
+// 113887 the totem's attack is a yellow strike, which no Seal swing rule
+// counts, so the rule holds by construction; the test keeps it held.
 func TestUnsealedWrathStoresNoCopyFromAWindfuryAttack(t *testing.T) {
 	const seeds = 40
 	const swingsBeforeTheSwap = 2
-	var extraAttacksSeen int32
+	var windfuryStrikesSeen int32
 	for seed := int64(1); seed <= seeds; seed++ {
 		talents := map[string]int{"seal_of_command": 1}
 		without, _ := sealOfRighteousnessProcCastsUnderWindfury(t, talents, seed)
 		talents["unsealed_wrath"] = 1
-		with, extraAttacks := sealOfRighteousnessProcCastsUnderWindfury(t, talents, seed)
-		extraAttacksSeen += extraAttacks
+		with, windfuryStrikes := sealOfRighteousnessProcCastsUnderWindfury(t, talents, seed)
+		windfuryStrikesSeen += windfuryStrikes
 		if released := with - without; released > swingsBeforeTheSwap {
-			t.Errorf("seed %d: Unsealed Wrath released %d copies, more than the %d swings that landed before the swap: a Windfury extra attack stored one", seed, released, swingsBeforeTheSwap)
+			t.Errorf("seed %d: Unsealed Wrath released %d copies, more than the %d swings that landed before the swap: a Windfury attack stored one", seed, released, swingsBeforeTheSwap)
 		}
 	}
-	if extraAttacksSeen == 0 {
-		t.Fatal("Windfury Totem gave no extra attack over the seeds; the test exercises nothing")
+	if windfuryStrikesSeen == 0 {
+		t.Fatal("Windfury Totem never struck over the seeds; the test exercises nothing")
 	}
 }
