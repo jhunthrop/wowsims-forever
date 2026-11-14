@@ -39,7 +39,7 @@ func TestSpellHitProfileReadsTheStatHit(t *testing.T) {
 	caster, boss := spellHitTestUnits(5)
 	registerDamageSpell(caster, SpellSchoolFire, 0)
 
-	p, ok := computeSpellHitProfile(caster, boss)
+	p, ok := computeSpellHitProfile(caster, boss, caster.Spellbook)
 	if !ok || p.Hit != 5 || p.SchoolHit != 5 || p.HasSchoolBonus() {
 		t.Fatalf("profile = %+v, ok %v, want hit 5 with no school bonus", p, ok)
 	}
@@ -57,7 +57,7 @@ func TestSpellHitProfileSplitsTheSchoolBonus(t *testing.T) {
 	registerDamageSpell(caster, SpellSchoolFrost, 3)
 	registerDamageSpell(caster, SpellSchoolArcane, 0)
 
-	p, _ := computeSpellHitProfile(caster, boss)
+	p, _ := computeSpellHitProfile(caster, boss, caster.Spellbook)
 	if p.Hit != 4 || p.SchoolHit != 7 || !p.HasSchoolBonus() {
 		t.Fatalf("profile = %+v, want hit 4, school hit 7", p)
 	}
@@ -74,7 +74,7 @@ func TestSpellHitDistanceNeverGoesNegative(t *testing.T) {
 	registerDamageSpell(caster, SpellSchoolShadow, 5)
 	registerDamageSpell(caster, SpellSchoolFire, 0)
 
-	p, _ := computeSpellHitProfile(caster, boss)
+	p, _ := computeSpellHitProfile(caster, boss, caster.Spellbook)
 	if p.ToSpellCap() != 2 || p.ToSchoolCap() != 0 {
 		t.Errorf("to cap = %v / school %v, want 2 / 0", p.ToSpellCap(), p.ToSchoolCap())
 	}
@@ -82,7 +82,7 @@ func TestSpellHitDistanceNeverGoesNegative(t *testing.T) {
 
 func TestSpellHitProfileIgnoresSpellsThatAreNotCastDamage(t *testing.T) {
 	caster, boss := spellHitTestUnits(2)
-	if _, ok := computeSpellHitProfile(caster, boss); ok {
+	if _, ok := computeSpellHitProfile(caster, boss, caster.Spellbook); ok {
 		t.Fatal("a unit with no spells has no spell profile")
 	}
 	caster.RegisterSpell(SpellConfig{
@@ -93,7 +93,7 @@ func TestSpellHitProfileIgnoresSpellsThatAreNotCastDamage(t *testing.T) {
 		ActionID: ActionID{SpellID: 2}, SpellSchool: SpellSchoolFire, ProcMask: ProcMaskSpellProc,
 		DamageMultiplier: 1, ThreatMultiplier: 1, ApplyEffects: func(*Simulation, *Unit, *Spell) {},
 	})
-	if _, ok := computeSpellHitProfile(caster, boss); ok {
+	if _, ok := computeSpellHitProfile(caster, boss, caster.Spellbook); ok {
 		t.Fatal("a weapon special and a proc are not cast spell damage")
 	}
 }

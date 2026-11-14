@@ -33,7 +33,8 @@ type HitProfile struct {
 	// SpecialCap and WhiteCap are the hit values (percent points) at which
 	// special attacks, and white swings, can no longer miss.
 	SpecialCap, WhiteCap float64
-	// Spell is true when the player casts damaging spells at its target.
+	// Spell is true when the player's rotation casts damaging spells at its
+	// target (a spell it knows but never casts does not count).
 	// Spell hit is a separate table from the weapon's: see SpellProfile.
 	Spell bool
 	// SpellProfile is where the player's spell hit stands, set when Spell is.
@@ -112,7 +113,7 @@ func ComputeHitProfile(swr *proto.StatWeightsRequest) (HitProfile, error) {
 	character := env.Raid.Parties[0].Players[0].GetCharacter()
 	profile := HitProfile{Hit: character.GetStat(stats.Hit) / HitRatingPerHitChance}
 	if len(env.Encounter.TargetUnits) > 0 {
-		profile.SpellProfile, profile.Spell = computeSpellHitProfile(&character.Unit, env.Encounter.TargetUnits[0])
+		profile.SpellProfile, profile.Spell = computeSpellHitProfile(&character.Unit, env.Encounter.TargetUnits[0], profiledSpells(character))
 	}
 
 	aa := character.AutoAttacks

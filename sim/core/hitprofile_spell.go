@@ -61,14 +61,14 @@ func castsDamageAtTarget(spell *Spell) bool {
 		spell.SpellSchool != SpellSchoolNone
 }
 
-// computeSpellHitProfile reads the hit of every damaging spell the unit
-// has against the target, from the engine's own SpellHitChance, and the cap
-// from the attack table's base spell miss. ok is false for a unit with no
-// such spell.
-func computeSpellHitProfile(unit *Unit, target *Unit) (SpellHitProfile, bool) {
+// computeSpellHitProfile reads the hit of every damaging spell among
+// spells (the ones the unit casts) against the target, from the engine's own
+// SpellHitChance, and the cap from the attack table's base spell miss. ok is
+// false when none of them is such a spell.
+func computeSpellHitProfile(unit *Unit, target *Unit, spells []*Spell) (SpellHitProfile, bool) {
 	var profile SpellHitProfile
 	found := false
-	for _, spell := range unit.Spellbook {
+	for _, spell := range spells {
 		if !castsDamageAtTarget(spell) {
 			continue
 		}
@@ -83,7 +83,7 @@ func computeSpellHitProfile(unit *Unit, target *Unit) (SpellHitProfile, bool) {
 		return profile, false
 	}
 	profile.Cap = spellHitCap(unit, target)
-	profile.SchoolNames = schoolsReaching(unit, target, profile)
+	profile.SchoolNames = schoolsReaching(spells, target, profile)
 	return profile, true
 }
 
@@ -102,12 +102,12 @@ func spellHitCap(unit *Unit, target *Unit) float64 {
 	return (table.BaseSpellMissChance - minSpellMissChance) * percentPerFraction
 }
 
-func schoolsReaching(unit *Unit, target *Unit, profile SpellHitProfile) []string {
+func schoolsReaching(spells []*Spell, target *Unit, profile SpellHitProfile) []string {
 	if !profile.HasSchoolBonus() {
 		return nil
 	}
 	var names []string
-	for _, spell := range unit.Spellbook {
+	for _, spell := range spells {
 		if !castsDamageAtTarget(spell) || spellHitPercent(spell, target) < profile.SchoolHit {
 			continue
 		}
