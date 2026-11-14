@@ -50,7 +50,7 @@
       }
     },
     {
-      "notes": "Whenever rage is under 80: with Improved Bloodrage, 15 rage at once and 15 more over 10 seconds, back every minute.",
+      "notes": "Whenever rage is under 80: 10 rage at once and 10 more over 10 seconds, back every minute. With Improved Bloodrage both are a quarter more at 1/2 and half more at 2/2, to 15 and 15.",
       "action": {
         "condition": {
           "cmp": {
@@ -73,7 +73,7 @@
       }
     },
     {
-      "notes": "At the pull when a second one still fits, otherwise in the execute phase, or in the last 30 seconds when that phase is shorter than the buff.",
+      "notes": "At the pull when a second one still fits, otherwise in the Execute phase, or in the last 30 seconds when that phase is shorter than the buff.",
       "action": {
         "condition": {
           "or": {
@@ -120,7 +120,7 @@
       }
     },
     {
-      "notes": "In the execute phase, or in the last 15 seconds when that phase is short. It is a once-a-fight button.",
+      "notes": "In the Execute phase, or in the last 15 seconds when that phase is short. It is a once-a-fight button.",
       "action": {
         "condition": {
           "or": {
@@ -154,7 +154,7 @@
       }
     },
     {
-      "notes": "Whenever it drops: 10 rage for the attack power of everyone within 20 yards, raid included.",
+      "notes": "Whenever it drops: 10 rage for the melee attack power of every party and raid member within 20 yards.",
       "action": {
         "condition": {
           "not": {
@@ -177,7 +177,7 @@
       }
     },
     {
-      "notes": "First, below 20%: it beats Bloodthirst there and takes every point of rage you hold.",
+      "notes": "First, in the Execute phase: it takes every point of rage you hold, and from 40 it goes ahead of Bloodthirst too.",
       "action": {
         "condition": {
           "isExecutePhase": {
@@ -204,7 +204,7 @@
       }
     },
     {
-      "notes": "On cooldown, right behind Bloodthirst: it hits up to four targets with both weapons.",
+      "notes": "On cooldown: it hits up to four targets with both weapons, and from 40 it sits right behind Bloodthirst.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -214,7 +214,7 @@
       }
     },
     {
-      "notes": "On cooldown, right behind Whirlwind: your next four white swings each bring 5 more rage, and it costs a quarter of your base health, which the healers cover.",
+      "notes": "On cooldown, right behind Whirlwind once you have it: your next four white swings that land within 8 seconds each bring 5 more rage, and it costs a quarter of your base health, which the healers cover.",
       "action": {
         "castSpell": {
           "spellId": {
@@ -224,7 +224,40 @@
       }
     },
     {
-      "notes": "From 36, under 80 rage: Improved Berserker Rage makes it 10 rage, back every 30 seconds. Hold it for the fear on Magmadar, Onyxia and Nefarian.",
+      "action": {
+        "castSpell": {
+          "spellId": {
+            "rank": 3,
+            "spellId": 7373
+          }
+        },
+        "condition": {
+          "and": {
+            "vals": [
+              {
+                "auraIsKnown": {
+                  "auraId": {
+                    "spellId": 10610
+                  }
+                }
+              },
+              {
+                "not": {
+                  "val": {
+                    "isExecutePhase": {
+                      "threshold": "E25"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "notes": "With a Windfury Totem on you, right after Reckless Swings, and never from 25% down: 10 rage for a main-hand hit that can trigger the totem's strike. Without the totem it is rage Bloodthirst and Whirlwind need."
+    },
+    {
+      "notes": "From 36, on cooldown under 80 rage, except hold it for the fears on Magmadar, Onyxia and Nefarian: rage from the hits you take, and 5 rage at once with Improved Berserker Rage 1/2 or 10 with 2/2.",
       "action": {
         "condition": {
           "and": {
@@ -290,7 +323,7 @@
       }
     },
     {
-      "notes": "Only above 60 rage, and never from 25% down: hold that rage for Execute. It is queued on your next swing and costs no global cooldown.",
+      "notes": "Only above 60 rage, and, once you have Execute, never from 25% down: hold that rage for it. It is queued on your next swing and costs no global cooldown.",
       "action": {
         "condition": {
           "and": {
